@@ -1,0 +1,30 @@
+.form-slider {
+   
+    position: relative;
+    .slider-content {
+        height: 10px;
+        background: #d7d7d7;
+        border-radius: 4px;
+        height: 100%;
+        .slider-percent {
+            border-radius: 4px;
+            height: 10px;
+            background: $main-active-color;
+        }
+    }
+    .slider-box {
+        transform: translate(-50% ,-30%);
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        width: 20px;
+        height: 20px;;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+        cursor: move;
+    }
+    .slider-number {
+        margin-top: 10px;
+
+    }
+}

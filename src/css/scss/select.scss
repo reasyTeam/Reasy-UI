@@ -1,0 +1,50 @@
+.form-select {
+    width: $elem-width;
+    cursor: pointer;
+    position: relative;
+    .select-arrow {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 20px;
+        text-align: center;
+        transition: all 0.3s;
+        .select-arrow-icon {
+            height: $form-line-height;
+            line-height: $form-line-height;
+            font-size: 18px;
+        }
+    }
+    .arrow-up {
+        transform: rotateZ(180deg);
+        transition: all 0.3s;
+    }
+    .text {
+        cursor: pointer;
+        padding-right: 20px;
+    }
+    .select-dropdown {
+        position: absolute;
+        min-width: 100%;
+        list-style: none;
+        border: solid 1px #e4e7ed;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        margin: 5px 0;
+        text-align: left;
+        z-index: 99;
+        max-height: 200px;
+        overflow-y: auto;
+        .select-li {
+            padding: 6px;
+            line-height: 1;
+            white-space: nowrap;
+            &:hover {
+                background: #ddd;
+            }
+        }
+    }
+}

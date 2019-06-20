@@ -1,0 +1,19 @@
+.form-checkbox {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+    .checkbox-item {
+        vertical-align: middle;
+        margin-right: 4px;
+        font-size: 18px;
+        color: $main-active-color;
+    }
+    .checkbox-text {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.form-el-checkbox {
+    max-width: $elem-width;
+}

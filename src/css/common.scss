@@ -1,0 +1,184 @@
+.form-group {
+    margin-bottom: 15px;
+    font-size: $font-size-small;
+    @extend .clearfix;
+
+    .form-title {
+        float: left;
+        text-align: left;
+        line-height: $form-line-height;
+        width: 33%;
+        min-height: 1px;
+        color: $info-color;
+    }
+
+    .form-content {
+        position: relative;
+        float: left;
+        text-align: left;
+        line-height: $form-line-height;
+    }
+}
+
+.clearfix {
+    &::after {
+        content: " ";
+        display: block;
+        visibility: hidden;
+        height: 0;
+        clear: both;
+    }
+}
+
+.text-error {
+    color: $error-color;
+}
+
+input[type='text'],
+input[type='password'] {
+    outline: 0;
+
+    &:focus {
+        border: 1px solid $main-active-color !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
+
+    }
+}
+
+.active {
+    color: $main-active-color;
+}
+
+.btn {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #dcdfe6;
+    border-color: #dcdfe6;
+    color: #606266;
+    text-align: center;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: $main-active-color;
+    }
+
+    &.btn-primary {
+        background: $main-active-color;
+        color: #fff;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    z-index: 100;
+    opacity: .5;
+}
+
+@keyframes slideInUp {
+from {
+
+    transform: translate3d(0, -100%, 0);
+}
+
+to {
+
+    transform: translate3d(0, 0, 0);
+}
+}
+
+.message-container {
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    z-index: 130;
+
+    .form-message {
+        width: 400px;
+        margin: 0 auto;
+        text-align: center;
+        background: #000;
+        opacity: .8;
+        border-radius: 4px;
+        color: #fff;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 1.2;
+        animation: slideInUp .5s;
+
+        &+.form-message {
+            margin-top: 8px;
+        }
+    }
+}
+
+input:disabled,
+select:disabled {
+    background: $disabled-color;
+    cursor: not-allowed;
+}
+
+.dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+}
+
+.dialog-container {
+    z-index: 110;
+    width: 600px;
+    max-height: 100%;
+    position: relative;
+    background: #fff;
+    top: 50%;
+    margin: 0 auto;
+    padding: 0;
+    transform: translateY(-50%);
+    .dialog-content {
+        position: relative;
+        background: #fff;
+        margin-bottom: 20px;
+        box-shadow: 0 0px 5px 3px rgba(0, 0, 0, 0.3);
+        .dialog-close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 30px;
+            text-align: center;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .dialog-title {
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .content {
+            margin: 20px;
+        }
+    }
+
+}
+
+.no-select {
+    user-select: none;
+}

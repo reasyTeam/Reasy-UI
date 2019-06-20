@@ -1,0 +1,109 @@
+.table-search {
+    position: relative;
+    float: right;
+    //width: 200px;
+    margin-bottom: 15px;
+    .form-search-input {
+        width: $elem-width;
+        padding-right: 44px;
+        border-radius: 6px;
+    }
+    .v-icon-search {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: $main-active-color;
+        line-height: $form-line-height - 2px;
+        height: $form-line-height;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        color: #fff;
+        width: 40px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 16px;
+    }
+}
+.table-body {
+    overflow-y: auto;
+}
+.table-group {
+    width: 100%;
+    margin-top: 10px;
+}
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    &.table-header {
+        background: #f2f2f2;
+    }
+    &.table-fixed {
+        table-layout: fixed;
+    }
+    .pointer {
+        cursor: pointer;
+    }
+    tr {
+        line-height: $form-line-height + 2px;
+        td {
+            padding: 2px 0;
+        }
+    }
+    th,
+    td {
+        border-bottom: 1px solid #d7d7d7;
+    }
+    .th-sort {
+        font-size: 16px;
+
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .fixed {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    .table-no-data {
+        text-align: center;
+        width: 100%;
+    }
+    .select-box {
+        .form-checkbox {
+            margin-right: 0;
+        }
+    }
+}
+.table-footer {
+    margin-top: 15px;
+    line-height: 30px;
+    .footer-tips {
+        display: inline-block;
+        width: 39%;
+        text-align: left;
+    }
+    .footer-page {
+        display: inline-block;
+        width: 60%;
+        text-align: right;
+        .table-btn {
+            cursor: pointer;
+            border-radius: 4px;
+            padding: 4px 8px;
+            &:hover,
+            &.active {
+                background: #f2f2f2;
+                color: $main-active-color;
+            }
+            &.disabled {
+                background: #ddd;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

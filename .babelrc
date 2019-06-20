@@ -1,0 +1,17 @@
+//es6配置文件，webpack会自动读取
+{
+	"presets": [
+		["env", {
+		  "modules": false,
+		  "targets": {
+			"browsers": ["ie >=9"]
+		  },
+		  "useBuiltIns": true,
+		}],
+		["es2015", {"loose": true}]
+	  ],
+	"plugins": [["component", {
+		"libraryName": "element-ui",
+		"styleLibraryName": "theme-chalk"
+	  }], 'transform-object-rest-spread']
+}
