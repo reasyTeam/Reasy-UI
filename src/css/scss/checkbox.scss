@@ -7,6 +7,9 @@
         margin-right: 4px;
         font-size: 18px;
         color: $main-active-color;
+        &.disabled {
+            color: $disabled-color;
+        }
     }
     .checkbox-text {
         display: inline-block;

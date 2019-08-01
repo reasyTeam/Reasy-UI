@@ -1,28 +1,52 @@
 <template>
-    <div class="progress-content"
-        :style="{'text-align': textAlign}">
-        <div class="progress-percent"
-            :style="{'width': percenter + '%'}">
-            {{percenter + '%'}}
+    <div>
+        <div class="overlay" v-if="hasOverlay"></div>
+        <div class="dialog">
+            <div class="progress-content" :class="css">
+                <div class="progress-title" v-if="title">{{title}}</div>
+                <div class="progress-group">
+                    <div class="progress-bar"
+                        :style="{'text-align': textAlign}">
+                        <div class="progress-percent"
+                            :style="{'width': percenter + '%'}">
+                            {{percenter + '%'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <slot></slot>
         </div>
     </div>
 </template>
 <script>
-
-let defaults = {
-    required: true,
-    textAlign: "center",
-    intervalTime: 0,
-    callback: function() {}
-};
-
 export default {
     name: "v-progress",
-    props: ["percent", "textAlign", "intervalTime", "callback"],
-    created() {
-        this.textAlign = this.textAlign || defaults.textAlign;
-        if(typeof this.callback != "function") {
-            this.callback = function() {};
+    props: {
+        percent: {
+            type: Number,
+            default: 0
+        },
+        title: {
+            type: String
+        },
+        css: {
+            type: String
+        },
+        textAlign: {
+            type: String,
+            default: "center"
+        }, 
+        intervalTime: {
+            type: Number,
+        }, 
+        callback: {
+            type: Function,
+            default: ()=> {}
+        },
+        hasOverlay: {
+            type: Boolean,
+            default: true
         }
     },
     data() {

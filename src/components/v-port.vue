@@ -36,29 +36,31 @@
                     <span class="checkbox-text">全选</span>
                 </label>
             </div>
-            <div
-                class="form-port-group"
-                v-for="item in portList"
-                :key="item.index[0]"
-                :name="dataPort.name"
-            >
-                <span>{{item.index[0]}}</span>
-                <div class="port-content" @click="clickPort(item.index[0])">
-                    <div
-                        class="form-port v-icon-port"
-                        :class="{'active': getChecked(item.index[0]), 'disabled': getDisabled(item.index[0])}"
-                    ></div>
-                    <div class="port-group-text">{{groupConfig[item.index[0]]}}</div>
-                </div>
+            <div class="form-normal-group">
+                <div
+                    class="form-port-group"
+                    v-for="item in portList"
+                    :key="item.index[0]"
+                    :name="dataPort.name"
+                >
+                    <span>{{item.index[0]}}</span>
+                    <div class="port-content" @click="clickPort(item.index[0])">
+                        <div
+                            class="form-port v-icon-port"
+                            :class="{'active': getChecked(item.index[0]), 'disabled': getDisabled(item.index[0])}"
+                        ></div>
+                        <div class="port-group-text">{{groupConfig[item.index[0]]}}</div>
+                    </div>
 
-                <div class="port-content" @click="clickPort(item.index[1])">
-                    <div
-                        class="form-port v-icon-port"
-                        :class="{'active': getChecked(item.index[1]), 'disabled': getDisabled(item.index[1])}"
-                    ></div>
-                    <div class="port-group-text">{{groupConfig[item.index[1]]}}</div>
+                    <div class="port-content" @click="clickPort(item.index[1])">
+                        <div
+                            class="form-port v-icon-port"
+                            :class="{'active': getChecked(item.index[1]), 'disabled': getDisabled(item.index[1])}"
+                        ></div>
+                        <div class="port-group-text">{{groupConfig[item.index[1]]}}</div>
+                    </div>
+                    <span>{{item.index[1]}}</span>
                 </div>
-                <span>{{item.index[1]}}</span>
             </div>
             <div class="form-console-group">
                 <div
@@ -144,7 +146,7 @@ export default {
             this.hasGroupLegend = true;
             this.relativePort[prop].forEach(item => {
                 //组数字
-                this.groupConfig[item] = prop.match(/[\d]+$/g)[0];
+                this.groupConfig[item] = (prop.match(/[\d]+$/g)||[])[0];
                 //关联组
                 this.relativeGroup[item] = this.relativePort[prop].filter(
                     item1 => item1 != item
@@ -169,7 +171,8 @@ export default {
             return this.activePortList.indexOf(portIndex) != -1;
         },
         getDisabled(portIndex) {
-            return this.dataPort.disabled.indexOf(portIndex) != -1;
+            let isDisabledArr = this.dataPort.disabled.filter(item => {return String(item) === String(portIndex)});
+            return isDisabledArr.length !== 0;
         },
         clickPort(portIndex) {
             //不允许点击
@@ -213,6 +216,10 @@ export default {
                 portArr = [];
             //关联组 组名
             for (let prop in this.relativePort) {
+                let portNum = this.relativePort[prop][0];
+                if(this.getDisabled(portNum)) {
+                    continue;
+                }
                 portArr.push(prop);
             }
             for (let i = 1; i <= maxPort; i++) {

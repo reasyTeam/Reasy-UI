@@ -10,6 +10,7 @@
             >
             <span class="v-icon-search" @click="goSearch()"></span>
         </div>
+        
         <table
             class="table table-fixed table-header"
             :style="{'padding-right': tableScroll ? '17px' : ''}"
@@ -53,6 +54,7 @@
                 </tr>
             </thead>
         </table>
+
         <div class="table-body" :style="{'height': bodyHeight + 'px'}">
             <table class="table table-fixed" ref="table-body">
                 <tbody>
@@ -62,7 +64,7 @@
                                 :is="'table-checkbox'"
                                 @on-custom-comp="customCompFunc"
                                 :rowData="rowsData"
-                                :originData="findOriginData(rowsData[tableOptions.key])"
+                                :originData="findOriginData(rowsData[guidKey])"
                                 field="selected"
                                 :index="rowsIndex"
                                 :style="{'width': '50px'}"
@@ -95,9 +97,9 @@
                                     :action="columns.action"
                                     @on-custom-comp="customCompFunc"
                                     :rowData="rowsData"
-                                    :originData="findOriginData(rowsData[tableOptions.key])"
+                                    :originData="findOriginData(rowsData[guidKey])"
                                     :field="columns.field"
-                                    :keyword="tableOptions.key"
+                                    :keyword="guidKey"
                                     :index="rowsIndex"
                                     :style="{'width': columns.width}"
                                 ></component>
@@ -119,10 +121,11 @@
             v-if="tableOptions.showPage && tableOptions.totalPage > 1"
         >
             <div class="footer-tips">
-                <span>共{{tableData.length || 0}}个，{{tableOptions.totalPage}}页，当前第{{tableOptions.page + 1}}页</span>
+                <span>{{pageTips}}</span>
+                <span class="page-tips">{{dataTips}}</span>
             </div>
             <div class="footer-page">
-                <a class="table-btn" @click="gotoPage('prev')" v-show="tableOptions.page > 0">&lt;</a>
+                <a class="table-btn" @click="gotoPage('prev')" :class="{'disabled': tableOptions.page === 0}">&lt;</a>
                 <a
                     class="table-btn"
                     :class="{'active': footerBtn.value == tableOptions.page}"
@@ -133,7 +136,7 @@
                 <a
                     class="table-btn"
                     @click="gotoPage('next')"
-                    v-show="tableOptions.page < (tableOptions.totalPage-1)"
+                    :class="{'disabled': tableOptions.page >= (tableOptions.totalPage-1)}"
                 >&gt;</a>
             </div>
         </div>
@@ -220,6 +223,17 @@ let filterTable = (tableData, filterStr, field) => {
 export default {
     name: "v-table",
     props: ["tableOptions", "callback"],
+    computed: {
+        pageTips() {
+            return _("第 %s / %s 页", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
+        },
+        dataTips() {
+            return _("共 %s 条数据", [this.tableData.length || 0]);
+        },
+        guidKey() {
+            return this.tableOptions.key || "_GUID";
+        }
+    },
     created() {
         //数据合并
         this.tableOptions = this.setOptions(this.tableOptions, defaults);
@@ -243,7 +257,7 @@ export default {
     },
 
     mounted() {
-        this.tabaleCallback = this.callback || function() {};
+        this.tableCallback = this.callback || function() {};
     },
 
     data() {
@@ -295,6 +309,7 @@ export default {
         updateTable() {
             //更新总页数
             if (this.tableOptions.showPage) {
+                this.tableOptions.page = 0;
                 this.tableOptions.totalPage = Math.ceil(
                     this.tableData.length / this.tableOptions.pagePer
                 );
@@ -314,7 +329,7 @@ export default {
             //this.tableOptions.pageData = this.pageData;
 
             this.$nextTick(function() {
-                this.tabaleCallback(this.pageData); //执行表格更新的回调
+                this.tableCallback(this.pageData); //执行表格更新的回调
             });
         },
 
@@ -402,7 +417,7 @@ export default {
                 //页数以1开头
                 footerArr.unshift({
                     text: "...",
-                    value: -1
+                    value: "prevBtn"
                 });
                 footerArr.unshift({
                     text: 1,
@@ -430,7 +445,7 @@ export default {
                 //页数以最后页结束
                 footerArr.push({
                     text: "...",
-                    value: -1
+                    value: "nextBtn"
                 });
                 footerArr.push({
                     text: this.tableOptions.totalPage,
@@ -452,6 +467,8 @@ export default {
                 nextPage = this.tableOptions.page - 1;
             } else if (nextPage == "next") {
                 nextPage = this.tableOptions.page + 1;
+            } else if(nextPage === "prevBtn" || nextPage === "nextBtn") {
+                return;
             }
 
             //当下一页超出范围 或者下一页 == 当前页时
@@ -520,14 +537,14 @@ export default {
         findOriginData(value) {
             //根据key值（key必须是唯一标识） 获取原始数据
             return this.tableOptions.originData.find(
-                item => item[this.tableOptions.key] == value
+                item => item[this.guidKey] == value
             );
         },
 
         findIndex(value) {
             //根据key值（key必须是唯一标识） 获取原始数据
             return this.tableOptions.originData.findIndex(
-                item => item[this.tableOptions.key] == value
+                item => item[this.guidKey] == value
             );
         },
 
@@ -562,7 +579,7 @@ export default {
                 item.hasCheckbox !== false && this.$set(item, "selected", this.checkbox.val);
             });
             let selectArr = [],
-                tableKey = this.tableOptions.key;
+                tableKey = this.guidKey;
             this.pageData.forEach(item => {
                 item.hasCheckbox !== false && selectArr.push(
                     this.tableOptions.originData.filter(

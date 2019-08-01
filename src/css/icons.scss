@@ -33,49 +33,45 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-  .v-icon-checkbox-checked:before {
-    content: "\e900";
-  }
-  .v-icon-checkbox-unchecked:before {
-    content: "\e901";
-  }
-  .v-icon-search:before {
-    content: "\e902";
-  }
-  .v-icon-sort-up:before {
-    content: "\e903";
-  }
-  .v-icon-sort-down:before {
-    content: "\e904";
-  }
-  .v-icon-unsort:before {
-    content: "\e905";
-  }
-  .v-icon-eye-open:before {
-    content: "\e909";
-  }
-  .v-icon-eye-close:before {
-    content: "\e90a";
-  }
-  .v-icon-arrrow-down:before {
-    content: "\e920";
-  }
-  .v-icon-arrrow-up:before {
-    content: "\e921";
-  }
-  .v-icon-switch-off:before {
-    content: "\e947";
-  }
-  .v-icon-switch-on:before {
-    content: "\e94a";
-  }
-  .v-icon-radio-checked:before {
-    content: "\ea55";
-  }
-  .v-icon-radio-unchecked:before {
-    content: "\ea56";
-  }
-  .v-icon-port:before {
-    content: "\e906";
-  }
-  
+.v-icon-checkbox-checked:before {
+  content: "\e900";
+}
+.v-icon-close:before {
+  content: "\e901";
+}
+.v-icon-checkbox-unchecked:before {
+  content: "\e902";
+}
+.v-icon-search:before {
+  content: "\e903";
+}
+.v-icon-sort-up:before {
+  content: "\e904";
+}
+.v-icon-sort-down:before {
+  content: "\e905";
+}
+.v-icon-unsort:before {
+  content: "\e906";
+}
+.v-icon-eye-close:before {
+  content: "\e907";
+}
+.v-icon-eye-open:before {
+  content: "\e908";
+}
+.v-icon-arrrow-down:before {
+  content: "\e920";
+}
+.v-icon-arrrow-up:before {
+  content: "\e921";
+}
+.v-icon-radio-checked:before {
+  content: "\ea54";
+}
+.v-icon-radio-unchecked:before {
+  content: "\ea56";
+}
+.v-icon-file:before {
+  content: "\e91f";
+}

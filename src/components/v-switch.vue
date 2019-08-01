@@ -1,19 +1,20 @@
 <template>
-    <div class="form-swicth form-el-content" v-show="dataKey.show">
-        <span
+    <div class="form-switch form-el-content clearfix" v-show="dataKey.show">
+        <div
             class="switch-item"
             :name="dataKey.name"
             @click="setCheckbox()"
             :class="checked ? 'checked' : ''"
-        ></span>
-        <span>{{dataKey.title}}</span>
+            v-manualevent="evtHandlerList"
+            :evt-name="evtName"
+        ></div>
+        <span class="switch-tips" v-show="dataKey.hasTips">{{tips}}</span>
     </div>
 </template>
 
 <script>
-
-import {isDefined} from "./libs";
-
+import { isDefined } from "./libs";
+import addEvent from "./add-event";
 let defaults = {
     css: "", //样式
     show: true, //是否显示
@@ -22,6 +23,8 @@ let defaults = {
     immediate: true,
     name: "",
     values: [true, false],
+    error: "",
+    hasTips: false,
     title: "", //描述
     changeCallBack: function() {},
     beforeChange: function() {}
@@ -30,8 +33,10 @@ let defaults = {
 export default {
     name: "v-switch",
     props: ["dataKey"],
+    mixins: [addEvent],
     created() {
         this.dataKey = this.setOptions(this.dataKey, defaults);
+        this.addEvent();
     },
     data() {
         return {
@@ -41,6 +46,9 @@ export default {
     computed: {
         checked() {
             return this.dataKey.val === this.dataKey.values[0];
+        },
+        tips() {
+            return this.checked ? "开启" : "关闭";
         }
     },
     mounted() {},
@@ -63,7 +71,11 @@ export default {
     watch: {
         "dataKey.val": {
             handler(newValue, oldValue) {
+                
                 if (!isDefined(newValue) || newValue === "") {
+                    this.dataKey.val = Array.isArray(this.dataKey.values)
+                        ? this.dataKey.values[1]
+                        : defaults.values[1];
                     return;
                 }
 

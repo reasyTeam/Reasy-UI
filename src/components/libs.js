@@ -1,6 +1,6 @@
 function copyDeepData(item) {
     let newItem;
-    if(Array.isArray(item)) {
+    if (Array.isArray(item)) {
         newItem = [];
         item.map(function(arr) {
             newItem.push(copyDeepData(arr));
@@ -10,7 +10,7 @@ function copyDeepData(item) {
     } else if (item instanceof Object) {
         newItem = {};
         for (let prop in item) {
-            newItem[prop] =  copyDeepData(item[prop]);
+            newItem[prop] = copyDeepData(item[prop]);
         }
     } else {
         newItem = item;
@@ -81,15 +81,22 @@ let setOptions = function(data, defaluts, noFreeze) {
     let defOpts = copyDeepData(defaluts);
     for (var prop in defOpts) {
         if (typeof data[prop] == "undefined") {
-            if(typeof this.$set == "function") {
+            if (typeof this.$set == "function") {
                 this.$set(data, prop, defOpts[prop]);
             } else {
                 data[prop] = defOpts[prop];
             }
+        } else {
+            let val = data[prop];
+            let $get = Object.getOwnPropertyDescriptor(data, prop).get;
+            if (typeof $get !== "function") {
+                delete data[prop];
+                this.$set(data, prop, val);
+            }
         }
     }
     //不允许data增加新属性
-    if(!noFreeze) {
+    if (!noFreeze) {
         Object.preventExtensions(data);
     }
     return data;
@@ -130,14 +137,14 @@ function isObject(obj) {
  * @param {string} [value] 元素的值
  */
 function checkData(dataKey, value) {
-    var val = value || (isDefined(dataKey.val) ? dataKey.val : ""),
+    var val = isDefined(value) ? value : (dataKey.val || ""),
         errMsg = "",
         handleValid,
         _this = this;
 
-    if (dataKey.show === false
-        || dataKey.ignore === true
-        || dataKey.disabled === true) { //忽略验证时
+    if (dataKey.show === false ||
+        dataKey.ignore === true ||
+        dataKey.disabled === true) { //忽略验证时
         return true;
     }
 
@@ -152,14 +159,14 @@ function checkData(dataKey, value) {
             return true;
         }
     }
-    if(Array.isArray(dataKey.sortArray)) {
+    if (Array.isArray(dataKey.sortArray)) {
         let sortArr = dataKey.sortArray.filter(item => item.value == val);
-        if(sortArr.length > 0) {
+        if (sortArr.length > 0) {
             dataKey.error = '';
             return true;
         }
     }
-    
+
 
     if (!Array.isArray(dataKey.valid)) {
         if (dataKey.valid) {
@@ -170,17 +177,15 @@ function checkData(dataKey, value) {
         }
     }
 
-    dataKey.valid && dataKey.valid.forEach(function(item){
-        handleValid = (_this.$valid||{})[item.type];
-        if(handleValid) {
-            if(typeof handleValid == "function") {
+    dataKey.valid && dataKey.valid.forEach(function(item) {
+        handleValid = (_this.$valid || {})[item.type];
+        if (handleValid && !errMsg) {
+            // edit by xc item.args可能为undefined
+            item.args = item.args || [];
+            if (typeof handleValid == "function") {
                 errMsg = handleValid(val, ...item.args);
-            } else if(typeof handleValid.all === "function") {
+            } else if (typeof handleValid.all === "function") {
                 errMsg = handleValid.all(val, ...item.args);
-            }
-
-            if(errMsg) {
-                return false;
             }
         }
     });
@@ -219,7 +224,7 @@ class FormMessage {
     }
 
     getMsgContent() {
-        if(this.elemPool.length > 0) {
+        if (this.elemPool.length > 0) {
             return this.elemPool[0].cloneNode(true);
         }
 
@@ -229,7 +234,7 @@ class FormMessage {
     getContainer() {
         let elem = document.getElementsByClassName("message-container")[0];
 
-        if(!elem) {
+        if (!elem) {
             elem = document.createElement("div");
             elem.className = "message-container";
             document.body.appendChild(elem);
@@ -242,23 +247,137 @@ class FormMessage {
         let elem = this.getMsgContent(),
             containerElem = this.getContainer(),
             _this = this;
-        if(typeof msg == "object" && msg.nodeType === 1) {
+        if (typeof msg == "object" && msg.nodeType === 1) {
             msg = msg.outerHTML;
         }
         this.msg = msg;
-        this.time = showTime || (2000 + msg.length * 30);
+        this.time = showTime || (2000 + msg.length * 50);
 
         elem.innerHTML = this.msg;
         containerElem.appendChild(elem);
-
         setTimeout(function() {
-            _this.elemPool.push(elem);
-            containerElem.removeChild(elem);
+            addClass(elem, "in");
+        }, 10);
+        setTimeout(function() {
+            addClass(elem, "out");
+            removeClass(elem,"in");
+            setTimeout(function() {
+                removeClass(elem, "out");
+                _this.elemPool.push(elem);
+                containerElem.removeChild(elem);
+            }, 300); 
         }, this.time);
     }
 }
 
 let formMessage = new FormMessage();
+
+
+/* add by xc */
+const trim = function(string) {
+    return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
+};
+
+/* istanbul ignore next */
+function hasClass(el, cls) {
+    if (!el || !cls) return false;
+    if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
+    if (el.classList) {
+        return el.classList.contains(cls);
+    } else {
+        return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
+    }
+}
+
+/* istanbul ignore next */
+function addClass(el, cls) {
+    if (!el) return;
+    var curClass = el.className;
+    var classes = (cls || '').split(' ');
+
+    for (var i = 0, j = classes.length; i < j; i++) {
+        var clsName = classes[i];
+        if (!clsName) continue;
+
+        if (el.classList) {
+            el.classList.add(clsName);
+        } else if (!hasClass(el, clsName)) {
+            curClass += ' ' + clsName;
+        }
+    }
+    if (!el.classList) {
+        el.className = curClass;
+    }
+}
+
+/* istanbul ignore next */
+function removeClass(el, cls) {
+    if (!el || !cls) return;
+    var classes = cls.split(' ');
+    var curClass = ' ' + el.className + ' ';
+
+    for (var i = 0, j = classes.length; i < j; i++) {
+        var clsName = classes[i];
+        if (!clsName) continue;
+
+        if (el.classList) {
+            el.classList.remove(clsName);
+        } else if (hasClass(el, clsName)) {
+            curClass = curClass.replace(' ' + clsName + ' ', ' ');
+        }
+    }
+    if (!el.classList) {
+        el.className = trim(curClass);
+    }
+}
+
+/**
+ * 防抖和节流
+ * 防抖的情况下只会调用一次， 而节流的情况会每隔一定时间调用一次函数
+ */
+function debounce(func, wait, immediate = true) {
+    let timeout, context, args;
+    // 延迟执行函数
+    const later = () => setTimeout(() => {
+        // 延迟函数执行完毕，清空定时器
+        timeout = null;
+        // 延迟执行的情况下，函数会在延迟函数中执行
+        // 使用到之前缓存的参数和上下文
+        if (!immediate) {
+            func.apply(context, args);
+            context = args = null;
+        }
+    }, wait);
+    let debounced = function(...params) {
+        if (!timeout) {
+            timeout = later();
+            if (immediate) {
+                //立即执行
+                func.apply(this, params);
+            } else {
+                //闭包
+                context = this;
+                args = params;
+            }
+        } else {
+            clearTimeout(timeout);
+            timeout = later();
+        }
+    };
+    debounced.cancel = function() {
+        clearTimeout(timeout);
+        timeout = null;
+    };
+    return debounced;
+}
+
+function isNotNullOrEmpty(val) {
+    if (!!val) {
+        return true;
+    }
+
+    return val !== '' && val !== undefined && val !== null;
+}
 
 export {
     setOptions,
@@ -268,5 +387,10 @@ export {
     checkData,
     checkSubmit,
     isDefined,
-    isObject
+    isObject,
+    hasClass,
+    addClass,
+    removeClass,
+    debounce,
+    isNotNullOrEmpty
 };

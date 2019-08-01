@@ -4,7 +4,7 @@
         :class="{'error-group': dataKey.error, [dataKey.css]: true}"
         v-show="dataKey.show"
     >
-        <div class="col-content" :class="dataKey.disabled ? 'disabled' : ''" :name="dataKey.name">
+        <div class="col-content" :class="{'disabled': dataKey.disabled, 'focus': isFocus }" :name="dataKey.name">
             <span
                 class="col-group"
                 :style="{'width': 100 / inputList.length + '%'}"
@@ -18,6 +18,8 @@
                     :value="inputVal[index]"
                     :data-index="index"
                     :maxlength="dataKey.maxlength"
+                    @focus="isFocus=true"
+                    @blur="isFocus=false"
                     @keydown="handlerKeyDown"
                     @keyup.stop="handlerKeyUp"
                     ref="input"
@@ -76,7 +78,9 @@ export default {
     },
     mounted() {},
     data() {
-        return {};
+        return {
+            isFocus: false
+        };
     },
 
     methods: {
@@ -109,7 +113,7 @@ export default {
             }
 
             //只取前几个数据
-            val = event.target.value = event.target.value.replace(illegalReg, "").split(0, this.dataKey.maxlength)[0];
+            val = event.target.value = event.target.value.replace(illegalReg, "").slice(0, this.dataKey.maxlength);
             
             //当输入值是分隔符或者是允许输入的数据时
             if (reg.test(keyVal) || keyVal === this.dataKey.splitter) {
@@ -146,6 +150,22 @@ export default {
             }
 
             return true;
+        }
+    },
+    watch: {
+        "dataKey.show": {
+            handler(newValue, oldValue) {
+                if (!newValue) {
+                this.dataKey.error = "";
+                }
+            }
+        },
+        "dataKey.disabled": {
+            handler(newValue, oldValue) {
+                if (!newValue) {
+                this.dataKey.error = "";
+                }
+            }
         }
     },
     destroyed() {

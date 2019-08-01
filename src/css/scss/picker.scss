@@ -1,0 +1,133 @@
+/* fade */
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+/* slide */
+.slide-enter,
+.slide-leave-to {
+  opacity: 0.5;
+  transform: translate3d(0, 100%, 0);
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.picker {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 270px;
+  z-index: 10000;
+  background: #fff;
+}
+
+.picker-title {
+  display: flex;
+  height: 40px;
+  color: #333;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  .pt-button {
+    width: 100px;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 12px;
+  }
+
+  .pt-cancel {
+    text-align: left;
+    color: #999;
+  }
+
+  .pt-submit {
+    text-align: right;
+    color: #42b983;
+  }
+
+  h4 {
+    flex: 1;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: center;
+  }
+}
+
+.picker-panel {
+  position: relative;
+  height: 228px;
+  padding: 14px 12px;
+  box-sizing: border-box;
+
+  .picker-mask-top,
+  .picker-mask-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: #fff;
+    transform: translateZ(0);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .picker-mask-top {
+    top: 14px;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5));
+  }
+
+  .picker-mask-bottom {
+    bottom: 14px;
+    background: linear-gradient(to top,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.5));
+  }
+}
+
+.picker-wheel-wrapper {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+
+  .picker-wheel {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .wheel-scroll {
+    margin-top: 80px;
+
+    .wheel-item {
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #333;
+    }
+  }
+}

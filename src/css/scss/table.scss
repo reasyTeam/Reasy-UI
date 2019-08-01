@@ -91,19 +91,21 @@
         display: inline-block;
         width: 60%;
         text-align: right;
-        .table-btn {
-            cursor: pointer;
-            border-radius: 4px;
-            padding: 4px 8px;
-            &:hover,
-            &.active {
-                background: #f2f2f2;
-                color: $main-active-color;
-            }
-            &.disabled {
-                background: #ddd;
-                cursor: not-allowed;
-            }
+    }
+    .table-btn {
+        cursor: pointer;
+        border-radius: 4px;
+        padding: 4px 8px;
+        &:hover,
+        &.active {
+            color: $main-active-color;
+        }
+        &.disabled {
+            background: #ddd;
+            cursor: not-allowed;
+        }
+        .page-tips {
+            padding-left: 6px;
         }
     }
 }

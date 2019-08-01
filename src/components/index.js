@@ -1,6 +1,5 @@
-
 import '../css/index.scss';
-import {setOptions, formMessage, checkData, checkSubmit} from './libs';
+import { setOptions, formMessage, checkData, checkSubmit, debounce } from './libs';
 import msgboxVue from './MessageBox';
 
 /*全局组件*/
@@ -21,11 +20,15 @@ import vButton from './v-button';
 import vProgress from './v-progress';
 import vSwitch from './v-switch';
 import vSlider from './v-slider';
-import vPort from './v-port';
 import vTableCheckbox from './table-checkbox';
+import vPop from './v-pop';
+import vText from './v-text';
+import vCollapse from './v-collapse';
+import vPicker from './v-picker';
 import vColumn from './v-column';
 import vIp from './v-ip';
 import vMac from './v-mac';
+import vUpload from './v-upload';
 
 let components = [
     vGroup,
@@ -42,11 +45,15 @@ let components = [
     vProgress,
     vSwitch,
     vSlider,
-    vPort,
+    vPop,
+    vText,
+    vCollapse,
+    vPicker,
     vTableCheckbox,
     vColumn,
     vIp,
-    vMac
+    vMac,
+    vUpload
 ];
 
 import derectives from '../directives';
@@ -70,25 +77,26 @@ const install = function(Vue) {
      */
     let msgBox;
     const MessageBoxInstance = Vue.extend(msgboxVue);
+
     function showDialog(msgOptions, hasCancel) {
 
         let currentMsg,
             msgBoxEl;
-        if(!msgBox) {
+        if (!msgBox) {
             currentMsg = new MessageBoxInstance();
             msgBoxEl = currentMsg.$mount().$el;
             document.body.appendChild(msgBoxEl);
             //msgBox = currentMsg;
         } else {
             currentMsg = msgBox;
-           // Vue.extend(currentMsg, defaults);
+            // Vue.extend(currentMsg, defaults);
         }
 
         if (typeof msgOptions === 'string') {
             currentMsg.content = msgOptions;
         } else if (typeof msgOptions === 'object') {
 
-            if(typeof msgOptions.content == "object" && msgOptions.content.nodeType === 1) {
+            if (typeof msgOptions.content == "object" && msgOptions.content.nodeType === 1) {
                 msgOptions.content = msgOptions.content.outerHTML;
                 msgOptions.parseHtml = true;
             }
@@ -115,6 +123,10 @@ const install = function(Vue) {
         formMessage.setMsg(msg, time);
     };
 
+    Vue.message = function(msg, time) {
+        formMessage.setMsg(msg, time);
+    };
+
     // 在Vue的原型上添加实例方法，以全局调用
     Vue.prototype.$confirm = function(msgOptions) {
 
@@ -122,10 +134,12 @@ const install = function(Vue) {
     };
 
     Vue.prototype.$alert = function(msgOptions) {
-    	return showDialog(msgOptions);
+        return showDialog(msgOptions);
 
     };
-    
+
+    /* add by xc 添加是否是移动端标识 */
+    Vue.prototype.$isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry/ig.test(navigator.userAgent) && document.documentElement.clientWidth <= 768;
 };
 
 /* istanbul ignore if */
@@ -133,7 +147,7 @@ if (typeof window !== 'undefined' && window.Vue) {
     install(window.Vue);
 }
 export default {
-	install,
+    install,
     vGroup,
     vDialog,
     vAlert,
@@ -148,7 +162,10 @@ export default {
     vProgress,
     vSwitch,
     vSlider,
-    vPort,
-    vTableCheckbox
+    vPop,
+    vText,
+    vPicker,
+    vCollapse,
+    vTableCheckbox,
+    vUpload
 };
-

@@ -43,6 +43,8 @@
     .error-bottom {
         position: absolute;
         line-height: 1;
+        animation: slideInUp 0.2s ease-in;
+        margin-top: 2px;
     }
     .text {
         border-color: $error-color;

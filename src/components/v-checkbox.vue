@@ -11,6 +11,8 @@
                 :class="{'disabled': dataKey.disabled}"
                 @click.stop="changeSelectedAll()"
                 :name="dataKey.name"
+                v-manualevent="evtHandlerList"
+                :evt-name="evtName"
             >
                 <span
                     class="checkbox-item"
@@ -32,6 +34,8 @@
                 class="form-checkbox"
                 :class="{'disabled': item.disabled || dataKey.disabled}"
                 @click.stop="changeCheckbox(index, item)"
+                v-manualevent="evtHandlerList"
+                :evt-name="evtName"
                 :data-index="index"
                 :key="item.key"
                 :name="dataKey.name"
@@ -49,6 +53,7 @@
 
 <script>
 import { isDefined } from "./libs";
+import addEvent from "./add-event";
 
 let defaults = {
     required: false,
@@ -74,6 +79,7 @@ let defaults = {
 export default {
     name: "v-checkbox",
     props: ["dataKey"],
+    mixins: [addEvent],
     created() {
         if (this.dataKey.sortArray.length <= 1) {
             this.groups = false;
@@ -85,6 +91,7 @@ export default {
         this.checkedVal = isDefined(this.dataKey.sortArray[0].value)
                 ? this.dataKey.sortArray[0].value
                 : this.dataKey.values[0];
+        this.addEvent();
     },
     data() {
         return {

@@ -3,6 +3,25 @@
 
 [TOC]
 
+### 安装与使用
+
+安装
+
+```
+npm install reasy-ui-vue
+```
+
+使用
+
+```
+//引用样式
+import '@reasy-team/reasy-ui-vue/dist/styles.css';
+//引用文件
+import ReasyUIVue from '@reasy-team/reasy-ui-vue';
+Vue.use(ReasyUIVue);
+```
+
+
 
 ### 自定义数据验证
 
@@ -12,6 +31,8 @@
 值为对象，如
 
 #### 添加验证示例
+
+验证类型为对象方式：
 
 	let valid = {
 		num: {
@@ -31,6 +52,8 @@
 	
 	}
 	Vue.prototype.$valid = valid;
+
+验证类型为函数方式：
 
 
 	//or
@@ -174,6 +197,10 @@
 	</script>
 
  
+
+
+
+
 
 
 <span id="Table表格"></span>
@@ -485,6 +512,7 @@ checkbox 中 on-custom-comp 事件中，参数为对象，其属性为
 | val            | String   |        | 下拉框值                                                     |
 | valid          | Array    |        | 自定义数据时的验证类型（详情见输入框）                       |
 | changeCallBack | Function |        | 值被修改后执行的回调，**参数为下拉框的值**                   |
+| events         | Object   |        | 自定义事件<br />属性为事件类型，值为事件方法                 |
 | beforeChange   | Function |        | 值修改之前执行的函数，返回false时不会执行changCallBack，其他则执行 |
 
 #### 下拉选项
@@ -523,11 +551,17 @@ sortArray的两种配置
 					valid: {
 						type: "ascii"
 					},
+					events: {
+						change: this.changeValue
+					},
 					changeCallBack: this.selectCallBack
 				}
 			}
 		},
 		methods: {
+	        changeValue(event) {
+	
+	        },
 			selectCallBack(selectVal) {
 		
 			}
@@ -1037,23 +1071,25 @@ IP地址和MAC地址的输入框是基于此组件实现
 
 当鼠标放到该元素上时，则显示“随便显示什么”
 
-### 弹出层
+### 对话框
 
 自定义弹出框内容，组件名`v-dialog`，
 
 #### 配置属性
 
-| 参数           | 类型     | 默认值 | 意义               |
-| -------------- | -------- | ------ | ------------------ |
-| title          | String   |        | 弹出框header文字   |
-| show           | Boolean  | true   | 是否显示           |
-| css            | String   |        | 自定义样式         |
-| hasOK          | Boolean  | true   | 是否有确定按钮     |
-| hasCancel      | Boolean  | true   | 是否有取消按钮     |
-| okText         | String   | 确定   | 确定按钮文字       |
-| cancelText     | String   | 取消   | 取消按钮文字       |
-| okCallBack     | Function |        | 点击确定执行的事件 |
-| cancelCallBack | Function |        | 点击取消执行的事件 |
+| 参数           | 类型     | 默认值 | 意义                 |
+| -------------- | -------- | ------ | -------------------- |
+| title          | String   |        | 弹出框header文字     |
+| show           | Boolean  | true   | 是否显示             |
+| css            | String   |        | 自定义样式           |
+| hasOK          | Boolean  | true   | 是否有确定按钮       |
+| hasCancel      | Boolean  | true   | 是否有取消按钮       |
+| outside        | Boolean  | true   | 点击对话框外是否隐藏 |
+| autoHide       | Boolean  | true   | 保存后是否自动隐藏   |
+| okText         | String   | 确定   | 确定按钮文字         |
+| cancelText     | String   | 取消   | 取消按钮文字         |
+| okCallBack     | Function |        | 点击确定执行的事件   |
+| cancelCallBack | Function |        | 点击取消执行的事件   |
 
 #### 示例
 
@@ -1159,6 +1195,7 @@ IP地址和MAC地址的输入框是基于此组件实现
 		<v-port :data-port="port" :relative-port="relativePort"></v-port>
 	</template>
 	
+	</script>
 	export default {
 		data() {
 			return {
@@ -1175,6 +1212,63 @@ IP地址和MAC地址的输入框是基于此组件实现
 	}	
 	</script>
 
+### 文件上传
+
+配置属性如下
+
+| 参数           | 类型     | 默认值 | 意义                                       |
+| -------------- | -------- | ------ | ------------------------------------------ |
+| uploadUrl      | String   |        | 上传的url                                  |
+| hasTips        | Boolean  | false  | 是否显示文件名称                           |
+| css            | String   |        | 自定义样式                                 |
+| name           | String   | file   | 上传文件的name值                           |
+| changeCallBack | Function |        | 选择文件后执行的事件，参数为选择的文件路径 |
+| afterCallBack  | Function |        | 上传文件后的回调事件，值为上传返回值       |
+
+* 注意： 文件上传需要手动执行文件上传组件的submit方法。
+
+示例：
+
+```
+<template>
+	<v-upload
+        ref="fileUpload"
+        title="软件升级"
+        name="file"
+        css="btn-tools"
+        :uploadUrl="upgradeUrl"
+        :afterCallBack="afterSubmit"
+        :changeCallBack="changeFile"
+        >
+        <button @click="upload">升级</button>
+    </v-upload>
+</template>
+<script>
+export default {
+	data() {
+		return {
+			upgradeUrl: "/cgi-bin/upgrade"
+		};
+	},
+	methods: {
+		afterSubmit(res) {
+			
+		},
+		changeFile(filePath) {
+             console.log(filePath);
+		},
+		upload() {
+			//手动执行上传事件
+			this.$refs.fileUpload.submit();
+		}
+	}
+	
+
+}
+</script>
+```
+
+
 
 ### 区块翻译
 
@@ -1184,6 +1278,7 @@ IP地址和MAC地址的输入框是基于此组件实现
 
 * 前提是项目必须引用B28n.js，并且在B28n.js 函数 `replaceTextNodeValue`中增加
 	
+	```
 	if(element.getAttribute("data-translated")) {
 		//translate siblings
 		if (nextSibling) {
@@ -1191,6 +1286,9 @@ IP地址和MAC地址的输入框是基于此组件实现
 		}
 		return;
 	}
+	```
+	
+	
 
 
 ​	 

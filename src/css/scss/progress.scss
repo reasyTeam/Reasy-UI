@@ -1,10 +1,30 @@
 .progress-content {
-    background: #e7e7e7;
-    border-radius: 6px;
-    height: 16px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9999;
+    width: 560px;
+    background: #fff;
+    margin: 0 auto;
+    padding: 60px 0;
+    box-shadow: 0 0px 5px 3px rgba(0, 0, 0, 0.3);
+    .progress-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .progress-bar{
+        background: #e7e7e7;
+        border-radius: 6px;
+        height: 16px;
+    }
+    .progress-group {
+        margin: 40px 60px;
+    }
+    
     .progress-percent {
         height: 100%;
-        line-height: 16px;
+        line-height: 18px;
         padding-right: 6px;
         background-color: $main-active-color;
         color: #fff;

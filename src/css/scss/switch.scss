@@ -1,5 +1,14 @@
+.form-switch {
+    .switch-tips {
+        display: inline-block;
+        margin-left: 8px;
+        line-height: $form-line-height;
+    }
+}
+
 .switch-item {
-    width: 52px;
+    width: 62px;
+    float: left;
     height: $form-line-height;
     position: relative;
     border: 1px solid #dfdfdf;
@@ -7,24 +16,28 @@
     box-shadow: #dfdfdf 0 0 0 0 inset;
     border-radius: 20px;
     background-clip: content-box;
-    display: inline-block;
+    display: block;
     user-select: none;
     cursor: pointer;
+
     &:focus {
         outline: 0;
     }
+
     &.checked {
         border-color: $main-active-color;
         box-shadow: $main-active-color 0 0 0 16px inset;
         background-color: $main-active-color;
+
         &:before {
-            left: 21px;
+            left: 32px;
         }
     }
+
     &:before {
         content: " ";
-        width: 29px;
-        height: 29px;
+        width: 28px;
+        height: 28px;
         position: absolute;
         top: 0px;
         left: 0;

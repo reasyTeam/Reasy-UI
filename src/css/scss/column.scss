@@ -7,18 +7,30 @@
         background: $disabled-color;
     }
 }
+.error-group .col-content {
+    border-color: $error-color; 
+}
+.focus.col-content {
+    border-color: $main-active-color;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
+}
 .col-group {
     display: inline-block;
     position: relative;
-    padding-right: 10px;
     .text {
         border: none;
+        border-radius: 0;
+        &:focus {
+            border: none !important;
+            box-shadow: none;
+        }
     }
     .col-splitter {
         position: absolute;
         top: 0;
         right: 0;
         width: 10px;
+        font-size: 20px;
         text-align: center;
         line-height: $form-line-height;
         height: $form-line-height;

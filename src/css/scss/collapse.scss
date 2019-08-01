@@ -1,0 +1,44 @@
+.v-collapse {
+  flex-wrap: wrap;
+}
+
+.v-collapse-header {
+  height: 50px;
+  line-height: 50px;
+  background-color: #fff;
+  color: $info-color;
+  cursor: pointer;
+  font-size: 13px;
+  // font-weight: 500;
+  outline: none;
+  width: 100%;
+}
+
+.v-collapse-arrow {
+  float: right;
+  line-height: 50px;
+  margin: 0 8px 0 auto;
+  transition: transform 0.3s;
+  font-weight: 300;
+  font-size: 16px;
+  transform: rotate(-90deg);
+
+  &.is-active {
+    transform: rotate(0);
+  }
+}
+
+.v-collapse-item {
+  will-change: height;
+  background-color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: height 0.3s;
+}
+
+.v-collapse-item-content {
+  padding-bottom: 25px;
+  font-size: 13px;
+  color: #303133;
+  line-height: 1.769230769230769;
+}
