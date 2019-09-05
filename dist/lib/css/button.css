@@ -1,0 +1,14 @@
+.button-item {
+  display: inline-block;
+}
+
+.button-item + .button-item {
+  margin-left: 20px;
+}
+
+.button-item .btn.disabled {
+  background: #ebebe4 !important;
+  cursor: not-allowed;
+  color: #aaa;
+}
+

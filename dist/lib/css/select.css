@@ -1,0 +1,96 @@
+.form-select {
+  width: 300px;
+  cursor: pointer;
+  position: relative;
+}
+
+.form-select .select-arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 14;
+  height: 100%;
+  width: 20px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.form-select .select-arrow .select-arrow-icon {
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+}
+
+.form-select .arrow-up {
+  -webkit-transform: rotateZ(180deg);
+      -ms-transform: rotate(180deg);
+          transform: rotateZ(180deg);
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.form-select .text {
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+.form-select .input-text {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  bottom: 1px;
+  width: 100%;
+  border: 1px solid #ddd;
+  padding: 0 20px 0 10px;
+  line-height: 30px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  background-color: transparent;
+  color: #333;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+}
+
+.form-select .input-text.active {
+  border-color: #d82228;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+}
+
+.form-select .input-text.disabled {
+  background: #ebebe4;
+}
+
+.form-select .select-dropdown {
+  position: absolute;
+  min-width: 100%;
+  list-style: none;
+  border: solid 1px #e4e7ed;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 5px 0;
+  text-align: left;
+  z-index: 99;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.form-select .select-dropdown .select-li {
+  padding: 6px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.form-select .select-dropdown .select-li:hover {
+  background: #ddd;
+}
+

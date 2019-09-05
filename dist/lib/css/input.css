@@ -1,0 +1,64 @@
+.form-el-content {
+  position: relative;
+  display: inline-block;
+}
+
+.form-input {
+  width: 300px;
+}
+
+.text {
+  line-height: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  width: 100%;
+  padding: 0 6px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.text-password {
+  padding-right: 30px;
+}
+
+.placeholder-text {
+  position: absolute;
+  top: 0;
+  color: #999;
+  padding: 0 6px;
+  line-height: 30px;
+}
+
+.v-icon-eye-open,
+.v-icon-eye-close {
+  display: inline-block;
+  position: absolute;
+  width: 30px;
+  line-height: 30px;
+  height: 30px;
+  right: 0;
+  top: 0;
+  font-size: 20px;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
+}
+
+.error-group {
+  position: relative;
+}
+
+.error-group .error-bottom {
+  position: absolute;
+  line-height: 1;
+  -webkit-animation: slideInUp 0.2s ease-in;
+          animation: slideInUp 0.2s ease-in;
+  margin-top: 2px;
+}
+
+.error-group .text {
+  border-color: #f00;
+  position: relative;
+  z-index: 9;
+}
+

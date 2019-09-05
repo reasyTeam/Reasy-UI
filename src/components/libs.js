@@ -1,8 +1,31 @@
+if (typeof window._ !== "function") {
+    window._ = function (key, replacements) {
+        var nkey = (key),
+            index,
+            count = 0;
+        if (!replacements) {
+            return nkey;
+        }
+        if (replacements instanceof Array && replacements.length !== 0) {
+            while ((index = nkey.indexOf('%s')) !== -1) {
+                nkey = nkey.slice(0, index) + replacements[count] +
+                    nkey.slice(index + 2);
+                count = ((count + 1) === replacements.length) ? count : (count + 1);
+            }
+        } else if (typeof replacements === "string") {
+            index = nkey.indexOf('%s');
+            nkey = nkey.slice(0, index) + replacements + nkey.slice(index + 2);
+        }
+        return nkey;
+    };
+}
+
+
 function copyDeepData(item) {
     let newItem;
     if (Array.isArray(item)) {
         newItem = [];
-        item.map(function(arr) {
+        item.map(function (arr) {
             newItem.push(copyDeepData(arr));
         });
     } else if (typeof item === "function") {
@@ -75,7 +98,7 @@ function sortByKey(item1, item2, fields, sortTypeObj) {
     return 0;
 }
 
-let setOptions = function(data, defaluts, noFreeze) {
+let setOptions = function (data, defaluts, noFreeze) {
 
     //浅复制
     let defOpts = copyDeepData(defaluts);
@@ -177,7 +200,7 @@ function checkData(dataKey, value) {
         }
     }
 
-    dataKey.valid && dataKey.valid.forEach(function(item) {
+    dataKey.valid && dataKey.valid.forEach(function (item) {
         handleValid = (_this.$valid || {})[item.type];
         if (handleValid && !errMsg) {
             // edit by xc item.args可能为undefined
@@ -255,17 +278,17 @@ class FormMessage {
 
         elem.innerHTML = this.msg;
         containerElem.appendChild(elem);
-        setTimeout(function() {
+        setTimeout(function () {
             addClass(elem, "in");
         }, 10);
-        setTimeout(function() {
+        setTimeout(function () {
             addClass(elem, "out");
-            removeClass(elem,"in");
-            setTimeout(function() {
+            removeClass(elem, "in");
+            setTimeout(function () {
                 removeClass(elem, "out");
                 _this.elemPool.push(elem);
                 containerElem.removeChild(elem);
-            }, 300); 
+            }, 300);
         }, this.time);
     }
 }
@@ -274,7 +297,7 @@ let formMessage = new FormMessage();
 
 
 /* add by xc */
-const trim = function(string) {
+const trim = function (string) {
     return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 };
 
@@ -348,7 +371,7 @@ function debounce(func, wait, immediate = true) {
             context = args = null;
         }
     }, wait);
-    let debounced = function(...params) {
+    let debounced = function (...params) {
         if (!timeout) {
             timeout = later();
             if (immediate) {
@@ -364,7 +387,7 @@ function debounce(func, wait, immediate = true) {
             timeout = later();
         }
     };
-    debounced.cancel = function() {
+    debounced.cancel = function () {
         clearTimeout(timeout);
         timeout = null;
     };

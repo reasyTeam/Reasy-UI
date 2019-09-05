@@ -1,0 +1,22 @@
+.form-radio {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.form-radio .raido-item {
+  vertical-align: middle;
+  margin-right: 4px;
+  font-size: 18px;
+  color: #d82228;
+}
+
+.form-radio .raido-item.disabled {
+  color: #ebebe4;
+}
+
+.form-radio .radio-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+

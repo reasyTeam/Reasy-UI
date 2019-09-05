@@ -1,145 +1,60 @@
 import '../css/index.scss';
-import { setOptions, formMessage, checkData, checkSubmit, debounce } from './libs';
-import msgboxVue from './MessageBox';
-
 /*全局组件*/
 
-import vGroup from './v-group';
-import vDialog from './v-dialog';
-import vAlert from './v-alert';
-//import vMenu from '@/components/v-menu';
-import vHeader from './v-header';
-import vPage from './v-elem';
-import vTable from './v-table';
+import Group from './group/index.js';
+import Dialog from './dialog/index.js';
+import Alert from './alert/index.js';
+import Header from './header/index.js';
+import Page from './elem/index.js';
+import Table from './table/index.js';
+import Input from './input/index.js';
+import Radio from './radio/index.js';
+import Select from './select/index.js';
+import Checkbox from './checkbox/index.js';
+import Button from './button/index.js';
+import Progress from './progress/index.js';
+import Switch from './switch/index.js';
+import Slider from './slider/index.js';
 
-import vInput from './v-input';
-import vRadio from './v-radio';
-import vSelect from './v-select';
-import vCheckbox from './v-checkbox';
-import vButton from './v-button';
-import vProgress from './v-progress';
-import vSwitch from './v-switch';
-import vSlider from './v-slider';
-import vTableCheckbox from './table-checkbox';
-import vPop from './v-pop';
-import vText from './v-text';
-import vCollapse from './v-collapse';
-import vPicker from './v-picker';
-import vColumn from './v-column';
-import vIp from './v-ip';
-import vMac from './v-mac';
-import vUpload from './v-upload';
-
+import Pop from './pop/index.js';
+import Text from './text/index.js';
+import Collapse from './collapse/index.js';
+import Picker from './picker/index.js';
+import Column from './column/index.js';
+import Ip from './ip/index.js';
+import Mac from './mac/index.js';
+import Upload from './upload/index.js';
+import Base from './base.js';
 let components = [
-    vGroup,
-    vDialog,
-    vAlert,
-    vHeader,
-    vPage,
-    vTable,
-    vInput,
-    vRadio,
-    vSelect,
-    vCheckbox,
-    vButton,
-    vProgress,
-    vSwitch,
-    vSlider,
-    vPop,
-    vText,
-    vCollapse,
-    vPicker,
-    vTableCheckbox,
-    vColumn,
-    vIp,
-    vMac,
-    vUpload
+    Group,
+    Dialog,
+    Alert,
+    Header,
+    Page,
+    Table,
+    Input,
+    Radio,
+    Select,
+    Checkbox,
+    Button,
+    Progress,
+    Switch,
+    Slider,
+    Pop,
+    Text,
+    Collapse,
+    Picker,
+    Column,
+    Ip,
+    Mac,
+    Upload
 ];
 
-import derectives from '../directives';
-
-const install = function(Vue) {
-    Vue.prototype.setOptions = setOptions;
-    Vue.use(derectives);
+const install = function (Vue) {
+    Vue.use(Base);
     components.forEach(component => {
         Vue.component(component.name, component);
     });
-
-    //定义数据验证
-    Vue.prototype.$checkData = checkData;
-    Vue.prototype.$checkAll = checkSubmit;
-
-    /**
-     * 显示弹出层
-     *
-     * @param {object | string} msgOptions
-     * @returns
-     */
-    let msgBox;
-    const MessageBoxInstance = Vue.extend(msgboxVue);
-
-    function showDialog(msgOptions, hasCancel) {
-
-        let currentMsg,
-            msgBoxEl;
-        if (!msgBox) {
-            currentMsg = new MessageBoxInstance();
-            msgBoxEl = currentMsg.$mount().$el;
-            document.body.appendChild(msgBoxEl);
-            //msgBox = currentMsg;
-        } else {
-            currentMsg = msgBox;
-            // Vue.extend(currentMsg, defaults);
-        }
-
-        if (typeof msgOptions === 'string') {
-            currentMsg.content = msgOptions;
-        } else if (typeof msgOptions === 'object') {
-
-            if (typeof msgOptions.content == "object" && msgOptions.content.nodeType === 1) {
-                msgOptions.content = msgOptions.content.outerHTML;
-                msgOptions.parseHtml = true;
-            }
-
-            Object.assign(currentMsg, msgOptions);
-        }
-
-        currentMsg.hasCancel = !!hasCancel;
-
-        return currentMsg.showMsgBox()
-            .then(val => {
-                currentMsg = null;
-                return Promise.resolve(val);
-            })
-            .catch(err => {
-                currentMsg = null;
-                return Promise.reject(err);
-            });
-    }
-
-    //提示信息
-    Vue.prototype.$message = function(msg, time) {
-        //let formMessage = new FormMessage();
-        formMessage.setMsg(msg, time);
-    };
-
-    Vue.message = function(msg, time) {
-        formMessage.setMsg(msg, time);
-    };
-
-    // 在Vue的原型上添加实例方法，以全局调用
-    Vue.prototype.$confirm = function(msgOptions) {
-
-        return showDialog(msgOptions, true);
-    };
-
-    Vue.prototype.$alert = function(msgOptions) {
-        return showDialog(msgOptions);
-
-    };
-
-    /* add by xc 添加是否是移动端标识 */
-    Vue.prototype.$isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry/ig.test(navigator.userAgent) && document.documentElement.clientWidth <= 768;
 };
 
 /* istanbul ignore if */
@@ -148,24 +63,24 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 export default {
     install,
-    vGroup,
-    vDialog,
-    vAlert,
-    vHeader,
-    vPage,
-    vTable,
-    vInput,
-    vRadio,
-    vSelect,
-    vCheckbox,
-    vButton,
-    vProgress,
-    vSwitch,
-    vSlider,
-    vPop,
-    vText,
-    vPicker,
-    vCollapse,
-    vTableCheckbox,
-    vUpload
+    Group,
+    Dialog,
+    Alert,
+    Header,
+    Page,
+    Table,
+    Input,
+    Radio,
+    Select,
+    Checkbox,
+    Button,
+    Progress,
+    Switch,
+    Slider,
+    Pop,
+    Text,
+    Picker,
+    Collapse,
+    Upload,
+    Base
 };

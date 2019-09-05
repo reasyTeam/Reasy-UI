@@ -1,0 +1,9 @@
+.dialog .btn-group {
+  padding: 20px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
+.message-content .btn-group {
+  border: none;
+}
+

@@ -1,0 +1,38 @@
+.form-slider {
+  position: relative;
+}
+
+.form-slider .slider-content {
+  height: 10px;
+  background: #d7d7d7;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  height: 100%;
+}
+
+.form-slider .slider-content .slider-percent {
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  height: 10px;
+  background: #d82228;
+}
+
+.form-slider .slider-box {
+  -webkit-transform: translate(-50%, -30%);
+      -ms-transform: translate(-50%, -30%);
+          transform: translate(-50%, -30%);
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: move;
+}
+
+.form-slider .slider-number {
+  margin-top: 10px;
+}
+

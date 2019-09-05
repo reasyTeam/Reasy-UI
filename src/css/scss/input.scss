@@ -22,6 +22,7 @@
     top: 0;
     color: #999;
     padding: $input-padding;
+    line-height: $form-line-height;
 }
 
 .v-icon-eye-open,
@@ -48,5 +49,7 @@
     }
     .text {
         border-color: $error-color;
+        position: relative;
+        z-index: 9;
     }
 }

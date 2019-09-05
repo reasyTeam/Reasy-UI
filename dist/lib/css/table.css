@@ -1,0 +1,133 @@
+.table-search {
+  position: relative;
+  float: right;
+  margin-bottom: 15px;
+}
+
+.table-search .form-search-input {
+  width: 300px;
+  padding-right: 44px;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.table-search .v-icon-search {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #d82228;
+  line-height: 28px;
+  height: 30px;
+  -webkit-border-top-right-radius: 6px;
+          border-top-right-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+  color: #fff;
+  width: 40px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}
+
+.table-body {
+  overflow-y: auto;
+}
+
+.table-group {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.table.table-header {
+  background: #f2f2f2;
+}
+
+.table.table-fixed {
+  table-layout: fixed;
+}
+
+.table .pointer {
+  cursor: pointer;
+}
+
+.table tr {
+  line-height: 32px;
+}
+
+.table tr td {
+  padding: 2px 0;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.table .th-sort {
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.table .fixed {
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.table .table-no-data {
+  text-align: center;
+  width: 100%;
+}
+
+.table .select-box .form-checkbox {
+  margin-right: 0;
+}
+
+.table-footer {
+  margin-top: 15px;
+  line-height: 30px;
+}
+
+.table-footer .footer-tips {
+  display: inline-block;
+  width: 39%;
+  text-align: left;
+}
+
+.table-footer .footer-page {
+  display: inline-block;
+  width: 60%;
+  text-align: right;
+}
+
+.table-footer .table-btn {
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.table-footer .table-btn:hover, .table-footer .table-btn.active {
+  color: #d82228;
+}
+
+.table-footer .table-btn.disabled {
+  background: #ddd;
+  cursor: not-allowed;
+}
+
+.table-footer .table-btn .page-tips {
+  padding-left: 6px;
+}
+

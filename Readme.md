@@ -21,6 +21,53 @@ import ReasyUIVue from '@reasy-team/reasy-ui-vue';
 Vue.use(ReasyUIVue);
 ```
 
+### 按需引入
+
+安装 babel-plugin-component 插件
+
+	.babelrc配置
+	"plugins": [
+	["component", {
+		"libraryName": "@reasy-team/reasy-ui-vue", //插件名称
+		"styleLibraryName": "css", //插件样式目录
+		"libDir": "dist/lib" //插件库路径
+	  }]]
+引用方式 
+
+可以使用 Vue.use  或者Vue.component引用，但是base组件必须使用use引用。
+
+```
+import {Button, Base, Table} from "@reasy-team/reasy-ui-vue";
+Vue.use(Base); //必须使用use
+Vue.use(Header); //use示例
+Vue.component(Table.name, Table); //全局组件示例
+```
+
+所有组件
+
+```
+Group,
+Dialog,
+Alert,
+Header,
+Page,
+Table,
+Input,
+Radio,
+Select,
+Checkbox,
+Button,
+Progress,
+Switch,
+Slider,
+Pop,
+Text,
+Picker,
+Collapse,
+Upload,
+Base
+```
+
 
 
 ### 自定义数据验证
@@ -197,6 +244,8 @@ Vue.use(ReasyUIVue);
 	</script>
 
  
+
+
 
 
 
@@ -487,7 +536,6 @@ checkbox 中 on-custom-comp 事件中，参数为对象，其属性为
 * 
 
 <div id="下拉框"></div>
-
 ### 下拉框
 
 #### 配置属性
@@ -705,7 +753,6 @@ sortArray 条目的对象如下
 	</script>
 
 <div id="输入框"></div>
-
 ### 输入框
 
 组件示例： `<v-input :data-key="options"></v-input>`
@@ -778,24 +825,23 @@ valid 为单个验证时，可以为对象，如
 
 
 <div id="开关"></div>
-
 ### 开关
 
 组件示例： `<v-switch :data-key="options"></v-switch>`
 
 #### 配置属性
 
-| 参数           | 类型            | 默认值        | 意义                                                      |
-| -------------- | --------------- | ------------- | --------------------------------------------------------- |
-| css            | String          |               | 样式                                                      |
-| show           | Boolean         | true          | 是否显示                                                  |
-| disabled       | Boolean         | false         | 是否禁用，禁用所有                                        |
-| val            | String or Array |               | 值                                                        |
-| immediate      | Boolean         | true          | 是否立即执行回调函数                                      |
-| name           | String          |               | 组件名称                                                  |
-| values         | Array           | [true, false] | 开启和关闭的值                                            |
-| changeCallBack | Function        |               | 切换开关后执行的回调函数，参数开关当前值                  |
-| beforeChange   | Function        |               | 切换之前执行的函数，如果返回false，则不执行changeCallBack |
+| 参数           | 类型               | 默认值        | 意义                                                      |
+| -------------- | ------------------ | ------------- | --------------------------------------------------------- |
+| css            | String             |               | 样式                                                      |
+| show           | Boolean            | true          | 是否显示                                                  |
+| disabled       | Boolean            | false         | 是否禁用                                                  |
+| val            | String or  Boolean |               | 值                                                        |
+| immediate      | Boolean            | true          | 是否立即执行回调函数                                      |
+| name           | String             |               | 组件名称                                                  |
+| values         | Array              | [true, false] | 开启和关闭的值                                            |
+| changeCallBack | Function           |               | 切换开关后执行的回调函数，参数开关当前值                  |
+| beforeChange   | Function           |               | 切换之前执行的函数，如果返回false，则不执行changeCallBack |
 
 #### 示例
 
@@ -822,7 +868,6 @@ valid 为单个验证时，可以为对象，如
 	</script>
 
 <div id="按钮"></div>
-
 ### 按钮
 
 组件示例： `<v-button title="" css="" :callback="click" :show="isShow" :disabled="isDisabled" name="xxx"></v-button>`
@@ -862,7 +907,6 @@ valid 为单个验证时，可以为对象，如
 	</script>
 
 <div id="IP地址输入框"></div>
-
 ### IP地址输入框
 
 组件示例： `<v-ip :data-key="ip"></v-ip>`
@@ -904,7 +948,6 @@ valid 为单个验证时，可以为对象，如
 	</script>
 
 <div id="MAC地址输入框"></div>
-
 ### MAC地址输入框
 
 组件示例： `<v-mac:data-key="ip"></v-mac>`
@@ -946,7 +989,6 @@ valid 为单个验证时，可以为对象，如
 	</script>
 
 <div id="自定义多段输入框"></div>
-
 ### 自定义多段输入框
 
 IP地址和MAC地址的输入框是基于此组件实现
@@ -1015,7 +1057,6 @@ IP地址和MAC地址的输入框是基于此组件实现
 	</script>
 
 <div id="组"></div>
-
 ### 组
 
 左右布局，左边文字，右边为组件
@@ -1131,7 +1172,6 @@ IP地址和MAC地址的输入框是基于此组件实现
 	</script>
 
 <div id="消息提示"></div>
-
 ### 消息提示
 
 	1、确认框
@@ -1163,7 +1203,6 @@ IP地址和MAC地址的输入框是基于此组件实现
 | content    | String or Dom |        | 提示的文字或者dom节点 |
 
 <div id="端口配置"></div>
-
 ### 端口配置
 
 组件名称 `v-port`，支持配置属性`data-port` 和`relative-port`

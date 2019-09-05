@@ -46,7 +46,7 @@ export default {
       this.isShowMessageBox = false;
       if (this.hasCancel) {
         //todo: 处理没有reject的情况
-        this.reject(false);
+        this.reject();
       }
     },
     showMsgBox() {

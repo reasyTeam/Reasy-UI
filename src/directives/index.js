@@ -57,10 +57,10 @@ const install = function (Vue) {
                     if (binding.value) {
                         tooltipBox.content = binding.value;
                     } else {
-                        if (this.querySelector("[v-tooltip]")) {
+                         if (this.querySelector("[v-tooltip]")) { //自定义生成
                             tooltipBox.content = this.querySelector("[v-tooltip]").getAttribute("v-tooltip");
                         } else {
-                            tooltipBox.content = "";
+                            tooltipBox.content = binding.value || "";
                         }
                     }
 

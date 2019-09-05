@@ -1,0 +1,50 @@
+.col-content {
+  border: 1px solid #ddd;
+}
+
+.col-content .col-group:last-child {
+  padding-right: 0;
+}
+
+.col-content.disabled {
+  background: #ebebe4;
+}
+
+.error-group .col-content {
+  border-color: #f00;
+}
+
+.focus.col-content {
+  border-color: #d82228;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+}
+
+.col-group {
+  display: inline-block;
+  position: relative;
+}
+
+.col-group .text {
+  border: none;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+}
+
+.col-group .text:focus {
+  border: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.col-group .col-splitter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+}
+
