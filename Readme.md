@@ -8,7 +8,7 @@
 安装
 
 ```
-npm install reasy-ui-vue
+npm install @reasy-team/reasy-ui-vue
 ```
 
 使用
@@ -244,6 +244,7 @@ Base
 	</script>
 
  
+
 
 
 
