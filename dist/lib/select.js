@@ -82,7 +82,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 101);
+/******/ 	return __webpack_require__(__webpack_require__.s = 98);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -201,63 +201,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 101:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _vSelect = __webpack_require__(102);
-
-var _vSelect2 = _interopRequireDefault(_vSelect);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* istanbul ignore next */
-_vSelect2.default.install = function (Vue) {
-  Vue.component(_vSelect2.default.name, _vSelect2.default);
-};
-
-exports.default = _vSelect2.default;
-
-/***/ }),
-
-/***/ 102:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(68);
-/* harmony import */ var _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(
-  _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
-  _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "src/components/select/v-select.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
 /***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -291,19 +234,19 @@ exports.default = {
 
 /***/ }),
 
-/***/ 24:
+/***/ 23:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ 25:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -392,11 +335,13 @@ var defaults = {
     disabled: false, //是否禁用
     hasManual: false, //是否支持自定义
     manualText: _("Manual"),
+    manualValue: "-1", //选择自定义时的值
     maxlength: "", //输入框最大输入长度
     error: "", //错误
     name: "",
     defaultVal: "",
     immediate: true,
+    isNum: false, //是否输入框内允许只输入数字或浮点型
     sortArray: [
         /* {
             value: xxx,
@@ -457,16 +402,15 @@ exports.default = {
         });
         if (valArr.length === 1) {
             this.isEdit = false;
-            this.selectLabel = valArr[0].title;
         } else {
             this.dataKey.hasManual && (this.isEdit = true);
-            this.selectLabel = newVal;
         }
         this.addEvent();
     },
     data: function data() {
         return {
             error: "",
+            inputValue: "",
             isEdit: false,
             isInput: false, //是否正在输入
             dropdownShow: false,
@@ -486,23 +430,6 @@ exports.default = {
             },
             get: function get() {
                 return this.$isMobile && this.dropdownShow;
-            }
-        },
-        isInSelect: {
-            set: function set() {},
-            get: function get() {
-                var newVal = this.dataKey.val,
-                    valArr = this.dataKey.sortArray.filter(function (item) {
-                    return item.value === newVal;
-                });
-                if (valArr.length === 1) {
-                    this.isEdit = false;
-                    this.selectLabel = valArr[0].title;
-                } else {
-                    this.dataKey.hasManual && (this.isEdit = true);
-                    this.selectLabel = newVal;
-                }
-                return valArr;
             }
         }
     },
@@ -561,31 +488,19 @@ exports.default = {
                 return item.title === val;
             }),
                 newVal = void 0;
-            if (valArr.length === 1) {
-                newVal = valArr[0].value;
-            } else if (val !== "") {
-                newVal = val;
+
+            newVal = val;
+            if (this.dataKey.isNum) {
+                newVal = Number(val).toString();
             }
+
             if (this.$refs.input.value === "") {
                 newVal = this.lastLabel || this.dataKey.defaultVal;
                 this.dataKey.error = "";
             }
-            if (this.dataKey.val === newVal) {
-                valArr = this.isInSelect;
-                if (valArr.length === 1) {
-                    this.isEdit = false;
-                    this.selectLabel = valArr[0].title;
-                } else {
-                    this.isEdit = true;
-                    this.selectLabel = newVal;
-                }
-            } else {
-                this.dataKey.val = newVal;
-            }
 
+            this.dataKey.val = newVal;
             this.isInput = false;
-            //不存在下拉框 && 有自定义
-            this.isEdit = !(valArr.length === 1) && this.dataKey.hasManual;
         },
         changeValue: function changeValue() {
             //this.checkData(this.dataKey, this.selectLabel);
@@ -598,24 +513,21 @@ exports.default = {
         },
         handlerCallBack: function handlerCallBack() {
             this.lastLabel = this.dataKey.val;
-            var arr = this.isInSelect;
+            this.dataKey.val = this.dataKey.manualValue;
 
-            //如果存在于下拉框中，并且value != title则清空
-            /* if (arr.length === 1 && arr[0].value !== arr[0].title) {
-                this.selectLabel = "";
-            } */
-            this.selectLabel = "";
-            this.isEdit = true;
             this.$refs.inputtext.style.display = "none";
             this.$refs.input.style.visibility = "visible";
-            this.$refs.input.focus();
-            this.$refs.input.scrollIntoView({ block: "center" });
-            this.isInput = true;
+            this.$nextTick(function () {
+                this.isEdit = true;
+                this.$refs.input.focus();
+                this.$refs.input.scrollIntoView({ block: "center" });
+                this.isInput = true;
+            });
         },
         hanlderManual: function hanlderManual() {
             this.handlerCallBack();
             this.hide();
-            this.dataKey.changeCallBack();
+            this.dataKey.changeCallBack(this.dataKey.val);
             this.handlerChange();
         },
         hide: function hide() {
@@ -652,8 +564,29 @@ exports.default = {
                 if (newValue === undefined || newValue === "") {
                     return;
                 }
-                var hasVal = this.isInSelect.length === 1;
-                if ((this.dataKey.immediate !== false || this.firstChange == true) && hasVal && !this.isInput) {
+                this.inputValue = newValue;
+                if (newValue === this.dataKey.manualValue) {
+                    this.inputValue = "";
+                }
+                var varArr = this.dataKey.sortArray.filter(function (item) {
+                    return item.value === newValue;
+                });
+                //存在下拉列表
+                if (varArr.length === 1) {
+                    this.selectLabel = varArr[0].title;
+                    this.$nextTick(function () {
+                        this.isEdit = false;
+                    });
+                } else {
+                    this.selectLabel = newValue;
+                    //支持自定义时
+                    this.dataKey.hasManual && this.$nextTick(function () {
+                        this.isEdit = true;
+                    });
+                }
+                if ((this.dataKey.immediate !== false || this.firstChange == true) &&
+                //hasVal &&
+                !this.isInput) {
                     this.dataKey.changeCallBack && this.dataKey.changeCallBack(newValue);
                 }
             },
@@ -1172,7 +1105,7 @@ component.options.__file = "src/components/add-event.vue"
 
 /***/ }),
 
-/***/ 68:
+/***/ 64:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1221,8 +1154,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.selectLabel,
-                expression: "selectLabel"
+                value: _vm.inputValue,
+                expression: "inputValue"
               },
               {
                 name: "manualevent",
@@ -1242,7 +1175,7 @@ var render = function() {
               maxlength: _vm.dataKey.maxlength,
               "evt-name": _vm.evtName
             },
-            domProps: { value: _vm.selectLabel },
+            domProps: { value: _vm.inputValue },
             on: {
               keyup: function($event) {
                 return _vm.changeValue()
@@ -1254,7 +1187,7 @@ var render = function() {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.selectLabel = $event.target.value
+                _vm.inputValue = $event.target.value
               }
             }
           }),
@@ -1394,6 +1327,63 @@ render._withStripped = true
 /* concated harmony reexport render */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* concated harmony reexport staticRenderFns */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
 
+
+/***/ }),
+
+/***/ 98:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _vSelect = __webpack_require__(99);
+
+var _vSelect2 = _interopRequireDefault(_vSelect);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* istanbul ignore next */
+_vSelect2.default.install = function (Vue) {
+  Vue.component(_vSelect2.default.name, _vSelect2.default);
+};
+
+exports.default = _vSelect2.default;
+
+/***/ }),
+
+/***/ 99:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(
+  _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
+  _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/select/v-select.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ })
 

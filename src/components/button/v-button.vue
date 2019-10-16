@@ -3,6 +3,7 @@
         <button
             :name="name"
             class="btn"
+            type="button"
             :class="{[css]: css, 'disabled': disabled}"
             @click.stop="clickCallBack()"
             ref="button"

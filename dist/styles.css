@@ -720,6 +720,7 @@ select:disabled {
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 12;
   width: 10px;
   font-size: 20px;
   text-align: center;
@@ -1573,6 +1574,7 @@ select:disabled {
   left: 0;
   font-size: 100px;
   opacity: 0;
+  overflow: hidden;
 }
 
 .uploader-container .list-name {

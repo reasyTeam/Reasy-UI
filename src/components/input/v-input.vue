@@ -10,7 +10,7 @@
       :class="{'text-password':dataKey.hasEye}"
       @input="changeValue()"
       @focus="focused = true"
-      @blur="focused = false"
+      @blur="blurEvt()"
       v-model="dataKey.val"
       v-manualevent="evtHandlerList"
       :evt-name="evtName"
@@ -39,6 +39,7 @@ let defaults = {
   name: "",
   val: "", //组件value
   error: "", //错误标志
+  isNum: false, //是否输入框内允许只输入数字或浮点型
   valid: [
     /*{
             type: "ssid",
@@ -90,6 +91,12 @@ export default {
       }
 
       return true;
+    },
+    blurEvt() {
+      this.focused = false;
+      if(this.dataKey.isNum && this.dataKey.val) { //输入框只允许输入数字
+        this.dataKey.val = Number(this.dataKey.val).toString();
+      }
     },
     focus() {
       this.$refs.input.focus();

@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import PopupManager from "../util/manager";
 let idSeed = 1;
 
@@ -92,7 +91,7 @@ export default {
         if (this._opening) return;
         if (!this.rendered) {
           this.rendered = true;
-          Vue.nextTick(() => {
+          this.$nextTick(() => {
             this.open();
           });
         } else {

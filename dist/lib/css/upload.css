@@ -35,6 +35,7 @@
   left: 0;
   font-size: 100px;
   opacity: 0;
+  overflow: hidden;
 }
 
 .uploader-container .list-name {

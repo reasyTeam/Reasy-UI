@@ -9,7 +9,7 @@
                 type="text"
                 class="text"
                 :class="dataKey.css"
-                v-model="selectLabel"
+                v-model="inputValue"
                 :style="{visibility: isEdit?'visible':'hidden'}"
                 :disabled="dataKey.disabled"
                 :name="dataKey.name"
@@ -73,11 +73,13 @@ let defaults = {
     disabled: false, //是否禁用
     hasManual: false, //是否支持自定义
     manualText: _("Manual"),
+    manualValue: "-1", //选择自定义时的值
     maxlength: "", //输入框最大输入长度
     error: "", //错误
     name: "",
     defaultVal: "",
     immediate: true,
+    isNum: false, //是否输入框内允许只输入数字或浮点型
     sortArray: [
         /* {
             value: xxx,
@@ -138,16 +140,15 @@ export default {
             );
         if (valArr.length === 1) {
             this.isEdit = false;
-            this.selectLabel = valArr[0].title;
         } else {
             this.dataKey.hasManual && (this.isEdit = true);
-            this.selectLabel = newVal;
         }
         this.addEvent();
     },
     data() {
         return {
             error: "",
+            inputValue: "",
             isEdit: false,
             isInput: false, //是否正在输入
             dropdownShow: false,
@@ -166,23 +167,6 @@ export default {
             },
             get() {
                 return this.$isMobile && this.dropdownShow;
-            }
-        },
-        isInSelect: {
-            set() {},
-            get() {
-                let newVal = this.dataKey.val,
-                    valArr = this.dataKey.sortArray.filter(
-                        item => item.value === newVal
-                    );
-                if (valArr.length === 1) {
-                    this.isEdit = false;
-                    this.selectLabel = valArr[0].title;
-                } else {
-                    this.dataKey.hasManual && (this.isEdit = true);
-                    this.selectLabel = newVal;
-                }
-                return valArr;
             }
         }
     },
@@ -239,31 +223,20 @@ export default {
                     item => item.title === val
                 ),
                 newVal;
-            if (valArr.length === 1) {
-                newVal = valArr[0].value;
-            } else if (val !== "") {
-                newVal = val;
+            
+            newVal = val;
+            if(this.dataKey.isNum) {
+                newVal = Number(val).toString();
             }
+            
             if (this.$refs.input.value === "") {
                 newVal = this.lastLabel || this.dataKey.defaultVal;
                 this.dataKey.error = "";
             }
-            if (this.dataKey.val === newVal) {
-                valArr = this.isInSelect;
-                if (valArr.length === 1) {
-                    this.isEdit = false;
-                    this.selectLabel = valArr[0].title;
-                } else {
-                    this.isEdit = true;
-                    this.selectLabel = newVal;
-                }
-            } else {
-                this.dataKey.val = newVal;
-            }
-
+            
+            this.dataKey.val = newVal;
             this.isInput = false;
-            //不存在下拉框 && 有自定义
-            this.isEdit = !(valArr.length === 1) && this.dataKey.hasManual;
+            
         },
 
         changeValue() {
@@ -278,25 +251,23 @@ export default {
 
         handlerCallBack() {
             this.lastLabel = this.dataKey.val;
-            let arr = this.isInSelect;
-
-            //如果存在于下拉框中，并且value != title则清空
-            /* if (arr.length === 1 && arr[0].value !== arr[0].title) {
-                this.selectLabel = "";
-            } */
-            this.selectLabel = "";
-            this.isEdit = true;
-            this.$refs.inputtext.style.display = "none";
-            this.$refs.input.style.visibility = "visible";
-            this.$refs.input.focus();
-            this.$refs.input.scrollIntoView({ block: "center" });
-            this.isInput = true;
+            this.dataKey.val = this.dataKey.manualValue;
+            
+             this.$refs.inputtext.style.display = "none";
+             this.$refs.input.style.visibility = "visible";
+            this.$nextTick(function() {
+                this.isEdit = true;
+                this.$refs.input.focus();
+                this.$refs.input.scrollIntoView({ block: "center" });
+                this.isInput = true;
+            });
+            
         },
 
         hanlderManual() {
             this.handlerCallBack();
             this.hide();
-            this.dataKey.changeCallBack();
+            this.dataKey.changeCallBack(this.dataKey.val);
             this.handlerChange();
         },
         hide() {
@@ -332,11 +303,31 @@ export default {
                 if (newValue === undefined || newValue === "") {
                     return;
                 }
-                let hasVal = this.isInSelect.length === 1;
+                this.inputValue = newValue;
+                if(newValue === this.dataKey.manualValue) {
+                    this.inputValue = "";
+                }
+                let varArr = this.dataKey.sortArray.filter(
+                        item => item.value === newValue
+                    );
+                //存在下拉列表
+                if(varArr.length === 1) {
+                    this.selectLabel = varArr[0].title;
+                    this.$nextTick(function() {
+                        this.isEdit = false;
+                    });
+                    
+                } else {
+                    this.selectLabel = newValue;
+                    //支持自定义时
+                    this.dataKey.hasManual && (this.$nextTick(function() {
+                        this.isEdit = true;
+                    }));
+                }
                 if (
                     (this.dataKey.immediate !== false ||
                         this.firstChange == true) &&
-                    hasVal &&
+                    //hasVal &&
                     !this.isInput
                 ) {
                     this.dataKey.changeCallBack &&

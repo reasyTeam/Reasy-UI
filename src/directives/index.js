@@ -1,4 +1,5 @@
 import Tooltip from '../components/v-tooltip';
+import {isDefined} from "../components/libs.js";
 
 let startClick;
 let seed = 0;
@@ -54,7 +55,7 @@ const install = function (Vue) {
                 el.addEventListener("mouseenter", function (event) {
 
                     tooltipBox.parseHtml = !!this.getAttribute("parse-html");
-                    if (binding.value) {
+                    if (isDefined(binding.value)) {
                         tooltipBox.content = binding.value;
                     } else {
                          if (this.querySelector("[v-tooltip]")) { //自定义生成

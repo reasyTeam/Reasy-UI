@@ -77,11 +77,12 @@
                                 <span
                                     v-if="columns.parseHtml"
                                     v-html="rowsData[columns.field]"
-                                    v-tooltip=""
+                                    v-tooltip
                                     :class="columns.css"  
                                 ></span>
                                 <span
                                     v-else
+                                    :key="rowsData[columns.field]"
                                     v-tooltip="rowsData[columns.field]"
                                     style="cursor: text"
                                     :class="columns.css"
@@ -109,7 +110,7 @@
                             </td>
                         </template>
                     </tr>
-                    <tr v-if="pageData.length === 0">
+                    <tr v-if="pageData.length === 0 && isLoadData">
                         <td
                             :colspan="tableOptions.selectBox ? tableOptions.columns.length + 1 : tableOptions.columns.length"
                         >
@@ -276,6 +277,7 @@ export default {
             tableScroll: false,
             pageData: [], //当前页数据
             tableData: [], //当前表格数据 过滤后
+            isLoadData: false,
             originData: [], //转换后的原始数据，format后的数据
             formatOpt: {},
             footer: [], //
@@ -283,7 +285,7 @@ export default {
             sortType: "",
             searchValue: "", //搜索文字
             bodyHeight: "",
-            noData: _("No Data"),
+            noData: _("暂无数据"),
             searchItem: [],
             searchText: "",
             checkbox: {
@@ -624,7 +626,7 @@ export default {
                 }
                 this.checkbox.val = "0";
                 this.formatTable();
-
+                this.isLoadData = true;
                 this.tableData = copyDeepData(this.originData);
 
                 this.updateTable();
