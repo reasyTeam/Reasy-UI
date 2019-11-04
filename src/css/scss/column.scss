@@ -4,7 +4,8 @@
         padding-right: 0;
     }
     &.disabled {
-        background: $disabled-color;
+        background: $disabled-background-color;
+        color: $disabled-color;
     }
 }
 .error-group .col-content {

@@ -100,7 +100,6 @@ function sortByKey(item1, item2, fields, sortTypeObj) {
 
 let setOptions = function (data, defaluts, noFreeze) {
 
-    //浅复制
     let defOpts = copyDeepData(defaluts);
     for (var prop in defOpts) {
         if (typeof data[prop] == "undefined") {

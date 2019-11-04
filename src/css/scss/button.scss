@@ -4,8 +4,8 @@
         margin-left: 20px;
     }
     .btn.disabled {
-        background: $disabled-color !important;
+        background: $disabled-background-color !important;
         cursor: not-allowed;
-        color: #aaa;
+        color: $disabled-color;
     }
 }

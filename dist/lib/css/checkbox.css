@@ -21,6 +21,7 @@
 }
 
 .disabled > .checkbox-item {
-  color: #ebebe4;
+  background: #f2f2f2;
+  color: #d9d9d9;
 }
 

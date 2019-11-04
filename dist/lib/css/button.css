@@ -7,8 +7,8 @@
 }
 
 .button-item .btn.disabled {
-  background: #ebebe4 !important;
+  background: #f2f2f2 !important;
   cursor: not-allowed;
-  color: #aaa;
+  color: #d9d9d9;
 }
 

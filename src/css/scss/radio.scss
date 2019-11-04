@@ -8,6 +8,7 @@
         font-size: 18px;
         color: $main-active-color;
         &.disabled {
+            background: $disabled-background-color;
             color: $disabled-color;
         }
     }

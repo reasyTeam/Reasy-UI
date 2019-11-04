@@ -33,25 +33,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.v-icon-checkbox-checked:before {
-  content: "\e900";
-}
 .v-icon-close:before {
-  content: "\e901";
-}
-.v-icon-checkbox-unchecked:before {
-  content: "\e902";
-}
-.v-icon-search:before {
-  content: "\e903";
-}
-.v-icon-sort-up:before {
-  content: "\e904";
-}
-.v-icon-sort-down:before {
-  content: "\e905";
-}
-.v-icon-unsort:before {
   content: "\e906";
 }
 .v-icon-eye-close:before {
@@ -60,6 +42,27 @@
 .v-icon-eye-open:before {
   content: "\e908";
 }
+.v-icon-file:before {
+  content: "\e91f";
+}
+.v-icon-checkbox-checked:before {
+  content: "\e900";
+}
+.v-icon-checkbox-unchecked:before {
+  content: "\e901";
+}
+.v-icon-search:before {
+  content: "\e902";
+}
+.v-icon-sort-up:before {
+  content: "\e903";
+}
+.v-icon-sort-down:before {
+  content: "\e904";
+}
+.v-icon-unsort:before {
+  content: "\e905";
+}
 .v-icon-arrrow-down:before {
   content: "\e920";
 }
@@ -67,11 +70,8 @@
   content: "\e921";
 }
 .v-icon-radio-checked:before {
-  content: "\ea54";
+  content: "\ea55";
 }
 .v-icon-radio-unchecked:before {
   content: "\ea56";
-}
-.v-icon-file:before {
-  content: "\e91f";
 }

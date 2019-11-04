@@ -101,7 +101,8 @@
             color: $main-active-color;
         }
         &.disabled {
-            background: #ddd;
+            background: #f2f2f2;
+            color: $disabled-color;
             cursor: not-allowed;
         }
         .page-tips {

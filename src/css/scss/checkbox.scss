@@ -19,5 +19,6 @@
     max-width: $elem-width;
 }
 .disabled > .checkbox-item {
+    background: $disabled-background-color;
     color: $disabled-color;
 }
