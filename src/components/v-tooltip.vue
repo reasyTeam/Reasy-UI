@@ -26,21 +26,26 @@
 		},
 		methods: {
 			updatePosition() {
-				let clientRect = this.$refs.tooltip.getBoundingClientRect(),
-					bodyWidth = document.body.clientWidth,
-					bodyHeight = document.body.clientHeight;
+
+				this.$nextTick(function() {
+					let clientRect = this.$refs.tooltip.getBoundingClientRect(),
+						bodyWidth = document.body.clientWidth,
+						bodyHeight = document.body.clientHeight;
+						
+					this.top = this.top + 10;
+					this.left = this.left + 10;
+					//当右边超出屏幕宽度时
+					if(clientRect.right > bodyWidth) {
+						this.left = this.left - this.$refs.tooltip.offsetWidth - 10;
+					}
 					
-				this.top = this.top - this.$refs.tooltip.offsetHeight;
-				//当右边超出屏幕宽度时
-				if(clientRect.right > bodyWidth) {
-					this.left = this.left - this.$refs.tooltip.offsetWidth * 2 - 10;
-				}
+					//当下方超出屏幕高度时
+					if(clientRect.bottom > bodyHeight) {
+						//当前高度 - 自身高度 - 元素高度 - 30
+						this.top = this.top - this.relativeHeight - this.$refs.tooltip.offsetWidth - 30;
+					}
+				});
 				
-				//当下方超出屏幕高度时
-				if(clientRect.bottom > bodyHeight) {
-					
-					this.top = this.top - this.$refs.tooltip.offsetHeight;
-				}
 			}
 		},
         wathch: {

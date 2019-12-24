@@ -403,14 +403,14 @@ var install = function install(Vue) {
                         }
                     }
 
+                    var clientRect = event.target.getBoundingClientRect();
+
                     tooltipBox.left = event.pageX;
-                    tooltipBox.top = event.pageY; //当前位置 - 目标高度
-                    tooltipBox.relativeWidth = event.target.offsetWidth;
-                    tooltipBox.relativeHeight = event.target.offsetHeight;
+                    tooltipBox.top = clientRect.top + clientRect.height; //当前元素位置 + 当前元素高度
+                    tooltipBox.relativeWidth = event.target.offsetWidth || clientRect.width;
+                    tooltipBox.relativeHeight = event.target.offsetHeight || clientRect.height;
                     tooltipBox.show = true;
                     tooltipBox.updatePosition();
-                    //console.log("event.relatedTarget", vnode.context);
-                    //vnode.context[binding.expression](event);
                 });
                 el.addEventListener("mouseleave", function (event) {
                     tooltipBox.show = false;
@@ -1097,21 +1097,25 @@ exports.default = {
 
 	methods: {
 		updatePosition: function updatePosition() {
-			var clientRect = this.$refs.tooltip.getBoundingClientRect(),
-			    bodyWidth = document.body.clientWidth,
-			    bodyHeight = document.body.clientHeight;
 
-			this.top = this.top - this.$refs.tooltip.offsetHeight;
-			//当右边超出屏幕宽度时
-			if (clientRect.right > bodyWidth) {
-				this.left = this.left - this.$refs.tooltip.offsetWidth * 2 - 10;
-			}
+			this.$nextTick(function () {
+				var clientRect = this.$refs.tooltip.getBoundingClientRect(),
+				    bodyWidth = document.body.clientWidth,
+				    bodyHeight = document.body.clientHeight;
 
-			//当下方超出屏幕高度时
-			if (clientRect.bottom > bodyHeight) {
+				this.top = this.top + 10;
+				this.left = this.left + 10;
+				//当右边超出屏幕宽度时
+				if (clientRect.right > bodyWidth) {
+					this.left = this.left - this.$refs.tooltip.offsetWidth - 10;
+				}
 
-				this.top = this.top - this.$refs.tooltip.offsetHeight;
-			}
+				//当下方超出屏幕高度时
+				if (clientRect.bottom > bodyHeight) {
+					//当前高度 - 自身高度 - 元素高度 - 30
+					this.top = this.top - this.relativeHeight - this.$refs.tooltip.offsetWidth - 30;
+				}
+			});
 		}
 	},
 	wathch: {

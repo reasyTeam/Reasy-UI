@@ -65,15 +65,14 @@ const install = function (Vue) {
                         }
                     }
 
+                    let clientRect = event.target.getBoundingClientRect();
+
                     tooltipBox.left = event.pageX;
-                    tooltipBox.top = event.pageY; //当前位置 - 目标高度
-                    tooltipBox.relativeWidth = event.target.offsetWidth;
-                    tooltipBox.relativeHeight = event.target.offsetHeight;
+                    tooltipBox.top = clientRect.top + clientRect.height; //当前元素位置 + 当前元素高度
+                    tooltipBox.relativeWidth = event.target.offsetWidth || clientRect.width;
+                    tooltipBox.relativeHeight = event.target.offsetHeight || clientRect.height;
                     tooltipBox.show = true;
                     tooltipBox.updatePosition();
-                    //console.log("event.relatedTarget", vnode.context);
-                    //vnode.context[binding.expression](event);
-
                 });
                 el.addEventListener("mouseleave", function (event) {
                     tooltipBox.show = false;

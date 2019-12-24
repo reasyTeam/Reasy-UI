@@ -1335,6 +1335,7 @@ exports.default = {
             //计算滚动条显示
             this.$nextTick(function () {
                 if ((this.$refs["table-body-tr"] || []).length === 0) {
+                    this.bodyHeight = '';
                     return;
                 }
                 var trHeight = this.$refs["table-body-tr"][0].offsetHeight;
@@ -1343,6 +1344,7 @@ exports.default = {
                     this.tableScroll = true;
                 } else {
                     this.tableScroll = false;
+                    this.bodyHeight = '';
                 }
             });
         },
@@ -1703,26 +1705,21 @@ var _addEvent2 = _interopRequireDefault(_addEvent);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var defaults = {
-  required: true,
-  css: "", //样式
-  show: true, //是否显示
-  ignore: false, //是否忽略
-  disabled: false, //是否禁用
-  maxlength: "",
-  type: "text",
-  placeholder: "",
-  hasEye: "",
-  name: "",
-  val: "", //组件value
-  error: "", //错误标志
-  isNum: false, //是否输入框内允许只输入数字或浮点型
-  valid: [
-    /*{
-            type: "ssid",
-            args: [1, 2]
-        }*/
-  ],
-  changeCallBack: function changeCallBack() {}
+    required: true, //是否必须输入
+    css: "", //样式
+    show: true, //是否显示
+    ignore: false, //是否忽略
+    disabled: false, //是否禁用
+    maxlength: "", //最大输入长度
+    type: "text", //输入框类型
+    placeholder: "", //占位提示文字
+    hasEye: "", //是否有小眼睛
+    name: "", //名称字段
+    val: "", //组件value
+    error: "", //错误标志
+    isNum: false, //是否输入框内允许只输入数字或浮点型
+    valid: [], //数据验证
+    changeCallBack: function changeCallBack() {}
 }; //
 //
 //
@@ -1747,82 +1744,102 @@ var defaults = {
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
-  name: "v-input",
-  props: ["data-key"],
-  mixins: [_addEvent2.default],
-  created: function created() {
-    this.dataKey = this.setOptions(this.dataKey, defaults);
-    this.addEvent();
-  },
-  data: function data() {
-    return {
-      supportPlaceholder: this.hasPlaceholder(),
-      // 记录当前是否是活动状态
-      focused: false
-    };
-  },
+    name: "v-input",
+    props: ["data-key"],
+    mixins: [_addEvent2.default],
+    created: function created() {
+        this.dataKey = this.setOptions(this.dataKey, defaults);
+        this.addEvent();
+    },
+    data: function data() {
+        return {
+            //是否支持placehodler
+            supportPlaceholder: this.hasPlaceholder(),
+            // 记录当前是否是活动状态
+            focused: false
+        };
+    },
 
 
-  methods: {
-    changePlaceHolder: function changePlaceHolder() {
-      if (this.dataKey.type == "password") {
-        this.dataKey.type = "text";
-      } else {
-        this.dataKey.type = "password";
-      }
-    },
-    changeValue: function changeValue() {
-      var isCheckTrue = this.check(this.dataKey);
-      if (!isCheckTrue) {
-        return;
-      }
+    methods: {
+        changePlaceHolder: function changePlaceHolder() {
+            if (this.dataKey.type == "password") {
+                this.dataKey.type = "text";
+            } else {
+                this.dataKey.type = "password";
+            }
+        },
+        changeValue: function changeValue() {
+            var isCheckTrue = this.check(this.dataKey);
+            if (!isCheckTrue) {
+                return;
+            }
 
-      this.dataKey.changeCallBack(this.dataKey.val);
-    },
-    hasPlaceholder: function hasPlaceholder() {
-      var i = document.createElement("input");
-      return "placeholder" in i;
-    },
-    check: function check(dataObj) {
-      if (typeof this.$checkData == "function") {
-        return this.$checkData(dataObj);
-      }
+            this.dataKey.changeCallBack(this.dataKey.val);
+        },
+        hasPlaceholder: function hasPlaceholder() {
+            var i = document.createElement("input");
+            return "placeholder" in i;
+        },
+        check: function check(dataObj) {
+            if (typeof this.$checkData == "function") {
+                return this.$checkData(dataObj);
+            }
 
-      return true;
-    },
-    blurEvt: function blurEvt() {
-      this.focused = false;
-      if (this.dataKey.isNum && this.dataKey.val) {
-        //输入框只允许输入数字
-        this.dataKey.val = Number(this.dataKey.val).toString();
-      }
-    },
-    focus: function focus() {
-      this.$refs.input.focus();
-    }
-  },
-  watch: {
-    "dataKey.show": {
-      handler: function handler(newValue, oldValue) {
-        if (!newValue) {
-          this.dataKey.error = "";
+            return true;
+        },
+        blurEvt: function blurEvt() {
+            this.focused = false;
+            if (this.dataKey.isNum && this.dataKey.val) {
+                //输入框只允许输入数字
+                this.dataKey.val = Number(this.dataKey.val).toString();
+            }
+        },
+        focus: function focus() {
+            this.$refs.input.focus();
         }
-      }
     },
-    "dataKey.disabled": {
-      handler: function handler(newValue, oldValue) {
-        if (!newValue) {
-          this.dataKey.error = "";
+    watch: {
+        "dataKey.show": {
+            handler: function handler(newValue, oldValue) {
+                if (!newValue) {
+                    this.dataKey.error = "";
+                }
+            }
+        },
+        "dataKey.disabled": {
+            handler: function handler(newValue, oldValue) {
+                if (!newValue) {
+                    this.dataKey.error = "";
+                }
+            }
         }
-      }
+    },
+    destroyed: function destroyed() {
+        this.dataKey.error = "";
     }
-  },
-  destroyed: function destroyed() {
-    this.dataKey.error = "";
-  }
 };
 
 /***/ }),
@@ -4185,21 +4202,25 @@ exports.default = {
 
 	methods: {
 		updatePosition: function updatePosition() {
-			var clientRect = this.$refs.tooltip.getBoundingClientRect(),
-			    bodyWidth = document.body.clientWidth,
-			    bodyHeight = document.body.clientHeight;
 
-			this.top = this.top - this.$refs.tooltip.offsetHeight;
-			//当右边超出屏幕宽度时
-			if (clientRect.right > bodyWidth) {
-				this.left = this.left - this.$refs.tooltip.offsetWidth * 2 - 10;
-			}
+			this.$nextTick(function () {
+				var clientRect = this.$refs.tooltip.getBoundingClientRect(),
+				    bodyWidth = document.body.clientWidth,
+				    bodyHeight = document.body.clientHeight;
 
-			//当下方超出屏幕高度时
-			if (clientRect.bottom > bodyHeight) {
+				this.top = this.top + 10;
+				this.left = this.left + 10;
+				//当右边超出屏幕宽度时
+				if (clientRect.right > bodyWidth) {
+					this.left = this.left - this.$refs.tooltip.offsetWidth - 10;
+				}
 
-				this.top = this.top - this.$refs.tooltip.offsetHeight;
-			}
+				//当下方超出屏幕高度时
+				if (clientRect.bottom > bodyHeight) {
+					//当前高度 - 自身高度 - 元素高度 - 30
+					this.top = this.top - this.relativeHeight - this.$refs.tooltip.offsetWidth - 30;
+				}
+			});
 		}
 	},
 	wathch: {
@@ -5152,7 +5173,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v(_vm._s(_vm.dataKey.placeholder))]
+            [_vm._v("\n        " + _vm._s(_vm.dataKey.placeholder) + "\n    ")]
           )
         : _vm._e(),
       _vm._v(" "),
@@ -5172,7 +5193,7 @@ var render = function() {
       _vm._v(" "),
       _vm.dataKey.error
         ? _c("div", { staticClass: "error-bottom text-error" }, [
-            _vm._v(_vm._s(_vm.dataKey.error))
+            _vm._v("\n        " + _vm._s(_vm.dataKey.error) + "\n    ")
           ])
         : _vm._e()
     ]
@@ -12381,14 +12402,14 @@ var install = function install(Vue) {
                         }
                     }
 
+                    var clientRect = event.target.getBoundingClientRect();
+
                     tooltipBox.left = event.pageX;
-                    tooltipBox.top = event.pageY; //当前位置 - 目标高度
-                    tooltipBox.relativeWidth = event.target.offsetWidth;
-                    tooltipBox.relativeHeight = event.target.offsetHeight;
+                    tooltipBox.top = clientRect.top + clientRect.height; //当前元素位置 + 当前元素高度
+                    tooltipBox.relativeWidth = event.target.offsetWidth || clientRect.width;
+                    tooltipBox.relativeHeight = event.target.offsetHeight || clientRect.height;
                     tooltipBox.show = true;
                     tooltipBox.updatePosition();
-                    //console.log("event.relatedTarget", vnode.context);
-                    //vnode.context[binding.expression](event);
                 });
                 el.addEventListener("mouseleave", function (event) {
                     tooltipBox.show = false;

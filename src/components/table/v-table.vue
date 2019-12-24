@@ -353,6 +353,7 @@ export default {
             //计算滚动条显示
             this.$nextTick(function() {
                 if ((this.$refs["table-body-tr"] || []).length === 0) {
+                    this.bodyHeight = '';
                     return;
                 }
                 let trHeight = this.$refs["table-body-tr"][0].offsetHeight;
@@ -361,6 +362,7 @@ export default {
                     this.tableScroll = true;
                 } else {
                     this.tableScroll = false;
+                    this.bodyHeight = '';
                 }
             });
         },
