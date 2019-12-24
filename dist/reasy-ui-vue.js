@@ -4742,7 +4742,12 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "table-body", style: { height: _vm.bodyHeight + "px" } },
+        {
+          staticClass: "table-body",
+          style: {
+            height: _vm.bodyHeight != "" ? _vm.bodyHeight + "px" : "auto"
+          }
+        },
         [
           _c("table", { ref: "table-body", staticClass: "table table-fixed" }, [
             _c(

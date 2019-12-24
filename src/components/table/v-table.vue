@@ -57,7 +57,7 @@
             </thead>
         </table>
 
-        <div class="table-body" :style="{'height': bodyHeight + 'px'}">
+        <div class="table-body" :style="{'height': bodyHeight != ''? (bodyHeight + 'px') : 'auto'}">
             <table class="table table-fixed" ref="table-body">
                 <tbody>
                     <tr ref="table-body-tr" v-for="(rowsData, rowsIndex) in pageData" :key="rowsData[guidKey]">
