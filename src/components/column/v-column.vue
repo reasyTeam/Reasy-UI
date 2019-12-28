@@ -93,7 +93,7 @@ export default {
         handlerKeyDown(event) {
             let val = event.target.value,
                 index = Number(event.target.getAttribute("data-index")),
-                keyVal = event.key,
+                keyVal = event.char || event.key,
                 keyCode = event.keyCode,
                 maxIndex = this.inputList.length - 1,
                 position;
@@ -142,7 +142,7 @@ export default {
         handlerKeyUp(event) {
             let val,
                 index = Number(event.target.getAttribute("data-index")),
-                keyVal = event.key,
+                keyVal = event.char || event.key,
                 regStr = this.dataKey.allow,
                 reg = new RegExp("[" + regStr + "]", "gi"),
                 illegalReg = new RegExp("[^" + regStr + "]", "gi"),
