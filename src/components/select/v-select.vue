@@ -72,7 +72,7 @@ let defaults = {
     ignore: false, //是否忽略
     disabled: false, //是否禁用
     hasManual: false, //是否支持自定义
-    manualText: _("Manual"),
+    manualText: _("Customize"),
     manualValue: "-1", //选择自定义时的值
     maxlength: "", //输入框最大输入长度
     error: "", //错误

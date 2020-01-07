@@ -28,7 +28,7 @@ export default {
       title: "",
       isShowMessageBox: false,
       parseHtml: false,
-      okText: _("OK"),
+      okText: _("Confirm"),
       cancelText: _("Cancel"),
       content: "",
       resolve: "",

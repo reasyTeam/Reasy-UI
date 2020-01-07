@@ -1,11 +1,17 @@
 {
-    "This field is required": "此项必填",
-    "Tips": "提示",
-    "OK": "确定",
+    "Required": "此项必填",
+    "Note": "提示",
+    "Confirm": "确定",
     "Cancel": "取消",
+    "Select All": "全选",
     "Selected": "已选",
     "Not selected": "未选",
     "Disabled": "不可选",
-    "Manual": "自定义",
-    "No Data": "没有数据"
+    "Customize": "自定义",
+    "Enable": "开启",
+    "Disable": "关闭",
+    "Page %s of %s": "第 %s / %s 页",
+    "%s pieces of data in total": "共 %s 条数据",
+    "No data": "暂无数据",
+    "Choose a File": "选择文件"
 }
