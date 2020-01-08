@@ -11,7 +11,7 @@
             <div class="clearfix">
                 <div class="file-btn-group">
                     <a class="btn" :class="css">
-                        <span class="file-title">选择文件</span>
+                        <span class="file-title">{{ _("Choose a File") }}</span>
                         <input
                             ref="file"
                             :name="name"

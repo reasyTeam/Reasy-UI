@@ -210,7 +210,7 @@ exports.__esModule = true;
 var defaults = {
     required: false,
     css: "", //样式
-    title: _("Tips"),
+    title: _("Note"),
     hasCancel: false,
     show: false, //是否显示
     ignore: true, //是否忽略
@@ -230,7 +230,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 58:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -286,7 +286,7 @@ exports.default = _vAlert2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_alert_vue_vue_type_template_id_2fe642b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(58);
+/* harmony import */ var _v_alert_vue_vue_type_template_id_2fe642b2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
 /* harmony import */ var _v_alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);

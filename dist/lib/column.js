@@ -217,7 +217,7 @@ exports.default = _vColumn2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_column_vue_vue_type_template_id_38434b74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(74);
+/* harmony import */ var _v_column_vue_vue_type_template_id_38434b74___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(73);
 /* harmony import */ var _v_column_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_column_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_column_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
@@ -515,7 +515,7 @@ function getCursorPos(ctrl) {
 
 /***/ }),
 
-/***/ 74:
+/***/ 73:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -538,9 +538,10 @@ var render = function() {
         }
       ],
       staticClass: "form-el-content form-input",
-      class: ((_obj = { "error-group": _vm.dataKey.error }),
-      (_obj[_vm.dataKey.css] = true),
-      _obj)
+      class:
+        ((_obj = { "error-group": _vm.dataKey.error }),
+        (_obj[_vm.dataKey.css] = true),
+        _obj)
     },
     [
       _c(

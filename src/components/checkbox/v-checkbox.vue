@@ -18,7 +18,7 @@
                     class="checkbox-item"
                     :class="selectedAll ? 'v-icon-checkbox-checked' : 'v-icon-checkbox-unchecked'"
                 ></span>
-                <span class="checkbox-text">全选</span>
+                <span class="checkbox-text">{{ _("Select All") }}</span>
             </label>
         </template>
         <template v-for="(item, index) in dataKey.sortArray">

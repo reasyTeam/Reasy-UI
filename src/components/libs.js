@@ -172,7 +172,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else { //非必填时 为空则不验证

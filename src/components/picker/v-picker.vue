@@ -35,8 +35,8 @@ const DATA_NORMAL = "normal";
 // 级联
 
 const TEXT_TITLE = "";
-const TEXT_CONFIRM = _("确定");
-const TEXT_CANCEL = _("取消");
+const TEXT_CONFIRM = _("Confirm");
+const TEXT_CANCEL = _("Cancel");
 
 const COLOR_TITLE = "#262626";
 const COLOR_CONFIRM = "#fe6600";

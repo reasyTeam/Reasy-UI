@@ -229,7 +229,7 @@ exports.default = _vSwitch2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_switch_vue_vue_type_template_id_aaea17f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(55);
+/* harmony import */ var _v_switch_vue_vue_type_template_id_aaea17f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
 /* harmony import */ var _v_switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(31);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_switch_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
@@ -473,7 +473,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -816,7 +816,7 @@ exports.default = {
             return this.dataKey.val === this.dataKey.values[0];
         },
         tips: function tips() {
-            return this.checked ? _("开启") : _("关闭");
+            return this.checked ? _("Enable") : _("Disable");
         }
     },
     mounted: function mounted() {},
@@ -889,7 +889,7 @@ component.options.__file = "src/components/add-event.vue"
 
 /***/ }),
 
-/***/ 55:
+/***/ 67:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

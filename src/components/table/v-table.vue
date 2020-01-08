@@ -233,10 +233,10 @@ export default {
     },
     computed: {
         pageTips() {
-            return _("第 %s / %s 页", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
+            return _("Page %s of %s", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
         },
         dataTips() {
-            return _("共 %s 条数据", [this.tableData.length || 0]);
+            return _("%s pieces of data in total", [this.tableData.length || 0]);
         },
         guidKey() {
             return this.tableOptions.key || "_GUID";
@@ -285,7 +285,7 @@ export default {
             sortType: "",
             searchValue: "", //搜索文字
             bodyHeight: "",
-            noData: _("暂无数据"),
+            noData: _("No data"),
             searchItem: [],
             searchText: "",
             checkbox: {

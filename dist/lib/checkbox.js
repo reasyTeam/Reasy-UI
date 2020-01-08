@@ -229,7 +229,7 @@ exports.default = _vCheckbox2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_checkbox_vue_vue_type_template_id_42111c26___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(65);
+/* harmony import */ var _v_checkbox_vue_vue_type_template_id_42111c26___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
 /* harmony import */ var _v_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_checkbox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
@@ -692,7 +692,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -991,7 +991,7 @@ component.options.__file = "src/components/add-event.vue"
 
 /***/ }),
 
-/***/ 65:
+/***/ 64:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1061,7 +1061,9 @@ var render = function() {
                     : "v-icon-checkbox-unchecked"
                 }),
                 _vm._v(" "),
-                _c("span", { staticClass: "checkbox-text" }, [_vm._v("全选")])
+                _c("span", { staticClass: "checkbox-text" }, [
+                  _vm._v(_vm._s(_vm._("Select All")))
+                ])
               ]
             )
           ]

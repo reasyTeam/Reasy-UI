@@ -371,7 +371,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -649,60 +649,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _libs = __webpack_require__(3);
-
-var specialNames = ["v-input", "v-select"]; //
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: "v-group",
-  props: ["css", "show", "title", "dataKey", "vname"],
-  data: function data() {
-    return {
-      hasTitle: true
-    };
-  },
-
-  computed: {
-    isFocus: function isFocus() {
-      return this.special && (this.dataKey.placeholder || this.$refs.formItem && this.$refs.formItem.focused || (0, _libs.isNotNullOrEmpty)(this.dataKey.val));
-    },
-    special: function special() {
-      return this.vname && specialNames.indexOf(this.vname) > -1;
-    }
-  },
-  methods: {
-    focus: function focus() {
-      this.special && this.$refs.formItem.focus && this.$refs.formItem.focus();
-    }
-  },
-  mounted: function mounted() {
-    if ((0, _libs.isDefined)(this.title)) {
-      this.hasTitle = true;
-    } else {
-      this.hasTitle = false;
-    }
-  }
-};
-
-/***/ }),
-
-/***/ 67:
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -770,6 +717,59 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ 6:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _libs = __webpack_require__(3);
+
+var specialNames = ["v-input", "v-select"]; //
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: "v-group",
+  props: ["css", "show", "title", "dataKey", "vname"],
+  data: function data() {
+    return {
+      hasTitle: true
+    };
+  },
+
+  computed: {
+    isFocus: function isFocus() {
+      return this.special && (this.dataKey.placeholder || this.$refs.formItem && this.$refs.formItem.focused || (0, _libs.isNotNullOrEmpty)(this.dataKey.val));
+    },
+    special: function special() {
+      return this.vname && specialNames.indexOf(this.vname) > -1;
+    }
+  },
+  methods: {
+    focus: function focus() {
+      this.special && this.$refs.formItem.focus && this.$refs.formItem.focus();
+    }
+  },
+  mounted: function mounted() {
+    if ((0, _libs.isDefined)(this.title)) {
+      this.hasTitle = true;
+    } else {
+      this.hasTitle = false;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ 81:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -798,7 +798,7 @@ exports.default = _vGroup2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_group_vue_vue_type_template_id_6b9b9210___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(67);
+/* harmony import */ var _v_group_vue_vue_type_template_id_6b9b9210___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(55);
 /* harmony import */ var _v_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_group_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);

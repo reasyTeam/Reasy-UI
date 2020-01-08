@@ -43,7 +43,7 @@ let defaults = {
     hasCancel: true,
     outside: true, //点击外面是否隐藏
     autoHide: true, //保存是否自动隐藏
-    okText: _("OK"),
+    okText: _("Confirm"),
     cancelText: _("Cancel"),
     show: true, //是否显示
     okCallBack: function() {},

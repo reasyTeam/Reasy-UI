@@ -48,7 +48,7 @@ export default {
             return this.dataKey.val === this.dataKey.values[0];
         },
         tips() {
-            return this.checked ? _("开启") : _("关闭");
+            return this.checked ? _("Enable") : _("Disable");
         }
     },
     mounted() {},
