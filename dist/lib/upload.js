@@ -217,7 +217,7 @@ exports.default = _vUpload2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_upload_vue_vue_type_template_id_3b0efaa6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(77);
+/* harmony import */ var _v_upload_vue_vue_type_template_id_3b0efaa6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(76);
 /* harmony import */ var _v_upload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(49);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_upload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_upload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
@@ -376,7 +376,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 77:
+/***/ 76:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -403,7 +403,9 @@ var render = function() {
         _c("div", { staticClass: "clearfix" }, [
           _c("div", { staticClass: "file-btn-group" }, [
             _c("a", { staticClass: "btn", class: _vm.css }, [
-              _c("span", { staticClass: "file-title" }, [_vm._v("选择文件")]),
+              _c("span", { staticClass: "file-title" }, [
+                _vm._v(_vm._s(_vm._("Choose a File")))
+              ]),
               _vm._v(" "),
               _c("input", {
                 ref: "file",

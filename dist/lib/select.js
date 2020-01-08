@@ -334,7 +334,7 @@ var defaults = {
     ignore: false, //是否忽略
     disabled: false, //是否禁用
     hasManual: false, //是否支持自定义
-    manualText: _("Manual"),
+    manualText: _("Customize"),
     manualValue: "-1", //选择自定义时的值
     maxlength: "", //输入框最大输入长度
     error: "", //错误
@@ -805,7 +805,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -1104,7 +1104,7 @@ component.options.__file = "src/components/add-event.vue"
 
 /***/ }),
 
-/***/ 64:
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1357,7 +1357,7 @@ exports.default = _vSelect2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(64);
+/* harmony import */ var _v_select_vue_vue_type_template_id_49c115f4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(63);
 /* harmony import */ var _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(23);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_select_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);

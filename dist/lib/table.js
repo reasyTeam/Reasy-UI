@@ -450,10 +450,10 @@ exports.default = {
     },
     computed: {
         pageTips: function pageTips() {
-            return _("第 %s / %s 页", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
+            return _("Page %s of %s", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
         },
         dataTips: function dataTips() {
-            return _("共 %s 条数据", [this.tableData.length || 0]);
+            return _("%s pieces of data in total", [this.tableData.length || 0]);
         },
         guidKey: function guidKey() {
             return this.tableOptions.key || "_GUID";
@@ -501,7 +501,7 @@ exports.default = {
             sortType: "",
             searchValue: "", //搜索文字
             bodyHeight: "",
-            noData: _("暂无数据"),
+            noData: _("No data"),
             searchItem: [],
             searchText: "",
             checkbox: {
@@ -1090,7 +1090,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -1356,7 +1356,7 @@ exports.isNotNullOrEmpty = isNotNullOrEmpty;
 
 /***/ }),
 
-/***/ 61:
+/***/ 60:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1856,7 +1856,7 @@ exports.default = _vTable2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_table_vue_vue_type_template_id_096f0396___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(61);
+/* harmony import */ var _v_table_vue_vue_type_template_id_096f0396___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(60);
 /* harmony import */ var _v_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);

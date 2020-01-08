@@ -4357,7 +4357,7 @@ function checkData(dataKey, value) {
 
     if (dataKey.required) {
         if (val === "" || val.length === 0) {
-            dataKey.error = _("This field is required");
+            dataKey.error = _("Required");
             return false;
         }
     } else {
@@ -4686,8 +4686,8 @@ var DATA_NORMAL = "normal";
 // 级联
 
 var TEXT_TITLE = "";
-var TEXT_CONFIRM = _("确定");
-var TEXT_CANCEL = _("取消");
+var TEXT_CONFIRM = _("Confirm");
+var TEXT_CANCEL = _("Cancel");
 
 var COLOR_TITLE = "#262626";
 var COLOR_CONFIRM = "#fe6600";

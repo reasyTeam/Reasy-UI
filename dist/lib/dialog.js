@@ -189,7 +189,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 57:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -364,7 +364,7 @@ var defaults = {
     hasCancel: true,
     outside: true, //点击外面是否隐藏
     autoHide: true, //保存是否自动隐藏
-    okText: _("OK"),
+    okText: _("Confirm"),
     cancelText: _("Cancel"),
     show: true, //是否显示
     okCallBack: function okCallBack() {},
@@ -432,7 +432,7 @@ exports.default = _vDialog2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_dialog_vue_vue_type_template_id_62474a86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
+/* harmony import */ var _v_dialog_vue_vue_type_template_id_62474a86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56);
 /* harmony import */ var _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
