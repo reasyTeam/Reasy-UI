@@ -450,10 +450,10 @@ exports.default = {
     },
     computed: {
         pageTips: function pageTips() {
-            return _("Page %s of %s", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
+            return _("Page %s/%s", [this.tableOptions.page + 1, this.tableOptions.totalPage]);
         },
         dataTips: function dataTips() {
-            return _("%s pieces of data in total", [this.tableData.length || 0]);
+            return _("A Total of %s Pieces of Data", [this.tableData.length || 0]);
         },
         guidKey: function guidKey() {
             return this.tableOptions.key || "_GUID";
