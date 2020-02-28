@@ -10,8 +10,8 @@
     "Customize": "自定义",
     "Enable": "开启",
     "Disable": "关闭",
-    "Page %s of %s": "第 %s / %s 页",
-    "%s pieces of data in total": "共 %s 条数据",
+    "Page %s/%s": "第 %s / %s 页",
+    "A Total of %s Pieces of Data": "共 %s 条数据",
     "No data": "暂无数据",
     "Choose a File": "选择文件"
 }
