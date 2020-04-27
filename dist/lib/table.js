@@ -165,7 +165,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -402,6 +402,9 @@ var defaults = {
 //判断是否存在
 var fileterField = function fileterField(searchV, content) {
     try {
+        // 忽略大小写
+        searchV = searchV.toUpperCase();
+        content = content.toUpperCase();
         if (content.indexOf(searchV) != -1) {
             return true;
         }
@@ -1361,6 +1364,10 @@ exports.isNotNullOrEmpty = isNotNullOrEmpty;
 
 "use strict";
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport */ render; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ staticRenderFns; });
+
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/table/v-table.vue?vue&type=template&id=096f0396&
 var render = function() {
   var _vm = this
@@ -1775,8 +1782,6 @@ render._withStripped = true
 
 
 // CONCATENATED MODULE: ./src/components/table/v-table.vue?vue&type=template&id=096f0396&
-/* concated harmony reexport render */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport staticRenderFns */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
 
 
 /***/ }),
@@ -1785,6 +1790,10 @@ render._withStripped = true
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "a", function() { return /* reexport */ render; });
+__webpack_require__.d(__webpack_exports__, "b", function() { return /* reexport */ staticRenderFns; });
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/table/table-checkbox.vue?vue&type=template&id=144e39d3&
 var render = function() {
@@ -1822,8 +1831,6 @@ render._withStripped = true
 
 
 // CONCATENATED MODULE: ./src/components/table/table-checkbox.vue?vue&type=template&id=144e39d3&
-/* concated harmony reexport render */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport staticRenderFns */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
 
 
 /***/ }),

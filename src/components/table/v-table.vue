@@ -185,6 +185,9 @@ let defaults = {
 //判断是否存在
 let fileterField = (searchV, content) => {
     try {
+        // 忽略大小写
+        searchV = searchV.toUpperCase();
+        content = content.toUpperCase();
         if (content.indexOf(searchV) != -1) {
             return true;
         }
