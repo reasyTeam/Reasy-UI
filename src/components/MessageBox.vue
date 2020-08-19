@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <v-elem class="dialog" v-if="isShowMessageBox">
+    <v-elem class="msg-box-dialog" v-if="isShowMessageBox">
       <div class="overlay" @click="isShowMessageBox = false;"></div>
       <div class="dialog-container message-content">
         <div class="dialog-content">
@@ -13,7 +13,7 @@
             <div v-else>{{content}}</div>
           </div>
           <div class="btn-group">
-            <button v-show="hasCancel" class="btn" @click="cancel()">{{cancelText}}</button> &nbsp;&nbsp;
+            <button v-if="hasCancel" class="btn" @click="cancel()">{{cancelText}}</button>
             <button class="btn btn-primary" @click="confirm()">{{okText}}</button>
           </div>
         </div>

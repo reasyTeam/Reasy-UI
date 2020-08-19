@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'v-iconmoon';
-    src: url('../fonts/iconmoon.ttf') format('truetype'),
-        url('../fonts/iconmoon.woff') format('woff'),
-        url('../fonts/iconmoon.svg') format('svg');
+    src: url('../fonts/v-iconmoon.ttf?tehvr9') format('truetype'),
+        url('../fonts/v-iconmoon.woff?tehvr9') format('woff'),
+        url('../fonts/v-iconmoon.svg?tehvr9#v-iconmoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -33,17 +33,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.v-icon-close:before {
-  content: "\e906";
+.v-icon-checkbox-disabled-checked:before {
+  content: "\e903";
 }
-.v-icon-eye-close:before {
-  content: "\e907";
-}
-.v-icon-eye-open:before {
-  content: "\e908";
-}
-.v-icon-file:before {
-  content: "\e91f";
+.v-icon-no-data:before {
+  content: "\e90b";
 }
 .v-icon-checkbox-checked:before {
   content: "\e900";
@@ -54,14 +48,14 @@
 .v-icon-search:before {
   content: "\e902";
 }
-.v-icon-sort-up:before {
-  content: "\e903";
+.v-icon-close:before {
+  content: "\e906";
 }
-.v-icon-sort-down:before {
-  content: "\e904";
+.v-icon-eye-close:before {
+  content: "\e907";
 }
-.v-icon-unsort:before {
-  content: "\e905";
+.v-icon-eye-open:before {
+  content: "\e908";
 }
 .v-icon-arrrow-down:before {
   content: "\e920";

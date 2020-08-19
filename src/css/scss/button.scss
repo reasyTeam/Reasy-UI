@@ -1,11 +1,12 @@
 .button-item {
     display: inline-block;
     & + .button-item {
-        margin-left: 20px;
+        margin-left: 16px;
     }
     .btn.disabled {
         background: $disabled-background-color !important;
+        border-color: rgba(0,0,0,0.15) !important;
         cursor: not-allowed;
-        color: $disabled-color;
+        color: $disabled-text-color;
     }
 }

@@ -20,7 +20,7 @@
                 v-manualevent="evtHandlerList"
                 :evt-name="evtName"
             />
-            <div ref="inputtext" class="input-text" :class="{'active': dropdownShow, 'disabled': dataKey.disabled}" v-show="!isEdit">{{selectLabel}}</div>
+            <div ref="inputtext" class="input-text ellipsis" :class="{'active': dropdownShow, 'disabled': dataKey.disabled}" v-show="!isEdit"><span>{{selectLabel}}</span></div>
             <div
                 class="select-arrow"
                 @click.stop="clickArrow"

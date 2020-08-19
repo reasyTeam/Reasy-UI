@@ -1,10 +1,12 @@
 .col-content {
     border: 1px solid #ddd;
+    border-radius: 2px;
     .col-group:last-child {
         padding-right: 0;
     }
     &.disabled {
         background: $disabled-background-color;
+        border-color: $black-with-opacity-15;
         color: $disabled-color;
     }
 }
@@ -12,15 +14,15 @@
     border-color: $error-color; 
 }
 .focus.col-content {
-    border-color: $main-active-color;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
+    border-color: $black-with-opacity-35;
+    // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
 }
 .col-group {
     display: inline-block;
     position: relative;
     .text {
         border: none;
-        border-radius: 0;
+        border-radius: 2px;
         &:focus {
             border: none !important;
             box-shadow: none;

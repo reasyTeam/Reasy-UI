@@ -4,17 +4,25 @@ $main-active-color: #d82228;
 //元素高度
 $form-line-height: 30px;
 //输入框的内边距
-$input-padding: 0 6px;
+$input-padding: 0 8px;
 $font-size-small: 13px;
 
 //颜色
 $success-color: #67c23a;
-$error-color: #f00;
+$error-color: #fe0000;
 $info-color: #333;
 $light-color: #999;
 $border-color: #e9e9e9;
 $disabled-color: #d9d9d9;
-$disabled-background-color: #f2f2f2;
+$disabled-background-color: rgba($border-color, 0.5);
+$disabled-text-color: #a6a6a6;
+
+$black-with-opacity-15: rgba(0, 0, 0, 0.15);
+$black-with-opacity-30: rgba(0, 0, 0, 0.3);
+$black-with-opacity-35: rgba(0, 0, 0, 0.35);
+$black-with-opacity-45: rgba(0, 0, 0, 0.45);
+$black-with-opacity-65: rgba(0, 0, 0, 0.65);
+$black-with-opacity-85: rgba(0, 0, 0, 0.85);
 
 //元素宽度  select input
 $elem-width: 300px;

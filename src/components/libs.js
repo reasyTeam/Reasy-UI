@@ -68,25 +68,35 @@ function sortByKey(item1, item2, fields, sortTypeObj) {
     }
 
     if (fields && fields.length > 0) {
-        for (i = 0; i < fields.length; i++) {
-            asc = sortTypeObj[fields[i]] == "asc"; //升序
+        for (i = 0; i < fields.length; i++)
+        {
             prop = fields[i];
-            if (typeof item1[prop] == "number" || typeof item2[prop] == "number") {
-                value1 = item1[prop];
-                value2 = item2[prop];
+            // edit by xc 
+            let option = sortTypeObj[prop];
+            asc = option.sortType == "asc"; //升序
+            let sortFn = option.sortFn;
+            if (typeof sortFn === 'function') {
+                cps.push(sortFn(item1, item2, asc));
             } else {
-                value1 = item1[prop].toString().toUpperCase();
-                value2 = item2[prop].toString().toUpperCase();
+                cps.push(sortFunctions[sortFn] ? sortFunctions[sortFn](item1[prop], item2[prop], asc) : 0);
             }
-            if (value1 > value2) {
-                cps.push(asc ? 1 : -1);
-                break; // 大于时跳出循环。
-            } else if (value1 === value2) {
-                cps.push(0);
-            } else {
-                cps.push(asc ? -1 : 1);
-                break; // 小于时跳出循环。
-            }
+
+            // if (typeof item1[prop] == "number" || typeof item2[prop] == "number") {
+            //     value1 = item1[prop];
+            //     value2 = item2[prop];
+            // } else {
+            //     value1 = item1[prop].toString().toUpperCase();
+            //     value2 = item2[prop].toString().toUpperCase();
+            // }
+            // if (value1 > value2) {
+            //     cps.push(asc ? 1 : -1);
+            //     break; // 大于时跳出循环。
+            // } else if (value1 === value2) {
+            //     cps.push(0);
+            // } else {
+            //     cps.push(asc ? -1 : 1);
+            //     break; // 小于时跳出循环。
+            // }
         }
     }
 
@@ -96,6 +106,51 @@ function sortByKey(item1, item2, fields, sortTypeObj) {
         }
     }
     return 0;
+}
+
+function compare(data1, data2, isAsc) {
+    if (data1 > data2) {
+        return isAsc ? 1 : -1;
+    } else if (data1 < data2) {
+        return isAsc ? -1 : 1;
+    } 
+    return 0;
+}
+
+let sortFunctions = {
+    num: (data1, data2, isAsc) => {
+        data1 = Number(data1);
+        data2 = Number(data2);
+        if (data1 !== data1){
+            if (data2 !== data2){
+                return 0;
+            }
+            return 1;
+        }
+        return compare(data1, data2, isAsc);
+    },
+    string:(data1, data2, isAsc)=>{
+        data1 = data1.toString().toUpperCase();
+        data2 = data2.toString().toUpperCase();
+        return compare(data1, data2, isAsc);
+    },
+    // ip，mask大小对比
+    ipmask: (data1, data2, isAsc) => { 
+        data1 = IPToInt(data1);
+        data2 = IPToInt(data2);
+        return compare(data1, data2, isAsc);
+    }
+};
+
+const sortFnNames = {
+    default: 'string',
+    names: Object.entries(sortFunctions).map(item => item[ 0 ])
+};
+
+function IPToInt(ip) {
+    var arr = ip.split('.'),
+        num = +arr[3] + +arr[2] * (1 << 8) + +arr[1] * (1 << 16) + +arr[0] * (1 << 24);
+    return num;
 }
 
 let setOptions = function (data, defaluts, noFreeze) {
@@ -306,9 +361,9 @@ function hasClass(el, cls) {
     if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.');
     if (el.classList) {
         return el.classList.contains(cls);
-    } else {
+    } 
         return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    }
+    
 }
 
 /* istanbul ignore next */
@@ -406,6 +461,7 @@ export {
     sortByKey,
     copyDeepData,
     formMessage,
+    sortFnNames,
     checkData,
     checkSubmit,
     isDefined,

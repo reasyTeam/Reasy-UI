@@ -5,7 +5,10 @@
 	    </div>
 
 		<div ref="tooltip" v-else class="el-tooltip" v-show="show && content" :style="{'left': left + 'px', 'top': top + 'px', 'max-width': width + 'px'}">
-	    	{{content}}
+			<div class="el-tooltip__content">{{content}}</div>
+			<svg class="el-tooltip__triangle">
+				<path d="M 0.5 1 L 7.5 1 L 4 5"></path>
+			</svg>
 	    </div>
     </transition>
 </template>
@@ -32,18 +35,18 @@
 						bodyWidth = document.body.clientWidth,
 						bodyHeight = document.body.clientHeight;
 						
-					this.top = this.top + 10;
-					this.left = this.left + 10;
+					this.top = this.top - clientRect.height - 5 - 2;
+					this.left = this.left - clientRect.width/2;
 					//当右边超出屏幕宽度时
-					if(clientRect.right > bodyWidth) {
-						this.left = this.left - this.$refs.tooltip.offsetWidth - 10;
-					}
+					// if(clientRect.right > bodyWidth) {
+					// 	this.left = this.left - this.$refs.tooltip.offsetWidth - 10;
+					// }
 					
 					//当下方超出屏幕高度时
-					if(clientRect.bottom > bodyHeight) {
-						//当前高度 - 自身高度 - 元素高度 - 30
-						this.top = this.top - this.relativeHeight - this.$refs.tooltip.offsetWidth - 30;
-					}
+					// if(clientRect.bottom > bodyHeight) {
+					// 	//当前高度 - 自身高度 - 元素高度 - 30
+					// 	this.top = this.top - this.relativeHeight - this.$refs.tooltip.offsetWidth - 30;
+					// }
 				});
 				
 			}

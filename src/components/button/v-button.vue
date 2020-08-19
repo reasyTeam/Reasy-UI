@@ -1,5 +1,5 @@
 <template>
-    <div class="button-item" v-if="show !== false">
+    <div class="button-item" :class="title ? 'btn-title' : ''" v-if="show !== false">
         <button
             :name="name"
             class="btn"

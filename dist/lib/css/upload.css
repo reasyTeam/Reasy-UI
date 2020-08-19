@@ -2,19 +2,19 @@
   width: 100%;
 }
 
-.uploader-container .file-title {
-  padding-left: 6px;
-}
-
 .uploader-container .file-btn-group {
   float: left;
   position: relative;
 }
 
+.uploader-container .file-btn-group .btn {
+  padding: 8px 16px;
+}
+
 .uploader-container .file-tips {
   float: left;
-  margin-left: 20px;
-  line-height: 34px;
+  margin-left: 16px;
+  line-height: 32px;
 }
 
 .uploader-container .file-tips .icon-file {

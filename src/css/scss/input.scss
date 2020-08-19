@@ -9,7 +9,7 @@
 .text {
     line-height: $form-line-height;
     height: $form-line-height;
-    border: 1px solid #ddd;
+    border: 1px solid $black-with-opacity-15;
     width: 100%;
     padding: $input-padding;
     border-radius: 4px;
@@ -38,6 +38,7 @@
     text-align: center;
     color: #000;
     cursor: pointer;
+    z-index: 9;
 }
 .error-group {
     position: relative;
@@ -47,8 +48,9 @@
         animation: slideInUp 0.2s ease-in;
         margin-top: 2px;
     }
-    .text {
-        border-color: $error-color;
+    .text,
+    .input-text {
+        border-color: $error-color !important;
         position: relative;
         z-index: 9;
     }

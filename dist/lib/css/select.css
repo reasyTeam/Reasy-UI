@@ -18,9 +18,9 @@
 }
 
 .form-select .select-arrow .select-arrow-icon {
-  height: 30px;
-  line-height: 30px;
-  font-size: 18px;
+  height: 32px;
+  line-height: 33px;
+  font-size: 16px;
 }
 
 .form-select .arrow-up {
@@ -43,11 +43,11 @@
   left: 0;
   bottom: 1px;
   width: 100%;
-  border: 1px solid #ddd;
-  padding: 0 20px 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0 32px 0 8px;
   line-height: 30px;
-  -webkit-border-radius: 4px;
-          border-radius: 4px;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
   background-color: transparent;
   color: #333;
   -webkit-box-sizing: border-box;
@@ -55,14 +55,20 @@
   overflow: hidden;
 }
 
+.form-select .input-text.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+}
+
 .form-select .input-text.active {
-  border-color: #d82228;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .form-select .input-text.disabled {
-  background: #f2f2f2;
+  background: rgba(233, 233, 233, 0.5);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .form-select .select-dropdown {
@@ -90,7 +96,12 @@
   white-space: nowrap;
 }
 
-.form-select .select-dropdown .select-li:hover {
-  background: #ddd;
+.form-select .select-dropdown .select-li.active {
+  background-color: #e9e9e9;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.form-select .select-dropdown .select-li:not(.active):hover {
+  background: rgba(233, 233, 233, 0.5);
 }
 

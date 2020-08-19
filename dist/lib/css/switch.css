@@ -1,3 +1,7 @@
+.form-switch {
+  top: 5px;
+}
+
 .form-switch .switch-tips {
   display: inline-block;
   margin-left: 8px;
@@ -5,14 +9,11 @@
 }
 
 .switch-item {
-  width: 62px;
+  width: 36px;
   float: left;
-  height: 30px;
+  height: 20px;
   position: relative;
-  border: 1px solid #dfdfdf;
-  background-color: #fdfdfd;
-  -webkit-box-shadow: #dfdfdf 0 0 0 0 inset;
-          box-shadow: #dfdfdf 0 0 0 0 inset;
+  background-color: #b2b2b2;
   -webkit-border-radius: 20px;
           border-radius: 20px;
   background-clip: content-box;
@@ -28,29 +29,30 @@
   outline: 0;
 }
 
+.switch-item.disabled {
+  background-color: #e0e0e0;
+}
+
 .switch-item.checked {
-  border-color: #d82228;
-  -webkit-box-shadow: #d82228 0 0 0 16px inset;
-          box-shadow: #d82228 0 0 0 16px inset;
   background-color: #d82228;
 }
 
 .switch-item.checked:before {
-  left: 32px;
+  left: auto;
+  right: 2px;
 }
 
 .switch-item:before {
   content: " ";
-  width: 28px;
-  height: 28px;
+  width: 16px;
+  height: 16px;
   position: absolute;
-  top: 0px;
-  left: 0;
+  top: 50%;
+  left: 2px;
+  margin-top: -8px;
   -webkit-border-radius: 20px;
           border-radius: 20px;
   background-color: #fff;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;

@@ -1,5 +1,7 @@
 .col-content {
   border: 1px solid #ddd;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
 }
 
 .col-content .col-group:last-child {
@@ -7,18 +9,17 @@
 }
 
 .col-content.disabled {
-  background: #f2f2f2;
+  background: rgba(233, 233, 233, 0.5);
+  border-color: rgba(0, 0, 0, 0.15);
   color: #d9d9d9;
 }
 
 .error-group .col-content {
-  border-color: #f00;
+  border-color: #fe0000;
 }
 
 .focus.col-content {
-  border-color: #d82228;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d82228;
+  border-color: rgba(0, 0, 0, 0.35);
 }
 
 .col-group {
@@ -28,8 +29,8 @@
 
 .col-group .text {
   border: none;
-  -webkit-border-radius: 0;
-          border-radius: 0;
+  -webkit-border-radius: 2px;
+          border-radius: 2px;
 }
 
 .col-group .text:focus {

@@ -1,4 +1,5 @@
 .form-switch {
+    top: 5px;
     .switch-tips {
         display: inline-block;
         margin-left: 8px;
@@ -6,14 +7,17 @@
     }
 }
 
+$switch-item-width: 36px;
+$switch-item-before-width: 16px;
+$switch-normal-color: #b2b2b2;
 .switch-item {
-    width: 62px;
+    width: $switch-item-width;
     float: left;
-    height: $form-line-height;
+    height: 20px;
     position: relative;
-    border: 1px solid #dfdfdf;
-    background-color: #fdfdfd;
-    box-shadow: #dfdfdf 0 0 0 0 inset;
+    // border: 1px solid $switch-normal-color;
+    background-color: $switch-normal-color;
+    // box-shadow: $switch-normal-color 0 0 0 0 inset;
     border-radius: 20px;
     background-clip: content-box;
     display: block;
@@ -24,26 +28,32 @@
         outline: 0;
     }
 
+    &.disabled {
+        background-color: #e0e0e0;
+    }
+
     &.checked {
-        border-color: $main-active-color;
-        box-shadow: $main-active-color 0 0 0 16px inset;
+        // border-color: $main-active-color;
+        // box-shadow: $main-active-color 0 0 0 16px inset;
         background-color: $main-active-color;
 
         &:before {
-            left: 32px;
+            left: auto;
+            right: 2px;
         }
     }
 
     &:before {
         content: " ";
-        width: 28px;
-        height: 28px;
+        width: $switch-item-before-width;
+        height: $switch-item-before-width;
         position: absolute;
-        top: 0px;
-        left: 0;
+        top: 50%;
+        left: 2px;
+        margin-top: -$switch-item-before-width / 2;
         border-radius: 20px;
         background-color: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         transition: all 0.3s;
     }
 }

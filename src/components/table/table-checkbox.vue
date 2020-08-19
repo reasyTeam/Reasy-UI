@@ -7,7 +7,7 @@
                     @click.stop="changeBack"
                     :class="rowData.selected == '1' ? 'v-icon-checkbox-checked': 'v-icon-checkbox-unchecked'"
                 ></span>
-                <span class="checkbox-text"></span>
+                <!-- <span class="checkbox-text"></span> -->
             </label>
         </div>
     </div>

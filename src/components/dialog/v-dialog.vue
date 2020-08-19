@@ -1,38 +1,38 @@
 <template>
-    <div >
-        <div class="overlay" v-if="dialog.show"></div>
-        <transition name="pop-fade">
-            <v-elem class="dialog" v-if="dialog.show">
-                <div class="dialog-container" :class="dialog.css">
-                    <div class="dialog-content" v-clickoutside="handlerOutSide">
-                        <div class="dialog-title">
-                            <span>{{dialog.title}}</span>
-                            <span class="dialog-close v-icon-close" @click="handlerCancel()"></span>
-                        </div>
-                        <div class="content">
-                            <slot></slot>
-                        </div>
-                        <div
-                            class="btn-group"
-                            v-if="dialog.hasCancel !== false || dialog.hasOK !== false"
-                        >
-                            <v-button
-                                v-if="dialog.hasCancel !== false"
-                                :callback="handlerCancel"
-                                :title="dialog.cancelText"
-                            ></v-button>
-                            <v-button
-                                v-if="dialog.hasOK !== false"
-                                :callback="handlerOK"
-                                css="btn-primary"
-                                :title="dialog.okText"
-                            ></v-button>
-                        </div>
+<transition v-if="dialog.show" name="pop-fade">
+    <div class="dialog-wrapper" v-show="dialog.show">
+        <div class="overlay"></div>
+        <v-elem class="dialog">
+            <div class="dialog-container" :class="dialog.css">
+                <div class="dialog-content" v-clickoutside="handlerOutSide">
+                    <div class="dialog-title">
+                        <span>{{dialog.title}}</span>
+                        <span class="dialog-close v-icon-close" @click="handlerCancel()"></span>
+                    </div>
+                    <div class="content">
+                        <slot></slot>
+                    </div>
+                    <div
+                        class="btn-group"
+                        v-if="dialog.hasCancel !== false || dialog.hasOK !== false"
+                    >
+                        <v-button
+                            v-if="dialog.hasCancel !== false"
+                            :callback="handlerCancel"
+                            :title="dialog.cancelText"
+                        ></v-button>
+                        <v-button
+                            v-if="dialog.hasOK !== false"
+                            :callback="handlerOK"
+                            css="btn-primary"
+                            :title="dialog.okText"
+                        ></v-button>
                     </div>
                 </div>
-            </v-elem>
-        </transition>
+            </div>
+        </v-elem>
     </div>
+</transition>
 </template>
 
 <script>

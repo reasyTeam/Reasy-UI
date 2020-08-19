@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isShow">
+    <div class="dialog-wrapper" v-if="isShow">
         <div class="overlay" v-if="hasOverlay"></div>
         <div class="dialog">
             <div class="progress-content" :class="css">
@@ -9,7 +9,7 @@
                         :style="{'text-align': textAlign}">
                         <div class="progress-percent"
                             :style="{'width': percenter + '%'}">
-                            {{percenter + '%'}}
+                            {{showPercentNumber ? percenter + '%' : ''}}
                         </div>
                     </div>
                 </div>
@@ -27,6 +27,10 @@ export default {
             default: 0
         },
         show: {
+            type: Boolean,
+            default: true
+        },
+        showPercentNumber: {
             type: Boolean,
             default: true
         },

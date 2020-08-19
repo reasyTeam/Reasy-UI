@@ -5,9 +5,17 @@
     .checkbox-item {
         vertical-align: middle;
         margin-right: 4px;
-        font-size: 18px;
-        color: $main-active-color;
-        
+        font-size: 16px;
+        color: #c4c4c4;
+        &.v-icon-checkbox-checked {
+            color: $main-active-color;
+        }
+        &.v-icon-checkbox-unchecked {
+            &:hover {
+                color: $main-active-color;
+                background-color: rgba($main-active-color, 0.1);
+            }
+        }
     }
     .checkbox-text {
         display: inline-block;
@@ -19,6 +27,6 @@
     max-width: $elem-width;
 }
 .disabled > .checkbox-item {
-    background: $disabled-background-color;
-    color: $disabled-color;
+    color: #c4c4c4 !important;
+    background: $disabled-background-color !important;
 }

@@ -4,7 +4,7 @@
             class="switch-item"
             :name="dataKey.name"
             @click="setCheckbox()"
-            :class="checked ? 'checked' : ''"
+            :class="{ 'checked': checked, 'disabled': dataKey.disabled }"
             v-manualevent="evtHandlerList"
             :evt-name="evtName"
         ></div>

@@ -1,16 +1,16 @@
 .uploader-container {
     width: 100%;
-    .file-title {
-        padding-left: 6px;
-    }
     .file-btn-group {
         float: left;
         position: relative;
+        .btn {
+            padding: 8px 16px;
+        }
     }
     .file-tips {
         float: left;
-        margin-left: 20px;
-        line-height: 34px;
+        margin-left: 16px;
+        line-height: 32px;
         .icon-file {
             padding-right: 10px;
         }

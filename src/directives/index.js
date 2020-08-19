@@ -66,9 +66,12 @@ const install = function (Vue) {
                     }
 
                     let clientRect = event.target.getBoundingClientRect();
+                    
+                    tooltipBox.left = clientRect.left + clientRect.width/2;
+                    tooltipBox.top = clientRect.top;
 
-                    tooltipBox.left = event.pageX;
-                    tooltipBox.top = clientRect.top + clientRect.height; //当前元素位置 + 当前元素高度
+                    // tooltipBox.left = event.pageX;
+                    // tooltipBox.top = clientRect.top + clientRect.height; //当前元素位置 + 当前元素高度
                     tooltipBox.relativeWidth = event.target.offsetWidth || clientRect.width;
                     tooltipBox.relativeHeight = event.target.offsetHeight || clientRect.height;
                     tooltipBox.show = true;

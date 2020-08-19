@@ -16,7 +16,7 @@
             >
                 <span
                     class="checkbox-item"
-                    :class="selectedAll ? 'v-icon-checkbox-checked' : 'v-icon-checkbox-unchecked'"
+                    :class="selectedAll ? (dataKey.disabled ? 'v-icon-checkbox-disabled-checked' : 'v-icon-checkbox-checked') : 'v-icon-checkbox-unchecked'"
                 ></span>
                 <span class="checkbox-text">{{ _("Select All") }}</span>
             </label>
@@ -42,9 +42,9 @@
             >
                 <span
                     class="checkbox-item"
-                    :class="getChecked(item.value, index) ? 'v-icon-checkbox-checked' : 'v-icon-checkbox-unchecked'"
+                    :class="getChecked(item.value, index) ? ( (item.disabled || dataKey.disabled) ? 'v-icon-checkbox-disabled-checked' : 'v-icon-checkbox-checked') : 'v-icon-checkbox-unchecked'"
                 ></span>
-                <span class="checkbox-text">{{item.title}}</span>
+                <span v-if="item.title" class="checkbox-text">{{item.title}}</span>
             </label>
         </template>
         <div class="error-bottom text-error" v-if="dataKey.error">{{dataKey.error}}</div>

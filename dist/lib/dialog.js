@@ -156,7 +156,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 
@@ -189,7 +194,7 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -203,95 +208,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm.dialog.show ? _c("div", { staticClass: "overlay" }) : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "transition",
-        { attrs: { name: "pop-fade" } },
-        [
-          _vm.dialog.show
-            ? _c("v-elem", { staticClass: "dialog" }, [
-                _c(
-                  "div",
-                  { staticClass: "dialog-container", class: _vm.dialog.css },
-                  [
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "clickoutside",
-                            rawName: "v-clickoutside",
-                            value: _vm.handlerOutSide,
-                            expression: "handlerOutSide"
-                          }
-                        ],
-                        staticClass: "dialog-content"
-                      },
-                      [
-                        _c("div", { staticClass: "dialog-title" }, [
-                          _c("span", [_vm._v(_vm._s(_vm.dialog.title))]),
-                          _vm._v(" "),
-                          _c("span", {
-                            staticClass: "dialog-close v-icon-close",
-                            on: {
-                              click: function($event) {
-                                return _vm.handlerCancel()
-                              }
+  return _vm.dialog.show
+    ? _c("transition", { attrs: { name: "pop-fade" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dialog.show,
+                expression: "dialog.show"
+              }
+            ],
+            staticClass: "dialog-wrapper"
+          },
+          [
+            _c("div", { staticClass: "overlay" }),
+            _vm._v(" "),
+            _c("v-elem", { staticClass: "dialog" }, [
+              _c(
+                "div",
+                { staticClass: "dialog-container", class: _vm.dialog.css },
+                [
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "clickoutside",
+                          rawName: "v-clickoutside",
+                          value: _vm.handlerOutSide,
+                          expression: "handlerOutSide"
+                        }
+                      ],
+                      staticClass: "dialog-content"
+                    },
+                    [
+                      _c("div", { staticClass: "dialog-title" }, [
+                        _c("span", [_vm._v(_vm._s(_vm.dialog.title))]),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "dialog-close v-icon-close",
+                          on: {
+                            click: function($event) {
+                              return _vm.handlerCancel()
                             }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "content" },
-                          [_vm._t("default")],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _vm.dialog.hasCancel !== false ||
-                        _vm.dialog.hasOK !== false
-                          ? _c(
-                              "div",
-                              { staticClass: "btn-group" },
-                              [
-                                _vm.dialog.hasCancel !== false
-                                  ? _c("v-button", {
-                                      attrs: {
-                                        callback: _vm.handlerCancel,
-                                        title: _vm.dialog.cancelText
-                                      }
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _vm.dialog.hasOK !== false
-                                  ? _c("v-button", {
-                                      attrs: {
-                                        callback: _vm.handlerOK,
-                                        css: "btn-primary",
-                                        title: _vm.dialog.okText
-                                      }
-                                    })
-                                  : _vm._e()
-                              ],
-                              1
-                            )
-                          : _vm._e()
-                      ]
-                    )
-                  ]
-                )
-              ])
-            : _vm._e()
-        ],
-        1
-      )
-    ],
-    1
-  )
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "content" },
+                        [_vm._t("default")],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _vm.dialog.hasCancel !== false ||
+                      _vm.dialog.hasOK !== false
+                        ? _c(
+                            "div",
+                            { staticClass: "btn-group" },
+                            [
+                              _vm.dialog.hasCancel !== false
+                                ? _c("v-button", {
+                                    attrs: {
+                                      callback: _vm.handlerCancel,
+                                      title: _vm.dialog.cancelText
+                                    }
+                                  })
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.dialog.hasOK !== false
+                                ? _c("v-button", {
+                                    attrs: {
+                                      callback: _vm.handlerOK,
+                                      css: "btn-primary",
+                                      title: _vm.dialog.okText
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ]
+                  )
+                ]
+              )
+            ])
+          ],
+          1
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -309,7 +320,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
@@ -434,9 +445,9 @@ exports.default = _vDialog2.default;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _v_dialog_vue_vue_type_template_id_62474a86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56);
+/* harmony import */ var _v_dialog_vue_vue_type_template_id_62474a86___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
 /* harmony import */ var _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _v_dialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
 
 

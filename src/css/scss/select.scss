@@ -14,9 +14,9 @@
     transition: all 0.3s;
 
     .select-arrow-icon {
-      height: $form-line-height;
-      line-height: $form-line-height;
-      font-size: 18px;
+      height: $form-line-height + 2px;
+      line-height: $form-line-height + 3px;
+      font-size: 16px;
     }
   }
 
@@ -36,22 +36,29 @@
     left: 0;
     bottom: 1px;
     width: 100%;
-    border: 1px solid #ddd;
-    padding: 0 20px 0 10px;
+    border: 1px solid $black-with-opacity-15;
+    padding: 0 32px 0 8px;
     line-height: $form-line-height;
-    border-radius: 4px;
+    border-radius: 2px;
     background-color: transparent;
     color: $info-color;
     box-sizing: border-box;
     overflow: hidden;
 
+    &.ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     &.active {
-      border-color: $main-active-color;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
+      border-color: $black-with-opacity-35;
+      // box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px $main-active-color;
     }
 
     &.disabled {
       background: $disabled-background-color;
+      border-color: $black-with-opacity-15;
     }
   }
 
@@ -75,8 +82,12 @@
       line-height: 1;
       white-space: nowrap;
 
-      &:hover {
-        background: #ddd;
+      &.active {
+        background-color: $border-color;
+        color: rgba(0, 0, 0, 0.85);
+      }
+      &:not(.active):hover {
+        background: rgba($border-color, 0.5);
       }
     }
   }

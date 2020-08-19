@@ -3,12 +3,13 @@
 }
 
 .button-item + .button-item {
-  margin-left: 20px;
+  margin-left: 16px;
 }
 
 .button-item .btn.disabled {
-  background: #f2f2f2 !important;
+  background: rgba(233, 233, 233, 0.5) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
   cursor: not-allowed;
-  color: #d9d9d9;
+  color: #a6a6a6;
 }
 
