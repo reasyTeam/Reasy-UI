@@ -170,9 +170,9 @@
     </div>
     <div class="table-footer clearfix" v-if="showNormalFooter">
       <div class="page-per">
-        <span>{{ _("显示") }}</span>
+        <span>{{ _("S#hOw#") }}</span>
         <v-select :data-key="pagePerSelect"></v-select>
-        <span>{{ _("条") }}</span>
+        <span>{{ _("/page") }}</span>
       </div>
       <div class="footer-tips">
         <span>{{ pageTips }}</span>
@@ -314,7 +314,7 @@ export default {
     },
     visibleColumns() {
       return this.tableOptions.columns.filter(
-        (col) => col.title !== "" || col.title !== undefined
+        (col) => col.title !== "" && col.title !== undefined
       );
     },
   },

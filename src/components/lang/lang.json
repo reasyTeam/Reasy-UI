@@ -13,5 +13,7 @@
     "Page %s/%s": "第 %s / %s 页",
     "A Total of %s Pieces of Data": "共 %s 条数据",
     "No data": "暂无数据",
-    "Choose a File": "选择文件"
+    "Choose a File": "选择文件",
+    "S#hOw#": "显示",
+    "/page": "条"
 }
