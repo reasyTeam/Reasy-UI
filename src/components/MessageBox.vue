@@ -1,7 +1,7 @@
 <template>
-  <transition name="fade">
+  <transition name="pop-fade">
     <v-elem class="msg-box-dialog" v-if="isShowMessageBox">
-      <div class="overlay" @click="isShowMessageBox = false;"></div>
+      <div class="overlay"></div>
       <div class="dialog-container message-content">
         <div class="dialog-content">
           <div class="dialog-title">
