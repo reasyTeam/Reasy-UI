@@ -1,6 +1,6 @@
 {
   "name": "@reasy-team/reasy-ui-vue",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "main": "dist/reasy-ui-vue.js",
   "author": "milo.z",
   "license": "ISC",
