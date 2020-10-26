@@ -19,6 +19,21 @@
       <span class="v-icon-search" @click="goSearch()"></span>
     </div>
 
+    <div class="table-wrapper">
+      <div class="loading-container" v-show="isShowLoading">
+        <svg :width="tableOptions.loadingCfg.sideLength" :height="tableOptions.loadingCfg.sideLength" class="loading-item">
+          <circle
+            v-for="item in loadingCfgArr"
+            :key="item"
+            :cx="item.cx"
+            :cy="item.cy"
+            :r="item.r"
+            :fill="item.fill"
+            :opacity="item.opacity"
+          />
+        </svg>
+      </div>
+
     <table
       class="table table-fixed table-header"
       :style="{ 'padding-right': tableScroll ? '17px' : '' }"
@@ -154,7 +169,7 @@
               </td>
             </template>
           </tr>
-          <tr v-if="pageData.length === 0 && isLoadData">
+          <tr v-if="!pageData || pageData.length === 0">
             <td
               :colspan="
                 tableOptions.selectBox
@@ -203,6 +218,7 @@
       <div class="footer-content">{{ dataTips }}</div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -238,6 +254,11 @@ let defaults = {
   placeholder: "",
   originData: [],
   selectBox: false,
+  loadingCfg: {  // loading样式配置
+    sideLength: 20,  // loading整体边长
+    circleR: 3,  // 圆的半径
+    color: "#d82228"  // 圆的填充颜色
+  },
 };
 
 //判断是否存在
@@ -317,6 +338,30 @@ export default {
         (col) => col.title !== "" && col.title !== undefined
       );
     },
+    loadingCfgArr() {
+      const { sideLength, circleR, color } = this.tableOptions.loadingCfg,
+        otherSidePosition = sideLength - circleR;
+
+      // svg圆类
+      class circleCfg {
+        r = circleR;
+        color = color;
+
+        constructor(cx, cy, opacity) {
+          this.cx = cx;
+          this.cy = cy;
+          this.opacity = opacity;
+        }
+      }
+
+      // 返回loading中每个圆的配置
+      return [
+        new circleCfg(circleR, circleR, 1),
+        new circleCfg(otherSidePosition, circleR, 0.8),
+        new circleCfg(circleR, otherSidePosition, 0.2),
+        new circleCfg(otherSidePosition, otherSidePosition, 0.6),
+      ];
+    }
   },
   created() {
     //数据合并
@@ -388,6 +433,7 @@ export default {
           click: this.changeSelectAll,
         },
       },
+      isShowLoading: false,
     };
   },
 
@@ -662,6 +708,19 @@ export default {
       return this.tableOptions.originData.find(
         (item) => item[this.guidKey] == value
       );
+    },
+
+    /**
+     * 显示loading图标
+     */
+    showLoading() {
+      this.isShowLoading = true;
+    },
+    /**
+     * 隐藏loading图标
+     */
+    hideLoading() {
+      this.isShowLoading = false;
     },
 
     findIndex(value) {

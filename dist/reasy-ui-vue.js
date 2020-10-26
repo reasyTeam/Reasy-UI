@@ -1047,6 +1047,22 @@ var _libs = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1284,7 +1300,12 @@ var defaults = {
   search: false,
   placeholder: "",
   originData: [],
-  selectBox: false
+  selectBox: false,
+  loadingCfg: { // loading样式配置
+    sideLength: 20, // loading整体边长
+    circleR: 3, // 圆的半径
+    color: "#d82228" // 圆的填充颜色
+  }
 };
 
 //判断是否存在
@@ -1360,6 +1381,31 @@ exports.default = {
       return this.tableOptions.columns.filter(function (col) {
         return col.title !== "" && col.title !== undefined;
       });
+    },
+    loadingCfgArr: function loadingCfgArr() {
+      var _tableOptions$loading = this.tableOptions.loadingCfg,
+          sideLength = _tableOptions$loading.sideLength,
+          circleR = _tableOptions$loading.circleR,
+          color = _tableOptions$loading.color,
+          otherSidePosition = sideLength - circleR;
+
+      // svg圆类
+
+      var circleCfg = function circleCfg(cx, cy, opacity) {
+        _classCallCheck(this, circleCfg);
+
+        this.r = circleR;
+        this.color = color;
+
+        this.cx = cx;
+        this.cy = cy;
+        this.opacity = opacity;
+      };
+
+      // 返回loading中每个圆的配置
+
+
+      return [new circleCfg(circleR, circleR, 1), new circleCfg(otherSidePosition, circleR, 0.8), new circleCfg(circleR, otherSidePosition, 0.2), new circleCfg(otherSidePosition, otherSidePosition, 0.6)];
     }
   },
   created: function created() {
@@ -1427,7 +1473,8 @@ exports.default = {
         events: {
           click: this.changeSelectAll
         }
-      }
+      },
+      isShowLoading: false
     };
   },
 
@@ -1684,6 +1731,21 @@ exports.default = {
       return this.tableOptions.originData.find(function (item) {
         return item[_this3.guidKey] == value;
       });
+    },
+
+
+    /**
+     * 显示loading图标
+     */
+    showLoading: function showLoading() {
+      this.isShowLoading = true;
+    },
+
+    /**
+     * 隐藏loading图标
+     */
+    hideLoading: function hideLoading() {
+      this.isShowLoading = false;
     },
     findIndex: function findIndex(value) {
       var _this4 = this;
@@ -4765,238 +4827,200 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "table",
-        {
-          staticClass: "table table-fixed table-header",
-          style: { "padding-right": _vm.tableScroll ? "17px" : "" }
-        },
-        [
-          _c("thead", [
-            _vm.tableOptions.secondColumns.length > 0
-              ? _c(
-                  "tr",
-                  _vm._l(_vm.tableOptions.secondColumns, function(columns) {
-                    return _c(
-                      "th",
-                      {
-                        key: columns.field,
-                        attrs: {
-                          width: columns.width,
-                          colspan: columns.colspan,
-                          rowspan: columns.rowspan
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n          " + _vm._s(columns.title) + "\n        "
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              : _vm._e(),
-            _vm._v(" "),
+      _c("div", { staticClass: "table-wrapper" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowLoading,
+                expression: "isShowLoading"
+              }
+            ],
+            staticClass: "loading-container"
+          },
+          [
             _c(
-              "tr",
-              [
-                _vm.tableOptions.selectBox
-                  ? _c("th", { attrs: { width: "64px" } }, [
-                      _c(
-                        "span",
-                        { staticClass: "select-box" },
-                        [
-                          _c("v-checkbox", {
-                            attrs: { "data-key": _vm.checkbox }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._l(_vm.visibleColumns, function(columns) {
-                  return _c(
-                    "th",
-                    { key: columns.field, attrs: { width: columns.width } },
-                    [
-                      _c(
-                        "span",
+              "svg",
+              {
+                staticClass: "loading-item",
+                attrs: {
+                  width: _vm.tableOptions.loadingCfg.sideLength,
+                  height: _vm.tableOptions.loadingCfg.sideLength
+                }
+              },
+              _vm._l(_vm.loadingCfgArr, function(item) {
+                return _c("circle", {
+                  key: item,
+                  attrs: {
+                    cx: item.cx,
+                    cy: item.cy,
+                    r: item.r,
+                    fill: item.fill,
+                    opacity: item.opacity
+                  }
+                })
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "table",
+          {
+            staticClass: "table table-fixed table-header",
+            style: { "padding-right": _vm.tableScroll ? "17px" : "" }
+          },
+          [
+            _c("thead", [
+              _vm.tableOptions.secondColumns.length > 0
+                ? _c(
+                    "tr",
+                    _vm._l(_vm.tableOptions.secondColumns, function(columns) {
+                      return _c(
+                        "th",
                         {
-                          class: { pointer: columns.sort },
-                          on: {
-                            click: function($event) {
-                              return _vm.sortTable(columns, columns.field)
-                            }
+                          key: columns.field,
+                          attrs: {
+                            width: columns.width,
+                            colspan: columns.colspan,
+                            rowspan: columns.rowspan
                           }
                         },
                         [
                           _vm._v(
-                            "\n            " +
+                            "\n          " +
                               _vm._s(columns.title) +
-                              "\n            "
-                          ),
-                          columns.sort
-                            ? _c("svg", { staticClass: "sort-column" }, [
-                                _c("path", {
-                                  class: {
-                                    "sort-active":
-                                      _vm.sortType === "asc" &&
-                                      _vm.sortKey == columns.field
-                                  },
-                                  attrs: { d: "M 4 1 L 7.5 5 L 0.5 5" }
-                                }),
-                                _vm._v(" "),
-                                _c("path", {
-                                  class: {
-                                    "sort-active":
-                                      _vm.sortType === "desc" &&
-                                      _vm.sortKey == columns.field
-                                  },
-                                  attrs: { d: "M 4 11 L 7.5 7 L 0.5 7" }
-                                })
-                              ])
-                            : _vm._e()
+                              "\n        "
+                          )
                         ]
                       )
-                    ]
+                    }),
+                    0
                   )
-                })
-              ],
-              2
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "table-body",
-          style: {
-            height: _vm.bodyHeight != "" ? _vm.bodyHeight + "px" : "auto"
-          }
-        },
-        [
-          _c("table", { ref: "table-body", staticClass: "table table-fixed" }, [
-            _c(
-              "tbody",
-              [
-                _vm._l(_vm.pageData, function(rowsData, rowsIndex) {
-                  return _c(
-                    "tr",
-                    {
-                      key: rowsData[_vm.guidKey],
-                      ref: "table-body-tr",
-                      refInFor: true,
-                      class: [
-                        rowsData.css,
-                        rowsData.selected == "1" ? "row-checked" : ""
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "tr",
+                [
+                  _vm.tableOptions.selectBox
+                    ? _c("th", { attrs: { width: "64px" } }, [
+                        _c(
+                          "span",
+                          { staticClass: "select-box" },
+                          [
+                            _c("v-checkbox", {
+                              attrs: { "data-key": _vm.checkbox }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.visibleColumns, function(columns) {
+                    return _c(
+                      "th",
+                      { key: columns.field, attrs: { width: columns.width } },
+                      [
+                        _c(
+                          "span",
+                          {
+                            class: { pointer: columns.sort },
+                            on: {
+                              click: function($event) {
+                                return _vm.sortTable(columns, columns.field)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(columns.title) +
+                                "\n            "
+                            ),
+                            columns.sort
+                              ? _c("svg", { staticClass: "sort-column" }, [
+                                  _c("path", {
+                                    class: {
+                                      "sort-active":
+                                        _vm.sortType === "asc" &&
+                                        _vm.sortKey == columns.field
+                                    },
+                                    attrs: { d: "M 4 1 L 7.5 5 L 0.5 5" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("path", {
+                                    class: {
+                                      "sort-active":
+                                        _vm.sortType === "desc" &&
+                                        _vm.sortKey == columns.field
+                                    },
+                                    attrs: { d: "M 4 11 L 7.5 7 L 0.5 7" }
+                                  })
+                                ])
+                              : _vm._e()
+                          ]
+                        )
                       ]
-                    },
-                    [
-                      _vm.tableOptions.selectBox
-                        ? _c(
-                            "td",
-                            {
-                              staticClass: "select-box",
-                              staticStyle: { width: "64px" }
-                            },
-                            [
-                              _c("table-checkbox", {
-                                tag: "component",
-                                style: { width: "64px" },
-                                attrs: {
-                                  rowData: rowsData,
-                                  originData: _vm.findOriginData(
-                                    rowsData[_vm.guidKey]
-                                  ),
-                                  field: "selected",
-                                  index: rowsIndex
-                                },
-                                on: { "on-custom-comp": _vm.customCompFunc }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm._l(_vm.tableOptions.columns, function(columns) {
-                        return [
-                          !columns.componentName
+                    )
+                  })
+                ],
+                2
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "table-body",
+            style: {
+              height: _vm.bodyHeight != "" ? _vm.bodyHeight + "px" : "auto"
+            }
+          },
+          [
+            _c(
+              "table",
+              { ref: "table-body", staticClass: "table table-fixed" },
+              [
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.pageData, function(rowsData, rowsIndex) {
+                      return _c(
+                        "tr",
+                        {
+                          key: rowsData[_vm.guidKey],
+                          ref: "table-body-tr",
+                          refInFor: true,
+                          class: [
+                            rowsData.css,
+                            rowsData.selected == "1" ? "row-checked" : ""
+                          ]
+                        },
+                        [
+                          _vm.tableOptions.selectBox
                             ? _c(
                                 "td",
                                 {
-                                  key: columns.field,
-                                  staticClass: "fixed",
-                                  style: { width: columns.width }
+                                  staticClass: "select-box",
+                                  staticStyle: { width: "64px" }
                                 },
                                 [
-                                  columns.parseHtml
-                                    ? _c("span", {
-                                        directives: [
-                                          {
-                                            name: "tooltip",
-                                            rawName: "v-tooltip"
-                                          }
-                                        ],
-                                        class: columns.css,
-                                        domProps: {
-                                          innerHTML: _vm._s(
-                                            rowsData[columns.field]
-                                          )
-                                        }
-                                      })
-                                    : _c(
-                                        "span",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "tooltip",
-                                              rawName: "v-tooltip",
-                                              value: columns.showTooltip
-                                                ? rowsData[columns.field]
-                                                : "",
-                                              expression:
-                                                "columns.showTooltip ? rowsData[columns.field] : ''"
-                                            }
-                                          ],
-                                          key: rowsData[columns.field],
-                                          class: columns.css,
-                                          staticStyle: { cursor: "text" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            _vm._s(rowsData[columns.field])
-                                          )
-                                        ]
-                                      )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          columns.componentName
-                            ? _c(
-                                "td",
-                                {
-                                  key: columns.field,
-                                  staticClass: "fixed",
-                                  class: columns.css,
-                                  style: { width: columns.width }
-                                },
-                                [
-                                  _c(columns.componentName, {
+                                  _c("table-checkbox", {
                                     tag: "component",
-                                    style: { width: columns.width },
+                                    style: { width: "64px" },
                                     attrs: {
-                                      action: columns.action,
                                       rowData: rowsData,
                                       originData: _vm.findOriginData(
                                         rowsData[_vm.guidKey]
                                       ),
-                                      field: columns.field,
-                                      keyword: _vm.guidKey,
+                                      field: "selected",
                                       index: rowsIndex
                                     },
                                     on: { "on-custom-comp": _vm.customCompFunc }
@@ -5004,119 +5028,208 @@ var render = function() {
                                 ],
                                 1
                               )
-                            : _vm._e()
-                        ]
-                      })
-                    ],
-                    2
-                  )
-                }),
-                _vm._v(" "),
-                _vm.pageData.length === 0 && _vm.isLoadData
-                  ? _c("tr", [
-                      _c(
-                        "td",
-                        {
-                          attrs: {
-                            colspan: _vm.tableOptions.selectBox
-                              ? _vm.tableOptions.columns.length + 1
-                              : _vm.tableOptions.columns.length
-                          }
-                        },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "table-no-data v-icon-no-data" },
-                            [_vm._v(_vm._s(_vm.noData))]
-                          )
-                        ]
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm._l(_vm.tableOptions.columns, function(columns) {
+                            return [
+                              !columns.componentName
+                                ? _c(
+                                    "td",
+                                    {
+                                      key: columns.field,
+                                      staticClass: "fixed",
+                                      style: { width: columns.width }
+                                    },
+                                    [
+                                      columns.parseHtml
+                                        ? _c("span", {
+                                            directives: [
+                                              {
+                                                name: "tooltip",
+                                                rawName: "v-tooltip"
+                                              }
+                                            ],
+                                            class: columns.css,
+                                            domProps: {
+                                              innerHTML: _vm._s(
+                                                rowsData[columns.field]
+                                              )
+                                            }
+                                          })
+                                        : _c(
+                                            "span",
+                                            {
+                                              directives: [
+                                                {
+                                                  name: "tooltip",
+                                                  rawName: "v-tooltip",
+                                                  value: columns.showTooltip
+                                                    ? rowsData[columns.field]
+                                                    : "",
+                                                  expression:
+                                                    "columns.showTooltip ? rowsData[columns.field] : ''"
+                                                }
+                                              ],
+                                              key: rowsData[columns.field],
+                                              class: columns.css,
+                                              staticStyle: { cursor: "text" }
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(rowsData[columns.field])
+                                              )
+                                            ]
+                                          )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              columns.componentName
+                                ? _c(
+                                    "td",
+                                    {
+                                      key: columns.field,
+                                      staticClass: "fixed",
+                                      class: columns.css,
+                                      style: { width: columns.width }
+                                    },
+                                    [
+                                      _c(columns.componentName, {
+                                        tag: "component",
+                                        style: { width: columns.width },
+                                        attrs: {
+                                          action: columns.action,
+                                          rowData: rowsData,
+                                          originData: _vm.findOriginData(
+                                            rowsData[_vm.guidKey]
+                                          ),
+                                          field: columns.field,
+                                          keyword: _vm.guidKey,
+                                          index: rowsIndex
+                                        },
+                                        on: {
+                                          "on-custom-comp": _vm.customCompFunc
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _vm._e()
+                            ]
+                          })
+                        ],
+                        2
                       )
-                    ])
-                  : _vm._e()
-              ],
-              2
+                    }),
+                    _vm._v(" "),
+                    !_vm.pageData || _vm.pageData.length === 0
+                      ? _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              attrs: {
+                                colspan: _vm.tableOptions.selectBox
+                                  ? _vm.tableOptions.columns.length + 1
+                                  : _vm.tableOptions.columns.length
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "table-no-data v-icon-no-data" },
+                                [_vm._v(_vm._s(_vm.noData))]
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ]
             )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _vm.showNormalFooter
-        ? _c("div", { staticClass: "table-footer clearfix" }, [
-            _c(
-              "div",
-              { staticClass: "page-per" },
-              [
-                _c("span", [_vm._v(_vm._s(_vm._("S#hOw#")))]),
-                _vm._v(" "),
-                _c("v-select", { attrs: { "data-key": _vm.pagePerSelect } }),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(_vm._("/page")))])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "footer-tips" }, [
-              _c("span", [_vm._v(_vm._s(_vm.pageTips))]),
+          ]
+        ),
+        _vm._v(" "),
+        _vm.showNormalFooter
+          ? _c("div", { staticClass: "table-footer clearfix" }, [
+              _c(
+                "div",
+                { staticClass: "page-per" },
+                [
+                  _c("span", [_vm._v(_vm._s(_vm._("S#hOw#")))]),
+                  _vm._v(" "),
+                  _c("v-select", { attrs: { "data-key": _vm.pagePerSelect } }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm._("/page")))])
+                ],
+                1
+              ),
               _vm._v(" "),
-              _c("span", { staticClass: "page-tips" }, [
+              _c("div", { staticClass: "footer-tips" }, [
+                _c("span", [_vm._v(_vm._s(_vm.pageTips))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "page-tips" }, [
+                  _vm._v(_vm._s(_vm.dataTips))
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "footer-page" },
+                [
+                  _c("a", {
+                    staticClass: "table-btn v-icon-arrrow-up page-change-arrow",
+                    class: { disabled: _vm.tableOptions.page === 0 },
+                    on: {
+                      click: function($event) {
+                        return _vm.gotoPage("prev")
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.footer, function(footerBtn) {
+                    return _c(
+                      "a",
+                      {
+                        key: footerBtn.value,
+                        staticClass: "table-btn",
+                        class: {
+                          active: footerBtn.value == _vm.tableOptions.page
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.gotoPage(footerBtn.value)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(footerBtn.text))]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("a", {
+                    staticClass:
+                      "table-btn v-icon-arrrow-down page-change-arrow",
+                    class: {
+                      disabled:
+                        _vm.tableOptions.page >= _vm.tableOptions.totalPage - 1
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.gotoPage("next")
+                      }
+                    }
+                  })
+                ],
+                2
+              )
+            ])
+          : _c("div", { staticClass: "simple-table-footer" }, [
+              _c("div", { staticClass: "footer-content" }, [
                 _vm._v(_vm._s(_vm.dataTips))
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "footer-page" },
-              [
-                _c("a", {
-                  staticClass: "table-btn v-icon-arrrow-up page-change-arrow",
-                  class: { disabled: _vm.tableOptions.page === 0 },
-                  on: {
-                    click: function($event) {
-                      return _vm.gotoPage("prev")
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.footer, function(footerBtn) {
-                  return _c(
-                    "a",
-                    {
-                      key: footerBtn.value,
-                      staticClass: "table-btn",
-                      class: {
-                        active: footerBtn.value == _vm.tableOptions.page
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.gotoPage(footerBtn.value)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(footerBtn.text))]
-                  )
-                }),
-                _vm._v(" "),
-                _c("a", {
-                  staticClass: "table-btn v-icon-arrrow-down page-change-arrow",
-                  class: {
-                    disabled:
-                      _vm.tableOptions.page >= _vm.tableOptions.totalPage - 1
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.gotoPage("next")
-                    }
-                  }
-                })
-              ],
-              2
-            )
-          ])
-        : _c("div", { staticClass: "simple-table-footer" }, [
-            _c("div", { staticClass: "footer-content" }, [
-              _vm._v(_vm._s(_vm.dataTips))
             ])
-          ])
+      ])
     ]
   )
 }

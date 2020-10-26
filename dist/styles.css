@@ -1636,6 +1636,54 @@ select:disabled {
   color: rgba(0, 0, 0, 0.45);
 }
 
+@-webkit-keyframes table-loading {
+  0% {
+    -webkit-transform: rotate3d(0, 0, -1, 45deg);
+            transform: rotate3d(0, 0, -1, 45deg);
+  }
+  0% {
+    -webkit-transform: rotate3d(0, 0, -1, 405deg);
+            transform: rotate3d(0, 0, -1, 405deg);
+  }
+}
+
+@keyframes table-loading {
+  0% {
+    -webkit-transform: rotate3d(0, 0, -1, 45deg);
+            transform: rotate3d(0, 0, -1, 45deg);
+  }
+  0% {
+    -webkit-transform: rotate3d(0, 0, -1, 405deg);
+            transform: rotate3d(0, 0, -1, 405deg);
+  }
+}
+
+.table-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.table-wrapper .loading-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 100;
+}
+
+.table-wrapper .loading-container .loading-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+  -webkit-transform: rotate3d(0, 0, -1, 45deg);
+          transform: rotate3d(0, 0, -1, 45deg);
+  -webkit-animation: table-loading 1.5s linear infinite;
+          animation: table-loading 1.5s linear infinite;
+}
+
 .el-tooltip {
   position: fixed;
   background: #101010;

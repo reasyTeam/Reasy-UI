@@ -185,3 +185,35 @@
         color: rgba(#000, .45);
     }
 }
+
+
+@keyframes table-loading {
+    0% {
+        transform: rotate3d(0, 0, -1, 45deg);
+    }
+    0% {
+        transform: rotate3d(0, 0, -1, 405deg);
+    }
+}
+
+.table-wrapper {
+    display: inline-block;
+    position: relative;
+    .loading-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(#fff, .6);
+        z-index: 100;
+        .loading-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            transform: rotate3d(0, 0, -1, 45deg);
+            animation: table-loading 1.5s linear infinite;
+        }
+    }
+}
