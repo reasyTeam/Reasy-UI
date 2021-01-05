@@ -8,10 +8,6 @@ https://reasyteam.github.io/Reasy-UI/
 - 属性命名用`-`连接
 - 尺寸大中小用`S`、`M`、`L`
 
-> **需要使用typescript嘛？**
->
-> 命名统一，类似是否之类的都需要is-xxx或show-xxx嘛？
-
 # v-button
 
 ## 属性 Attributes
