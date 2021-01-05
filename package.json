@@ -1,7 +1,7 @@
 {
-  "name": "@reasy-team/reasy-ui-vue",
+  "name": "@reasy-team/reasy-ui",
   "version": "3.0.0",
-  "main": "dist/reasy-ui-vue.js.js",
+  "main": "dist/reasy-ui.js",
   "scripts": {
     "publish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publish.js --mode production",
     "component": "webpack --env.NODE_ENV=publish --color --config build/webpack.component.js --mode production",
@@ -58,11 +58,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reasyTeam/reasy-ui-vue.git"
+    "url": "git+https://github.com/reasyTeam/Reasy-UI.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/reasyTeam/reasy-ui-vue/issues"
+    "url": "https://github.com/reasyTeam/Reasy-UI/issues"
   },
-  "homepage": "https://github.com/reasyTeam/reasy-ui-vue#readme"
+  "homepage": "https://github.com/reasyTeam/Reasy-UI#readme"
 }

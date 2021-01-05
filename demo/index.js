@@ -26,6 +26,7 @@ const router = new VueRouter({
 });
 
 router.afterEach(() => {
+  document.documentElement.scrollTop = 0;
   Vue.nextTick(() => {
     const blocks = document.querySelectorAll("pre code:not(.hljs)");
     Array.prototype.forEach.call(blocks, hljs.highlightBlock);

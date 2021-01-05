@@ -105,7 +105,7 @@ const webpackConfig = {
       template: "./demo/index.tpl",
       filename: "./index.html",
       favicon: "./public/favicon.ico",
-      title: "reasy-ui-vue"
+      title: "reasy-ui"
     }),
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
@@ -150,7 +150,7 @@ if (isProd) {
     cacheGroups: {
       vendor: {
         test: /[\\/]src[\\/]/,
-        name: "reasy-ui-vue",
+        name: "reasy-ui",
         chunks: "all"
       }
     }

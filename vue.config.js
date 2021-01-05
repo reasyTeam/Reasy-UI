@@ -11,7 +11,7 @@ module.exports = {
   pages: {
     index: {
       entry: "src/main.js",
-      title: "reasy-ui-vue"
+      title: "reasy-ui"
     }
   },
   outputDir: "docs",

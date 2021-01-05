@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_137970_p1tpzmomxp9cnmi.css">
     <link rel='mask-icon' href="https://raw.githubusercontent.com/ElemeFE/element/dev/examples/assets/images/element-logo-small.svg" color="#409EFF">
     <link rel="stylesheet" href="//shadow.elemecdn.com/npm/highlight.js@9.3.0/styles/color-brewer.css">
-    <title>Reasy-ui-vue</title>
+    <title>reasy-ui</title>
     <meta name="description" content="基于 Vue 2.0 的桌面端组件库" />
   </head>
   <body>

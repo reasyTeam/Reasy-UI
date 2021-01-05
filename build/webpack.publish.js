@@ -12,10 +12,10 @@ module.exports = {
     path: path.join(root, "dist/"), // 出口目录
     publicPath: process.env.NODE_ENV === "publish" ? "/dist" : "/",
     chunkFilename: "[name].js?[chunkhash:5]",
-    filename: "reasy-ui-vue.js",
+    filename: "reasy-ui.js",
     libraryTarget: "commonjs2",
     libraryExport: "default",
-    library: "reasy-ui-vue"
+    library: "reasy-ui"
   },
   resolve: {
     alias: {
