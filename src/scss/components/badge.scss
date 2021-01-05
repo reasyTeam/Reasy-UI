@@ -1,0 +1,58 @@
+.v-badge {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-size: 14px;
+  color: $info-color;
+
+  &__tip {
+    display: inline-block;
+    text-align: center;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    line-height: 20px;
+    padding: 0 4px;
+    font-size: 12px;
+    vertical-align: middle;
+  }
+
+  &__dot {
+    font-size: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__rt {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  &__default {
+    background-color: #c0c0c0;
+    color: $info-color;
+  }
+
+  &__success,
+  &__error,
+  &__warn {
+    color: #fff;
+  }
+
+  &__success {
+    background-color: #17cc82;
+  }
+
+  &__error {
+    background-color: #f7421e;
+  }
+
+  &__warn {
+    background-color: #f4b71e;
+  }
+}

@@ -1,0 +1,65 @@
+$background: rgb(144, 147, 153);
+
+.v-scroll {
+  overflow: hidden;
+  position: relative;
+  // 创建新的层叠上下文
+  z-index: 0;
+
+  &:hover {
+    & > .v-scroll__bar {
+      opacity: 1;
+    }
+  }
+
+  &__bar {
+    position: absolute;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.12s ease-out;
+    &.active {
+      opacity: 1;
+      &__slider {
+        background-color: rgba($background, 0.5);
+      }
+    }
+
+    &__slider {
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: rgba($background, 0.3);
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: rgba($background, 0.5);
+      }
+    }
+
+    @mixin scroll-bar {
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      margin: 1px;
+    }
+
+    &.is-vertical {
+      @include scroll-bar();
+      top: 0;
+      width: 6px;
+
+      .v-scroll__bar__slider {
+        width: 100%;
+        height: 0;
+      }
+    }
+    &.is-horizontal {
+      @include scroll-bar();
+      left: 0;
+      height: 6px;
+
+      .v-scroll__bar__slider {
+        height: 100%;
+        width: 0;
+      }
+    }
+  }
+}

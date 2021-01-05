@@ -1,0 +1,39 @@
+$icon-size: 32px;
+$icon-line-space: 8px;
+
+.v-steps {
+  width: 100%;
+  overflow: auto;
+  .v-steps__lines {
+    .v-steps__lines-wrapper {
+      padding: 0 $icon-size / 2;
+      white-space: nowrap;
+    }
+    .v-steps__line {
+      display: inline-block;
+      padding: 0 $icon-size / 2 + $icon-line-space;
+      &-inner {
+        width: 100%;
+        height: 1px;
+        background-color: $border-color;
+      }
+    }
+    .v-steps__line--finish {
+      .v-steps__line-inner {
+        background-color: lighten($main-active-color, 10%);
+      }
+    }
+  }
+
+  .v-steps__main {
+    @include clearfix;
+    margin-top: -$icon-size + 12px;
+    font-size: 0;
+    white-space: nowrap;
+  }
+}
+
+:export {
+  iconSize: $icon-size;
+  iconLineSpace: $icon-line-space;
+}

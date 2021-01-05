@@ -1,0 +1,90 @@
+@mixin timepicker-size($fontSize, $lineHeight) {
+  font-size: $fontSize;
+  .input-text, .v-timepicker__title, .v-timepicker__li {
+    font-size: $fontSize;
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+  .v-timepicker__icon {
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+}
+.v-timepicker {
+  position: relative;
+  display: inline-block;
+  width: $elem-width;
+  vertical-align: middle;
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  &__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 8px;
+    color: $border-color;
+    cursor: pointer;
+    &--disabled {
+      color: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+
+  &__label {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  &__title {
+    border-bottom: 1px solid #f5f5f5;
+    text-align: center;
+  }
+  &__wrapper {
+    & + & {
+      border-left: 2px solid $disabled-border-color;
+    }
+  }
+
+  &__splitter {
+    padding: 0 4px;
+  }
+
+  &__group {
+    & + & {
+      border-left: 1px solid $disabled-border-color;
+    }
+  }
+  &__li {
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #f5f5f5;
+    }
+    &--active {
+      color: $main-active-color;
+      background-color: #f5f5f5;
+    }
+    &--disabled {
+      color: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+  .input-text {
+    padding-right: 30px;
+  }
+
+  &--medium {
+    @include timepicker-size($font-size-m, $form-line-height);
+  }
+  &--small {
+    @include timepicker-size($font-size-s, $form-line-height-s);
+  }
+  &--large {
+    @include timepicker-size($font-size-l, $form-line-height-l);
+  }
+}

@@ -1,0 +1,25 @@
+.v-button {
+  & + & {
+    margin-left: 20px;
+  }
+}
+
+.v-dialog__main {
+  .form-control {
+    margin-bottom: 24px;
+    &:last-child {
+      margin: 0;
+    }
+    &__label {
+      display: inline-block;
+      margin-right: 12px;
+      width: 80px;
+      text-align: right;
+      line-height: 32px;
+    }
+  }
+  
+  .dialog-content {
+    line-height: 22px;
+  }
+}

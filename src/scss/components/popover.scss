@@ -1,0 +1,19 @@
+.v-popover {
+  display: inline-block;
+  &__main {
+    font-size: $font-size-m;
+  }
+  &__title {
+    $border-width: 1px;
+    padding: 5px - $border-width / 2 8px;
+    font-weight: 500;
+    color: $title-color;
+    line-height: 22px;
+    border-bottom: $border-width solid #f0f0f0;
+  }
+  &__content {
+    padding: 8px;
+    color: $info-color;
+    line-height: 22px;
+  }
+}

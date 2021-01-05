@@ -1,0 +1,49 @@
+.v-message {
+  $icon-size: 16px;
+
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  padding: 8px 16px;
+  min-width: 264px;
+  max-width: 50%;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.3s, transform 0.4s, top 0.4s;
+  &__icon {
+    // float: left;
+    position: absolute;
+    top: 50%;
+    margin-top: -$icon-size / 2;
+    font-size: $icon-size;
+
+    @each $type, $color in (success, $success-color),
+                           (error, darken($error-color, 1.4%)),
+                           (warn, $warn-color),
+                           (info, $info-color) {
+      &--#{$type} {
+        color: $color;
+      }
+    }
+  }
+
+  &__content {
+    padding-left: $icon-size + $icon-size / 2;
+    line-height: 24px;
+    color: $info-color;
+    font-size: $font-size-m;
+    font-weight: 400;
+    word-break: break-all;
+    &--cover {
+      padding-left: 0;
+    }
+  }
+}
+
+.v-message-fade-enter,
+.v-message-fade-leave-active {
+  opacity: 0;
+  transform: translate(-50%, -100%);
+}

@@ -1,0 +1,14 @@
+@import "./chart.scss";
+
+.line-animate{
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 2s forwards;
+  // transition: stroke-dashoffset .3s;
+}
+
+@keyframes dash {
+  to {
+      stroke-dashoffset: 0;
+  }
+}

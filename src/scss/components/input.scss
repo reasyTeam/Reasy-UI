@@ -1,0 +1,281 @@
+$main-active-light-color: lighten($main-active-color, 10%);
+
+@mixin input-size($fontSize, $lineHeight) {
+  font-size: $fontSize;
+
+  .input-text,
+  .v-input-group__splitter,
+  .placeholder-text {
+    font-size: $fontSize;
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+
+  .v-input__icon {
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.v-input {
+  position: relative;
+  display: inline-block;
+  width: $elem-width;
+
+  &__icon {
+    vertical-align: middle;
+    font-size: $font-size-l;
+    color: $border-color;
+
+    &.pointer:hover {
+      color: darken($border-color, 15%);
+    }
+
+    &--prefix {
+      position: absolute;
+      height: 100%;
+      padding: 0 8px;
+      vertical-align: middle;
+    }
+
+    &--suffix {
+      @extend .v-input__icon--prefix;
+      right: 0;
+
+      .input-icon+.input-icon {
+        padding-left: 8px;
+      }
+    }
+  }
+
+  &--prefix .input-text {
+    padding-left: 32px;
+  }
+
+  &--medium {
+    @include input-size($font-size-m, $form-line-height);
+
+    &.v-input--no-border {
+      @include input-size($font-size-m, $form-line-height - 2);
+    }
+  }
+
+  &--small {
+    @include input-size($font-size-s, $form-line-height-s);
+
+    &.v-input--no-border {
+      @include input-size($font-size-s, $form-line-height-s - 2);
+    }
+  }
+
+  &--large {
+    @include input-size($font-size-l, $form-line-height-l);
+
+    &.v-input--no-border {
+      @include input-size($font-size-l, $form-line-height-l - 2);
+    }
+  }
+
+  &--no-border {
+    &:hover {
+      border: none;
+      box-shadow: none;
+    }
+
+    .input-text {
+      border: none;
+      box-shadow: none;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+::placeholder {
+  color: $light-gray-color;
+}
+
+.v-input-textarea {
+  line-height: 20px;
+
+  .input-word-limit {
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+  }
+
+  .placeholder-text {
+    line-height: 20px;
+    padding: 0 8px;
+  }
+}
+
+.input-text,
+.input-textarea {
+  padding: 0 8px;
+  width: 100%;
+  resize: vertical;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  color: $title-color;
+  outline: 0;
+
+  &:hover {
+    border-color: $main-active-light-color;
+  }
+
+  &:focus {
+    border-color: $main-active-light-color;
+    box-shadow: 0px 0px 4px 0px $main-active-light-color;
+  }
+}
+
+.input-textarea {
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  padding: 4px 8px;
+
+  &.is-disabled {
+    border: 1px solid $disabled-border-color !important;
+  }
+}
+
+//输入框组
+.v-input-group {
+  width: $elem-width;
+
+  &__splitter {
+    position: absolute;
+    padding: 0 4px;
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+    height: 100%;
+    text-align: center;
+    z-index: 9;
+  }
+
+  &__item {
+    //display: inline-block;
+    position: relative;
+  }
+}
+
+//输入框组公共样式
+.input-group--content {
+  border: 1px solid $border-color;
+  position: relative;
+
+  &.is-hover {
+    border: 1px solid $main-active-light-color;
+  }
+}
+
+.is-focus {
+  border: 1px solid $main-active-light-color;
+  box-shadow: 0px 0px 4px 0px $main-active-light-color;
+}
+
+.is-controls {
+  .input-text {
+    padding-right: 36px;
+  }
+}
+
+//计数器
+.v-input-number {
+  display: inline-block;
+  position: relative;
+  width: $elem-width;
+
+  .v-input {
+    display: block;
+    width: 100%;
+  }
+
+  &__button {
+    position: absolute;
+    right: 0px;
+    width: 30px;
+    height: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    border-left: 1px solid $light-gray-color;
+
+    &+.v-input-number__button {
+      border-top: 1px solid $light-gray-color;
+    }
+  }
+
+  .btn-disabled {
+    cursor: not-allowed;
+  }
+
+  //左右控制器位置
+  &__position .input-text {
+    padding: 0 40px;
+  }
+
+  &__controls {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 0 8px;
+    min-width: 32px;
+    width: 32px;
+    border: none;
+    z-index: 4;
+
+    &--left {
+      left: 0;
+      border-right: 1px solid $border-color;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:hover,
+      &:focus {
+        border-right: 1px solid $main-active-light-color;
+      }
+    }
+
+    &--right {
+      right: 0;
+      border-left: 1px solid $border-color;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &:hover,
+      &:focus {
+        border-left: 1px solid $main-active-light-color;
+      }
+    }
+  }
+
+  .up {
+    top: 0;
+  }
+
+  .down {
+    bottom: 0;
+  }
+}
+
+.is-disabled {
+  .v-input-number__button {
+    background: $disabled-background-color;
+    border: 1px solid $disabled-background-color !important;
+    cursor: not-allowed;
+  }
+}

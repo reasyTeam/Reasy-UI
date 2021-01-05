@@ -1,0 +1,216 @@
+@mixin select-size($fontSize, $lineHeight) {
+  font-size: $fontSize;
+
+  .input-text,
+  .v-select-options__item,
+  .placeholder-text {
+    font-size: $fontSize;
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+
+  .v-select__icon {
+    height: $lineHeight;
+    line-height: $lineHeight;
+  }
+
+  .v-select__icon--right--active {
+    height: $lineHeight - 2;
+    line-height: $lineHeight - 2;
+  }
+}
+
+.v-select {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: $elem-width;
+
+  .placeholder-text {
+    padding: 0;
+  }
+
+  &__label {
+    cursor: pointer;
+    padding-right: 30px;
+
+    &--text {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &--position {
+      position: relative;
+      top: -1px;
+    }
+
+    &__item {
+      background: $disabled-border-color;
+      padding: 0 8px;
+      display: inline-block;
+      line-height: 20px;
+      border-radius: 2px;
+
+      &+& {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  &__icon--right--active {
+    font-size: 16px !important;
+    float: right;
+    color: $main-active-color;
+  }
+
+  &__icon--right {
+    font-size: 16px !important;
+    vertical-align: top;
+    display: inline-block;
+    color: $light-color;
+    padding-left: 8px;
+
+    &:hover {
+      color: $main-active-color;
+    }
+  }
+
+  &__input {
+    width: 100%;
+
+    .input-text {
+      padding-right: 30px !important;
+    }
+
+    &--clear .input-text {
+      padding-right: 60px !important;
+    }
+  }
+
+  &-options {
+    padding: 8px 0;
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    &__item {
+      padding: 0 8px;
+      cursor: pointer;
+      white-space: nowrap;
+
+      &--disabled {
+        color: $disabled-color;
+        cursor: not-allowed;
+      }
+
+      &.active {
+        color: $main-active-color;
+      }
+
+      &:hover {
+        background-color: lighten($main-active-color, 40%);
+        color: $main-active-color;
+      }
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 8px;
+    vertical-align: middle;
+    z-index: 3;
+    cursor: pointer;
+    color: $border-color;
+    transition: all 0.2s;
+
+    &:hover {
+      color: darken($border-color, 15%);
+    }
+
+    &--active {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  &--large {
+    @include select-size($font-size-l, $form-line-height-l);
+
+    &.v-input--no-border {
+      @include select-size($font-size-l, $form-line-height-l - 2);
+    }
+
+    .v-select__label__item,
+    .v-select__icon--right {
+      line-height: 28px;
+    }
+  }
+
+  &--medium {
+    @include select-size($font-size-m, $form-line-height);
+
+    &.v-input--no-border {
+      @include select-size($font-size-m, $form-line-height - 2);
+    }
+
+    .v-select__label__item,
+    .v-select__icon--right {
+      line-height: 24px;
+    }
+  }
+
+  &--small {
+    @include select-size($font-size-s, $form-line-height-s);
+
+    &.v-input--no-border {
+      @include select-size($font-size-s, $form-line-height-s - 2);
+    }
+
+    .v-select__label__item,
+    .v-select__icon--right {
+      line-height: 16px;
+    }
+
+    .v-select__label {
+      padding-right: 24px;
+    }
+  }
+
+  .v-input__icon--suffix {
+    right: 28px;
+  }
+}
+
+
+
+.slide-down-enter-active {
+  animation: slideInUp 0.3s;
+}
+
+.slide-down-leave-active {
+  animation: slideOutUp 0.3s;
+}
+
+.is-disabled {
+  .v-select__icon {
+    cursor: not-allowed;
+    &:hover {
+      color: $border-color;
+    }
+  }
+
+  .v-select__label__item {
+    background: $disabled-background-color;
+    color: $disabled-color;
+    border: 1px solid $disabled-border-color;
+  }
+
+  .v-select__icon--right {
+    color: $disabled-color;
+  }
+}

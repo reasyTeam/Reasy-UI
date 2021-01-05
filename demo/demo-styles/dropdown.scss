@@ -1,0 +1,5 @@
+.dropdown-item {
+  & + & {
+    margin-left: 20px;
+  }
+}

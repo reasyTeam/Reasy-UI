@@ -1,0 +1,15 @@
+.loading-box {
+  height: 160px;
+  border-radius: 2px;
+  border: 1px solid #f0f0f0;
+  position: relative;
+  color: #000;
+}
+.loading-box__fill{
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+.loading-mask {
+  color: #000;
+}

@@ -1,0 +1,11 @@
+.alert-box {
+  & + .alert-box {
+    margin-top: 20px;
+  }
+
+  .slot-content {
+    color: rgb(100, 93, 93);
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

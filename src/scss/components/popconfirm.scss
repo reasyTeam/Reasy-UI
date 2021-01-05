@@ -1,0 +1,38 @@
+.v-popconfirm {
+  display: inline-block;
+}
+
+.v-popconfirm__box {
+  $icon-size: 16px;
+  padding: 16px;
+
+  .v-popconfirm__main {
+    @include clearfix;
+
+    .v-popconfirm__title {
+      float: left;
+      width: 100%;
+      line-height: 22px;
+
+      &.has-icon {
+        padding-left: $icon-size + $icon-size / 2;
+      }
+    }
+    .v-popconfirm__icon {
+      float: left;
+      margin-left: -100%;
+      font-size: $icon-size;
+      line-height: 22px;
+    }
+  }
+
+  .v-popconfirm__footer {
+    margin-top: 16px;
+    text-align: right;
+    .v-popconfirm__button-item {
+      & + .v-popconfirm__button-item {
+        margin-left: 16px;
+      }
+    }
+  }
+}

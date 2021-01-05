@@ -1,0 +1,63 @@
+.v-upload {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+  &__file {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    top: 0;
+    left: 0;
+    font-size: 100px;
+    opacity: 0;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  &__button {
+    position: relative;
+  }
+
+  &__tips {
+    margin-top: 6px;
+    font-size: 14px;
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__image {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    vertical-align: middle;
+    border: 1px solid $disabled-color;
+    text-align: center;
+
+    &__icon {
+      font-size: 24px;
+      &--big {
+        font-size: 40px;
+      }
+    }
+
+    &__text {
+      font-size: 14px;
+    }
+
+    &__middle {
+      margin-top: 50%;
+      transform: translateY(-50%);
+    }
+    &__src {
+      vertical-align: middle;
+    }
+  }
+}

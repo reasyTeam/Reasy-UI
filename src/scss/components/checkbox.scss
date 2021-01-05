@@ -1,0 +1,64 @@
+.v-checkbox {
+  display: inline-block;
+  position: relative;
+
+  &__item {
+    cursor: pointer;
+    display: inline-block;
+
+    &--disabled {
+      cursor: not-allowed;
+      color: $disabled-color;
+
+      .v-checkbox__icon {
+        color: $disabled-border-color;
+
+        &:hover {
+          color: $disabled-border-color;
+        }
+      }
+    }
+
+    &+& {
+      margin-left: 20px;
+    }
+  }
+
+  &__icon {
+    color: $border-color;
+    padding-right: 4px;
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: middle;
+
+    &:hover {
+      color: $main-active-light-color;
+    }
+
+    &:focus {
+      color: $main-active-light-color;
+      box-shadow: 0px 0px 4px 0px $main-active-light-color;
+    }
+
+    &--active {
+      color: $main-active-color;
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.v-checkbox-group {
+  display: inline-block;
+
+  &__item {
+    margin-right: 26px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

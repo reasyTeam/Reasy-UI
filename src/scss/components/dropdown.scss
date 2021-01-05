@@ -1,0 +1,108 @@
+.v-dropdown {
+  @mixin disabled-style {
+    color: $disabled-color !important;
+    cursor: not-allowed;
+  }
+  display: inline-block;
+  .v-dropdown__label {
+    display: inline-block;
+    font-size: $font-size-m;
+    font-weight: 400;
+    color: $title-color;
+    cursor: pointer;
+
+    &.v-dropdown__label-button {
+      padding: 0 16px;
+      line-height: 29px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+
+      &.v-dropdown__label--active {
+        border-color: $main-active-color;
+      }
+      &:not(.v-dropdown__label--disabled) {
+        &:hover {
+          border-color: lighten($main-active-color, 10%);
+        }
+        &:focus {
+          border-color: lighten($main-active-color, 10%);
+        }
+        &:active {
+          border-color: darken($main-active-color, 10%);
+        }
+      }
+    }
+
+    &.v-icon-down {
+      &:before {
+        float: right;
+        margin: 1px 0 0 8px;
+      }
+    }
+
+    &.v-dropdown__label--active {
+      color: $main-active-color;
+    }
+    &.v-dropdown__label--disabled {
+      @include disabled-style;
+    }
+
+    &:hover {
+      color: lighten($main-active-color, 10%);
+    }
+    &:focus {
+      color: lighten($main-active-color, 10%);
+    }
+    &:active {
+      color: darken($main-active-color, 10%);
+    }
+  }
+
+  @at-root {
+    $option-height: 32px;
+    $option-line-height: 22px;
+    $menu-padding-tb: $option-height / 4;
+    .position-panel {
+      margin-top: 8px;
+      border-radius: 2px;
+    }
+    .v-dropdown__menu {
+      padding: $menu-padding-tb 0;
+      .v-dropdown__option {
+        padding: ($option-height - $option-line-height)/2 16px;
+        line-height: $option-line-height;
+        font-size: 14px;
+        color: $title-color;
+        cursor: pointer;
+
+        &.v-dropdown__option--divided {
+          border-bottom: 1px solid $border-color;
+        }
+        &.v-dropdown__option--active {
+          color: $main-active-color;
+        }
+        &.v-dropdown__option--disabled {
+          @include disabled-style;
+        }
+        &:not(.v-dropdown__option--disabled) {
+          &:hover {
+            color: $main-active-color;
+            background-color: lighten($main-active-color, 48%);
+          }
+        }
+        
+
+        .v-dropdown__icon {
+          margin-right: 4px;
+          // font-size: $font-size-s;
+          vertical-align: -1px;
+        }
+      }
+    }
+
+    :export {
+      optionHeight: $option-height;
+      menuVerticalPadding: $menu-padding-tb * 2;
+    }
+  }
+}

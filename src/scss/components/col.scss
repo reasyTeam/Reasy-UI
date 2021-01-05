@@ -1,0 +1,17 @@
+[class*="v-col__"] {
+  float: left;
+}
+
+.v-col-0 {
+  display: none;
+}
+
+@for $i from 0 through 24 {
+  .v-col__#{$i} {
+    width: ($i / 24 * 100) * 1%;
+  }
+
+  .v-col--offset__#{$i} {
+    margin-left: ($i / 24 * 100) * 1%;
+  }
+}

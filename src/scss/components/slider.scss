@@ -1,0 +1,145 @@
+$slider-line-height: 4px;
+
+@mixin slider-size($lineHeight) {
+
+  .v-slider-range,
+  .v-slider-text-range {
+    line-height: $lineHeight;
+  }
+
+  .v-slider-line {
+    margin-top: ($lineHeight - $slider-line-height) / 2;
+    margin-bottom: ($lineHeight - $slider-line-height) / 2;
+  }
+}
+
+.v-slider {
+  display: inline-block;
+  width: 400px;
+
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+  }
+
+  &:after {
+    clear: both;
+  }
+
+  &-range {
+    float: left;
+
+    &--left {
+      padding-right: 12px;
+    }
+
+    &--right {
+      float: right;
+      padding-left: 12px;
+    }
+  }
+
+  //占位符
+  &-text-space {
+    float: right;
+    height: 10px;
+    padding-right: 16px;
+  }
+
+  //输入框长度
+  &__number {
+    float: right;
+    width: 60px;
+
+    //有控制器时输入框长度
+    &--controls {
+      width: 120px;
+    }
+  }
+
+  &-line {
+    position: relative;
+    height: $slider-line-height;
+    background-color: $border-color;
+    cursor: pointer;
+
+    .v-popups__arrow {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &__popper {
+      position: absolute !important;
+      top: -8px;
+      left: 50%;
+      padding-bottom: 4px;
+      transform: translate(-50%, -100%);
+    }
+    &__content {
+      position: absolute;
+      transition: .2s;
+      width: 14px;
+      height: 14px;
+      margin-top: -7px;
+      margin-left: -7px;
+    }
+    &__bar {
+      position: absolute;
+      top: -1px;
+      width: 100%;
+      height: 100%;
+      border: 3px solid $main-active-color;
+      background: #fff;
+      border-radius: 50%;
+      transition: .2s;
+      cursor: pointer;
+      user-select: none;
+
+      &--active,
+      &:hover {
+        transform: scale(1.2);
+        transform-origin: center;
+      }
+    }
+
+    &__inner {
+      background-color: $main-active-color;
+      transition: .2s;
+      height: 100%;
+    }
+  }
+
+  &--disabled {
+    color: $disabled-color;
+
+    .v-slider-line {
+      cursor: not-allowed;
+    }
+
+    .v-slider-line__inner {
+      background-color: lighten($main-active-color, 30%);
+    }
+
+    .v-slider-line__bar {
+      border-color: lighten($main-active-color, 30%);
+      cursor: not-allowed;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  &--small {
+    @include slider-size($form-line-height-s);
+  }
+
+  &--medium {
+    @include slider-size($form-line-height);
+  }
+
+  &--large {
+    @include slider-size($form-line-height-l);
+  }
+}

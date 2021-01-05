@@ -1,0 +1,12 @@
+.v-tooltip {
+  display: inline-block;
+}
+
+.v-tooltip__main {
+  padding: 5px 8px;
+
+  .v-tooltip__content {
+    line-height: 22px;
+    font-size: $font-size-m;
+  }
+}

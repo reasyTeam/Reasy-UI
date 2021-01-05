@@ -1,0 +1,29 @@
+.list-icons {
+  display: flex;
+  flex-wrap: wrap;
+  .list-item {
+    width: 12.5%;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 14px;
+    color: #565656;
+
+    i {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: #fff5e4;
+      color: #ff801f;
+    }
+  }
+
+  .item-text {
+    width: 100%;
+    line-height: 20px;
+  }
+}

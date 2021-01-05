@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'icomoon';
+  src:
+    url('fonts/icomoon.ttf?latwc6') format('truetype'),
+    url('fonts/icomoon.woff?latwc6') format('woff'),
+    url('fonts/icomoon.svg?latwc6#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="v-icon-"], [class*=" v-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.v-icon-loading:before {
+  content: "\e920";
+}
+.v-icon-radio:before {
+  content: "\e91d";
+}
+.v-icon-checkbox:before {
+  content: "\e91e";
+}
+.v-icon-checkbox-checked:before {
+  content: "\e91f";
+}
+.v-icon-minus-square:before {
+  content: "\e915";
+}
+.v-icon-add-square:before {
+  content: "\e916";
+}
+.v-icon-edit:before {
+  content: "\e917";
+}
+.v-icon-image:before {
+  content: "\e918";
+}
+.v-icon-help-plane:before {
+  content: "\e900";
+}
+.v-icon-close-plane:before {
+  content: "\e901";
+}
+.v-icon-ok-plane:before {
+  content: "\e902";
+}
+.v-icon-remind-plane:before {
+  content: "\e903";
+}
+.v-icon-help-line:before {
+  content: "\e904";
+}
+.v-icon-close-line:before {
+  content: "\e905";
+}
+.v-icon-ok-line:before {
+  content: "\e906";
+}
+.v-icon-remind-line:before {
+  content: "\e907";
+}
+.v-icon-ok:before {
+  content: "\e908";
+}
+.v-icon-close:before {
+  content: "\e909";
+}
+.v-icon-delete:before {
+  content: "\e90a";
+}
+.v-icon-search:before {
+  content: "\e90b";
+}
+.v-icon-add:before {
+  content: "\e90c";
+}
+.v-icon-up:before {
+  content: "\e90d";
+}
+.v-icon-right:before {
+  content: "\e90e";
+}
+.v-icon-down:before {
+  content: "\e90f";
+}
+.v-icon-left:before {
+  content: "\e910";
+}
+.v-icon-double-right:before {
+  content: "\e919";
+}
+.v-icon-double-left:before {
+  content: "\e91a";
+}
+.v-icon-time:before {
+  content: "\e911";
+}
+.v-icon-calendar:before {
+  content: "\e912";
+}
+.v-icon-upload:before {
+  content: "\e913";
+}
+.v-icon-eye-on:before {
+  content: "\e914";
+}
+.v-icon-eye-off:before {
+  content: "\e91b";
+}
+.v-icon-disable:before {
+  content: "\e91c";
+}

@@ -1,0 +1,82 @@
+.v-notification {
+  $line-height: 22px;
+  $close-font-size: 9px;
+  $close-wrap-size: $close-font-size + 3px;
+  $box-padding: 24px;
+  $box-padding-top: 16px;
+  $base-transition: opacity 0.3s, transform 0.4s !default;
+
+  position: fixed;
+  padding: $box-padding-top $box-padding $box-padding;
+  width: 400px;
+  max-width: 400px;
+  background-color: #fff;
+  box-shadow: 0px 2px 24px 0px rgba(200, 201, 204, 0.5);
+  border-radius: 2px;
+  // transition: opacity 0.3s, transform 0.4s;
+
+  // &__header {
+
+  // }
+  &__title {
+    margin-bottom: 8px;
+    color: $title-color;
+    font-size: $font-size-m;
+    font-weight: 500;
+    line-height: $line-height;
+  }
+
+  &__main {
+    &--default {
+      color: $info-color;
+      font-size: $font-size-m;
+      font-weight: 400;
+      line-height: $line-height;
+    }
+  }
+
+  &__button {
+    margin-top: 16px;
+    text-align: right;
+  }
+
+  &__close {
+    position: absolute;
+    top: $box-padding-top + ($line-height - $close-wrap-size) / 2;
+    right: $box-padding;
+    font-size: 9px;
+    color: lighten($title-color, 50%);
+    cursor: pointer;
+  }
+
+  &__close-space {
+    padding-right: $box-padding + $close-wrap-size;
+  }
+
+  // .v-notification-fade-enter,
+  // .v-notification-fade-leave-active {
+  //   opacity: 0;
+  //   transform: translate3d(100%, 0, 0);
+  // }
+
+  @each $position1, $position2 in (top, right),
+                                  (top, left),
+                                  (bottom, right),
+                                  (bottom, left) {
+    &--#{$position1}-#{$position2} {
+      transition: $base-transition, $position1 0.4s, $position2 0.4s;
+
+      @at-root {
+        .v-notification-fade-#{$position2}-enter,
+        .v-notification-fade-#{$position2}-leave-active {
+          opacity: 0;
+          @if $position2 == left {
+            transform: translate3d(-100%, 0, 0);
+          } @else {
+            transform: translate3d(100%, 0, 0);
+          }
+        }
+      }
+    }
+  }
+}

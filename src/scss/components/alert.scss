@@ -1,0 +1,96 @@
+.v-alert {
+  @mixin alert-content-font($color, $size, $weight) {
+    color: $color;
+    font-size: $size;
+    font-weight: $weight;
+  }
+
+  @include clearfix;
+
+  padding: 8px 16px;
+  border-radius: 2px;
+  transition: $--md-fade-transition;
+
+  @each $type, $color, $bgcolor in (success, $success-color, #e7fdeb),
+                         (warn, $warn-color, #fefae3),
+                         (info, $main-active-color, lighten($main-active-color, 45%)),
+                         (error, darken($error-color, 1.4%), #fef1e3) {
+    &--#{$type} {
+      background-color:$bgcolor;
+      border: 1px solid $color;
+      .v-alert__icon {
+        color: $color;
+      }
+      .v-alert__button {
+        .v-alert__show-detail {
+          color: $color;
+        }
+      }
+    }
+  }
+  
+  &__icon {
+    float: left;
+    margin-left: -100%;
+    color: $main-active-color;
+    font-size: $font-size-l;
+
+    &-inner {
+      line-height: 22px;
+    }
+    &--big {
+      font-size: 24px;
+      line-height: 26px;
+    }
+  }
+  &__main {
+    float: left;
+    padding: 0 80px 0 24px;
+    width: 100%;
+    line-height: 22px;
+    &-inner {
+      .v-alert__title {
+        @include alert-content-font($info-color, $font-size-m, 400);
+        &--bold {
+          @include alert-content-font($title-color, $font-size-l, 500);
+          line-height: 24px;
+        }
+      }
+      .v-alert__description {
+        @include alert-content-font($info-color, $font-size-m, 400);
+      }
+    }
+
+    &--center {
+      text-align: center;
+    }
+    &--big-padding {
+      padding-left: 40px;
+    }
+    &--hide-icon {
+      padding-left: 0;
+    }
+  }
+  &__button {
+    float: left;
+    margin-left: -68px;
+    width: 68px;
+    line-height: 22px;
+    text-align: right;
+    .v-alert__show-detail {
+      @include alert-content-font($main-active-color, $font-size-m, 400);
+      cursor: pointer;
+    }
+    .v-alert__close {
+      color: rgba(#252525, .5);
+      font-size: 7px;
+      cursor: pointer;
+    }
+  }
+}
+
+.v-alert-fade-enter,
+.v-alert-fade-leave-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}

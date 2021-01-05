@@ -1,0 +1,22 @@
+.scroll-demo {
+  border: 1px solid #eee;
+  color: #565656;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+.scroll-item {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.scroll-btn {
+  padding-top: 12px;
+
+  button {
+    width: 100%;
+  }
+}

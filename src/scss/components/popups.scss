@@ -1,0 +1,104 @@
+$arrow-height: 6px;
+$arrow-bottom-side-length: 10px;
+
+@mixin arrow-position-color($color) {
+  @each $position in (top),
+                     (right),
+                     (bottom),
+                     (left) {
+    &--#{$position} {
+      border-#{$position}-color: $color;
+    }
+  }
+}
+
+.v-popups__wrapper {
+  display: inline-block;
+}
+
+.v-popups {
+  position: fixed;
+
+  &__main {
+    min-width: 16px;
+    min-height: 32px;
+    border-radius: 2px;
+    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+  }
+
+  &__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+
+    @each $p1, $p2, $p3, $p4 in (top, bottom, left, right),
+                               (right, left, top, bottom),
+                               (bottom, top, left, right),
+                               (left, right, top, bottom) {
+      &--#{$p1} {
+        border-#{$p1}-width: $arrow-height;
+        border-#{$p2}-width: $arrow-height;
+        border-#{$p3}-width: $arrow-bottom-side-length / 2;
+        border-#{$p4}-width: $arrow-bottom-side-length / 2;
+      }
+    }
+  }
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+  &--light {
+    .v-popups__main {
+      color: rgba(#000, .65);
+      background-color: #fff;
+    }
+    .v-popups__arrow {
+      @include arrow-position-color(#fff);
+    }
+  }
+  &--dark {
+    .v-popups__main {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .v-popups__arrow {
+      @include arrow-position-color(rgba(0, 0, 0, 0.8));
+    }
+  }
+
+  @at-root {
+    .pop-fade-in-out-enter-active {
+      animation: pop-fade-in .1s;
+    }
+    .pop-fade-in-out-leave-active {
+      animation: pop-fade-out .1s;
+    }
+  
+    @keyframes pop-fade-in {
+      0% {
+        opacity: 0;
+      }
+  
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes pop-fade-out {
+      0% {
+        opacity: 1;
+      }
+  
+      100% {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+:export {
+  arrowHeight: $arrow-height;
+  arrowBottomSideLength: $arrow-bottom-side-length;
+}

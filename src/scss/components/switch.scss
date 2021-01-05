@@ -1,0 +1,101 @@
+@mixin switch-size($width, $height) {
+  .v-switch__icon {
+    width: $width;
+    height: $height;
+    border-radius: $height / 2;
+
+    &:after {
+      width: $height - 4;
+      height: $height - 4;
+    }
+
+    &--active:after {
+      margin-left: -$width / 2;
+    }
+  }
+
+  .v-switch__label {
+    line-height: $height;
+  }
+
+}
+
+.v-switch {
+  display: inline-block;
+  position: relative;
+
+  &__item {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__icon {
+    color: $border-color;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    outline: 0;
+    box-sizing: border-box;
+    background: $light-color;
+    cursor: pointer;
+    transition: border-color .3s, background-color .3s;
+    vertical-align: middle;
+
+    &:after {
+      content: " ";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 100%;
+      transition: all .3s;
+      background-color: #fff;
+    }
+
+    &--active {
+      background: $main-active-color;
+      color: $main-active-color;
+
+      &:after {
+        right: 2px;
+        left: 100%;
+        color: $main-active-color;
+      }
+    }
+
+    &--disabled {
+      background: $disabled-color;
+      cursor: not-allowed;
+
+      &.v-switch__icon--active {
+        background: lighten($main-active-color, 20%);
+      }
+    }
+  }
+
+  &__label {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 4px;
+  }
+
+  &--large {
+    @include switch-size(44px, 24px);
+  }
+
+  &--medium {
+    @include switch-size(36px, 20px);
+  }
+
+  &--small {
+    @include switch-size(28px, 16px);
+  }
+  &--disabled {
+    color: $disabled-color;
+    cursor: not-allowed;
+    .v-switch__label {
+      @extend .v-switch--disabled;
+    }
+  }
+}

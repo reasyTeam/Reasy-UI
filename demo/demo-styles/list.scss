@@ -1,0 +1,19 @@
+.empty-list-demo {
+  & + & {
+    margin-top: 24px;
+  }
+
+  strong {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .custom-empty-content {
+    text-align: center;
+
+    img {
+      height: 200px;
+    }
+  }
+}

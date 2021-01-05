@@ -1,0 +1,44 @@
+// 全局变量
+$padding: 14px;
+//主要颜色
+$main-active-color: #ff8f00;
+//元素高度
+$form-line-height: 32px;
+$form-line-height-s: 24px;
+$form-line-height-l: 40px;
+
+//文字大小
+$font-size-s: 12px;
+$font-size-m: 14px;
+$font-size-l: 16px;
+
+//颜色
+$success-color: #17cc82;
+$warn-color: #f4b71e;
+$error-color: #fe0000;
+$title-color: #262626;
+$info-color: #595959;
+$light-color: #8d8d8d;
+$border-color: #d8d8d8;
+$disabled-color: #c0c0c0;
+$disabled-border-color: #e9e9e9;
+$disabled-background-color: #fafafa;
+$light-gray-color: #ccc;
+
+//元素宽度  select input
+$elem-width: 220px;
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    visibility: hidden;
+    clear: both;
+  }
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

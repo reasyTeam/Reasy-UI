@@ -1,0 +1,45 @@
+@mixin form-size($fontSize, $lineHeight) {
+  font-size: $fontSize;
+  line-height: $lineHeight;
+}
+
+.v-form-item {
+  @include clearfix;
+  position: relative;
+  margin-bottom: 20px;
+
+  &__label {
+    float: left;
+    text-align: left;
+    word-break: keep-all;
+    white-space: nowrap;
+    &--right {
+      text-align: right;
+    }
+
+    &--medium {
+      @include form-size($font-size-m, $form-line-height);
+    }
+
+    &--small {
+      @include form-size($font-size-s, $form-line-height-s);
+    }
+
+    &--large {
+      @include form-size($font-size-l, $form-line-height-l);
+    }
+  }
+
+  &__content {
+    position: relative;
+
+    &__msg {
+      position: relative;
+      font-size: 12px;
+    }
+  }
+}
+
+.is-error {
+  color: $error-color;
+}

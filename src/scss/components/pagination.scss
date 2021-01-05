@@ -1,0 +1,63 @@
+.v-pagination {
+  font-size: 14px;
+  &__item {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    & + & {
+      margin-left: 12px;
+    }
+  }
+  &__button {
+    display: inline-block;
+    line-height: 20px;
+    padding: 2px 0;
+    width: 24px;
+    text-align: center;
+    cursor: pointer;
+    @extend .no-select;
+    &--active {
+      color: $main-active-color;
+    }
+    &--border {
+      padding: 6px 0;
+      width: 30px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      &.v-pagination__button--active {
+        background-color: $main-active-color;
+        border-color: $main-active-color;
+        color: #fff;
+      }
+    }
+    &--disabled {
+      //background-color: $disabled-background-color;
+      color: $disabled-color;
+      cursor: not-allowed;
+      &.v-pagination__button--active {
+        background-color: $disabled-background-color;
+      }
+      &.v-pagination__button--border {
+        border-color: $disabled-border-color;
+        background-color: $disabled-background-color;
+        &.v-pagination__button--active{
+          background-color: $disabled-border-color;
+          color: $disabled-color;
+        }
+      }
+    }
+    & + .v-pagination__button {
+      margin-left: 8px;
+    }
+  }
+  &__select {
+    width: 60px;
+  }
+  &__input {
+    width: 48px;
+  }
+  &__text {
+    line-height: $form-line-height-s;
+    padding: 0 4px;
+  }
+}

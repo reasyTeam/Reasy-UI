@@ -1,0 +1,36 @@
+.v-container {
+  background-color: #f8f8f8;
+  position: relative;
+
+  &__header {
+    background-color: #fff;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+  }
+
+  &__nav {
+    background-color: #fff;
+    box-shadow: rgba(#000000, 0.45);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  &__main {
+    margin: 24px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 0;
+    bottom: 0;
+    width: 100%;
+  }
+}
