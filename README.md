@@ -1,5 +1,5 @@
-# reasy-ui-vue@v2
-https://reasyteam.github.io/reasy-ui-vue/
+# reasy-ui
+https://reasyteam.github.io/Reasy-UI/
 
 # 字段规范
 
