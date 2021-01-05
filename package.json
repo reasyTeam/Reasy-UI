@@ -8,9 +8,8 @@
     "scss": "webpack --env.NODE_ENV=publish --color --config build/webpack.scss.js --mode production",
     "build": "npm run scss && npm run component && npm run publish",
     "serve": "vue-cli-service serve",
-    "build:demo": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy:build": "cross-env NODE_ENV=production webpack --config build/webpack.demo.js",
+    "build:demo": "cross-env NODE_ENV=production webpack --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js"
   },
   "dependencies": {

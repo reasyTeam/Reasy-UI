@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["container"],{"0c27":function(e,t,n){"use strict";n.r(t);var a=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("r-page",{staticStyle:{position:"relative"}})},c=[],i=n("2877"),l={},r=Object(i["a"])(l,a,c,!1,null,null,null);t["default"]=r.exports}}]);
-//# sourceMappingURL=container.js.map
