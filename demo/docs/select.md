@@ -190,11 +190,7 @@
 ::: demo
 
 ```html
-<v-select
-  v-model="select1"
-  is-clear
-  :options="selectOption"
-></v-select>
+<v-select v-model="select1" is-clear :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -338,6 +334,7 @@
 | v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array | —                   | —      |
 | name           | select input 的 name 属性                    | string         | —                   | —      |
 | disabled       | 是否禁用                                     | boolean        | —                   | false  |
+| width          | 选择器宽度                                   | string / Array | —                   | —      |
 | is-clear       | 是否可以清空选项                             | boolean        | —                   | false  |
 | is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean        | —                   | false  |
 | multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number         | —                   | 0      |

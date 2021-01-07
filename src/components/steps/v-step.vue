@@ -24,7 +24,9 @@
       </div>
       <div class="v-step__description">
         <slot name="description">
-          <span class="v-step__description--default">{{ description }}</span>
+          <span v-if="description" class="v-step__description--default">
+            {{ description }}
+          </span>
         </slot>
       </div>
     </div>

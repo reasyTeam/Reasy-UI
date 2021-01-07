@@ -5,6 +5,10 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
+  //解决打包后出现多个Vue的问题
+  externals: {
+    vue: "vue"
+  },
   entry: {
     app: ["./src/components/index.js"]
   }, // 入口文件路径
@@ -42,7 +46,7 @@ module.exports = {
 					 options: {
 					     modules: true,
 					   importLoaders: 1
-					 } 
+					 }
 				   }, */
           "postcss-loader",
           {

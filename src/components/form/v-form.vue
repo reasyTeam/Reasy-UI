@@ -86,7 +86,7 @@ export default {
       this.fields.forEach(field => {
         if (!field.ignore && field.prop) {
           //未忽略时传值
-          subData[field.prop] = this.model[field.prop];
+          subData[field.prop] = field.value;
         }
       });
       return subData;
@@ -112,11 +112,7 @@ export default {
     },
 
     cancelForm() {
-      if (typeof this.cancel == "function") {
-        this.cancel();
-      } else {
-        this.$emit("cancel");
-      }
+      this.$emit("cancel");
     }
   }
 };

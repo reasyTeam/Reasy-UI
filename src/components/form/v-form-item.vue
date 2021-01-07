@@ -20,12 +20,6 @@
       :style="{ 'margin-left': !isNoLabel ? labelWidth + 20 + 'px' : '0' }"
     >
       <slot></slot>
-      <!-- <div
-        class="v-form-item__content__msg is-error"
-        v-if="errorMsg && !isFoucs"
-      >
-        {{ errorMsg }}
-      </div> -->
     </div>
   </div>
 </template>

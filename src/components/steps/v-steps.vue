@@ -1,5 +1,10 @@
 <template>
   <div class="v-steps">
+    <!-- v-step -->
+    <div class="v-steps__main">
+      <slot></slot>
+    </div>
+
     <!-- lines -->
     <div class="v-steps__lines">
       <div class="v-steps__lines-wrapper" :style="lineWrapperStyle">
@@ -15,11 +20,6 @@
           </div>
         </template>
       </div>
-    </div>
-
-    <!-- v-step -->
-    <div class="v-steps__main">
-      <slot></slot>
     </div>
   </div>
 </template>

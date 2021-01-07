@@ -113,6 +113,8 @@ export default {
   top: 120px;
   right: 24px;
   padding-left: 24px;
+  background-color: #fff;
+
   &__bar {
     position: absolute;
     left: 0;

@@ -2,10 +2,15 @@ $icon-size: 32px;
 $icon-line-space: 8px;
 
 .v-steps {
+  position: relative;
   width: 100%;
   overflow: auto;
-  .v-steps__lines {
-    .v-steps__lines-wrapper {
+  &__lines {
+    position: absolute;
+    top: $icon-size / 2;
+    width: 100%;
+    font-size: 0;
+    &-wrapper {
       padding: 0 $icon-size / 2;
       white-space: nowrap;
     }
@@ -27,7 +32,7 @@ $icon-line-space: 8px;
 
   .v-steps__main {
     @include clearfix;
-    margin-top: -$icon-size + 12px;
+    // margin-top: -$icon-size + 12px;
     font-size: 0;
     white-space: nowrap;
   }

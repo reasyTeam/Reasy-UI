@@ -1,0 +1,24 @@
+.popconfirm-custom-icon {
+  &.v-icon-help-plane {
+    color: $main-active-color;
+  }
+}
+
+.popconfirm-demo-box {
+  // min-width: 300px;
+
+  .popconfirm-demo__title {
+    margin-bottom: 16px;
+    color: $title-color;
+    font-size: $font-size-m;
+  }
+
+  .popconfirm-demo__content {
+    color: $info-color;
+    font-size: $font-size-s;
+
+    &--height-line {
+      color: #000;
+    }
+  }
+}

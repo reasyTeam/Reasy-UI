@@ -183,21 +183,22 @@
 
 ### v-timepicker Attributes
 
-| 参数            | 说明                                                                             | 类型    | 可选值   | 默认值 |
-| --------------- | -------------------------------------------------------------------------------- | ------- | -------- | ------ |
-| value / v-model | 绑定值                                                                           | string  | —        | —      |
-| name            | 时间框名称                                                                       | string  | —        | —      |
-| disabled        | 是否禁用                                                                         | boolean | —        | false  |
-| is-clear        | 是否支持清除                                                                     | boolean | —        | true   |
-| is-range        | 是否支持范围选择                                                                 | boolean | —        | false  |
-| placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string  | —        | —      |
-| end-placeholder | 支持范围选择时结束时间的占位符                                                   | string  |          |        |
-| format          | 时间格式，支持 hh、mm、ss 与任意字符组合，小时 hh 为必填项                       | string  | —        | hh:mm  |
-| min             | 最小时间                                                                         | string  | —        | —      |
-| max             | 最大时间                                                                         | string  | —        | —      |
-| minute-interval | 分钟间隔                                                                         | number  | —        | 1      |
-| second-interval | 秒间隔                                                                           | number  | —        | 1      |
-| size            | 输入框尺寸                                                                       | string  | S/ M / L | M      |
+| 参数            | 说明                                                                             | 类型           | 可选值   | 默认值 |
+| --------------- | -------------------------------------------------------------------------------- | -------------- | -------- | ------ |
+| value / v-model | 绑定值                                                                           | string         | —        | —      |
+| name            | 时间框名称                                                                       | string         | —        | —      |
+| disabled        | 是否禁用                                                                         | boolean        | —        | false  |
+| width           | 时间选择器宽度                                                                   | string / Array | —        | —      |
+| is-clear        | 是否支持清除                                                                     | boolean        | —        | true   |
+| is-range        | 是否支持范围选择                                                                 | boolean        | —        | false  |
+| placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string         | —        | —      |
+| end-placeholder | 支持范围选择时结束时间的占位符                                                   | string         |          |        |
+| format          | 时间格式，支持 hh、mm、ss 与任意字符组合，小时 hh 为必填项                       | string         | —        | hh:mm  |
+| min             | 最小时间                                                                         | string         | —        | —      |
+| max             | 最大时间                                                                         | string         | —        | —      |
+| minute-interval | 分钟间隔                                                                         | number         | —        | 1      |
+| second-interval | 秒间隔                                                                           | number         | —        | 1      |
+| size            | 输入框尺寸                                                                       | string         | S/ M / L | M      |
 
 ### v-timepicker Events
 

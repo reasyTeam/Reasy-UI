@@ -3,6 +3,8 @@
   width: 256px;
   box-sizing: border-box;
   transition: opacity 0.3s;
+  border-right: 1px solid #e9e9e9;
+
   &.is-fade {
     transition: opacity 3s;
   }
@@ -38,9 +40,11 @@
       position: relative;
       transition: 0.15s ease-out;
       font-weight: bold;
+      padding-left: 24px;
 
       &.active {
-        color: #409eff;
+        color: #ff801f;
+        background-color: #fff5e4;
       }
     }
 
@@ -58,7 +62,8 @@
 
         &:hover,
         &.active {
-          color: #409eff;
+          color: #ff801f;
+          background-color: #fff5e4;
         }
       }
     }
@@ -100,6 +105,7 @@
     color: #999;
     line-height: 26px;
     margin-top: 15px;
+    padding-left: 24px;
   }
 
   #code-sponsor-widget {

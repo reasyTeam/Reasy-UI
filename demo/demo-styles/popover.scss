@@ -1,0 +1,5 @@
+.popover-demo {
+  & + & {
+    margin-left: 24px;
+  }
+}

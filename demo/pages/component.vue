@@ -52,7 +52,6 @@ $nav-width: 256px;
   }
 
   .nav-scroll {
-    padding-left: 24px;
     padding-top: 24px;
   }
 }

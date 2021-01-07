@@ -9,6 +9,9 @@
     height: $lineHeight;
     line-height: $lineHeight;
   }
+  .placeholder-text {
+    line-height: $lineHeight;
+  }
 }
 .v-datepicker {
   position: relative;
@@ -41,6 +44,10 @@
 
   &--panel {
     vertical-align: top;
+    &__weeks, &__date-list {
+      padding: 0;
+      margin: 0;
+    }
     .date {
       display: inline-block;
       width: 14.2%;

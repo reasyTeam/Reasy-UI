@@ -98,6 +98,7 @@ const minDelay = 300;
 export default {
   name: "v-popups",
   props: {
+    value: Boolean,
     effect: {
       type: String,
       default: "light",
@@ -217,6 +218,14 @@ export default {
       this.referenceDomProps = this.parentElm.getBoundingClientRect();
       this.visible = false;
       this.hidden = false;
+      if (this.trigger === "manual") {
+        this.visible = this.value;
+        if (this.visible) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }
       document.body.appendChild(popups);
     });
   },
@@ -392,7 +401,7 @@ export default {
       } else if (
         parseInt(this.popupsStyle[positionPropMap[p1]]) +
           this.popupsDomProps[positionSideNameMap[p1]] >
-        bodyDomProps[p1]
+        bodyDomProps[positionSideNameMap[p1]]
       ) {
         this.setPosition([positionReverseMap[p1], p2]);
       }
@@ -416,6 +425,18 @@ export default {
   },
   beforeDestroy() {
     this.unbindEvent();
+  },
+  watch: {
+    value(newVal) {
+      if (this.trigger === "manual") {
+        // 手动模式
+        if (newVal) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }
+    }
   }
 };
 </script>

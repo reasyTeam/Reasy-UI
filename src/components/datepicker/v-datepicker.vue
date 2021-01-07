@@ -1,5 +1,9 @@
 <template>
-  <div class="v-datepicker" :class="sizeCss">
+  <div
+    class="v-datepicker"
+    :class="sizeCss"
+    :style="{ width: datePickerWidth }"
+  >
     <div
       :name="name"
       class="v-datepicker__label input-text"
@@ -135,6 +139,7 @@ import DatePanel from "./date-panel.vue";
 import TimePanel from "./time-select-panel.vue";
 import HeaderPanel from "./header-panel.vue";
 import FormMixin from "../form-mixins";
+import { size } from "../filters";
 
 import { parseDate, formatDate } from "../libs";
 export default {
@@ -164,6 +169,8 @@ export default {
       type: Boolean,
       default: false
     },
+    //宽度
+    width: [String, Number],
     //是否支持清除
     isClear: {
       type: Boolean,
@@ -221,6 +228,10 @@ export default {
         return "YYYY-MM-DD hh:mm:ss";
       }
       return "YYYY-MM-DD";
+    },
+    //宽度
+    datePickerWidth() {
+      return size(this.width);
     }
   },
   data() {
@@ -292,6 +303,7 @@ export default {
       }
     },
     clearDate() {
+      this.isClickRange = false;
       this.$emit("change", this.isRange ? ["", ""] : "");
     },
     //点击日期执行事件
@@ -418,18 +430,21 @@ export default {
     },
 
     changeDate() {
+      //开始日期
       let startDate = new Date(
           this.originDate.year,
           this.originDate.month,
           this.originDate.day
         ),
+        //结束日期
         endDate = new Date(
           this.originEndDate.year,
           this.originEndDate.month,
           this.originEndDate.day
         ),
-        isReverse;
+        isReverse; //开始时间是否大于结束时间
 
+      //开始时间
       let dateStart = new Date(
           this.originDate.year,
           this.originDate.month,
@@ -438,6 +453,10 @@ export default {
           this.originDate.minute,
           this.originDate.second
         ),
+        dateEnd = "";
+
+      if (this.isRange && !this.isClickRange) {
+        //支持范围选择 && 第二次点击
         dateEnd = new Date(
           this.originEndDate.year,
           this.originEndDate.month,
@@ -446,9 +465,8 @@ export default {
           this.originEndDate.minute,
           this.originEndDate.second
         );
-
-      if (this.isRange) {
         isReverse = startDate.getTime() > endDate.getTime();
+        //开始日期大于结束日期
         if (isReverse) {
           //交换年月日
           dateStart = new Date(
@@ -472,18 +490,24 @@ export default {
         isReverse = false;
       }
       startDate = formatDate(dateStart, this.dateFormat);
-      endDate = formatDate(dateEnd, this.dateFormat);
+      endDate = dateEnd === "" ? "" : formatDate(dateEnd, this.dateFormat);
 
+      //起止日期赋值
       this.startDate = startDate;
       this.endDate = endDate;
 
+      //点击后是否隐藏
       let isHide = false;
       if (this.isRange) {
+        //支持范围选择
         if (!this.isClickRange && !this.hasTime) {
+          //第二次点击 && 不支持时间配置时
           isHide = true;
         }
       } else {
+        //不支持范围
         if (!this.hasTime) {
+          //不支持时间配置
           isHide = true;
         }
       }
@@ -491,21 +515,21 @@ export default {
     },
     //设置日期时间
     setDateTime(isHide = true) {
+      //不隐藏面板时，不处理
+      if (!isHide) return;
       let dateTime = this.startDate;
 
-      if (isHide) {
-        if (this.isRange) {
-          let endDateTime = this.endDate;
-          if (dateTime != this.value[0] || endDateTime !== this.value[1]) {
-            this.$emit("change", [dateTime, endDateTime]);
-          }
-        } else {
-          if (dateTime != this.value) {
-            this.$emit("change", dateTime);
-          }
+      if (this.isRange) {
+        let endDateTime = this.endDate;
+        if (dateTime != this.value[0] || endDateTime !== this.value[1]) {
+          this.$emit("change", [dateTime, endDateTime]);
         }
-        this.hide();
+      } else {
+        if (dateTime != this.value) {
+          this.$emit("change", dateTime);
+        }
       }
+      this.hide();
     },
     formatData(value) {
       if (value) {

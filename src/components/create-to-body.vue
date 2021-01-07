@@ -70,7 +70,7 @@ export default {
           document.body.scrollLeft;
 
       //更新dom
-      this.popperElm = this.$el;
+      //this.popperElm = this.$el;
       this.style.left = parentRect.left + scrollLeft + "px";
       this.style.top = parentRect.bottom + scrollTop + "px";
       //宽度和放大倍数同时存在时优先宽度
@@ -80,7 +80,8 @@ export default {
       this.style.zIndex = zIndex;
       //挂载完成
       if (this.$el.offsetHeight) {
-        let bodyHeight = document.body.clientHeight,
+        let bodyHeight =
+            document.documentElement.clientHeight || document.body.clientHeight,
           elHeight = this.$el.offsetHeight,
           marginTop =
             parseInt(window.getComputedStyle(this.$el, null).marginTop, 10) ||
@@ -104,9 +105,9 @@ export default {
       this.isAnimation = isAnimation;
     },
     doDestroy() {
-      if (this.popperElm && this.popperElm.parentNode === document.body) {
+      if (this.popperElm) {
         this.parentElm = null;
-        document.body.removeChild(this.popperElm);
+        document.body.removeChild(this.$el);
       }
       off(window, "resize", this.setPotion);
     },

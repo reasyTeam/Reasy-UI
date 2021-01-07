@@ -441,8 +441,10 @@ export default {
     //展开
     expandTable(rowData, index) {
       this.$set(rowData, this.expandField, !rowData[this.expandField]);
+
       //滚动条跳转到对应的行
       this.$nextTick(() => {
+        this.$refs.scroll.update();
         this.$refs.scroll.scrollToNode(this.$refs["table-body-tr"][index]);
       });
     },

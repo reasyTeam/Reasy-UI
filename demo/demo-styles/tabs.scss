@@ -1,0 +1,21 @@
+.tabs-demo {
+  & + & {
+    margin-top: 32px;
+  }
+  h5 {
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+  }
+
+  &__size {
+    label {
+      font-size: $font-size-m;
+      color: $light-color;
+    }
+    & + & {
+      margin-top: 24px;
+    }
+  }
+}

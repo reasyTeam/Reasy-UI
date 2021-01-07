@@ -9,6 +9,8 @@ import SideNav from "./components/side-nav";
 import FooterNav from "./components/footer-nav";
 import SideLink from "./components/side-link";
 
+import { valid } from "./valid.js";
+
 import "@/scss/index.scss";
 import "./demo-styles/index.scss";
 
@@ -18,6 +20,8 @@ Vue.component("demo-block", demoBlock);
 Vue.component("side-nav", SideNav);
 Vue.component("footer-nav", FooterNav);
 Vue.component("side-link", SideLink);
+
+Vue.prototype.$valid = valid;
 
 const router = new VueRouter({
   mode: "hash",

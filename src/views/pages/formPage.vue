@@ -19,7 +19,7 @@
             <v-input-number
               v-model="ruleForm.index"
               :min="1"
-              :max="100"
+              :max="12"
             ></v-input-number>
           </v-form-item>
           <v-form-item label="加密" prop="security">
@@ -138,12 +138,12 @@ export default {
       ],
       rules: {
         ssid: [
-          { type: "num", max: 12, min: 1, msg: "请输入正确的范围，范围1-12" }
+          { type: "num", args: [1, 12], msg: "请输入正确的范围，范围1-12" }
         ],
-        power: { type: "num", max: 12, min: 1 },
+        power: { type: "num", args: [1, 12] },
         ip: { type: "ip" },
-        index: { type: "num", max: 12, min: 1 },
-        downLimit: { type: "num", max: 12, min: 1 }
+        index: { type: "num", args: [1, 12] },
+        downLimit: { type: "num", args: [1, 12] }
       }
     };
   },

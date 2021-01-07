@@ -5,6 +5,15 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = require("./components.js");
 
 module.exports = {
+  //解决打包后出现多个Vue的问题
+  externals: {
+    vue: {
+      root: "Vue",
+      commonjs: "vue",
+      commonjs2: "vue",
+      amd: "vue"
+    }
+  },
   entry: config, // 入口文件路径
   output: {
     path: path.join(root, "dist/lib"), // 出口目录

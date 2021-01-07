@@ -1,5 +1,9 @@
 <template>
-  <div class="v-timepicker" :class="sizeCss">
+  <div
+    class="v-timepicker"
+    :class="sizeCss"
+    :style="{ width: timePickerWidth }"
+  >
     <div
       :name="name"
       class="v-timepicker__label input-text"
@@ -77,6 +81,7 @@
 import TimePanel from "./time-panel";
 import CreateToBody from "../create-to-body.vue";
 import FormMixin from "../form-mixins";
+import { size } from "../filters";
 export default {
   name: "v-timepicker",
   mixins: [FormMixin],
@@ -96,6 +101,8 @@ export default {
       type: Boolean,
       default: false
     },
+    //宽度
+    width: [String, Number],
     //是否支持清空
     isClear: {
       type: Boolean,
@@ -143,6 +150,10 @@ export default {
     //是否显示清除标志 支持清除 && 时间不为空 && 鼠标放在上面
     hasClear() {
       return this.isClear && this.value !== "" && this.isMouseover;
+    },
+    //宽度
+    timePickerWidth() {
+      return size(this.width);
     }
   },
   data() {

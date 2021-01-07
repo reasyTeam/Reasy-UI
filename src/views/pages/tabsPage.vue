@@ -16,7 +16,7 @@
         size="M"
         v-model="activeName1"
         :before-leave="beforeLeave"
-        :tab-click="tabClick"
+        @tab-click="tabClick"
       >
         <v-tab-pane v-if="showFirst" label="tab1" value="1" :disabled="true"
           >tab1 content</v-tab-pane
@@ -32,7 +32,7 @@
         size="M"
         v-model="activeName2"
         :before-leave="beforeLeave"
-        :tab-click="tabClick"
+        @tab-click="tabClick"
       >
         <v-tab-pane label="tab1" value="1">tab1 content</v-tab-pane>
         <v-tab-pane label="tab2" value="2">tab2 content</v-tab-pane>
@@ -46,7 +46,7 @@
         size="S"
         v-model="activeName3_S"
         :before-leave="beforeLeave"
-        :tab-click="tabClick"
+        @tab-click="tabClick"
       >
         <v-tab-pane label="tab1" value="1">tab1 content</v-tab-pane>
         <v-tab-pane label="tab2" value="2">tab2 content</v-tab-pane>
@@ -57,7 +57,7 @@
         size="M"
         v-model="activeName3_M"
         :before-leave="beforeLeave"
-        :tab-click="tabClick"
+        @tab-click="tabClick"
       >
         <v-tab-pane label="tab1" value="1">tab1 content</v-tab-pane>
         <v-tab-pane label="tab2" value="2">tab2 content</v-tab-pane>
@@ -83,9 +83,9 @@ export default {
     handleButtonClick() {
       this.showFirst = !this.showFirst;
     },
-    tabClick(tabVNode) {
+    tabClick(tabVNode, event) {
       console.log(`trigger tab-click, arguments as follows: `);
-      console.log(tabVNode);
+      console.log(tabVNode, event);
     },
     beforeLeave(newVal, oldVal) {
       console.log(`trigger before-leave, arguments: ${newVal}, ${oldVal}`);

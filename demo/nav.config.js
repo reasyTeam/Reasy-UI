@@ -65,6 +65,31 @@ export default [
           {
             path: "timepicker",
             title: "时间选择器"
+          },
+          {
+            path: "datepicker",
+            title: "日期选择器"
+          },
+          {
+            path: "upload",
+            title: "文件上传"
+          },
+          {
+            path: "form",
+            title: "表单"
+          }
+        ]
+      },
+      {
+        groupName: "表格组件",
+        list: [
+          {
+            path: "table",
+            title: "表格"
+          },
+          {
+            path: "pagination",
+            title: "分页"
           }
         ]
       },
@@ -95,6 +120,14 @@ export default [
           {
             path: "dropdown",
             title: "下拉菜单"
+          },
+          {
+            path: "steps",
+            title: "步骤条"
+          },
+          {
+            path: "tabs",
+            title: "标签页"
           }
         ]
       },
@@ -137,6 +170,18 @@ export default [
           {
             path: "list",
             title: "列表"
+          },
+          {
+            path: "popconfirm",
+            title: "气泡确认框"
+          },
+          {
+            path: "popover",
+            title: "弹出框"
+          },
+          {
+            path: "tooltip",
+            title: "文字提示"
           }
         ]
       }

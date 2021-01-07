@@ -1,16 +1,3 @@
-https://lanhuapp.com/url/qVcLs-cIgaV
-
-# 字段规范
-
-- 属性书写顺序：必填->非必填，
-- 长宽、距离的值类型，只能写xxpx的`number`类型，否则百分比的`string`，
-- 属性命名用`-`连接
-- 尺寸大中小用`S`、`M`、`L`
-
-> **需要使用typescript嘛？**
->
-> 命名统一，类似是否之类的都需要is-xxx或show-xxx嘛？
-
 # v-button
 
 ## 属性 Attributes
@@ -156,6 +143,7 @@ https://lanhuapp.com/url/qVcLs-cIgaV
 | v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array                | —                   | —      |
 | name           | select input 的 name 属性                    | string                        | —                   | —      |
 | disabled       | 是否禁用                                     | boolean                       | —                   | false  |
+| width          | 选择器宽度                                   | string / Array                | —                   | —      |
 | is-clear       | 是否可以清空选项                             | boolean                       | —                   | false  |
 | is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean                       | —                   | false  |
 | multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number                        | —                   | 0      |
@@ -195,21 +183,22 @@ https://lanhuapp.com/url/qVcLs-cIgaV
 
 ## 属性 Attributes
 
-| 参数            | 说明                                                         | 类型    | 可选值   | 默认值 |
-| --------------- | ------------------------------------------------------------ | ------- | -------- | ------ |
-| value / v-model | 绑定值                                                       | string  | —        | —      |
-| name            | 时间框名称                                                   | string  | —        | —      |
-| disabled        | 是否禁用                                                     | boolean | —        | false  |
-| is-clear        | 是否支持清除                                                 | boolean | —        | true   |
-| is-range        | 是否支持范围选择                                             | boolean | —        | false  |
-| placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string  | —        | —      |
-| end-placeholder | 支持范围选择时结束时间的占位符                               | string  |          |        |
-| format          | 时间格式，支持hh、mm、ss与任意字符组合，小时hh为必填项       | string  | —        | hh:mm  |
-| min             | 最小时间                                                     | string  | —        | —      |
-| max             | 最大时间                                                     | string  | —        | —      |
-| minute-interval | 分钟间隔                                                     | number  | —        | 1      |
-| second-interval | 秒间隔                                                       | number  | —        | 1      |
-| size            | 输入框尺寸                                                   | string  | S/ M / L | M      |
+| 参数            | 说明                                                         | 类型           | 可选值   | 默认值 |
+| --------------- | ------------------------------------------------------------ | -------------- | -------- | ------ |
+| value / v-model | 绑定值                                                       | string         | —        | —      |
+| name            | 时间框名称                                                   | string         | —        | —      |
+| disabled        | 是否禁用                                                     | boolean        | —        | false  |
+| width           | 时间选择器宽度                                               | string / Array | —        | —      |
+| is-clear        | 是否支持清除                                                 | boolean        | —        | true   |
+| is-range        | 是否支持范围选择                                             | boolean        | —        | false  |
+| placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string         | —        | —      |
+| end-placeholder | 支持范围选择时结束时间的占位符                               | string         |          |        |
+| format          | 时间格式，支持hh、mm、ss与任意字符组合，小时hh为必填项       | string         | —        | hh:mm  |
+| min             | 最小时间                                                     | string         | —        | —      |
+| max             | 最大时间                                                     | string         | —        | —      |
+| minute-interval | 分钟间隔                                                     | number         | —        | 1      |
+| second-interval | 秒间隔                                                       | number         | —        | 1      |
+| size            | 输入框尺寸                                                   | string         | S/ M / L | M      |
 
 ## 事件 Events
 
@@ -221,22 +210,23 @@ https://lanhuapp.com/url/qVcLs-cIgaV
 
 ## 属性 Attributes
 
-| 参数            | 说明                                                         | 类型    | 可选值          | 默认值     |
-| --------------- | ------------------------------------------------------------ | ------- | --------------- | ---------- |
-| value / v-model | 绑定值                                                       | string  | —               | —          |
-| type            | 日期时间类型，date日期  <br />datetime时间日期               | string  | date / datetime | date       |
-| name            | 时间框名称                                                   | string  | —               | —          |
-| disabled        | 是否禁用                                                     | boolean | —               | false      |
-| is-clear        | 是否支持清除                                                 | boolean | —               | true       |
-| is-range        | 是否支持范围选择                                             | boolean | —               | false      |
-| placeholder     | 占位内容，支持范围选择时为开始日期的占位符<br />不支持范围时为日期选择框的占位符 | string  | —               | —          |
-| end-placeholder | 支持范围选择时结束时间的占位符                               | string  |                 |            |
-| format          | 日期格式，YYYY-MM-DD hh:mm:ss<br />日期格式YYYY-MM-DD可任意调整年月日的位置 <br />YYYY表示年  MM表示月 DD表示天 分隔符可自定义<br /><br />时分秒格式见`v-timepicker` | string  | —               | YYYY-MM-DD |
-| min             | 最小日期，必须与日期格式对应                                 | string  | —               | 2000-01-01 |
-| max             | 最大日期，必须与日期格式对应                                 | string  | —               | 2037-12-31 |
-| minute-interval | 分钟间隔                                                     | number  | —               | 1          |
-| second-interval | 秒间隔                                                       | number  | —               | 1          |
-| size            | 输入框尺寸                                                   | string  | S / M / L       | M          |
+| 参数            | 说明                                                         | 类型           | 可选值          | 默认值     |
+| --------------- | ------------------------------------------------------------ | -------------- | --------------- | ---------- |
+| value / v-model | 绑定值                                                       | string         | —               | —          |
+| type            | 日期时间类型，date日期  <br />datetime时间日期               | string         | date / datetime | date       |
+| name            | 时间框名称                                                   | string         | —               | —          |
+| disabled        | 是否禁用                                                     | boolean        | —               | false      |
+| width           | 日期选择器宽度                                               | string / Array | —               | —          |
+| is-clear        | 是否支持清除                                                 | boolean        | —               | true       |
+| is-range        | 是否支持范围选择                                             | boolean        | —               | false      |
+| placeholder     | 占位内容，支持范围选择时为开始日期的占位符<br />不支持范围时为日期选择框的占位符 | string         | —               | —          |
+| end-placeholder | 支持范围选择时结束时间的占位符                               | string         |                 |            |
+| format          | 日期格式，YYYY-MM-DD hh:mm:ss<br />日期格式YYYY-MM-DD可任意调整年月日的位置 <br />YYYY表示年  MM表示月 DD表示天 分隔符可自定义<br /><br />时分秒格式见`v-timepicker` | string         | —               | YYYY-MM-DD |
+| min             | 最小日期，必须与日期格式对应                                 | string         | —               | 2000-01-01 |
+| max             | 最大日期，必须与日期格式对应                                 | string         | —               | 2037-12-31 |
+| minute-interval | 分钟间隔                                                     | number         | —               | 1          |
+| second-interval | 秒间隔                                                       | number         | —               | 1          |
+| size            | 输入框尺寸                                                   | string         | S / M / L       | M          |
 
 ## 事件 Events
 
@@ -353,7 +343,7 @@ https://lanhuapp.com/url/qVcLs-cIgaV
 | accept         | 接受上传的文件类型，例如 .bin                                | string             |              |        |
 | disabled       | 是否禁用                                                     | boolean            | —            | false  |
 | data           | 上传时附带的额外参数                                         | object             | —            | —      |
-| list-type      | 文件列表的类型，文本 图片                                    | string             | text/picture | text   |
+| type           | 文件列表的类型，文本 图片                                    | string             | text/picture | text   |
 | show-file-list | 是否显示已上传文件列表                                       | boolean            | —            | false  |
 | on-success     | 文件上传成功时的钩子                                         | function(response) | —            | —      |
 | on-change      | 文件改变时的钩子，添加文件或修改文件                         | function(file)     | —            | —      |

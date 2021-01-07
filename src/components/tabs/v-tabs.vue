@@ -64,13 +64,7 @@ export default {
       type: Boolean,
       default: false
     },
-    beforeLeave: Function,
-    tabClick: {
-      type: Function,
-      default() {
-        return () => {};
-      }
-    }
+    beforeLeave: Function
   },
   data() {
     return {
@@ -139,7 +133,7 @@ export default {
       if (disabled) return;
 
       this.setCurrentValue(value);
-      this.tabClick(tabVNode, event);
+      this.$emit("tab-click", tabVNode, event);
     },
 
     /**

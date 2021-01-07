@@ -7,26 +7,28 @@
 :::demo
 
 ```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="恭喜！成功提示的文案"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="warn"
-  title="警告提示的文案"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="info"
-  title="常规消息的文案"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="error"
-  title="错误提示的文案"
-></v-alert>
+<template>
+  <v-alert
+    class="alert-box"
+    type="success"
+    title="恭喜！这里是成功成功成功成功成功的提示信息。"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="warn"
+    title="这里是警告警告警告警告警告警告警告的提示信息。"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="info"
+    title="这里是常规常规常规常规常规常规常规的提示信息。"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="error"
+    title="这里是错误错误错误错误错误错误错误的提示信息。"
+  ></v-alert>
+</template>
 ```
 
 :::
@@ -37,66 +39,71 @@
 :::demo 通过设置`show-icon`来控制图标的显示，默认值为`true`。
 
 ```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="恭喜！成功提示的文案"
-  :show-icon="false"
-></v-alert>
+<template>
+  <v-alert
+    class="alert-box"
+    type="success"
+    title="恭喜！这里是成功成功成功成功成功的提示信息。"
+    :show-icon="false"
+  ></v-alert>
+</template>
 ```
 :::
 
-### 居中显示
-
-:::demo 通过设置`align-center`来控制图标的显示，默认值为`false`。
-
-```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="恭喜！成功提示的文案"
-  :align-center="true" 
-></v-alert>
-```
-:::
 
 ### 含查看链接的提示
 
 :::demo 通过设置`show-details-button`和`show-close`来仅显示`查看详情`按钮。
 
 ```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="success title"
-  :show-icon="false"
-  :show-details-button="true"
-  :show-close="false"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="warn"
-  title="warn title"
-  :show-icon="false"
-  :show-details-button="true"
-  :show-close="false"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="info"
-  title="info title"
-  :show-icon="false"
-  :show-details-button="true"
-  :show-close="false"
-></v-alert>
-<v-alert
-  class="alert-box"
-  type="error"
-  title="error itle"
-  :show-icon="false"
-  :show-details-button="true"
-  :show-close="false"
-></v-alert>
+<template>
+  <v-alert
+    class="alert-box"
+    type="success"
+    title="恭喜！这里是成功成功成功成功成功的提示信息。"
+    :show-icon="false"
+    :show-details-button="true"
+    :show-close="false"
+    @handle-details-click="handleDetailsClick"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="warn"
+    title="这里是警告警告警告警告警告警告警告的提示信息。"
+    :show-icon="false"
+    :show-details-button="true"
+    :show-close="false"
+    @handle-details-click="handleDetailsClick"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="info"
+    title="这里是常规常规常规常规常规常规常规的提示信息。"
+    :show-icon="false"
+    :show-details-button="true"
+    :show-close="false"
+    @handle-details-click="handleDetailsClick"
+  ></v-alert>
+  <v-alert
+    class="alert-box"
+    type="error"
+    title="这里是错误错误错误错误错误错误错误的提示信息。"
+    :show-icon="false"
+    :show-details-button="true"
+    :show-close="false"
+    @handle-details-click="handleDetailsClick"
+  ></v-alert>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleDetailsClick() {
+      this.$message.warn("点击了“查看详情”按钮！");
+    }
+  }
+};
+</script>
 ```
 
 :::
@@ -106,13 +113,15 @@
 :::demo 通过设置`title`和`descrition`来实现。
 
 ```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="success title"
-  icon="v-icon-ok-line"
-  description="error content error content error content error content error content error content"
-></v-alert>
+<template>
+  <v-alert
+    class="alert-box"
+    type="success"
+    title="成功提示信息标题"
+    icon="v-icon-ok-line"
+    description="恭喜！这里是成功成功成功成功成功的提示信息。"
+  ></v-alert>
+</template>
 ```
 
 :::
@@ -122,14 +131,16 @@
 :::demo 通过设置`default slot`来插入`description`内容。
 
 ```html
-<v-alert
-  class="alert-box"
-  type="success"
-  title="success title"
-  icon="v-icon-ok-line"
->
-  <div class="slot-content">这是插槽中的内容</div>
-</v-alert>
+<template>
+  <v-alert
+    class="alert-box"
+    type="success"
+    title="提示信息标题"
+    icon="v-icon-ok-line"
+  >
+    <div class="slot-content">这是插槽中的内容</div>
+  </v-alert>
+</template>
 ```
 
 :::
@@ -146,7 +157,6 @@
 | show-icon           | 是否显示icon                       | Boolean | -                       | true   |
 | show-close          | 是否显示关闭按钮                   | boolean | -                       | true   |
 | show-details-button | 是否显示查看详情按钮               | boolean | -                       | false  |
-| align-center        | 文字是否居中                       | boolean | -                       | false  |
 
 
 ### Events

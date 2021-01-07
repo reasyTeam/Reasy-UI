@@ -391,14 +391,7 @@ export function checkData(dataKey, value) {
     //数据验证函数
     let handleValid = this.$valid[valid.type] || {};
     //验证参数
-    let args = [];
-    if (valid.min != undefined) {
-      args.push(valid.min);
-    }
-    if (valid.max != undefined) {
-      args.push(valid.max);
-    }
-
+    let args = valid.args || [];
     if (typeof handleValid == "function") {
       errMsg = handleValid(val, ...args);
     } else if (typeof handleValid.all === "function") {

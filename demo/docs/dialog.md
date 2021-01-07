@@ -7,36 +7,38 @@
 :::demo
 
 ```html
-<v-dialog
-  v-model="showDialog"
-  :title="dialogTitle"
-  :close-on-click-modal="closeOnClickModal"
-  :modal="true"
-  :width="600"
-  @confirm="handleConfirm"
-  @open="handleOpen"
-  @after-close="handleAfterClose"
-  @cancel="handleCancel"
->
-  我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
-</v-dialog>
+<template>
+  <v-dialog
+    v-model="showDialog"
+    :title="dialogTitle"
+    :close-on-click-modal="closeOnClickModal"
+    :modal="true"
+    :width="600"
+    @confirm="handleConfirm"
+    @open="handleOpen"
+    @after-close="handleAfterClose"
+    @cancel="handleCancel"
+  >
+    我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
+  </v-dialog>
 
-<v-dialog
-  v-model="showDialog1"
-  :title="dialogTitle"
-  :close-on-click-modal="closeOnClickModal1"
-  :modal="true"
-  :width="600"
-  @confirm="handleConfirm"
-  @open="handleOpen"
-  @after-close="handleAfterClose"
-  @cancel="handleCancel"
->
-  我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
-</v-dialog>
+  <v-dialog
+    v-model="showDialog1"
+    :title="dialogTitle"
+    :close-on-click-modal="closeOnClickModal1"
+    :modal="true"
+    :width="600"
+    @confirm="handleConfirm"
+    @open="handleOpen"
+    @after-close="handleAfterClose"
+    @cancel="handleCancel"
+  >
+    我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
+  </v-dialog>
 
-<v-button type="text" @click="handleButtonClick">点我打开 Dialog</v-button>
-<v-button type="text" @click="handleButtonClick1">点击外部不关闭 Dialog</v-button>
+  <v-button type="text" @click="handleButtonClick">点我打开 Dialog</v-button>
+  <v-button type="text" @click="handleButtonClick1">点击外部不关闭 Dialog</v-button>
+</template>
 
 <script>
 export default {
@@ -88,23 +90,25 @@ Dialog的内容可以是任意的，甚至可以是表格和表单，下面是�
 :::demo 通过设置`默认插槽`来自定义对话框内容。
 
 ```html
-<v-dialog
-  v-model="showInputDialog"
-  :title="dialogTitle"
-  :close-on-click-modal="closeOnClickModal"
-  :modal="true"
-  @confirm="handleConfirm"
->
-  <div class="form-control">
-    <label class="form-control__label" for="">name:</label>
-    <v-input v-model="dialogInput"></v-input>
-  </div>
-  <div class="form-control">
-    <label class="form-control__label" for="">hobit:</label>
-    <v-select v-model="selectVal" :options="selectOptions"></v-select>
-  </div>
-</v-dialog>
-<v-button type="text" @click="handleDialogInputClick">内嵌表单的 Dialog</v-button>
+<template>
+  <v-dialog
+    v-model="showInputDialog"
+    :title="dialogTitle"
+    :close-on-click-modal="closeOnClickModal"
+    :modal="true"
+    @confirm="handleConfirm"
+  >
+    <div class="form-control">
+      <label class="form-control__label" for="">name:</label>
+      <v-input v-model="dialogInput"></v-input>
+    </div>
+    <div class="form-control">
+      <label class="form-control__label" for="">hobit:</label>
+      <v-select v-model="selectVal" :options="selectOptions"></v-select>
+    </div>
+  </v-dialog>
+  <v-button type="text" @click="handleDialogInputClick">内嵌表单的 Dialog</v-button>
+</template>
 
 <script>
 export default {
@@ -154,18 +158,20 @@ export default {
 :::demo 通过`align-center`来设置居中。
 
 ```html
-<v-dialog
-  v-model="showDialog"
-  :title="dialogTitle"
-  :close-on-click-modal="closeOnClickModal"
-  :show-close="false"
-  :modal="true"
-  :align-center="true"
-  @confirm="handleConfirm"
->
-  <p class="dialog-content">需要注意的是内容不居中。</p>
-</v-dialog>
-<v-button type="text" @click="handleDialogClick">居中布局的 Dialog</v-button>
+<template>
+  <v-dialog
+    v-model="showDialog"
+    :title="dialogTitle"
+    :close-on-click-modal="closeOnClickModal"
+    :show-close="false"
+    :modal="true"
+    :align-center="true"
+    @confirm="handleConfirm"
+  >
+    <p class="dialog-content">需要注意的是内容不居中。</p>
+  </v-dialog>
+  <v-button type="text" @click="handleDialogClick">居中布局的 Dialog</v-button>
+</template>
 
 <script>
 export default {

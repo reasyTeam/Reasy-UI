@@ -1,6 +1,7 @@
 <template>
   <div class="v-popover">
     <v-popups
+      v-model="value"
       :custom-style="{ width: _width }"
       :trigger="trigger"
       :show-arrow="showArrow"
@@ -29,6 +30,7 @@
 export default {
   name: "v-popover",
   props: {
+    value: Boolean,
     trigger: {
       type: String,
       default: "click"

@@ -1,5 +1,6 @@
 .v-step {
   $icon-size: 32px;
+  $border-width: 1px;
   @mixin default-text($line-height, $font-size) {
     display: inline-block;
     color: $info-color;
@@ -24,22 +25,23 @@
       font-size: $icon-size;
     }
     & > .is-text {
-      padding: $icon-size/4 0;
-      width: $icon-size - 1px;
-      height: $icon-size - 1px;;
-      line-height: 100%;
+      // padding: $icon-size/4 0;
+      width: $icon-size;
+      height: $icon-size;
+      line-height: $icon-size - $border-width * 2;
       font-size: 12px;
       font-style: normal;
       font-weight: 400;
       color: $light-color;
       text-align: center;
       border-radius: 16px;
-      border: 1px solid $border-color;
+      border: $border-width solid $border-color;
       cursor: default;
     }
   }
 
   &__content {
+    margin-top: 4px;
     .v-step__title {
       font-size: 14px;
       &--default {
@@ -47,6 +49,7 @@
       }
     }
     .v-step__description {
+      margin-top: 2px;
       font-size: 12px;
       &--default {
         @include default-text(16px, 12px);
@@ -87,9 +90,12 @@
       color: $disabled-color;
       border-color: $disabled-border-color;
       background-color: $disabled-background-color;
+      cursor: not-allowed;
     }
-    .v-step__title--default {
+    .v-step__title--default,
+    .v-step__description--default {
       color: $disabled-color;
+      cursor: not-allowed;
     }
   }
 }

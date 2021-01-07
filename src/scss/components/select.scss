@@ -88,7 +88,7 @@
   }
 
   &-options {
-    padding: 8px 0;
+    margin: 8px 0;
 
     &__list {
       list-style: none;
@@ -149,6 +149,9 @@
     .v-select__icon--right {
       line-height: 28px;
     }
+    &.v-select-options {
+      max-height: 200px;
+    }
   }
 
   &--medium {
@@ -161,6 +164,9 @@
     .v-select__label__item,
     .v-select__icon--right {
       line-height: 24px;
+    }
+    &.v-select-options {
+      max-height: 160px;
     }
   }
 
@@ -178,6 +184,10 @@
 
     .v-select__label {
       padding-right: 24px;
+    }
+
+    &.v-select-options {
+      max-height: 120px;
     }
   }
 
