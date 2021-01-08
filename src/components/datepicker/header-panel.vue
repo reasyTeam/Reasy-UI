@@ -1,5 +1,6 @@
 <template>
   <div class="v-datepicker--panel__header">
+    <!-- 左边按钮 -->
     <div class="v-datepicker--panel__left">
       <span
         class="v-icon-double-left v-datepicker--panel__icon pointer"
@@ -11,6 +12,7 @@
         @click="previousMonth()"
       ></span>
     </div>
+    <!-- 右边按钮 -->
     <div class="v-datepicker--panel__right">
       <span
         v-if="type === 'init'"
@@ -22,6 +24,7 @@
         @click="nextYear()"
       ></span>
     </div>
+    <!-- 中间文字显示 -->
     <v-row class="v-datepicker--panel__title">
       <v-col :span="isRange ? 12 : 24">
         <div :class="{ pointer: !isRange }" @click="showYear()">
@@ -56,12 +59,14 @@ export default {
     };
   },
   methods: {
+    // 前一年
     previousYear() {
       let index = this.type === "year" ? 10 : 1;
       if (this.tmpYear - index < this.minYear) return;
       this.tmpYear -= index;
       this.setDate();
     },
+    // 前一月
     previousMonth() {
       if (this.tmpMonth === 0) {
         if (this.tmpYear <= this.minYear) return;
@@ -72,12 +77,14 @@ export default {
       }
       this.setDate();
     },
+    // 下一年
     nextYear() {
       let index = this.type === "year" ? 10 : 1;
       if (this.tmpYear + index > this.maxYear) return;
       this.tmpYear += index;
       this.setDate();
     },
+    // 下一月
     nextMonth() {
       if (this.isRange && this.tmpMonth >= 10) {
         if (this.tmpYear + 1 >= this.maxYear) return;
@@ -94,6 +101,7 @@ export default {
     setDate() {
       this.$emit("change", this.tmpYear, this.tmpMonth);
     },
+    // 点击年选择
     showYear() {
       if (this.isRange) return;
       this.$emit("clickHeader", "year");

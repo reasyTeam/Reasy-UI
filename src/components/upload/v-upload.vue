@@ -15,7 +15,7 @@
         :key="value"
         :value="value"
       />
-
+      <!-- 文件上传 -->
       <div v-if="type !== 'picture'">
         <v-button
           icon="v-icon-upload"
@@ -26,6 +26,7 @@
           <span>选择文件</span>
         </v-button>
       </div>
+      <!-- 图片上传 -->
       <upload-image
         v-else
         ref="image"
@@ -34,6 +35,7 @@
         @clickFile="clickFile"
         :data-image="imageBase64"
       ></upload-image>
+      <!-- 上传文件列表 -->
       <div
         v-if="fileStr && showFileList"
         class="v-upload__tips"
@@ -41,6 +43,7 @@
       >
         <span>{{ fileStr }}</span>
       </div>
+      <!-- 上传文件 -->
       <input
         v-if="!disabled"
         ref="file"

@@ -12,12 +12,15 @@
           :class="{ 'v-table__header--sort': col.isSort }"
           @click="sortTable(col)"
         >
+          <!-- 选择框 -->
           <v-checkbox
             v-if="col.type === 'selection'"
             v-model="checkboxValue"
             :hasValue="hasValue"
           ></v-checkbox>
+          <!-- 表头文字 -->
           <span>{{ col.label }}</span>
+          <!-- 排序 -->
           <span v-if="col.isSort" class="v-table__sort">
             <span
               class="v-table__icon v-table__icon--up"

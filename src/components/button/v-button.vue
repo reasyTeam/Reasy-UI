@@ -7,18 +7,22 @@
     :class="[sizeCss, typeCss, { 'is-disabled': disabled !== false }]"
   >
     <template v-if="!isLoading">
+      <!-- 按钮前缀图标 -->
       <span
         class="v-button__icon button-prefix"
         v-if="icon"
         :class="icon"
       ></span>
+      <!-- 按钮内容 -->
       <slot></slot>
+      <!-- 按钮后缀图标 -->
       <span
         class="v-button__icon button-suffix"
         v-if="suffixIcon"
         :class="suffixIcon"
       ></span>
     </template>
+    <!-- 加载中 -->
     <template v-else>
       <span class="v-button--loading v-button__icon v-icon-loading"></span>
     </template>

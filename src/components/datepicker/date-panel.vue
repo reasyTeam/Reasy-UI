@@ -1,11 +1,13 @@
 <template>
   <div class="v-datepicker--panel__wrapper">
+    <!-- 星期 -->
     <ul class="v-datepicker--panel__weeks">
       <li class="date" v-for="item in weekList" :key="item">
         {{ item | week(item) }}
       </li>
     </ul>
     <ul class="v-datepicker--panel__date-list">
+      <!-- 天 -->
       <template v-for="(item, index) in dateList">
         <li
           :key="index"
@@ -27,6 +29,7 @@
             <span>{{ item.value }}</span>
           </span>
         </li>
+        <!-- 每周换行 -->
         <br :key="index + 50" v-if="(index + 1) % 7 === 0" />
       </template>
     </ul>

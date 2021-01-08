@@ -1,5 +1,6 @@
 <template>
   <div class="v-table">
+    <!-- 搜索 -->
     <div class="v-table__search" v-if="search">
       <v-input
         v-model="searchValue"
@@ -8,6 +9,7 @@
         @change="goSearch"
       ></v-input>
     </div>
+    <!-- 表头信息 -->
     <table-header
       :columns="columns"
       :border="border"
@@ -98,6 +100,7 @@
                 :key="rowIndex + 1 + expandField"
                 v-if="expandFunc && rowsData[expandField]"
               >
+                <!-- 展开信息 -->
                 <td :colspan="columns.length" class="v-table__expand--inner">
                   <collapse-transition>
                     <table-expand
@@ -110,7 +113,7 @@
                 </td>
               </tr>
             </template>
-
+            <!-- 列表为空信息 -->
             <tr ref="table-body-tr" v-if="tableData.length === 0 && !isLoading">
               <td :colspan="columns.length">
                 <div class="v-table__empty-data">{{ emptyText }}</div>
@@ -121,6 +124,7 @@
         </table>
       </v-scroll>
     </div>
+    <!-- 分页信息 -->
     <table-footer
       v-if="isPagination && tableData.length > 0"
       :page="page"

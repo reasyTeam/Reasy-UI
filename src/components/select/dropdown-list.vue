@@ -1,6 +1,7 @@
 <template>
   <div class="v-select-options">
     <v-x-scroll ref="scroll" @mounted="setPosition">
+      <!-- 下拉选项列表 -->
       <ul class="v-select-options__list">
         <li
           v-for="(item, index) in options"
@@ -52,6 +53,7 @@ export default {
       //点击选项事件
       this.$emit("click-options", options);
     },
+    // 是否选中
     getSelected(options, index) {
       if (this.isMultiple) {
         return this.selectValue.indexOf(options.value) >= 0;
@@ -63,6 +65,7 @@ export default {
         return true;
       }
     },
+    // 是否禁用
     getDisabled(options, index) {
       //选项禁用 或者（支持多选 && 多选限制个数 >= 当前选中个数 && 当前未选中）
       return (

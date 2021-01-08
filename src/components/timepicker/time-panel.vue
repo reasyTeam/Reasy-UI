@@ -1,6 +1,7 @@
 <template>
   <div class="v-timepicker--panel">
     <v-row>
+      <!-- 时 -->
       <v-col class="v-timepicker__group" :span="colSpan">
         <v-x-scroll ref="hour" :to-index="hourIndex">
           <ul class="v-timepicker__list">
@@ -19,6 +20,7 @@
           </ul>
         </v-x-scroll>
       </v-col>
+      <!-- 分 -->
       <v-col class="v-timepicker__group" v-if="hasMinute" :span="colSpan">
         <v-x-scroll ref="minute" :to-index="minuteIndex">
           <ul class="v-timepicker__list">
@@ -37,6 +39,7 @@
           </ul>
         </v-x-scroll>
       </v-col>
+      <!-- 秒 -->
       <v-col class="v-timepicker__group" v-if="hasSecond" :span="colSpan">
         <v-x-scroll ref="second" :to-index="secondIndex">
           <ul class="v-timepicker__list">
@@ -146,12 +149,14 @@ export default {
       });
       return index;
     },
+    // 最小时间
     minTimeStr() {
       if (this.min) {
         return this.min;
       }
       return this.formatTimeStr(0, 0, 0);
     },
+    // 最大时间
     maxTimeStr() {
       if (this.max) {
         return this.max;

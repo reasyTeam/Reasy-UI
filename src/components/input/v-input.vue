@@ -61,19 +61,24 @@
     >
       {{ placeholder }}
     </div>
+    <!-- 后缀内容 -->
     <span v-if="hasSuffix" ref="suffix" class="v-input__icon--suffix">
+      <!-- 清除图标 -->
       <span
         v-if="inputValue && isClear !== false"
         class="v-input__icon pointer v-icon-close-plane"
         @click="clearValue()"
       ></span>
+      <!-- 显示密码图标 -->
       <span
         v-if="showPassword !== false"
         class="v-input__icon pointer"
         :class="passwordVisible ? 'v-icon-eye-off' : 'v-icon-eye-on'"
         @click="handlePasswordVisible"
       ></span>
+      <!-- 自定义后缀图标 -->
       <span v-if="suffixIcon" class="v-input__icon" :class="suffixIcon"></span>
+      <!-- 字数限制文字 -->
       <span
         v-if="showWordLimit !== false"
         class="v-input__icon input-word-limit"
@@ -81,7 +86,9 @@
         {{ limitTips }}
       </span>
     </span>
+    <!-- 后缀内容 -->
     <slot class="v-input__icon" name="suffix"></slot>
+    <!-- 错误信息 -->
     <div class="v-form-item__content__msg is-error" v-if="error && !isFoucs">
       {{ error }}
     </div>
@@ -280,6 +287,7 @@ export default {
       this.isZh = false;
       this.rectifyValue(event);
     },
+    // 纠正输入的值
     rectifyValue(event) {
       //有字符限制时 纠正Value
       let inputVal = event.target.value;

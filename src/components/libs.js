@@ -92,14 +92,14 @@ export const on = (function() {
 /* istanbul ignore next */
 export const off = (function() {
   if (document.removeEventListener) {
-    return function(element, event, handler) {
+    return function(element, event, handler, isAnonymous = false) {
       if (element && event) {
         let eventObj = element.__event__ || {};
         for (let i = 0; i < (eventObj[event] || []).length; i++) {
-          if (
-            eventObj[event][i] === handler ||
-            eventObj[event][i].toString() === handler.toString()
-          ) {
+          const isSameFunc = !isAnonymous
+            ? eventObj[event][i] === handler
+            : eventObj[event][i].toString() === handler.toString();
+          if (isSameFunc) {
             eventObj[event].splice(i, 1);
           }
         }

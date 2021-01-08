@@ -10,9 +10,11 @@
       :class="{ 'is-disabled': disabled, 'is-focus': showTimePanel }"
       @click="showPanel"
     >
+      <!-- 开始时间 -->
       <span :class="{ 'placeholder-text': placeholder && !startTime }">
         {{ startTime || placeholder }}
       </span>
+      <!-- 结束时间 -->
       <template v-if="isRange">
         <span class="v-timepicker__splitter">-</span>
         <span
@@ -24,6 +26,7 @@
         </span>
       </template>
     </div>
+    <!-- 图标信息 -->
     <span
       class="v-timepicker__icon"
       :class="[
@@ -40,6 +43,7 @@
     >
       {{ error }}
     </div>
+    <!-- 下拉内容 -->
     <create-to-body
       :class="sizeCss"
       :show="showTimePanel"
@@ -51,6 +55,7 @@
         <v-col class="v-timepicker__title" :span="12">结束时间</v-col>
       </v-row>
       <v-row>
+        <!-- 开始时间 -->
         <v-col class="v-timepicker__wrapper" :span="isRange ? 12 : 24">
           <time-panel
             :format="format"
@@ -62,6 +67,7 @@
             @change="changeTime"
           ></time-panel>
         </v-col>
+        <!-- 结束时间 -->
         <v-col v-if="isRange" class="v-timepicker__wrapper" :span="12">
           <time-panel
             :format="format"

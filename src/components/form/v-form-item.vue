@@ -1,5 +1,6 @@
 <template>
   <div class="v-form-item">
+    <!-- 左边文字 -->
     <label
       v-if="!isNoLabel"
       :style="{ width: labelWidth + 'px' }"
@@ -12,9 +13,12 @@
       ]"
       class="v-form-item__label"
     >
+      <!-- 文字显示 -->
       <span ref="labelTxt" v-if="label">{{ label }}</span>
+      <!-- 左边插槽 -->
       <slot name="label"></slot>
     </label>
+    <!-- 右边内容 -->
     <div
       class="v-form-item__content"
       :style="{ 'margin-left': !isNoLabel ? labelWidth + 20 + 'px' : '0' }"

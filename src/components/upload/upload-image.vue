@@ -6,13 +6,16 @@
     @click="clickFile"
   >
     <div class="v-upload__image__middle">
+      <!-- 未上传 -->
       <template v-if="uploadType === 0">
         <span class="v-upload__image__icon v-icon-add"></span>
         <div class="v-upload__image__text">添加</div>
       </template>
+      <!-- 上传中 -->
       <template v-if="uploadType === 1">
         <span class="v-upload__image__icon v-icon-image"></span>
       </template>
+      <!-- 上传后 -->
       <template v-if="uploadType === 2">
         <img
           v-if="dataImage"

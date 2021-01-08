@@ -7,6 +7,7 @@
       <v-col v-if="isRange" :span="12"> 结束时间 </v-col>
     </v-row>
     <v-row>
+      <!-- 开始时间 -->
       <v-col class="v-timepicker__wrapper" :span="isRange ? 12 : 24">
         <time-panel
           :format="format"
@@ -18,6 +19,7 @@
           @change="changeTime"
         ></time-panel>
       </v-col>
+      <!-- 结束时间 -->
       <v-col v-if="isRange" class="v-timepicker__wrapper" :span="12">
         <time-panel
           :format="format"

@@ -1,6 +1,7 @@
 <template>
   <div class="v-switch" :class="[sizeCss, { 'v-switch--disabled': disabled }]">
     <span class="v-switch__item" @click="clickSwitch">
+      <!-- 开关按钮 -->
       <span
         :name="name"
         class="v-switch__icon"
@@ -9,6 +10,7 @@
           'v-switch__icon--disabled': disabled
         }"
       ></span>
+      <!-- 开关文字 -->
       <span v-if="onText && offText" class="v-switch__label">
         {{ value === onValue ? onText : offText }}
       </span>

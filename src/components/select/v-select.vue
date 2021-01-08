@@ -46,6 +46,7 @@
               @click.stop.prevent="delValue"
             ></span>
           </span>
+          <!-- 多选个数大于1时 其他项用数字表示 -->
           <span v-if="multipleLabel.length > 1" class="v-select__label__item">
             <span class="v-select__label--text__item">
               +{{ multipleLabel.length - 1 }}
@@ -57,6 +58,7 @@
         {{ placeholder }}
       </div>
     </div>
+    <!-- 下拉图标 -->
     <span
       class="v-select__icon"
       :class="{

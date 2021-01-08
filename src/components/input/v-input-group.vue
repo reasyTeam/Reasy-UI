@@ -15,6 +15,7 @@
         v-for="item in inputGroups"
         :key="item.index"
       >
+        <!-- 输入框项 -->
         <v-input
           class="v-input--no-border"
           v-model="item.value"

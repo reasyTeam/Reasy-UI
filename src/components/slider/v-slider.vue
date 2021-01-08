@@ -6,6 +6,7 @@
       { 'is-range': showRange, 'v-slider--disabled': disabled }
     ]"
   >
+    <!-- 输入框控制器 -->
     <v-input-number
       v-model="inputValue"
       v-if="showInput"
@@ -21,12 +22,14 @@
       :step="step"
       @change="changeValue"
     ></v-input-number>
+    <!-- 显示输入框时的占位符 -->
     <span
       ref="endRange1"
       v-if="showInput !== false"
       class="v-slider-text-space"
       :class="{ 'show-input': showInput }"
     ></span>
+    <!-- 最小值 -->
     <span
       ref="startRange"
       v-if="showRange !== false"
@@ -34,6 +37,7 @@
     >
       {{ min }}</span
     >
+    <!-- 最大值 -->
     <span
       ref="endRange"
       v-if="showRange !== false"
@@ -42,7 +46,7 @@
     >
       {{ max }}</span
     >
-
+    <!-- 线条 -->
     <div
       class="v-slider-line"
       ref="line"
@@ -56,19 +60,21 @@
         class="v-slider-line__inner"
         :style="{ width: leftPercent + '%' }"
       ></div>
-
+      <!-- 滑块区域 -->
       <div
         class="v-slider-line__content"
         ref="bar"
         :style="{ left: leftPercent + '%' }"
         @mousedown.stop="mouseStart"
       >
+        <!-- 滑块信息 -->
         <div
           class="v-slider-line__bar"
           :class="{ 'v-slider-line__bar--active': moveStart }"
           @mouseenter="isMouseOver = true"
           @mouseleave="isMouseOver = false"
         ></div>
+        <!-- 滑块显示文字 -->
         <template v-if="showTooltip">
           <slider-popups
             v-if="moveStart || isMouseOver"
@@ -78,6 +84,7 @@
         </template>
       </div>
     </div>
+    <!-- 错误信息 -->
     <div class="v-form-item__content__msg is-error" v-if="error && !moveStart">
       {{ error }}
     </div>

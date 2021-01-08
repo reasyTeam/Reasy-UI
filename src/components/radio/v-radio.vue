@@ -10,6 +10,7 @@
           'v-radio__item--disabled': disabled || item.disabled
         }"
       >
+        <!-- 单选图标 -->
         <span
           class="v-radio__icon"
           :value="item.value"
@@ -20,9 +21,11 @@
           ]"
         >
         </span>
+        <!-- 单选文字 -->
         <span class="v-radio__label">{{ item.label }}</span>
       </label>
     </div>
+    <!-- 错误信息 -->
     <div class="v-form-item__content__msg is-error" v-if="error">
       {{ error }}
     </div>

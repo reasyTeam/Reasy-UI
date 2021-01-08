@@ -47,7 +47,9 @@
       v-clickoutside="hide"
       :width="isRange ? '480px' : '240px'"
     >
+      <!-- 日期设置 -->
       <template v-if="!isSetTime">
+        <!-- 日期头部信息 -->
         <header-panel
           :year="tmpDate.year"
           :month="tmpDate.month"
@@ -60,6 +62,7 @@
           @change="changeHeader"
           @clickHeader="clickHeader"
         ></header-panel>
+        <!-- 日期天选择 -->
         <template v-if="headerType === 'init'">
           <date-panel
             :class="isRange ? 'v-datepicker--panel--group' : ''"
@@ -89,6 +92,7 @@
             @hide="hide"
           ></date-panel>
         </template>
+        <!-- 日期年选择 -->
         <year-panel
           v-else
           :headerType="headerType"

@@ -303,7 +303,7 @@ export default {
       on(window, "resize", this.handleWindowResize);
     },
     unbindEvent() {
-      off(document, "scroll", this.handleDocumentScroll, true);
+      off(document, "scroll", this.handleDocumentScroll);
       off(window, "resize", this.handleWindowResize);
     },
     visibleChange(isShow) {
@@ -424,7 +424,12 @@ export default {
     }
   },
   beforeDestroy() {
+    const {
+      $refs: { popups }
+    } = this;
+
     this.unbindEvent();
+    popups && document.body.removeChild(popups);
   },
   watch: {
     value(newVal) {

@@ -1,5 +1,6 @@
 <template>
   <div class="v-checkbox-group">
+    <!-- 全选 -->
     <v-checkbox
       class="v-checkbox-group__item"
       v-if="isSelectAll"
@@ -9,6 +10,7 @@
     >
       {{ selectText }}
     </v-checkbox>
+    <!-- 选项 -->
     <v-checkbox
       class="v-checkbox-group__item"
       v-for="(item, index) in optionList"
@@ -22,6 +24,7 @@
     >
       {{ item.label }}
     </v-checkbox>
+    <!-- 错误信息 -->
     <div class="v-form-item__content__msg is-error" v-if="error">
       {{ error }}
     </div>

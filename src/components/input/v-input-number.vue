@@ -11,6 +11,7 @@
       @mouseover="isHover = true"
       @mouseout="isHover = false"
     >
+      <!-- 减少按钮 -->
       <v-button
         class="v-input-number__controls v-input-number__controls--left v-input--no-border"
         :class="{ 'btn-disabled': subDisabled }"
@@ -20,6 +21,7 @@
         v-if="isControls && controlsPosition != 'right'"
         >-</v-button
       >
+      <!-- 输入框组件 -->
       <v-input
         v-model="inputValue"
         :name="name"
@@ -38,6 +40,7 @@
       >
       </v-input>
       <template v-if="isControls">
+        <!-- 添加按钮 -->
         <v-button
           class="v-input-number__controls v-input-number__controls--right v-input--no-border"
           :class="{ 'btn-disabled': addDisabled }"
@@ -47,12 +50,15 @@
           :size="size"
           >+</v-button
         >
+        <!-- 控制器在右边时 -->
         <template v-else>
+          <!-- 上箭头 -->
           <span
             class="v-button--info v-icon-up v-input-number__button up"
             :class="{ 'btn-disabled': addDisabled }"
             @click="addNum"
           ></span>
+          <!-- 下箭头 -->
           <span
             class="v-button--info v-icon-down v-input-number__button down"
             :class="{ 'btn-disabled': subDisabled }"
@@ -61,6 +67,7 @@
         </template>
       </template>
     </div>
+    <!-- 错误信息 -->
     <div class="v-form-item__content__msg is-error" v-if="error && !isFocus">
       {{ error }}
     </div>
@@ -130,27 +137,33 @@ export default {
     isMaxInfinity() {
       return this.max === Infinity;
     },
+    // 最大输入长度
     maxlength() {
       return this.isMaxInfinity ? 50 : String(this.max).length;
     },
     minlength() {
       return this.isMinInfinity ? 50 : String(this.min).length;
     },
+    // 输入框最大输入长度
     inputMaxLength() {
       return (
         Math.max(this.maxlength, this.minlength) +
         (this.precision > 0 ? this.precision + 1 : 0)
       );
     },
+    // 添加按钮是否禁用
     addDisabled() {
       return this.inputValue >= this.max;
     },
+    // 减少按钮是否禁用
     subDisabled() {
       return this.inputValue <= this.min;
     },
+    // 是否有精度
     hasPrecision() {
       return typeof this.precision === "number";
     },
+    // 精度数字
     precisionVal() {
       if (this.hasPrecision) {
         return this.precision;
@@ -166,19 +179,24 @@ export default {
     };
   },
   methods: {
+    // 输入框修改值
     handlerChange(value) {
       let val = parseFloat(value);
       if (this.hasPrecision) {
         val = +val.toFixed(this.precisionVal);
       }
+      // 错误值 或小于最小值时
       if (isNaN(val) || val < this.min) {
+        // 无穷小时 取当前值  其他情况取最小值
         val = this.isMinInfinity ? this.value : this.min;
       }
-
+      //大于最大值
       if (val > this.max) {
         val = this.isMaxInfinity ? this.value : this.max;
       }
+      //严格步长
       val = this.getStrictStep(val);
+      //手动修改输入框值
       this.setInputValue(val);
       if (val === this.value) {
         return;
@@ -206,7 +224,7 @@ export default {
       stepValue = Number(stepValue.toFixed(this.precisionVal));
       return stepValue;
     },
-
+    // 增加
     addNum() {
       if (this.addDisabled || this.disabled) {
         return;
@@ -216,6 +234,7 @@ export default {
       this.setInputValue(val);
       this.$emit("change", val);
     },
+    // 减少
     subNum() {
       if (this.subDisabled || this.disabled) {
         return;
@@ -241,6 +260,7 @@ export default {
       this.setInputValue(val);
       this.$emit("change", val);
     },
+    // 修改输入框值
     setInputValue(val) {
       if (this.hasPrecision) {
         this.$refs.input.setInputValue(val.toFixed(this.precisionVal));
