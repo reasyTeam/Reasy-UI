@@ -104,7 +104,7 @@ $nav-width: 256px;
   margin: 10px 0;
   padding: 0 0 0 20px;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.85);
+  color: #595959;
   line-height: 2em;
 }
 </style>
