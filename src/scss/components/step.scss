@@ -69,6 +69,7 @@
       color: $main-active-color;
     }
     .v-step__title--default {
+      @extend .bold;
       color: $main-active-color;
       font-weight: 500;
     }

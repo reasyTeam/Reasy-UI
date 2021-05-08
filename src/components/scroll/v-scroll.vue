@@ -12,6 +12,7 @@
       :barsize="vbarHeight"
       v-model="scrollTop"
       @change="change"
+      :style="{visibility: isMac ? 'hidden':'visible'}"
     ></bar>
     <!-- 水平滚动条 -->
     <bar
@@ -20,6 +21,7 @@
       direct="x"
       :barsize="hBarWidth"
       v-model="scrollLeft"
+      :style="{visibility: isMac ? 'hidden':'visible'}"
       @change="change"
     ></bar>
   </div>
@@ -79,6 +81,7 @@ export default {
   data() {
     // 水平和垂直方向可滚动的范围
     this.scrollLeftRange = this.scrollTopRange = 1;
+    this.isMac = /macintosh|mac os x/i.test(navigator.userAgent);
     return {
       // 浏览器默认滚动条宽度
       barWidth: getScrollWidth(),
