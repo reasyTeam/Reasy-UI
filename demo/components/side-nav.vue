@@ -38,10 +38,11 @@
         </ul>
         <template v-if="item.groups">
           <div class="nav-group" v-for="(group, key) in item.groups" :key="key">
-            <v-collapse :actived="true" @change="$emit('change')">
-              <template v-slot:title>
-                {{ group.groupName }}
-              </template>
+            <v-collapse
+              :actived="true"
+              :title="group.groupName"
+              @change="$emit('change')"
+            >
               <ul class="pure-menu-list">
                 <li
                   class="nav-item"
