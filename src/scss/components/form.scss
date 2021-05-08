@@ -6,7 +6,8 @@
 .v-form-item {
   @include clearfix;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  vertical-align: top;
 
   &__label {
     float: left;
@@ -33,9 +34,15 @@
   &__content {
     position: relative;
 
+    &--no-label {
+      margin-left: 0;
+    }
+
     &__msg {
-      position: relative;
+      position: absolute;
       font-size: 12px;
+      line-height: 20px;
+      max-width: 100%;
     }
   }
 }

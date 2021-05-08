@@ -6,8 +6,9 @@
   >
     <div
       :name="name"
+      :data-name="_name"
       class="v-datepicker__label input-text"
-      :class="{ 'is-disabled': disabled, 'is-focus': showDatePanel }"
+      :class="{ 'is-disabled': isDisabled, 'is-focus': showDatePanel }"
       @click="showPanel"
     >
       <span :class="{ 'placeholder-text': placeholder && !startDate }">
@@ -28,24 +29,19 @@
       class="v-datepicker__icon"
       :class="[
         hasClear ? 'v-icon-close-plane' : 'v-icon-calendar',
-        { 'v-datepicker__icon--disabled': disabled }
+        { 'v-datepicker__icon--disabled': isDisabled }
       ]"
       @mouseover="handlerMouseover"
       @mouseout="isMouseover = false"
       @click="clickIcon"
     ></span>
-    <div
-      class="v-form-item__content__msg is-error"
-      v-if="error && !showDatePanel"
-    >
-      {{ error }}
-    </div>
     <create-to-body
       :class="sizeCss"
+      :data-name="_name"
       class="v-datepicker--panel"
       :show="showDatePanel"
       v-clickoutside="hide"
-      :width="isRange ? '480px' : '240px'"
+      :width="isRange ? '456px' : '228px'"
     >
       <!-- 日期设置 -->
       <template v-if="!isSetTime">
@@ -295,11 +291,11 @@ export default {
       };
     },
     showPanel() {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       this.showDatePanel = !this.showDatePanel;
     },
     clickIcon() {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       if (this.hasClear) {
         this.clearDate();
       } else {
@@ -308,6 +304,8 @@ export default {
     },
     clearDate() {
       this.isClickRange = false;
+      this.startDate = "";
+      this.endDate = "";
       this.$emit("change", this.isRange ? ["", ""] : "");
     },
     //点击日期执行事件
@@ -331,7 +329,7 @@ export default {
       this.showDatePanel = false;
     },
     handlerMouseover() {
-      if (!this.disabled) this.isMouseover = true;
+      if (!this.isDisabled) this.isMouseover = true;
     },
     setFirstClick(year, month, day) {
       this.originDate.year = this.originEndDate.year = year;
@@ -621,12 +619,17 @@ export default {
       immediate: true
     },
     showDatePanel: {
-      handler() {
+      handler(val) {
         //if (val) {
         this.headerType = "init";
         this.isClickRange = false;
         this.isSetTime = false;
         this.initData();
+
+        if (this.elFormItem && !this.elFormItem.ignore) {
+          //当form组件存在且需要数据验证时
+          this.$dispatch("v-form-item", "form:error", !val);
+        }
       },
       immediate: true
     }

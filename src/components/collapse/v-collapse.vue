@@ -10,7 +10,7 @@
         {{ title }}
       </template>
       <i
-        class="v-collapse__arrow v-icon-up"
+        class="v-collapse__arrow v-icon-down"
         :class="{ 'is-active': isActive }"
       ></i>
     </div>

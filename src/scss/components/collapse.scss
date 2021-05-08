@@ -1,5 +1,5 @@
 .v-collapse {
-  border: 1px solid $border-color;
+  border: 1px solid #ebebeb;
   & + & {
     margin-top: -1px;
   }
@@ -15,7 +15,7 @@
     width: 100%;
     padding: 0 $padding;
     &.is-active {
-      background-color: #fafafa;
+      background-color: #fcfcfc;
     }
   }
 
@@ -30,16 +30,17 @@
 
     &.is-active {
       transform: rotate(180deg);
+      color: $title-color;
     }
   }
 
   &__item {
     will-change: height;
-    background-color: #fcfcfc;
+    background-color: #fafafa;
     overflow: hidden;
     box-sizing: border-box;
     transition: height 0.3s;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid #ebebeb;
     padding: 0 $padding;
     width: 100%;
 
@@ -54,6 +55,10 @@
   &.disabled{
     .v-collapse__header{
       cursor: not-allowed;
+      color: #c0c0c0;
+      .v-collapse__arrow{
+        color: #c0c0c0;
+      }
     }
   }
 }

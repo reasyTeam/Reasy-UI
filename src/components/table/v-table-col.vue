@@ -20,10 +20,15 @@ export default {
     },
     width: {
       //宽度
-      type: String
+      type: [String, Number]
     },
     isTooltip: {
       //是否支持提示信息
+      type: Boolean,
+      default: false
+    },
+    isNoFixed: {
+      //是否没有fixed样式
       type: Boolean,
       default: false
     },

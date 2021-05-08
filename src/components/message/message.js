@@ -3,7 +3,7 @@ import Message from "./v-message.vue";
 import { isObject, isEmpty } from "../libs";
 
 const MsgConstructor = Vue.extend(Message);
-const typeList = ["success", "error", "warn", "info"];
+const typeList = ["success", "error", "warn", "info", "loading"];
 const betweenSpace = 16;
 
 let instance,
@@ -61,10 +61,11 @@ const Msg = function(...args) {
 };
 
 typeList.forEach(msgType => {
-  Msg[msgType] = function(content, duration) {
+  Msg[msgType] = function(content, duration, closeCallback = () => {}) {
     const options = {
       type: msgType,
-      content
+      content,
+      closeCallback
     };
 
     if (!isEmpty(duration)) {

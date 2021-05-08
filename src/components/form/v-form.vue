@@ -1,11 +1,21 @@
 <template>
-  <section class="v-form">
+  <section
+    class="v-form"
+    :class="{ 'v-dialog-form v-dialog-form__center': dialogCenter }"
+  >
     <slot></slot>
   </section>
 </template>
 <script>
 export default {
   name: "v-form",
+  provide() {
+    return {
+      elForm: this,
+      getField: this.getField,
+      getValidateType: this.getValidateType
+    };
+  },
   props: {
     //数据验证规则
     rules: {
@@ -26,12 +36,20 @@ export default {
       type: Boolean,
       default: false
     },
+    dialogCenter: {
+      type: Boolean,
+      default: false
+    },
     //提交前自定义事件，返回false时不会执行submit
     beforeSubmit: {
       type: Function,
       default(data) {
         return data;
       }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -53,11 +71,14 @@ export default {
         this.labelWidth = width;
       }
     });
+    this.$on("form:change", () => {
+      this.$emit("change");
+    });
   },
   methods: {
     addField(field) {
       //给formItem添加验证规则
-      field.valid = this.rules[field.prop] || [];
+      //field.valid = this.rules[field.prop] || [];
       field.labelPosition = this.isLabelRight ? "right" : "left";
       this.fields.push(field);
     },
@@ -66,18 +87,27 @@ export default {
       this.fields = this.fields.filter(item => item !== field) || [];
     },
 
+    getField(propName) {
+      return this.fields.filter(item => item.prop === propName) || [];
+    },
+
+    getValidateType(prop) {
+      return this.rules[prop] || [];
+    },
+
     //表单数据验证
     checkValidate() {
-      let error = true;
+      let error = false;
       this.fields.forEach(field => {
-        if (field.prop) {
-          let checkSuccess = field.checkValid(field.value);
-          if (!checkSuccess) {
-            error = false;
-          }
+        //if (field.prop) {
+        //返回true时表示验证正确
+        let checkSuccess = field.checkValid(field.getValue());
+        if (!checkSuccess) {
+          error = true;
         }
+        //}
       });
-      return error;
+      return !error;
     },
 
     //获取表单提交数据
@@ -86,13 +116,14 @@ export default {
       this.fields.forEach(field => {
         if (!field.ignore && field.prop) {
           //未忽略时传值
-          subData[field.prop] = field.value;
+          subData[field.prop] = field.getValue();
         }
       });
       return subData;
     },
     //表单提交时执行
     submitForm() {
+      if (this.disabled) return;
       //有错
       if (!this.checkValidate()) {
         this.$message.error("请检查错误信息");
@@ -110,7 +141,6 @@ export default {
       //数据验证通过
       this.$emit("submit", subData);
     },
-
     cancelForm() {
       this.$emit("cancel");
     }

@@ -5,7 +5,7 @@
       :class="{
         'is-hover': isHover,
         'is-focus': isFocus,
-        'is-disabled': disabled
+        'is-disabled': isDisabled
       }"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
@@ -22,7 +22,8 @@
           :maxlength="inputMaxLen"
           :data-index="item.index"
           :allow="inputAllow"
-          :disabled="disabled"
+          :disabled="isDisabled"
+          is-child
           :width="item.width"
           ref="input"
           @focus="handlerFocus"
@@ -43,9 +44,6 @@
           </template>
         </v-input>
       </span>
-    </div>
-    <div class="v-form-item__content__msg is-error" v-if="error && !isFocus">
-      {{ error }}
     </div>
   </div>
 </template>
@@ -132,6 +130,10 @@ export default {
       if (keyCode === 8) {
         //回退
         if (position === 0) {
+          let selectText = window.getSelection().toString() || "";
+          if (selectText.length > 0) {
+            return;
+          }
           this.setInputFocus(event, "prev");
           event.preventDefault();
           return;
@@ -221,12 +223,19 @@ export default {
       },
       immediate: true
     },
-    isFocus(focus) {
-      //失焦时 && 值有修改
-      if (!focus && this.isChanged) {
-        this.$emit("change", this.getValue());
-        this.isChanged = false;
-      }
+    isFocus: {
+      handler(focus) {
+        //失焦时 && 值有修改
+        if (!focus && this.isChanged) {
+          this.$emit("change", this.getValue());
+          this.isChanged = false;
+        }
+        if (this.elFormItem && !this.elFormItem.ignore) {
+          //当form组件存在且需要数据验证时
+          this.$dispatch("v-form-item", "form:error", !focus);
+        }
+      },
+      immediate: true
     }
   }
 };

@@ -1,17 +1,6 @@
 $arrow-height: 6px;
 $arrow-bottom-side-length: 10px;
 
-@mixin arrow-position-color($color) {
-  @each $position in (top),
-                     (right),
-                     (bottom),
-                     (left) {
-    &--#{$position} {
-      border-#{$position}-color: $color;
-    }
-  }
-}
-
 .v-popups__wrapper {
   display: inline-block;
 }
@@ -28,22 +17,6 @@ $arrow-bottom-side-length: 10px;
 
   &__arrow {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent;
-
-    @each $p1, $p2, $p3, $p4 in (top, bottom, left, right),
-                               (right, left, top, bottom),
-                               (bottom, top, left, right),
-                               (left, right, top, bottom) {
-      &--#{$p1} {
-        border-#{$p1}-width: $arrow-height;
-        border-#{$p2}-width: $arrow-height;
-        border-#{$p3}-width: $arrow-bottom-side-length / 2;
-        border-#{$p4}-width: $arrow-bottom-side-length / 2;
-      }
-    }
   }
 
   &--hidden {
@@ -56,7 +29,10 @@ $arrow-bottom-side-length: 10px;
       background-color: #fff;
     }
     .v-popups__arrow {
-      @include arrow-position-color(#fff);
+      polygon {
+        fill: #fff;
+      }
+      
     }
   }
   &--dark {
@@ -65,7 +41,9 @@ $arrow-bottom-side-length: 10px;
       background-color: rgba(0, 0, 0, 0.8);
     }
     .v-popups__arrow {
-      @include arrow-position-color(rgba(0, 0, 0, 0.8));
+      polygon {
+        fill: rgba(0, 0, 0, 0.8);
+      }
     }
   }
 

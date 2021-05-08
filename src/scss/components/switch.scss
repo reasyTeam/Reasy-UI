@@ -1,4 +1,4 @@
-@mixin switch-size($width, $height) {
+@mixin switch-size($width, $height, $fontSize) {
   .v-switch__icon {
     width: $width;
     height: $height;
@@ -16,6 +16,7 @@
 
   .v-switch__label {
     line-height: $height;
+    font-size: $fontSize;
   }
 
 }
@@ -65,11 +66,11 @@
     }
 
     &--disabled {
-      background: $disabled-color;
+      background: $border-color;
       cursor: not-allowed;
 
       &.v-switch__icon--active {
-        background: lighten($main-active-color, 20%);
+        background: lighten($main-active-color, 25%);
       }
     }
   }
@@ -81,19 +82,33 @@
   }
 
   &--large {
-    @include switch-size(44px, 24px);
+    @include switch-size(44px, 24px, $font-size-l);
+
+    .v-switch__item {
+      line-height: $form-line-height-l;
+    }
   }
 
   &--medium {
-    @include switch-size(36px, 20px);
+    @include switch-size(36px, 20px, $font-size-m);
+
+    .v-switch__item {
+      line-height: $form-line-height;
+    }
   }
 
   &--small {
-    @include switch-size(28px, 16px);
+    @include switch-size(28px, 16px, $font-size-s);
+
+    .v-switch__item {
+      line-height: $form-line-height-s;
+    }
   }
+
   &--disabled {
     color: $disabled-color;
     cursor: not-allowed;
+
     .v-switch__label {
       @extend .v-switch--disabled;
     }

@@ -3,93 +3,126 @@ export default [
     name: "组件",
     groups: [
       {
-        groupName: "基础组件",
+        groupName: "通用",
         list: [
           {
+            path: "button",
+            title: "Button 按钮"
+          },
+          {
             path: "icon",
-            title: "图标"
+            title: "Icon 图标"
           },
           {
             path: "layout",
-            title: "栅格布局"
+            title: "Layout 布局"
           },
           {
             path: "scroll",
-            title: "滚动条"
-          },
-          {
-            path: "button",
-            title: "按钮"
+            title: "Scroll 滚动条"
           }
         ]
       },
       {
-        groupName: "表单组件",
+        groupName: "导航",
         list: [
           {
-            path: "radio",
-            title: "单选按钮"
+            path: "dropdown",
+            title: "Dropdown 下拉菜单"
           },
           {
-            path: "checkbox",
-            title: "复选框"
+            path: "steps",
+            title: "Steps 步骤条"
           },
           {
-            path: "checkbox-group",
-            title: "复选框组"
-          },
-          {
-            path: "input",
-            title: "输入框"
-          },
-          {
-            path: "input-group",
-            title: "输入框组"
-          },
-          {
-            path: "input-number",
-            title: "计数器"
-          },
-          {
-            path: "select",
-            title: "选择器"
-          },
-          {
-            path: "switch",
-            title: "开关"
-          },
-          {
-            path: "slider",
-            title: "滑块"
-          },
-          {
-            path: "timepicker",
-            title: "时间选择器"
-          },
-          {
-            path: "datepicker",
-            title: "日期选择器"
-          },
-          {
-            path: "upload",
-            title: "文件上传"
-          },
-          {
-            path: "form",
-            title: "表单"
-          }
-        ]
-      },
-      {
-        groupName: "表格组件",
-        list: [
-          {
-            path: "table",
-            title: "表格"
+            path: "tabs",
+            title: "Tabs 标签页"
           },
           {
             path: "pagination",
-            title: "分页"
+            title: "Pagination 分页"
+          }
+        ]
+      },
+      {
+        groupName: "数据录入",
+        list: [
+          {
+            path: "input",
+            title: "Input 输入框"
+          },
+          {
+            path: "input-group",
+            title: "Input Group 输入框组"
+          },
+          {
+            path: "input-number",
+            title: "Input Num 计数器"
+          },
+          {
+            path: "select",
+            title: "Select 选择器"
+          },
+          {
+            path: "radio",
+            title: "Radio 单选框"
+          },
+          {
+            path: "checkbox",
+            title: "Checkbox 复选框"
+          },
+          {
+            path: "checkbox-group",
+            title: "Checkbox Group 复选框组"
+          },
+          {
+            path: "switch",
+            title: "Switch 开关"
+          },
+          {
+            path: "slider",
+            title: "Slider 滑动输入条"
+          },
+          {
+            path: "timepicker",
+            title: "Timepicker 时间选择框"
+          },
+          {
+            path: "datepicker",
+            title: "Datepicker 日期选择框"
+          },
+          {
+            path: "upload",
+            title: "Upload 上传"
+          },
+          {
+            path: "form",
+            title: "Form 表单"
+          }
+        ]
+      },
+      {
+        groupName: "数据展示",
+        list: [
+          {
+            path: "table",
+            title: "Table 表格"
+          },
+          {
+            path: "list",
+            title: "List 列表"
+          },
+          {
+            path: "tooltip",
+            title: "Tooltip 文字提示"
+          },
+          {
+            path: "badge",
+            title: "Badge 徽标数"
+          },
+          {
+            path: "collapse",
+            title: "Collapse 折叠面板"
           }
         ]
       },
@@ -98,36 +131,19 @@ export default [
         list: [
           {
             path: "bar",
-            title: "柱状图"
+            title: "Bar 柱状图"
           },
           {
             path: "line",
-            title: "折线图"
+            title: "Line 折线图"
           },
           {
             path: "pie",
-            title: "饼图"
+            title: "Pie 饼图"
           },
           {
             path: "percent",
-            title: "百分比"
-          }
-        ]
-      },
-      {
-        groupName: "导航组件",
-        list: [
-          {
-            path: "dropdown",
-            title: "下拉菜单"
-          },
-          {
-            path: "steps",
-            title: "步骤条"
-          },
-          {
-            path: "tabs",
-            title: "标签页"
+            title: "Percent 百分比"
           }
         ]
       },
@@ -135,53 +151,36 @@ export default [
         groupName: "通知组件",
         list: [
           {
-            path: "loading",
-            title: "加载中"
-          },
-          {
-            path: "alert",
-            title: "警告提示"
-          },
-          {
-            path: "message",
-            title: "全局提示"
+            path: "dialog",
+            title: "Modal 对话框"
           },
           {
             path: "notification",
-            title: "通知提醒"
-          }
-        ]
-      },
-      {
-        groupName: "其它",
-        list: [
-          {
-            path: "collapse",
-            title: "折叠面板"
-          },
-          {
-            path: "badge",
-            title: "徽标数"
-          },
-          {
-            path: "dialog",
-            title: "对话框"
-          },
-          {
-            path: "list",
-            title: "列表"
+            title: "Notification 通知提醒"
           },
           {
             path: "popconfirm",
-            title: "气泡确认框"
+            title: "Popconfirm 气泡确认框"
+          },
+          {
+            path: "alert",
+            title: "Alert 警告提示"
+          },
+          {
+            path: "message",
+            title: "Message 全局提示"
+          },
+          {
+            path: "loading",
+            title: "Loading 加载中"
           },
           {
             path: "popover",
-            title: "弹出框"
+            title: "Popover 弹出框"
           },
           {
-            path: "tooltip",
-            title: "文字提示"
+            path: "progress",
+            title: "Progress 进度条"
           }
         ]
       }

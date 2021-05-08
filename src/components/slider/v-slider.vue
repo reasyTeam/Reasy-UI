@@ -3,7 +3,7 @@
     class="v-slider"
     :class="[
       sizeCss,
-      { 'is-range': showRange, 'v-slider--disabled': disabled }
+      { 'is-range': showRange, 'v-slider--disabled': isDisabled }
     ]"
   >
     <!-- 输入框控制器 -->
@@ -15,7 +15,7 @@
       :min="min"
       :max="max"
       ref="input"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :is-controls="showInputControls"
       :precision="precisionVal"
       :size="size"
@@ -83,10 +83,6 @@
           ></slider-popups>
         </template>
       </div>
-    </div>
-    <!-- 错误信息 -->
-    <div class="v-form-item__content__msg is-error" v-if="error && !moveStart">
-      {{ error }}
     </div>
   </div>
 </template>
@@ -225,7 +221,7 @@ export default {
       on(window, "mouseup", this.mouseUp);
     },
     mouseStart(event) {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       event.preventDefault();
       this.bindEvent(); //绑定事件
       let lineRect = this.$refs.line.getBoundingClientRect();
@@ -248,7 +244,7 @@ export default {
       off(window, "mouseup", this.mouseUp);
     },
     handlerClickLine(event) {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       //点击球
       if (event.target === this.$refs.bar) return;
 
@@ -276,9 +272,9 @@ export default {
       let leftStep = leftWidth / this.perStepPx,
         sliderValue = Math.round(leftStep) * this.step + this.min, //满足最近步长点的值
         leftValue = leftStep * this.step + this.min, //移动后的值
+        //最大步长时的值
         maxStepValue =
-          Math.floor((this.max - this.min) / this.step) * this.step + this.min; //最大步长时的值
-
+          Math.floor((this.max - this.min) / this.step) * this.step + this.min;
       if (leftValue > this.max) {
         leftValue = this.max;
       }
@@ -305,7 +301,15 @@ export default {
         this.inputValue = val;
       },
       immediate: true
+    },
+
+    moveStart(moveStart) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", !moveStart);
+      }
     }
+
   }
 };
 </script>

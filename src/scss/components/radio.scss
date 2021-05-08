@@ -5,6 +5,7 @@
   &__item {
     cursor: pointer;
     display: inline-block;
+    font-size: $font-size-m;
 
     &--disabled {
       cursor: not-allowed;
@@ -17,7 +18,7 @@
         }
       }
     }
-    &+& {
+    & + & {
       margin-left: 26px;
     }
   }
@@ -44,5 +45,9 @@
   &__label {
     display: inline-block;
     vertical-align: middle;
+
+    &_tips {
+      color: $light-color;
+    }
   }
 }

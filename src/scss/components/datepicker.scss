@@ -103,6 +103,14 @@
       float: right;
     }
   }
+  &--info {
+    border-radius: 1px;
+    border: 1px solid transparent;
+    display: block;
+    &:hover {
+      border-color: $main-active-color;
+    }
+  }
   &--range {
     color: #fff;
     background-color: lighten($main-active-color, 10%) ;
@@ -112,6 +120,9 @@
     color: #fff;
     background-color: $main-active-color;
     display: block;
+    &:hover {
+      border-color: $main-active-color;
+    }
   }
 
   &__splitter {
@@ -119,11 +130,17 @@
   }
   &__pre-month, &__next-month {
     color: $disabled-color;
+    .v-datepicker--info:hover {
+      border-color: transparent;
+    }
   }
 
   &--invalid {
     color: $disabled-color;
     cursor: not-allowed;
+    .v-datepicker--info:hover {
+      border-color: transparent;
+    }
   }
 
   .input-text {

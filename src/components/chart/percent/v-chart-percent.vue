@@ -66,7 +66,8 @@
     <!-- 描述信息 -->
     <div
       class="v-chart__percent__detail"
-      :class="{ line: !isCircle }"
+      v-show="showText"
+      :class="{ line: !isCircle, 'chart-text-right': isTextRight }"
       :style="{ width: `${detailWidth}px` }"
     >
       <slot>
@@ -102,7 +103,7 @@ export default {
     colors: {
       type: Array,
       default() {
-        return ["#ace06f"];
+        return ["#ff801f"];
       }
     },
     // 颜色值区间
@@ -116,13 +117,13 @@ export default {
     backColor: {
       type: Array,
       default() {
-        return ["#f5f5f5"];
+        return ["#e9e9e9"];
       }
     },
     // 百分比图线条宽
     strokeWidth: {
       type: Number,
-      default: 10
+      default: 8
     },
     // 百分比图内边距
     padding: {
@@ -138,6 +139,21 @@ export default {
     height: {
       type: Number,
       default: 0
+    },
+    showText:{
+      type: Boolean,
+      default: true
+    },
+    textPosition:{
+      type: String,
+      default: 'auto',
+      validator(val) {
+        return ["auto", "right"].indexOf(val) > -1;
+      }
+    },
+    textWidth:{
+      type: Number, String,
+      default: 40
     }
   },
   data() {
@@ -188,7 +204,13 @@ export default {
       if (this.isCircle) {
         return this.center.r * 2;
       }
+      if(this.isTextRight){
+        return this.textWidth;
+      }
       return this.center.r;
+    },
+    isTextRight() {
+      return this.textPosition === 'right';
     }
   },
   watch: {
@@ -241,8 +263,11 @@ export default {
       let { center, padding } = this;
 
       width -= padding * 2;
+      if(this.isTextRight){
+        width -= this.textWidth + 10;
+      }
       center.x = padding;
-      center.y = Math.floor((height + this.detailHeight) / 2);
+      center.y = Math.floor((height + ((this.isTextRight || !this.showText) ? 0 : this.detailHeight)) / 2);
       center.r = width;
     }
   },

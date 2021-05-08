@@ -4,7 +4,7 @@
     <v-checkbox
       class="v-checkbox-group__item"
       v-if="isSelectAll"
-      :hasValue="!isAllChecked && value.length > 0"
+      :has-value="!isAllChecked && value.length > 0"
       v-model="isAllChecked"
       :disabled="disabled"
     >
@@ -24,10 +24,6 @@
     >
       {{ item.label }}
     </v-checkbox>
-    <!-- 错误信息 -->
-    <div class="v-form-item__content__msg is-error" v-if="error">
-      {{ error }}
-    </div>
   </div>
 </template>
 <script>
@@ -137,6 +133,7 @@ export default {
         this.value.splice(index, 1);
       }
       this.$emit("change", this.value);
+      this.checkValid(this.value);
     },
     selectAll(value) {
       let allValue = [].concat(this.selectAllValue);
@@ -145,8 +142,10 @@ export default {
       }
       if (value) {
         this.$emit("change", allValue);
+        this.checkValid(allValue);
       } else {
         this.$emit("change", []);
+        this.checkValid([]);
       }
     },
     handlerClick(options) {

@@ -387,6 +387,7 @@ export default {
 | hide-after-selected    | 选择完成后隐藏下拉选项                                       | boolean        | -           | true     |
 | display-options-number | 设置可显示选项的数量，如options.length大于该值，则显示滚动条 | number         | -           | 4        |
 | options                | 菜单项配置<br />                                             | Array\<object> | -           | -        |
+| panel-class                | 下拉菜单项容器的类名                                             | String | -           | -        |-        |
 
 
 ### Options Attributes

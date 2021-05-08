@@ -182,7 +182,7 @@
             { type: "num", args: [1, 12], msg: "请输入正确的范围，范围1-12" }
           ],
           power: { type: "num", args: [1, 12] },
-          ip: { type: "ip" },
+          ip: [{ type: "ip" }, this.checkIp],
           index: { type: "num", args: [1, 12] },
           downLimit: { type: "num", args: [1, 12] }
         }
@@ -195,6 +195,12 @@
       submit(data) {
         this.$message.success("验证成功");
         console.log("submit data", data);
+      },
+      checkIp(ip) {
+        let ipArr = ip.split(".");
+        if(+ipArr[0] < 193) {
+          return "自定义验证说明";
+        }
       },
       cancel() {}
     },
@@ -209,10 +215,11 @@
 
 | 参数           | 说明                                                                    | 类型     | 可选值 | 默认值 |
 | -------------- | ----------------------------------------------------------------------- | -------- | ------ | ------ |
-| rules          | 数据验证规则                                                            | boolean  | —      | {}     |
+| rules          | 数据验证规则                                                            | boolean  |        | {}     |
 | model          | 表单数据对象                                                            | Object   | —      | {}     |
-| is-label-right | 文字方向是否右对齐                                                      | boolean  | —      | false  |
-| beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function | —      | —      |
+| is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
+| beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
+| disabled       | 表单是否禁用                                                            | Boolean  |        | false  |
 
 ### rules 验证规则
 
@@ -222,12 +229,11 @@ key 为 表单选项的 prop，
 
 验证规则，rules 选项配置
 
-| 参数 | 说明                                               | 类型            | 可选值 | 默认值 |
-| ---- | -------------------------------------------------- | --------------- | ------ | ------ |
-| type | 数据验证类型                                       | string          | —      | —      |
-| max  | 最大值或最大长度                                   | string / number | —      | —      |
-| min  | 最小值或最小长度                                   | string / number | —      | —      |
-| msg  | 错误提示信息，如果定义了，当验证错误时会提示此信息 | string          | —      | —      |
+| 参数 | 说明                                               | 类型   | 可选值 | 默认值 |
+| ---- | -------------------------------------------------- | ------ | ------ | ------ |
+| type | 数据验证类型                                       | string |        |        |
+| args | 数据验证需要用到的值                               | Array  |        |        |
+| msg  | 错误提示信息，如果定义了，当验证错误时会提示此信息 | string |        |        |
 
 ### v-form Methods
 
@@ -245,12 +251,15 @@ key 为 表单选项的 prop，
 
 ### v-form-item Attributes
 
-| 参数        | 说明                                                               | 类型    | 可选值 | 默认值 |
-| ----------- | ------------------------------------------------------------------ | ------- | ------ | ------ |
-| label       | 选项文字                                                           | string  | —      | —      |
-| is-no-label | 不显示文字                                                         | boolean | —      | false  |
-| prop        | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string  | —      | —      |
-| required    | 是否必填                                                           | boolean | —      | true   |
+| 参数        | 说明                                                               | 类型           | 可选值 | 默认值 |
+| ----------- | ------------------------------------------------------------------ | -------------- | ------ | ------ |
+| label       | 选项文字                                                           | string         |        |        |
+| is-no-label | 不显示文字                                                         | boolean        |        | false  |
+| prop        | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string         |        |        |
+| required    | 是否必填                                                           | boolean        |        | true   |
+| ignore      | 是否忽略验证                                                       | boolean        |        | false  |
+| valid       | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |        |
+| disabled    | 选项是否禁用                                                       | boolean        |        | false  |
 
 ### v-form-item Methods
 
@@ -260,7 +269,8 @@ key 为 表单选项的 prop，
 
 ### v-form-item slot
 
-| name    | 说明                 |
-| ------- | -------------------- |
-| default | 表单元素右边显示内容 |
-| label   | 表单元素左边文字内容 |
+| name    | 说明                                       |
+| ------- | ------------------------------------------ |
+| default | 表单元素右边显示内容                       |
+| content | 右边多个数据验证时需要把第二个放入此插槽内 |
+| label   | 表单元素左边文字内容                       |

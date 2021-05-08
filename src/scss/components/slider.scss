@@ -2,9 +2,9 @@ $slider-line-height: 4px;
 
 @mixin slider-size($lineHeight) {
 
-  .v-slider-range,
-  .v-slider-text-range {
+  .v-slider-range {
     line-height: $lineHeight;
+    font-size: 14px;
   }
 
   .v-slider-line {
@@ -61,7 +61,8 @@ $slider-line-height: 4px;
   &-line {
     position: relative;
     height: $slider-line-height;
-    background-color: $border-color;
+    background-color: $disabled-border-color;
+    border-radius: 2px;
     cursor: pointer;
 
     .v-popups__arrow {
@@ -86,7 +87,7 @@ $slider-line-height: 4px;
     }
     &__bar {
       position: absolute;
-      top: -1px;
+      top: -2px;
       width: 100%;
       height: 100%;
       border: 3px solid $main-active-color;
@@ -105,6 +106,7 @@ $slider-line-height: 4px;
 
     &__inner {
       background-color: $main-active-color;
+      border-radius: 2px;
       transition: .2s;
       height: 100%;
     }

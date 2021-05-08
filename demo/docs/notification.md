@@ -143,6 +143,7 @@ export default {
   <v-button class="notify-btn" @click="handleshowCloseConfirmBtnClick">显示确定和关闭按钮</v-button>
   <v-button class="notify-btn" @click="handleHideAllBtnClick">不显示按钮</v-button>
   <v-button class="notify-btn" @click="handleCustomConfirmTextBtnClick">自定义确定文本</v-button>
+  <v-button class="notify-btn" @click="handleNoTitleClick">无标题</v-button>
 </template>
 
 <script>
@@ -188,6 +189,14 @@ export default {
         showConfirm: true,
         showClose: false,
         confirmText: "知道了",
+        position: "top-right"
+      });
+    },
+    handleNoTitleClick() {
+      this.$notify({
+        content: "骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。列国周齐秦汉楚，赢，都变做了土；输，都变做了土。",
+        showConfirm: true,
+        showClose: false,
         position: "top-right"
       });
     }

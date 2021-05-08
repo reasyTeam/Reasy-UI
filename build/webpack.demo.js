@@ -23,7 +23,7 @@ const webpackConfig = {
   resolve: {
     extensions: [".js", ".vue", ".json"],
     alias: {
-      '@': path.resolve(__dirname, "../src"),
+      "@": path.resolve(__dirname, "../src"),
       packages: path.resolve(__dirname, "../packages"),
       demo: path.resolve(__dirname, "../demo")
     },

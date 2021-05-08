@@ -1,13 +1,14 @@
 <template>
-  <div class="v-switch" :class="[sizeCss, { 'v-switch--disabled': disabled }]">
+  <div class="v-switch" :class="[sizeCss, { 'v-switch--disabled': isDisabled }]">
     <span class="v-switch__item" @click="clickSwitch">
       <!-- 开关按钮 -->
       <span
         :name="name"
+        :data-name="_name"
         class="v-switch__icon"
         :class="{
           'v-switch__icon--active': value === onValue,
-          'v-switch__icon--disabled': disabled
+          'v-switch__icon--disabled': isDisabled
         }"
       ></span>
       <!-- 开关文字 -->
@@ -18,8 +19,10 @@
   </div>
 </template>
 <script>
+import FormMixin from "../form-mixins";
 export default {
   name: "v-switch",
+  mixins: [FormMixin],
   model: {
     prop: "value",
     event: "change"
@@ -68,11 +71,11 @@ export default {
     }
   },
   methods: {
-    clickSwitch() {
-      if (this.disabled) return;
+    async clickSwitch() {
+      if (this.isDisabled) return;
       let changedValue =
         this.value === this.onValue ? this.offValue : this.onValue;
-      let result = this.beforeChange(changedValue);
+      let result = await this.beforeChange(this.value);
       if (result === false) {
         return;
       }

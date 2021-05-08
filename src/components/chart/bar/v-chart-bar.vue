@@ -14,6 +14,19 @@
     @mousemove.native="hover"
     @mouseleave.native="leave"
   >
+    <!-- 鼠标悬浮柱条的背景遮罩 -->
+    <transition name="fade">
+      <rect
+        name="tip-shadow"
+        v-if="tipIndex > -1"
+        :x="shadowX"
+        :y="axis.yStart"
+        :width="shadowWidth"
+        :height="axis.yHeight"
+        fill="rgba(0,0,0,0.03)"
+        @click="click"
+      ></rect>
+    </transition>
     <!-- 柱条集合 -->
     <g name="bar">
       <rect
@@ -41,19 +54,6 @@
         >{{ t.value | format }}
       </text>
     </g>
-    <!-- 鼠标悬浮柱条的背景遮罩 -->
-    <transition name="fade">
-      <rect
-        name="tip-shadow"
-        v-if="tipIndex > -1"
-        :x="shadowX"
-        :y="axis.yStart"
-        :width="shadowWidth"
-        :height="axis.yHeight"
-        fill="rgba(0,0,0,0.1)"
-        @click="click"
-      ></rect>
-    </transition>
     <!-- tool tip -->
     <template v-slot:tip>
       <transition name="fade">

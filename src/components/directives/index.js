@@ -158,6 +158,10 @@ const install = function(Vue) {
       },
       update(el, binding) {
         tooltipConfig.setPropsInVm(el, binding);
+      },
+      unbind(el) {
+        //元素解绑时，去掉提示信息
+        tooltipConfig.tooltipVms.get(el).hide();
       }
     }
   };

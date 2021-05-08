@@ -26,6 +26,10 @@
       margin-left: -100%;
       font-size: $icon-size;
       line-height: 22px;
+
+      &.v-icon-remind-plane {
+        color: $main-active-color;
+      }
     }
   }
 

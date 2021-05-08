@@ -24,16 +24,17 @@
         <div class="v-popups__main" :style="customStyle">
           <slot></slot>
         </div>
-        <i
+        <svg
           v-show="showArrow"
-          :class="['v-popups__arrow', arrowClass]"
+          :class="['v-popups__arrow']"
           :style="arrowStyle"
-          class="v-popups__arrow"
-        ></i>
+        >
+          <polygon :points="polygonPoints" />
+        </svg>
       </div>
     </transition>
 
-    <slot name="reference"></slot>
+    <slot name="reference" :visible="visible"></slot>
   </div>
 </template>
 
@@ -90,7 +91,20 @@ const positionSideNameMap = {
 arrowHeight = parseInt(arrowHeight);
 arrowBottomSideLength = parseInt(arrowBottomSideLength);
 
-const space = arrowBottomSideLength + 4;
+// 每个方向三角形的位置
+const positionTriangle = {
+  top: `0,0 ${arrowBottomSideLength},0 ${arrowBottomSideLength /
+    2},${arrowHeight}`,
+  bottom: `0,${arrowHeight} ${arrowBottomSideLength},${arrowHeight} ${arrowBottomSideLength /
+    2},0`,
+  left: `0,0 0,${arrowBottomSideLength} ${arrowHeight},${arrowBottomSideLength /
+    2}`,
+  right: `${arrowHeight},0 ${arrowHeight},${arrowBottomSideLength} 0,${arrowBottomSideLength /
+    2}`
+};
+
+// const space = arrowBottomSideLength + 4;
+// const toZeroSpace = arrowBottomSideLength / 2;
 
 // 用于enterable为true默认的delay时间
 const minDelay = 300;
@@ -167,6 +181,10 @@ export default {
     closeDelay: {
       type: Number,
       default: 0
+    },
+    betweenSpace: {
+      type: Number,
+      default: arrowBottomSideLength / 2 + 4
     }
   },
   computed: {
@@ -201,7 +219,8 @@ export default {
       arrowStyle: {},
       arrowClass: "",
       popupsDomProps: {},
-      referenceDomProps: {}
+      referenceDomProps: {},
+      polygonPoints: ""
     };
   },
   mounted() {
@@ -328,6 +347,15 @@ export default {
     hide() {
       this.proxyVisibleDelay(false);
     },
+    getBetweenSpace(p1) {
+      const moveNegative = ["top", "left"].includes(p1);
+
+      let space = this.showArrow
+        ? this.betweenSpace + arrowHeight
+        : this.betweenSpace;
+
+      return moveNegative ? -space : space;
+    },
     setPosition(_position = this._position) {
       this.setPopupsStyle(..._position);
       this.setArrowStyle(..._position);
@@ -349,15 +377,16 @@ export default {
       }
 
       const { popupsDomProps, referenceDomProps } = this;
+      const _betweenSpace = this.getBetweenSpace(p1);
 
       // 设置top-center => p1-p2
       if (p1 === "top" || p1 === "left") {
         popupsStyleObj[p1] = `${referenceDomProps[p1] -
-          popupsDomProps[positionSideNameMap[p1]] -
-          space}px`;
+          popupsDomProps[positionSideNameMap[p1]] +
+          _betweenSpace}px`;
       } else {
         popupsStyleObj[positionPropMap[p1]] = `${referenceDomProps[p1] +
-          space}px`;
+          _betweenSpace}px`;
       }
 
       if (p2 === "top" || p2 === "left") {
@@ -376,9 +405,12 @@ export default {
       this.popupsStyle = Object.assign(this.popupsStyle, popupsStyleObj);
     },
     setArrowStyle(p1, p2) {
-      const arrowStyleObj = {};
+      const arrowStyleObj = {
+        [positionSideNameMap[p1]]: arrowHeight,
+        [positionSideNameMap[centerFixedMap[p1]]]: arrowBottomSideLength
+      };
 
-      arrowStyleObj[positionReverseMap[p1]] = `-${arrowHeight * 2}px`;
+      arrowStyleObj[positionReverseMap[p1]] = `-${arrowHeight}px`;
       if (p2 !== "center") {
         arrowStyleObj[p2] = `${arrowBottomSideLength}px`;
       } else {
@@ -388,7 +420,8 @@ export default {
         ] = `-${arrowBottomSideLength / 2}px`;
       }
 
-      this.arrowClass = `v-popups__arrow--${p1}`;
+      // this.arrowClass = `v-popups__arrow--${p1}`;
+      this.polygonPoints = positionTriangle[p1];
       this.arrowStyle = arrowStyleObj;
     },
     autoFixedPosition(p1, p2) {
@@ -397,6 +430,7 @@ export default {
       if (p1 === "top" || p1 === "left") {
         if (parseInt(this.popupsStyle[p1]) < bodyDomProps[p1]) {
           this.setPosition([positionReverseMap[p1], p2]);
+          console.log("autofixed");
         }
       } else if (
         parseInt(this.popupsStyle[positionPropMap[p1]]) +
@@ -415,7 +449,9 @@ export default {
         this.hidden = true;
         this.visible = true;
         this.$nextTick(() => {
-          this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
+          if (this.$refs.popups) {
+            this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
+          }
           this.referenceDomProps = this.parentElm.getBoundingClientRect();
           this.visible = false;
           this.hidden = false;

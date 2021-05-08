@@ -20,6 +20,36 @@
 
 :::
 
+### 开关大小
+
+::: demo
+
+```html
+<div class="input-group">
+  <div>L</div>
+  <v-switch size="L" v-model="enable"></v-switch>
+</div>
+<div class="input-group">
+  <div>M</div>
+  <v-switch size="M" v-model="enable"></v-switch>
+</div>
+<div class="input-group">
+  <div>S</div>
+  <v-switch size="S" v-model="enable"></v-switch>
+</div>
+<script>
+  export default {
+    data() {
+      return {
+        enable: false
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 开启关闭值
 
 `on-value`开启时的值，`off-value`关闭时的值
@@ -47,7 +77,7 @@
 ::: demo
 
 ```html
-<v-switch size="L" on-text="开启" off-text="关闭" v-model="enable"></v-switch>
+<v-switch on-text="开启" off-text="关闭" v-model="enable"></v-switch>
 
 <script>
   export default {
@@ -67,12 +97,20 @@
 ::: demo
 
 ```html
-<v-switch disabled v-model="enable"></v-switch>
+<div class="input-group">
+  <v-switch disabled v-model="enable"></v-switch>
+</div>
+
+<div class="input-group">
+  <v-switch disabled v-model="enable1"></v-switch>
+</div>
+
 <script>
   export default {
     data() {
       return {
-        enable: true
+        enable: true,
+        enable1: false
       };
     }
   };

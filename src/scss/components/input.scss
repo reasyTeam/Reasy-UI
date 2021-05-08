@@ -2,6 +2,7 @@ $main-active-light-color: lighten($main-active-color, 10%);
 
 @mixin input-size($fontSize, $lineHeight) {
   font-size: $fontSize;
+  line-height: $lineHeight;
 
   .input-text,
   .v-input-group__splitter,
@@ -11,9 +12,16 @@ $main-active-light-color: lighten($main-active-color, 10%);
     line-height: $lineHeight;
   }
 
-  .v-input__icon {
+  .v-input__middle {
     height: $lineHeight;
     line-height: $lineHeight;
+  }
+  .v-input__search {
+    height: $lineHeight - 2;
+    line-height: $lineHeight - 2;
+  }
+  .v-input__icon--suffix {
+    height: $lineHeight;
   }
 }
 
@@ -30,12 +38,11 @@ input[type="number"] {
   position: relative;
   display: inline-block;
   width: $elem-width;
-
-  &__icon {
-    vertical-align: middle;
-    font-size: $font-size-l;
+  &__middle {
     color: $border-color;
-
+  }
+  &__icon {
+    font-size: $font-size-l;
     &.pointer:hover {
       color: darken($border-color, 15%);
     }
@@ -54,6 +61,31 @@ input[type="number"] {
       .input-icon+.input-icon {
         padding-left: 8px;
       }
+    }
+  }
+
+  &__search {
+    position: relative;
+    top: 1px;
+    left: -1px;
+    margin: 0px -8px;
+    padding: 0 8px;
+    display: inline-block;
+    //border: 1px solid transparent;
+    border-left: 1px solid $border-color;
+    &:hover {
+      background-color: lighten($main-active-color, 45%);
+      color: $main-active-color;
+      border-left: 1px solid $main-active-color;
+    }
+    &:focus {
+      background-color: #fff;
+      border: 1px solid $main-active-color;
+    }
+    &:active {
+      background-color: lighten($main-active-color, 30%);
+      color: darken($main-active-color, 5%);
+      border-left: 1px solid darken($main-active-color, 5%);
     }
   }
 
@@ -94,6 +126,7 @@ input[type="number"] {
     .input-text {
       border: none;
       box-shadow: none;
+      width: calc(100% - 2px);
 
       &:focus {
         box-shadow: none;
@@ -139,6 +172,9 @@ input[type="number"] {
     border-color: $main-active-light-color;
     box-shadow: 0px 0px 4px 0px $main-active-light-color;
   }
+  .placeholder-text {
+    padding: 0;
+  }
 }
 
 .input-textarea {
@@ -176,12 +212,12 @@ input[type="number"] {
 .input-group--content {
   border: 1px solid $border-color;
   position: relative;
-
-  &.is-hover {
-    border: 1px solid $main-active-light-color;
-  }
+  border-radius: 2px;
 }
 
+.is-hover {
+  border: 1px solid $main-active-light-color;
+}
 .is-focus {
   border: 1px solid $main-active-light-color;
   box-shadow: 0px 0px 4px 0px $main-active-light-color;

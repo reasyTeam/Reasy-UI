@@ -38,6 +38,7 @@
       }
       &.tab-nav--active {
         color: $main-active-color;
+        font-weight: 500;
       }
       &.tab-nav-item--disabled {
         @include tab-nav-item-disabled;

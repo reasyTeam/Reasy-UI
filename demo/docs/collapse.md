@@ -119,7 +119,7 @@
 :::demo 通过`disabled`属性设置折叠面板的禁用状态。禁用后，面板的折叠状态不可修改。
 
 ```html
-<v-collapse title="disabled" disabled :actived="true">
+<v-collapse title="disabled" disabled>
   disabled，无法切换展开和收缩状态。
 </v-collapse>
 ```

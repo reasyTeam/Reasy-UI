@@ -99,18 +99,53 @@ export default {
 
 ```html
 <template>
-  <v-tabs v-model="activeName" type="card">
-    <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
-    <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
-    <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
-  </v-tabs>
+  <div>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>小</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName" size="S" type="card">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>中</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName1" size="M" type="card">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>大</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName2" size="L" type="card">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      activeName: ""
+      activeName: "",
+      activeName1: "",
+      activeName2: ""
     };
   }
 };
@@ -126,18 +161,53 @@ export default {
 
 ```html
 <template>
-  <v-tabs v-model="activeName" type="button">
-    <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
-    <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
-    <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
-  </v-tabs>
+  <div>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>小</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName" size="S" type="button">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>中</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName1" size="M" type="button">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>大</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName2" size="L" type="button">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      activeName: ""
+      activeName: "",
+      activeName1: "",
+      activeName2: ""
     };
   }
 };
@@ -154,20 +224,27 @@ export default {
 ```html
 <template>
   <div class="tabs-demo">
-    <h5>1. 禁用全部</h5>
-    <v-tabs v-model="activeName" :disabled="true">
+    <h5></h5>
+    <v-tabs v-model="activeName">
       <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
       <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
-      <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+      <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>
     </v-tabs>
   </div>
-
   <div class="tabs-demo">
-    <h5>2. 禁用部分</h5>
-    <v-tabs v-model="activeName1">
-      <v-tab-pane label="标签1" value="1" :disabled="true">标签1内容</v-tab-pane>
+    <h5></h5>
+    <v-tabs v-model="activeName1" type="card">
+      <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
       <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
-      <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+      <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>
+    </v-tabs>
+  </div>
+  <div class="tabs-demo">
+    <h5></h5>
+    <v-tabs v-model="activeName2" type="button">
+      <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+      <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+      <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>
     </v-tabs>
   </div>
 </template>
@@ -177,7 +254,8 @@ export default {
   data() {
     return {
       activeName: "",
-      activeName1: ""
+      activeName1: "",
+      activeName2: ""
     };
   }
 };

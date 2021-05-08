@@ -36,7 +36,7 @@ export default {
     //是否显示
     show: Boolean,
     //下拉框值
-    selectValue: [String, Number, Array],
+    selectValue: [String, Number, Array, Boolean],
     //多选长度限制
     multipleLimit: Number,
     //是否支持多选

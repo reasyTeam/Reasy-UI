@@ -28,8 +28,6 @@
     }
   };
 </script>
-
-
 ```
 
 :::
@@ -96,7 +94,6 @@
 ```
 
 :::
-
 
 ### 输入框宽度
 
@@ -212,7 +209,12 @@
 ::: demo
 
 ```html
-<v-input type="text" icon="v-icon-search" suffix-icon="v-icon-time" v-model="input"></v-input>
+<v-input
+  type="text"
+  icon="v-icon-search"
+  suffix-icon="v-icon-time"
+  v-model="input"
+></v-input>
 <script>
   export default {
     data() {
@@ -292,7 +294,7 @@
 | --------------- | -------------------------------------------------------------------- | --------------- | ------------------------------------ | ------ |
 | v-model         | 绑定值，type=number 时，值类型为 number，<br />其他情况类型为 string | string / number | —                                    | —      |
 | type            | 类型                                                                 | string          | text/textarea,其他 input type 的类型 | —      |
-| name            | 原生属性                                                             |  string         | —                                    | —      |
+| name            | 原生属性                                                             | string          | —                                    | —      |
 | maxlength       | 最大输入长度                                                         | number          | —                                    | —      |
 | disabled        | 是否禁用                                                             | boolean         | —                                    | false  |
 | width           | 输入框长度，支持数字和字符串，如 70 或 70px 或 70%                   | string / number |                                      |        |
@@ -307,3 +309,21 @@
 | suffix-icon     | 输入框尾部图标                                                       | string          | —                                    | —      |
 | rows            | textarea 时生效                                                      | number          | —                                    | 2      |
 | allow           | 输入框允许输入字符的正则表达式                                       | RegExp          | —                                    | —      |
+
+### v-input Events
+
+| 事件名 | 说明                                                 | 参数       |
+| ------ | ---------------------------------------------------- | ---------- |
+| change | 值改变时执行（失焦时），先执行失焦事件，再执行此事件 | 改变后的值 |
+| input  | 输入框值改变时触发                                   | 输入框的值 |
+| blur   | 输入框失焦时触发                                     | event      |
+| focus  | 输入框聚焦时触发                                     | event      |
+| clear  | 点击清空时触发                                       | —          |
+
+
+## v-input Methods
+
+| 方法名        | 说明           | 参数           |
+| ------------- | -------------- | -------------- |
+| focus         | 输入框聚焦     |                |
+| setInputValue | 设置输入框的值 | 设置输入框的值 |

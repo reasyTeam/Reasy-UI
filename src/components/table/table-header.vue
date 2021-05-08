@@ -7,8 +7,9 @@
       <tr>
         <th
           v-for="(col, index) in columns"
-          :width="col.width"
+          :width="getColWidth(col.width)"
           :key="index + 1"
+          :align="col.align"
           :class="{ 'v-table__header--sort': col.isSort }"
           @click="sortTable(col)"
         >
@@ -41,6 +42,7 @@
   </table>
 </template>
 <script>
+import { size } from "../filters";
 export default {
   props: {
     //全选值
@@ -65,6 +67,9 @@ export default {
     }
   },
   methods: {
+    getColWidth(width) {
+      return size(width);
+    },
     sortTable(col) {
       if (!col.isSort) return;
       if (col.sortType === "asc") {

@@ -2,8 +2,10 @@
   <div class="v-checkbox">
     <label
       class="v-checkbox__item"
-      :class="{ 'v-checkbox__item--disabled': disabled }"
+      :class="{ 'v-checkbox__item--disabled': isDisabled }"
       @click="clickCheckbox"
+      :name="name"
+      :data-name="_name"
     >
       <span
         class="v-checkbox__icon"
@@ -19,6 +21,7 @@
         <slot></slot>
       </span>
     </label>
+    <slot name="content"></slot>
   </div>
 </template>
 <script>
@@ -55,12 +58,13 @@ export default {
   },
   methods: {
     clickCheckbox() {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       this.$emit("click", this.value);
       this.$emit(
         "change",
         this.value === this.onValue ? this.offValue : this.onValue
       );
+      this.checkValid(this.value);
     }
   }
 };

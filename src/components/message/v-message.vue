@@ -8,11 +8,19 @@
       @mouseleave="startTimer"
     >
       <template v-if="showIcon">
-        <i v-if="icon" :class="['v-message__icon', icon]"></i>
-        <i
-          v-else
-          :class="['v-message__icon', `v-message__icon--${type}`, typeClass]"
-        ></i>
+        <template v-if="icon">
+          <i :class="['v-message__icon', icon]"></i>
+        </template>
+        <template v-else-if="type !== 'loading'">
+          <i
+            :class="['v-message__icon', `v-message__icon--${type}`, typeClass]"
+          ></i>
+        </template>
+        <template v-else>
+          <div class="v-message__loading">
+            <v-loading size="S" :visible="true"></v-loading>
+          </div>
+        </template>
       </template>
       <slot>
         <p v-if="!dangerouslyUseHTMLString" :class="contentClass">
@@ -28,7 +36,8 @@ const typeMap = {
   success: "v-icon-ok-plane",
   error: "v-icon-close-plane",
   info: "v-icon-help-plane",
-  warn: "v-icon-remind-plane"
+  warn: "v-icon-remind-plane",
+  loading: ""
 };
 
 export default {
@@ -42,10 +51,11 @@ export default {
       icon: "",
       showIcon: true,
       content: "",
-      duration: 2500,
+      duration: 2000,
       timer: null,
       dangerouslyUseHTMLString: false,
-      onClose: null
+      onClose: null,
+      closeCallback: () => {}
     };
   },
   computed: {
@@ -100,6 +110,7 @@ export default {
       if (typeof this.onClose === "function") {
         this.onClose();
       }
+      this.closeCallback();
     }
   }
 };

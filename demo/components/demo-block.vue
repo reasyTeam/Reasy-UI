@@ -116,7 +116,7 @@
     border-bottom-right-radius: 4px;
     text-align: center;
     margin-top: -1px;
-    color: #d3dce6;
+    color: #ffd5ad;
     cursor: pointer;
     position: relative;
 
@@ -145,7 +145,7 @@
     }
 
     &:hover {
-      color: #409eff;
+      color: #ff801f;
       background-color: #f9fafc;
     }
 

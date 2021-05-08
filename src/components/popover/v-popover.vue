@@ -10,6 +10,8 @@
       :enterable="enterable"
       :open-delay="openDelay"
       :close-delay="closeDelay"
+      :between-space="betweenSpace"
+      :auto-adjust-position="autoAdjustPosition"
       @visible-change="visibleChange"
     >
       <div class="v-popover__main">
@@ -60,7 +62,9 @@ export default {
     closeDelay: {
       type: Number,
       default: 0
-    }
+    },
+    betweenSpace: Number,
+    autoAdjustPosition: Boolean
   },
   computed: {
     _width() {

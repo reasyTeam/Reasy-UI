@@ -144,6 +144,14 @@ export default {
       return wrapStyle;
     }
   },
+  watch:{
+    height(val){
+      this.setSize(val, this.width);
+    },
+    width(val){
+      this.setSize(this.height, val);
+    }
+  },
   components: {
     Bar
   },
@@ -211,8 +219,8 @@ export default {
       this.view.scrollLeft = this.scrollLeft = 0;
       this.isVertical = false;
       this.isHorizontal = false;
-      this.update();
 
+      this.update();
       this.$emit("mounted");
     },
     /**
@@ -248,6 +256,7 @@ export default {
         this.scrollTopRange = 0;
         this.scrollSize.height = 0;
       }
+      this.scroll();
     },
     /**
      * bar组件对应的v-model响应

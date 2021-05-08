@@ -16,7 +16,7 @@
                          (info, $main-active-color, lighten($main-active-color, 45%)),
                          (error, darken($error-color, 1.4%), #fef1e3) {
     &--#{$type} {
-      background-color:$bgcolor;
+      background-color: $bgcolor;
       border: 1px solid $color;
       .v-alert__icon {
         color: $color;
@@ -75,6 +75,7 @@
     float: left;
     margin-left: -68px;
     width: 68px;
+    height: 22px;
     line-height: 22px;
     text-align: right;
     .v-alert__show-detail {

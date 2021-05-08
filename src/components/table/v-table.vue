@@ -40,11 +40,9 @@
               >
                 <template v-for="(col, index) in columns">
                   <td
-                    :style="{ width: col.width }"
-                    :class="[
-                      col.css,
-                      { 'v-table__expand': col.type === 'expand' }
-                    ]"
+                    :style="{ width: getColWidth(col.width) }"
+                    :align="col.align"
+                    :class="[{ 'v-table__expand': col.type === 'expand' }]"
                     :key="index + 1"
                   >
                     <template v-if="col.type === 'index'">
@@ -68,8 +66,8 @@
                       @click="expandTable(rowsData, rowIndex)"
                     ></span>
                     <div
-                      class="fixed"
                       :class="{
+                        fixed: !col.isNoFixed,
                         'v-table__expand__wrapper': col.type === 'expand'
                       }"
                     >
@@ -146,6 +144,7 @@ import TableExpand from "./table-expand.vue";
 import TableHeader from "./table-header.vue";
 import TableFooter from "./table-footer.vue";
 import { copyDeepData, sortByKey, escapeHTML } from "../libs";
+import { size } from "../filters";
 //判断是否存在
 let fileterField = (searchV, content) => {
   try {
@@ -284,7 +283,6 @@ export default {
       return this.checkboxAllVal === CHECKBOX_UNCHECKED && isSelect;
     }
   },
-
   data() {
     return {
       columns: [], //表头信息
@@ -350,22 +348,28 @@ export default {
     });
   },
   methods: {
+    getColWidth(width) {
+      return size(width);
+    },
     updateTable() {
       this.pageData = this.getPageData();
 
       this.$nextTick(() => {
-        let rowMinIndex = Math.min(this.maxRow, this.pageData.length) || 1,
-          height = 0,
-          trRefs = this.$refs["table-body-tr"],
-          trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
-        for (let i = 0; i < rowMinIndex; i++) {
-          if (trArr[i]) {
-            height += trArr[i].offsetHeight;
-          }
-        }
-        this.$refs.scroll.setSize(height, this.$refs["table-body"].offsetWidth);
+        this.updateScrollHeight();
         this.$emit("updateCallBack", this.pageData);
       });
+    },
+    updateScrollHeight() {
+      let rowMinIndex = Math.min(this.maxRow, this.pageData.length) || 1,
+        height = 0,
+        trRefs = this.$refs["table-body-tr"],
+        trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
+      for (let i = 0; i < rowMinIndex; i++) {
+        if (trArr[i]) {
+          height += trArr[i].offsetHeight;
+        }
+      }
+      this.$refs.scroll.setSize(height, this.$refs["table-body"].offsetWidth);
     },
 
     //搜索

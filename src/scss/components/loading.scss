@@ -27,23 +27,23 @@ $class: v-loading;
   &__dots {
     position: relative;
     display: inline-block;
-    font-size: 20px;
+    font-size: 18px;
     width: 1em;
     height: 1em;
     animation: dotRotate 1.2s linear infinite;
     transform: rotate(45deg);
-    &#{$class}__dots--S {
-      font-size: 14px;
-      #{$class}__dot__item {
-        width: 6px;
-        height: 6px;
+    &.#{$class}__dots--S {
+      font-size: 12px;
+      .#{$class}__dot__item {
+        width: 4px;
+        height: 4px;
       }
     }
-    &#{$class}__dots--L {
-      font-size: 32px;
-      #{$class}__dot__item {
-        width: 14px;
-        height: 14px;
+    &.#{$class}__dots--L {
+      font-size: 24px;
+      .#{$class}__dot__item {
+        width: 8px;
+        height: 8px;
       }
     }
   }
@@ -51,11 +51,11 @@ $class: v-loading;
   &__dot__item {
     position: absolute;
     display: block;
-    width: 9px;
-    height: 9px;
+    width: 6px;
+    height: 6px;
     background-color: $main-active-color;
     border-radius: 100%;
-    transform: scale(0.75);
+    // transform: scale(0.75);
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
     opacity: 0.3;

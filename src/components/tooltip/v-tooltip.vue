@@ -2,6 +2,7 @@
   <div class="v-tooltip">
     <v-popups
       ref="popups"
+      v-model="value"
       :effect="effect"
       :custom-style="{ maxWidth: `${maxWidth}px` }"
       :trigger="trigger"
@@ -11,6 +12,8 @@
       :enterable="enterable"
       :open-delay="openDelay"
       :close-delay="closeDelay"
+      :between-space="betweenSpace"
+      :auto-adjust-position="autoAdjustPosition"
     >
       <div class="v-tooltip__main">
         <slot name="content">
@@ -32,6 +35,11 @@ export default {
     effect: {
       type: String,
       default: "dark"
+    },
+    value: Boolean,
+    trigger: {
+      type: String,
+      default: "hover"
     },
     maxWidth: Number,
     content: String,
@@ -55,18 +63,21 @@ export default {
     closeDelay: {
       type: Number,
       default: 0
-    }
+    },
+    betweenSpace: Number,
+    autoAdjustPosition: Boolean
   },
   data() {
-    return {
-      trigger: "hover"
-    };
+    return {};
   },
   methods: {
     updatePosition() {
       this.$nextTick(() => {
         this.$refs.popups.updatePosition();
       });
+    },
+    hide() {
+      this.$refs.popups.hide();
     }
   },
   watch: {

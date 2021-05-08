@@ -6,12 +6,17 @@
   left: 50%;
   transform: translate3d(-50%, 0, 0);
   padding: 8px 16px;
-  min-width: 264px;
+  // min-width: 264px;
   max-width: 50%;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
   transition: opacity 0.3s, transform 0.4s, top 0.4s;
+  &__loading {
+    position: absolute;
+    width: 12px;
+    height: 22px;
+  }
   &__icon {
     // float: left;
     position: absolute;

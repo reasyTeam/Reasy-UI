@@ -7,13 +7,14 @@
         @click="clickRadio(item)"
         class="v-radio__item"
         :class="{
-          'v-radio__item--disabled': disabled || item.disabled
+          'v-radio__item--disabled': isDisabled || item.disabled
         }"
       >
         <!-- 单选图标 -->
         <span
           class="v-radio__icon"
           :value="item.value"
+          :data-name="_name"
           :class="[
             item.value === value
               ? 'v-radio__icon--active v-icon-ok-plane'
@@ -23,12 +24,15 @@
         </span>
         <!-- 单选文字 -->
         <span class="v-radio__label">{{ item.label }}</span>
+        <span class="v-radio__label v-radio__label_tips" v-if="item.tips">{{
+          item.tips
+        }}</span>
       </label>
     </div>
     <!-- 错误信息 -->
-    <div class="v-form-item__content__msg is-error" v-if="error">
+    <!-- <div class="v-form-item__content__msg is-error" v-if="error">
       {{ error }}
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -83,12 +87,13 @@ export default {
   methods: {
     clickRadio(options) {
       //禁用或选项禁用
-      if (this.disabled || options.disabled) return;
+      if (this.isDisabled || options.disabled) return;
 
       this.$emit("click", options.value);
       let result = this.beforeChange(options.value);
       if (result !== false) {
         this.$emit("change", options.value);
+        this.$dispatch("v-form", "form:change");
       }
     }
   }

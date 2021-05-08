@@ -23,9 +23,9 @@ $header-height: 80px;
   background-color: #fff;
 
   img {
-    height: 36px;
+    height: auto;
     margin-bottom: 4px;
-    width: auto;
+    width: 140px;
   }
 
   .header-text {

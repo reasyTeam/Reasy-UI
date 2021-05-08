@@ -1,5 +1,3 @@
-
-
 .v-dialog-box {
   position: fixed;
   top: 0;
@@ -9,7 +7,7 @@
   z-index: 1000;
 }
 .v-dialog {
-  $close-font-size: 9px;
+  $close-font-size: 16px;
   $close-wrap-size: $close-font-size + 3px;
   $box-padding: 24px;
   $box-padding-top: 16px;
@@ -19,13 +17,13 @@
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-  min-width: 400px;
+  // min-width: 400px;
   max-width: 100%;
   min-height: 160px;
   max-height: 720px;
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0px 2px 24px 0px rgba(200, 201, 204, 0.5);
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12), 0px 4px 12px -8px rgba(0, 0, 0, 0.09);
   z-index: 1000;
 
   &__header {
@@ -34,7 +32,7 @@
   &__title {
     padding: $box-padding-top $box-padding;
     font-size: $font-size-m;
-    font-weight: 500;
+    font-weight: 600;
     color: $title-color;
     line-height: 21px;
     border-bottom: 1px solid #f5f5f5;
@@ -44,13 +42,13 @@
     top: 50%;
     right: $box-padding + 3px;
     margin-top: -$close-wrap-size / 2;
-    font-size: 9px;
+    font-size: $close-font-size;
     cursor: pointer;
   }
 
-
   &__main {
     padding: $box-padding;
+    overflow: auto;
   }
 
   &__footer {
@@ -68,7 +66,6 @@
       }
     }
   }
-
 
   &__close-space {
     padding-right: $box-padding * 2 + $close-wrap-size;
@@ -96,16 +93,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(#000, .5);
+  background-color: rgba(#000, 0.5);
   z-index: 1000;
 }
 
-
 .v-dialog-fade-enter-active {
-  animation: pop-fade-in .3s;
+  animation: pop-fade-in 0.3s;
 }
 .v-dialog-fade-leave-active {
-  animation: pop-fade-out .3s;
+  animation: pop-fade-out 0.3s;
 }
 
 @keyframes pop-fade-in {
@@ -127,12 +123,11 @@
   }
 }
 
-
 .v-dialog-inner-fade-enter-active {
-  animation: dialog-fade-in .3s;
+  animation: dialog-fade-in 0.3s;
 }
 .v-dialog-inner-fade-leave-active {
-  animation: dialog-fade-out .3s;
+  animation: dialog-fade-out 0.3s;
 }
 @keyframes dialog-fade-in {
   0% {

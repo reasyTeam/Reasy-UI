@@ -6,26 +6,28 @@
         'is-hover': isHover,
         'is-focus': isFocus,
         'is-controls': isControls && controlsPosition === 'right',
-        'is-disabled': disabled
+        'is-disabled': isDisabled
       }"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
     >
       <!-- 减少按钮 -->
       <v-button
-        class="v-input-number__controls v-input-number__controls--left v-input--no-border"
+        class="v-input-number__controls v-icon-minus v-input-number__controls--left v-input--no-border"
         :class="{ 'btn-disabled': subDisabled }"
-        :disabled="disabled"
+        :disabled="isDisabled"
         @click="subNum"
         :size="size"
         v-if="isControls && controlsPosition != 'right'"
-        >-</v-button
-      >
+      ></v-button>
       <!-- 输入框组件 -->
       <v-input
         v-model="inputValue"
         :name="name"
-        :disabled="disabled"
+        :data-name="_name"
+        is-child
+        :width="width"
+        :disabled="isDisabled"
         :size="size"
         :maxlength="inputMaxLength"
         ref="input"
@@ -42,14 +44,13 @@
       <template v-if="isControls">
         <!-- 添加按钮 -->
         <v-button
-          class="v-input-number__controls v-input-number__controls--right v-input--no-border"
+          class="v-input-number__controls v-icon-add v-input-number__controls--right v-input--no-border"
           :class="{ 'btn-disabled': addDisabled }"
-          :disabled="disabled"
+          :disabled="isDisabled"
           v-if="controlsPosition !== 'right'"
           @click="addNum"
           :size="size"
-          >+</v-button
-        >
+        ></v-button>
         <!-- 控制器在右边时 -->
         <template v-else>
           <!-- 上箭头 -->
@@ -66,10 +67,6 @@
           ></span>
         </template>
       </template>
-    </div>
-    <!-- 错误信息 -->
-    <div class="v-form-item__content__msg is-error" v-if="error && !isFocus">
-      {{ error }}
     </div>
   </div>
 </template>
@@ -226,7 +223,7 @@ export default {
     },
     // 增加
     addNum() {
-      if (this.addDisabled || this.disabled) {
+      if (this.addDisabled || this.isDisabled) {
         return;
       }
       let val = accSub(Number(this.inputValue) || 0, -this.step);
@@ -236,7 +233,7 @@ export default {
     },
     // 减少
     subNum() {
-      if (this.subDisabled || this.disabled) {
+      if (this.subDisabled || this.isDisabled) {
         return;
       }
       let maxStepValue; //最大步长时的值
@@ -266,6 +263,14 @@ export default {
         this.$refs.input.setInputValue(val.toFixed(this.precisionVal));
       } else {
         this.$refs.input.setInputValue(String(val));
+      }
+    }
+  },
+  watch: {
+    isFocus(focus) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", !focus);
       }
     }
   }

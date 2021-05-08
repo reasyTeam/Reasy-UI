@@ -1,7 +1,7 @@
 <template>
   <div
     class="v-select"
-    :class="[sizeCss, { 'is-disabled': disabled }]"
+    :class="[sizeCss, { 'is-disabled': isDisabled }]"
     :style="{ width: selectWidth }"
   >
     <v-input
@@ -10,10 +10,12 @@
       v-if="isShowInput"
       v-model="inputValue"
       ref="input"
+      is-child
       :name="name"
+      :data-name="_name"
       :maxlength="maxlength"
       :minlength="minlength"
-      :disabled="disabled"
+      :disabled="isDisabled"
       :is-clear="isClear"
       @blur="handlerBlur"
       @input="handlerInput"
@@ -22,13 +24,15 @@
       :placeholder="placeholder"
       :allow="allow"
       :size="size"
+      :ignoreUpdateValue="true"
     >
     </v-input>
     <div
       :name="name"
+      :data-name="_name"
       v-else
       class="v-select__label input-text"
-      :class="{ 'is-disabled': disabled, 'is-focus': dropdownShow }"
+      :class="{ 'is-disabled': isDisabled, 'is-focus': dropdownShow }"
       @click="showOptions"
     >
       <div v-if="!isMultiple" class="v-select__label--text">
@@ -70,14 +74,9 @@
       @mouseout="isMouseover = false"
       @click="showOptions(true)"
     ></span>
-    <div
-      class="v-form-item__content__msg is-error"
-      v-if="error && isShowInput && !isInput"
-    >
-      {{ error }}
-    </div>
     <create-to-body
       ref="body"
+      :data-name="_name"
       :show="dropdownShow"
       v-clickoutside="hide"
       :position="position"
@@ -113,7 +112,7 @@ export default {
   },
   props: {
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Boolean],
       default: ""
     },
     name: String,
@@ -254,6 +253,9 @@ export default {
     },
     hasClear() {
       return this.isClear && !this.isEmpty && this.isMouseover;
+    },
+    isShowError() {
+      return !this.isInput && !this.dropdownShow;
     }
   },
   data() {
@@ -266,10 +268,12 @@ export default {
   },
   methods: {
     showOptions(isArrow) {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       if (isArrow) {
         if (this.hasClear) {
           this.$emit("change", this.isMultiple ? [] : "");
+          this.$dispatch("v-form", "form:change");
+
           this.$emit("clear");
           this.dropdownShow = false;
           return;
@@ -314,7 +318,7 @@ export default {
       this.$emit("input", val);
     },
     handlerMouseover() {
-      if (!this.disabled && !this.isShowInput) this.isMouseover = true;
+      if (!this.isDisabled && !this.isShowInput) this.isMouseover = true;
     },
     changeValue(value) {
       if (this.value === value) {
@@ -330,6 +334,11 @@ export default {
       }
 
       this.$emit("change", value);
+      this.$dispatch("v-form", "form:change");
+
+      this.$nextTick(function() {
+        this.checkValid(value);
+      });
     },
     changeMultiple(value) {
       let index = this.value.indexOf(value);
@@ -343,12 +352,16 @@ export default {
         this.value.splice(index, 1);
       }
       this.$emit("change", this.value);
+      this.$dispatch("v-form", "form:change");
+
+      this.checkValid(this.value);
     },
     delValue() {
-      if (this.disabled) {
+      if (this.isDisabled) {
         return;
       }
       this.value.shift();
+      this.checkValid(this.value);
     },
     hide() {
       this.dropdownShow = false;
@@ -356,6 +369,11 @@ export default {
     setInputValue(val) {
       if (this.$refs.input) {
         this.$refs.input.setInputValue(val);
+      }
+    },
+    beforeCheckError() {
+      if (this.isExsitOption) {
+        return true;
       }
     }
   },
@@ -368,6 +386,12 @@ export default {
     },
     dropdownShow(val) {
       this.$emit("visible-change", val);
+    },
+    isShowError(val) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", val);
+      }
     }
   }
 };

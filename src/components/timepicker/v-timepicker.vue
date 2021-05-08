@@ -6,8 +6,9 @@
   >
     <div
       :name="name"
+      :data-name="_name"
       class="v-timepicker__label input-text"
-      :class="{ 'is-disabled': disabled, 'is-focus': showTimePanel }"
+      :class="{ 'is-disabled': isDisabled, 'is-focus': showTimePanel }"
       @click="showPanel"
     >
       <!-- 开始时间 -->
@@ -31,23 +32,19 @@
       class="v-timepicker__icon"
       :class="[
         hasClear ? 'v-icon-close-plane' : 'v-icon-time',
-        { 'v-timepicker__icon--disabled': disabled }
+        { 'v-timepicker__icon--disabled': isDisabled }
       ]"
       @mouseover="handlerMouseover"
       @mouseout="isMouseover = false"
       @click="clickIcon"
     ></span>
-    <div
-      class="v-form-item__content__msg is-error"
-      v-if="error && !showTimePanel"
-    >
-      {{ error }}
-    </div>
     <!-- 下拉内容 -->
     <create-to-body
       :class="sizeCss"
+      :data-name="_name"
       :show="showTimePanel"
       v-clickoutside="hide"
+      :width="timePickerWidth"
       :scale="isRange ? 2 : 1"
     >
       <v-row v-if="isRange">
@@ -172,23 +169,25 @@ export default {
   },
   methods: {
     showPanel() {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       this.showTimePanel = !this.showTimePanel;
     },
     clickIcon() {
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       if (this.hasClear) {
         if (this.isRange) {
-          this.$emit("change", ["", ""]);
+          this.$emit("change", []);
         } else {
           this.$emit("change", "");
         }
+        this.checkValid("");
       } else {
         this.showPanel();
       }
     },
     hide() {
       this.showTimePanel = false;
+      this.checkValid(this.value);
     },
     changeTime(time) {
       if (time !== this.startTime) {
@@ -208,7 +207,20 @@ export default {
       }
     },
     handlerMouseover() {
-      if (!this.disabled) this.isMouseover = true;
+      if (!this.isDisabled) this.isMouseover = true;
+    },
+    beforeCheckError(val) {
+      if (this.isRange) {
+        let startTime = val[0] || "",
+          endTime = val[1] || "";
+        if (!startTime && !endTime) {
+          return "请选择时间范围";
+        } else if (!startTime) {
+          return "请选择开始时间";
+        } else if (!endTime) {
+          return "请选择结束时间";
+        }
+      }
     }
   },
   watch: {
@@ -222,6 +234,12 @@ export default {
         }
       },
       immediate: true
+    },
+    showTimePanel(val) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", !val);
+      }
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <transition
-    :name="transition"
+    name="el-zoom-in-top"
     @before-leave="beforeLeave"
     @after-leave="doDestroy"
     v-if="show"
@@ -13,6 +13,10 @@
 <script>
 import { on, off } from "./libs.js";
 let zIndex = 2000;
+const transformMap = {
+  TOP: "center bottom",
+  BOTTOM: "center top"
+};
 export default {
   name: "create-to-body",
   props: {
@@ -37,7 +41,6 @@ export default {
     return {
       popperElm: null,
       parentElm: null,
-      transition: "el-zoom-in-top",
       style: {
         left: 0,
         top: 0,
@@ -86,6 +89,7 @@ export default {
           marginTop =
             parseInt(window.getComputedStyle(this.$el, null).marginTop, 10) ||
             0;
+        let transformOrigin = transformMap.BOTTOM;
 
         //位置自动 && 超出屏幕高度 || 位置在上
         if (
@@ -93,11 +97,13 @@ export default {
             this.position === "auto") ||
           this.position === "top"
         ) {
-          this.transition = "el-zoom-in-bottom";
           this.style.top =
             scrollTop + parentRect.top - elHeight - 2 * marginTop + "px";
-        } else {
-          this.transition = "el-zoom-in-top";
+          transformOrigin = transformMap.TOP;
+        }
+
+        if (this.$el) {
+          this.$el.style.transformOrigin = transformOrigin;
         }
       }
     },
@@ -128,19 +134,11 @@ export default {
         zIndex++;
         this.setPotion();
         on(window, "resize", this.setPotion);
+        on(window, "scroll", this.setPotion);
       } else {
         off(window, "resize", this.setPotion);
+        off(window, "scroll", this.setPotion);
       }
-    },
-    position: {
-      handler(val) {
-        if (val === "top") {
-          this.transition = "el-zoom-in-bottom";
-        } else if (val === "bottom") {
-          this.transition = "el-zoom-in-top";
-        }
-      },
-      immediate: true
     }
   }
 };

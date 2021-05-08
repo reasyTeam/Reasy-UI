@@ -197,21 +197,22 @@ export default {
 :::
 ### 属性 Attributes
 
-| 参数                 | 说明                                           | 类型    | 可选值             | 默认值  |
-| -------------------- | ---------------------------------------------- | ------- | ------------------ | ------- |
-| v-model              | 是否显示dialog                                 | boolean | -                  | false   |
-| title                | dialog的标题，也可通过具名slot传入             | -       | -                  | -       |
-| width                | dialog的宽度，最小宽度为400px，最大宽度为720px | string  | -                  | -       |
-| modal                | 是否需要遮罩层                                 | boolean | -                  | true    |
-| close-on-click-modal | 是否可以通过点击modal关闭dialog                | boolean | -                  | true    |
-| show-close           | 是否显示关闭按钮                               | boolean | -                  | true    |
-| show-confirm         | 是否显示确定按钮                               | boolean | -                  | true    |
-| show-cancel          | 是否显示取消按钮                               | boolean | -                  | true    |
-| confirm-button-text  | 确认按钮文字                                   | string  | -                  | 确定    |
-| cancel-button-text   | 取消按钮文字                                   | string  | -                  | 取消    |
-| confirm-button-type  | 确认按钮类型                                   | string  | 参考button组件类型 | primary |
-| cancel-button-type   | 取消按钮类型                                   | string  | 参考button组件类型 | info    |
-| align-center         | 是否对头部和底部采用居中布局                   | boolean | -                  | false   |
+| 参数                 | 说明                               | 类型    | 可选值             | 默认值  |
+| -------------------- | ---------------------------------- | ------- | ------------------ | ------- |
+| v-model              | 是否显示dialog                     | boolean | -                  | false   |
+| title                | dialog的标题，也可通过具名slot传入 | -       | -                  | -       |
+| show-title           | 是否显示dialog标题                 | boolean | -                  | true    |
+| width                | dialog的宽度                       | string  | -                  | auto    |
+| modal                | 是否需要遮罩层                     | boolean | -                  | true    |
+| close-on-click-modal | 是否可以通过点击modal关闭dialog    | boolean | -                  | false   |
+| show-close           | 是否显示关闭按钮                   | boolean | -                  | true    |
+| show-confirm         | 是否显示确定按钮                   | boolean | -                  | true    |
+| show-cancel          | 是否显示取消按钮                   | boolean | -                  | true    |
+| confirm-button-text  | 确认按钮文字                       | string  | -                  | 确定    |
+| cancel-button-text   | 取消按钮文字                       | string  | -                  | 取消    |
+| confirm-button-type  | 确认按钮类型                       | string  | 参考button组件类型 | primary |
+| cancel-button-type   | 取消按钮类型                       | string  | 参考button组件类型 | info    |
+| align-center         | 是否对头部和底部采用居中布局       | boolean | -                  | false   |
 
 
 ### Events

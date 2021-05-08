@@ -14,7 +14,7 @@
   position: relative;
   display: inline-block;
   width: $elem-width;
-  vertical-align: middle;
+  vertical-align: top;
   &__list {
     list-style: none;
     padding: 0;
@@ -25,7 +25,7 @@
     top: 0;
     right: 0;
     padding: 0 8px;
-    color: $border-color;
+    color: $light-color;
     cursor: pointer;
     &--disabled {
       color: $disabled-color;
@@ -62,6 +62,7 @@
     height: 30px;
     text-align: center;
     cursor: pointer;
+    color: $title-color;
     &:hover {
       background-color: #f5f5f5;
     }

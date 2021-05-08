@@ -11,8 +11,8 @@
       </transition>
 
       <transition name="v-dialog-inner-fade">
-        <div class="v-dialog" :style="dialogStyle" v-if="visible">
-          <div class="v-dialog__header">
+        <div ref="dialog" class="v-dialog" :style="dialogStyle" v-if="visible">
+          <div class="v-dialog__header" ref="header" v-if="showTitle">
             <slot name="title">
               <div
                 :class="[
@@ -36,10 +36,14 @@
               @click="close"
             ></i>
           </div>
-          <div class="v-dialog__main">
+          <div
+            class="v-dialog__main"
+            ref="main"
+            :style="{ 'max-height': mainMaxHeight + 'px' }"
+          >
             <slot></slot>
           </div>
-          <div :class="['v-dialog__footer', footerClass]">
+          <div ref="footer" :class="['v-dialog__footer', footerClass]">
             <slot name="footer">
               <div
                 :class="[
@@ -79,6 +83,10 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    showTitle: {
+      type: Boolean,
+      default: true
     },
     title: String,
     width: Number,
@@ -128,7 +136,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      mainMaxHeight: 600
+    };
   },
   mounted() {},
   computed: {

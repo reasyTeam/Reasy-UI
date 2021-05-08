@@ -80,6 +80,8 @@ export default {
   },
   methods: {
     clickBtn() {
+      if(this.isLoading) return;
+      if(this.disabled) return;
       this.$emit("click");
       this.$refs.btn.blur();
     }

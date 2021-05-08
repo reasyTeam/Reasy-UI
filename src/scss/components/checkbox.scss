@@ -1,10 +1,13 @@
 .v-checkbox {
   display: inline-block;
   position: relative;
+  vertical-align: middle;
+  @include clearfix;
 
   &__item {
     cursor: pointer;
-    display: inline-block;
+    float: left;
+    font-size: $font-size-m;
 
     &--disabled {
       cursor: not-allowed;

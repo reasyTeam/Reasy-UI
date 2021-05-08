@@ -1,3 +1,4 @@
+import "../scss/vars.scss";
 import "../scss/index.scss";
 
 //全局方法，挂载到prototype上的方法
@@ -16,7 +17,7 @@ import Loading from "./loading";
 import Bar from "./chart/bar";
 import Line from "./chart/line";
 import Pie from "./chart/pie";
-import Percent from "./chart/percent";
+import Percent, { Progress } from "./chart/percent";
 
 import Button from "./button";
 import { Input, InputGroup, InputNumber } from "./input";
@@ -46,9 +47,11 @@ import Tabs from "./tabs";
 import TabPane from "./tab-pane";
 import Steps from "./steps";
 import Step from "./step";
+import CollapseTransition from "./collapse/collapse-transition.js";
 
 const components = [
   Collapse,
+  CollapseTransition,
   Row,
   Col,
   Container,
@@ -91,7 +94,8 @@ const components = [
   TabPane,
   Steps,
   Step,
-  Percent
+  Percent,
+  Progress
 ];
 
 const install = function(Vue) {

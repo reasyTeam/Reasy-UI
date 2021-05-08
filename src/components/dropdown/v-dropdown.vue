@@ -9,7 +9,11 @@
     >
       {{ label }}
     </div>
-    <create-to-body :show="dropdownShow" v-clickoutside="hide">
+    <create-to-body
+      :show="dropdownShow"
+      v-clickoutside="hide"
+      :class="[panelClass]"
+    >
       <v-scroll
         ref="scroll"
         :height="scrollHeight"
@@ -115,7 +119,8 @@ export default {
           } */
         ];
       }
-    }
+    },
+    panelClass: String
   },
   data() {
     return {

@@ -11,7 +11,7 @@
     :style="{ width: inputWidth }"
   >
     <span
-      class="v-input__icon v-input__icon--prefix"
+      class="v-input__middle v-input__icon v-input__icon--prefix"
       v-if="icon"
       :class="icon"
     ></span>
@@ -19,11 +19,16 @@
       <input
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :name="name"
+        :data-name="_name"
         ref="input"
         class="input-text"
-        :class="{ 'is-disabled': disabled !== false }"
+        :class="{
+          'is-disabled': isDisabled !== false,
+          'is-hover': isHover,
+          'is-focus': isFocus
+        }"
         @focus="setFocus"
-        :disabled="disabled !== false"
+        :disabled="isDisabled !== false"
         :readonly="readonly"
         :minlength="minlength"
         :maxlength="maxlength"
@@ -39,11 +44,12 @@
       <textarea
         :rows="rows"
         :name="name"
+        :data-name="_name"
         ref="input"
         class="input-textarea"
-        :class="{ 'is-disabled': disabled !== false }"
+        :class="{ 'is-disabled': isDisabled !== false }"
         @focus="setFocus"
-        :disabled="disabled !== false"
+        :disabled="isDisabled !== false"
         :readonly="readonly"
         :minlength="minlength"
         :maxlength="maxlength"
@@ -62,36 +68,45 @@
       {{ placeholder }}
     </div>
     <!-- 后缀内容 -->
+
     <span v-if="hasSuffix" ref="suffix" class="v-input__icon--suffix">
+      <!-- 搜索 -->
+      <span
+        v-if="isSearch"
+        @mouseover="isHover = true"
+        @mouseout="isHover = false"
+        class="v-input__search v-input__icon pointer v-icon-search"
+        @click="handlerSearch()"
+      ></span>
       <!-- 清除图标 -->
       <span
         v-if="inputValue && isClear !== false"
-        class="v-input__icon pointer v-icon-close-plane"
+        class="v-input__middle v-input__icon pointer v-icon-close-plane"
         @click="clearValue()"
       ></span>
       <!-- 显示密码图标 -->
       <span
         v-if="showPassword !== false"
-        class="v-input__icon pointer"
-        :class="passwordVisible ? 'v-icon-eye-off' : 'v-icon-eye-on'"
-        @click="handlePasswordVisible"
+        class="v-input__middle v-input__icon pointer"
+        :class="passwordVisible ? 'v-icon-eye-on' : 'v-icon-eye-off'"
+        @click="handlerPasswordVisible"
       ></span>
       <!-- 自定义后缀图标 -->
-      <span v-if="suffixIcon" class="v-input__icon" :class="suffixIcon"></span>
+      <span
+        v-if="suffixIcon"
+        class="v-input__middle v-input__icon"
+        :class="suffixIcon"
+      ></span>
       <!-- 字数限制文字 -->
       <span
         v-if="showWordLimit !== false"
-        class="v-input__icon input-word-limit"
+        class="v-input__middle input-word-limit"
       >
         {{ limitTips }}
       </span>
     </span>
     <!-- 后缀内容 -->
-    <slot class="v-input__icon" name="suffix"></slot>
-    <!-- 错误信息 -->
-    <div class="v-form-item__content__msg is-error" v-if="error && !isFoucs">
-      {{ error }}
-    </div>
+    <slot name="suffix"></slot>
   </label>
 </template>
 <script>
@@ -101,6 +116,10 @@ import FormMixin from "../form-mixins";
 export default {
   name: "v-input",
   mixins: [FormMixin],
+  model: {
+    prop: "value",
+    event: "change"
+  },
   props: {
     value: {
       type: [String, Number],
@@ -119,6 +138,11 @@ export default {
     },
     width: [String, Number],
     placeholder: String,
+    //是否是搜索
+    isSearch: {
+      type: Boolean,
+      default: false
+    },
     isClear: {
       type: Boolean,
       default: false
@@ -155,7 +179,8 @@ export default {
       default: 2
     },
     //输入框允许输入字符正则
-    allow: RegExp
+    allow: RegExp,
+    valid: [Array, Object]
   },
   computed: {
     //尺寸大小样式
@@ -180,6 +205,7 @@ export default {
     hasSuffix() {
       let iconIdex = 0;
       this.isClear !== false && this.inputValue && iconIdex++;
+      this.isSearch !== false && iconIdex++;
       this.showPassword !== false && iconIdex++;
       this.suffixIcon && iconIdex++;
       this.showWordLimit && iconIdex++;
@@ -212,7 +238,8 @@ export default {
   },
   data() {
     return {
-      isFoucs: false,
+      isHover: false,
+      isFocus: false,
       subffixWidth: "",
       passwordVisible: false,
       isZh: false //是否非英文输入法
@@ -233,15 +260,24 @@ export default {
   methods: {
     changeValue(event) {
       this.$emit("change", event.target.value);
+      this.$dispatch("v-form", "form:change");
     },
     clearValue() {
-      if (this.disabled !== false) {
+      if (this.isDisabled !== false) {
         return;
       }
       this.$emit("input", "");
       this.$emit("change", "");
+      this.$dispatch("v-form", "form:change");
       this.$emit("clear");
       this.$refs.input.focus();
+    },
+    handlerSearch() {
+      if (this.isDisabled !== false) {
+        return;
+      }
+      this.$emit("search", this.value);
+      this.isFocus = true;
     },
     setInputValue(newValue) {
       const input = this.$refs.input;
@@ -253,8 +289,8 @@ export default {
       if (this.isZh) return;
       this.rectifyValue(event);
     },
-    handlePasswordVisible() {
-      if (this.disabled !== false) {
+    handlerPasswordVisible() {
+      if (this.isDisabled !== false) {
         return;
       }
       this.passwordVisible = !this.passwordVisible;
@@ -262,16 +298,23 @@ export default {
     },
     setFocus(event) {
       this.$emit("focus", event);
-      this.isFoucs = true;
+      this.isFocus = true;
     },
     focus() {
       this.$refs.input.focus();
     },
     blur(event) {
       this.$emit("blur", event);
+      //this.$emit("change", this.$refs.input.value);
+      this.isFocus = false;
+      //if(this.isChild) return;
       //失焦后数据验证
-      this.$dispatch("v-form-item", "form:blur");
-      this.isFoucs = false;
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:blur");
+      } else {
+        // this.checkValid(this.value);
+      }
     },
     getInput() {
       return this.$refs.input;
@@ -316,6 +359,12 @@ export default {
         this.setInputValue(this.inputValue);
       },
       immediate: true
+    },
+    isFocus(val) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", !val);
+      }
     }
   }
 };

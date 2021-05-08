@@ -21,6 +21,7 @@
           @mouseover="setDate(item)"
         >
           <span
+            class="v-datepicker--info"
             :class="{
               'v-datepicker--active': isSelected(item),
               'v-datepicker--range': isRangedSelected(item)

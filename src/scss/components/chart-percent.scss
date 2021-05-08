@@ -1,5 +1,6 @@
 .v-chart__percent {
   position: relative;
+  font-size: 0;
 
   &__detail {
     text-align: center;
@@ -8,6 +9,7 @@
     transform: translate(-50%, -50%);
     width: 100%;
     left: 50%;
+    font-size: 14px;
 
     &.line {
       margin-top: -20px;
@@ -49,5 +51,14 @@
   }
   .dash-back {
     transition: stroke 0.5s;
+  }
+
+  .chart-text-right{
+    right: 0;
+    left: auto;
+    margin-top: 0;
+    .v-chart__percent__detail__value{
+      font-size: 14px;
+    }
   }
 }

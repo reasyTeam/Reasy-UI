@@ -367,7 +367,7 @@ export function checkData(dataKey, value) {
 
   if (dataKey.required !== false) {
     if (val === "" || val.length === 0) {
-      return "此项必填";
+      return "本项不能为空";
     }
   } else {
     //非必填时 为空则不验证
@@ -387,18 +387,28 @@ export function checkData(dataKey, value) {
     validList = dataKey.valid;
   }
 
-  validList.forEach(valid => {
+  validList.some(valid => {
+    if (typeof valid == "function") {
+      errMsg = valid(val);
+      if (errMsg) {
+        errMsg = valid.msg || errMsg;
+        return true;
+      }
+      return false;
+    }
+
     //数据验证函数
     let handleValid = this.$valid[valid.type] || {};
+    let result;
     //验证参数
     let args = valid.args || [];
     if (typeof handleValid == "function") {
-      errMsg = handleValid(val, ...args);
+      result = handleValid(val, ...args);
     } else if (typeof handleValid.all === "function") {
-      errMsg = handleValid.all(val, ...args);
+      result = handleValid.all(val, ...args);
     }
-    if (errMsg) {
-      errMsg = valid.msg || errMsg;
+    if (result) {
+      errMsg = valid.msg || result;
       return true;
     }
   });
@@ -454,4 +464,20 @@ export function throttle(fn, wait, immediate) {
       }, wait);
     }
   };
+}
+// 获取唯一ID
+export function IGuid(len, radix) {
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split(
+    ""
+  );
+  var uuid = [],
+    i;
+  len = len || 8;
+  radix = radix || chars.length;
+
+  for (i = 0; i < len; i++) {
+    uuid[i] = chars[0 | (Math.random() * radix)];
+  }
+
+  return uuid.join("");
 }

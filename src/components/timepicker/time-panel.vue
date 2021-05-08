@@ -3,7 +3,7 @@
     <v-row>
       <!-- 时 -->
       <v-col class="v-timepicker__group" :span="colSpan">
-        <v-x-scroll ref="hour" :to-index="hourIndex">
+        <v-x-scroll :count="6" ref="hour" :to-index="hourIndex">
           <ul class="v-timepicker__list">
             <li
               v-for="hours in hoursList"
@@ -22,7 +22,7 @@
       </v-col>
       <!-- 分 -->
       <v-col class="v-timepicker__group" v-if="hasMinute" :span="colSpan">
-        <v-x-scroll ref="minute" :to-index="minuteIndex">
+        <v-x-scroll :count="6" ref="minute" :to-index="minuteIndex">
           <ul class="v-timepicker__list">
             <li
               v-for="minutes in minutesList"
@@ -41,7 +41,7 @@
       </v-col>
       <!-- 秒 -->
       <v-col class="v-timepicker__group" v-if="hasSecond" :span="colSpan">
-        <v-x-scroll ref="second" :to-index="secondIndex">
+        <v-x-scroll :count="6" ref="second" :to-index="secondIndex">
           <ul class="v-timepicker__list">
             <li
               v-for="seconds in secondsList"

@@ -12,7 +12,10 @@
             }"
             @click="selectYear(item)"
           >
-            <span :class="{ 'v-datepicker--active': year === item }">
+            <span
+              class="v-datepicker--info"
+              :class="{ 'v-datepicker--active': year === item }"
+            >
               <span>{{ item }}</span>
             </span>
           </li>
@@ -31,6 +34,7 @@
             @click="selectMonth(item)"
           >
             <span
+              class="v-datepicker--info"
               :class="{
                 'v-datepicker--active': year === tmpYear && month === item
               }"

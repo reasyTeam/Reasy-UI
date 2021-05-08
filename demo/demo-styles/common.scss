@@ -67,7 +67,7 @@ textarea {
 
   h2 {
     font-size: 28px;
-    color: #1f2d3d;
+    color: rgba(0,0,0,0.85);
     margin: 0;
   }
   h3 {
@@ -78,7 +78,7 @@ textarea {
   h4,
   h5 {
     font-weight: normal;
-    color: #1f2f3d;
+    color: rgba(0,0,0,0.85);
 
     &:hover a {
       opacity: 0.4;
@@ -98,7 +98,7 @@ textarea {
 
   p {
     font-size: 14px;
-    color: #5e6d82;
+    color: rgba(0,0,0,0.85);
     line-height: 1.5em;
     margin: 14px 0;
   }
