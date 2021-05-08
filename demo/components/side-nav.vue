@@ -191,7 +191,7 @@ export default {
 
   .nav-item {
     a {
-      color: #262626;
+      color: #8d8d8d;
       line-height: 40px;
       height: 40px;
       margin: 0;

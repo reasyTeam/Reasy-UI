@@ -109,7 +109,6 @@ export default {
     },
     scrollStyle() {
       let res = {
-        // maxHeight: `${this.wrapHeight}px`,
         display: this.isBlock ? "block" : "inline-block"
       };
       if ((this.width || this.isHorizontal) && this.wrapWidth) {
@@ -144,11 +143,11 @@ export default {
       return wrapStyle;
     }
   },
-  watch:{
-    height(val){
+  watch: {
+    height(val) {
       this.setSize(val, this.width);
     },
-    width(val){
+    width(val) {
       this.setSize(this.height, val);
     }
   },
@@ -211,29 +210,44 @@ export default {
      * 重新设置容器的宽和高
      * @param {Number} height 容器高
      * @param {Number} width 容器宽
+     * @param {Boolean} isScrollToTop 是否滚动到初始位置
      */
-    setSize(height, width) {
-      this.wrapHeight = height;
-      this.wrapWidth = width;
-      this.view.scrollTop = this.scrollTop = 0;
-      this.view.scrollLeft = this.scrollLeft = 0;
+    setSize(height, width, isScrollToTop) {
+      this.height = height;
+      this.width = width;
+      if (isScrollToTop) {
+        this.view.scrollTop = this.scrollTop = 0;
+        this.view.scrollLeft = this.scrollLeft = 0;
+      }
       this.isVertical = false;
       this.isHorizontal = false;
 
-      this.update();
-      this.$emit("mounted");
+      this.$nextTick(() => {
+        this.update();
+        this.$emit("mounted");
+      });
     },
     /**
      * 更新滚动条相关配置
      * 内部内容变化需要手动调用重新计算高度
      */
     update() {
+      this.wrapWidth = this.width || this.$el.parentNode.offsetWidth;
+      if (this.height === "inherit") {
+        this.wrapHeight = this.$el.parentNode.offsetHeight;
+      } else if (this.height === "auto") {
+        this.wrapHeight = 0;
+      } else {
+        this.wrapHeight = this.height;
+      }
+
       let width = this.view.scrollWidth;
       let height = this.view.scrollHeight;
+
       this.isVertical = this.overflow === "auto" || this.overflow === "y";
+      this.isVertical = this.isVertical && this.wrapHeight < height;
       this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
       this.isHorizontal = this.isHorizontal && this.wrapWidth < width;
-      this.isVertical = this.isVertical && this.wrapHeight < height;
 
       if (this.isHorizontal) {
         this.hBarWidth = parseInt((this.wrapWidth / width) * this.wrapWidth);
@@ -297,15 +311,6 @@ export default {
     }
   },
   mounted() {
-    this.wrapWidth = this.width || this.$el.parentNode.offsetWidth;
-    if (this.height === "inherit") {
-      this.wrapHeight = this.$el.parentNode.offsetHeight;
-    } else if (this.height === "auto") {
-      this.wrapHeight = 0;
-    } else {
-      this.wrapHeight = this.height;
-    }
-
     this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
     this.isVertical = this.overflow === "auto" || this.overflow === "y";
     this.update();

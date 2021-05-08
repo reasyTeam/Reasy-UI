@@ -297,6 +297,7 @@
 | scrollToX(to)        | 水平滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
 | scrollToY(to)        | 垂直滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
 | scrollToIndex(index) | 滚动到第几个元素                                   | 元素索引，从 1 开始                     |
+| setSize(height, width, isScrollToTop) | 修改容器的宽高           | 高，框，是否滚动到左上角                     |
 
 ### Slot
 
