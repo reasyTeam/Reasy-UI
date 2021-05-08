@@ -291,6 +291,7 @@ export default {
 
   .v-collapse__header {
     padding-left: 24px;
+    @include bold;
   }
   .v-collapse__header,
   .v-collapse__arrow {

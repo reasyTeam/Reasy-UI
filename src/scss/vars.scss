@@ -42,3 +42,8 @@ $elem-width: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin bold{
+  font-family: PingFangSC-Medium, PingFang SC, arial, "Microsoft Yahei",
+    "Hiragino Sans GB", sans-serif;
+} 

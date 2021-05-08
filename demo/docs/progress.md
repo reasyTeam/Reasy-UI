@@ -8,7 +8,7 @@
 
 :::demo
 
-```html 
+```html
 <v-row :gutter="24">
   <v-col :span="24">
     <v-progress :height="40" :value=".5" type="line"></v-progress>
@@ -25,13 +25,14 @@
 ```
 
 :::
+
 ### 小型进度条
 
 适合放在较狭窄的区域内。
 
 :::demo
 
-```html 
+```html
 <v-row :gutter="24">
   <v-col :offset="9" :span="6">
     <v-progress :height="30" :strokeWidth="6" :value=".5" type="line"></v-progress>

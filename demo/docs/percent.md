@@ -8,7 +8,7 @@
 
 :::demo 默认配置要保证组件的外层容器有对应的`高`和`宽`，否则无法渲染图表。
 
-```html 
+```html
 <v-row :gutter="24">
   <v-col :span="8">
     <v-chart-percent :height="160" :value=".7"></v-chart-percent>

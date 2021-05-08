@@ -11,70 +11,70 @@
   <div class="tooltip-demo__position-12">
     <v-row>
       <v-col :offset="3" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-left">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-left">
           <v-button>上左</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-center">
+      <v-col :offset="1" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-center">
           <v-button>上中</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-right">
+      <v-col :offset="1" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="top-right">
           <v-button>上右</v-button>
         </v-tooltip>
       </v-col>
     </v-row>
     <v-row class="left-right-row">
       <v-col :offset="1" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-top">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-top">
           <v-button>左上</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :offset="6" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-top">
+      <v-col :offset="8" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-top">
           <v-button>右上</v-button>
         </v-tooltip>
       </v-col>
     </v-row>
     <v-row class="left-right-row">
       <v-col :offset="1" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-center">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-center">
           <v-button>左中</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :offset="6" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-center">
+      <v-col :offset="8" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-center">
           <v-button>右中</v-button>
         </v-tooltip>
       </v-col>
     </v-row>
     <v-row class="left-right-row">
       <v-col :offset="1" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-bottom">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="left-bottom">
           <v-button>左下</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :offset="6" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-bottom">
+      <v-col :offset="8" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="right-bottom">
           <v-button>右下</v-button>
         </v-tooltip>
       </v-col>
     </v-row>
     <v-row class="left-right-row">
       <v-col :offset="3" :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-left">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-left">
           <v-button>下左</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-center">
+      <v-col :offset="1" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-center">
           <v-button>下中</v-button>
         </v-tooltip>
       </v-col>
-      <v-col :span="2">
-        <v-tooltip :max-width="210" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-right">
+      <v-col :offset="1" :span="2">
+        <v-tooltip :max-width="210" :enterable="false" content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。" position="bottom-right">
           <v-button>下右</v-button>
         </v-tooltip>
       </v-col>

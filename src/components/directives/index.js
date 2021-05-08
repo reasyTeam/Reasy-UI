@@ -20,8 +20,10 @@ const tooltipConfig = {
           const popupsVm = this.$refs.popups;
           // 点击该parentElm元素不会执行v-clickoutside的方法
           popupsVm.parentElm = el;
-          popupsVm.popupsDomProps = popupsVm.$refs.popups.getBoundingClientRect();
-          popupsVm.referenceDomProps = el.getBoundingClientRect();
+          if (popupsVm.visible) {
+            popupsVm.popupsDomProps = popupsVm.$refs.popups.getBoundingClientRect();
+            popupsVm.referenceDomProps = el.getBoundingClientRect();
+          }
 
           on(el, "click", popupsVm.handleClick);
           on(el, "mouseenter", popupsVm.handleMouseenter);

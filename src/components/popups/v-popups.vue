@@ -10,12 +10,7 @@
       <div
         v-if="visible"
         ref="popups"
-        :class="[
-          'v-popups',
-          `v-popups--${effect}`,
-          customClass,
-          { 'v-popups--hidden': hidden }
-        ]"
+        :class="['v-popups', `v-popups--${effect}`, customClass]"
         :style="popupsStyle"
         @mouseenter="handlePopupsEnter"
         @mouseleave="handlePopupsLeave"
@@ -213,8 +208,7 @@ export default {
   },
   data() {
     return {
-      visible: true,
-      hidden: true,
+      visible: false,
       popupsStyle: {},
       arrowStyle: {},
       arrowClass: "",
@@ -224,29 +218,8 @@ export default {
     };
   },
   mounted() {
-    const {
-      $el,
-      $refs: { popups }
-    } = this;
-
     // 点击该parentElm元素不会执行v-clickoutside的方法
-    this.parentElm = $el;
-    this.$nextTick(() => {
-      // 先渲染，获取到弹出框宽高后再隐藏弹出框
-      this.popupsDomProps = popups.getBoundingClientRect();
-      this.referenceDomProps = this.parentElm.getBoundingClientRect();
-      this.visible = false;
-      this.hidden = false;
-      if (this.trigger === "manual") {
-        this.visible = this.value;
-        if (this.visible) {
-          this.show();
-        } else {
-          this.hide();
-        }
-      }
-      document.body.appendChild(popups);
-    });
+    this.parentElm = this.$el;
   },
   methods: {
     handleMouseenter() {
@@ -329,15 +302,18 @@ export default {
       if (this.visible !== isShow) {
         this.visible = isShow;
         this.$emit("visible-change", isShow);
-      }
 
-      if (isShow) {
-        this.bindEvent();
-        this.$nextTick(() => {
-          this.setPosition();
-        });
-      } else {
-        this.unbindEvent();
+        const $body = document.body;
+        if (isShow) {
+          this.bindEvent();
+          this.$nextTick(() => {
+            $body.appendChild(this.$refs.popups);
+            this.setPosition();
+          });
+        } else {
+          $body.removeChild(this.$refs.popups);
+          this.unbindEvent();
+        }
       }
     },
     show() {
@@ -357,6 +333,11 @@ export default {
       return moveNegative ? -space : space;
     },
     setPosition(_position = this._position) {
+      if (this.visible) {
+        this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
+        this.referenceDomProps = this.parentElm.getBoundingClientRect();
+      }
+
       this.setPopupsStyle(..._position);
       this.setArrowStyle(..._position);
 
@@ -370,10 +351,10 @@ export default {
       if (!this.popupsStyle.zIndex) {
         // 首次加载
         popupsStyleObj.zIndex = zIndex++;
-        this.referenceDomProps = this.parentElm.getBoundingClientRect();
+        // this.referenceDomProps = this.parentElm.getBoundingClientRect();
       } else if (this.trigger === "hover") {
         // hover时获取触发弹出的元素属性，用于滚动后获取
-        this.referenceDomProps = this.parentElm.getBoundingClientRect();
+        // this.referenceDomProps = this.parentElm.getBoundingClientRect();
       }
 
       const { popupsDomProps, referenceDomProps } = this;
@@ -442,20 +423,9 @@ export default {
     },
     updatePosition() {
       if (this.visible) {
-        this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
-        this.referenceDomProps = this.parentElm.getBoundingClientRect();
+        // this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
+        // this.referenceDomProps = this.parentElm.getBoundingClientRect();
         this.setPosition();
-      } else {
-        this.hidden = true;
-        this.visible = true;
-        this.$nextTick(() => {
-          if (this.$refs.popups) {
-            this.popupsDomProps = this.$refs.popups.getBoundingClientRect();
-          }
-          this.referenceDomProps = this.parentElm.getBoundingClientRect();
-          this.visible = false;
-          this.hidden = false;
-        });
       }
     }
   },
