@@ -58,7 +58,7 @@ $class: v-loading;
     // transform: scale(0.75);
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
-    opacity: 0.3;
+    opacity: 0.1;
     animation: dotMove 1s linear infinite alternate;
 
     &:first-child {
