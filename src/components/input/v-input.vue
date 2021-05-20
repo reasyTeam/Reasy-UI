@@ -67,8 +67,8 @@
     >
       {{ placeholder }}
     </div>
-    <!-- 后缀内容 -->
 
+    <!-- 后缀内容 -->
     <span v-if="hasSuffix" ref="suffix" class="v-input__icon--suffix">
       <!-- 搜索 -->
       <span
@@ -86,7 +86,7 @@
       ></span>
       <!-- 显示密码图标 -->
       <span
-        v-if="showPassword !== false"
+        v-if="showPassword"
         class="v-input__middle v-input__icon pointer"
         :class="passwordVisible ? 'v-icon-eye-on' : 'v-icon-eye-off'"
         @click="handlerPasswordVisible"
@@ -99,10 +99,10 @@
       ></span>
       <!-- 字数限制文字 -->
       <span
-        v-if="showWordLimit !== false"
+        v-if="showWordLimit && this.maxlength"
         class="v-input__middle input-word-limit"
       >
-        {{ limitTips }}
+        {{ valueLen + "/" + this.maxlength }}
       </span>
     </span>
     <!-- 后缀内容 -->
@@ -180,7 +180,12 @@ export default {
     },
     //输入框允许输入字符正则
     allow: RegExp,
-    valid: [Array, Object]
+    valid: [Array, Object],
+    //单位
+    unit: {
+      type: String,
+      default: ""
+    }
   },
   computed: {
     //尺寸大小样式
@@ -214,7 +219,7 @@ export default {
         //图标宽度 + 边距 = 24
         let suffixWidth = 8;
         if (this.$refs.suffix) {
-          suffixWidth = this.$refs.suffix.scrollWidth + 4;
+          suffixWidth = this.$refs.suffix.scrollWidth;
         }
         this.subffixWidth = suffixWidth; //iconIdex * 24 + 8;
       });
@@ -223,21 +228,11 @@ export default {
     //输入框值
     inputValue() {
       return this.value;
-    },
-    //限制字符长度文字
-    limitTips() {
-      if (!this.maxlength) {
-        return "";
-      }
-      let maxLen = this.inputValue.length;
-      if (maxLen > this.maxlength) {
-        maxLen = this.maxlength;
-      }
-      return maxLen + "/" + this.maxlength;
     }
   },
   data() {
     return {
+      valueLen: 0, //输入框值长度
       isHover: false,
       isFocus: false,
       subffixWidth: "",
@@ -256,6 +251,14 @@ export default {
     this.isZh = false;
     on(this.getInput(), "compositionstart", this.compositionstart);
     on(this.getInput(), "compositionend", this.compositionend);
+
+    //适配自动化脚本
+    this.$refs.input.changeValue = value => {
+      if (this.value !== undefined) {
+        this.$emit("change", value);
+        this.$dispatch("v-form", "form:change");
+      }
+    };
   },
   methods: {
     changeValue(event) {
@@ -299,11 +302,20 @@ export default {
     setFocus(event) {
       this.$emit("focus", event);
       this.isFocus = true;
+      if (this.unit) {
+        this.setInputValue(this.inputValue);
+      }
     },
     focus() {
       this.$refs.input.focus();
     },
+    select() {
+      this.$refs.input.select();
+    },
     blur(event) {
+      if (this.unit && this.inputValue) {
+        this.setInputValue(this.inputValue + " " + this.unit);
+      }
       this.$emit("blur", event);
       //this.$emit("change", this.$refs.input.value);
       this.isFocus = false;
@@ -346,6 +358,7 @@ export default {
         setCursorPos(event.target, inputVal.length - endNum);
         //});
       }
+      this.valueLen = inputVal.length;
       this.$emit("input", inputVal);
     }
   },
@@ -355,8 +368,13 @@ export default {
   },
   watch: {
     value: {
-      handler() {
-        this.setInputValue(this.inputValue);
+      handler(val) {
+        this.valueLen = val.length;
+        this.$nextTick(() => {
+          this.setInputValue(
+            this.inputValue + (val && this.unit ? " " + this.unit : "")
+          );
+        });
       },
       immediate: true
     },

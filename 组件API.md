@@ -68,6 +68,7 @@
 | rows            | textarea时生效                                               | number          | —                                  | 2      |
 | allow           | 输入框允许输入字符的正则表达式                               | RegExp          | —                                  | —      |
 | valid           | 数据验证                                                     | Array / Object  |                                    |        |
+| unit            | 输入框单位                                                   | String          | —                                  | —      |
 
 ## 事件 Events
 

@@ -3,7 +3,12 @@
     <v-row>
       <!-- 时 -->
       <v-col class="v-timepicker__group" :span="colSpan">
-        <v-x-scroll :count="6" ref="hour" :to-index="hourIndex">
+        <v-x-scroll
+          :count="6"
+          ref="hour"
+          :to-index="hourIndex"
+          @mounted="setPosition"
+        >
           <ul class="v-timepicker__list">
             <li
               v-for="hours in hoursList"
@@ -128,25 +133,16 @@ export default {
     //小时选中第几个
     hourIndex() {
       let index = this.hoursList.indexOf(this.hour) + 1;
-      this.$nextTick(() => {
-        this.$refs.hour.scrollToIndex(index);
-      });
       return index;
     },
     //分钟选中第几个
     minuteIndex() {
       let index = this.minutesList.indexOf(this.minute) + 1;
-      this.$nextTick(() => {
-        this.$refs.minute.scrollToIndex(index);
-      });
       return index;
     },
     //秒钟选中第几个
     secondIndex() {
       let index = this.secondsList.indexOf(this.second) + 1;
-      this.$nextTick(() => {
-        this.$refs.second.scrollToIndex(index);
-      });
       return index;
     },
     // 最小时间
@@ -180,12 +176,15 @@ export default {
       second: ""
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.$dispatch("create-to-body", "update:position");
-    });
-  },
   methods: {
+    setPosition() {
+      this.$nextTick(() => {
+        this.$dispatch("create-to-body", "update:position");
+        this.$refs.hour.scrollToIndex(this.hourIndex);
+        this.hasMinute && this.$refs.minute.scrollToIndex(this.minuteIndex);
+        this.hasSecond && this.$refs.second.scrollToIndex(this.secondIndex);
+      });
+    },
     //获取时分秒的数字
     getTimeNumber(time) {
       let timeObj = parseDate(time, this.format);

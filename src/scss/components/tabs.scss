@@ -37,7 +37,7 @@
         color: lighten($main-active-color, 10%);
       }
       &.tab-nav--active {
-        @extend .bold;
+        @include bold;
         color: $main-active-color;
         font-weight: 500;
       }

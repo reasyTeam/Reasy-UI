@@ -248,6 +248,7 @@
   };
 </script>
 ```
+
 :::
 
 ### 文本区域
@@ -309,6 +310,7 @@
 | suffix-icon     | 输入框尾部图标                                                       | string          | —                                    | —      |
 | rows            | textarea 时生效                                                      | number          | —                                    | 2      |
 | allow           | 输入框允许输入字符的正则表达式                                       | RegExp          | —                                    | —      |
+| unit            | 输入框单位                                                           | String          | —                                    | —      |
 
 ### v-input Events
 
@@ -319,7 +321,6 @@
 | blur   | 输入框失焦时触发                                     | event      |
 | focus  | 输入框聚焦时触发                                     | event      |
 | clear  | 点击清空时触发                                       | —          |
-
 
 ## v-input Methods
 

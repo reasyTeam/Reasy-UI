@@ -82,6 +82,8 @@ export default {
     // 水平和垂直方向可滚动的范围
     this.scrollLeftRange = this.scrollTopRange = 1;
     this.isMac = /macintosh|mac os x/i.test(navigator.userAgent);
+    this.newHeight = this.height;
+    this.newWidth = this.height;
     return {
       // 浏览器默认滚动条宽度
       barWidth: getScrollWidth(),
@@ -216,8 +218,8 @@ export default {
      * @param {Boolean} isScrollToTop 是否滚动到初始位置
      */
     setSize(height, width, isScrollToTop) {
-      this.height = height;
-      this.width = width;
+      this.newHeight = height;
+      this.newWidth = width;
       if (isScrollToTop) {
         this.view.scrollTop = this.scrollTop = 0;
         this.view.scrollLeft = this.scrollLeft = 0;
@@ -235,13 +237,14 @@ export default {
      * 内部内容变化需要手动调用重新计算高度
      */
     update() {
-      this.wrapWidth = this.width || this.$el.parentNode.offsetWidth;
-      if (this.height === "inherit") {
+      this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
+      let newHeight = this.newHeight;
+      if (newHeight === "inherit") {
         this.wrapHeight = this.$el.parentNode.offsetHeight;
-      } else if (this.height === "auto") {
+      } else if (newHeight === "auto") {
         this.wrapHeight = 0;
       } else {
-        this.wrapHeight = this.height;
+        this.wrapHeight = newHeight;
       }
 
       let width = this.view.scrollWidth;

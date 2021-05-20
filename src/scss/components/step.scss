@@ -25,7 +25,6 @@
       font-size: $icon-size;
     }
     & > .is-text {
-      // padding: $icon-size/4 0;
       width: $icon-size;
       height: $icon-size;
       line-height: $icon-size - $border-width * 2;
@@ -69,7 +68,7 @@
       color: $main-active-color;
     }
     .v-step__title--default {
-      @extend .bold;
+      @include bold;
       color: $main-active-color;
       font-weight: 500;
     }

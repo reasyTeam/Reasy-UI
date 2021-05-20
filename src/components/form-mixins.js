@@ -54,7 +54,7 @@ export default {
     },
     checkValid(val) {
       let result = this.checkData(val);
-      this.elFormItem.setError(result);
+      this.elFormItem && this.elFormItem.setError(result);
     },
     checkData(val) {
       let result,

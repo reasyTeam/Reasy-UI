@@ -1,3 +1,5 @@
+@import "./step.scss";
+
 $icon-size: 32px;
 $icon-line-space: 8px;
 
@@ -32,7 +34,6 @@ $icon-line-space: 8px;
 
   .v-steps__main {
     @include clearfix;
-    // margin-top: -$icon-size + 12px;
     font-size: 0;
     white-space: nowrap;
   }

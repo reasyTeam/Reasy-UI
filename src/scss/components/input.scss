@@ -43,6 +43,8 @@ input[type="number"] {
   }
   &__icon {
     font-size: $font-size-l;
+    width: $font-size-l;
+    display: inline-block;
     &.pointer:hover {
       color: darken($border-color, 15%);
     }
