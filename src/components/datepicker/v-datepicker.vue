@@ -306,7 +306,7 @@ export default {
       this.isClickRange = false;
       this.startDate = "";
       this.endDate = "";
-      this.$emit("change", this.isRange ? ["", ""] : "");
+      this.changeValue(this.isRange ? [] : "");
     },
     //点击日期执行事件
     clickStartPanel() {
@@ -524,14 +524,23 @@ export default {
       if (this.isRange) {
         let endDateTime = this.endDate;
         if (dateTime != this.value[0] || endDateTime !== this.value[1]) {
-          this.$emit("change", [dateTime, endDateTime]);
+          this.changeValue([dateTime, endDateTime]);
         }
       } else {
         if (dateTime != this.value) {
-          this.$emit("change", dateTime);
+          this.changeValue(dateTime);
         }
       }
       this.hide();
+    },
+    changeValue(val) {
+      this.$emit("change", val);
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:blur", val);
+      } else {
+        // this.checkValid(this.value);
+      }
     },
     formatData(value) {
       if (value) {
@@ -597,6 +606,19 @@ export default {
     },
     clickHeader(type) {
       this.headerType = type;
+    },
+    beforeCheckError(val) {
+      if (this.isRange) {
+        let startTime = val[0] || "",
+          endTime = val[1] || "";
+        if (!startTime && !endTime) {
+          return "请选择日期范围";
+        } else if (!startTime) {
+          return "请选择开始时间";
+        } else if (!endTime) {
+          return "请选择结束时间";
+        }
+      }
     }
   },
   watch: {

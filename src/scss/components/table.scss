@@ -1,6 +1,7 @@
 .v-table {
   position: relative;
   color: $info-color;
+
   th {
     @extend .no-select;
   }
@@ -14,6 +15,15 @@
       &:hover {
         background: #f5f5f5;
       }
+    }
+
+    &__checkbox {
+      line-height: 20px;
+    }
+
+    &__label {
+      vertical-align: top;
+      line-height: 20px;
     }
   }
 
@@ -29,6 +39,9 @@
   &__row {
     &:hover {
       background: $disabled-background-color;
+    }
+    &--active {
+      background-color: scale-color($color: $main-active-color, $alpha: -90%) !important;
     }
   }
 
@@ -105,6 +118,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+
       &:hover {
         color: $main-active-color;
       }
@@ -114,10 +128,12 @@
       padding-left: 24px;
     }
   }
+
   &__footer {
     margin-top: 20px;
     text-align: right;
   }
+
   &__search {
     margin-bottom: 16px;
   }

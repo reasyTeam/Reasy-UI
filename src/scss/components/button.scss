@@ -3,43 +3,56 @@
   line-height: 20px;
   text-align: center;
   outline: 0;
-  border: none;
+  border: 2px solid transparent;
+  border-radius: 2px;
   cursor: pointer;
-  & + & {
+
+  &+& {
     margin-left: 12px;
   }
+  &--inner {
+    min-width: auto !important;
+  }
+  &__item {
+    display: inline-block;
+  }
+
   &--medium {
     padding: 0 16px;
     height: $form-line-height;
     min-width: 60px;
     font-size: $font-size-m;
-    .button-prefix {
-      padding-right: 8px;
-    }
-    .button-suffix {
+
+    .v-button__item + .v-button__item {
       padding-left: 8px;
     }
   }
+
   &--small {
     padding: 0 12px;
     height: $form-line-height-s;
     min-width: 48px;
     font-size: $font-size-s;
+
     .button-prefix {
       padding-right: 4px;
     }
+
     .button-suffix {
       padding-left: 4px;
     }
   }
+
   &--large {
     padding: 0 24px;
     height: $form-line-height-l;
     min-width: 80px;
     font-size: $font-size-l;
+
     .button-prefix {
       padding-right: 8px;
     }
+
     .button-suffix {
       padding-left: 8px;
     }
@@ -48,86 +61,118 @@
   &--primary {
     background-color: $main-active-color;
     color: #fff;
+
     &:hover {
       background-color: lighten($main-active-color, 15%);
     }
+
     &:focus {
-      background-color: lighten($main-active-color, 10%);
+      box-shadow: 0 0 2px 2px scale-color($main-active-color, $alpha: -60%);
     }
+
     &:active {
       background-color: darken($main-active-color, 10%);
     }
-  }
 
-  &--secondary {
-    background-color: #fff;
-    color: $main-active-color;
-    border: 1px solid $main-active-color;
+    &--disabled {
+      background: scale-color($main-active-color, $alpha: -60%) !important;
+      cursor: not-allowed;
+      box-shadow: none !important;
+    }
   }
 
   &--info {
     background-color: #fff;
     color: $info-color;
     border: 1px solid $border-color;
-  }
 
-  &--secondary, &--info {
     &:hover {
-      background-color: lighten($main-active-color, 45%);
+      background-color: #fff;
       color: $main-active-color;
       border-color: $main-active-color;
     }
+
     &:focus {
-      background-color: #fff;
       border-color: $main-active-color;
+      box-shadow: 0 0 2px 2px scale-color($main-active-color, $alpha: -60%);
+      background-color: scale-color($main-active-color, $alpha: -90%);
     }
+
     &:active {
-      background-color: lighten($main-active-color, 30%);
-      color: darken($main-active-color, 5%);
-      border-color: darken($main-active-color, 5%);
+      background-color: scale-color($main-active-color, $alpha: -90%);
+    }
+
+    &--disabled {
+      background: $disabled-background-color !important;
+      color: $disabled-color !important;
+      border-color: $border-color !important;
+      box-shadow: none !important;
+      cursor: not-allowed;
     }
   }
 
   &--danger {
     background-color: $error-color;
     color: #fff;
+
     &:hover {
       background-color: lighten($error-color, 15%);
     }
+
     &:focus {
       background-color: lighten($error-color, 10%);
+      box-shadow: 0 0 2px 2px scale-color($error-color, $alpha: -60%);
     }
+
     &:active {
+      box-shadow: none;
       background-color: darken($error-color, 10%);
     }
+
+    &--disabled {
+      background: scale-color($error-color, $alpha: -60%) !important;
+      box-shadow: none !important;
+      cursor: not-allowed;
+    }
   }
+
   &--text {
     width: auto;
     color: $main-active-color;
     background-color: transparent;
-    padding: 2px;
+    padding: 1px 2px;
+
+    line-height: 22px;
+    height: auto;
+
     &:hover {
       color: lighten($main-active-color, 15%);
     }
+
     &:focus {
       background-color: #fff;
-      border-color: $main-active-color;
-      border-color: lighten($main-active-color, 15%);;
+      border-color: scale-color($main-active-color, $alpha: -60%);
     }
+
     &:active {
-      color: darken($main-active-color, 5%);
+      color: darken($main-active-color, 10%);
       border-color: transparent;
     }
+
+    &--disabled {
+      color: $disabled-color !important;
+      cursor: not-allowed;
+      border-color: transparent !important;
+    }
   }
+
   &--loading {
     animation: rotate 1.6s linear infinite;
     display: inline-block;
   }
+
   &__icon {
     font-size: 16px;
     vertical-align: middle;
   }
 }
-
-
-

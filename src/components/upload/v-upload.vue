@@ -37,11 +37,11 @@
       ></upload-image>
       <!-- 上传文件列表 -->
       <div
-        v-if="fileStr && showFileList"
+        v-if="fileName && showFileList"
         class="v-upload__tips"
         :class="{ 'v-upload__tips--center': type === 'picture' }"
       >
-        <span>{{ fileStr }}</span>
+        <span>{{ fileName }}</span>
       </div>
       <!-- 上传文件 -->
       <input
@@ -84,6 +84,11 @@ export default {
     },
     //支持上传的文件类型
     accept: String,
+    crossDomain: {
+      // 是否跨域
+      type: Boolean,
+      default: false
+    },
     disabled: {
       type: Boolean,
       default: false
@@ -104,6 +109,10 @@ export default {
     showFileList: {
       type: Boolean,
       default: false
+    },
+    noFileText: {
+      type: String,
+      default: ""
     },
     //上传成功
     onSuccess: {
@@ -131,6 +140,9 @@ export default {
         return "image/*";
       }
       return "";
+    },
+    fileName() {
+      return this.fileStr || this.noFileText;
     }
   },
   data() {
@@ -145,9 +157,16 @@ export default {
     this.targetFile = "upload?" + Math.random();
   },
   mounted() {
-    this.$refs.upload.addEventListener("load", () => {
-      this.parseIframeResponse();
-    });
+    if (!this.crossDomain) {
+      this.$refs.upload.addEventListener("load", () => {
+        this.parseIframeResponse();
+      });
+    } else {
+      // 跨域解决方案  使用postMessage
+      // 后台跳转到 /corss-domain-res.html 并带参数
+
+      window.addEventListener("message", this.parseIframeCrossReponse, false);
+    }
   },
   methods: {
     //处理上传返回
@@ -160,6 +179,7 @@ export default {
       if (!response) {
         return false;
       }
+
       try {
         const jsonStr = JSON.parse(response);
         this.uploadType = UPLOAD_TYPE.UPLOADED;
@@ -167,6 +187,13 @@ export default {
       } catch (err) {
         console.log(err);
       }
+    },
+
+    parseIframeCrossReponse(event) {
+      let data = event.data;
+      // 跨域解决方案
+      this.uploadType = UPLOAD_TYPE.UPLOADED;
+      this.onSuccess(data);
     },
 
     //获取图片的base64位，缩略图使用
@@ -202,14 +229,20 @@ export default {
       }
       this.onChange(this.fileStr);
     },
-    submit() {
-      let result = this.beforeUpload(this.fileStr);
+    async submit() {
+      let result = await this.beforeUpload(this.fileStr);
       if (!result) return;
       this.$refs.iform.submit();
       this.uploadType = UPLOAD_TYPE.LOADING;
       //上传后清空文件
       this.$refs.file.value = "";
+    },
+    clearFile() {
+      this.$refs.file.value = "";
     }
+  },
+  beforeDestroy() {
+    window.removeEventListener("message", this.parseIframeCrossReponse, false);
   }
 };
 </script>

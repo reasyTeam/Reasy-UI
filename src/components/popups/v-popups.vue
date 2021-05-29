@@ -435,7 +435,12 @@ export default {
     } = this;
 
     this.unbindEvent();
-    popups && document.body.removeChild(popups);
+    try {
+      // 切换页面如果还显示在body中，则移除
+      popups && document.body.removeChild(popups);
+    } catch (e) {
+      // 当前页面remove依赖元素（容错处理）
+    }
   },
   watch: {
     value(newVal) {

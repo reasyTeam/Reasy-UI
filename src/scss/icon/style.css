@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'icomoon';
-  src:
-    url('fonts/icomoon.ttf?7u8civ') format('truetype'),
-    url('fonts/icomoon.woff?7u8civ') format('woff'),
-    url('fonts/icomoon.svg?7u8civ#icomoon') format('svg');
+  src: 
+    url('fonts/icomoon.ttf?nejc2m') format('truetype'),
+    url('fonts/icomoon.woff?nejc2m') format('woff'),
+    url('fonts/icomoon.svg?nejc2m#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.v-icon-radio-checked:before {
+  content: "\e90c";
+}
 .v-icon-minus:before {
   content: "\e921";
 }

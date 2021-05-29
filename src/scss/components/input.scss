@@ -2,24 +2,25 @@ $main-active-light-color: lighten($main-active-color, 10%);
 
 @mixin input-size($fontSize, $lineHeight) {
   font-size: $fontSize;
-  line-height: $lineHeight;
 
   .input-text,
   .v-input-group__splitter,
   .placeholder-text {
     font-size: $fontSize;
     height: $lineHeight;
-    line-height: $lineHeight;
   }
 
+  .v-input-group__splitter,
   .v-input__middle {
     height: $lineHeight;
     line-height: $lineHeight;
   }
+
   .v-input__search {
     height: $lineHeight - 2;
     line-height: $lineHeight - 2;
   }
+
   .v-input__icon--suffix {
     height: $lineHeight;
   }
@@ -38,13 +39,16 @@ input[type="number"] {
   position: relative;
   display: inline-block;
   width: $elem-width;
+
   &__middle {
     color: $border-color;
   }
+
   &__icon {
     font-size: $font-size-l;
     width: $font-size-l;
     display: inline-block;
+
     &.pointer:hover {
       color: darken($border-color, 15%);
     }
@@ -75,15 +79,18 @@ input[type="number"] {
     display: inline-block;
     //border: 1px solid transparent;
     border-left: 1px solid $border-color;
+
     &:hover {
       background-color: lighten($main-active-color, 45%);
       color: $main-active-color;
       border-left: 1px solid $main-active-color;
     }
+
     &:focus {
       background-color: #fff;
       border: 1px solid $main-active-color;
     }
+
     &:active {
       background-color: lighten($main-active-color, 30%);
       color: darken($main-active-color, 5%);
@@ -96,6 +103,7 @@ input[type="number"] {
   }
 
   &--medium {
+    line-height: 22px;
     @include input-size($font-size-m, $form-line-height);
 
     &.v-input--no-border {
@@ -104,6 +112,7 @@ input[type="number"] {
   }
 
   &--small {
+    line-height: 20px;
     @include input-size($font-size-s, $form-line-height-s);
 
     &.v-input--no-border {
@@ -112,6 +121,7 @@ input[type="number"] {
   }
 
   &--large {
+    line-height: 24px;
     @include input-size($font-size-l, $form-line-height-l);
 
     &.v-input--no-border {
@@ -174,6 +184,7 @@ input[type="number"] {
     border-color: $main-active-light-color;
     box-shadow: 0px 0px 4px 0px $main-active-light-color;
   }
+
   .placeholder-text {
     padding: 0;
   }
@@ -220,6 +231,7 @@ input[type="number"] {
 .is-hover {
   border: 1px solid $main-active-light-color;
 }
+
 .is-focus {
   border: 1px solid $main-active-light-color;
   box-shadow: 0px 0px 4px 0px $main-active-light-color;
@@ -247,18 +259,41 @@ input[type="number"] {
     right: 0px;
     width: 30px;
     height: 50%;
+    font-size: 12px;
     text-align: center;
     cursor: pointer;
     border: 0;
-    border-left: 1px solid $light-gray-color;
+    border-left: 1px solid $border-color;
 
     &+.v-input-number__button {
-      border-top: 1px solid $light-gray-color;
+      border-top: 1px solid $border-color;
+    }
+
+    &::before {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: $main-active-color;
+    }
+
+    &:focus,
+    &:active {
+      color: $main-active-color;
+      background: #f5f5f5;
     }
   }
 
   .btn-disabled {
     cursor: not-allowed;
+    background: #f5f5f5;
+    color: $disabled-color;
+
+    &:focus {
+      border-color: $border-color;
+      box-shadow: none;
+      color: $disabled-color;
+    }
   }
 
   //左右控制器位置
@@ -270,11 +305,12 @@ input[type="number"] {
     position: absolute;
     top: 0;
     height: 100%;
-    padding: 0 8px;
+    padding: 0 2px;
     min-width: 32px;
     width: 32px;
     border: none;
     z-index: 4;
+    text-align: center;
 
     &--left {
       left: 0;
@@ -299,6 +335,11 @@ input[type="number"] {
         border-left: 1px solid $main-active-light-color;
       }
     }
+    &:focus,
+    &:active {
+      color: $main-active-color;
+      background: #f5f5f5;
+    }
   }
 
   .up {
@@ -307,13 +348,5 @@ input[type="number"] {
 
   .down {
     bottom: 0;
-  }
-}
-
-.is-disabled {
-  .v-input-number__button {
-    background: $disabled-background-color;
-    border: 1px solid $disabled-background-color !important;
-    cursor: not-allowed;
   }
 }

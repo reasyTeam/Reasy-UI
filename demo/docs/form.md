@@ -55,6 +55,7 @@
 <v-form ref="form" :model="ruleForm" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid">
     <v-input v-model="ruleForm.ssid"></v-input>
+    <span>秒</span>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
@@ -93,9 +94,12 @@
   </v-form-item>
   <v-form-item label="时间" prop="time">
     <v-timepicker v-model="ruleForm.time"></v-timepicker>
+    <v-form-item prop="time" is-no-label is-inline>
+      <v-datepicker v-model="ruleForm.date" type="datetime"></v-datepicker>
+    </v-form-item>
   </v-form-item>
-  <v-form-item label="日期时间" prop="date" :required="false">
-    <v-datepicker v-model="ruleForm.date" type="datetime"></v-datepicker>
+  <v-form-item label="日期时间" prop="date1">
+    <v-datepicker v-model="ruleForm.date1" :width="400" is-range type="datetime"></v-datepicker>
   </v-form-item>
   <v-form-item>
     <v-button type="primary" @click="submitForm">保存</v-button>
@@ -117,6 +121,7 @@
           day: [],
           time: "10:12",
           date: "",
+          date1: [],
           security: ""
         },
         options: [
@@ -198,7 +203,7 @@
       },
       checkIp(ip) {
         let ipArr = ip.split(".");
-        if(+ipArr[0] < 193) {
+        if (+ipArr[0] < 193) {
           return "自定义验证说明";
         }
       },
@@ -219,7 +224,7 @@
 | model          | 表单数据对象                                                            | Object   | —      | {}     |
 | is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
 | beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
-| disabled       | 表单是否禁用                                                            | Boolean  |        | false  |
+| disabled       | 表单是否禁用                                                            | boolean  |        | false  |
 
 ### rules 验证规则
 
@@ -260,6 +265,7 @@ key 为 表单选项的 prop，
 | ignore      | 是否忽略验证                                                       | boolean        |        | false  |
 | valid       | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |        |
 | disabled    | 选项是否禁用                                                       | boolean        |        | false  |
+| isInline    | 是否不换行显示，适用于紧接着前面的组件显示在一行                   | boolean        |        | false  |
 
 ### v-form-item Methods
 
@@ -269,8 +275,8 @@ key 为 表单选项的 prop，
 
 ### v-form-item slot
 
-| name    | 说明                                       |
-| ------- | ------------------------------------------ |
-| default | 表单元素右边显示内容                       |
-| content | 右边多个数据验证时需要把第二个放入此插槽内 |
-| label   | 表单元素左边文字内容                       |
+| name    | 说明                                                                |
+| ------- | ------------------------------------------------------------------- |
+| default | 表单元素右边显示内容                                                |
+| content | 右边多个数据验证时需要把第二个放入此插槽内，显示在 default 插槽后面 |
+| label   | 表单元素左边文字内容                                                |

@@ -17,7 +17,7 @@
           :data-name="_name"
           :class="[
             item.value === value
-              ? 'v-radio__icon--active v-icon-ok-plane'
+              ? 'v-radio__icon--active v-icon-radio-checked'
               : 'v-icon-radio'
           ]"
         >
@@ -94,6 +94,7 @@ export default {
       if (result !== false) {
         this.$emit("change", options.value);
         this.$dispatch("v-form", "form:change");
+        this.checkValid(options.value);
       }
     }
   }

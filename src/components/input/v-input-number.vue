@@ -55,13 +55,13 @@
         <template v-else>
           <!-- 上箭头 -->
           <span
-            class="v-button--info v-icon-up v-input-number__button up"
+            class="v-icon-up v-input-number__button up"
             :class="{ 'btn-disabled': addDisabled }"
             @click="addNum"
           ></span>
           <!-- 下箭头 -->
           <span
-            class="v-button--info v-icon-down v-input-number__button down"
+            class="v-icon-down v-input-number__button down"
             :class="{ 'btn-disabled': subDisabled }"
             @click="subNum"
           ></span>
@@ -150,11 +150,11 @@ export default {
     },
     // 添加按钮是否禁用
     addDisabled() {
-      return this.inputValue >= this.max;
+      return this.inputValue >= this.max || this.disabled;
     },
     // 减少按钮是否禁用
     subDisabled() {
-      return this.inputValue <= this.min;
+      return this.inputValue <= this.min || this.disabled;
     },
     // 是否有精度
     hasPrecision() {

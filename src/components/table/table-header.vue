@@ -16,11 +16,12 @@
           <!-- 选择框 -->
           <v-checkbox
             v-if="col.type === 'selection'"
+            class="v-table__header__checkbox"
             v-model="checkboxValue"
             :hasValue="hasValue"
           ></v-checkbox>
           <!-- 表头文字 -->
-          <span>{{ col.label }}</span>
+          <span class="v-table__header__label">{{ col.label }}</span>
           <!-- 排序 -->
           <span v-if="col.isSort" class="v-table__sort">
             <span

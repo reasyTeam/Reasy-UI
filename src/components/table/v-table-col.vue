@@ -2,7 +2,7 @@
   <div></div>
 </template>
 <script>
-import { copyDeepData } from "../libs";
+import { copyDeepData, IGuid } from "../libs";
 let expandFn = function() {};
 export default {
   name: "v-table-col",
@@ -65,6 +65,14 @@ export default {
       }
     }
   },
+  computed: {
+    tableProp() {
+      if (this.prop === "") {
+        return IGuid();
+      }
+      return this.prop;
+    }
+  },
   mounted() {
     this.$dispatch("v-table", "add.column", this.getProps());
   },
@@ -74,11 +82,12 @@ export default {
       props.sortType = "";
       props.fn = this.$scopedSlots.default;
       props.expandFn = this.$scopedSlots.expand || expandFn;
+      props.prop = this.tableProp;
       return props;
     }
   },
   beforeDestroy() {
-    this.$dispatch("VTable", "remove.column", this.prop);
+    this.$dispatch("VTable", "remove.column", this.tableProp);
   },
   watch: {
     label() {

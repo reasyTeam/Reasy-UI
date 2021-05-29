@@ -12,7 +12,7 @@
       :barsize="vbarHeight"
       v-model="scrollTop"
       @change="change"
-      :style="{visibility: isMac ? 'hidden':'visible'}"
+      :style="{ visibility: isMac ? 'hidden' : 'visible' }"
     ></bar>
     <!-- 水平滚动条 -->
     <bar
@@ -21,7 +21,7 @@
       direct="x"
       :barsize="hBarWidth"
       v-model="scrollLeft"
-      :style="{visibility: isMac ? 'hidden':'visible'}"
+      :style="{ visibility: isMac ? 'hidden' : 'visible' }"
       @change="change"
     ></bar>
   </div>
@@ -82,14 +82,14 @@ export default {
     // 水平和垂直方向可滚动的范围
     this.scrollLeftRange = this.scrollTopRange = 1;
     this.isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-    this.newHeight = this.height;
-    this.newWidth = this.height;
     return {
       // 浏览器默认滚动条宽度
       barWidth: getScrollWidth(),
       // 滚动内容宽度
       wrapWidth: this.width,
       wrapHeight: this.height,
+      newHeight: this.height,
+      newWidth: this.width,
       // 是否有垂直滚动条
       isVertical: false,
       // 是否有水平滚动条
@@ -116,10 +116,10 @@ export default {
       let res = {
         display: this.isBlock ? "block" : "inline-block"
       };
-      if ((this.width || this.isHorizontal) && this.wrapWidth) {
+      if ((this.newWidth || this.isHorizontal) && this.wrapWidth) {
         res.maxWidth = `${this.wrapWidth}px`;
       }
-      if ((this.height || this.isVertical) && this.wrapHeight) {
+      if ((this.newHeight || this.isVertical) && this.wrapHeight) {
         res.maxHeight = `${this.wrapHeight}px`;
       }
 
@@ -227,10 +227,7 @@ export default {
       this.isVertical = false;
       this.isHorizontal = false;
 
-      this.$nextTick(() => {
-        this.update();
-        this.$emit("mounted");
-      });
+      this.update();
     },
     /**
      * 更新滚动条相关配置
@@ -238,45 +235,48 @@ export default {
      */
     update() {
       this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
-      let newHeight = this.newHeight;
-      if (newHeight === "inherit") {
+      if (this.newHeight === "inherit") {
         this.wrapHeight = this.$el.parentNode.offsetHeight;
-      } else if (newHeight === "auto") {
+      } else if (this.newHeight === "auto") {
         this.wrapHeight = 0;
       } else {
-        this.wrapHeight = newHeight;
+        this.wrapHeight = this.newHeight;
       }
 
-      let width = this.view.scrollWidth;
-      let height = this.view.scrollHeight;
+      this.$nextTick(() => {
+        let width = this.view.scrollWidth;
+        let height = this.view.scrollHeight;
 
-      this.isVertical = this.overflow === "auto" || this.overflow === "y";
-      this.isVertical = this.isVertical && this.wrapHeight < height;
-      this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
-      this.isHorizontal = this.isHorizontal && this.wrapWidth < width;
+        this.isVertical = this.overflow === "auto" || this.overflow === "y";
+        this.isVertical = this.isVertical && this.wrapHeight < height;
+        this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
+        this.isHorizontal = this.isHorizontal && this.wrapWidth < width;
 
-      if (this.isHorizontal) {
-        this.hBarWidth = parseInt((this.wrapWidth / width) * this.wrapWidth);
-        this.scrollLeftRange = width - this.wrapWidth;
-        this.scrollSize.width = this.wrapWidth;
-      } else {
-        this.hBarWidth = 0;
-        this.scrollLeftRange = 0;
-        this.scrollSize.width = 0;
-      }
+        if (this.isHorizontal) {
+          this.hBarWidth = parseInt((this.wrapWidth / width) * this.wrapWidth);
+          this.scrollLeftRange = width - this.wrapWidth;
+          this.scrollSize.width = this.wrapWidth;
+        } else {
+          this.hBarWidth = 0;
+          this.scrollLeftRange = 0;
+          this.scrollSize.width = 0;
+        }
 
-      if (this.isVertical) {
-        this.vbarHeight = parseInt(
-          (this.wrapHeight / height) * this.wrapHeight
-        );
-        this.scrollTopRange = height - this.wrapHeight;
-        this.scrollSize.height = this.wrapHeight;
-      } else {
-        this.vbarHeight = 0;
-        this.scrollTopRange = 0;
-        this.scrollSize.height = 0;
-      }
-      this.scroll();
+        if (this.isVertical) {
+          this.vbarHeight = parseInt(
+            (this.wrapHeight / height) * this.wrapHeight
+          );
+          this.scrollTopRange = height - this.wrapHeight;
+          this.scrollSize.height = this.wrapHeight;
+        } else {
+          this.vbarHeight = 0;
+          this.scrollTopRange = 0;
+          this.scrollSize.height = 0;
+        }
+        this.scroll();
+        
+        this.$emit("mounted");
+      });
     },
     /**
      * bar组件对应的v-model响应

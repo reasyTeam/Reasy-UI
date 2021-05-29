@@ -37,6 +37,15 @@
 
 ```html
 <v-input-number disabled v-model="num"></v-input-number>
+
+<v-input-number
+  v-model="num"
+  :min="0"
+  :max="10"
+  disabled
+  controls-position="right"
+></v-input-number>
+
 <script>
   export default {
     data() {

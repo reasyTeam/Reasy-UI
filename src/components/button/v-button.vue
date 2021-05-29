@@ -4,20 +4,29 @@
     ref="btn"
     @click="clickBtn"
     class="v-button"
-    :class="[sizeCss, typeCss, { 'is-disabled': disabled !== false }]"
+    :class="[
+      sizeCss,
+      typeCss,
+      {
+        [typeCss + '--disabled']: disabled !== false,
+        'v-button--inner': !$slots.default && type === 'text'
+      }
+    ]"
   >
     <template v-if="!isLoading">
       <!-- 按钮前缀图标 -->
       <span
-        class="v-button__icon button-prefix"
+        class="v-button__icon v-button__item"
         v-if="icon"
         :class="icon"
       ></span>
       <!-- 按钮内容 -->
-      <slot></slot>
+      <span class="v-button__item" v-if="$slots.default">
+        <slot></slot>
+      </span>
       <!-- 按钮后缀图标 -->
       <span
-        class="v-button__icon button-suffix"
+        class="v-button__icon v-button__item"
         v-if="suffixIcon"
         :class="suffixIcon"
       ></span>
@@ -67,7 +76,7 @@ export default {
     typeCss() {
       let cssObj = {
         primary: "v-button--primary",
-        secondary: "v-button--secondary",
+        //secondary: "v-button--secondary",
         info: "v-button--info",
         danger: "v-button--danger",
         text: "v-button--text"
@@ -80,8 +89,8 @@ export default {
   },
   methods: {
     clickBtn() {
-      if(this.isLoading) return;
-      if(this.disabled) return;
+      if (this.isLoading) return;
+      if (this.disabled) return;
       this.$emit("click");
       this.$refs.btn.blur();
     }

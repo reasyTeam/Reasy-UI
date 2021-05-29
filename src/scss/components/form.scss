@@ -9,6 +9,11 @@
   margin-bottom: 24px;
   vertical-align: top;
 
+  &--inline {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
   &__label {
     float: left;
     text-align: left;

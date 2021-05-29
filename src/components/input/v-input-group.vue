@@ -170,13 +170,16 @@ export default {
       if (type === "next") {
         if (index !== maxIndex) {
           inputElArr[index + 1].focus();
-          //设置光标在第一个位置
-          setCursorPos(inputElArr[index + 1].getInput(), 0);
+          // //设置光标在第一个位置
+          // setCursorPos(inputElArr[index + 1].getInput(), 0);
+          inputElArr[index + 1].select();
           event.preventDefault();
         }
       } else {
         if (index !== 0) {
           inputElArr[index - 1].focus();
+          //设置光标在最后一位
+          setCursorPos(inputElArr[index - 1].getInput(), -1);
           event.preventDefault();
         }
       }

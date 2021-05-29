@@ -1,7 +1,7 @@
 .v-radio {
   display: inline-block;
   position: relative;
-
+  line-height: $form-line-height;
   &__item {
     cursor: pointer;
     display: inline-block;

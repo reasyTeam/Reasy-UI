@@ -1,5 +1,5 @@
 <template>
-  <div class="v-form-item">
+  <div class="v-form-item" :class="{ 'v-form-item--inline': isInline }">
     <!-- 左边文字 -->
     <label
       v-if="!isNoLabel"
@@ -24,8 +24,8 @@
     <div
       class="v-form-item__content"
       :class="{
-        'v-form-item__content--no-label': isNoLabel,
-        [sizeCss]: sizeCss
+        'v-form-item__content--no-label': isNoLabel
+        // [sizeCss]: sizeCss
       }"
       :style="{ 'margin-left': !isNoLabel ? labelWidth + 20 + 'px' : '0' }"
     >
@@ -77,6 +77,10 @@ export default {
     //数据验证规则
     valid: [Object, Array],
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    isInline: {
       type: Boolean,
       default: false
     }

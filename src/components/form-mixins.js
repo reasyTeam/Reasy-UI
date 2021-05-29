@@ -110,6 +110,12 @@ export default {
         this.$dispatch("v-form-item", "form:size", val);
       },
       immediate: true
+    },
+    isDisabled(disabled) {
+      if (this.elFormItem && !this.elFormItem.ignore) {
+        //当form组件存在且需要数据验证时
+        this.$dispatch("v-form-item", "form:error", !disabled);
+      }
     }
   }
 };

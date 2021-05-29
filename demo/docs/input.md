@@ -251,6 +251,27 @@
 
 :::
 
+### 输入单位
+
+`unit`配置输入框的单位
+
+::: demo
+
+```html
+<v-input type="text" unit="KB/s" v-model="input"></v-input>
+<script>
+  export default {
+    data() {
+      return {
+        input: "1234"
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 文本区域
 
 ::: demo
@@ -328,3 +349,4 @@
 | ------------- | -------------- | -------------- |
 | focus         | 输入框聚焦     |                |
 | setInputValue | 设置输入框的值 | 设置输入框的值 |
+| select        | 输入框内容选中 |                |

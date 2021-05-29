@@ -137,9 +137,13 @@ export default {
         return false;
       } else if (result === false) {
         return false;
+      } else if(result === true) {
+        result = subData;
       }
+
+      result = result || subData;
       //数据验证通过
-      this.$emit("submit", subData);
+      this.$emit("submit", result);
     },
     cancelForm() {
       this.$emit("cancel");

@@ -6,6 +6,7 @@
 
 ```html
 <v-table :data="table1">
+  <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -206,6 +207,65 @@
 
 :::
 
+自定义表格点击事件
+
+::: demo
+
+```html
+<v-table :data="table1">
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit" @click="editData(slotProps)"></span>
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    },
+    methods: {
+      editData(data) {
+        console.log("edit data", data)
+      }
+    }
+  };
+</script>
+```
+
+:::
+
 ### 加载中
 
 `is-loading`表格是否在加载中
@@ -257,6 +317,33 @@
 
 :::
 
+自定义 loading， 插槽 `loading`
+
+::: demo
+
+```html
+<v-table :data="table1" is-loading>
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <template #loading>
+    <div style="color: green; text-align: center;">我是自定义加载</div>
+  </template>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: []
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 列类型
 
 `v-table-col`组件中的`type`配置表格当前列的类型，支持值`selection`选择，`index`索引，`expand`展开
@@ -268,7 +355,60 @@
 ::: demo
 
 ```html
-<v-table :data="table1">
+<v-table :data="table1" row-key="ssid">
+  <v-table-col type="selection"></v-table-col>
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 默认选中数据
+
+`select-data`为表格选中数据，类型为`Array`，必须配置`row-key`
+
+
+::: demo
+
+```html
+<v-table :data="table1" row-key="ssid" :select-data="[table1[2]]">
   <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -926,13 +1066,16 @@
 | is-change-size    | 是否支持修改每页条数                                  | boolean  | —      | false                     |
 | page-size-options | 每页显示个数选择器的选项设置                          | number[] | —      | [10, 20, 30, 40, 50, 100] |
 | is-input-page     | 是否支持手动输入页面                                  | boolean  | —      | false                     |
+| show-page-border  | 是否显示分页按钮的框                                  | boolean  |        | false                     |
+| select-data        | 选中的行数据                                          | Array    |        | []                        |
 
 ### v-table Slot
 
-| name   | 说明                                             |
-| ------ | ------------------------------------------------ |
-| header | 表格 body 第一行显示的内容，从 tr 开始自定义元素 |
-|        |                                                  |
+| name    | 说明                                              |
+| ------- | ------------------------------------------------- |
+| header  | 表格 body 第一行显示的内容，从 tr 开始自定义元素  |
+| loading | 自定义加载中，显示的前提是 is-loading 必须为 true |
+| empty   | 自定义数据列表为空显示                            |
 
 ### v-table Methods
 

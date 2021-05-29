@@ -87,6 +87,7 @@
 | ------------- | -------------- | -------------- |
 | focus         | 输入框聚焦     |                |
 | setInputValue | 设置输入框的值 | 设置输入框的值 |
+| select        | 输入框内容选中 |                |
 
 # v-input-group
 
@@ -142,21 +143,21 @@
 
 ## 属性 Attributes
 
-| 参数           | 说明                                         | 类型                          | 可选值              | 默认值 |
-| -------------- | -------------------------------------------- | ----------------------------- | ------------------- | ------ |
-| v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array                | —                   | —      |
-| name           | select input 的 name 属性                    | string                        | —                   | —      |
-| disabled       | 是否禁用                                     | boolean                       | —                   | false  |
-| width          | 选择器宽度                                   | string / Array                | —                   | —      |
-| is-clear       | 是否可以清空选项                             | boolean                       | —                   | false  |
-| is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean                       | —                   | false  |
-| multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number                        | —                   | 0      |
-| placeholder    | 占位符                                       | string                        | —                   | 请选择 |
-| size           | 输入框尺寸                                   | string                        | S / M / L           | M      |
-| options        | 下拉选项数组对象，支持数据选项为对象和字符串 | Array<Object> / Array<string> | —                   | []     |
-| is-manual      | 是否支持手动输入                             | boolean                       | —                   | false  |
-| manual-text    | 手动输入时选项的文字                         | string                        | —                   | 自定义 |
-| position       | 选项框位置，对应上 、下、 自适应             | string                        | top / bottom / auto | auto   |
+| 参数           | 说明                                         | 类型                              | 可选值              | 默认值 |
+| -------------- | -------------------------------------------- | --------------------------------- | ------------------- | ------ |
+| v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array / Number / Boolean | —                   | —      |
+| name           | select input 的 name 属性                    | string                            | —                   | —      |
+| disabled       | 是否禁用                                     | boolean                           | —                   | false  |
+| width          | 选择器宽度                                   | string / Number                   | —                   | —      |
+| is-clear       | 是否可以清空选项                             | boolean                           | —                   | false  |
+| is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean                           | —                   | false  |
+| multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number                            | —                   | 0      |
+| placeholder    | 占位符                                       | string                            | —                   | 请选择 |
+| size           | 输入框尺寸                                   | string                            | S / M / L           | M      |
+| options        | 下拉选项数组对象，支持数据选项为对象和字符串 | Array<Object> / Array<string>     | —                   | []     |
+| is-manual      | 是否支持手动输入                             | boolean                           | —                   | false  |
+| manual-text    | 手动输入时选项的文字                         | string                            | —                   | 自定义 |
+| position       | 选项框位置，对应上 、下、 自适应             | string                            | top / bottom / auto | auto   |
 
 **当支持手动输入时，支持输入框组件的属性**
 
@@ -380,13 +381,16 @@
 | is-change-size    | 是否支持修改每页条数                                  | boolean  | —      | false                     |
 | page-size-options | 每页显示个数选择器的选项设置                          | number[] | —      | [10, 20, 30, 40, 50, 100] |
 | is-input-page     | 是否支持手动输入页面                                  | boolean  | —      | false                     |
+| show-page-border  | 是否显示分页按钮的框                                  | boolean  |        | false                     |
+| select-data       | 选中的行数据                                          | Array    |        | []                        |
 
 ## Slot
 
-| name   | 说明                                         |
-| ------ | -------------------------------------------- |
-| header | 表格body第一行显示的内容，从tr开始自定义元素 |
-|        |                                              |
+| name    | 说明                                            |
+| ------- | ----------------------------------------------- |
+| header  | 表格body第一行显示的内容，从tr开始自定义元素    |
+| loading | 自定义加载中，显示的前提是is-loading 必须为true |
+| empty   | 自定义数据列表为空显示                          |
 
 ## 方法 Methods
 
@@ -583,15 +587,17 @@ export default {
 
 ## 属性 Attributes
 
-| 参数        | 说明                                                         | 类型           | 可选值 | 默认值 |
-| ----------- | ------------------------------------------------------------ | -------------- | ------ | ------ |
-| label       | 选项文字                                                     | string         |        |        |
-| is-no-label | 不显示文字                                                   | boolean        |        | false  |
-| prop        | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string         |        |        |
-| required    | 是否必填                                                     | boolean        |        | true   |
-| ignore      | 是否忽略验证                                                 | boolean        |        | false  |
-| valid       | 数据验证规格，与rules配置一致，支持type， args，msg配置      | Array / Object |        |        |
-| disabled    | 选项是否禁用                                                 | boolean        |        | false  |
+| 参数         | 说明                                                         | 类型           | 可选值 | 默认值 |
+| ------------ | ------------------------------------------------------------ | -------------- | ------ | ------ |
+| label        | 选项文字                                                     | string         |        |        |
+| is-no-label  | 不显示文字                                                   | boolean        |        | false  |
+| prop         | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string         |        |        |
+| relativeProp | 关联元素，prop数据验证时，同时也会执行relativeProp 的数据验证 | String / Array |        |        |
+| required     | 是否必填                                                     | boolean        |        | true   |
+| ignore       | 是否忽略验证                                                 | boolean        |        | false  |
+| valid        | 数据验证规格，与rules配置一致，支持type， args，msg配置      | Array / Object |        |        |
+| disabled     | 选项是否禁用                                                 | boolean        |        | false  |
+| isInline     | 是否不换行显示，适用于紧接着前面的组件显示在一行             | boolean        |        | false  |
 
 ## 方法 Methods
 
@@ -601,11 +607,11 @@ export default {
 
 # v-form-item slot
 
-| name    | 说明                                       |
-| ------- | ------------------------------------------ |
-| default | 表单元素右边显示内容                       |
-| content | 右边多个数据验证时需要把第二个放入此插槽内 |
-| label   | 表单元素左边文字内容                       |
+| name    | 说明                                                         |
+| ------- | ------------------------------------------------------------ |
+| default | 表单元素右边显示内容                                         |
+| content | 右边多个数据验证时需要把第二个放入此插槽内，显示在default插槽后面 |
+| label   | 表单元素左边文字内容                                         |
 
 ﻿# list
 

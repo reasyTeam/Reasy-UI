@@ -329,21 +329,21 @@
 
 ### v-select Attributes
 
-| 参数           | 说明                                         | 类型           | 可选值              | 默认值 |
-| -------------- | -------------------------------------------- | -------------- | ------------------- | ------ |
-| v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array | —                   | —      |
-| name           | select input 的 name 属性                    | string         | —                   | —      |
-| disabled       | 是否禁用                                     | boolean        | —                   | false  |
-| width          | 选择器宽度                                   | string / Array | —                   | —      |
-| is-clear       | 是否可以清空选项                             | boolean        | —                   | false  |
-| is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean        | —                   | false  |
-| multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number         | —                   | 0      |
-| placeholder    | 占位符                                       | string         | —                   | 请选择 |
-| size           | 输入框尺寸                                   | string         | S / M / L           | M      |
-| options        | 下拉选项数组对象，支持数据选项为对象和字符串 | Array          | —                   | []     |
-| is-manual      | 是否支持手动输入                             | boolean        | —                   | false  |
-| manual-text    | 手动输入时选项的文字                         | string         | —                   | 自定义 |
-| position       | 选项框位置，对应上 、下、 自适应             | string         | top / bottom / auto | auto   |
+| 参数           | 说明                                         | 类型                              | 可选值              | 默认值 |
+| -------------- | -------------------------------------------- | --------------------------------- | ------------------- | ------ |
+| v-model        | 绑定值，多选时值为数组，单选时为字符串       | string / Array / Number / Boolean | —                   | —      |
+| name           | select input 的 name 属性                    | string                            | —                   | —      |
+| disabled       | 是否禁用                                     | boolean                           | —                   | false  |
+| width          | 选择器宽度                                   | string / Number                   | —                   | —      |
+| is-clear       | 是否可以清空选项                             | boolean                           | —                   | false  |
+| is-multiple    | 是否可以多选，支持多选时不能配置自定义       | boolean                           | —                   | false  |
+| multiple-limit | 多选时用户最多可以选择的个数，为 0 则不限制  | number                            | —                   | 0      |
+| placeholder    | 占位符                                       | string                            | —                   | 请选择 |
+| size           | 输入框尺寸                                   | string                            | S / M / L           | M      |
+| options        | 下拉选项数组对象，支持数据选项为对象和字符串 | Array                             | —                   | []     |
+| is-manual      | 是否支持手动输入                             | boolean                           | —                   | false  |
+| manual-text    | 手动输入时选项的文字                         | string                            | —                   | 自定义 |
+| position       | 选项框位置，对应上 、下、 自适应             | string                            | top / bottom / auto | auto   |
 
 **当支持手动输入时，支持输入框组件的属性**
 

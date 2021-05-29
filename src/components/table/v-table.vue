@@ -34,6 +34,10 @@
             <template v-for="(rowsData, rowIndex) in pageData">
               <tr
                 class="v-table__row"
+                :class="{
+                  'v-table__row--active':
+                    getActive(rowsData) || rowsData[checkboxField]
+                }"
                 ref="table-body-tr"
                 @click="clickRow(rowsData)"
                 :key="rowIndex + 1"
@@ -51,6 +55,7 @@
                     <v-checkbox
                       ref="selection"
                       v-if="col.type === 'selection'"
+                      class="v-table__header__checkbox"
                       v-model="rowsData[checkboxField]"
                       :disabled="col.getDisabled(rowsData)"
                       @change="clickCheckbox"
@@ -78,11 +83,11 @@
                         :index="rowIndex"
                       >
                       </v-td>
-                      <!-- <span
-                      v-if="col.tooltip"
-                      v-tooltip="rowsData[col.prop]"
-                      >{{ rowsData[col.prop] }}</span
-                    > -->
+                      <span
+                        v-else-if="col.isTooltip"
+                        v-tooltip="col.format(col.prop, rowsData)"
+                        >{{ col.format(col.prop, rowsData) }}</span
+                      >
                       <span
                         v-else-if="col.isSearch"
                         v-html="filterSearch(col.format(col.prop, rowsData))"
@@ -112,9 +117,19 @@
               </tr>
             </template>
             <!-- 列表为空信息 -->
-            <tr ref="table-body-tr" v-if="tableData.length === 0 && !isLoading">
+            <tr
+              v-if="$slots.empty"
+              v-show="tableData.length === 0 && !isLoading"
+            >
               <td :colspan="columns.length">
-                <div class="v-table__empty-data">{{ emptyText }}</div>
+                <slot name="empty"></slot>
+              </td>
+            </tr>
+            <tr v-else v-show="tableData.length === 0 && !isLoading">
+              <td :colspan="columns.length">
+                <div class="v-table__empty-data">
+                  {{ emptyText }}
+                </div>
               </td>
             </tr>
           </tbody>
@@ -127,6 +142,7 @@
       v-if="isPagination && tableData.length > 0"
       :page="page"
       :total="tableData.length"
+      :border="showPageBorder"
       :pageSize="pageSizeValue"
       :isChangeSize="isChangeSize"
       :isInputPage="isInputPage && totalPage > 1"
@@ -134,7 +150,10 @@
       @change-page="changePage"
       @change-size="changeSize"
     ></table-footer>
-    <v-loading :visible="isLoading">{{ loadingText }}</v-loading>
+    <div v-if="$slots.loading" v-show="isLoading">
+      <slot name="loading"></slot>
+    </div>
+    <v-loading v-else :visible="isLoading">{{ loadingText }}</v-loading>
   </div>
 </template>
 <script>
@@ -143,7 +162,12 @@ import CollapseTransition from "../collapse/collapse-transition.js";
 import TableExpand from "./table-expand.vue";
 import TableHeader from "./table-header.vue";
 import TableFooter from "./table-footer.vue";
-import { copyDeepData, sortByKey, escapeHTML } from "../libs";
+import {
+  copyDeepData,
+  sortByKey,
+  escapeHTML,
+  isUndefinedOrNull
+} from "../libs";
 import { size } from "../filters";
 //判断是否存在
 let fileterField = (searchV, content) => {
@@ -256,6 +280,18 @@ export default {
     isInputPage: {
       type: Boolean,
       default: false
+    },
+    // 是否显示分页的框
+    showPageBorder: {
+      type: Boolean,
+      default: false
+    },
+    //选中的选项
+    selectData: {
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
   computed: {
@@ -348,18 +384,34 @@ export default {
     });
   },
   methods: {
+    getActive(rowData) {
+      if (this.selectData.length < 1 || !this.rowKey) {
+        return false;
+      }
+      return this.selectData.some(item => {
+        if (item[this.rowKey] === rowData[this.rowKey]) {
+          if (isUndefinedOrNull(rowData[this.checkboxField])) {
+            this.$set(rowData, this.checkboxField, true);
+          } else {
+            return false;
+          }
+          return true;
+        }
+        return false;
+      });
+    },
     getColWidth(width) {
       return size(width);
     },
-    updateTable() {
+    updateTable(isChanged) {
       this.pageData = this.getPageData();
 
       this.$nextTick(() => {
-        this.updateScrollHeight();
+        this.updateScrollHeight(isChanged);
         this.$emit("updateCallBack", this.pageData);
       });
     },
-    updateScrollHeight() {
+    updateScrollHeight(isChanged) {
       let rowMinIndex = Math.min(this.maxRow, this.pageData.length) || 1,
         height = 0,
         trRefs = this.$refs["table-body-tr"],
@@ -369,7 +421,11 @@ export default {
           height += trArr[i].offsetHeight;
         }
       }
-      this.$refs.scroll.setSize(height, this.$refs["table-body"].offsetWidth);
+      this.$refs.scroll.setSize(
+        height,
+        this.$refs["table-body"].offsetWidth,
+        isChanged
+      );
     },
 
     //搜索
@@ -392,7 +448,7 @@ export default {
       }
       this.page = 1;
       this.checkboxAllVal = CHECKBOX_UNCHECKED;
-      this.updateTable();
+      this.updateTable(true);
     },
     filterSearch(data) {
       let text = data,
@@ -414,7 +470,7 @@ export default {
       this.tableData.sort((a, b) => {
         return sortByKey(a, b, prop, { [prop]: sortType });
       });
-      this.updateTable();
+      this.updateTable(true);
     },
 
     //全选
@@ -491,12 +547,12 @@ export default {
     //切换页
     changePage(page) {
       this.page = page;
-      this.updateTable();
+      this.updateTable(true);
     },
     //切换每页数
     changeSize(pageSize) {
       this.pageSizeValue = pageSize;
-      this.updateTable();
+      this.updateTable(true);
     }
   },
 

@@ -12,21 +12,19 @@
 <section class="button-content">
   <div class="button-group">
     <v-button type="primary">主按钮</v-button>
+    <v-button type="primary" disabled>主按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="secondary">次按钮</v-button>
-  </div>
-  <div class="button-group">
-    <v-button type="info">常用按钮</v-button>
+    <v-button type="info">次按钮</v-button>
+    <v-button type="info" disabled>次按钮</v-button>
   </div>
   <div class="button-group">
     <v-button type="danger">高危按钮</v-button>
-  </div>
-  <div class="button-group">
-    <v-button type="danger" disabled>禁用按钮</v-button>
+    <v-button type="danger" disabled>高危按钮</v-button>
   </div>
   <div class="button-group">
     <v-button type="text">文本按钮</v-button>
+    <v-button type="text" disabled>文本按钮</v-button>
   </div>
   <div class="button-group">
     <v-button type="text" icon="v-icon-delete"></v-button>
@@ -88,7 +86,7 @@
 
 | 参数        | 说明         | 类型    | 可选值                                                                                                    | 默认值 |
 | ----------- | ------------ | ------- | --------------------------------------------------------------------------------------------------------- | ------ |
-| type        | 类型         | string  | primary 主按钮<br />secondary 次按钮<br />info 次按钮-灰 常用按钮<br />danger 高危按钮<br />text 文字按钮 | info   |
+| type        | 类型         | string  | primary 主按钮<br />info 次按钮 常用按钮<br />danger 高危按钮<br />text 文字按钮 | info   |
 | disabled    | 是否禁用     | boolean | —                                                                                                         | false  |
 | is-loading  | 是否在加载中 | boolean | —                                                                                                         | false  |
 | icon        | 图标类名     | string  | —                                                                                                         | —      |
