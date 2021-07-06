@@ -70,7 +70,7 @@
       cursor: not-allowed;
 
       &.v-switch__icon--active {
-        background: lighten($main-active-color, 25%);
+        background: rgba($main-active-color, 0.5);
       }
     }
   }

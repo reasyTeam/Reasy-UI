@@ -123,7 +123,11 @@ export default {
     //失焦后数据验证
     this.$on("form:blur", val => {
       this.checkValid(val);
+      if (!this.relativeProp) return;
+
       //获取关联验证组件
+      if(!this.relativeProp) return;
+
       let relativeProps = Array.isArray(this.relativeProp)
         ? this.relativeProp
         : [this.relativeProp];

@@ -7,6 +7,7 @@
 ::: demo
 
 ```html
+<pre>
   const valid = {
     //函数形式
     num: function(str, min, max) {
@@ -14,7 +15,7 @@
         return "输入值必须为整数";
       }
       if (typeof min === "number" && typeof max === "number") {
-        if (parseInt(str, 10) <script min || parseInt(str, 10) > max) {
+        if (parseInt(str, 10) < min || parseInt(str, 10) > max) {
           return `有效输入范围：${min} - ${max}`;
         }
       }
@@ -39,6 +40,7 @@
 
   //绑定在原型链上
   Vue.prototype.$valid = valid;
+</pre>
 ```
 
 :::
@@ -55,7 +57,7 @@
 <v-form ref="form" :model="ruleForm" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid">
     <v-input v-model="ruleForm.ssid"></v-input>
-    <span>秒</span>
+    <span style="font-size: 14px;">秒</span>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
@@ -99,7 +101,12 @@
     </v-form-item>
   </v-form-item>
   <v-form-item label="日期时间" prop="date1">
-    <v-datepicker v-model="ruleForm.date1" :width="400" is-range type="datetime"></v-datepicker>
+    <v-datepicker
+      v-model="ruleForm.date1"
+      :width="400"
+      is-range
+      type="datetime"
+    ></v-datepicker>
   </v-form-item>
   <v-form-item>
     <v-button type="primary" @click="submitForm">保存</v-button>
@@ -203,7 +210,7 @@
       },
       checkIp(ip) {
         let ipArr = ip.split(".");
-        if (+ipArr[0] < 193) {
+        if (+ipArr[0] <= 193) {
           return "自定义验证说明";
         }
       },

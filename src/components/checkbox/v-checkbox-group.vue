@@ -7,12 +7,14 @@
       :has-value="!isAllChecked && value.length > 0"
       v-model="isAllChecked"
       :disabled="disabled"
+      @click="handleAllClick"
     >
       {{ selectText }}
     </v-checkbox>
     <!-- 选项 -->
     <v-checkbox
       class="v-checkbox-group__item"
+      :class="{'v-checkbox-group__item--active': activeValue === item.value}"
       v-for="(item, index) in optionList"
       :key="item.value"
       :value="checkboxValueList[index]"
@@ -36,6 +38,7 @@ export default {
     event: "change"
   },
   props: {
+    activeValue: [String, Number, Boolean],
     value: Array,
     name: String,
     disabled: {
@@ -151,6 +154,10 @@ export default {
     handlerClick(options) {
       if (this.disabled || options.disabled) return;
       this.$emit("click", options.value);
+    },
+    handleAllClick() {
+      if (this.disabled) return;
+      this.$emit("click-all", this.isAllChecked);
     },
     getDisabled(options, value) {
       if (this.disabled || options.disabled) return true;

@@ -138,6 +138,8 @@ export default {
 | open-delay           | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
 | close-delay          | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
 | auto-adjust-position | 超出视窗自动调整位置                      | boolan  | -                                                                                                                                                                                       | true           |
+| arrowOffset          | 小箭头偏移量                              | number  | -                                                                                                                                                                                       | 小箭头底边长    |
+| whiteSpace           | 同css的white-space                       | string  | -                                                                                                                                                                                       | normal         |
 
 
 ### Slot

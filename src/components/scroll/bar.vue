@@ -6,6 +6,7 @@
       { active: isDragging }
     ]"
     @mousedown="barClick"
+    :style="barStyle"
   >
     <div
       ref="slider"
@@ -24,7 +25,11 @@ export default {
   props: {
     direct: String, // x, y
     barsize: Number,
-    scroll: Number
+    scroll: Number,
+    sliderWidth: {
+      type: Number,
+      default: 6
+    }
   },
   model: {
     prop: "scroll",
@@ -56,6 +61,15 @@ export default {
       );
       style[this.direct === "x" ? "width" : "height"] = this.barsize + "px";
 
+      return style;
+    },
+    barStyle() {
+      let style = {};
+      if (this.direct === "y") {
+        style.width = `${this.sliderWidth}px`;
+      } else {
+        style.height = `${this.sliderWidth}px`;
+      }
       return style;
     }
   },

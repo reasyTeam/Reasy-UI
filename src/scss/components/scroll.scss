@@ -27,7 +27,7 @@ $background: rgb(144, 147, 153);
     &__slider {
       border-radius: 4px;
       cursor: pointer;
-      background-color: rgba($background, 0.3);
+      background-color: #b2b2b2;
       transition: background-color 0.3s;
       &:hover {
         background-color: rgba($background, 0.5);
@@ -44,7 +44,7 @@ $background: rgb(144, 147, 153);
     &.is-vertical {
       @include scroll-bar();
       top: 0;
-      width: 6px;
+      // width: 6px;
 
       .v-scroll__bar__slider {
         width: 100%;
@@ -54,7 +54,7 @@ $background: rgb(144, 147, 153);
     &.is-horizontal {
       @include scroll-bar();
       left: 0;
-      height: 6px;
+      // height: 6px;
 
       .v-scroll__bar__slider {
         height: 100%;

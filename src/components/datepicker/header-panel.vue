@@ -3,12 +3,12 @@
     <!-- 左边按钮 -->
     <div class="v-datepicker--panel__left">
       <span
-        class="v-icon-double-left v-datepicker--panel__icon pointer"
+        class="v-icon-double-left v-datepicker--panel__icon pointer v-date-icon"
         @click="previousYear()"
       ></span>
       <span
         v-if="type === 'init'"
-        class="v-icon-left v-datepicker--panel__icon pointer"
+        class="v-icon-left v-datepicker--panel__icon pointer v-date-icon"
         @click="previousMonth()"
       ></span>
     </div>
@@ -16,11 +16,11 @@
     <div class="v-datepicker--panel__right">
       <span
         v-if="type === 'init'"
-        class="v-icon-right v-datepicker--panel__icon pointer"
+        class="v-icon-right v-datepicker--panel__icon pointer v-date-icon"
         @click="nextMonth()"
       ></span>
       <span
-        class="v-icon-double-right v-datepicker--panel__icon pointer"
+        class="v-icon-double-right v-datepicker--panel__icon pointer v-date-icon"
         @click="nextYear()"
       ></span>
     </div>

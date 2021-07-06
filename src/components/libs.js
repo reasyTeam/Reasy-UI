@@ -214,6 +214,31 @@ export function parseDate(str, fmt) {
   };
 }
 
+export function preFormatDate(str, format = "YYYY-MM-DD") {
+  let strs = "";
+  if (str === "") {
+    return strs;
+  }
+  var strExp = /([^\d]*)(\d*)/g;
+  var formatExp = /([^a-z]*)([a-z]*)/gi;
+  let data = strExp.exec(str);
+  let data1 = formatExp.exec(format);
+  while (data.index < str.length) {
+    let s = data[2];
+    while (s.length < data1[2].length) {
+      s = "0" + s;
+    }
+    if (data1[1]) {
+      strs += data1[1] + s;
+    } else {
+      strs += s;
+    }
+    data = strExp.exec(str);
+    data1 = formatExp.exec(format);
+  }
+  return strs;
+}
+
 export function formatDate(date, fmt) {
   date = date == undefined ? new Date() : date;
   date = typeof date == "number" ? new Date(date) : date;
@@ -443,8 +468,8 @@ export function debounce(fn, wait, immediate) {
 
 /**
  * 节流
- * @param {Function} fn - 需要防抖的函数
- * @param {Number} wait - 防抖时间
+ * @param {Function} fn - 需要节流的函数
+ * @param {Number} wait - 节流时间
  * @param {Boolean} immediate - 是否马上执行
  */
 export function throttle(fn, wait, immediate) {

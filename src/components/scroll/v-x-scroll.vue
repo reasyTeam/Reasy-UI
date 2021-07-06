@@ -4,6 +4,7 @@
     :width="width"
     :toX="toX"
     :toY="toY"
+    :sliderWidth="4"
     :toIndex="toIndex"
     :overflow="overflow"
     :isBlock="isBlock"
@@ -20,6 +21,10 @@ export default {
     width: {
       type: Number,
       default: 0
+    },
+    border: {
+      default: 0,
+      type: Number
     },
     toX: {
       type: Number,
@@ -63,7 +68,7 @@ export default {
     update() {
       if (this.count > 0) {
         let node = this.scroll.view.children[0];
-        if (node) {
+        if (node && node.children && node.children.length !== 0) {
           let height = node.children[0].offsetHeight;
           let maxHeight = height;
           let childrenLen = node.children.length;
@@ -75,7 +80,9 @@ export default {
               maxHeight += height;
             }
           }
-          this.scroll.setSize(maxHeight, this.width);
+          this.scroll.setSize(maxHeight + this.border, this.width);
+        } else {
+          this.scroll.setSize(0, this.width);
         }
       }
     },

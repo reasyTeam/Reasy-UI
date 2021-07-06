@@ -11,6 +11,7 @@
       direct="y"
       :barsize="vbarHeight"
       v-model="scrollTop"
+      :sliderWidth="sliderWidth"
       @change="change"
       :style="{ visibility: isMac ? 'hidden' : 'visible' }"
     ></bar>
@@ -21,6 +22,7 @@
       direct="x"
       :barsize="hBarWidth"
       v-model="scrollLeft"
+      :sliderWidth="sliderWidth"
       :style="{ visibility: isMac ? 'hidden' : 'visible' }"
       @change="change"
     ></bar>
@@ -76,6 +78,10 @@ export default {
     isBlock: {
       type: Boolean,
       default: true
+    },
+    sliderWidth: {
+      type: Number,
+      default: 4
     }
   },
   data() {
@@ -274,7 +280,7 @@ export default {
           this.scrollSize.height = 0;
         }
         this.scroll();
-        
+
         this.$emit("mounted");
       });
     },
@@ -311,8 +317,11 @@ export default {
         clearTimeout(this.timer);
         this.timer = null;
       }
+      // 节流
       this.timer = setTimeout(() => {
-        this.update();
+        this.$nextTick(() => {
+          this.update();
+        });
       }, 100);
     }
   },

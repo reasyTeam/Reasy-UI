@@ -288,6 +288,7 @@ export default {
       }
       //纠正值是否按照步长
       this.inputValue = this.getStrictStep(sliderValue);
+      this.moveStart ? this.$emit('moveHandle',this.inputValue) : this.$emit('clickHandle',this.inputValue);
     },
     changeValue() {
       if (this.inputValue !== this.value) {
@@ -309,7 +310,6 @@ export default {
         this.$dispatch("v-form-item", "form:error", !moveStart);
       }
     }
-
   }
 };
 </script>

@@ -194,6 +194,7 @@
 | name            | 时间框名称                                                   | string          | —        | —      |
 | disabled        | 是否禁用                                                     | boolean         | —        | false  |
 | width           | 时间选择器宽度                                               | string / Number | —        | —      |
+| panelWidth      | 面板框宽度                                                   | string / Number | —        | —      |
 | is-clear        | 是否支持清除                                                 | boolean         | —        | true   |
 | is-range        | 是否支持范围选择                                             | boolean         | —        | false  |
 | placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string          | —        | —      |
@@ -270,13 +271,14 @@
 
 ## 属性 Attributes
 
-| 参数            | 说明           | 类型                      | 可选值 | 默认值 |
-| --------------- | -------------- | ------------------------- | ------ | ------ |
-| value / v-model | 绑定值         | string / number / boolean | —      | —      |
-| name            | checkbox的名称 | string                    | —      | —      |
-| disabled        | 是否禁用       | boolean                   | —      | false  |
-| on-value        | 选中时的值     | string / number / boolean | —      | true   |
-| off-value       | 未选中时的值   | string / number / boolean | —      | false  |
+| 参数            | 说明                                              | 类型                      | 可选值 | 默认值                   |
+| --------------- | ------------------------------------------------- | ------------------------- | ------ | ------------------------ |
+| value / v-model | 绑定值                                            | string / number / boolean | —      | —                        |
+| name            | checkbox的名称                                    | string                    | —      | —                        |
+| disabled        | 是否禁用                                          | boolean                   | —      | false                    |
+| on-value        | 选中时的值                                        | string / number / boolean | —      | true                     |
+| off-value       | 未选中时的值                                      | string / number / boolean | —      | false                    |
+| before-change   | 切换之前执行的函数，返回false时，不会执行数据更新 | function(value) {}        | —      | function() {return true} |
 
 ## 事件 Events
 
@@ -364,25 +366,26 @@
 
 ## 属性 Attributes
 
-| 参数              | 说明                                                  | 类型     | 可选值 | 默认值                    |
-| ----------------- | ----------------------------------------------------- | -------- | ------ | ------------------------- |
-| data              | 表格数据                                              | Array    | —      | []                        |
-| show-header       | 是否显示表头                                          | boolean  | —      | true                      |
-| row-key           | 表格行的key（选填项）                                 | string   | —      |                           |
-| max-row           | 表格最多显示多少行，超过时右侧显示滚动条              | number   | —      | 10                        |
-| stripe            | 是否显示斑马纹表格                                    | boolean  | —      | false                     |
-| border            | 表格td是否有边框                                      | boolean  |        | false                     |
-| placeholder       | 搜索框占位符，为空时会取支持搜索列的表头文字以 / 连接 | string   | —      |                           |
-| is-loading        | 是否在加载中                                          | boolean  | —      | false                     |
-| loading-text      | loading的文字                                         | string   | —      |                           |
-| empty-text        | 表格为空时的文字                                      | string   | —      | 无数据                    |
-| is-pagination     | 是否支持分页                                          | boolean  | —      | false                     |
-| page-size         | 每页多少条                                            | number   | —      | 10                        |
-| is-change-size    | 是否支持修改每页条数                                  | boolean  | —      | false                     |
-| page-size-options | 每页显示个数选择器的选项设置                          | number[] | —      | [10, 20, 30, 40, 50, 100] |
-| is-input-page     | 是否支持手动输入页面                                  | boolean  | —      | false                     |
-| show-page-border  | 是否显示分页按钮的框                                  | boolean  |        | false                     |
-| select-data       | 选中的行数据                                          | Array    |        | []                        |
+| 参数              | 说明                                                  | 类型     | 可选值 | 默认值                      |
+| ----------------- | ----------------------------------------------------- | -------- | ------ | --------------------------- |
+| data              | 表格数据                                              | Array    | —      | []                          |
+| show-header       | 是否显示表头                                          | boolean  | —      | true                        |
+| row-key           | 表格行的key（选填项）                                 | string   | —      |                             |
+| max-row           | 表格最多显示多少行，超过时右侧显示滚动条              | number   | —      | 10                          |
+| stripe            | 是否显示斑马纹表格                                    | boolean  | —      | false                       |
+| border            | 表格td是否有边框                                      | boolean  |        | false                       |
+| placeholder       | 搜索框占位符，为空时会取支持搜索列的表头文字以 / 连接 | string   | —      |                             |
+| is-loading        | 是否在加载中                                          | boolean  | —      | false                       |
+| loading-text      | loading的文字                                         | string   | —      |                             |
+| empty-text        | 表格为空时的文字                                      | string   | —      | 无数据                      |
+| is-pagination     | 是否支持分页                                          | boolean  | —      | false                       |
+| page-size         | 每页多少条                                            | number   | —      | 10                          |
+| is-change-size    | 是否支持修改每页条数                                  | boolean  | —      | false                       |
+| page-size-options | 每页显示个数选择器的选项设置                          | number[] | —      | [10, 20, 30, 40, 50, 100]   |
+| is-input-page     | 是否支持手动输入页面                                  | boolean  | —      | false                       |
+| show-page-border  | 是否显示分页按钮的框                                  | boolean  |        | false                       |
+| select-data       | 选中的行数据                                          | Array    |        | []                          |
+| before-select-all | 全选时切换前执行的事件，返回false时不会执行全选事件   | function |        | function(val) {return true} |
 
 ## Slot
 
@@ -401,10 +404,11 @@
 
 ## 事件 Events
 
-| 事件名       | 说明                         | 参数                     |
-| ------------ | ---------------------------- | ------------------------ |
-| after-update | 更新后的表格数据             | 表格数据（转化后的数据） |
-| click-row    | 当某一行被点击时会触发该事件 | rowData, index           |
+| 事件名           | 说明                                                    | 参数                     |
+| ---------------- | ------------------------------------------------------- | ------------------------ |
+| after-update     | 更新后的表格数据                                        | 表格数据（转化后的数据） |
+| click-row        | 当某一行被点击时会触发该事件                            | rowData, index           |
+| selection-change | 点击全选 或者单选时执行的事件，仅在type=selection时生效 | 当前的选中项             |
 
 ## v-table-col 属性 Attributes
 

@@ -44,7 +44,7 @@
       :data-name="_name"
       :show="showTimePanel"
       v-clickoutside="hide"
-      :width="timePickerWidth"
+      :width="timePanelWidth"
       :scale="isRange ? 2 : 1"
     >
       <v-row v-if="isRange">
@@ -85,6 +85,7 @@ import TimePanel from "./time-panel";
 import CreateToBody from "../create-to-body.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
+import { preFormatDate } from "../libs";
 export default {
   name: "v-timepicker",
   mixins: [FormMixin],
@@ -106,6 +107,8 @@ export default {
     },
     //宽度
     width: [String, Number],
+    //面板宽度
+    panelWidth: [String, Number],
     //是否支持清空
     isClear: {
       type: Boolean,
@@ -157,6 +160,9 @@ export default {
     //宽度
     timePickerWidth() {
       return size(this.width);
+    },
+    timePanelWidth() {
+      return size(this.panelWidth) || this.timePickerWidth;
     }
   },
   data() {
@@ -227,10 +233,10 @@ export default {
     value: {
       handler(value) {
         if (this.isRange) {
-          this.startTime = value[0] || "";
-          this.endTime = value[1] || "";
+          this.startTime = preFormatDate(value[0] || "", this.format);
+          this.endTime = preFormatDate(value[1] || "", this.format);
         } else {
-          this.startTime = value || "";
+          this.startTime = preFormatDate(value || "", this.format);
         }
       },
       immediate: true

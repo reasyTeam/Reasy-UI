@@ -36,11 +36,7 @@
               @click="close"
             ></i>
           </div>
-          <div
-            class="v-dialog__main"
-            ref="main"
-            :style="{ 'max-height': mainMaxHeight + 'px' }"
-          >
+          <div class="v-dialog__main" ref="main">
             <slot></slot>
           </div>
           <div ref="footer" :class="['v-dialog__footer', footerClass]">
@@ -136,9 +132,7 @@ export default {
     }
   },
   data() {
-    return {
-      mainMaxHeight: 600
-    };
+    return {};
   },
   mounted() {},
   computed: {

@@ -17,6 +17,7 @@
           <v-checkbox
             v-if="col.type === 'selection'"
             class="v-table__header__checkbox"
+            :before-change="beforeSelectAll"
             v-model="checkboxValue"
             :hasValue="hasValue"
           ></v-checkbox>
@@ -55,7 +56,8 @@ export default {
     //排序元素
     sortProp: String,
     //是否有选项框被选中
-    hasValue: Boolean
+    hasValue: Boolean,
+    beforeSelectAll: Function
   },
   computed: {
     checkboxValue: {

@@ -1,64 +1,108 @@
 .v-pagination {
-  font-size: 14px;
+  font-size: 12px;
+
+  &--border {
+    font-size: 14px;
+  }
   &__item {
     display: inline-block;
     vertical-align: middle;
     text-align: left;
-    & + & {
+
+    &+& {
       margin-left: 12px;
     }
   }
+
   &__button {
     display: inline-block;
     line-height: 20px;
     padding: 2px 0;
     width: 24px;
+    font-size: 14px;
     text-align: center;
     color: $info-color;
     cursor: pointer;
     @extend .no-select;
-    &--active {
+
+    &:hover {
       color: $main-active-color;
     }
+
     &--border {
-      padding: 6px 0;
-      width: 30px;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0;
       border: 1px solid $border-color;
       border-radius: 2px;
+
+      &:hover {
+        border-color: $main-active-color;
+        background-color: #fff;
+      }
+
+      &:focus,
+      &:active {
+        background-color: rgba($main-active-color, 0.1)
+      }
+
       &.v-pagination__button--active {
         background-color: $main-active-color;
         border-color: $main-active-color;
         color: #fff;
       }
     }
+
+    &--active {
+      background-color: $main-active-color;
+      border-color: $main-active-color;
+      color: #fff;
+      border-radius: 2px;
+      &:hover {
+        color: #fff;
+      }
+    }
+
     &--disabled {
       //background-color: $disabled-background-color;
       color: $disabled-color;
       cursor: not-allowed;
+
+      &:hover {
+        color: $disabled-color;
+      }
+
       &.v-pagination__button--active {
         background-color: $disabled-background-color;
       }
+
       &.v-pagination__button--border {
         border-color: $disabled-border-color;
         background-color: $disabled-background-color;
-        &.v-pagination__button--active{
+
+        &.v-pagination__button--active {
           background-color: $disabled-border-color;
           color: $disabled-color;
         }
       }
     }
-    & + .v-pagination__button {
+
+    &+.v-pagination__button {
       margin-left: 8px;
     }
   }
+
   &__select {
     width: 60px;
   }
+
   &__input {
     width: 48px;
   }
+
   &__text {
     line-height: $form-line-height-s;
-    padding: 0 4px;
+    padding: 0 8px;
   }
 }

@@ -51,7 +51,7 @@
       line-height: 20px;
       border-radius: 2px;
 
-      &+& {
+      & + & {
         margin-left: 4px;
       }
     }
@@ -196,8 +196,6 @@
   }
 }
 
-
-
 .slide-down-enter-active {
   animation: slideInUp 0.3s;
 }
@@ -209,8 +207,9 @@
 .is-disabled {
   .v-select__icon {
     cursor: not-allowed;
+    color: $disabled-color;
     &:hover {
-      color: $border-color;
+      color: $disabled-color;
     }
   }
 

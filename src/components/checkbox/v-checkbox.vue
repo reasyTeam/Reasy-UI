@@ -7,7 +7,7 @@
       :name="name"
       :data-name="_name"
     >
-      <span
+      <!-- <span
         class="v-checkbox__icon"
         :class="
           value === onValue
@@ -15,6 +15,16 @@
             : hasValue
             ? 'v-checkbox__icon--active v-icon-minus-square'
             : 'v-icon-checkbox'
+        "
+      ></span> -->
+      <span
+        class="v-checkbox__icon"
+        :class="
+          value === onValue
+            ? 'v-checkbox__icon--active v-icon-ok'
+            : hasValue
+            ? 'v-checkbox__icon--active v-checkbox__process'
+            : 'v-icon-check'
         "
       ></span>
       <span class="v-checkbox__label">
@@ -54,17 +64,27 @@ export default {
     offValue: {
       type: [String, Number, Boolean],
       default: false
+    },
+    //切换前执行事件，返回false时不会被选中
+    beforeChange: {
+      type: Function,
+      default() {
+        return true;
+      }
     }
   },
   methods: {
     clickCheckbox() {
       if (this.isDisabled) return;
       this.$emit("click", this.value);
-      this.$emit(
-        "change",
-        this.value === this.onValue ? this.offValue : this.onValue
-      );
-      this.checkValid(this.value);
+      let result = this.beforeChange(this.value);
+      if (result !== false) {
+        this.$emit(
+          "change",
+          this.value === this.onValue ? this.offValue : this.onValue
+        );
+        this.checkValid(this.value);
+      }
     }
   }
 };

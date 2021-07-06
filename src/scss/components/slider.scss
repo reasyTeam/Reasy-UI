@@ -1,7 +1,6 @@
 $slider-line-height: 4px;
 
 @mixin slider-size($lineHeight) {
-
   .v-slider-range {
     line-height: $lineHeight;
     font-size: 14px;
@@ -72,14 +71,28 @@ $slider-line-height: 4px;
 
     &__popper {
       position: absolute !important;
-      top: -8px;
+      top: -12px;
       left: 50%;
-      padding-bottom: 4px;
       transform: translate(-50%, -100%);
+      box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
+        0px 6px 16px 0px rgba(0, 0, 0, 0.08),
+        0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+
+      .v-popups__arrow--top {
+        position: absolute;
+        left: 50%;
+        top: 100%;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-top-color: #333;
+        margin-top: -2px;
+        border-width: 8px 6px;
+      }
     }
     &__content {
       position: absolute;
-      transition: .2s;
+      transition: 0.2s;
       width: 14px;
       height: 14px;
       margin-top: -7px;
@@ -93,7 +106,7 @@ $slider-line-height: 4px;
       border: 3px solid $main-active-color;
       background: #fff;
       border-radius: 50%;
-      transition: .2s;
+      transition: 0.2s;
       cursor: pointer;
       user-select: none;
 
@@ -107,7 +120,7 @@ $slider-line-height: 4px;
     &__inner {
       background-color: $main-active-color;
       border-radius: 2px;
-      transition: .2s;
+      transition: 0.2s;
       height: 100%;
     }
   }
@@ -120,11 +133,11 @@ $slider-line-height: 4px;
     }
 
     .v-slider-line__inner {
-      background-color: lighten($main-active-color, 30%);
+      background-color: #ffcd93;
     }
 
     .v-slider-line__bar {
-      border-color: lighten($main-active-color, 30%);
+      border-color: #ffcd93;
       cursor: not-allowed;
 
       &:hover {

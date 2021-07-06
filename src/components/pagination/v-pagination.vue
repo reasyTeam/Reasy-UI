@@ -1,5 +1,5 @@
 <template>
-  <div class="v-pagination">
+  <div class="v-pagination" :class="{ 'v-pagination--border': border }">
     <div class="v-pagination__item" v-if="isShowTotal">
       {{ dataTips }}
     </div>
@@ -17,7 +17,10 @@
         class="v-pagination__button"
         :class="{
           'v-pagination__button--active': footerBtn.value == page,
-          'v-pagination__button--border': border,
+          'v-pagination__button--border':
+            border &&
+            footerBtn.value !== 'prevBtn' &&
+            footerBtn.value !== 'nextBtn',
           'v-pagination__button--disabled': disabled
         }"
         v-for="footerBtn in footer"
@@ -37,12 +40,7 @@
     </div>
     <div class="v-pagination__item" v-if="isShowTotalPage">
       <span>第</span>
-      <span
-        class="v-pagination__button--active"
-        :class="{ 'v-pagination__button--disabled': disabled }"
-        >{{ page }}</span
-      >
-      <span>{{ "/" + totalPage + "页" }}</span>
+      <span>{{ page + "/" + totalPage + "页" }}</span>
     </div>
     <div class="v-pagination__item" v-if="isChangeSize">
       <span class="v-pagination__text">每页</span>

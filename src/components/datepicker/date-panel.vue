@@ -28,6 +28,7 @@
             }"
           >
             <span>{{ item.value }}</span>
+            <div v-if="isActive(item)" class="v-datepicker__top"></div>
           </span>
         </li>
         <!-- 每周换行 -->
@@ -40,11 +41,26 @@
 export default {
   props: {
     //实际开始日期
-    originDate: Object,
+    originDate: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
     //实际结束日期
-    originEndDate: Object,
+    originEndDate: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
     //面板当前的年月日
-    date: Object,
+    date: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
     //是否点击了范围
     isClickRange: Boolean,
     //是否支持范围
@@ -52,7 +68,14 @@ export default {
     //最小日期
     minDate: Object,
     //最大日期
-    maxDate: Object
+    maxDate: Object,
+    //显示日期右上角样式列表
+    activeList: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
   computed: {
     //日期列表
@@ -191,6 +214,20 @@ export default {
         this.tmpMonth === this.originDate.month &&
         this.tmpYear === this.originDate.year
       );
+    },
+    isActive(item) {
+      //去掉上月和下月
+      if(item.previousMonth || item.nextMonth) {
+        return false;
+      }
+      return this.activeList.some(item1 => {
+        return (
+          //item.currentMonth &&
+          +item.value === +item1.day &&
+          +this.tmpMonth === +item1.month &&
+          +this.tmpYear === +item1.year
+        );
+      });
     },
     setDate(date) {
       if (!this.isClickRange) return;

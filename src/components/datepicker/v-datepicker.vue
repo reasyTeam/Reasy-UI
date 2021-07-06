@@ -141,7 +141,7 @@ import HeaderPanel from "./header-panel.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
 
-import { parseDate, formatDate } from "../libs";
+import { parseDate, preFormatDate, formatDate } from "../libs";
 export default {
   name: "v-datepicker",
   mixins: [FormMixin],
@@ -544,6 +544,7 @@ export default {
     },
     formatData(value) {
       if (value) {
+        value = preFormatDate(value, this.dateFormat);
         let dateObj = parseDate(value, this.dateFormat);
         Object.assign(this.originDate, dateObj);
         this.startDate = value;

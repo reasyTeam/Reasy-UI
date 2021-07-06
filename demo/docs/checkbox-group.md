@@ -199,7 +199,7 @@
   export default {
     data() {
       return {
-        checked: [],
+        checked: [1,3],
         options: [
           {
             label: "选项一",
@@ -216,7 +216,8 @@
           },
           {
             label: "选项四",
-            value: 4
+            value: 4,
+            disabled: true
           }
         ]
       };

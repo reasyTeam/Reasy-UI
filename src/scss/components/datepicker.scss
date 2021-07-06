@@ -1,6 +1,8 @@
 @mixin datepicker-size($fontSize, $lineHeight) {
   font-size: $fontSize;
-  .input-text, .v-datepicker__title, .v-datepicker__li {
+  .input-text,
+  .v-datepicker__title,
+  .v-datepicker__li {
     font-size: $fontSize;
     height: $lineHeight;
     line-height: $lineHeight;
@@ -25,12 +27,23 @@
     top: 0;
     right: 0;
     padding: 0 8px;
-    color: $border-color;
+    color: $light-color;
+    font-size: 16px;
     cursor: pointer;
     &--disabled {
       color: $disabled-color;
       cursor: not-allowed;
     }
+  }
+
+  &__top {
+    width: 0;
+    height: 0;
+    border-top: 6px solid $main-active-color;
+    border-left: 6px solid transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   &__label {
@@ -46,7 +59,15 @@
 
   &--panel {
     vertical-align: top;
-    &__weeks, &__date-list {
+    .pointer {
+      color: $title-color;
+    }
+
+    .v-date-icon {
+      color: $light-color;
+    }
+    &__weeks,
+    &__date-list {
       padding: 0;
       margin: 0;
     }
@@ -54,11 +75,16 @@
       display: inline-block;
       width: 14.2%;
       text-align: center;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+    }
+    &__weeks {
+      .date {
+        color: $light-color;
+      }
     }
     .year {
       display: inline-block;
-      width: 72px;
+      width: 66px;
       text-align: center;
       margin-bottom: 6px;
       padding: 10px;
@@ -87,8 +113,7 @@
       padding: 0 12px;
     }
     &__wrapper {
-      margin-top: 6px;
-      padding: 0 12px;
+      padding: 12px;
     }
     &__footer {
       border-top: 1px solid $disabled-border-color;
@@ -106,16 +131,20 @@
     }
   }
   &--info {
+    position: relative;
     border-radius: 1px;
     border: 1px solid transparent;
     display: block;
+    margin: 0 2px;
+    line-height: 24px;
+    height: 24px;
     &:hover {
       border-color: $main-active-color;
     }
   }
   &--range {
-    color: #fff;
-    background-color: lighten($main-active-color, 10%) ;
+    color: $title-color;
+    background-color: rgba($main-active-color, 0.1);
     display: block;
   }
   &--active {
@@ -130,7 +159,8 @@
   &__splitter {
     padding: 0 4px;
   }
-  &__pre-month, &__next-month {
+  &__pre-month.pointer,
+  &__next-month.pointer {
     color: $disabled-color;
     .v-datepicker--info:hover {
       border-color: transparent;

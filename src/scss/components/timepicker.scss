@@ -1,6 +1,8 @@
 @mixin timepicker-size($fontSize, $lineHeight) {
   font-size: $fontSize;
-  .input-text, .v-timepicker__title, .v-timepicker__li {
+  .input-text,
+  .v-timepicker__title,
+  .v-timepicker__li {
     font-size: $fontSize;
     height: $lineHeight;
     line-height: $lineHeight;
@@ -27,6 +29,7 @@
     padding: 0 8px;
     color: $light-color;
     cursor: pointer;
+    font-size: 16px;
     &--disabled {
       color: $disabled-color;
       cursor: not-allowed;
@@ -39,8 +42,9 @@
     cursor: pointer;
   }
   &__title {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid $disabled-border-color;
     text-align: center;
+    color: $title-color;
   }
   &__wrapper {
     & + & {
@@ -64,11 +68,11 @@
     cursor: pointer;
     color: $title-color;
     &:hover {
-      background-color: #f5f5f5;
+      background-color: rgba($main-active-color, 0.1);
     }
     &--active {
       color: $main-active-color;
-      background-color: #f5f5f5;
+      background-color: rgba($main-active-color, 0.1);
     }
     &--disabled {
       color: $disabled-color;

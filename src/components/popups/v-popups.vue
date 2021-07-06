@@ -128,6 +128,10 @@ export default {
       type: Boolean,
       default: true
     },
+    arrowOffset: {
+      type: Number,
+      default: arrowBottomSideLength
+    },
     position: {
       type: String,
       default: "top-center",
@@ -309,10 +313,12 @@ export default {
           this.$nextTick(() => {
             $body.appendChild(this.$refs.popups);
             this.setPosition();
+            this.$emit("after-change", isShow);
           });
         } else {
           $body.removeChild(this.$refs.popups);
           this.unbindEvent();
+          this.$emit("after-change", isShow);
         }
       }
     },
@@ -387,13 +393,13 @@ export default {
     },
     setArrowStyle(p1, p2) {
       const arrowStyleObj = {
-        [positionSideNameMap[p1]]: arrowHeight,
-        [positionSideNameMap[centerFixedMap[p1]]]: arrowBottomSideLength
+        [positionSideNameMap[p1]]: `${arrowHeight}px`,
+        [positionSideNameMap[centerFixedMap[p1]]]: `${arrowBottomSideLength}px`
       };
 
       arrowStyleObj[positionReverseMap[p1]] = `-${arrowHeight}px`;
       if (p2 !== "center") {
-        arrowStyleObj[p2] = `${arrowBottomSideLength}px`;
+        arrowStyleObj[p2] = `${this.arrowOffset}px`;
       } else {
         arrowStyleObj[centerFixedMap[p1]] = "50%";
         arrowStyleObj[

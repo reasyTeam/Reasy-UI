@@ -15,7 +15,7 @@ export function getScrollWidth() {
   outer.style.top = "-10000px";
   outer.style.zIndex = "-100";
 
-  document.body.append(outer);
+  document.body.appendChild(outer);
   let inner = document.createElement("div");
   outer.appendChild(inner);
   scorllWidth = outer.offsetWidth - inner.offsetWidth;

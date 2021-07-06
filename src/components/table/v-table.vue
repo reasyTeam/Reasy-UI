@@ -16,6 +16,7 @@
       :sortProp="sortProp"
       :value="checkboxAllVal"
       :hasValue="hasCheckBoxSelect"
+      :before-select-all="beforeSelectAll"
       @change="changeCheckboxAll"
       @sort="sortTable"
     ></table-header>
@@ -58,6 +59,7 @@
                       class="v-table__header__checkbox"
                       v-model="rowsData[checkboxField]"
                       :disabled="col.getDisabled(rowsData)"
+                      :before-change="col.beforeSelected.bind(this, rowsData)"
                       @change="clickCheckbox"
                     ></v-checkbox>
                     <span
@@ -292,6 +294,12 @@ export default {
       default() {
         return [];
       }
+    },
+    beforeSelectAll: {
+      type: Function,
+      default() {
+        return true;
+      }
     }
   },
   computed: {
@@ -408,7 +416,7 @@ export default {
 
       this.$nextTick(() => {
         this.updateScrollHeight(isChanged);
-        this.$emit("updateCallBack", this.pageData);
+        this.$emit("after-update", this.pageData);
       });
     },
     updateScrollHeight(isChanged) {
@@ -481,6 +489,7 @@ export default {
           this.$set(item, this.checkboxField, val);
         }
       });
+      this.$emit("selection-change", this.getSelected());
     },
     //单选
     clickCheckbox() {
@@ -501,6 +510,7 @@ export default {
           this.checkboxAllVal = CHECKBOX_UNCHECKED;
         }
       }
+      this.$emit("selection-change", this.getSelected());
     },
     //展开
     expandTable(rowData, index) {

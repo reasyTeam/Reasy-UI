@@ -4,9 +4,10 @@
       ref="popups"
       v-model="value"
       :effect="effect"
-      :custom-style="{ maxWidth: `${maxWidth}px` }"
+      :custom-style="{ maxWidth: `${maxWidth}px`, whiteSpace }"
       :trigger="trigger"
       :show-arrow="showArrow"
+      :arrow-offset="arrowOffset"
       :position="position"
       :transition="transition"
       :enterable="enterable"
@@ -42,6 +43,10 @@ export default {
       default: "hover"
     },
     maxWidth: Number,
+    whiteSpace: {
+      type: String,
+      default: "normal"
+    },
     content: String,
     position: {
       type: String,
@@ -52,6 +57,7 @@ export default {
       type: Boolean,
       default: true
     },
+    arrowOffset: Number,
     enterable: {
       type: Boolean,
       default: true

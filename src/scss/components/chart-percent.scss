@@ -1,6 +1,7 @@
 .v-chart__percent {
   position: relative;
   font-size: 0;
+  line-height: 0;
 
   &__detail {
     text-align: center;
@@ -16,7 +17,7 @@
       .v-chart__percent__detail {
         &__value,
         &__text {
-          display: inline-flex;
+          display: inline-block;
           padding: 0;
           vertical-align: middle;
           margin: 0 6px;

@@ -12,10 +12,23 @@
       color: $disabled-color;
 
       .v-radio__icon {
-        color: $disabled-border-color;
+        color: $border-color;
+        background-color: #f5f5f5;
+        
         &:hover {
-          color: $disabled-border-color;
+          color: $border-color;
         }
+
+        &.v-radio__icon--active {
+          color: rgba($main-active-color, 0.5);
+          background-color: #fff;
+          &:hover {
+            color: rgba($main-active-color, 0.5);
+          }
+        }
+      }
+      .v-radio__label {
+        color: $disabled-color;
       }
     }
     & + & {
@@ -25,17 +38,18 @@
 
   &__icon {
     color: $border-color;
-    padding-right: 4px;
+    margin-right: 8px;
     font-size: 16px;
     display: inline-block;
     vertical-align: middle;
+    border-radius: 50%;
 
     &:hover {
-      color: $main-active-light-color;
+      color: $main-active-color;
     }
     &:focus {
-      color: $main-active-light-color;
-      box-shadow: 0px 0px 4px 0px $main-active-light-color;
+      color: $main-active-color;
+      box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
     }
 
     &--active {
@@ -45,6 +59,7 @@
   &__label {
     display: inline-block;
     vertical-align: middle;
+    color: $title-color;
 
     &_tips {
       color: $light-color;
