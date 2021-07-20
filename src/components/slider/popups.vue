@@ -8,6 +8,7 @@
     <i class="v-popups__arrow v-popups__arrow v-popups__arrow--top"></i>
   </div>
 </template>
+
 <script>
 export default {
   name: "slider-popups",

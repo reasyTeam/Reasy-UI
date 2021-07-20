@@ -2,7 +2,7 @@ $main-active-light-color: lighten($main-active-color, 10%);
 
 @mixin input-size($fontSize, $lineHeight) {
   font-size: $fontSize;
-
+  vertical-align: top;
   .input-text,
   .v-input-group__splitter,
   .placeholder-text {

@@ -27,7 +27,7 @@ import Radio from "./radio";
 import { Checkbox, CheckboxGroup } from "./checkbox";
 import Switch from "./switch";
 import TimePicker from "./timepicker";
-import DatePicker from "./datepicker";
+import DatePicker, { DatepickerPanel } from "./datepicker";
 import Upload from "./upload";
 import { Table, TableCol } from "./table";
 import Pagination from "./pagination";
@@ -68,6 +68,7 @@ const components = [
   Switch,
   TimePicker,
   DatePicker,
+  DatepickerPanel,
   Upload,
   Table,
   TableCol,

@@ -50,6 +50,160 @@
 
 :::
 
+### 表格大小
+
+`size`控制表格大小，行高，默认`L`
+
+表格 - 大
+
+::: demo
+
+```html
+<v-table size="L" :data="table1">
+  <v-table-col type="index" label="22222"> </v-table-col>
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+表格 - 中
+
+::: demo
+
+```html
+<v-table size="M" :data="table1">
+  <v-table-col type="index" label="22222"> </v-table-col>
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+表格 - 小
+
+::: demo
+
+```html
+<v-table size="S" :data="table1">
+  <v-table-col type="index" label="22222"> </v-table-col>
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 斑马条纹
 
 `stripe`配置表格斑马条纹
@@ -1065,26 +1219,27 @@
 
 ### v-table Attributes
 
-| 参数              | 说明                                                  | 类型     | 可选值 | 默认值                      |
-| ----------------- | ----------------------------------------------------- | -------- | ------ | --------------------------- |
-| data              | 表格数据                                              | Array    | —      | []                          |
-| show-header       | 是否显示表头                                          | boolean  | —      | true                        |
-| row-key           | 表格行的 key（选填项）                                | string   | —      |                             |
-| max-row           | 表格最多显示多少行，超过时右侧显示滚动条              | number   | —      | 10                          |
-| stripe            | 是否显示斑马纹表格                                    | boolean  | —      | false                       |
-| border            | 表格 td 是否有边框                                    | boolean  |        | false                       |
-| placeholder       | 搜索框占位符，为空时会取支持搜索列的表头文字以 / 连接 | string   | —      |                             |
-| is-loading        | 是否在加载中                                          | boolean  | —      | false                       |
-| loading-text      | loading 的文字                                        | string   | —      |                             |
-| empty-text        | 表格为空时的文字                                      | string   | —      | 无数据                      |
-| is-pagination     | 是否支持分页                                          | boolean  | —      | false                       |
-| page-size         | 每页多少条                                            | number   | —      | 10                          |
-| is-change-size    | 是否支持修改每页条数                                  | boolean  | —      | false                       |
-| page-size-options | 每页显示个数选择器的选项设置                          | number[] | —      | [10, 20, 30, 40, 50, 100]   |
-| is-input-page     | 是否支持手动输入页面                                  | boolean  | —      | false                       |
-| show-page-border  | 是否显示分页按钮的框                                  | boolean  |        | false                       |
-| select-data       | 选中的行数据                                          | Array    |        | []                          |
-| before-select-all | 全选时切换前执行的事件，返回 false 时不会执行全选事件 | function |        | function(val) {return true} |
+| 参数              | 说明                                                  | 类型     | 可选值    | 默认值                      |
+| ----------------- | ----------------------------------------------------- | -------- | --------- | --------------------------- |
+| data              | 表格数据                                              | Array    | —         | []                          |
+| size              | 表格大小                                              | String   | L / M / S | L                           |
+| show-header       | 是否显示表头                                          | boolean  | —         | true                        |
+| row-key           | 表格行的 key（选填项）                                | string   | —         |                             |
+| max-row           | 表格最多显示多少行，超过时右侧显示滚动条              | number   | —         | 10                          |
+| stripe            | 是否显示斑马纹表格                                    | boolean  | —         | false                       |
+| border            | 表格 td 是否有边框                                    | boolean  |           | false                       |
+| placeholder       | 搜索框占位符，为空时会取支持搜索列的表头文字以 / 连接 | string   | —         |                             |
+| is-loading        | 是否在加载中                                          | boolean  | —         | false                       |
+| loading-text      | loading 的文字                                        | string   | —         |                             |
+| empty-text        | 表格为空时的文字                                      | string   | —         | 无数据                      |
+| is-pagination     | 是否支持分页                                          | boolean  | —         | false                       |
+| page-size         | 每页多少条                                            | number   | —         | 10                          |
+| is-change-size    | 是否支持修改每页条数                                  | boolean  | —         | false                       |
+| page-size-options | 每页显示个数选择器的选项设置                          | number[] | —         | [10, 20, 30, 40, 50, 100]   |
+| is-input-page     | 是否支持手动输入页面                                  | boolean  | —         | false                       |
+| show-page-border  | 是否显示分页按钮的框                                  | boolean  |           | false                       |
+| select-data       | 选中的行数据                                          | Array    |           | []                          |
+| before-select-all | 全选时切换前执行的事件，返回 false 时不会执行全选事件 | function |           | function(val) {return true} |
 
 ### v-table Slot
 

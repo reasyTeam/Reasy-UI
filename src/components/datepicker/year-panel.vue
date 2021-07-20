@@ -1,5 +1,15 @@
 <template>
   <div>
+    <header-panel
+      :year="year"
+      :month="month"
+      :isRange="false"
+      :type="headerType"
+      :maxYear="maxYear"
+      :minYear="minYear"
+      @change="changeHeader"
+      @clickHeader="clickHeader"
+    ></header-panel>
     <div class="v-datepicker--panel__wrapper">
       <!-- 年选择 -->
       <ul class="v-datepicker--panel__date-list" v-if="headerType === 'year'">
@@ -39,7 +49,7 @@
                 'v-datepicker--active': year === tmpYear && month === item
               }"
             >
-              <span>{{ item + 1 + "月" }}</span>
+              <span>{{ item | month(item) }}</span>
             </span>
           </li>
           <br :key="index + 50" v-if="(index + 1) % 3 === 0" />
@@ -48,14 +58,37 @@
     </div>
   </div>
 </template>
+
 <script>
+import HeaderPanel from "./header-panel.vue";
 export default {
+  components: {
+    HeaderPanel
+  },
   props: {
     headerType: String,
     year: Number,
     month: Number,
     maxYear: Number,
     minYear: Number
+  },
+  filters: {
+    month: item => {
+      return {
+        0: "1月",
+        1: "2月",
+        2: "3月",
+        3: "4月",
+        4: "5月",
+        5: "6月",
+        6: "7月",
+        7: "8月",
+        8: "9月",
+        9: "10月",
+        10: "11月",
+        11: "12月"
+      }[item];
+    }
   },
   computed: {
     yearList() {
@@ -126,11 +159,17 @@ export default {
       this.$emit("change", this.tmpYear, this.tmpMonth);
       this.$emit("clickHeader", "month");
     },
+    clickHeader(type) {
+      this.$emit("clickHeader", type);
+    },
     // 选择月份
     selectMonth(month) {
       this.tmpMonth = month;
       this.$emit("change", this.tmpYear, this.tmpMonth);
       this.$emit("clickHeader", "init");
+    },
+    changeHeader(year, month) {
+      this.$emit("change", year, month);
     }
   },
   watch: {

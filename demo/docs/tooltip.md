@@ -105,6 +105,24 @@
     v-tooltip="{ content: customContent, enterable: false }"
     >鼠标不可移入</v-button
   >
+
+  <!-- 单例html start -->
+  <v-button
+    class="left-right-row"
+    v-tooltip.single="{ content: '单例1内容', enterable: false }"
+    >单例1</v-button
+  >
+  <v-button
+    class="left-right-row"
+    v-tooltip.single="{ content: '单例2内容', enterable: false }"
+    >单例2</v-button
+  >
+  <v-button
+    class="left-right-row"
+    v-tooltip.single="{ content: '单例3内容', enterable: false }"
+    >单例3</v-button
+  >
+  <!-- 单例html end -->
 </template>
 
 <script>
@@ -138,8 +156,8 @@ export default {
 | open-delay           | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
 | close-delay          | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
 | auto-adjust-position | 超出视窗自动调整位置                      | boolan  | -                                                                                                                                                                                       | true           |
-| arrowOffset          | 小箭头偏移量                              | number  | -                                                                                                                                                                                       | 小箭头底边长    |
-| whiteSpace           | 同css的white-space                       | string  | -                                                                                                                                                                                       | normal         |
+| arrow-offset          | 小箭头偏移量                              | number  | -                                                                                                                                                                                       | 小箭头底边长   |
+| white-space           | 同css的white-space                        | string  | -                                                                                                                                                                                       | normal         |
 
 
 ### Slot
@@ -148,3 +166,10 @@ export default {
 | ------- | ------------------------- |
 | default | 触发tooltip显示的HTML元素 |
 | content | 自定义内容                |
+
+
+### 修饰符（指令模式） Modifiers
+
+| modifiers | 说明                                 |
+| --------- | ------------------------------------ |
+| single    | 单例模式，目前仅支持trigger为`hover` |

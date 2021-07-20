@@ -5,7 +5,10 @@
       :custom-style="{ maxWidth }"
       :show-arrow="showArrow"
       :position="position"
-      trigger="click"
+      :popups-offset="popupsOffset"
+      :arrow-offset="arrowOffset"
+      :between-space="betweenSpace"
+      :trigger="trigger"
       :transition="transition"
       :open-delay="openDelay"
       :close-delay="closeDelay"
@@ -60,6 +63,13 @@ export default {
   props: {
     title: String,
     icon: String,
+    popupsOffset: Number,
+    arrowOffset: Number,
+    betweenSpace: Number,
+    trigger: {
+      type: String,
+      default: "click"
+    },
     position: {
       type: String,
       default: "top-center"

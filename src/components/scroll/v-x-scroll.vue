@@ -8,6 +8,7 @@
     :toIndex="toIndex"
     :overflow="overflow"
     :isBlock="isBlock"
+    :animate="animate"
     @mounted="setPosition"
   >
     <slot></slot>
@@ -52,6 +53,10 @@ export default {
     isBlock: {
       type: Boolean,
       default: true
+    },
+    animate: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

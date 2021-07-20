@@ -1,73 +1,85 @@
 <template>
-  <transition name="v-dialog-fade">
-    <div v-show="visible" class="v-dialog-box">
-      <transition name="v-dialog-fade">
-        <div
-          v-show="visible"
-          v-if="modal"
-          class="v-modal"
-          @click="handleClickModal"
-        ></div>
-      </transition>
+  <transition
+    name="v-dialog-fade"
+    @before-enter="() => setBodyOverflow('add')"
+    @after-enter="() => setBodyOverflow('add')"
+    @after-leave="animationAfterLeave"
+  >
+    <div ref="dialogBox" v-show="visible" class="v-dialog-box">
+      <div class="v-dialog-wrapper" :style="dialogWrapperStyle">
+        <transition name="v-dialog-fade">
+          <div
+            v-show="visible"
+            v-if="modal"
+            class="v-modal"
+            @click="handleClickModal"
+          ></div>
+        </transition>
 
-      <transition name="v-dialog-inner-fade">
-        <div ref="dialog" class="v-dialog" :style="dialogStyle" v-if="visible">
-          <div class="v-dialog__header" ref="header" v-if="showTitle">
-            <slot name="title">
-              <div
-                :class="[
-                  `v-dialog__title`,
-                  { 'v-dialog__close-space': showClose }
-                ]"
-              >
-                <h5
+        <transition name="v-dialog-inner-fade" @after-enter="updateDialogStyle">
+          <div
+            ref="dialog"
+            class="v-dialog"
+            :style="dialogStyle"
+            v-if="visible"
+          >
+            <div class="v-dialog__header" ref="header" v-if="showTitle">
+              <slot name="title">
+                <div
                   :class="[
-                    'v-dialog__title-inner',
+                    `v-dialog__title`,
+                    { 'v-dialog__close-space': showClose }
+                  ]"
+                >
+                  <h5
+                    :class="[
+                      'v-dialog__title-inner',
+                      { 'v-dialog__center': alignCenter }
+                    ]"
+                  >
+                    {{ title }}
+                  </h5>
+                </div>
+              </slot>
+              <i
+                v-if="showClose"
+                class="v-dialog__close v-icon-close"
+                @click="close"
+              ></i>
+            </div>
+            <div class="v-dialog__main" ref="main">
+              <slot></slot>
+            </div>
+            <div ref="footer" :class="['v-dialog__footer', footerClass]">
+              <slot name="footer">
+                <div
+                  :class="[
+                    'v-dialog__button-group',
                     { 'v-dialog__center': alignCenter }
                   ]"
                 >
-                  {{ title }}
-                </h5>
-              </div>
-            </slot>
-            <i
-              v-if="showClose"
-              class="v-dialog__close v-icon-close"
-              @click="close"
-            ></i>
+                  <v-button
+                    v-if="showCancel"
+                    class="v-dialog__button-item"
+                    :type="cancelButtonType"
+                    size="M"
+                    @click="handleCancel"
+                    >{{ cancelButtonText }}</v-button
+                  >
+                  <v-button
+                    v-if="showConfirm"
+                    class="v-dialog__button-item"
+                    :type="confirmButtonType"
+                    size="M"
+                    @click="handleConfirm"
+                    >{{ confirmButtonText }}</v-button
+                  >
+                </div>
+              </slot>
+            </div>
           </div>
-          <div class="v-dialog__main" ref="main">
-            <slot></slot>
-          </div>
-          <div ref="footer" :class="['v-dialog__footer', footerClass]">
-            <slot name="footer">
-              <div
-                :class="[
-                  'v-dialog__button-group',
-                  { 'v-dialog__center': alignCenter }
-                ]"
-              >
-                <v-button
-                  v-if="showCancel"
-                  class="v-dialog__button-item"
-                  :type="cancelButtonType"
-                  size="M"
-                  @click="handleCancel"
-                  >{{ cancelButtonText }}</v-button
-                >
-                <v-button
-                  v-if="showConfirm"
-                  class="v-dialog__button-item"
-                  :type="confirmButtonType"
-                  size="M"
-                  @click="handleConfirm"
-                  >{{ confirmButtonText }}</v-button
-                >
-              </div>
-            </slot>
-          </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
     </div>
   </transition>
 </template>
@@ -132,7 +144,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      dialogWrapperStyle: {}
+    };
   },
   mounted() {},
   computed: {
@@ -164,10 +178,6 @@ export default {
       if (typeof this.onClose === "function") {
         this.onClose();
       }
-
-      this.$nextTick(() => {
-        this.$emit("after-close");
-      });
     },
     handleClickModal() {
       if (this.closeOnClickModal === false) {
@@ -181,6 +191,28 @@ export default {
     },
     handleConfirm() {
       this.$emit("confirm");
+    },
+
+    updateDialogStyle() {
+      const $dialog = this.$refs.dialog,
+        { width, height } = $dialog.getBoundingClientRect();
+
+      this.dialogWrapperStyle = {
+        minWidth: `${width / 0.9}px`,
+        minHeight: `${height / 0.9}px`
+      };
+    },
+    animationAfterLeave() {
+      this.setBodyOverflow("remove");
+      this.$emit("after-close");
+    },
+    setBodyOverflow(excutor) {
+      document.body.classList[excutor]("body--overflow-hidden");
+    },
+    insertDialogToBody() {
+      const $dialogBox = this.$refs.dialogBox;
+
+      document.body.appendChild($dialogBox);
     }
   },
   watch: {

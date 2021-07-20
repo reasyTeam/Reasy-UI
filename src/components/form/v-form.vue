@@ -6,6 +6,7 @@
     <slot></slot>
   </section>
 </template>
+
 <script>
 export default {
   name: "v-form",
@@ -39,6 +40,10 @@ export default {
     dialogCenter: {
       type: Boolean,
       default: false
+    },
+    paddingWidth: {
+      type: Number,
+      default: 24
     },
     //提交前自定义事件，返回false时不会执行submit
     beforeSubmit: {
@@ -137,7 +142,7 @@ export default {
         return false;
       } else if (result === false) {
         return false;
-      } else if(result === true) {
+      } else if (result === true) {
         result = subData;
       }
 

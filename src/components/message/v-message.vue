@@ -31,6 +31,7 @@
     </div>
   </transition>
 </template>
+
 <script>
 const typeMap = {
   success: "v-icon-ok-plane",

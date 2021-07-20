@@ -7,6 +7,8 @@ let nodeList = [];
 const ctx = "@@clickoutsideContext";
 
 const tooltipConfig = {
+  // 存放单例对象
+  singleVm: null,
   // 存放多实例对象
   tooltipVms: new Map(),
   /**
@@ -65,8 +67,10 @@ const tooltipConfig = {
    * @param {Object} binding - 指令传入的参数配置
    */
   setPropsInVm(el, binding) {
-    const { tooltipVms, getProps } = tooltipConfig,
-      currentTooltipVm = tooltipVms.get(el),
+    const { singleVm, tooltipVms, getProps } = tooltipConfig,
+      currentTooltipVm = binding.modifiers.single
+        ? singleVm
+        : tooltipVms.get(el),
       tooltipProps = getProps(el, binding);
 
     for (let key in tooltipProps) {
@@ -114,6 +118,9 @@ function createDocumentHandler(el, binding, vnode) {
 }
 
 const install = function(Vue) {
+  const tooltipComponent = Vue.extend(Tooltip);
+  tooltipConfig.singleVm = new tooltipComponent();
+
   let directiveConfig = {
     clickoutside: {
       bind(el, binding, vnode) {
@@ -148,22 +155,64 @@ const install = function(Vue) {
     },
     tooltip: {
       inserted(el, binding) {
-        const tooltipInstance = Vue.extend(Tooltip),
-          { tooltipVms, getOptions, setPropsInVm } = tooltipConfig,
-          vm = new tooltipInstance(getOptions(el));
+        if (binding.modifiers.single) {
+          // 单例处理
+          const { singleVm, setPropsInVm } = tooltipConfig;
+          !singleVm._isMounted && singleVm.$mount();
 
-        tooltipVms.set(el, vm);
+          const popupsVm = singleVm.$refs.popups;
 
-        setPropsInVm(el, binding);
+          on(el, "mouseenter", () => {
+            setPropsInVm(el, binding);
+            popupsVm.parentElm = el;
+            popupsVm.handleMouseenter();
+          });
+          on(el, "mouseleave", () => {
+            popupsVm.handleMouseleave();
+          });
+        } else {
+          const { tooltipVms, getOptions, setPropsInVm } = tooltipConfig,
+            vm = new tooltipComponent(getOptions(el));
 
-        vm.$mount();
+          tooltipVms.set(el, vm);
+
+          setPropsInVm(el, binding);
+
+          vm.$mount();
+        }
       },
       update(el, binding) {
-        tooltipConfig.setPropsInVm(el, binding);
+        if (!binding.modifiers.single) {
+          tooltipConfig.setPropsInVm(el, binding);
+        }
       },
-      unbind(el) {
-        //元素解绑时，去掉提示信息
-        tooltipConfig.tooltipVms.get(el).hide();
+      unbind(el, binding) {
+        const { singleVm, setPropsInVm } = tooltipConfig,
+          popupsVm = singleVm.$refs.popups;
+
+        if (binding.modifiers.single) {
+          off(
+            el,
+            "mouseenter",
+            () => {
+              setPropsInVm(el, binding);
+              popupsVm.parentElm = el;
+              popupsVm.handleMouseenter();
+            },
+            true
+          );
+          off(
+            el,
+            "mouseleave",
+            () => {
+              popupsVm.handleMouseleave();
+            },
+            true
+          );
+        } else {
+          //元素解绑时，去掉提示信息
+          tooltipConfig.tooltipVms.get(el).hide();
+        }
       }
     }
   };

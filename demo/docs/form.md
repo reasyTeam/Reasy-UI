@@ -228,6 +228,7 @@
 | 参数           | 说明                                                                    | 类型     | 可选值 | 默认值 |
 | -------------- | ----------------------------------------------------------------------- | -------- | ------ | ------ |
 | rules          | 数据验证规则                                                            | boolean  |        | {}     |
+| padding-width  | 表单选项文字与右边组件的距离                                            | number   |        | 24     |
 | model          | 表单数据对象                                                            | Object   | —      | {}     |
 | is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
 | beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |

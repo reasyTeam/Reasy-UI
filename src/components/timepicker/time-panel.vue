@@ -4,10 +4,11 @@
       <!-- 时 -->
       <v-col class="v-timepicker__group" :span="colSpan">
         <v-x-scroll
-          :count="6"
+          :count="count"
           ref="hour"
           :to-index="hourIndex"
           @mounted="setPosition"
+          :animate="true"
         >
           <ul class="v-timepicker__list">
             <li
@@ -22,12 +23,22 @@
             >
               {{ hours }}
             </li>
+            <li
+              v-for="(item, index) in repeatList"
+              :key="index + 'repeat'"
+              class="v-timepicker__li v-timepicker__li--empty"
+            ></li>
           </ul>
         </v-x-scroll>
       </v-col>
       <!-- 分 -->
       <v-col class="v-timepicker__group" v-if="hasMinute" :span="colSpan">
-        <v-x-scroll :count="6" ref="minute" :to-index="minuteIndex">
+        <v-x-scroll
+          :count="count"
+          ref="minute"
+          :to-index="minuteIndex"
+          :animate="true"
+        >
           <ul class="v-timepicker__list">
             <li
               v-for="minutes in minutesList"
@@ -41,12 +52,22 @@
             >
               {{ minutes }}
             </li>
+            <li
+              v-for="(item, index) in repeatList"
+              :key="index + 'repeat'"
+              class="v-timepicker__li v-timepicker__li--empty"
+            ></li>
           </ul>
         </v-x-scroll>
       </v-col>
       <!-- 秒 -->
       <v-col class="v-timepicker__group" v-if="hasSecond" :span="colSpan">
-        <v-x-scroll :count="6" ref="second" :to-index="secondIndex">
+        <v-x-scroll
+          :count="count"
+          ref="second"
+          :to-index="secondIndex"
+          :animate="true"
+        >
           <ul class="v-timepicker__list">
             <li
               v-for="seconds in secondsList"
@@ -60,6 +81,11 @@
             >
               {{ seconds }}
             </li>
+            <li
+              v-for="(item, index) in repeatList"
+              :key="index + 'repeat'"
+              class="v-timepicker__li v-timepicker__li--empty"
+            ></li>
           </ul>
         </v-x-scroll>
       </v-col>
@@ -67,7 +93,7 @@
   </div>
 </template>
 <script>
-import { parseDate, formatDate } from "../libs";
+import { parseDate, formatTime } from "../libs";
 export default {
   props: {
     //时间格式
@@ -83,7 +109,8 @@ export default {
     //时间值
     time: String,
     min: String,
-    max: String
+    max: String,
+    isAllDay: Boolean
   },
   computed: {
     //是否支持分钟
@@ -93,6 +120,9 @@ export default {
     //是否支持秒
     hasSecond() {
       return this.format.indexOf("ss") > -1;
+    },
+    repeatList() {
+      return new Array(this.count - 1).fill("");
     },
     colSpan() {
       if (this.hasSecond) {
@@ -107,6 +137,9 @@ export default {
       let list = [];
       for (let i = 0; i < 24; i++) {
         list.push(`0${i}`.slice(-2));
+      }
+      if (this.isAllDay) {
+        list.push("24");
       }
       return list;
     },
@@ -133,16 +166,19 @@ export default {
     //小时选中第几个
     hourIndex() {
       let index = this.hoursList.indexOf(this.hour) + 1;
+      this.$refs.hour && this.$refs.hour.scrollToIndex(index);
       return index;
     },
     //分钟选中第几个
     minuteIndex() {
       let index = this.minutesList.indexOf(this.minute) + 1;
+      this.$refs.minute && this.$refs.minute.scrollToIndex(index);
       return index;
     },
     //秒钟选中第几个
     secondIndex() {
       let index = this.secondsList.indexOf(this.second) + 1;
+      this.$refs.second && this.$refs.second.scrollToIndex(index);
       return index;
     },
     // 最小时间
@@ -156,6 +192,9 @@ export default {
     maxTimeStr() {
       if (this.max) {
         return this.max;
+      }
+      if (this.isAllDay) {
+        return "24:00:00";
       }
       return this.formatTimeStr(23, 59, 59);
     },
@@ -171,6 +210,7 @@ export default {
   },
   data() {
     return {
+      count: 7, //内容区域最多显示多少条
       hour: "",
       minute: "",
       second: ""
@@ -194,7 +234,7 @@ export default {
         (timeObj.second || 0)
       );
     },
-    setTime() {
+    getTime() {
       let time = this.formatTimeStr(this.hour, this.minute, this.second);
       let timeNumber = this.getTimeNumber(time);
       if (timeNumber < this.minTime) {
@@ -202,6 +242,10 @@ export default {
       } else if (timeNumber > this.maxTime) {
         time = this.maxTimeStr;
       }
+      return time;
+    },
+    setTime() {
+      let time = this.getTime();
       if (time === this.time) {
         return;
       }
@@ -214,12 +258,15 @@ export default {
       switch (type) {
         case "hour":
           this.hour = value;
+
           break;
         case "minute":
           this.minute = value;
+
           break;
         case "second":
           this.second = value;
+
           break;
       }
 
@@ -227,8 +274,14 @@ export default {
     },
     //解析成标准的时分秒格式
     formatTimeStr(hour, minute, second) {
-      let newDate = new Date(2000, 1, 1, hour || 0, minute || 0, second || 0);
-      return formatDate(newDate, this.format);
+      return formatTime(
+        {
+          hour,
+          minute,
+          second
+        },
+        this.format
+      );
     },
     //获取小时是否禁用
     getHourDisabled(hour) {
@@ -242,6 +295,9 @@ export default {
           this.formatTimeStr(this.hour, minute, 59)
         ),
         minTimeNumber = maxTimeNumber - 59;
+      if (this.hour === 24) {
+        minTimeNumber = this.maxTime;
+      }
       return minTimeNumber > this.maxTime || maxTimeNumber < this.minTime;
     },
     //获取秒钟是否禁用
@@ -255,6 +311,15 @@ export default {
   watch: {
     time: {
       handler(val) {
+        let timeNum = this.getTimeNumber(val);
+        if (timeNum < this.minTime) {
+          this.$emit("change", this.minTimeStr);
+          return;
+        }
+        if (timeNum > this.maxTime) {
+          this.$emit("change", this.maxTimeStr);
+          return;
+        }
         let timeObj = parseDate(val, this.format);
         this.hour = `0${timeObj.hour}`.slice(-2);
         this.minute = `0${timeObj.minute}`.slice(-2);

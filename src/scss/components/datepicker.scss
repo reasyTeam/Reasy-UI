@@ -1,5 +1,6 @@
 @mixin datepicker-size($fontSize, $lineHeight) {
   font-size: $fontSize;
+
   .input-text,
   .v-datepicker__title,
   .v-datepicker__li {
@@ -7,20 +8,33 @@
     height: $lineHeight;
     line-height: $lineHeight;
   }
+
   .v-datepicker__icon {
     height: $lineHeight;
     line-height: $lineHeight;
   }
+
   .placeholder-text {
     line-height: $lineHeight;
   }
 }
+
 .v-datepicker {
   position: relative;
   display: inline-block;
   width: $elem-width;
   vertical-align: top;
+
   // vertical-align: middle;
+  &__input {
+    .input-text {
+      padding-right: 2px !important;
+    }
+
+    &--half.v-input {
+      width: calc(48% - 4px);
+    }
+  }
 
   &__icon {
     position: absolute;
@@ -30,6 +44,7 @@
     color: $light-color;
     font-size: 16px;
     cursor: pointer;
+
     &--disabled {
       color: $disabled-color;
       cursor: not-allowed;
@@ -50,6 +65,10 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+
+    &.input-text {
+      padding: 0;
+    }
   }
 
   &__title {
@@ -59,6 +78,7 @@
 
   &--panel {
     vertical-align: top;
+
     .pointer {
       color: $title-color;
     }
@@ -66,22 +86,26 @@
     .v-date-icon {
       color: $light-color;
     }
+
     &__weeks,
     &__date-list {
       padding: 0;
       margin: 0;
     }
+
     .date {
       display: inline-block;
       width: 14.2%;
       text-align: center;
       margin-bottom: 4px;
     }
+
     &__weeks {
       .date {
         color: $light-color;
       }
     }
+
     .year {
       display: inline-block;
       width: 66px;
@@ -94,6 +118,7 @@
       display: inline-block;
       width: 50%;
     }
+
     &__title {
       padding: 0 32px;
       width: 100%;
@@ -104,6 +129,7 @@
         color: $main-active-color;
       }
     }
+
     &__header {
       text-align: center;
       @include clearfix;
@@ -112,24 +138,30 @@
       border-bottom: 1px solid $disabled-border-color;
       padding: 0 12px;
     }
+
     &__wrapper {
       padding: 12px;
     }
+
     &__footer {
       border-top: 1px solid $disabled-border-color;
       padding: 8px 12px;
       @include clearfix;
+
       &__btn {
         margin-right: 8px;
       }
     }
+
     &__left {
       float: left;
     }
+
     &__right {
       float: right;
     }
   }
+
   &--info {
     position: relative;
     border-radius: 1px;
@@ -138,41 +170,53 @@
     margin: 0 2px;
     line-height: 24px;
     height: 24px;
+
     &:hover {
       border-color: $main-active-color;
     }
   }
+
   &--range {
     color: $title-color;
     background-color: rgba($main-active-color, 0.1);
     display: block;
   }
+
   &--active {
     color: #fff;
     background-color: $main-active-color;
     display: block;
+
     &:hover {
       border-color: $main-active-color;
     }
   }
 
   &__splitter {
-    padding: 0 4px;
+    padding: 0;
+    font-size: 12px;
+    color: $disabled-color;
   }
+
   &__pre-month.pointer,
   &__next-month.pointer {
     color: $disabled-color;
+
     .v-datepicker--info:hover {
       border-color: transparent;
     }
   }
 
   &--invalid {
-    color: $disabled-color;
+
     cursor: not-allowed;
-    .v-datepicker--info:hover {
+
+    .v-datepicker--info {
       border-color: transparent;
+      color: $disabled-color !important;
+      background-color: $disabled-background-color;
     }
+
   }
 
   .input-text {
@@ -182,10 +226,22 @@
   &--medium {
     @include datepicker-size($font-size-m, $form-line-height);
   }
+
   &--small {
     @include datepicker-size($font-size-s, $form-line-height-s);
   }
+
   &--large {
     @include datepicker-size($font-size-l, $form-line-height-l);
+  }
+
+  &__time-panel {
+    .v-timepicker__group {
+      padding-bottom: 4px !important;
+    }
+  }
+
+  &__time-border {
+    border-left: 1px solid $disabled-border-color;
   }
 }

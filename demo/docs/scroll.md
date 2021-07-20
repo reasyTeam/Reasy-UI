@@ -283,11 +283,18 @@
 | to-x     | 滚动到 X 轴的具体位置，单位 px | number         | -                   | 0            |
 | to-y     | 滚动到 Y 轴的具体位置，单位 px | number         | -                   | 0            |
 | to-index | 滚动到第几个元素               | number         | -                   | -            |
+| to-index | 滚动到第几个元素               | number         | -                   | -            |
+| animate  | 是否添加滚动动画               | boolean         | -                   | false            |
 
 - `height`为`inherit`时继承父级容器的高度，要保证外层容器可以取得高。为`auto`时表示不会出现垂直滚动条。
 - 不设置`width`时，要保证外层容器可以取得高或者宽
 - `to-index`默认会选中当前 slot 的最外层元素的第`index`个子元素，优先级高于`scroll-to-y`
+- `animate`为`true`时，对应`scrollTo`、`scrollToX`、`scrollTo`、`scrollToY`、`scrollToIndex`方法使用时会产生`200ms`动画过渡滚动效果。
+### Events
 
+| 事件名 | 说明                                                 | 参数       |
+| ------ | ---------------------------------------------------- | ---------- |
+| scroll | 滚动事件，各类型的滚动过程都会执行该事件，**【注意必要时请添加节流或防抖】** | - |
 ### Methods
 
 | 方法                 | 说明                                               | 参数                                    |
@@ -316,9 +323,11 @@
 | to-y     | 滚动到 Y 轴的具体位置，单位 px | number  | -                  | 0            |
 | to-index | 滚动到第几个元素               | number  | -                  | -            |
 | count    | 最多显示行数                   | number  | -                  | 5            |
+| animate  | 是否添加滚动动画               | boolean         | -                   | false            |
 
 - 不设置`width`时，要保证外层容器可以取得高或者宽
 - `to-index`默认会选中当前 slot 的最外层元素的第`index`个子元素，优先级高于`scroll-to-y`
+- `animate`为`true`时，对应`to-index`、`to-x`、`to-y`使用时会产生`200ms`动画过渡滚动效果。
 
 ### Slot
 

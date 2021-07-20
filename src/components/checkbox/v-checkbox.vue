@@ -34,6 +34,7 @@
     <slot name="content"></slot>
   </div>
 </template>
+
 <script>
 import FormMixin from "../form-mixins";
 export default {

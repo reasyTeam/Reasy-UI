@@ -26,19 +26,13 @@
     </div>
     <!-- 中间文字显示 -->
     <v-row class="v-datepicker--panel__title">
-      <v-col :span="isRange ? 12 : 24">
-        <div :class="{ pointer: !isRange }" @click="showYear()">
-          {{ type !== "month" ? `${year}年${month + 1}月` : `${year}年` }}
-        </div>
-      </v-col>
-      <v-col v-if="isRange" :span="12">
-        <div>
-          {{ `${endYear}年${endMonth + 1}月` }}
-        </div>
-      </v-col>
+      <div class="pointer" @click="showYear()">
+        {{ type !== "month" ? `${year}年${month + 1}月` : `${year}年` }}
+      </div>
     </v-row>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -47,8 +41,6 @@ export default {
     type: String,
     year: Number,
     month: Number,
-    endYear: Number,
-    endMonth: Number,
     minYear: Number,
     maxYear: Number
   },

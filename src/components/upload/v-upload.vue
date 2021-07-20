@@ -63,6 +63,7 @@
     ></iframe>
   </div>
 </template>
+
 <script>
 import UploadImage from "./upload-image.vue";
 const UPLOAD_TYPE = {

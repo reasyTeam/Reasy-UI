@@ -40,6 +40,7 @@
     &:hover {
       background: $disabled-background-color;
     }
+
     &--active {
       background-color: scale-color($color: $main-active-color, $alpha: -90%) !important;
     }
@@ -137,6 +138,36 @@
   &__search {
     margin-bottom: 16px;
   }
+
+  &--large {
+
+    th,
+    td {
+      padding: 16px;
+    }
+  }
+
+  &--medium {
+
+    th,
+    td {
+      padding: 12px;
+    }
+  }
+
+  &--small {
+
+    th,
+    td {
+      padding: 8px;
+    }
+  }
+
+  &__loading {
+    .v-loading__mask {
+      background-color: rgba(#fff, 0.8);
+    }
+  }
 }
 
 .fixed {
@@ -159,7 +190,6 @@
 
   th,
   td {
-    padding: 16px;
     border-bottom: 1px solid $disabled-border-color;
     font-weight: 400;
   }

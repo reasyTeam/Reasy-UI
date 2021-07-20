@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table">
+  <div class="v-table" :class="[sizeCss]">
     <!-- 搜索 -->
     <div class="v-table__search" v-if="search">
       <v-input
@@ -17,6 +17,7 @@
       :value="checkboxAllVal"
       :hasValue="hasCheckBoxSelect"
       :before-select-all="beforeSelectAll"
+      :table-num="pageData.length"
       @change="changeCheckboxAll"
       @sort="sortTable"
     ></table-header>
@@ -134,6 +135,12 @@
                 </div>
               </td>
             </tr>
+            <!-- 默认表格loading要多加一空行 -->
+            <tr v-if="tableData.length === 0 && isLoading && !$slots.loading">
+              <td :colspan="columns.length">
+                <div class="v-table__empty-data"></div>
+              </td>
+            </tr>
           </tbody>
           <slot></slot>
         </table>
@@ -155,7 +162,9 @@
     <div v-if="$slots.loading" v-show="isLoading">
       <slot name="loading"></slot>
     </div>
-    <v-loading v-else :visible="isLoading">{{ loadingText }}</v-loading>
+    <v-loading class="v-table__loading" v-else :visible="isLoading">
+      {{ loadingText }}
+    </v-loading>
   </div>
 </template>
 <script>
@@ -234,6 +243,10 @@ export default {
   },
   props: {
     data: Array,
+    size: {
+      type: String,
+      default: "L"
+    },
     showHeader: {
       type: Boolean,
       default: true
@@ -303,6 +316,14 @@ export default {
     }
   },
   computed: {
+    sizeCss() {
+      let cssObj = {
+        M: "v-table--medium",
+        S: "v-table--small",
+        L: "v-table--large"
+      };
+      return cssObj[this.size] || cssObj.L;
+    },
     //是否显示搜索信息
     search() {
       return this.searchSupportArr.length > 0;

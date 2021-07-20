@@ -12,19 +12,31 @@
       @click="showPanel"
     >
       <!-- 开始时间 -->
-      <span :class="{ 'placeholder-text': placeholder && !startTime }">
-        {{ startTime || placeholder }}
-      </span>
+      <v-input
+        class="v-input--no-border v-timepicker__input"
+        :class="{ 'v-timepicker__input--half': isRange }"
+        v-model="startTime"
+        :disabled="isDisabled"
+        @click.native="clickInput"
+        :placeholder="placeholder"
+        ref="start"
+        @input="inputStartTime"
+        @change="changeStartTime"
+      ></v-input>
       <!-- 结束时间 -->
       <template v-if="isRange">
-        <span class="v-timepicker__splitter">-</span>
-        <span
-          :class="{
-            'placeholder-text': endPlaceholder && !endTime
-          }"
-        >
-          {{ endTime || endPlaceholder }}
-        </span>
+        <span class="v-timepicker__splitter v-icon-spliter"></span>
+        <v-input
+          class="v-input--no-border v-timepicker__input"
+          :class="{ 'v-timepicker__input--half': isRange }"
+          v-model="endTime"
+          :disabled="isDisabled"
+          @click.native="clickInput"
+          :placeholder="endPlaceholder"
+          ref="end"
+          @input="inputEndTime"
+          @change="changeEndTime"
+        ></v-input>
       </template>
     </div>
     <!-- 图标信息 -->
@@ -59,9 +71,11 @@
             :minuteInterval="minuteInterval"
             :secondInterval="secondInterval"
             :time="startTime"
+            :is-all-day="isAllDay"
+            ref="startPanel"
             :min="min"
             :max="max"
-            @change="changeTime"
+            @change="changeStartTime"
           ></time-panel>
         </v-col>
         <!-- 结束时间 -->
@@ -71,21 +85,33 @@
             :minuteInterval="minuteInterval"
             :secondInterval="secondInterval"
             :time="endTime"
+            ref="endPanel"
+            :is-all-day="isAllDay"
             :min="min"
             :max="max"
             @change="changeEndTime"
           ></time-panel>
         </v-col>
       </v-row>
+      <div class="v-timepicker__footer">
+        <v-button
+          type="primary"
+          size="S"
+          :disabled="isSubmitDisabled"
+          @click="setTime"
+          >确定</v-button
+        >
+      </div>
     </create-to-body>
   </div>
 </template>
+
 <script>
 import TimePanel from "./time-panel";
 import CreateToBody from "../create-to-body.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
-import { preFormatDate } from "../libs";
+import { preFormatDate, isValidTime, parseDate } from "../libs";
 export default {
   name: "v-timepicker",
   mixins: [FormMixin],
@@ -119,9 +145,16 @@ export default {
       type: Boolean,
       default: false
     },
-    placeholder: String,
-    //结束时间占位符
-    endPlaceholder: String,
+    placeholder: {
+      type: String,
+      default() {
+        return this.isRange ? "开始时间" : "选择时间";
+      }
+    },
+    endPlaceholder: {
+      type: String,
+      default: "结束时间"
+    },
     //时间格式
     format: {
       type: String,
@@ -139,9 +172,14 @@ export default {
       type: Number,
       default: 1
     },
-    size: {
-      type: String,
-      default: "M"
+    //暂时不支持size配置
+    // size: {
+    //   type: String,
+    //   default: "M"
+    // },
+    isAllDay: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -163,17 +201,110 @@ export default {
     },
     timePanelWidth() {
       return size(this.panelWidth) || this.timePickerWidth;
+    },
+    isSubmitDisabled() {
+      if (this.isRange) {
+        return this.startTime == "" || this.endTime == "";
+      }
+      return this.startTime == "";
+    },
+    //是否支持分钟
+    hasMinute() {
+      return this.format.indexOf("mm") > -1;
+    },
+    //是否支持秒
+    hasSecond() {
+      return this.format.indexOf("ss") > -1;
     }
   },
   data() {
     return {
       startTime: "",
       endTime: "",
+      initStartTime: "",
+      initEndTime: "",
       showTimePanel: false,
       isMouseover: false
     };
   },
   methods: {
+    clickInput(e) {
+      if (this.showTimePanel) {
+        e.stopPropagation();
+      } else {
+        this.$refs.start.focus();
+      }
+    },
+    //手动输入
+    inputStartTime(val) {
+      if (!isValidTime(val, this.format, this.isAllDay)) {
+        return;
+      }
+      if (
+        !this.isAllDay &&
+        ((this.minuteInterval > 1 && this.hasMinute) ||
+          (this.secondInterval > 1 && this.hasSecond))
+      ) {
+        let timeObj = parseDate(val, this.format);
+        if (this.hasMinute) {
+          if (timeObj.minute % this.minuteInterval !== 0) {
+            return;
+          }
+        }
+        if (this.hasSecond) {
+          if (timeObj.second % this.secondInterval !== 0) {
+            return;
+          }
+        }
+      }
+      this.startTime = val;
+    },
+    changeStartTime() {
+      let time = this.$refs.startPanel.getTime();
+      this.startTime = time;
+      this.$refs.start.setInputValue(time);
+      this.$refs.start && this.$refs.start.focus();
+    },
+    inputEndTime(val) {
+      if (!isValidTime(val, this.format, this.isAllDay)) {
+        return;
+      }
+      if (
+        !this.isAllDay &&
+        ((this.minuteInterval > 1 && this.hasMinute) ||
+          (this.secondInterval > 1 && this.hasSecond))
+      ) {
+        let timeObj = parseDate(val, this.format);
+        if (this.hasMinute) {
+          if (timeObj.minute % this.minuteInterval !== 0) {
+            return;
+          }
+        }
+        if (this.hasSecond) {
+          if (timeObj.second % this.secondInterval !== 0) {
+            return;
+          }
+        }
+      }
+      this.endTime = val;
+    },
+    changeEndTime() {
+      let time = this.$refs.endPanel.getTime();
+      this.endTime = time;
+      this.$refs.end.setInputValue(time);
+      this.$refs.end && this.$refs.end.focus();
+    },
+    initTime() {
+      let value = this.value;
+      if (this.isRange) {
+        this.startTime = preFormatDate(value[0] || "", this.format);
+        this.endTime = preFormatDate(value[1] || "", this.format);
+      } else {
+        this.startTime = preFormatDate(value || "", this.format);
+      }
+      this.initStartTime = this.startTime;
+      this.initEndTime = this.endTime;
+    },
     showPanel() {
       if (this.isDisabled) return;
       this.showTimePanel = !this.showTimePanel;
@@ -195,22 +326,15 @@ export default {
       this.showTimePanel = false;
       this.checkValid(this.value);
     },
-    changeTime(time) {
-      if (time !== this.startTime) {
-        this.setTime([time, this.endTime]);
-      }
-    },
-    changeEndTime(time) {
-      if (time !== this.endTime) {
-        this.setTime([this.startTime, time]);
-      }
-    },
-    setTime(time) {
+    setTime() {
       if (this.isRange) {
-        this.$emit("change", time);
+        this.$emit("change", [this.startTime, this.endTime]);
       } else {
-        this.$emit("change", time[0]);
+        this.$emit("change", this.startTime);
       }
+      this.$nextTick(() => {
+        this.hide();
+      });
     },
     handlerMouseover() {
       if (!this.isDisabled) this.isMouseover = true;
@@ -231,17 +355,13 @@ export default {
   },
   watch: {
     value: {
-      handler(value) {
-        if (this.isRange) {
-          this.startTime = preFormatDate(value[0] || "", this.format);
-          this.endTime = preFormatDate(value[1] || "", this.format);
-        } else {
-          this.startTime = preFormatDate(value || "", this.format);
-        }
+      handler() {
+        this.initTime();
       },
       immediate: true
     },
     showTimePanel(val) {
+      this.initTime();
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
         this.$dispatch("v-form-item", "form:error", !val);

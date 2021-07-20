@@ -10,6 +10,7 @@
     </div>
   </transition>
 </template>
+
 <script>
 import { on, off } from "./libs.js";
 let zIndex = 2000;
@@ -139,6 +140,12 @@ export default {
         off(window, "resize", this.setPotion);
         off(window, "scroll", this.setPotion);
       }
+    },
+    width() {
+      let $parent = this.$parent.$el;
+      this.style.minWidth = this.width
+        ? this.width
+        : $parent.clientWidth * this.scale + "px";
     }
   }
 };

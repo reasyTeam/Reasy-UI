@@ -79,7 +79,7 @@ $nav-width: 256px;
   line-height: 1.5em;
 }
 .page-content .content > table strong {
-  font-weight: normal;
+  font-weight: bold;
 }
 .page-content .content > table td,
 .page-content .content > table th {

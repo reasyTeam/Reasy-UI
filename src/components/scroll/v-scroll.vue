@@ -33,6 +33,7 @@
 import { getScrollWidth } from "./scroll-lib.js";
 import Bar from "./bar.vue";
 import { on, off } from "../libs.js";
+import tween from "../easing-function.js";
 
 export default {
   name: "v-scroll",
@@ -82,6 +83,10 @@ export default {
     sliderWidth: {
       type: Number,
       default: 4
+    },
+    animate: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -186,8 +191,27 @@ export default {
      * @param {HtmlElement} node dom节点
      */
     scrollToNode(node) {
-      this.view.scrollLeft = node.offsetLeft;
-      this.view.scrollTop = node.offsetTop;
+      if (this.animate) {
+        let startLeft = this.view.scrollLeft,
+          startTop = this.view.scrollTop,
+          endLeft = node.offsetLeft,
+          endTop = node.offsetTop;
+        let rangeLeft = endLeft - startLeft,
+          rangeTop = endTop - startTop;
+
+        tween(
+          0,
+          1,
+          state => {
+            this.view.scrollLeft = startLeft + parseInt(state * rangeLeft);
+            this.view.scrollTop = startTop + parseInt(state * rangeTop);
+          },
+          200
+        );
+      } else {
+        this.view.scrollLeft = node.offsetLeft;
+        this.view.scrollTop = node.offsetTop;
+      }
       this.scroll();
     },
     /**
@@ -195,16 +219,48 @@ export default {
      * @param {Number} x x方向的位置
      */
     scrollToX(x) {
-      this.view.scrollLeft = x;
-      this.scrollLeft = this.view.scrollLeft / this.scrollLeftRange;
+      if (this.animate) {
+        let start = this.view.scrollLeft;
+        let range = x - start;
+
+        tween(
+          0,
+          1,
+          state => {
+            let toValue = start + parseInt(state * range);
+            this.view.scrollLeft = toValue;
+            this.scrollLeft = toValue / this.scrollLeftRange;
+          },
+          200
+        );
+      } else {
+        this.view.scrollLeft = x;
+        this.scrollLeft = this.view.scrollLeft / this.scrollLeftRange;
+      }
     },
     /**
      * 垂直滚动到指定的位置
      * @param {Number} y y方向的位置
      */
     scrollToY(y) {
-      this.view.scrollTop = y;
-      this.scrollTop = this.view.scrollTop / this.scrollTopRange;
+      if (this.animate) {
+        let start = this.view.scrollTop;
+        let range = y - start;
+
+        tween(
+          0,
+          1,
+          state => {
+            let toValue = start + parseInt(state * range);
+            this.view.scrollTop = toValue;
+            this.scrollLeft = toValue / this.scrollTopRange;
+          },
+          200
+        );
+      } else {
+        this.view.scrollTop = y;
+        this.scrollTop = this.view.scrollTop / this.scrollTopRange;
+      }
     },
     /**
      * 滚动到第几个元素
@@ -295,6 +351,7 @@ export default {
      * 同步Bar组件的滚动距离
      */
     scroll() {
+      this.$emit("scroll");
       this.scrollTop = this.view.scrollTop / this.scrollTopRange;
       this.scrollLeft = this.view.scrollLeft / this.scrollLeftRange;
     },

@@ -179,6 +179,42 @@ export function getPrecision(value) {
 }
 
 /**
+ *
+ * @param {String} 日期值
+ * @param {String} 日期格式
+ * @returns 判断日期是否满足格式
+ */
+export function isValidDate(str, fmt) {
+  if (str.length === 0) return false;
+  fmt = fmt || "YYYY-MM-DD";
+  let regStr = fmt.replace(
+      /([^YMDhms]*?)(([YMDhms])\3*)([^YMDhms]*?)/g,
+      function(m, $1, $2, $3, $4) {
+        return $1 + "(\\d{" + $2.length + "})" + $4;
+      }
+    ),
+    reg = new RegExp(regStr);
+
+  if (!reg.test(str)) {
+    return false;
+  }
+
+  let dataObj = parseDate(str, fmt);
+  let newStr = formatDate(
+    new Date(
+      dataObj.year,
+      dataObj.month,
+      dataObj.day,
+      dataObj.hour,
+      dataObj.minute,
+      dataObj.second
+    ),
+    fmt
+  );
+  return newStr === str;
+}
+
+/**
  * @description 解析字符串为年月日
  * @param {*} str
  * @param {*} 时间格式
@@ -197,7 +233,7 @@ export function parseDate(str, fmt) {
     str = str.replace(
       new RegExp($1 + "(\\d{" + $2.length + "})" + $4),
       function(_m, _$1) {
-        obj[$3] = parseInt(_$1);
+        obj[$3] = parseInt(_$1, 10);
         return "";
       }
     );
@@ -251,6 +287,61 @@ export function formatDate(date, fmt) {
     h: date.getHours(), // 24小时制
     m: date.getMinutes(), // 分钟
     s: date.getSeconds() // 秒
+  };
+
+  for (var i in obj) {
+    fmt = fmt.replace(new RegExp(i + "+", "g"), function(m) {
+      var val = obj[i] + "";
+      for (var j = 0, len = val.length; j < m.length - len; j++)
+        val = "0" + val;
+      return m.length == 1 ? val : val.substring(val.length - m.length);
+    });
+  }
+  return fmt;
+}
+
+/**
+ *
+ * @param {String} 时间值
+ * @param {String} 时间格式
+ * @returns 判断时间是否满足格式
+ */
+export function isValidTime(str, fmt, isAllDay = false) {
+  if (str.length === 0) return false;
+  fmt = fmt || "hh:mm";
+  let regStr = fmt.replace(
+      /([^YMDhms]*?)(([YMDhms])\3*)([^YMDhms]*?)/g,
+      function(m, $1, $2, $3, $4) {
+        return $1 + "(\\d{" + $2.length + "})" + $4;
+      }
+    ),
+    reg = new RegExp(regStr);
+
+  if (!reg.test(str)) {
+    return false;
+  }
+
+  let dataObj = parseDate(str, fmt);
+  if (
+    isAllDay &&
+    dataObj.hour == 24 &&
+    dataObj.minute == 0 &&
+    dataObj.second == 0
+  ) {
+    return true;
+  }
+  let newStr = formatDate(
+    new Date(2000, 0, 1, dataObj.hour, dataObj.minute, dataObj.second),
+    fmt
+  );
+  return newStr === str;
+}
+
+export function formatTime(tiemObj, fmt) {
+  var obj = {
+    h: tiemObj.hour, // 24小时制
+    m: tiemObj.minute, // 分钟
+    s: tiemObj.second // 秒
   };
 
   for (var i in obj) {

@@ -14,7 +14,7 @@
     <!-- 选项 -->
     <v-checkbox
       class="v-checkbox-group__item"
-      :class="{'v-checkbox-group__item--active': activeValue === item.value}"
+      :class="{ 'v-checkbox-group__item--active': activeValue === item.value }"
       v-for="(item, index) in optionList"
       :key="item.value"
       :value="checkboxValueList[index]"
@@ -28,6 +28,7 @@
     </v-checkbox>
   </div>
 </template>
+
 <script>
 import FormMixin from "../form-mixins";
 export default {

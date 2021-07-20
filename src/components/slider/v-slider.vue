@@ -86,6 +86,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { getPrecision, on, off, accSub } from "../libs";
 import FormMixin from "../form-mixins";
@@ -288,7 +289,9 @@ export default {
       }
       //纠正值是否按照步长
       this.inputValue = this.getStrictStep(sliderValue);
-      this.moveStart ? this.$emit('moveHandle',this.inputValue) : this.$emit('clickHandle',this.inputValue);
+      this.moveStart
+        ? this.$emit("moveHandle", this.inputValue)
+        : this.$emit("clickHandle", this.inputValue);
     },
     changeValue() {
       if (this.inputValue !== this.value) {

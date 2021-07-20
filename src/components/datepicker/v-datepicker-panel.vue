@@ -1,15 +1,5 @@
 <template>
   <div class="v-datepicker" :style="{ width: datePickerWidth }">
-    <!-- 日期头部信息 -->
-    <header-panel
-      :year="tmpDate.year"
-      :month="tmpDate.month"
-      :type="headerType"
-      :maxYear="maxDate.year"
-      :minYear="minDate.year"
-      @change="changeHeader"
-    ></header-panel>
-    <!-- 日期天选择 -->
     <date-panel
       class="v-datepicker--panel"
       :date="tmpDate"
@@ -20,31 +10,26 @@
       :maxDate="maxDate"
       :format="dateFormat"
       :active-list="selectList"
+      @change-header="changeHeader"
       @change="changeTmpDate"
-      @hide="hide"
       @clickDate="changeDate"
     ></date-panel>
   </div>
 </template>
+
 <script>
-import CreateToBody from "../create-to-body.vue";
-import YearPanel from "./year-panel.vue";
 import DatePanel from "./date-panel.vue";
-import TimePanel from "./time-select-panel.vue";
-import HeaderPanel from "./header-panel.vue";
+//import HeaderPanel from "./header-panel.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
 
 import { parseDate, formatDate } from "../libs";
 export default {
-  name: "v-datepicker",
+  name: "v-datepicker-panel",
   mixins: [FormMixin],
   components: {
-    CreateToBody,
-    DatePanel, //日期面板
-    YearPanel, //年月面板
-    HeaderPanel, //头部面板
-    TimePanel //时间面板
+    DatePanel //日期面板
+    //HeaderPanel //头部面板
   },
   model: {
     prop: "value",
@@ -99,7 +84,6 @@ export default {
   data() {
     return {
       isClickRange: false,
-      headerType: "init",
       originDate: {
         //真实数据
         year: "",
@@ -121,8 +105,7 @@ export default {
       endTime: "",
       maxDate: {},
       minDate: {},
-      isMouseover: false,
-      showDatePanel: false
+      isMouseover: false
     };
   },
   methods: {
@@ -136,10 +119,6 @@ export default {
         minute: now.getMinutes(),
         second: now.getSeconds()
       };
-    },
-
-    hide() {
-      this.showDatePanel = false;
     },
     handlerMouseover() {
       if (!this.isDisabled) this.isMouseover = true;
@@ -184,7 +163,6 @@ export default {
       }
     },
     formatData(value) {
-      let dateObj = {};
       if (value) {
         let dateObj = parseDate(value, this.dateFormat);
         Object.assign(this.originDate, dateObj);
@@ -192,7 +170,6 @@ export default {
         this.tmpDate.year = dateObj.year;
         this.tmpDate.month = dateObj.month;
         this.tmpDate.day = dateObj.day;
-
       } else {
         this.startDate = "";
         Object.assign(this.originDate, {
@@ -237,20 +214,6 @@ export default {
     max: {
       handler(value) {
         this.formatMaxData(value);
-      },
-      immediate: true
-    },
-    showDatePanel: {
-      handler(val) {
-        //if (val) {
-        this.headerType = "init";
-        this.isClickRange = false;
-        this.initData();
-
-        if (this.elFormItem && !this.elFormItem.ignore) {
-          //当form组件存在且需要数据验证时
-          this.$dispatch("v-form-item", "form:error", !val);
-        }
       },
       immediate: true
     }

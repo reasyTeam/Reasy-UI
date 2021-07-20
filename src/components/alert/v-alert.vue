@@ -44,6 +44,7 @@
     </div>
   </transition>
 </template>
+
 <script>
 // 类型--字体图标映射表
 const typeToIcon = {

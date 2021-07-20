@@ -1,6 +1,7 @@
 <template>
   <div></div>
 </template>
+
 <script>
 import { copyDeepData, IGuid } from "../libs";
 let expandFn = function() {};

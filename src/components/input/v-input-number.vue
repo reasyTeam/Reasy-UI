@@ -70,6 +70,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { accSub, getPrecision } from "../libs";
 import FormMixin from "../form-mixins";

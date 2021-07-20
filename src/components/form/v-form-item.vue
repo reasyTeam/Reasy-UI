@@ -27,7 +27,9 @@
         'v-form-item__content--no-label': isNoLabel
         // [sizeCss]: sizeCss
       }"
-      :style="{ 'margin-left': !isNoLabel ? labelWidth + 20 + 'px' : '0' }"
+      :style="{
+        'margin-left': !isNoLabel ? labelWidth + paddingWidth + 'px' : '0'
+      }"
     >
       <slot></slot>
       <slot name="content"></slot>
@@ -43,6 +45,7 @@
     </div>
   </div>
 </template>
+
 <script>
 //import { checkData, isUndefinedOrNull } from "../libs";
 export default {
@@ -86,6 +89,10 @@ export default {
     }
   },
   computed: {
+    //间距
+    paddingWidth() {
+      return this.elForm.paddingWidth;
+    },
     //组件标题宽度
     labelWidth() {
       return this.$getLabelWidth();
@@ -126,7 +133,7 @@ export default {
       if (!this.relativeProp) return;
 
       //获取关联验证组件
-      if(!this.relativeProp) return;
+      if (!this.relativeProp) return;
 
       let relativeProps = Array.isArray(this.relativeProp)
         ? this.relativeProp
@@ -166,8 +173,10 @@ export default {
   },
 
   mounted() {
-    //标题文字长度改变事件
-    this.changeTitle();
+    this.$nextTick(() => {
+      //标题文字长度改变事件
+      this.changeTitle();
+    });
   },
   methods: {
     //数据验证

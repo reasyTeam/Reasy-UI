@@ -20,6 +20,7 @@
             :before-change="beforeSelectAll"
             v-model="checkboxValue"
             :hasValue="hasValue"
+            :disabled="tableNum === 0"
           ></v-checkbox>
           <!-- 表头文字 -->
           <span class="v-table__header__label">{{ col.label }}</span>
@@ -57,7 +58,8 @@ export default {
     sortProp: String,
     //是否有选项框被选中
     hasValue: Boolean,
-    beforeSelectAll: Function
+    beforeSelectAll: Function,
+    tableNum: Number
   },
   computed: {
     checkboxValue: {

@@ -1,5 +1,8 @@
 <template>
-  <div class="v-switch" :class="[sizeCss, { 'v-switch--disabled': isDisabled }]">
+  <div
+    class="v-switch"
+    :class="[sizeCss, { 'v-switch--disabled': isDisabled }]"
+  >
     <span class="v-switch__item" @click="clickSwitch">
       <!-- 开关按钮 -->
       <span
@@ -18,6 +21,7 @@
     </span>
   </div>
 </template>
+
 <script>
 import FormMixin from "../form-mixins";
 export default {

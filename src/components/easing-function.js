@@ -232,9 +232,9 @@ const animate =
  * 动画函数
  * @param {number} start 起始值
  * @param {number} end 结束值
+ * @param {function} cb 回调函数
  * @param {number} during 动画持续时间
  * @param {string} easingFunc 缓动函数
- * @param {function} cb 回调函数
  */
 export default function tween(
   start,

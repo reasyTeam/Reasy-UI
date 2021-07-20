@@ -109,6 +109,7 @@
     <slot name="suffix"></slot>
   </label>
 </template>
+
 <script>
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 import { size } from "../filters";

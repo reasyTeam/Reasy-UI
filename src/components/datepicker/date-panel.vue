@@ -1,44 +1,77 @@
 <template>
-  <div class="v-datepicker--panel__wrapper">
-    <!-- 星期 -->
-    <ul class="v-datepicker--panel__weeks">
-      <li class="date" v-for="item in weekList" :key="item">
-        {{ item | week(item) }}
-      </li>
-    </ul>
-    <ul class="v-datepicker--panel__date-list">
-      <!-- 天 -->
-      <template v-for="(item, index) in dateList">
-        <li
-          :key="index"
-          class="pointer date"
-          :class="{
-            'v-datepicker__pre-month': item.previousMonth,
-            'v-datepicker__next-month': item.nextMonth,
-            'v-datepicker--invalid': validateDate(item)
-          }"
-          @click="updateDate(item)"
-          @mouseover="setDate(item)"
-        >
-          <span
-            class="v-datepicker--info"
-            :class="{
-              'v-datepicker--active': isSelected(item),
-              'v-datepicker--range': isRangedSelected(item)
-            }"
-          >
-            <span>{{ item.value }}</span>
-            <div v-if="isActive(item)" class="v-datepicker__top"></div>
-          </span>
-        </li>
-        <!-- 每周换行 -->
-        <br :key="index + 50" v-if="(index + 1) % 7 === 0" />
-      </template>
-    </ul>
+  <div>
+    <template v-if="headerType === 'init'">
+      <header-panel
+        :year="date.year"
+        :month="date.month"
+        :isRange="isRange"
+        :type="headerType"
+        :maxYear="maxDate.year"
+        :minYear="minDate.year"
+        @change="changeHeader"
+        @clickHeader="clickHeader"
+      ></header-panel>
+      <div class="v-datepicker--panel__wrapper">
+        <!-- 星期 -->
+        <ul class="v-datepicker--panel__weeks">
+          <li class="date" v-for="item in weekList" :key="item">
+            {{ item | week(item) }}
+          </li>
+        </ul>
+        <ul class="v-datepicker--panel__date-list">
+          <!-- 天 -->
+          <template v-for="(item, index) in dateList">
+            <li
+              :key="index"
+              class="pointer date"
+              :class="{
+                'v-datepicker__pre-month': item.previousMonth,
+                'v-datepicker__next-month': item.nextMonth,
+                'v-datepicker--invalid': validateDate(item)
+              }"
+              @click="updateDate(item)"
+              @mouseover="setDate(item)"
+              @mouseleave="handlerLeave(item)"
+            >
+              <span
+                class="v-datepicker--info"
+                :class="{
+                  'v-datepicker--active': isSelected(item),
+                  'v-datepicker--range': isRangedSelected(item)
+                }"
+              >
+                <span>{{ item.value }}</span>
+                <div v-if="isActive(item)" class="v-datepicker__top"></div>
+              </span>
+            </li>
+            <!-- 每周换行 -->
+            <br :key="index + 50" v-if="(index + 1) % 7 === 0" />
+          </template>
+        </ul>
+      </div>
+    </template>
+
+    <year-panel
+      v-else
+      :headerType="headerType"
+      :year="date.year"
+      :month="date.month"
+      :minYear="minDate.year"
+      :maxYear="maxDate.year"
+      @change="changeYear"
+      @clickHeader="clickHeader"
+    ></year-panel>
   </div>
 </template>
+
 <script>
+import HeaderPanel from "./header-panel.vue";
+import YearPanel from "./year-panel.vue";
 export default {
+  components: {
+    HeaderPanel,
+    YearPanel
+  },
   props: {
     //实际开始日期
     originDate: {
@@ -146,13 +179,24 @@ export default {
       weekList: [0, 1, 2, 3, 4, 5, 6],
       tmpYear: 0,
       tmpMonth: 0,
-      tmpDay: 0
+      tmpDay: 0,
+      headerType: "init",
+      selectedDate: {}
     };
   },
   mounted() {
     this.$dispatch("create-to-body", "update:position");
   },
   methods: {
+    clickHeader(type) {
+      this.headerType = type;
+    },
+    changeHeader(year, month) {
+      this.$emit("change-header", year, month);
+    },
+    changeYear(year, month) {
+      this.$emit("change-header", year, month);
+    },
     validateDate(date) {
       let mon = this.tmpMonth;
       if (date.previousMonth) {
@@ -217,7 +261,7 @@ export default {
     },
     isActive(item) {
       //去掉上月和下月
-      if(item.previousMonth || item.nextMonth) {
+      if (item.previousMonth || item.nextMonth) {
         return false;
       }
       return this.activeList.some(item1 => {
@@ -234,6 +278,17 @@ export default {
       //上月或者下月时不处理
       if (date.previousMonth || date.nextMonth) return;
       this.selectDate(date);
+    },
+    handlerLeave() {
+      if (!this.selectedDate.year) {
+        return;
+      }
+      this.$emit(
+        "change",
+        this.selectedDate.year,
+        this.selectedDate.month,
+        this.selectedDate.day
+      );
     },
     selectDate(date) {
       if (this.validateDate(date)) return;
@@ -259,6 +314,12 @@ export default {
       this.$emit("change", year, month, day);
     },
     updateDate(date) {
+      if (this.isClickRange) {
+        this.selectedDate.year = this.tmpYear;
+        this.selectedDate.month = this.tmpMonth;
+        this.selectedDate.day = date.value;
+      }
+
       this.selectDate(date);
       this.$emit("clickDate");
     },

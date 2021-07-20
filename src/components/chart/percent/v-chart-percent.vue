@@ -140,19 +140,20 @@ export default {
       type: Number,
       default: 0
     },
-    showText:{
+    showText: {
       type: Boolean,
       default: true
     },
-    textPosition:{
+    textPosition: {
       type: String,
-      default: 'auto',
+      default: "auto",
       validator(val) {
         return ["auto", "right"].indexOf(val) > -1;
       }
     },
-    textWidth:{
-      type: Number, String,
+    textWidth: {
+      type: Number,
+      String,
       default: 40
     }
   },
@@ -204,13 +205,13 @@ export default {
       if (this.isCircle) {
         return this.center.r * 2;
       }
-      if(this.isTextRight){
+      if (this.isTextRight) {
         return this.textWidth;
       }
       return this.center.r;
     },
     isTextRight() {
-      return this.textPosition === 'right';
+      return this.textPosition === "right";
     }
   },
   watch: {
@@ -263,11 +264,15 @@ export default {
       let { center, padding } = this;
 
       width -= padding * 2;
-      if(this.isTextRight){
+      if (this.isTextRight) {
         width -= this.textWidth + 10;
       }
       center.x = padding;
-      center.y = Math.floor((height + ((this.isTextRight || !this.showText) ? 0 : this.detailHeight)) / 2);
+      center.y = Math.floor(
+        (height +
+          (this.isTextRight || !this.showText ? 0 : this.detailHeight)) /
+          2
+      );
       center.r = width;
     }
   },

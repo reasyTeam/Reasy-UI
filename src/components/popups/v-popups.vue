@@ -132,6 +132,10 @@ export default {
       type: Number,
       default: arrowBottomSideLength
     },
+    popupsOffset: {
+      type: Number,
+      default: 0
+    },
     position: {
       type: String,
       default: "top-center",
@@ -377,7 +381,7 @@ export default {
       }
 
       if (p2 === "top" || p2 === "left") {
-        popupsStyleObj[p2] = `${referenceDomProps[p2]}px`;
+        popupsStyleObj[p2] = `${referenceDomProps[p2] + this.popupsOffset}px`;
       } else if (p2 === "center") {
         popupsStyleObj[centerFixedMap[p1]] = `${referenceDomProps[
           centerFixedMap[p1]
@@ -386,7 +390,8 @@ export default {
           popupsDomProps[positionSideNameMap[centerFixedMap[p1]]] / 2}px`;
       } else {
         popupsStyleObj[positionPropMap[p2]] = `${referenceDomProps[p2] -
-          popupsDomProps[positionSideNameMap[p2]]}px`;
+          popupsDomProps[positionSideNameMap[p2]] +
+          this.popupsOffset}px`;
       }
 
       this.popupsStyle = Object.assign(this.popupsStyle, popupsStyleObj);
@@ -417,7 +422,6 @@ export default {
       if (p1 === "top" || p1 === "left") {
         if (parseInt(this.popupsStyle[p1]) < bodyDomProps[p1]) {
           this.setPosition([positionReverseMap[p1], p2]);
-          console.log("autofixed");
         }
       } else if (
         parseInt(this.popupsStyle[positionPropMap[p1]]) +
