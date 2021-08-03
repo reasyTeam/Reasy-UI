@@ -16,7 +16,10 @@
       </span> -->
       <v-input
         class="v-input--no-border v-datepicker__input"
-        :class="{ 'v-datepicker__input--half': isRange }"
+        :class="{
+          'v-datepicker__input--half': isRange,
+          'v-datepicker__input--placeholder': isDateMouseover
+        }"
         v-model="startDate"
         :disabled="isDisabled"
         @click.native="clickInput"
@@ -24,11 +27,13 @@
         ref="start"
         @input="inputStartDate"
         @change="changeStartDate"
+        @focus="handlerStartFocus"
       ></v-input>
       <template v-if="isRange">
         <span class="v-datepicker__splitter v-icon-spliter"></span>
         <v-input
           class="v-input--no-border v-datepicker__input v-datepicker__input--half"
+          :class="{ 'v-datepicker__input--placeholder': isEndDateMouseover }"
           v-model="endDate"
           ref="end"
           :disabled="isDisabled"
@@ -36,6 +41,7 @@
           :placeholder="endPlaceholder"
           @input="inputEndDate"
           @change="changeEndDate"
+          @focus="handlerEndFocus"
         ></v-input>
       </template>
     </div>
@@ -61,20 +67,19 @@
       <v-row>
         <!-- 时间日期范围 -->
         <template v-if="isRangeDatetime">
-          <template v-if="!isClickRange">
+          <template v-if="isSetStartTime">
             <v-col :span="12">
               <date-panel
                 :isRange="isRange"
                 :date="tmpDate"
-                :isClickRange="isClickRange"
                 :originDate="originDate"
                 :originEndDate="originEndDate"
-                :minDate="minDate"
-                :maxDate="maxDate"
+                :minDate="minSetDate"
+                :maxDate="maxSetDate"
                 @change-header="changeHeader"
                 @change="changeTmpDate"
+                @mouseover="handlerDateMouseover"
                 @hide="hide"
-                @clickDate="clickStartPanel"
               ></date-panel>
             </v-col>
             <v-col :span="12" class="v-datepicker__time-border">
@@ -93,15 +98,14 @@
             <v-col :span="12">
               <date-panel
                 :isRange="isRange"
-                :isClickRange="isClickRange"
-                :date="tmpDate"
+                :date="tmpEndDate"
                 :originDate="originDate"
                 :originEndDate="originEndDate"
-                :minDate="minEndDate"
-                :maxDate="maxDate"
-                @change="changeTmpDate"
+                :minDate="minSetDate"
+                :maxDate="maxSetDate"
+                @change="changeTmpEndDate"
                 @change-header="changeHeader"
-                @clickDate="clickEndPanel"
+                @mouseover="handlerDateMouseover"
                 @hide="hide"
               ></date-panel>
             </v-col>
@@ -124,30 +128,30 @@
             <date-panel
               :isRange="isRange"
               :date="tmpDate"
-              :isClickRange="isClickRange"
+              type="start"
               :originDate="originDate"
               :originEndDate="originEndDate"
-              :minDate="minDate"
-              :maxDate="maxDate"
+              :minDate="minSetDate"
+              :maxDate="maxSetDate"
               @change-header="changeHeader"
               @change="changeTmpDate"
+              @mouseover="handlerDateMouseover"
               @hide="hide"
-              @clickDate="clickStartPanel"
             ></date-panel>
           </v-col>
           <!-- 结束日期 -->
           <v-col :span="12" v-if="isRange">
             <date-panel
               :isRange="isRange"
-              :isClickRange="isClickRange"
               :date="tmpEndDate"
+              type="end"
               :originDate="originDate"
               :originEndDate="originEndDate"
-              :minDate="minDate"
-              :maxDate="maxDate"
+              :minDate="minSetDate"
+              :maxDate="maxSetDate"
               @change="changeTmpEndDate"
               @change-header="changeHeader"
-              @clickDate="clickEndPanel"
+              @mouseover="handlerDateMouseover"
               @hide="hide"
             ></date-panel>
           </v-col>
@@ -168,12 +172,6 @@
 
       <div class="v-datepicker--panel__footer" v-if="hasTime">
         <div class="v-datepicker--panel__right">
-          <!-- <v-button
-            class="v-datepicker--panel__footer__btn"
-            size="S"
-            @click="clearDate"
-            >清空</v-button
-          > -->
           <v-button
             size="S"
             :disabled="submitDisabled"
@@ -300,14 +298,30 @@ export default {
     isRangeDatetime() {
       return this.isRange && this.hasTime;
     },
-    minEndDate() {
-      if (this.startDate) {
+    minSetDate() {
+      if (
+        this.startDate &&
+        this.isChangedInput &&
+        this.isRange &&
+        !this.isSetStartTime
+      ) {
         return parseDate(this.startDate, this.dateFormat);
       }
       return this.minDate;
     },
+    maxSetDate() {
+      if (
+        this.endDate &&
+        this.isChangedInput &&
+        this.isRange &&
+        this.isSetStartTime
+      ) {
+        return parseDate(this.endDate, this.dateFormat);
+      }
+      return this.maxDate;
+    },
     submitDisabled() {
-      if (this.isClickRange) {
+      if (!this.isSetStartTime) {
         return !this.endDate;
       }
       return !this.startDate;
@@ -315,10 +329,11 @@ export default {
   },
   data() {
     return {
-      isClickRange: false,
       isSetTime: false,
       isSetStartTime: true, //是否设置开始时间
-      isDoubleClickEnd: true, //两次是否都是点击结束面板
+      isChangedInput: false, //是否
+      isStartFocus: false,
+      isEndFocus: false,
       originDate: {
         //真实数据
         year: "",
@@ -356,15 +371,54 @@ export default {
       maxDate: {},
       minDate: {},
       isMouseover: false,
-      showDatePanel: false
+      showDatePanel: false,
+      isDateMouseover: false,
+      isEndDateMouseover: false
     };
   },
   methods: {
+    handlerDateMouseover(year, month, day, isOver) {
+      if (this.isSetStartTime) {
+        this.isDateMouseover = isOver;
+        this.isEndDateMouseover = false;
+        let startDate = formatDate(
+          new Date(
+            year,
+            month,
+            day,
+            this.originDate.hour,
+            this.originDate.minute,
+            this.originDate.second
+          ),
+          this.dateFormat
+        );
+        this.startDate = startDate;
+        if (!isOver) {
+          this.startDate = this.initStartDate;
+        }
+      } else {
+        this.isEndDateMouseover = isOver;
+        this.isDateMouseover = false;
+        let endDate = formatDate(
+          new Date(
+            year,
+            month,
+            day,
+            this.originEndDate.hour,
+            this.originEndDate.minute,
+            this.originEndDate.second
+          ),
+          this.dateFormat
+        );
+        this.endDate = endDate;
+        if (!isOver) {
+          this.endDate = this.initEndDate;
+        }
+      }
+    },
     clickInput(e) {
       if (this.showDatePanel) {
         e.stopPropagation();
-      } else {
-        this.$refs.start.focus();
       }
     },
     getNowDate() {
@@ -401,7 +455,8 @@ export default {
         return;
       }
       //修改日期
-      this.changeTmpDate(dateObj.year, dateObj.month, dateObj.day);
+      this.changeTmpDate(dateObj.year, dateObj.month, dateObj.day, true);
+
       if (this.hasTime) {
         //修改时间
         this.setTime(
@@ -425,7 +480,7 @@ export default {
         return;
       }
       //修改日期
-      this.changeTmpEndDate(dateObj.year, dateObj.month, dateObj.day);
+      this.changeTmpEndDate(dateObj.year, dateObj.month, dateObj.day, true);
       if (this.hasTime) {
         //修改时间
         this.setTime(
@@ -480,105 +535,204 @@ export default {
       this.endDate = endDate;
     },
 
+    handlerStartFocus() {
+      this.isSetStartTime = true;
+      let year = this.tmpDate.year,
+        month = this.tmpDate.month;
+
+      if (!this.showDatePanel || !this.isStartFocus) {
+        year = this.originDate.year;
+        month = this.originDate.month;
+      }
+      if (!this.isRange) {
+        this.tmpDate.day = this.originDate.day;
+      }
+      this.isStartFocus = true;
+      this.isEndFocus = false;
+      this.updateTmpDate(year, month);
+    },
+    handlerEndFocus() {
+      this.isSetStartTime = false;
+      let year = this.tmpEndDate.year,
+        month = this.tmpEndDate.month;
+
+      if (!this.showDatePanel || !this.isEndFocus) {
+        year = this.originEndDate.year;
+        month = this.originEndDate.month;
+      }
+      this.isStartFocus = false;
+      this.isEndFocus = true;
+      if (
+        this.tmpDate.year === year &&
+        this.tmpDate.month === month &&
+        this.isRange &&
+        !this.hasTime
+      ) {
+        month += 1;
+        if (month > 11) {
+          month = 0;
+          year += 1;
+        }
+      }
+      this.updateTmpEndDate(year, month);
+    },
+
     clearDate() {
-      this.isClickRange = false;
+      this.isChangedInput = false;
       this.startDate = "";
       this.endDate = "";
       this.changeValue(this.isRange ? [] : "");
-    },
-    //点击日期执行事件
-    clickStartPanel() {
-      this.isDoubleClickEnd = false;
-      this.clickDate();
-      this.setStartFocus();
-    },
-    clickEndPanel() {
-      if (this.isClickRange) {
-        this.isDoubleClickEnd = true;
-      }
-      this.clickDate();
-      this.setEndFocus();
-    },
-    clickDate() {
-      if (this.isRangeDatetime) {
-        //this.isSetStartTime = false;
-      } else if (this.isRange) {
-        this.isClickRange = !this.isClickRange;
-      }
+      if (this.showDatePanel) {
+        if (this.isStartFocus) {
+          this.setStartFocus();
+        }
 
-      this.changeDate();
+        if (this.isEndFocus) {
+          this.setEndFocus();
+        }
+      }
     },
     setStartFocus() {
+      this.isEndDateMouseover = false;
       this.$refs.start && this.$refs.start.focus();
     },
     setEndFocus() {
+      this.isDateMouseover = false;
       this.$refs.end && this.$refs.end.focus();
     },
     hide() {
+      this.isEndDateMouseover = false;
+      this.isDateMouseover = false;
       this.showDatePanel = false;
+      this.isStartFocus = false;
+      this.isEndFocus = false;
     },
     handlerMouseover() {
       if (!this.isDisabled) this.isMouseover = true;
     },
-    setFirstClick(year, month, day) {
-      this.originDate.year = this.originEndDate.year = year;
-      this.originDate.month = this.originEndDate.month = month;
-      this.originDate.day = this.originEndDate.day = day;
-    },
-    changeTmpDate(year, month, day) {
-      this.tmpDate.year = year;
-      this.tmpDate.month = month;
-      this.tmpDate.day = day;
-      this.updateTmpEndDate();
-      if (!this.isRange && !this.hasTime) {
-        this.setFirstClick(year, month, day);
-        //this.setDateTime();
+    changeTmpDate(year, month, day, isInput = false) {
+      if (this.isSetStartTime) {
+        this.originDate.year = this.tmpDate.year = year;
+        this.originDate.month = this.tmpDate.month = month;
+        this.originDate.day = this.tmpDate.day = day;
+        this.initStartDate = formatDate(
+          new Date(
+            this.originDate.year,
+            this.originDate.month,
+            this.originDate.day,
+            this.originDate.hour,
+            this.originDate.minute,
+            this.originDate.second
+          ),
+          this.dateFormat
+        );
+
+        if (!this.isRangeDatetime && this.isRange) {
+          this.updateTmpDate(year, month);
+        }
+      }
+
+      if (isInput || this.isRangeDatetime) {
         return;
       }
-      if (!this.isClickRange) {
-        //第一次点击
-        this.setFirstClick(year, month, day);
+      if (this.isRange && !this.isChangedInput) {
+        this.changeSetInput();
       } else {
-        //第二次点击
-        this.originEndDate.year = year;
-        this.originEndDate.month = month;
-        this.originEndDate.day = day;
+        if (!this.hasTime) {
+          this.changeDate();
+        }
       }
     },
     //选择结束时间事件
-    changeTmpEndDate(year, month, day) {
-      if (!this.isClickRange) {
-        this.tmpEndDate.year = year;
-        this.tmpEndDate.month = month;
-        this.tmpEndDate.day = day;
-        //更新起始时间模板
-        this.updateTmpDate();
-        //第一次点击时同步日期
-        this.setFirstClick(year, month, day);
-      } else {
-        this.originEndDate.year = year;
-        this.originEndDate.month = month;
-        this.originEndDate.day = day;
+    changeTmpEndDate(year, month, day, isInput = false) {
+      if (!this.isSetStartTime) {
+        this.originEndDate.year = this.tmpEndDate.year = year;
+        this.originEndDate.month = this.tmpEndDate.month = month;
+        this.originEndDate.day = this.tmpEndDate.day = day;
+
+        this.initEndDate = formatDate(
+          new Date(
+            this.originEndDate.year,
+            this.originEndDate.month,
+            this.originEndDate.day,
+            this.originEndDate.hour,
+            this.originEndDate.minute,
+            this.originEndDate.second
+          ),
+          this.dateFormat
+        );
+        if (!this.isRangeDatetime) {
+          this.updateTmpEndDate(year, month);
+        }
       }
+      if (isInput) {
+        return;
+      }
+      if (!this.isRangeDatetime && !this.isChangedInput) {
+        this.changeSetInput();
+      } else {
+        if (!this.isRangeDatetime) {
+          this.changeDate();
+        }
+      }
+    },
+    //
+    changeSetInput() {
+      //结束日期 >= 开始日期
+      let startTime = new Date(
+        this.originDate.year,
+        this.originDate.month,
+        this.originDate.day
+      ).getTime();
+      let endTime = new Date(
+        this.originEndDate.year,
+        this.originEndDate.month,
+        this.originEndDate.day
+      ).getTime();
+      let isCheckValid = endTime >= startTime;
+      if (this.isSetStartTime) {
+        if (!isCheckValid) {
+          this.endDate = "";
+        }
+        this.setEndFocus();
+      } else {
+        if (!isCheckValid) {
+          this.startDate = "";
+        }
+        this.setStartFocus();
+      }
+      this.isChangedInput = true;
     },
     //更新开始日期的显示年月
-    updateTmpDate() {
-      if (this.tmpEndDate.month === 0) {
-        this.tmpDate.year = this.tmpEndDate.year - 1;
-        this.tmpDate.month = 11;
-      } else {
-        this.tmpDate.year = this.tmpEndDate.year;
-        this.tmpDate.month = this.tmpEndDate.month - 1;
+    updateTmpDate(year, month) {
+      this.tmpDate.year = year;
+      this.tmpDate.month = month;
+
+      //范围选择且不支持时间时
+      if (this.isRange && !this.hasTime) {
+        if (month === 11) {
+          this.tmpEndDate.year = year + 1;
+          this.tmpEndDate.month = 0;
+        } else {
+          this.tmpEndDate.year = year;
+          this.tmpEndDate.month = month + 1;
+        }
       }
+
+      //this.setStartFocus();
     },
     //更新结束日期的显示年月
-    updateTmpEndDate() {
-      if (this.tmpDate.month === 11) {
-        this.tmpEndDate.year = this.tmpDate.year + 1;
-        this.tmpEndDate.month = 0;
-      } else {
-        this.tmpEndDate.year = this.tmpDate.year;
-        this.tmpEndDate.month = this.tmpDate.month + 1;
+    updateTmpEndDate(year, month) {
+      this.tmpEndDate.year = year;
+      this.tmpEndDate.month = month;
+      if (this.isRange && !this.hasTime) {
+        if (month === 0) {
+          this.tmpDate.year = year - 1;
+          this.tmpDate.month = 11;
+        } else {
+          this.tmpDate.year = year;
+          this.tmpDate.month = month - 1;
+        }
       }
     },
     //切换时间
@@ -610,20 +764,35 @@ export default {
       this.setEndFocus();
     },
     //修改header
-    changeHeader(year, month) {
-      this.tmpDate.year = year;
-      this.tmpDate.month = month;
-      this.updateTmpEndDate();
-      if (this.isClickRange) {
-        this.setEndFocus();
-      } else {
+    changeHeader(year, month, type) {
+      if (this.isSetStartTime) {
+        if (type === "end") {
+          month -= 1;
+          if (month <= -1) {
+            year -= 1;
+            month = 11;
+          }
+        }
+        this.tmpDate.year = year;
+        this.tmpDate.month = month;
         this.setStartFocus();
+      } else {
+        if (type === "start") {
+          month += 1;
+          if (month >= 12) {
+            year += 1;
+            month = 0;
+          }
+        }
+        this.tmpEndDate.year = year;
+        this.tmpEndDate.month = month;
+        this.setEndFocus();
       }
     },
     changeYear(year, month) {
       this.tmpDate.year = year;
       this.tmpDate.month = month;
-      this.updateTmpEndDate();
+      this.updateTmpDate(year, month);
     },
 
     changeDate() {
@@ -650,14 +819,6 @@ export default {
           this.originDate.minute,
           this.originDate.second
         ),
-        dateEnd = "";
-
-      if (
-        this.isRange &&
-        ((!this.isClickRange && !this.isRangeDatetime) ||
-          (this.isRangeDatetime && this.isClickRange))
-      ) {
-        //支持范围选择 && 第二次点击
         dateEnd = new Date(
           this.originEndDate.year,
           this.originEndDate.month,
@@ -666,6 +827,10 @@ export default {
           this.originEndDate.minute,
           this.originEndDate.second
         );
+
+      if (this.isRange) {
+        //支持范围选择 && 第二次点击
+
         isReverse = startDate.getTime() > endDate.getTime();
         //开始日期大于结束日期
         if (isReverse) {
@@ -701,7 +866,7 @@ export default {
       let isHide = false;
       if (this.isRange) {
         //支持范围选择
-        if (!this.isClickRange && !this.hasTime) {
+        if (!this.hasTime) {
           //第二次点击 && 不支持时间配置时
           isHide = true;
         }
@@ -718,12 +883,9 @@ export default {
     setDateTime(isHide = true) {
       //不隐藏面板时，不处理
       if (!isHide) return;
-      if (this.isRangeDatetime) {
-        if (!this.isClickRange) {
-          this.isClickRange = true;
-          //this.isSetStartTime = false;
-          return;
-        }
+      if (this.isRangeDatetime && !this.isChangedInput) {
+        this.changeSetInput();
+        return;
       }
       let dateTime = this.startDate;
 
@@ -744,56 +906,22 @@ export default {
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
         this.$dispatch("v-form-item", "form:blur", val);
-      } else {
-        // this.checkValid(this.value);
       }
     },
     formatData(value) {
       if (value) {
         value = preFormatDate(value, this.dateFormat);
-        let dateObj = parseDate(value, this.dateFormat);
-        Object.assign(this.originDate, dateObj);
         this.startDate = value;
-        if (this.isDoubleClickEnd && this.tmpDate.year) {
-          return;
-        }
-        if (!this.isClickRange) {
-          Object.assign(this.tmpDate, dateObj);
-        }
       } else {
         this.startDate = "";
-        Object.assign(this.originDate, {
-          year: "",
-          month: "",
-          day: "",
-          hour: "",
-          minute: "",
-          second: ""
-        });
-        let dateObj = new Date();
-        this.tmpDate.year = dateObj.getFullYear();
-        this.tmpDate.month = dateObj.getMonth();
-        this.tmpDate.day = dateObj.getDate();
       }
       this.initStartDate = this.startDate;
-      this.updateTmpEndDate();
-      //this.endDay = dateObj.D;
     },
     formatEndData(value) {
       if (value) {
-        let dateObj = parseDate(value, this.dateFormat);
-        Object.assign(this.originEndDate, dateObj);
         this.endDate = value;
       } else {
         this.endDate = "";
-        Object.assign(this.originEndDate, {
-          year: "",
-          month: "",
-          day: "",
-          hour: "23",
-          minute: 60 - this.minuteInterval,
-          second: 60 - this.secondInterval
-        });
       }
       this.initEndDate = this.endDate;
     },
@@ -850,13 +978,58 @@ export default {
       handler(val) {
         //if (val) {
         this.headerType = "init";
-        this.isClickRange = false;
-        //this.isSetStartTime = true;
+        this.isChangedInput = false;
         this.initData();
-
         if (this.elFormItem && !this.elFormItem.ignore) {
           //当form组件存在且需要数据验证时
           this.$dispatch("v-form-item", "form:error", !val);
+        }
+      },
+      immediate: true
+    },
+    startDate: {
+      handler(value) {
+        if (value) {
+          let dateObj = parseDate(value, this.dateFormat);
+          Object.assign(this.originDate, dateObj);
+        } else {
+          let dateObj = this.getNowDate();
+          Object.assign(this.originDate, {
+            year: dateObj.year,
+            month: dateObj.month,
+            day: 0,
+            hour: "",
+            minute: "",
+            second: ""
+          });
+        }
+      },
+      immediate: true
+    },
+    endDate: {
+      handler(value) {
+        if (value) {
+          let dateObj = parseDate(value, this.dateFormat);
+          Object.assign(this.originEndDate, dateObj);
+        } else {
+          let dateObj = this.getNowDate();
+          let year = dateObj.year,
+            month = dateObj.month;
+          if (!this.isRangeDatetime) {
+            month += 1;
+            if (month >= 12) {
+              month = 0;
+              year += 1;
+            }
+          }
+          Object.assign(this.originEndDate, {
+            year: year,
+            month: month,
+            day: 0,
+            hour: "23",
+            minute: 60 - this.minuteInterval,
+            second: 60 - this.secondInterval
+          });
         }
       },
       immediate: true

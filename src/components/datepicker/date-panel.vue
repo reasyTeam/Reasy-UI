@@ -2,16 +2,17 @@
   <div>
     <template v-if="headerType === 'init'">
       <header-panel
-        :year="date.year"
-        :month="date.month"
+        :year="tmpYear"
+        :month="tmpMonth"
         :isRange="isRange"
+        :icon-type="type"
         :type="headerType"
         :maxYear="maxDate.year"
         :minYear="minDate.year"
         @change="changeHeader"
         @clickHeader="clickHeader"
       ></header-panel>
-      <div class="v-datepicker--panel__wrapper">
+      <div class="v-datepicker--panel__wrapper" @mouseleave="handlerMouseLeave">
         <!-- 星期 -->
         <ul class="v-datepicker--panel__weeks">
           <li class="date" v-for="item in weekList" :key="item">
@@ -29,9 +30,8 @@
                 'v-datepicker__next-month': item.nextMonth,
                 'v-datepicker--invalid': validateDate(item)
               }"
-              @click="updateDate(item)"
-              @mouseover="setDate(item)"
-              @mouseleave="handlerLeave(item)"
+              @click="clickDate(item)"
+              @mouseover="handlerOver(item)"
             >
               <span
                 class="v-datepicker--info"
@@ -73,6 +73,11 @@ export default {
     YearPanel
   },
   props: {
+    type: {
+      //面板类型
+      type: String,
+      default: ""
+    },
     //实际开始日期
     originDate: {
       type: Object,
@@ -94,8 +99,6 @@ export default {
         return {};
       }
     },
-    //是否点击了范围
-    isClickRange: Boolean,
     //是否支持范围
     isRange: Boolean,
     //最小日期
@@ -107,6 +110,12 @@ export default {
       type: Array,
       default() {
         return [];
+      }
+    },
+    selectedDate: {
+      type: Object,
+      default() {
+        return {};
       }
     }
   },
@@ -180,8 +189,7 @@ export default {
       tmpYear: 0,
       tmpMonth: 0,
       tmpDay: 0,
-      headerType: "init",
-      selectedDate: {}
+      headerType: "init"
     };
   },
   mounted() {
@@ -191,8 +199,8 @@ export default {
     clickHeader(type) {
       this.headerType = type;
     },
-    changeHeader(year, month) {
-      this.$emit("change-header", year, month);
+    changeHeader(year, month, type) {
+      this.$emit("change-header", year, month, type);
     },
     changeYear(year, month) {
       this.$emit("change-header", year, month);
@@ -225,16 +233,17 @@ export default {
     isRangedSelected(item) {
       let startTime = this.startTime,
         endTime = this.endTime;
-      if (this.isRange && this.originEndDate.year > 0) {
+      if (
+        this.isRange &&
+        this.originEndDate.year > 0 &&
+        this.originEndDate.day > 0
+      ) {
         let time = new Date(this.tmpYear, this.tmpMonth, item.value).getTime();
         let start, end;
-        if (startTime > endTime) {
-          end = startTime;
-          start = endTime;
-        } else {
-          start = startTime;
-          end = endTime;
-        }
+
+        start = startTime;
+        end = endTime;
+
         return item.currentMonth && time <= end && time >= start;
       }
       return false;
@@ -273,25 +282,19 @@ export default {
         );
       });
     },
-    setDate(date) {
-      if (!this.isClickRange) return;
+    handlerOver(date) {
       //上月或者下月时不处理
-      if (date.previousMonth || date.nextMonth) return;
+      //if (date.previousMonth || date.nextMonth) return;
       this.selectDate(date);
     },
-    handlerLeave() {
-      if (!this.selectedDate.year) {
-        return;
-      }
-      this.$emit(
-        "change",
-        this.selectedDate.year,
-        this.selectedDate.month,
-        this.selectedDate.day
-      );
+    handlerMouseLeave() {
+      this.$emit("mouseover", this.tmpYear, this.tmpMonth, this.tmpDay, false);
     },
     selectDate(date) {
-      if (this.validateDate(date)) return;
+      if (!this.isRange) {
+        //return;
+      }
+      //if (this.validateDate(date)) return;
       let year = this.tmpYear,
         month = this.tmpMonth,
         day = date.value;
@@ -311,16 +314,32 @@ export default {
           month = this.tmpMonth + 1;
         }
       }
-      this.$emit("change", year, month, day);
-    },
-    updateDate(date) {
-      if (this.isClickRange) {
-        this.selectedDate.year = this.tmpYear;
-        this.selectedDate.month = this.tmpMonth;
-        this.selectedDate.day = date.value;
-      }
 
-      this.selectDate(date);
+      this.$emit("mouseover", year, month, day, true);
+    },
+    clickDate(date) {
+      if (this.validateDate(date)) return;
+      let year = this.tmpYear,
+        month = this.tmpMonth,
+        day = date.value;
+      if (date.previousMonth) {
+        if (this.tmpMonth === 0) {
+          year = this.tmpYear - 1;
+          month = 11;
+        } else {
+          month = this.tmpMonth - 1;
+        }
+      } else if (date.nextMonth) {
+        if (this.tmpMonth === 11) {
+          year = this.tmpYear + 1;
+          month = 0;
+        } else {
+          month = this.tmpMonth + 1;
+        }
+      }
+      //}
+      this.$emit("change", year, month, day);
+      this.$emit("change-select", year, month, day);
       this.$emit("clickDate");
     },
     showYear() {

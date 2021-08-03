@@ -17,7 +17,7 @@
       :value="checkboxAllVal"
       :hasValue="hasCheckBoxSelect"
       :before-select-all="beforeSelectAll"
-      :table-num="pageData.length"
+      :is-select-all-disabled="isSelectAllDisabled || pageData.length === 0"
       @change="changeCheckboxAll"
       @sort="sortTable"
     ></table-header>
@@ -313,6 +313,11 @@ export default {
       default() {
         return true;
       }
+    },
+    //全选是否禁用
+    isSelectAllDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

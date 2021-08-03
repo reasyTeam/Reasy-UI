@@ -110,6 +110,16 @@ export default {
       });
       return list;
     },
+    unSelectedAllValue() {
+      let list = [];
+      this.optionList.forEach(item => {
+        //为禁用 且 被选中
+        if (item.disabled && this.value.indexOf(item.value) !== -1) {
+          list.push(item.value);
+        }
+      });
+      return list;
+    },
     isAllChecked: {
       get() {
         return this.value.length >= this.selectAllValue.length;
@@ -148,8 +158,8 @@ export default {
         this.$emit("change", allValue);
         this.checkValid(allValue);
       } else {
-        this.$emit("change", []);
-        this.checkValid([]);
+        this.$emit("change", this.unSelectedAllValue);
+        this.checkValid(this.unSelectedAllValue);
       }
     },
     handlerClick(options) {

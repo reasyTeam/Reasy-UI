@@ -34,6 +34,12 @@
     &--half.v-input {
       width: calc(48% - 4px);
     }
+    &--placeholder {
+      .input-text {
+        color: $light-gray-color;
+      }
+
+    }
   }
 
   &__icon {

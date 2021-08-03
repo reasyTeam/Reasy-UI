@@ -231,8 +231,6 @@ export default {
     clickInput(e) {
       if (this.showTimePanel) {
         e.stopPropagation();
-      } else {
-        this.$refs.start.focus();
       }
     },
     //手动输入

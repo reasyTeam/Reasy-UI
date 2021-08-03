@@ -1,7 +1,10 @@
 <template>
   <div class="v-datepicker--panel__header">
     <!-- 左边按钮 -->
-    <div class="v-datepicker--panel__left">
+    <div
+      class="v-datepicker--panel__left"
+      v-if="!(isRange && iconType === 'end')"
+    >
       <span
         class="v-icon-double-left v-datepicker--panel__icon pointer v-date-icon"
         @click="previousYear()"
@@ -13,7 +16,10 @@
       ></span>
     </div>
     <!-- 右边按钮 -->
-    <div class="v-datepicker--panel__right">
+    <div
+      class="v-datepicker--panel__right"
+      v-if="!(isRange && iconType === 'start')"
+    >
       <span
         v-if="type === 'init'"
         class="v-icon-right v-datepicker--panel__icon pointer v-date-icon"
@@ -36,6 +42,11 @@
 <script>
 export default {
   props: {
+    //面板类型 支持start / end
+    iconType: {
+      type: String,
+      default: ""
+    },
     isRange: Boolean,
     //当前面板显示初始状态 选择年 选择月
     type: String,
@@ -91,7 +102,7 @@ export default {
       this.setDate();
     },
     setDate() {
-      this.$emit("change", this.tmpYear, this.tmpMonth);
+      this.$emit("change", this.tmpYear, this.tmpMonth, this.iconType);
     },
     // 点击年选择
     showYear() {
