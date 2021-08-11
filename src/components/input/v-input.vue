@@ -81,13 +81,13 @@
       <!-- 清除图标 -->
       <span
         v-if="inputValue && isClear !== false"
-        class="v-input__middle v-input__icon pointer v-icon-close-plane"
+        class="v-input__middle v-input__icon pointer icon-gray v-icon-close-plane"
         @click="clearValue()"
       ></span>
       <!-- 显示密码图标 -->
       <span
         v-if="showPassword"
-        class="v-input__middle v-input__icon pointer"
+        class="v-input__middle v-input__icon pointer icon-gray"
         :class="passwordVisible ? 'v-icon-eye-on' : 'v-icon-eye-off'"
         @click="handlerPasswordVisible"
       ></span>
@@ -114,6 +114,7 @@
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 import { size } from "../filters";
 import FormMixin from "../form-mixins";
+
 export default {
   name: "v-input",
   mixins: [FormMixin],

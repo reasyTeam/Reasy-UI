@@ -7,13 +7,15 @@
 ::: demo
 
 ```html
-<div class="input-group">
-  <v-input-group type="ip" v-model="ip"></v-input-group>
-</div>
+<v-form ref="form">
+  <v-form-item label="IP/网关等其它">
+    <v-input-group type="ip" v-model="ip"></v-input-group>
+  </v-form-item>
+  <v-form-item label="MAC地址">
+    <v-input-group type="mac" v-model="mac"></v-input-group>
+  </v-form-item>
+</v-form>
 
-<div>
-  <v-input-group type="mac" v-model="mac"></v-input-group>
-</div>
 <script>
   export default {
     data() {

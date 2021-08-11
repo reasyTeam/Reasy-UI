@@ -236,12 +236,12 @@ export default {
     placeholder: {
       type: String,
       default() {
-        return this.isRange ? "开始时间" : "选择时间";
+        return this.isRange ? "开始日期" : "选择日期";
       }
     },
     endPlaceholder: {
       type: String,
-      default: "结束时间"
+      default: "结束日期"
     },
     //时间日期格式
     format: String,

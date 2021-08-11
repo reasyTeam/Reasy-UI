@@ -17,7 +17,7 @@
       >
         <!-- 输入框项 -->
         <v-input
-          class="v-input--no-border"
+          :class="['v-input--no-border',`v-input-group--${type}`]"
           v-model="item.value"
           :maxlength="inputMaxLen"
           :data-index="item.index"

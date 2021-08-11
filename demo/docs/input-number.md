@@ -16,6 +16,15 @@
 <div class="input-group">
   <v-input-number size="S" v-model="num"></v-input-number>
 </div>
+<div class="input-group">
+  <v-input-number size="L" v-model="num" controls-position="right"></v-input-number>
+</div>
+<div class="input-group">
+  <v-input-number size="M" v-model="num" controls-position="right"></v-input-number>
+</div>
+<div class="input-group">
+  <v-input-number size="S" v-model="num" controls-position="right"></v-input-number>
+</div>
 <script>
   export default {
     data() {

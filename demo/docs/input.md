@@ -202,6 +202,27 @@
 
 :::
 
+### 支持搜索
+
+`is-clear`配置输入框是否支持搜索
+
+::: demo
+
+```html
+<v-input type="text" is-search v-model="input"></v-input>
+<script>
+  export default {
+    data() {
+      return {
+        input: ""
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 前缀图标和后缀图标
 
 `icon`配置输入框的前缀图标，`suffix-icon`配置输入框的后缀图标，值为对应图标的类名
@@ -322,6 +343,7 @@
 | width           | 输入框长度，支持数字和字符串，如 70 或 70px 或 70%                   | string / number |                                      |        |
 | placeholder     | 输入框占位文字                                                       | string          | —                                    | —      |
 | is-clear        | 是否支持清空                                                         | boolean         | —                                    | false  |
+| is-search       | 是否支持搜索                                                         | boolean         | —                                    | false  |
 | show-password   | 是否显示切换密码图标                                                 | boolean         | —                                    | false  |
 | show-word-limit | 是否显示输入字数统计                                                 | boolean         | —                                    | false  |
 | readonly        | 原生属性，是否只读                                                   | boolean         | —                                    | false  |

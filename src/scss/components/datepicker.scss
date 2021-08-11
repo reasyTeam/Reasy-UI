@@ -146,7 +146,7 @@
     }
 
     &__wrapper {
-      padding: 12px;
+      padding: 12px 12px 12px 15px;
     }
 
     &__footer {
@@ -171,11 +171,12 @@
   &--info {
     position: relative;
     border-radius: 1px;
-    border: 1px solid transparent;
+    // border: 1px solid transparent;
     display: block;
-    margin: 0 2px;
+    margin: 0 3px 0 0;
     line-height: 24px;
     height: 24px;
+    width: 26px;
 
     &:hover {
       border-color: $main-active-color;

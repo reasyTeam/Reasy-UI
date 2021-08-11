@@ -66,11 +66,11 @@
     }
 
     &--disabled {
-      background: $border-color;
+      background: rgba($light-color, 0.4);;
       cursor: not-allowed;
 
       &.v-switch__icon--active {
-        background: rgba($main-active-color, 0.5);
+        background: rgba($main-active-color, 0.4);
       }
     }
   }

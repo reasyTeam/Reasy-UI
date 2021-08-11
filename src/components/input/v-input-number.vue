@@ -52,7 +52,7 @@
           :size="size"
         ></v-button>
         <!-- 控制器在右边时 -->
-        <template v-else>
+        <div class="v-input-number__arrow" v-else>
           <!-- 上箭头 -->
           <span
             class="v-icon-up v-input-number__button up"
@@ -65,7 +65,7 @@
             :class="{ 'btn-disabled': subDisabled }"
             @click="subNum"
           ></span>
-        </template>
+        </div>
       </template>
     </div>
   </div>

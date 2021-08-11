@@ -53,7 +53,7 @@ export default [
           },
           {
             path: "input-group",
-            title: "Input Group 输入框组"
+            title: "Input Group 特殊输入框"
           },
           {
             path: "input-number",

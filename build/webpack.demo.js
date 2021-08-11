@@ -18,7 +18,18 @@ const webpackConfig = {
     path: path.resolve(process.cwd(), "./docs/"),
     publicPath: process.env.CI_ENV || "",
     filename: "[name].[hash:7].js",
-    chunkFilename: isProd ? "page/[name].[hash:7].js" : "[name].js"
+    chunkFilename: isProd ? "page/[name].[hash:7].js" : "[name].js",
+    devtoolModuleFilenameTemplate: info => {
+      const resPath = info.resourcePath;
+      if (/node_modules/.test(resPath) || /\.js$/.test(resPath)) {
+        return `webpack:///${resPath.replace(/^(\.\/)?src/, "my-code/src")}`;
+      } else if (/\.vue$/.test(resPath)) {
+        if (!/type=script/.test(info.identifier)) {
+          return `webpack:///${resPath.replace(/^(\.\/)?src/, "my-code/src")}`;
+        }
+      }
+      return `webpack:///${resPath}?${info.hash}`;
+    }
   },
   resolve: {
     extensions: [".js", ".vue", ".json"],

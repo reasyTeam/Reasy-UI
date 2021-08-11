@@ -1,11 +1,15 @@
 @mixin timepicker-size($fontSize, $lineHeight) {
   font-size: $fontSize;
   .input-text,
-  .v-timepicker__title,
-  .v-timepicker__li {
+  .v-timepicker__title {
     font-size: $fontSize;
     height: $lineHeight;
     line-height: $lineHeight;
+  }
+  .v-timepicker__li {
+    font-size: $fontSize;
+    height: $lineHeight - 2px;
+    line-height: $lineHeight - 2px;
   }
   .v-timepicker__icon {
     height: $lineHeight;
