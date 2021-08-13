@@ -1,5 +1,8 @@
 <template>
-  <div class="v-form-item" :class="{ 'v-form-item--inline': isInline }">
+  <div
+    class="v-form-item"
+    :class="[{ 'v-form-item--inline': isInline }, itemCss]"
+  >
     <!-- 左边文字 -->
     <label
       v-if="!isNoLabel"
@@ -33,6 +36,22 @@
     >
       <slot></slot>
       <slot name="content"></slot>
+
+      <label
+        class="v-form-item__tip v-form-item__unit"
+        v-if="$slots.unit || unit"
+      >
+        <slot name="unit" v-if="$slots.unit"></slot>
+        <template v-else>{{ unit }}</template>
+      </label>
+
+      <slot name="description" v-if="$slots.description"> </slot>
+      <label
+        class="v-form-item__tip v-form-item__description"
+        v-else-if="description"
+        >{{ description }}
+      </label>
+
       <div :style="{ height: errHeight }">
         <div
           ref="error"
@@ -47,7 +66,7 @@
 </template>
 
 <script>
-//import { checkData, isUndefinedOrNull } from "../libs";
+import { sizeToCss } from "../filters";
 export default {
   name: "v-form-item",
   inject: ["getValidateType", "getField", "elForm"],
@@ -86,6 +105,14 @@ export default {
     isInline: {
       type: Boolean,
       default: false
+    },
+    description: {
+      type: [String, Number],
+      default: ""
+    },
+    unit: {
+      type: [String, Number],
+      default: ""
     }
   },
   computed: {
@@ -101,12 +128,10 @@ export default {
       return this.errorMsg && this.isShowError;
     },
     sizeCss() {
-      let cssObj = {
-        M: "v-form-item__label--medium",
-        S: "v-form-item__label--small",
-        L: "v-form-item__label--large"
-      };
-      return cssObj[this.size] || cssObj.M;
+      return sizeToCss(this.size, "v-form-item__label--");
+    },
+    itemCss() {
+      return sizeToCss(this.size, "v-form-item--");
     },
     isDisabled() {
       return (this.elForm && this.elForm.disabled) || this.disabled;
@@ -116,7 +141,7 @@ export default {
     return {
       errHeight: "", //错误文字高度
       value: "",
-      size: "",
+      size: "M",
       isMounted: false, //子元素是否挂载
       childVm: null,
       errorMsg: "", //错误信息

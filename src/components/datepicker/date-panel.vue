@@ -117,6 +117,12 @@ export default {
       default() {
         return {};
       }
+    },
+    realDate: {
+      type: Object,
+      default() {
+        return {};
+      }
     }
   },
   computed: {
@@ -262,10 +268,10 @@ export default {
         return item.currentMonth && (isEqualStart || isEqualEnd);
       }
       return (
-        this.tmpDay === item.value &&
+        this.realDate.day === item.value &&
         item.currentMonth &&
-        this.tmpMonth === this.originDate.month &&
-        this.tmpYear === this.originDate.year
+        this.realDate.month === this.tmpMonth &&
+        this.realDate.year === this.tmpYear
       );
     },
     isActive(item) {

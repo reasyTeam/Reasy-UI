@@ -204,6 +204,8 @@ input[type="number"] {
 //输入框组
 .v-input-group {
   width: $elem-width;
+  display: inline-block;
+  vertical-align: middle;
 
   &__splitter {
     position: absolute;
@@ -320,7 +322,7 @@ input[type="number"] {
     top: 0;
     height: 100%;
     padding: 0 2px;
-    min-width: 32px;
+    min-width: 24px;
     width: 32px;
     border: none;
     z-index: 4;
@@ -364,12 +366,39 @@ input[type="number"] {
     height: 100%;
     top: 0;
     right: 0;
-    width: 30px;
+    width: 20px;
 
     &:hover {
       .v-input-number__button {
         height: 40%;
       }
+    }
+  }
+
+  &--small {
+    .v-input-number__arrow {
+      width: 16px;
+    }
+
+    .v-input-number__controls {
+      width: 22px;
+    }
+    .v-input-number__position .input-text {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  &--large {
+    .v-input-number__arrow {
+      width: 24px;
+    }
+    .v-input-number__controls {
+      width: 40px;
+    }
+
+    .v-input-number__position .input-text {
+      padding-left: 48px;
+      padding-right: 48px;
     }
   }
 }

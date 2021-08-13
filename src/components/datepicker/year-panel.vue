@@ -155,6 +155,9 @@ export default {
     },
     // 选择年份
     selectYear(year) {
+      if (this.validateYear(year)) {
+        return;
+      }
       this.tmpYear = year;
       this.$emit("change", this.tmpYear, this.tmpMonth);
       this.$emit("clickHeader", "month");
@@ -164,6 +167,9 @@ export default {
     },
     // 选择月份
     selectMonth(month) {
+      if (this.validateMonth(month)) {
+        return;
+      }
       this.tmpMonth = month;
       this.$emit("change", this.tmpYear, this.tmpMonth);
       this.$emit("clickHeader", "init");

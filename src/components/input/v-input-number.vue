@@ -1,5 +1,8 @@
 <template>
-  <div class="v-input-number" :style="{ width: inputWidth }">
+  <div
+    :class="['v-input-number', `${sizeToCss(size, 'v-input-number--')}`]"
+    :style="{ width: inputWidth }"
+  >
     <div
       class="input-group--content"
       :class="{
@@ -73,6 +76,7 @@
 
 <script>
 import { accSub, getPrecision } from "../libs";
+import { sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
 export default {
   name: "v-input-number",
@@ -177,6 +181,7 @@ export default {
     };
   },
   methods: {
+    sizeToCss,
     // 输入框修改值
     handlerChange(value) {
       let val = parseFloat(value);

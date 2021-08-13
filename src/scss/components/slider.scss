@@ -14,7 +14,6 @@ $slider-line-height: 4px;
 
 .v-slider {
   display: inline-block;
-  width: 400px;
 
   &:after,
   &:before {
@@ -63,6 +62,7 @@ $slider-line-height: 4px;
     background-color: $disabled-border-color;
     border-radius: 2px;
     cursor: pointer;
+    width: $elem-width;
 
     .v-popups__arrow {
       left: 50%;
@@ -123,6 +123,9 @@ $slider-line-height: 4px;
       transition: 0.2s;
       height: 100%;
     }
+  }
+  .input-text {
+    text-align: center;
   }
 
   &--disabled {

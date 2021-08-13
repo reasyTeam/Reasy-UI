@@ -32,7 +32,7 @@
         :readonly="readonly"
         :minlength="minlength"
         :maxlength="maxlength"
-        :style="{ paddingRight: subffixWidth + 'px' }"
+        :style="{ paddingRight: subffixWidth }"
         @blur="blur"
         @change="changeValue"
         @keydown="$emit('keydown', $event)"
@@ -112,7 +112,7 @@
 
 <script>
 import { setCursorPos, getCursorPos, on, off } from "../libs";
-import { size } from "../filters";
+import { size, sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
 
 export default {
@@ -192,12 +192,13 @@ export default {
   computed: {
     //尺寸大小样式
     sizeCss() {
-      let cssObj = {
-        M: "v-input--medium",
-        S: "v-input--small",
-        L: "v-input--large"
-      };
-      return cssObj[this.size] || cssObj.M;
+      return sizeToCss(this.size, "v-input--");
+      // let cssObj = {
+      //   M: "medium",
+      //   S: "v-input--small",
+      //   L: "v-input--large"
+      // };
+      // return cssObj[this.size] || cssObj.M;
     },
     //是否支持placeholder
     supportPlaceholder() {
@@ -223,7 +224,11 @@ export default {
         if (this.$refs.suffix) {
           suffixWidth = this.$refs.suffix.scrollWidth;
         }
-        this.subffixWidth = suffixWidth; //iconIdex * 24 + 8;
+        if (suffixWidth !== 8) {
+          this.subffixWidth = suffixWidth + "px"; //iconIdex * 24 + 8;
+        } else {
+          this.subffixWidth = "";
+        }
       });
       return iconIdex > 0;
     },

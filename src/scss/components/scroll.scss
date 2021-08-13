@@ -6,10 +6,12 @@ $background: rgb(144, 147, 153);
   // 创建新的层叠上下文
   z-index: 0;
 
-  &:hover {
-    & > .v-scroll__bar {
-      opacity: 1;
-    }
+  &:hover > .v-scroll__bar {
+    opacity: 1;
+  }
+
+  &.active > .v-scroll__bar {
+    opacity: 1;
   }
 
   &__bar {

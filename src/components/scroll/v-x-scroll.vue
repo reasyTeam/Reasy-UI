@@ -9,6 +9,7 @@
     :overflow="overflow"
     :isBlock="isBlock"
     :animate="animate"
+    :active="true"
     @mounted="setPosition"
   >
     <slot></slot>

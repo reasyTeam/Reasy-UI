@@ -133,6 +133,7 @@
               :originEndDate="originEndDate"
               :minDate="minSetDate"
               :maxDate="maxSetDate"
+              :realDate="realDate"
               @change-header="changeHeader"
               @change="changeTmpDate"
               @mouseover="handlerDateMouseover"
@@ -325,6 +326,9 @@ export default {
         return !this.endDate;
       }
       return !this.startDate;
+    },
+    realDate() {
+      return parseDate(this.initStartDate, this.dateFormat);
     }
   },
   data() {

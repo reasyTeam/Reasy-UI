@@ -21,11 +21,14 @@
   display: inline-block;
   width: $elem-width;
   vertical-align: top;
+  .v-input {
+    width: 100%;
+  }
   &__input {
     .input-text {
       padding-right: 2px !important;
     }
-    &--half.v-input {
+    &--half.v-timepicker__input.v-input {
       width: calc(48% - 4px);
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="v-scroll" :style="scrollStyle">
+  <div class="v-scroll" :class="{ active: active }" :style="scrollStyle">
     <!-- 滚动条体 -->
     <div ref="view" class="v-scroll__wrap" :style="wrapStyle" @scroll="scroll">
       <slot></slot>
@@ -85,6 +85,10 @@ export default {
       default: 4
     },
     animate: {
+      type: Boolean,
+      default: false
+    },
+    active: {
       type: Boolean,
       default: false
     }

@@ -4,10 +4,7 @@
 
 首先要在`Vue`的`prototype`上绑定`$valid`数据验证对象，对象形式时，执行`all`方法
 
-::: demo
-
-```html
-<pre>
+```js
   const valid = {
     //函数形式
     num: function(str, min, max) {
@@ -40,10 +37,8 @@
 
   //绑定在原型链上
   Vue.prototype.$valid = valid;
-</pre>
 ```
 
-:::
 
 ### 基本用法
 
@@ -55,17 +50,14 @@
 
 ```html
 <v-form ref="form" :model="ruleForm" :rules="rules" @submit="submit">
-  <v-form-item label="数字" prop="ssid">
+  <v-form-item label="数字" prop="ssid" unit="秒">
     <v-input v-model="ruleForm.ssid"></v-input>
-    <span style="font-size: 14px;">秒</span>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
+    <template v-slot:unit>这里显示单位信息</template>
   </v-form-item>
-  <v-form-item label="功率" prop="power">
-    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
-  </v-form-item>
-  <v-form-item label="IP地址" prop="ip">
+  <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
     <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
   </v-form-item>
   <v-form-item label="个数" prop="index">
@@ -74,6 +66,9 @@
       :min="1"
       :max="12"
     ></v-input-number>
+  </v-form-item>
+  <v-form-item label="功率" prop="power">
+    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
   </v-form-item>
   <v-form-item label="加密" prop="security">
     <v-radio v-model="ruleForm.security" :options="radioOptions"></v-radio>
@@ -233,6 +228,8 @@
 | is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
 | beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
 | disabled       | 表单是否禁用                                                            | boolean  |        | false  |
+| unit   |  表单显示的单位信息 | string | - |
+| description   |  表单显示的描述信息 | string | - |
 
 ### rules 验证规则
 
@@ -288,3 +285,5 @@ key 为 表单选项的 prop，
 | default | 表单元素右边显示内容                                                |
 | content | 右边多个数据验证时需要把第二个放入此插槽内，显示在 default 插槽后面 |
 | label   | 表单元素左边文字内容                                                |
+| unit | 单位信息，与`unit`属性作用相同，若同时配置`unit`属性，则只生效该slot |
+| description | 描述信息，可自定义特定样式描述信息，若同时配置`description`属性，则只生效该slot |

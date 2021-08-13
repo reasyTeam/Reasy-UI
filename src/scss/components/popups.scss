@@ -12,7 +12,8 @@ $arrow-bottom-side-length: 10px;
     min-width: 16px;
     min-height: 32px;
     border-radius: 2px;
-    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
+      0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
   }
 
   &__arrow {
@@ -25,41 +26,42 @@ $arrow-bottom-side-length: 10px;
 
   &--light {
     .v-popups__main {
-      color: rgba(#000, .65);
+      color: rgba(#000, 0.65);
       background-color: #fff;
     }
     .v-popups__arrow {
       polygon {
         fill: #fff;
       }
-      
     }
   }
   &--dark {
     .v-popups__main {
       color: #fff;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.85);
     }
     .v-popups__arrow {
       polygon {
-        fill: rgba(0, 0, 0, 0.8);
+        fill: rgba(0, 0, 0, 0.85);
       }
     }
+    box-shadow: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
+      0px 6px 16px 0px rgba(0, 0, 0, 0.08), 0px 3px 6px -4px rgba(0, 0, 0, 0.12);
   }
 
   @at-root {
     .pop-fade-in-out-enter-active {
-      animation: pop-fade-in .1s;
+      animation: pop-fade-in 0.1s;
     }
     .pop-fade-in-out-leave-active {
-      animation: pop-fade-out .1s;
+      animation: pop-fade-out 0.1s;
     }
-  
+
     @keyframes pop-fade-in {
       0% {
         opacity: 0;
       }
-  
+
       100% {
         opacity: 1;
       }
@@ -68,7 +70,7 @@ $arrow-bottom-side-length: 10px;
       0% {
         opacity: 1;
       }
-  
+
       100% {
         opacity: 0;
       }

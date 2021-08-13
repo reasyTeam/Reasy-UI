@@ -50,6 +50,34 @@
       max-width: 100%;
     }
   }
+
+  &--small {
+    .v-form-item__tip {
+      line-height: $form-line-height-s;
+      font-size: 12px;
+    }
+  }
+  &--medium {
+    .v-form-item__tip {
+      line-height: $form-line-height;
+      font-size: 14px;
+    }
+  }
+  &--large {
+    .v-form-item__tip {
+      line-height: $form-line-height-l;
+      font-size: 16px;
+    }
+  }
+  &__tip {
+    margin-left: 8px;
+  }
+  &__unit {
+    color: $title-color;
+  }
+  &__description {
+    color: $light-color;
+  }
 }
 
 .is-error {

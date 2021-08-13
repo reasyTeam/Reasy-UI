@@ -2,7 +2,8 @@
  * 组件长度和宽度处理
  * @param {String/Number} val
  */
-import { isUndefinedOrNull } from "./libs";
+import { isUndefinedOrNull, SIZE_TO_CSS } from "./libs";
+
 export function size(val) {
   if (typeof val === "string") {
     return val;
@@ -11,4 +12,8 @@ export function size(val) {
     return;
   }
   return `${val}px`;
+}
+
+export function sizeToCss(size, pre = "") {
+  return pre + (SIZE_TO_CSS[size] || SIZE_TO_CSS["M"]);
 }

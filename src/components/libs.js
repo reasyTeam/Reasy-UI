@@ -597,3 +597,9 @@ export function IGuid(len, radix) {
 
   return uuid.join("");
 }
+
+export const SIZE_TO_CSS = {
+  S: "small",
+  M: "medium",
+  L: "large"
+};
