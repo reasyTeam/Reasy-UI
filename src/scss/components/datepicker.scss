@@ -41,7 +41,6 @@
       .input-text {
         color: $light-gray-color;
       }
-
     }
   }
 
@@ -94,6 +93,13 @@
 
     .v-date-icon {
       color: $light-color;
+      font-size: 16px;
+    }
+    .v-icon-right {
+      margin-right: 6px;
+    }
+    .v-icon-left {
+      margin-left: 6px;
     }
 
     &__weeks,
@@ -222,7 +228,6 @@
   }
 
   &--invalid {
-
     cursor: not-allowed;
 
     .v-datepicker--info {
@@ -230,7 +235,6 @@
       color: $disabled-color !important;
       background-color: $disabled-background-color;
     }
-
   }
 
   .input-text {

@@ -154,6 +154,13 @@
 
 ```html
 <v-checkbox-group
+  is-select-all
+  disabled
+  v-model="selected"
+  :options="options"
+></v-checkbox-group>
+<v-checkbox-group
+  is-select-all
   disabled
   v-model="checked"
   :options="options"
@@ -163,6 +170,7 @@
     data() {
       return {
         checked: [],
+        selected:[1, 3],
         options: [
           {
             label: "选项一",

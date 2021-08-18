@@ -7,7 +7,7 @@
   }
 
   &__header {
-    background: $disabled-background-color;
+    background: #fafafa;
 
     &--sort {
       cursor: pointer;
@@ -38,11 +38,11 @@
 
   &__row {
     &:hover {
-      background: $disabled-background-color;
+      background: #fafafa;
     }
 
     &--active {
-      background-color: scale-color($color: $main-active-color, $alpha: -90%) !important;
+      background-color: rgba($main-active-color, 0.06) !important;
     }
   }
 
@@ -56,18 +56,18 @@
     border: 1px solid $disabled-border-color;
     border-bottom: 0;
 
-    &+& {
+    & + & {
       border-top: 0;
     }
 
     td {
-      &+td {
+      & + td {
         border-left: 1px solid $disabled-border-color;
       }
     }
 
     th {
-      &+th {
+      & + th {
         border-left: 1px solid $disabled-border-color;
       }
     }
@@ -140,7 +140,6 @@
   }
 
   &--large {
-
     th,
     td {
       padding: 16px;
@@ -148,7 +147,6 @@
   }
 
   &--medium {
-
     th,
     td {
       padding: 12px;
@@ -156,7 +154,6 @@
   }
 
   &--small {
-
     th,
     td {
       padding: 8px;

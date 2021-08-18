@@ -39,7 +39,7 @@
     position: relative;
     outline: 0;
     box-sizing: border-box;
-    background: $light-color;
+    background: $disabled-color;
     cursor: pointer;
     transition: border-color .3s, background-color .3s;
     vertical-align: middle;
@@ -66,7 +66,7 @@
     }
 
     &--disabled {
-      background: rgba($light-color, 0.4);;
+      background: rgba($disabled-color, 0.4);;
       cursor: not-allowed;
 
       &.v-switch__icon--active {

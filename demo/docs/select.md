@@ -230,18 +230,18 @@
 ::: demo
 
 ```html
-<div class="input-group">
-  <div>top</div>
-  <v-select v-model="select1" position="top" :options="selectOption"></v-select>
-</div>
-<div>
-  <div>bottom</div>
-  <v-select
-    v-model="select1"
-    position="bottom"
-    :options="selectOption"
-  ></v-select>
-</div>
+<v-row class="page-row">
+  <v-col :span="2" class="page-row__title page-row__border">top</v-col>
+  <v-col :span="22">
+    <v-select v-model="select1" position="top" :options="selectOption"></v-select>
+  </v-col>
+</v-row>
+<v-row class="page-row">
+  <v-col :span="2" class="page-row__title page-row__border">bottom</v-col>
+  <v-col :span="22">
+    <v-select v-model="select1" position="bottom" :options="selectOption"></v-select>
+  </v-col>
+</v-row>
 
 <script>
   export default {

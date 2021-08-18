@@ -9,7 +9,7 @@
     vertical-align: middle;
     text-align: left;
 
-    &+& {
+    & + & {
       margin-left: 12px;
     }
   }
@@ -23,7 +23,12 @@
     text-align: center;
     color: $info-color;
     cursor: pointer;
+    vertical-align: middle;
     @extend .no-select;
+
+    &.v-pagonation__icon {
+      font-size: 12px;
+    }
 
     &:hover {
       color: $main-active-color;
@@ -36,6 +41,7 @@
       padding: 0;
       border: 1px solid $border-color;
       border-radius: 2px;
+      vertical-align: middle;
 
       &:hover {
         border-color: $main-active-color;
@@ -44,13 +50,17 @@
 
       &:focus,
       &:active {
-        background-color: rgba($main-active-color, 0.1)
+        background-color: rgba($main-active-color, 0.1);
       }
 
       &.v-pagination__button--active {
         background-color: $main-active-color;
         border-color: $main-active-color;
         color: #fff;
+      }
+
+      &.v-pagonation__icon {
+        font-size: 16px;
       }
     }
 
@@ -88,21 +98,33 @@
       }
     }
 
-    &+.v-pagination__button {
+    & + .v-pagination__button {
       margin-left: 8px;
+    }
+
+    &.v-icon-more {
+      color: #ccc;
+      font-size: 20px;
     }
   }
 
   &__select {
     width: 60px;
+    vertical-align: middle;
   }
 
   &__input {
     width: 48px;
+    vertical-align: middle;
   }
 
   &__text {
     line-height: $form-line-height-s;
     padding: 0 8px;
+    vertical-align: middle;
+  }
+
+  .v-select__icon {
+    font-size: 14px;
   }
 }

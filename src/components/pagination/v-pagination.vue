@@ -5,14 +5,13 @@
     </div>
     <div class="v-pagination__item" v-if="totalPage > 1">
       <a
-        class="v-pagination__button"
+        class="v-pagination__button v-pagonation__icon v-icon-left"
         @click="gotoPage('prev')"
         :class="{
           'v-pagination__button--disabled': page === 1 || disabled,
           'v-pagination__button--border': border
         }"
-        >&lt;</a
-      >
+      ></a>
       <a
         class="v-pagination__button"
         :class="{
@@ -21,22 +20,25 @@
             border &&
             footerBtn.value !== 'prevBtn' &&
             footerBtn.value !== 'nextBtn',
-          'v-pagination__button--disabled': disabled
+          'v-pagination__button--disabled': disabled,
+          'v-icon-more': footerBtn.text === 'more'
         }"
         v-for="footerBtn in footer"
         :key="footerBtn.value"
         @click="gotoPage(footerBtn.value)"
-        >{{ footerBtn.text }}</a
+      >
+        <template v-if="footerBtn.text !== 'more'">{{
+          footerBtn.text
+        }}</template></a
       >
       <a
-        class="v-pagination__button"
+        class="v-pagination__button v-pagonation__icon v-icon-right"
         @click="gotoPage('next')"
         :class="{
           'v-pagination__button--disabled': page >= totalPage || disabled,
           'v-pagination__button--border': border
         }"
-        >&gt;</a
-      >
+      ></a>
     </div>
     <div class="v-pagination__item" v-if="isShowTotalPage">
       <span>第</span>
@@ -46,7 +48,7 @@
       <span class="v-pagination__text">每页</span>
       <v-select
         v-model="pageSizeValue"
-        size="S"
+        :size="border ? 'M' : 'S'"
         :disabled="disabled"
         class="v-pagination__select"
         :options="pageSizeOptions"
@@ -59,7 +61,7 @@
       <v-input
         v-model="pageValue"
         :disabled="disabled"
-        size="S"
+        :size="border ? 'M' : 'S'"
         class="v-pagination__input"
         :allow="/^\d+$/"
         @change="gotoPage(pageValue)"
@@ -173,7 +175,7 @@ export default {
         if (this.page > this.pagerCount / 2) {
           //前面省略号
           footerArr[1] = {
-            text: "...",
+            text: "more",
             value: "prevBtn"
           };
           footerArr[0] = {
@@ -185,7 +187,7 @@ export default {
         if (this.page <= this.totalPage - this.pagerCount / 2) {
           //后面省略号
           footerArr[this.pagerCount - 2] = {
-            text: "...",
+            text: "more",
             value: "nextBtn"
           };
           footerArr[this.pagerCount - 1] = {

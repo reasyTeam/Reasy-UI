@@ -14,17 +14,17 @@
       v-clickoutside="hide"
       :class="[panelClass]"
     >
-      <v-scroll
-        ref="scroll"
-        :height="scrollHeight"
-        :is-block="true"
-        :to-index="selectIndex"
-        @mounted="setPosition"
+      <div
+        class="v-dropdown__menu"
+        @mouseenter="handleDropdownMouseenter"
+        @mouseleave="handleDropdownMouseleave"
       >
-        <div
-          class="v-dropdown__menu"
-          @mouseenter="handleDropdownMouseenter"
-          @mouseleave="handleDropdownMouseleave"
+        <v-x-scroll
+          ref="scroll"
+          :count="4"
+          :is-block="true"
+          :to-index="selectIndex"
+          @mounted="setPosition"
         >
           <ul>
             <li
@@ -56,8 +56,8 @@
               <span class="v-dropdown__text">{{ item.text }}</span>
             </li>
           </ul>
-        </div>
-      </v-scroll>
+        </v-x-scroll>
+      </div>
     </create-to-body>
   </div>
 </template>

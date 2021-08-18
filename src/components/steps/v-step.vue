@@ -85,8 +85,8 @@ export default {
     },
     currentIcon() {
       const statusIcon = {
-        finish: "v-icon-ok-line",
-        error: "v-icon-close-line"
+        finish: "v-icon-ok-line-thin",
+        error: "v-icon-close-line-thin"
       };
       let { icon, currentStatus } = this;
 

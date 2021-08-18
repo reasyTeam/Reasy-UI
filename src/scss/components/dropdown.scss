@@ -86,7 +86,7 @@
         &:not(.v-dropdown__option--disabled) {
           &:hover {
             color: $main-active-color;
-            background-color: lighten($main-active-color, 48%);
+            background-color: rgba($main-active-color, 0.1);
           }
         }
         

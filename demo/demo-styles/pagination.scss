@@ -1,0 +1,13 @@
+.page-row {
+  margin: 12px 0 24px;
+}
+
+.page-row__title {
+  font-size: 14px;
+  line-height: 24px;
+  color: #8d8d8d;
+
+  &.page-row__border {
+    line-height: 32px;
+  }
+}

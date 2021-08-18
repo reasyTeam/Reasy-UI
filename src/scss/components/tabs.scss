@@ -25,12 +25,13 @@
     &-item {
       display: inline-block;
       cursor: pointer;
-      @each $size, $line-height, $font-size in (S, 20px, 12px),
-                                                (M, 22px, 14px),
-                                                (L, 24px, 16px) {
+      @each $size, $line-height, $font-size, $padding in (S, 20px, 12px, 12px),
+                                                (M, 22px, 14px, 16px),
+                                                (L, 24px, 16px, 20px) {
         &.tab-nav--#{$size} {
           line-height: $line-height;
           font-size: $font-size;
+          padding: 0 $padding;
         }
       }
       &:hover {
@@ -84,9 +85,9 @@
   .tab-nav--link {
     border-bottom: 2px solid #f5f5f5;
     .tab-nav-item {
-      @each $size, $margin in (S, 0 20px 1px),
-                              (M, 0 20px 8px),
-                              (L, 0 20px 10px) {
+      @each $size, $margin in (S, 0 0 1px),
+                              (M, 0 0 8px),
+                              (L, 0 0 10px) {
         &.tab-nav--#{$size} {
           margin: $margin;
         }
