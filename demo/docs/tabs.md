@@ -10,8 +10,8 @@ Tab 让用户可以在不同的子任务、视图、模式之间切换，它具�
 <template>
   <v-tabs v-model="activeName">
     <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
-    <v-tab-pane label="标签2222" value="2">标签2内容</v-tab-pane>
-    <v-tab-pane label="标签333333" value="3">标签3内容</v-tab-pane>
+    <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+    <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
   </v-tabs>
 </template>
 
