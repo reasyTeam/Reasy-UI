@@ -33,7 +33,7 @@ const getOptions = (nums, type = "circle") => {
   const obj = {
     avatar: {
       type,
-      src: "src/views/img/dog.jpg"
+      src: "./img/dog.jpg"
     },
     title: "列表主要内容",
     description: "次要信息"
@@ -95,7 +95,7 @@ export default {
   >
     <template #empty-text>
       <div class="custom-empty-content">
-        <img src="src/views/img/empty.png" alt="no data" />
+        <img src="img/empty.png" alt="no data" />
       </div>
     </template>
   </v-list>
@@ -105,7 +105,7 @@ export default {
 // 生成假数据
 const options = (() => {
   const obj = {
-    avatar: "src/views/img/dog.jpg",
+    avatar: "./img/dog.jpg",
     title: "列表主要内容",
     description: "次要信息"
   };

@@ -8,6 +8,7 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const loader = require("sass-loader");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -78,7 +79,14 @@ const webpackConfig = {
       {
         test: /\.(scss|css)$/,
         use: [
-          isProd ? MiniCssExtractPlugin.loader : "style-loader",
+          isProd
+            ? {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  publicPath: "../"
+                }
+              }
+            : "style-loader",
           "css-loader",
           {
             loader: "sass-loader",
@@ -106,7 +114,7 @@ const webpackConfig = {
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
-        loader: "url-loader?limit=8192&name=img/[hash:8].[name].[ext]"
+        loader: "url-loader?limit=8192&name=font/[hash:8].[name].[ext]"
       }
     ]
   },
@@ -147,6 +155,9 @@ if (isProd) {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:7].css"
+    }),
+    new CopyPlugin({
+      patterns: [{ from: path.resolve(process.cwd(), "./img/"), to: "img" }]
     })
   );
   webpackConfig.optimization.minimizer.push(
