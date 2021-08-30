@@ -1,10 +1,10 @@
 module.exports = {
+  base: "./src/scss/base.scss",
   alert: "./src/scss/components/alert.scss",
   badge: "./src/scss/components/badge.scss",
   button: "./src/scss/components/button.scss",
   checkbox: "./src/scss/components/checkbox.scss",
   collapse: "./src/scss/components/collapse.scss",
-  container: "./src/scss/components/container.scss",
   datepicker: "./src/scss/components/datepicker.scss",
   dialog: "./src/scss/components/dialog.scss",
   dropdown: "./src/scss/components/dropdown.scss",
@@ -25,7 +25,7 @@ module.exports = {
   slider: "./src/scss/components/slider.scss",
   steps: "./src/scss/components/steps.scss",
   switch: "./src/scss/components/switch.scss",
-  tbas: "./src/scss/components/tabs.scss",
+  tabs: "./src/scss/components/tabs.scss",
   table: "./src/scss/components/table.scss",
   timepicker: "./src/scss/components/timepicker.scss",
   tooltip: "./src/scss/components/tooltip.scss",
@@ -33,5 +33,6 @@ module.exports = {
   bar: "./src/scss/components/chart-bar.scss",
   line: "./src/scss/components/chart-line.scss",
   percent: "./src/scss/components/chart-percent.scss",
-  pie: "./src/scss/components/chart-pie.scss"
+  pie: "./src/scss/components/chart-pie.scss",
+  progress: "./src/scss/components/chart-percent.scss"
 };

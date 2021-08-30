@@ -28,6 +28,9 @@ $light-gray-color: #ccc;
 //元素宽度  select input
 $elem-width: 228px;
 
+$--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
+  opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
+
 @mixin clearfix {
   &::after {
     content: "";
@@ -43,7 +46,12 @@ $elem-width: 228px;
   text-overflow: ellipsis;
 }
 
-@mixin bold{
+@mixin bold {
   font-family: PingFangSC-Medium, PingFang SC, "Microsoft Yahei",
     "Hiragino Sans GB", sans-serif;
+}
+
+@mixin disabled-style {
+  color: $disabled-color !important;
+  cursor: not-allowed;
 }

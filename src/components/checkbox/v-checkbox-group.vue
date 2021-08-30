@@ -6,7 +6,7 @@
       v-if="isSelectAll"
       :has-value="!isAllChecked && value.length > 0"
       v-model="isAllChecked"
-      :disabled="disabled"
+      :disabled="disabledCheckAll || disabled"
       @click="handleAllClick"
     >
       {{ selectText }}
@@ -43,6 +43,10 @@ export default {
     value: Array,
     name: String,
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    disabledCheckAll: {
       type: Boolean,
       default: false
     },
@@ -104,7 +108,11 @@ export default {
       let list = [];
       this.optionList.forEach(item => {
         //为禁用 或者 禁用却被选中
-        if (!item.disabled || this.value.indexOf(item.value) !== -1) {
+        if (
+          this.disabledCheckAll ||
+          !item.disabled ||
+          this.value.indexOf(item.value) !== -1
+        ) {
           list.push(item.value);
         }
       });

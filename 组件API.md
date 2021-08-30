@@ -1,3 +1,11 @@
+
+## 字段规范
+
+- 属性书写顺序：必填->非必填，
+- 长宽、距离的值类型，只能写xxpx的`number`类型，否则百分比的`string`，
+- 属性命名用`-`连接
+- 尺寸大中小用`S`、`M`、`L`
+
 # v-button
 
 ## 属性 Attributes
@@ -69,6 +77,7 @@
 | allow           | 输入框允许输入字符的正则表达式                               | RegExp          | —                                  | —      |
 | valid           | 数据验证                                                     | Array / Object  |                                    |        |
 | unit            | 输入框单位                                                   | String          | —                                  | —      |
+| auto-correction | 自动纠错，仅支持按范围进行数字纠错                              | Array          | —                                  | []      |
 
 ## 事件 Events
 
@@ -105,6 +114,7 @@
 | splitter   | 输入框的分隔符                                     | string          | —         | —      |
 | maxlength  | 每个输入框最大输入长度                             | number          | —         | —      |
 | allow      | 输入框允许输入的字符的正则表达式                   | RegExp          | —         | —      |
+| auto-correction | 自动纠错，仅支持按范围进行数字纠错             | Array          | —         | []      |
 
 ## 事件 Events
 

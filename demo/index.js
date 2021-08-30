@@ -3,7 +3,7 @@ import App from "./App";
 import VueRouter from "vue-router";
 import hljs from "highlight.js";
 import routes from "./route.config";
-import ReasyUI from "@/components/index";
+import ReasyUI from "@/components/indexFull";
 import demoBlock from "./components/demo-block";
 import SideNav from "./components/side-nav";
 import FooterNav from "./components/footer-nav";
@@ -11,7 +11,7 @@ import SideLink from "./components/side-link";
 
 import { valid } from "./valid.js";
 
-import "@/scss/index.scss";
+import "@/scss/indexFull.scss";
 import "./demo-styles/index.scss";
 
 ReasyUI.install(Vue);

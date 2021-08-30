@@ -17,7 +17,7 @@
       >
         <!-- 输入框项 -->
         <v-input
-          :class="['v-input--no-border',`v-input-group--${type}`]"
+          :class="['v-input--no-border', `v-input-group--${type}`]"
           v-model="item.value"
           :maxlength="inputMaxLen"
           :data-index="item.index"
@@ -33,6 +33,7 @@
           @input="handlerInput"
           @change="handlerChange"
           @keydown="handlerKeydown"
+          :auto-correction="item.correctArg"
         >
           <template #suffix>
             <div
@@ -54,6 +55,10 @@ import FormMixin from "../form-mixins";
 export default {
   name: "v-input-group",
   mixins: [FormMixin],
+  model: {
+    prop: "value",
+    event: "change"
+  },
   props: {
     value: {
       type: String,
@@ -76,7 +81,11 @@ export default {
     },
     inputNums: Number,
     splitter: String,
-    allow: RegExp
+    allow: RegExp,
+    autoCorrection: {
+      type: Array,
+      default: () => []
+    }
   },
   computed: {
     inputGroupValue() {
@@ -88,7 +97,8 @@ export default {
         arr.push({
           index: i,
           value: this.inputGroupValue[i],
-          width: 100 / this.inputNumber + "%"
+          width: 100 / this.inputNumber + "%",
+          correctArg: this.correctArgs[i]
         });
       }
       return arr;
@@ -109,7 +119,8 @@ export default {
       isFocus: false, //是否聚焦
       focusIndex: 0, //聚焦时输入框标记
       isChanged: false, //是否已修改
-      isHover: false
+      isHover: false,
+      correctArgs: [] //纠正的范围
     };
   },
   methods: {
@@ -237,6 +248,35 @@ export default {
         if (this.elFormItem && !this.elFormItem.ignore) {
           //当form组件存在且需要数据验证时
           this.$dispatch("v-form-item", "form:error", !focus);
+        }
+      },
+      immediate: true
+    },
+    autoCorrection: {
+      handler(val) {
+        this.correctArgs = [];
+        if (typeof val[0] === "string") {
+          if (val.length !== 2) {
+            this.correctArgs = [];
+          } else {
+            const limitMin = val[0].split(this.inputSplitter),
+              limitMax = val[1].split(this.inputSplitter),
+              len = limitMin.length;
+            let i = 0;
+
+            for (; i < len; i++) {
+              if (!limitMin[i] || !limitMax[i]) {
+                this.correctArgs = [];
+                break;
+              }
+              const limitArr = [];
+              limitArr.push(Number(limitMin[i]));
+              limitArr.push(Number(limitMax[i]));
+              this.correctArgs.push(limitArr);
+            }
+          }
+        } else {
+          this.correctArgs = val;
         }
       },
       immediate: true

@@ -1,5 +1,4 @@
 // 全局打包样式文件集合
-@import "./reset.scss";
 @import "./base.scss";
 @import "./components/collapse.scss";
 @import "./components/button.scss";
@@ -16,14 +15,14 @@
 @import "./components/pagination.scss";
 @import "./components/form.scss";
 @import "./components/row.scss";
-@import "./components/container.scss";
+// @import "./components/container.scss";
 @import "./components/scroll.scss";
 @import "./components/badge.scss";
 @import "./components/list.scss";
 @import "./components/loading.scss";
-@import "./components/chart-bar.scss";
-@import "./components/chart-line.scss";
-@import "./components/chart-pie.scss";
+// @import "./components/chart-bar.scss";
+// @import "./components/chart-line.scss";
+// @import "./components/chart-pie.scss";
 @import "./components/chart-percent.scss";
 @import "./components/alert.scss";
 @import "./components/message.scss";

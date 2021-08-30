@@ -290,16 +290,17 @@
 
 ### v-checkbox-group Attributes
 
-| 参数            | 说明                                                                      | 类型    | 可选值 | 默认值 |
-| --------------- | ------------------------------------------------------------------------- | ------- | ------ | ------ |
-| value / v-model | 绑定值                                                                    | Arrray  | —      | []     |
-| name            | checkbox 的名称                                                           | string  | —      |        |
-| disabled        | 是否禁用                                                                  | boolean | —      | false  |
-| options         | 选项数组对象[{label: 显示文字，<br /> value：值，disabled: 是否禁用此项}] | Array   | —      | []     |
-| is-select-all   | 是否支持全选                                                              | boolean | —      | false  |
-| select-text     | 全部选中的文字描述                                                        | string  | —      | 全选   |
-| min             | 最小支持选项                                                              | number  | —      | 0      |
-| max             | 最大支持选项，最大为选项的个数                                            | number  | —      | —      |
+| 参数               | 说明                                                                                            | 类型    | 可选值 | 默认值 |
+| ------------------ | ----------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| value / v-model    | 绑定值                                                                                          | Arrray  | —      | []     |
+| name               | checkbox 的名称                                                                                 | string  | —      |        |
+| disabled           | 是否禁用全部复选框，包括全选复选框                                                              | boolean | —      | false  |
+| disabled-check-all | 是否仅禁用全选复选框。特殊情况下使用(一般配合options中的disabled，在多个checkbox组之间修改交互而使用) | boolean | —      | false  |
+| options            | 选项数组对象[{label: 显示文字，<br /> value：值，disabled: 是否禁用此项}]                       | Array   | —      | []     |
+| is-select-all      | 是否支持全选                                                                                    | boolean | —      | false  |
+| select-text        | 全部选中的文字描述                                                                              | string  | —      | 全选   |
+| min                | 最小支持选项                                                                                    | number  | —      | 0      |
+| max                | 最大支持选项，最大为选项的个数                                                                  | number  | —      | —      |
 
 ### options 选项
 

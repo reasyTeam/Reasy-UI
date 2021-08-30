@@ -3,6 +3,8 @@ const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const { VueLoaderPlugin } = require("vue-loader");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = require("./components.js");
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   //解决打包后出现多个Vue的问题
@@ -18,7 +20,7 @@ module.exports = {
   output: {
     path: path.join(root, "dist/lib"), // 出口目录
     chunkFilename: "[name].js?[chunkhash:5]",
-    filename: "[name].js",
+    filename: "[name]/index.js",
     //library: 'reasyUIVue',
     libraryTarget: "commonjs2",
     libraryExport: "default"
@@ -52,17 +54,59 @@ module.exports = {
           loaders: {
             js: "babel-loader",
             //css: 'style-loader',
-            scss: "vue-style-loader!css-loader!sass-loader?indentedSyntax"
+            // scss: "vue-style-loader!css-loader!sass-loader?indentedSyntax"
           },
           extractCSS: true
         }
+      },
+      // {
+      //   test: /\.js$/,
+      //   loader: "babel-loader"
+      // },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          "css-loader",
+          "postcss-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              prependData: `@import "src/scss/vars.scss";`
+            }
+          }
+        ]
       }
     ]
   },
-  optimization: {
-    //webpack 4
-    minimize: false
-  },
+  // optimization: {
+  //   //webpack 4
+  //   minimize: false,
+  //   splitChunks: {
+  //     // chunks: "all",
+  //     cacheGroups: {
+  //       // common: {
+  //       //   // test: /[\\/]node_modules[\\/]/,
+  //       //   name: "common",
+  //       //   chunks: "all",
+  //       //   priority: 3,
+  //       //   minChunks: 4
+  //       // },
+  //       vender: {
+  //         name: "base/index",
+  //         chunks: "all",
+  //         priority: 2,
+  //         minChunks: 5
+  //       }
+  //     }
+  //     // minChunks: 2,
+  //     // name: 'base'
+  //   }
+  // },
   devtool: false,
-  plugins: [new VueLoaderPlugin(), new UglifyJsPlugin()]
+  plugins: [
+    // new CleanWebpackPlugin(),
+    new VueLoaderPlugin(),
+    new UglifyJsPlugin()
+    // new BundleAnalyzerPlugin()
+  ]
 };

@@ -57,6 +57,44 @@
 
 :::
 
+### 自动纠错
+
+`auto-correction`配置输入框的纠错范围，可选两种数据格式进行配置，第一种：数组的子元素格式和`v-model`相同，第二种：数组的子元素格式为包含范围的数组
+
+::: demo
+
+```html
+ <v-input-group
+  v-model="num"
+  splitter="-"
+  :input-nums="2"
+  :allow="/\d/g"
+  :auto-correction="['0-0', '500-500']"
+></v-input-group>
+ <v-input-group
+  type="ip"
+  v-model="ip"
+  :auto-correction="[
+    [0, 223],
+    [0, 255],
+    [0, 255],
+    [0, 221]
+  ]"
+></v-input-group>
+<script>
+  export default {
+    data() {
+      return {
+        num: "100-300",
+        ip: "192.168.0.1"
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### v-input-group Attributes
 
 | 参数       | 说明                                               | 类型            | 可选值    | 默认值 |
@@ -71,6 +109,7 @@
 | splitter   | 输入框的分隔符                                     | string          | —         | —      |
 | maxlength  | 每个输入框最大输入长度                             | number          | —         | —      |
 | allow      | 输入框允许输入的字符的正则表达式                   | RegExp          | —         | —      |
+| auto-correction | 自动纠错，仅支持按范围进行数字纠错             | Array          | —         | []      |
 
 ### v-input-group Events
 

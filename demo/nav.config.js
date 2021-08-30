@@ -3,6 +3,15 @@ export default [
     name: "组件",
     groups: [
       {
+        groupName: "使用",
+        list: [
+          {
+            path: "start",
+            title: "快速开始"
+          }
+        ]
+      },
+      {
         groupName: "通用",
         list: [
           {

@@ -3,7 +3,7 @@
   color: $info-color;
 
   th {
-    @extend .no-select;
+    user-select: none;
   }
 
   &__header {

@@ -7,6 +7,7 @@ module.exports = {
   entry: config, // 入口文件路径
   output: {
     path: path.join(root, "dist/lib"), // 出口目录
+    filename: "[name]/index.js",
     publicPath: "/"
   },
   resolve: {
@@ -31,16 +32,19 @@ module.exports = {
           "css-loader",
           "postcss-loader",
           {
-            loader: "sass-loader"
-          },
-
-          {
-            loader: "sass-resources-loader",
+            loader: "sass-loader",
             options: {
-              // Provide path to the file with resources
-              resources: "./src/scss/vars.scss"
+              prependData: `@import "src/scss/vars.scss";`
             }
           }
+
+          // {
+          //   loader: "sass-resources-loader",
+          //   options: {
+          //     // Provide path to the file with resources
+          //     resources: "./src/scss/vars.scss"
+          //   }
+          // }
         ],
         exclude: /node_modules/
       },
@@ -63,7 +67,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "css/[name].css",
+      filename: "[name]/style.css",
       chunkFilename: "[id].css"
     })
   ]

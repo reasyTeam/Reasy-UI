@@ -24,7 +24,7 @@
     color: $info-color;
     cursor: pointer;
     vertical-align: middle;
-    @extend .no-select;
+    user-select: none;
 
     &.v-pagonation__icon {
       font-size: 12px;

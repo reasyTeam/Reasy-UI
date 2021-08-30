@@ -1,12 +1,13 @@
 {
   "name": "@reasy-team/reasy-ui",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "main": "dist/reasy-ui.js",
   "scripts": {
     "publish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publish.js --mode production",
+    "fullPublish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publishFull.js --mode production",
     "component": "webpack --env.NODE_ENV=publish --color --config build/webpack.component.js --mode production",
     "scss": "webpack --env.NODE_ENV=publish --color --config build/webpack.scss.js --mode production",
-    "build": "npm run scss && npm run component && npm run publish",
+    "build": "npm run scss && npm run component && npm run publish && npm run fullPublish",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build:demo": "cross-env NODE_ENV=production webpack --config build/webpack.demo.js",

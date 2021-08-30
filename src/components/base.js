@@ -1,7 +1,10 @@
 import Message from "./message/message.js";
 import Notification from "./notification/notification.js";
+//全局指令
+import Derectives from "./directives";
 
 const install = function(Vue) {
+  Vue.use(Derectives);
   //触发组件的祖先事件
   Vue.prototype.$dispatch = function(componentName, name, ...arsg) {
     if (this.$options.name === componentName || this === this.$root) {

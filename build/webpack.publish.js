@@ -41,24 +41,23 @@ module.exports = {
           //"vue-style-loader",
           MiniCssExtractPlugin.loader,
           "css-loader",
-          /*  {
-					 loader: 'css-loader',
-					 options: {
-					     modules: true,
-					   importLoaders: 1
-					 }
-				   }, */
           "postcss-loader",
           {
-            loader: "sass-loader"
-          },
-          {
-            loader: "sass-resources-loader",
+            loader: "sass-loader",
             options: {
-              // Provide path to the file with resources
-              resources: "./src/scss/vars.scss"
+              prependData: `@import "src/scss/vars.scss";`
             }
           }
+          // {
+          //   loader: "sass-loader"
+          // },
+          // {
+          //   loader: "sass-resources-loader",
+          //   options: {
+          //     // Provide path to the file with resources
+          //     resources: "./src/scss/vars.scss"
+          //   }
+          // }
         ],
         exclude: /node_modules/
       },
@@ -114,7 +113,7 @@ module.exports = {
   devtool: false,
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "styles.css?[contenthash:5]",
+      filename: "style.css?[contenthash:5]",
       chunkFilename: "[id].css"
     }),
     new VueLoaderPlugin(),

@@ -114,7 +114,6 @@
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 import { size, sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
-
 export default {
   name: "v-input",
   mixins: [FormMixin],
@@ -167,6 +166,10 @@ export default {
     autofocus: {
       type: Boolean,
       default: false
+    },
+    autoCorrection: {
+      type: Array,
+      default: () => []
     },
     size: {
       type: String,
@@ -327,13 +330,47 @@ export default {
       //this.$emit("change", this.$refs.input.value);
       this.isFocus = false;
       //if(this.isChild) return;
+      const { autoCorrection } = this;
+
+      if (autoCorrection.length) {
+        //选择自动纠错，仅可纠正为数字
+        const minValue = autoCorrection[0],
+          maxValue = autoCorrection[1],
+          inputVal = event.target.value;
+
+        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
+        event.target.value = newVal;
+        this.$emit("change", newVal);
+      }
       //失焦后数据验证
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
-        this.$dispatch("v-form-item", "form:blur");
+        this.$nextTick(() => {
+          this.$dispatch("v-form-item", "form:blur");
+        });
       } else {
         // this.checkValid(this.value);
       }
+    },
+    correctInputValue(inputVal, minValue, maxValue) {
+      let newVal = inputVal;
+
+      if (inputVal.match(/[^\d]/g)) {
+        newVal = inputVal.replace(/[^\d]/g, "");
+      }
+      if (inputVal.match(/^0\d/g)) {
+        newVal = parseInt(inputVal, 10);
+      }
+      if (Number(newVal) > Number(maxValue)) {
+        newVal = maxValue;
+      }
+      if (Number(newVal) < Number(minValue)) {
+        newVal = minValue;
+      }
+      if (newVal == "") {
+        newVal = minValue;
+      }
+      return newVal;
     },
     getInput() {
       return this.$refs.input;

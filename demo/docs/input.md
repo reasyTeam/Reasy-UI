@@ -331,6 +331,27 @@
 
 :::
 
+### 自动纠错
+
+`auto-correction`配置输入框的纠错范围
+
+::: demo
+
+```html
+<v-input type="text" v-model="input" :auto-correction="[1, 10]" :allow="/\d/g"></v-input>
+<script>
+  export default {
+    data() {
+      return {
+        input: 8
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### v-input Attributes
 
 | 参数            | 说明                                                                 | 类型            | 可选值                               | 默认值 |
@@ -354,7 +375,7 @@
 | rows            | textarea 时生效                                                      | number          | —                                    | 2      |
 | allow           | 输入框允许输入字符的正则表达式                                       | RegExp          | —                                    | —      |
 | unit            | 输入框单位                                                           | String          | —                                    | —      |
-
+| auto-correction | 自动纠错，仅支持按范围进行数字纠错                                      | Array          | —                                    | []      |
 ### v-input Events
 
 | 事件名 | 说明                                                 | 参数       |

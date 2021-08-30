@@ -1,10 +1,10 @@
 module.exports = {
+  base: "./src/components/base.js",
   alert: "./src/components/alert/index.js",
   badge: "./src/components/badge/index.js",
   button: "./src/components/button/index.js",
   checkbox: "./src/components/checkbox/index.js",
   collapse: "./src/components/collapse/index.js",
-  container: "./src/components/container/index.js",
   datepicker: "./src/components/datepicker/index.js",
   dialog: "./src/components/dialog/index.js",
   dropdown: "./src/components/dropdown/index.js",
@@ -25,7 +25,7 @@ module.exports = {
   slider: "./src/components/slider/index.js",
   steps: "./src/components/steps/index.js",
   switch: "./src/components/switch/index.js",
-  tbas: "./src/components/tabs/index.js",
+  tabs: "./src/components/tabs/index.js",
   table: "./src/components/table/index.js",
   timepicker: "./src/components/timepicker/index.js",
   tooltip: "./src/components/tooltip/index.js",
@@ -33,5 +33,6 @@ module.exports = {
   bar: "./src/components/chart/bar/index.js",
   line: "./src/components/chart/line/index.js",
   percent: "./src/components/chart/percent/index.js",
-  pie: "./src/components/chart/pie/index.js"
+  pie: "./src/components/chart/pie/index.js",
+  progress: "./src/components/chart/percent/progress.js"
 };

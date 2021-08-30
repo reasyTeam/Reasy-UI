@@ -1,23 +1,22 @@
-import "../scss/vars.scss";
+// import "../scss/vars.scss";
 import "../scss/index.scss";
 
 //全局方法，挂载到prototype上的方法
 import Base from "./base.js";
-//全局指令
-import Derectives from "./directives";
 
 /*全局组件*/
 import Collapse from "./collapse";
 import Row from "./layout";
 import Col from "./layout/colIndex";
-import Container from "./container";
+// import Container from "./container";
 import Scroll, { XScroll } from "./scroll";
 import Badge from "./badge";
 import Loading from "./loading";
-import Bar from "./chart/bar";
-import Line from "./chart/line";
-import Pie from "./chart/pie";
-import Percent, { Progress } from "./chart/percent";
+// import Bar from "./chart/bar";
+// import Line from "./chart/line";
+// import Pie from "./chart/pie";
+// import Percent from "./chart/percent";
+import Progress from "./chart/percent/progress";
 
 import Button from "./button";
 import { Input, InputGroup, InputNumber } from "./input";
@@ -54,7 +53,7 @@ const components = [
   CollapseTransition,
   Row,
   Col,
-  Container,
+  // Container,
   Scroll,
   Button,
   Input,
@@ -79,9 +78,9 @@ const components = [
   List,
   Loading,
   XScroll,
-  Bar,
-  Line,
-  Pie,
+  // Bar,
+  // Line,
+  // Pie,
   Alert,
   Message,
   Notification,
@@ -95,14 +94,13 @@ const components = [
   TabPane,
   Steps,
   Step,
-  Percent,
+  // Percent,
   Progress
 ];
 
 const install = function(Vue) {
   window.Vue = Vue;
   Vue.use(Base);
-  Vue.use(Derectives);
   components.forEach(component => {
     Vue.component(component.name, component);
   });

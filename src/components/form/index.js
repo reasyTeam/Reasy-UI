@@ -6,4 +6,5 @@ Form.install = function(Vue) {
   Vue.component(FormItem.name, FormItem);
 };
 
+export default Form;
 export { Form, FormItem };

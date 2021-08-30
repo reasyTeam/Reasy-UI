@@ -9,4 +9,5 @@ Input.install = function(Vue) {
   Vue.component(InputNumber.name, InputNumber);
 };
 
+export default Input;
 export { Input, InputGroup, InputNumber };

@@ -4,3 +4,14 @@ node_modules
 .history
 build
 docs
+src
+public
+demo
+docs
+img
+.gitignore
+.eslintrc.js
+.browserslistrc
+babel.config.js
+postcss.config.js
+vue.config.js
