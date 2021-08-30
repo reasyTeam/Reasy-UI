@@ -8,11 +8,21 @@ Tenda 基于 Vue2.x 的 PC 组件库，[查看源码](https://github.com/reasyTe
 npm i @reasy-team/reasy-ui -S
 ```
 
-### 完全引用
+### 常用功能引用
+不包含折线图、饼图、柱图、和百分比
 
 ```
 import ReasyUi from '@reasy-team/reasy-ui';
 import "@reasy-team/reasy-ui/dist/style.css";
+
+Vue.use(ReasyUi);
+```
+### 完全引用
+包含所有组件
+
+```
+import ReasyUi from '@reasy-team/reasy-ui/dist/reasy-ui-full.js';
+import "@reasy-team/reasy-ui/dist/styleFull.css";
 
 Vue.use(ReasyUi);
 ```
