@@ -113,7 +113,7 @@ module.exports = {
   devtool: false,
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "styleFull.css?[contenthash:5]",
+      filename: "style-full.css?[contenthash:5]",
       chunkFilename: "[id].css"
     }),
     new VueLoaderPlugin(),

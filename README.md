@@ -9,7 +9,7 @@ npm i @reasy-team/reasy-ui -S
 
 ```
 
-### 常用功能引用
+### 常用组件引用
 不包含折线图、饼图、柱图、和百分比
 
 ```
@@ -23,7 +23,7 @@ Vue.use(ReasyUi);
 
 ```
 import ReasyUi from '@reasy-team/reasy-ui/dist/reasy-ui-full.js';
-import "@reasy-team/reasy-ui/dist/styleFull.css";
+import "@reasy-team/reasy-ui/dist/style-full.css";
 
 Vue.use(ReasyUi);
 ```
