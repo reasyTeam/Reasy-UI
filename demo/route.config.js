@@ -12,7 +12,7 @@ const registerRoute = navConfig => {
   let route = [];
   route.push({
     path: `/component`,
-    redirect: `/component/layout`,
+    redirect: `/component/start`,
     component: () =>
       import(/* webpackChunkName: "component" */ `./pages/component.vue`),
     children: []
