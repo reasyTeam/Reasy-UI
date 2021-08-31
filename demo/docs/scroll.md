@@ -2,6 +2,14 @@
 
 自定义滚动条，可以使所有浏览器样式统一。与 DOM 出现滚动条的表现基本保持一致。
 
+### 按需引用
+
+```js
+import { Scroll } from "@reasy-team/reasy-ui";
+
+Vue.use(Scroll);
+```
+
 ### 基础示例
 
 :::demo

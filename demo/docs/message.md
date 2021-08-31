@@ -2,6 +2,14 @@
 
 全局展示操作反馈信息，一种不打断用于操作的轻量级提示方式。
 
+### 按需引用
+
+```js
+import { Message } from "@reasy-team/reasy-ui";
+
+Vue.use(Message);
+```
+
 ### 基础示例
 
 从顶部出现，2 秒后自动消失。

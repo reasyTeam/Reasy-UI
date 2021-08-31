@@ -1,5 +1,14 @@
 ## 开关
 
+切换两种状态，开启或关闭。
+### 按需引用
+
+```js
+import { Switch } from "@reasy-team/reasy-ui";
+
+Vue.use(Switch);
+```
+
 ### 基本用法
 
 ::: demo

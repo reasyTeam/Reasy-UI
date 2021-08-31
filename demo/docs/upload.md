@@ -1,5 +1,14 @@
 ## 文件上传
 
+选择本地文件上传的组件。
+### 按需引用
+
+```js
+import { Upload } from "@reasy-team/reasy-ui";
+
+Vue.use(Upload);
+```
+
 ### 基本用法
 
 ::: demo

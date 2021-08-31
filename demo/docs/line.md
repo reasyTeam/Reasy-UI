@@ -2,6 +2,14 @@
 
 表征分类型变量 vs 数值型变量的关系。
 
+### 按需引用
+
+```js
+import { Line } from "@reasy-team/reasy-ui";
+
+Vue.use(Line);
+```
+
 ### 基础示例
 
 折线图的默认配置示例。

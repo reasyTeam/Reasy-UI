@@ -2,6 +2,14 @@
 
 全局展示通知提醒信息，用于较复杂的通知内容。
 
+### 按需引用
+
+```js
+import { Notification } from "@reasy-team/reasy-ui";
+
+Vue.use(Notification);
+```
+
 ### 基础示例
 
 :::demo 在全局注册了$notify方法，接收一个options字面量参数。在最简单的情况下，直接传入的`content`和`title`的来设置内容和标题。默认情况下，经过一段时间后Notification组件会关闭，可以通过设置`duration`控制关闭的时间间隔，特别的是，如果设置为`0`，则不会关闭。注：`duration`接收一个`Number`，单位为毫秒，默认为`4500`。

@@ -2,6 +2,14 @@
 
 鼠标移入显示提示，移出消失。
 
+### 按需引用
+
+```js
+import { Tooltip } from "@reasy-team/reasy-ui";
+
+Vue.use(Tooltip);
+```
+
 ### 基础示例
 
 :::demo

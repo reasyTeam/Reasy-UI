@@ -2,6 +2,17 @@
 
 当页面操作命令过多时，用于收纳操作元素，将动作或菜单折叠到下拉菜单中。
 
+### 按需引用
+
+该组件依赖于`v-scroll`组件。
+
+```js
+import { Scroll, Dropdown } from "@reasy-team/reasy-ui";
+
+Vue.use(Scroll);
+Vue.use(Dropdown);
+```
+
 ### 基础示例
 
 点击下拉菜单按钮，展开更多操作。

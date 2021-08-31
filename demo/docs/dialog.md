@@ -2,6 +2,14 @@
 
 在保留当前页面状态的情况下，告知用户并承载相关操作。
 
+### 按需引用
+
+```js
+import { Dialog } from "@reasy-team/reasy-ui";
+
+Vue.use(Dialog);
+```
+
 ### 基础示例
 
 :::demo

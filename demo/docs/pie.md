@@ -2,6 +2,14 @@
 
 用于表示不同分类的占比情况，通过弧度大小来对比各种分类
 
+### 按需引用
+
+```js
+import { Pie } from "@reasy-team/reasy-ui";
+
+Vue.use(Pie);
+```
+
 ### 基础示例
 
 饼图的默认配置示例。

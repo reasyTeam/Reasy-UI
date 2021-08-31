@@ -1,5 +1,17 @@
 ## 选择器
 
+当选项过多时，使用下拉菜单展示并选择。
+### 按需引用
+
+该组件依赖于`v-scroll`组件。
+
+```js
+import { Scroll, Select } from "@reasy-team/reasy-ui";
+
+Vue.use(Scroll);
+Vue.use(Select);
+```
+
 ### 基本用法
 
 ::: demo

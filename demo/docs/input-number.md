@@ -1,5 +1,14 @@
 ## 计数器
 
+通过鼠标或键盘，输入范围内的数值。
+### 按需引用
+
+```js
+import { Input } from "@reasy-team/reasy-ui";
+
+Vue.use(Input);
+```
+
 ### 输入框大小
 
 `size`配置输入框大小，大中小分别为 `L`，`M`，`S`，默认为`M`

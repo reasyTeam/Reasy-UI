@@ -2,6 +2,14 @@
 
 一组备选项中进行多选
 
+### 按需引用
+
+```js
+import { Checkbox } from "@reasy-team/reasy-ui";
+
+Vue.use(Checkbox);
+```
+
 ### 基础用法
 
 单独使用可以切换两种状态

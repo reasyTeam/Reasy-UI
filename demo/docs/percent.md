@@ -2,6 +2,14 @@
 
 用于表示在一个内容中占该内容整体的百分之多少。
 
+### 按需引用
+
+```js
+import { Percent } from "@reasy-team/reasy-ui";
+
+Vue.use(Percent);
+```
+
 ### 基础示例
 
 进度条的默认配置示例。

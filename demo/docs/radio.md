@@ -1,6 +1,14 @@
-## 单选按钮
+## 单选框
 
-常用的操作按钮。
+用于一组可选项单项选择。
+
+### 按需引用
+
+```js
+import { Radio } from "@reasy-team/reasy-ui";
+
+Vue.use(Radio);
+```
 
 ### 基础用法
 

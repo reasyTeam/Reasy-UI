@@ -2,6 +2,14 @@
 
 可以折叠/展开的内容区域。
 
+### 按需引用
+
+```js
+import { Collapse } from "@reasy-team/reasy-ui";
+
+Vue.use(Collapse);
+```
+
 ### 基础示例
 
 :::demo

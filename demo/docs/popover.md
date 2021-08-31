@@ -2,6 +2,14 @@
 
 点击元素，弹出气泡确认框。
 
+### 按需引用
+
+```js
+import { Popover } from "@reasy-team/reasy-ui";
+
+Vue.use(Popover);
+```
+
 ### 基础示例
 
 :::demo 通过`trigger`配置触发方式。

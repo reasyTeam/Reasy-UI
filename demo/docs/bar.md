@@ -2,6 +2,14 @@
 
 表征分类型变量 vs 数值型变量的关系。
 
+### 按需引用
+
+```js
+import { Bar } from "@reasy-team/reasy-ui";
+
+Vue.use(Bar);
+```
+
 ### 基础示例
 
 柱状图的默认配置示例。

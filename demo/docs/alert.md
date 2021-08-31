@@ -2,6 +2,14 @@
 
 用于页面中展示重要的提示信息。
 
+### 按需引用
+
+```js
+import { Alert } from "@reasy-team/reasy-ui";
+
+Vue.use(Alert);
+```
+
 ### 基础示例
 
 :::demo

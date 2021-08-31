@@ -2,6 +2,14 @@
 
 点击元素，弹出气泡确认框。
 
+### 按需引用
+
+```js
+import { Popconfirm } from "@reasy-team/reasy-ui";
+
+Vue.use(Popconfirm);
+```
+
 ### 基础示例
 
 :::demo 通过`title`配置内容、`icon`配置图标。

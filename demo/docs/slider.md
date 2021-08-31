@@ -1,5 +1,14 @@
 ## 滑块
 
+滑动型输入器，在范围内滑动选择数据。
+### 按需引用
+
+```js
+import { Slider } from "@reasy-team/reasy-ui";
+
+Vue.use(Slider);
+```
+
 ### 基本用法
 
 ::: demo

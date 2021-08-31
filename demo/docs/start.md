@@ -48,11 +48,10 @@ plugins: [
 **3. `import`需要使用的组件**
 
 ```js
-import { Base, Datepicker, Input } from "@reasy-team/reasy-ui";
+import { Base, Input } from "@reasy-team/reasy-ui";
 
-Vue.use(Base);
-Vue.use(Datepicker);
+Vue.use(Base); // 必须引入
 Vue.use(Input);
 ```
 
-> 其中`Base`为组件基础支撑项，必须引入项，否则组件部分功能会不生效。
+> 其中`Base`为组件基础支撑项，必须引入项，否则其它组件部分功能会不生效。

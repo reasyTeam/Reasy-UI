@@ -2,6 +2,14 @@
 
 基本的列表展示。
 
+### 按需引用
+
+```js
+import { List } from "@reasy-team/reasy-ui";
+
+Vue.use(List);
+```
+
 ### 基础示例
 
 :::demo

@@ -2,6 +2,14 @@
 
 适应于支持选择多个选项
 
+### 按需引用
+
+```js
+import { Checkbox } from "@reasy-team/reasy-ui";
+
+Vue.use(Checkbox);
+```
+
 ### 基本用法
 
 ::: demo

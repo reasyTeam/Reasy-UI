@@ -1,5 +1,15 @@
 ## 输入框组
 
+多个输入框按自定义需求进行组合，生成不同的输入框组。
+
+### 按需引用
+
+```js
+import { Input } from "@reasy-team/reasy-ui";
+
+Vue.use(Input);
+```
+
 ### 输入框大小
 
 `type`输入框组内置类型，可选值`ip`，`mac`，默认为空

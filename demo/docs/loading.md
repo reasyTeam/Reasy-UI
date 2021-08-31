@@ -2,6 +2,14 @@
 
 用于页面和区块的加载中状态。页面局部处于等待异步数据或正在渲染过程时，合适的加载动效会有效缓解用户的焦虑。
 
+### 按需引用
+
+```js
+import { Loading } from "@reasy-team/reasy-ui";
+
+Vue.use(Loading);
+```
+
 ### 基础示例
 
 :::demo

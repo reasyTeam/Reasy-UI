@@ -1,5 +1,14 @@
 ## 输入框
 
+用户可以输入任意字母，数字或符号（除非另有限制）的内容。
+### 按需引用
+
+```js
+import { Input } from "@reasy-team/reasy-ui";
+
+Vue.use(Input);
+```
+
 ### 输入框大小
 
 `size`配置输入框大小，大中小分别为 `L`，`M`，`S`，默认为`M`

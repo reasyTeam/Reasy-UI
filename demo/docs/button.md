@@ -2,6 +2,14 @@
 
 常用的操作按钮。
 
+### 按需引用
+
+```js
+import { Button } from "@reasy-team/reasy-ui";
+
+Vue.use(Button);
+```
+
 ### 基础用法
 
 基础的按钮用法。

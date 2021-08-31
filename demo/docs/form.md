@@ -1,5 +1,14 @@
 ## 表单
 
+表单包含复选框、单选框、输入框、下拉选择框等元素，用于收集数据、校验和提交数据。
+### 按需引用
+
+```js
+import { Form } from "@reasy-team/reasy-ui";
+
+Vue.use(Form);
+```
+
 ### 前提条件
 
 首先要在`Vue`的`prototype`上绑定`$valid`数据验证对象，对象形式时，执行`all`方法

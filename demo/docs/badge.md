@@ -2,6 +2,15 @@
 
 主要用于通知未读数的角标，提醒用户点击。
 
+### 按需引用
+
+```js
+import { Badge } from "@reasy-team/reasy-ui";
+
+Vue.use(Badge);
+```
+
+
 ### 基础示例
 
 :::demo

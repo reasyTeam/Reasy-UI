@@ -1,5 +1,14 @@
 ## 表格
 
+用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作。
+### 按需引用
+
+```js
+import { Table } from "@reasy-team/reasy-ui";
+
+Vue.use(Table);
+```
+
 ### 基本用法
 
 ::: demo
