@@ -21,6 +21,7 @@
       :on-value="item.value"
       :off-value="offValue"
       :disabled="getDisabled(item, checkboxValueList[index])"
+      :tooltip="tooltip | formatTooltip(item.label)"
       @change="changeValue(item)"
       @click="handlerClick(item)"
     >
@@ -73,7 +74,8 @@ export default {
       default: 0
     },
     //最大选中个数
-    max: Number
+    max: Number,
+    tooltip: Object // 与v-tooltip指令配置相同
   },
   computed: {
     //选项显示列表
@@ -141,6 +143,15 @@ export default {
     return {
       offValue: undefined
     };
+  },
+  filters: {
+    formatTooltip(tooltip, label) {
+      if (tooltip) {
+        tooltip = { content: label, ...tooltip };
+      }
+
+      return tooltip;
+    }
   },
   methods: {
     changeValue(options) {

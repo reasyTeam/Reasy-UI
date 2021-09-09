@@ -24,6 +24,7 @@
     &__label {
       vertical-align: top;
       line-height: 20px;
+      color: #262626;
     }
   }
 
@@ -163,6 +164,28 @@
   &__loading {
     .v-loading__mask {
       background-color: rgba(#fff, 0.8);
+    }
+  }
+
+  &.disabled {
+    color: #c0c0c0;
+
+    .v-table__header {
+      background-color: #fafafa;
+    }
+    .v-table__header__label {
+      color: #c0c0c0;
+    }
+
+    .v-table__icon--down {
+      border-top-color: #c0c0c0;
+    }
+    .v-table__icon--up {
+      border-bottom-color: #c0c0c0;
+    }
+
+    .v-table__header--sort{
+      cursor: not-allowed;
     }
   }
 }

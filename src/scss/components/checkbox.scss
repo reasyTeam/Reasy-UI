@@ -7,7 +7,7 @@
   &__item {
     cursor: pointer;
     float: left;
-    font-size: $font-size-m;
+    font-size: 0;
 
     &:hover {
       .v-checkbox__icon,
@@ -99,6 +99,7 @@
     display: inline-block;
     vertical-align: middle;
     color: $title-color;
+    font-size: $font-size-m;
   }
 }
 

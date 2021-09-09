@@ -71,19 +71,36 @@ export default {
       default: 0
     },
     betweenSpace: Number,
-    autoAdjustPosition: Boolean
+    autoAdjustPosition: Boolean,
+    showOnlyEllipsis: Boolean
   },
   data() {
     return {};
+  },
+  mounted() {
+    this.$nextTick(() => {
+      // 等待parentElm被最终赋值后再执行
+      this.handleShowOnlyEllipsis();
+    });
   },
   methods: {
     updatePosition() {
       this.$nextTick(() => {
         this.$refs.popups.updatePosition();
+        this.handleShowOnlyEllipsis();
       });
     },
     hide() {
       this.$refs.popups.hide();
+    },
+    handleShowOnlyEllipsis() {
+      if (this.showOnlyEllipsis) {
+        const popupsVm = this.$refs.popups,
+          ctt = popupsVm.parentElm,
+          trigger = ctt.scrollWidth > ctt.offsetWidth ? "hover" : "manual";
+
+        this.trigger = trigger;
+      }
     }
   },
   watch: {

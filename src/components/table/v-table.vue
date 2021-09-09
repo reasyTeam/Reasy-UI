@@ -1,5 +1,5 @@
 <template>
-  <div class="v-table" :class="[sizeCss]">
+  <div class="v-table" :class="[sizeCss, { disabled: disabled }]">
     <!-- 搜索 -->
     <div class="v-table__search" v-if="search">
       <v-input
@@ -316,6 +316,10 @@ export default {
     },
     //全选是否禁用
     isSelectAllDisabled: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     }

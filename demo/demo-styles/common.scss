@@ -76,7 +76,7 @@ textarea {
   h4,
   h5 {
     font-weight: normal;
-    @include bold;
+    // @include bold;
     color: #262626;
 
     &:hover a {

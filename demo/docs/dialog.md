@@ -104,6 +104,7 @@ Dialog的内容可以是任意的，甚至可以是表格和表单，下面是�
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal"
     :modal="true"
+    @after-close="handleAfterClose"
     @confirm="handleConfirm"
   >
     <div class="form-control">
@@ -148,7 +149,10 @@ export default {
   methods: {
     handleConfirm() {
       console.log(`Emit CONFIRM event, timestamp: ${new Date().getTime()}`);
-      this.handleButtonClick();
+      this.showInputDialog = false;
+    },
+    handleAfterClose() {
+      this.$message.success("保存成功");
     },
     handleDialogInputClick() {
       this.showInputDialog = !this.showInputDialog;

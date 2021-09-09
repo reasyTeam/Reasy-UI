@@ -227,9 +227,9 @@ export default {
       if (+nextPage === this.page) {
         return;
       }
-      this.page = nextPage;
+      this.page = Number(nextPage);
       //当前页
-      this.$emit("change-page", nextPage);
+      this.$emit("change-page", this.page);
     },
     changeSize(val) {
       this.$emit("change-size", val);

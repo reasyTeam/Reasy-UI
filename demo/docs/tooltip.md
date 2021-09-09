@@ -148,24 +148,73 @@ export default {
 :::
 
 
+### 特殊用法
+
+:::demo 使用`v-tooltip`指令的配置`show-only-ellipsis`，设置为`true`即可生效。
+
+```html
+<template>
+  <section>
+    <p
+      v-tooltip="{
+        effect: 'light',
+        position: 'bottom-left',
+        showOnlyEllipsis: true,
+        enterable: false,
+        betweenSpace: 0,
+        content: ellipsisShort
+      }"
+      style="width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+    >{{ ellipsisShort }}</p>
+    <p
+      v-tooltip="{
+        effect: 'light',
+        position: 'bottom-left',
+        showOnlyEllipsis: true,
+        enterable: false,
+        betweenSpace: 0,
+        content: ellipsisLong
+      }"
+      style="width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"
+      >{{ ellipsisLong }}</p>
+  </section>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      ellipsisShort: "文字不够长，不打点",
+      ellipsisLong: "文字过长，打点处理，这里是长文本，这里是长文本，这里是长文本，这里是长文本"
+    };
+  },
+};
+</script>
+```
+
+:::
+
+
 
 
 ### 属性 Attributes
 
-| 参数                 | 说明                                      | 类型    | 可选值                                                                                                                                                                                  | 默认值         |
-| -------------------- | ----------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| effect               | 提供的主题                                | string  | dark/light                                                                                                                                                                              | dark           |
-| max-width            | 最大宽度，单位px，超出换行                | number  | -                                                                                                                                                                                       | -              |
-| content              | 显示的内容                                | string  | -                                                                                                                                                                                       | -              |
-| position             | tooltip出现的位置，如果不配置，位置自适应 | string  | top-left<br/>top-center<br/> top-right<br/>right-top<br/>right-center<br/>right-bottom<br/>bottom-right<br/> bottom-center<br/>bottom-left<br/>left-bottom<br/>left-center<br/>left-top | top-center     |
-| transition           | 定义过渡动画名，与vue过渡动画组件使用一致 | string  | -                                                                                                                                                                                       | -              |
-| enterable            | 鼠标是否可以进入tooltip中                 | boolean | -                                                                                                                                                                                       | true           |
-| between-space        | 弹出框与参考元素的距离                    | number  | -                                                                                                                                                                                       | 三角形底边 + 4 |
-| open-delay           | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
-| close-delay          | 延迟出现，单位：毫秒                      | number  | -                                                                                                                                                                                       | 0              |
-| auto-adjust-position | 超出视窗自动调整位置                      | boolan  | -                                                                                                                                                                                       | true           |
-| arrow-offset          | 小箭头偏移量                              | number  | -                                                                                                                                                                                       | 小箭头底边长   |
-| white-space           | 同css的white-space                        | string  | -                                                                                                                                                                                       | normal         |
+| 参数                 | 说明                                                                                                     | 类型    | 可选值                                                                                                                                                                                  | 默认值         |
+| -------------------- | -------------------------------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| effect               | 提供的主题                                                                                               | string  | dark/light                                                                                                                                                                              | dark           |
+| trigger              | 触发方式                                                                                                 | string  | hover/click/manual                                                                                                                                                                      | hover          |
+| max-width            | 最大宽度，单位px，超出换行                                                                               | number  | -                                                                                                                                                                                       | -              |
+| content              | 显示的内容                                                                                               | string  | -                                                                                                                                                                                       | -              |
+| position             | tooltip出现的位置，如果不配置，位置自适应                                                                | string  | top-left<br/>top-center<br/> top-right<br/>right-top<br/>right-center<br/>right-bottom<br/>bottom-right<br/> bottom-center<br/>bottom-left<br/>left-bottom<br/>left-center<br/>left-top | top-center     |
+| transition           | 定义过渡动画名，与vue过渡动画组件使用一致                                                                | string  | -                                                                                                                                                                                       | -              |
+| enterable            | 鼠标是否可以进入tooltip中                                                                                | boolean | -                                                                                                                                                                                       | true           |
+| between-space        | 弹出框与参考元素的距离                                                                                   | number  | -                                                                                                                                                                                       | 三角形底边 + 4 |
+| open-delay           | 延迟出现，单位：毫秒                                                                                     | number  | -                                                                                                                                                                                       | 0              |
+| close-delay          | 延迟出现，单位：毫秒                                                                                     | number  | -                                                                                                                                                                                       | 0              |
+| auto-adjust-position | 超出视窗自动调整位置                                                                                     | boolean | -                                                                                                                                                                                       | true           |
+| arrow-offset         | 小箭头偏移量                                                                                             | number  | -                                                                                                                                                                                       | 小箭头底边长   |
+| white-space          | 同css的white-space                                                                                       | string  | -                                                                                                                                                                                       | normal         |
+| show-only-ellipsis   | 仅在文字过长打点处理显示文字提示（注意：需要手动添加css`打点`样式。若使用该配置，请不要随意更改trigger） | boolean | -                                                                                                                                                                                       | false          |
 
 
 ### Slot

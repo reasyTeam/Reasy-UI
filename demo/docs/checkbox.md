@@ -98,6 +98,7 @@ Vue.use(Checkbox);
 | on-value        | 选中时的值                                          | string / number / boolean | —      | true                     |
 | off-value       | 未选中时的值                                        | string / number / boolean | —      | false                    |
 | before-change   | 切换之前执行的函数，返回 false 时，不会执行数据更新 | function(value) {}        | —      | function() {return true} |
+| tooltip         | 文字提示，配置参考v-tooltip指令                     | object                    | —      | —                        |
 
 ### v-checkbox Events
 

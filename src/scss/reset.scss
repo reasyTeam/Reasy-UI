@@ -62,14 +62,15 @@ body {
   position: relative;
   background-color: #fff;
   height: 100%;
-  font-family: PingFangSC-Regular, PingFang SC, "Microsoft Yahei",
-    "Hiragino Sans GB", sans-serif;
+  font-family: PingFangSC-Regular, PingFang SC, Sans-Serif, "Microsoft Yahei",
+    "Hiragino Sans GB";
   color: $info-color;
 }
 
-.bold{
-  font-family: PingFangSC-Medium, PingFang SC, "Microsoft Yahei",
-    "Hiragino Sans GB", sans-serif;
+.bold {
+  // font-family: PingFangSC-Medium, PingFang SC, Sans-Serif, "Microsoft Yahei",
+  //   "Hiragino Sans GB", sans-serif;
+  font-weight: 600;
 }
 
 img,

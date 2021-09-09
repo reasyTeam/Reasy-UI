@@ -370,7 +370,7 @@ Vue.use(Table);
 
 :::
 
-自定义表格点击事件
+### 自定义表格点击事件
 
 ::: demo
 
@@ -632,7 +632,7 @@ Vue.use(Table);
 
 :::
 
-序号表格
+### 序号表格
 
 `type=index`表示序号，序号从 1 开始
 
@@ -684,7 +684,7 @@ Vue.use(Table);
 
 :::
 
-展开表格
+### 展开表格
 
 `type=expand`支持此列展开，插槽名称为`expand`，值为当前行的数据
 
@@ -755,6 +755,62 @@ Vue.use(Table);
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
   <v-table-col is-sort prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 禁用
+
+`disabled`配置表格全部禁用
+
+::: demo
+
+```html
+<v-table :data="table1" border disabled>
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit"></span>
+    </template>
+  </v-table-col>
 </v-table>
 <script>
   export default {
@@ -1250,6 +1306,7 @@ Vue.use(Table);
 | select-data            | 选中的行数据                                         | Array    |           | []                          |
 | before-select-all      | 全选时切换前执行的事件，返回 false 时不会执行全选事件 | function |           | function(val) {return true} |
 | is-select-all-disabled | 全选按钮是否禁用                                     | boolean  |           | false                       |
+| disabled | 表格是否禁用                                     | boolean  |           | false                       |
 
 ### v-table Slot
 

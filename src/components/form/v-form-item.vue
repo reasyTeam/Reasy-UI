@@ -1,7 +1,10 @@
 <template>
   <div
     class="v-form-item"
-    :class="[{ 'v-form-item--inline': isInline }, itemCss]"
+    :class="[
+      { 'v-form-item--inline': isInline, 'v-form-item--disabled': isDisabled },
+      itemCss
+    ]"
   >
     <!-- 左边文字 -->
     <label

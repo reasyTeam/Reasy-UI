@@ -27,7 +27,10 @@
             : 'v-icon-check'
         "
       ></span>
-      <span class="v-checkbox__label">
+      <span v-if="tooltip" v-tooltip="tooltip" class="v-checkbox__label">
+        <slot></slot>
+      </span>
+      <span v-else class="v-checkbox__label">
         <slot></slot>
       </span>
     </label>
@@ -72,7 +75,8 @@ export default {
       default() {
         return true;
       }
-    }
+    },
+    tooltip: Object // 与v-tooltip指令配置相同
   },
   methods: {
     clickCheckbox() {

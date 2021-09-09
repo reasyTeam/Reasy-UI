@@ -18,10 +18,10 @@ const tooltipConfig = {
   getOptions(el) {
     return {
       mounted() {
+        const popupsVm = this.$refs.popups;
+        // 点击该parentElm元素不会执行v-clickoutside的方法
+        popupsVm.parentElm = el;
         this.$nextTick(() => {
-          const popupsVm = this.$refs.popups;
-          // 点击该parentElm元素不会执行v-clickoutside的方法
-          popupsVm.parentElm = el;
           if (popupsVm.visible) {
             popupsVm.popupsDomProps = popupsVm.$refs.popups.getBoundingClientRect();
             popupsVm.referenceDomProps = el.getBoundingClientRect();

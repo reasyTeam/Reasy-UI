@@ -47,8 +47,9 @@ $--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
 }
 
 @mixin bold {
-  font-family: PingFangSC-Medium, PingFang SC, "Microsoft Yahei",
-    "Hiragino Sans GB", sans-serif;
+  // font-family: PingFangSC-Medium, PingFang SC, "Microsoft Yahei",
+  //   "Hiragino Sans GB", sans-serif;
+  font-weight: 600;
 }
 
 @mixin disabled-style {

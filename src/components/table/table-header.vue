@@ -59,7 +59,8 @@ export default {
     //是否有选项框被选中
     hasValue: Boolean,
     beforeSelectAll: Function,
-    isSelectAllDisabled: Boolean
+    isSelectAllDisabled: Boolean,
+    disabled: Boolean
   },
   computed: {
     checkboxValue: {
@@ -69,6 +70,9 @@ export default {
       set(val) {
         this.$emit("change", val);
       }
+    },
+    isDisabled() {
+      return this.disabled || this.$parent.disabled;
     }
   },
   methods: {
@@ -76,6 +80,10 @@ export default {
       return size(width);
     },
     sortTable(col) {
+      if (this.isDisabled) {
+        return;
+      }
+
       if (!col.isSort) return;
       if (col.sortType === "asc") {
         col.sortType = "desc";
