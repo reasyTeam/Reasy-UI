@@ -2,6 +2,7 @@
   display: inline-block;
   position: relative;
   line-height: $form-line-height;
+  vertical-align: middle;
   @include clearfix;
 
   &__item {

@@ -62,7 +62,7 @@ export default {
     },
     emptyText: {
       type: String,
-      default: "暂无数据"
+      default: _("No Data")
     },
     devided: {
       type: Boolean,

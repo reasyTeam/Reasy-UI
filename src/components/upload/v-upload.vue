@@ -23,7 +23,7 @@
           class="v-upload__button"
           @click="clickFile"
         >
-          <span>选择文件</span>
+          <span>{{ _("Select File") }}</span>
         </v-button>
       </div>
       <!-- 图片上传 -->

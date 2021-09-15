@@ -33,7 +33,7 @@
           v-if="showDetailsButton"
           class="v-alert__show-detail"
           @click="$emit('handle-details-click')"
-          >查看详情</span
+          >{{_('Details')}}</span
         >
         <span
           v-if="showClose"

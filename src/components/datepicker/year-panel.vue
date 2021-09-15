@@ -75,18 +75,18 @@ export default {
   filters: {
     month: item => {
       return {
-        0: "1月",
-        1: "2月",
-        2: "3月",
-        3: "4月",
-        4: "5月",
-        5: "6月",
-        6: "7月",
-        7: "8月",
-        8: "9月",
-        9: "10月",
-        10: "11月",
-        11: "12月"
+        0: _("s#hOr#Jan"),
+        1: _("s#hOr#Feb"),
+        2: _("s#hOr#Mar"),
+        3: _("s#hOr#Apr"),
+        4: _("s#hOr#May"),
+        5: _("s#hOr#Jun"),
+        6: _("s#hOr#Jul"),
+        7: _("s#hOr#Aug"),
+        8: _("s#hOr#Sep"),
+        9: _("s#hOr#Oct"),
+        10: _("s#hOr#Nov"),
+        11: _("s#hOr#Dec")
       }[item];
     }
   },

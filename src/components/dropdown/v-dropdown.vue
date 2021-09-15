@@ -88,7 +88,7 @@ export default {
     },
     label: {
       type: String,
-      default: "下拉菜单"
+      default: _("Drop-down menu")
     },
     disabled: {
       type: Boolean,

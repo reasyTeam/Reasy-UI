@@ -483,7 +483,7 @@ export function checkData(dataKey, value) {
 
   if (dataKey.required !== false) {
     if (val === "" || val.length === 0) {
-      return "本项不能为空";
+      return _("This field is required");
     }
   } else {
     //非必填时 为空则不验证

@@ -131,7 +131,7 @@ export default {
       if (this.disabled) return;
       //有错
       if (!this.checkValidate()) {
-        this.$message.error("请检查错误信息");
+        this.$message.error(_("Please check the error message"));
         return false;
       }
       //表单自定义事件

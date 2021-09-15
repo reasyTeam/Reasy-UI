@@ -60,8 +60,12 @@
       :scale="isRange ? 2 : 1"
     >
       <v-row v-if="isRange">
-        <v-col class="v-timepicker__title" :span="12">开始时间</v-col>
-        <v-col class="v-timepicker__title" :span="12">结束时间</v-col>
+        <v-col class="v-timepicker__title" :span="12">{{
+          _("Start Time")
+        }}</v-col>
+        <v-col class="v-timepicker__title" :span="12">{{
+          _("End Time")
+        }}</v-col>
       </v-row>
       <v-row>
         <!-- 开始时间 -->
@@ -99,7 +103,7 @@
           size="S"
           :disabled="isSubmitDisabled"
           @click="setTime"
-          >确定</v-button
+          >{{ _("OK") }}</v-button
         >
       </div>
     </create-to-body>
@@ -148,12 +152,12 @@ export default {
     placeholder: {
       type: String,
       default() {
-        return this.isRange ? "开始时间" : "选择时间";
+        return this.isRange ? _("Start Time") : _("Choose Time");
       }
     },
     endPlaceholder: {
       type: String,
-      default: "结束时间"
+      default: _("End Time")
     },
     //时间格式
     format: {
@@ -342,11 +346,11 @@ export default {
         let startTime = val[0] || "",
           endTime = val[1] || "";
         if (!startTime && !endTime) {
-          return "请选择时间范围";
+          return _("Please select a time period");
         } else if (!startTime) {
-          return "请选择开始时间";
+          return _("Please choose the start time");
         } else if (!endTime) {
-          return "请选择结束时间";
+          return _("Please choose the end time");
         }
       }
     }

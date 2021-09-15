@@ -178,7 +178,7 @@
             :disabled="submitDisabled"
             type="primary"
             @click="setDateTime"
-            >确定</v-button
+            >{{ _("OK") }}</v-button
           >
         </div>
       </div>
@@ -237,12 +237,12 @@ export default {
     placeholder: {
       type: String,
       default() {
-        return this.isRange ? "开始日期" : "选择日期";
+        return this.isRange ? _("Start Time") : _("Choose Time");
       }
     },
     endPlaceholder: {
       type: String,
-      default: "结束日期"
+      default: _("End Time")
     },
     //时间日期格式
     format: String,
@@ -950,11 +950,11 @@ export default {
         let startTime = val[0] || "",
           endTime = val[1] || "";
         if (!startTime && !endTime) {
-          return "请选择日期范围";
+          return _("Please select a time period");
         } else if (!startTime) {
-          return "请选择开始时间";
+          return _("Please choose the start time");
         } else if (!endTime) {
-          return "请选择结束时间";
+          return _("Please choose the end time");
         }
       }
     }

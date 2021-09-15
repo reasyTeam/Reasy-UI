@@ -66,7 +66,7 @@ export default {
     //支持全选时的文字
     selectText: {
       type: String,
-      default: "全选"
+      default: _("All")
     },
     //最小选中个数
     min: {

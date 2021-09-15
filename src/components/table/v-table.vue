@@ -272,7 +272,7 @@ export default {
     loadingText: String,
     emptyText: {
       type: String,
-      default: "无数据"
+      default: _("No Data")
     },
     isPagination: {
       type: Boolean,

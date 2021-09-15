@@ -33,7 +33,7 @@
     <!-- 中间文字显示 -->
     <v-row class="v-datepicker--panel__title">
       <div class="pointer" @click="showYear()">
-        {{ type !== "month" ? `${year}年${month + 1}月` : `${year}年` }}
+        {{ headerText }}
       </div>
     </v-row>
   </div>
@@ -56,10 +56,30 @@ export default {
     maxYear: Number
   },
   data() {
+    this.monthMap = {
+      0: _("January"),
+      1: _("February"),
+      2: _("March"),
+      3: _("April"),
+      4: _("May"),
+      5: _("June"),
+      6: _("July"),
+      7: _("August"),
+      8: _("September"),
+      9: _("October"),
+      10: _("November"),
+      11: _("December")
+    };
     return {
       tmpYear: 0,
       tmpMonth: 0
     };
+  },
+  computed: {
+    headerText() {
+      const { type, year, month, monthMap } = this;
+      return type !== "month" ? _("Y#eaR#%s %s", [year, monthMap[month]]) : _("Y#eaR#%s", [year]);
+    }
   },
   methods: {
     // 前一年

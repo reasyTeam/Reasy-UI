@@ -41,11 +41,11 @@
       ></a>
     </div>
     <div class="v-pagination__item" v-if="isShowTotalPage">
-      <span>第</span>
-      <span>{{ page + "/" + totalPage + "页" }}</span>
+      <span>{{ _("Page %s/%s", [page, totalPage]) }}</span>
+      <!-- <span>{{ "第" + page + "/" + totalPage + "页" }}</span> -->
     </div>
     <div class="v-pagination__item" v-if="isChangeSize">
-      <span class="v-pagination__text">每页</span>
+      <span class="v-pagination__text">{{ _("P#erP#") }}</span>
       <v-select
         v-model="pageSizeValue"
         :size="border ? 'M' : 'S'"
@@ -54,10 +54,10 @@
         :options="pageSizeOptions"
         @change="changeSize"
       ></v-select>
-      <span class="v-pagination__text">条</span>
+      <span class="v-pagination__text">{{ _("P#erP#") }}</span>
     </div>
     <div class="v-pagination__item" v-if="isInputPage">
-      <span class="v-pagination__text">前往</span>
+      <span class="v-pagination__text">{{ _("Go to") }}</span>
       <v-input
         v-model="pageValue"
         :disabled="disabled"
@@ -66,7 +66,7 @@
         :allow="/^\d+$/"
         @change="gotoPage(pageValue)"
       ></v-input>
-      <span class="v-pagination__text">页</span>
+      <span class="v-pagination__text">{{ _("P#aGe#") }}</span>
     </div>
   </div>
 </template>
@@ -135,7 +135,7 @@ export default {
   },
   computed: {
     dataTips() {
-      return `共${this.total || 0}条`;
+      return _(`%s items in total`, [this.total || 0]);
     },
     totalPage() {
       return Math.ceil(this.total / this.pageSizeValue);

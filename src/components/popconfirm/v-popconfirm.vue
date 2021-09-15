@@ -101,11 +101,11 @@ export default {
     },
     confirmButtonText: {
       type: String,
-      default: "确定"
+      default: _("OK")
     },
     cancelButtonText: {
       type: String,
-      default: "取消"
+      default: _("Cancel")
     },
     confirmButtonType: {
       type: String,

@@ -63,7 +63,7 @@ export default {
       position: "top-right",
       showClose: true,
       showConfirm: false,
-      confirmText: "确定",
+      confirmText: _("OK"),
       verticalOffset: 16,
       dangerouslyUseHTMLString: false
     };

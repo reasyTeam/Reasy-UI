@@ -2,6 +2,12 @@
 
 Tenda 基于 Vue2.x 的 PC 组件库，[查看源码](https://github.com/reasyTeam/Reasy-UI)。
 
+### 使用
+
+如有多语言环境，使用前请先引入`B28n.js`文件。
+
+> 组件中词条已提取到`lang.en.zh.json`文件，项目中请自行导入。
+
 ### 安装
 
 ```

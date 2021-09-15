@@ -9,7 +9,7 @@
       <!-- 未上传 -->
       <template v-if="uploadType === 0">
         <span class="v-upload__image__icon v-icon-add"></span>
-        <div class="v-upload__image__text">添加</div>
+        <div class="v-upload__image__text">{{ _("Add") }}</div>
       </template>
       <!-- 上传中 -->
       <template v-if="uploadType === 1">

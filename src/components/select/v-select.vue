@@ -146,7 +146,7 @@ export default {
     //手动配置文字
     manualText: {
       type: String,
-      default: "自定义"
+      default: _("Custom")
     },
     //下拉选项位置
     position: {
@@ -162,7 +162,7 @@ export default {
     //占位符
     placeholder: {
       type: String,
-      default: "请选择"
+      default: _("Please select")
     },
     //是否支持清空
     isClear: {

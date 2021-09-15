@@ -179,13 +179,13 @@ export default {
   filters: {
     week: item => {
       return {
-        0: "日",
-        1: "一",
-        2: "二",
-        3: "三",
-        4: "四",
-        5: "五",
-        6: "六"
+        0: _("o#TuN#Su"),
+        1: _("o#TuN#Mo"),
+        2: _("o#TuN#Tu"),
+        3: _("o#TuN#We"),
+        4: _("o#TuN#Th"),
+        5: _("r#ZlG#Fr"),
+        6: _("s#jdm#Sa")
       }[item];
     }
   },
