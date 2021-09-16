@@ -464,8 +464,8 @@ key 为 表单选项的 prop，
 | valid       | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |        |
 | disabled    | 选项是否禁用                                                       | boolean        |        | false  |
 | isInline    | 是否不换行显示，适用于紧接着前面的组件显示在一行                   | boolean        |        | false  |
-| showPopError    | 是否错误提示显示为提示小浮窗                   | boolean        |        | false  |
-| popErrorPosition    | 错误提示小浮窗位置，参考[tooltip](./#/component/tooltip)组件                   | string        |        | right-center  |
+| show-pop-error    | 是否错误提示显示为提示小浮窗                   | boolean        |        | false  |
+| pop-error-position    | 错误提示小浮窗位置，参考[tooltip](./#/component/tooltip)组件                   | string        |        | right-center  |
 
 ### v-form-item Methods
 
