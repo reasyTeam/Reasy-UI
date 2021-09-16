@@ -172,6 +172,10 @@
 
     .v-table__header {
       background-color: #fafafa;
+
+      &:hover {
+        background-color: #fafafa;
+      }
     }
     .v-table__header__label {
       color: #c0c0c0;
@@ -184,8 +188,15 @@
       border-bottom-color: #c0c0c0;
     }
 
-    .v-table__header--sort{
+    .v-table__header--sort {
       cursor: not-allowed;
+      &:hover {
+        background-color: #fafafa;
+      }
+    }
+
+    .v-table__row:hover {
+      background: #fff;
     }
   }
 }

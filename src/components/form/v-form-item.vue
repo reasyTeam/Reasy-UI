@@ -40,26 +40,34 @@
       <slot></slot>
       <slot name="content"></slot>
 
-      <label
-        class="v-form-item__tip v-form-item__unit"
-        v-if="$slots.unit || unit"
+      <label class="v-form-item__tip">
+        <label class="v-form-item__unit">
+          <template v-if="unit">{{ unit }}</template>
+          <slot name="unit" v-else></slot>
+        </label>
+        <label class=" v-form-item__description" v-if="description"
+          >{{ description }}
+        </label>
+        <slot name="description" v-else> </slot>
+      </label>
+
+      <div
+        :style="{ height: showPopError ? '' : errHeight }"
+        :class="{ 'v-form-item__content__error-pop': showPopError }"
       >
-        <slot name="unit" v-if="$slots.unit"></slot>
-        <template v-else>{{ unit }}</template>
-      </label>
-
-      <slot name="description" v-if="$slots.description"> </slot>
-      <label
-        class="v-form-item__tip v-form-item__description"
-        v-else-if="description"
-        >{{ description }}
-      </label>
-
-      <div :style="{ height: errHeight }">
+        <template v-if="showPopError">
+          <v-tooltip
+            v-model="showError"
+            trigger="manual"
+            :content="errorMsg"
+            :position="popErrorPosition"
+          >
+          </v-tooltip>
+        </template>
         <div
           ref="error"
           class="v-form-item__content__msg is-error"
-          v-if="showError"
+          v-else-if="showError"
         >
           {{ errorMsg }}
         </div>
@@ -85,6 +93,16 @@ export default {
     isNoLabel: {
       type: Boolean,
       default: false
+    },
+    // 是否错误提示显示为提示小浮窗
+    showPopError: {
+      type: Boolean,
+      default: false
+    },
+    // 错误提示方向 参考 v-tooltip
+    popErrorPosition: {
+      type: String,
+      default: "right-center"
     },
     //属性值，数据验证和提交数据时必填
     prop: String,
@@ -128,7 +146,7 @@ export default {
       return this.$getLabelWidth();
     },
     showError() {
-      return this.errorMsg && this.isShowError;
+      return !!this.errorMsg && this.isShowError;
     },
     sizeCss() {
       return sizeToCss(this.size, "v-form-item__label--");

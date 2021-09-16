@@ -1282,6 +1282,151 @@ Vue.use(Table);
 
 :::
 
+分页删除
+
+::: demo
+
+```html
+<v-table :data="table" is-pagination is-change-size is-input-page :max-row="5">
+  <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
+  <v-table-col prop="upload" label="上传速率"></v-table-col>
+  <v-table-col prop="download" label="下载速率"></v-table-col>
+  <v-table-col prop="upLimit" label="上传限速"></v-table-col>
+  <v-table-col label="操作">
+    <template >
+      <v-button type="text" icon="v-icon-delete" @click="del"></v-button>
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table: [
+          {
+            ip: "192.168.0.105",
+            mac: "C8:3A:35:22:11:16",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.106",
+            mac: "C8:3A:35:22:11:17",
+            onlineTime: "67567",
+            hz: "2.4G",
+            upload: "678",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.107",
+            mac: "C8:3A:35:22:11:18",
+            onlineTime: "1000",
+            hz: "5G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.108",
+            mac: "C8:3A:35:22:11:19",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.109",
+            mac: "C8:3A:35:22:11:20",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.108",
+            mac: "C8:3A:35:22:11:19",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: '2"</span>',
+            mac: "C8:3A:35:22:11:20",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.128",
+            mac: "C8:3A:35:22:11:29",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.139",
+            mac: "C8:3A:35:22:11:32",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.148",
+            mac: "C8:3A:35:22:11:65",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.123",
+            mac: "C8:3A:35:22:11:87",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    },
+    methods:{
+      del(){
+        this.table.shift();
+      }
+    }
+  };
+</script>
+```
+
+:::
 ### v-table Attributes
 
 | 参数                   | 说明                                                 | 类型     | 可选值    | 默认值                      |

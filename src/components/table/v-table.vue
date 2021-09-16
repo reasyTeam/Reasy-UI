@@ -606,6 +606,13 @@ export default {
     data: {
       handler(val) {
         this.tableData = copyDeepData(val || []);
+        if (this.page > 1) {
+          if (this.tableData.length === 0) {
+            this.page = 1;
+          } else if (this.tableData.length <= (this.page - 1) * this.pageSize) {
+            this.page = Math.ceil(this.tableData.length / this.pageSize);
+          }
+        }
         this.updateTable();
       },
       immediate: true

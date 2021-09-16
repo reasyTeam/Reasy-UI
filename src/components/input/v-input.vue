@@ -25,7 +25,8 @@
         :class="{
           'is-disabled': isDisabled !== false,
           'is-hover': isHover,
-          'is-focus': isFocus
+          'is-focus': isFocus,
+          'is-input-error': isError
         }"
         @focus="setFocus"
         :disabled="isDisabled !== false"
@@ -238,6 +239,9 @@ export default {
     //输入框值
     inputValue() {
       return this.value;
+    },
+    isError() {
+      return !!(this.elFormItem && this.elFormItem.showError);
     }
   },
   data() {

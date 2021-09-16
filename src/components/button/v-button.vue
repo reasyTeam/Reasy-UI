@@ -8,7 +8,7 @@
       sizeCss,
       typeCss,
       {
-        [typeCss + '--disabled']: disabled !== false,
+        [typeCss + '--disabled']: isDisabled !== false,
         'v-button--inner': !$slots.default && type === 'text'
       }
     ]"
@@ -83,6 +83,20 @@ export default {
         text: "v-button--text"
       };
       return cssObj[this.type] || cssObj.info;
+    },
+    isDisabled() {
+      if (this.disabled) {
+        return true;
+      }
+      
+      if (
+        this.$parent &&
+        this.$parent.$options._componentTag === "v-form-item" &&
+        this.$parent.isDisabled
+      ) {
+        return true;
+      }
+      return false;
     }
   },
   data() {
@@ -91,7 +105,7 @@ export default {
   methods: {
     clickBtn() {
       if (this.isLoading) return;
-      if (this.disabled) return;
+      if (this.isDisabled) return;
       this.$emit("click");
       this.$refs.btn.blur();
     }

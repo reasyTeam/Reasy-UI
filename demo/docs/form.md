@@ -236,13 +236,15 @@ Vue.use(Form);
 ::: demo
 
 ```html
+<p>全部禁用</p>
+
 <v-form ref="form" disabled :model="ruleForm" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid" unit="秒">
     <v-input v-model="ruleForm.ssid"></v-input>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
-    <template v-slot:unit>这里显示单位信息</template>
+    <template v-slot:description>这里显示单位信息</template>
   </v-form-item>
   <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
     <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
@@ -254,7 +256,16 @@ Vue.use(Form);
       :max="12"
     ></v-input-number>
   </v-form-item>
+  <v-form-item label="功率" prop="power">
+    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
+  </v-form-item>
+  <v-form-item disabled>
+    <v-button type="primary" @click="submitForm">保存</v-button>
+    <v-button @click="cancel">取消</v-button>
+  </v-form-item>
 </v-form>
+
+<p>部分禁用</p>
 <v-form>
   <v-form-item label="功率" prop="power">
     <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
@@ -453,6 +464,8 @@ key 为 表单选项的 prop，
 | valid       | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |        |
 | disabled    | 选项是否禁用                                                       | boolean        |        | false  |
 | isInline    | 是否不换行显示，适用于紧接着前面的组件显示在一行                   | boolean        |        | false  |
+| showPopError    | 是否错误提示显示为提示小浮窗                   | boolean        |        | false  |
+| popErrorPosition    | 错误提示小浮窗位置，参考[tooltip](./#/component/tooltip)组件                   | string        |        | right-center  |
 
 ### v-form-item Methods
 
