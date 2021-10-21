@@ -21,7 +21,7 @@
       >
         <v-x-scroll
           ref="scroll"
-          :count="4"
+          :count="displayOptionsNumber"
           :is-block="true"
           :to-index="selectIndex"
           @mounted="setPosition"
@@ -64,14 +64,6 @@
 
 <script>
 import CreateToBody from "../create-to-body";
-import scssVars from "../../scss/components/dropdown.scss";
-let { optionHeight, menuVerticalPadding } = scssVars;
-
-// 以下：一步到位的写法会导致npm run dev报警告，即使把小驼峰写法修改为下横杠“_”拼接也不行
-// import { optionHeight, menuVerticalPadding } from "../../scss/components/dropdown.scss";
-
-optionHeight = parseInt(optionHeight);
-menuVerticalPadding = parseInt(menuVerticalPadding);
 
 export default {
   name: "v-dropdown",
@@ -140,16 +132,6 @@ export default {
         "v-dropdown__label--disabled": disabled,
         [`v-dropdown__label-${type}`]: true
       };
-    },
-    scrollHeight() {
-      const {
-        displayOptionsNumber,
-        options: { length }
-      } = this;
-
-      return length <= displayOptionsNumber
-        ? "auto"
-        : displayOptionsNumber * optionHeight + menuVerticalPadding;
     }
   },
   methods: {

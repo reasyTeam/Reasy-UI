@@ -1,16 +1,23 @@
 <template>
   <table
-    class="table table--fixed v-table__header"
+    ref="table"
+    class="table v-table__header"
     :class="{ 'v-table__border': border }"
   >
+    <colgroup>
+      <col
+        v-for="(col, index) in columns"
+        :width="col.width"
+        :key="index + 1"
+        :align="col.align"
+      />
+    </colgroup>
     <thead>
       <tr>
         <th
           v-for="(col, index) in columns"
-          :width="getColWidth(col.width)"
           :key="index + 1"
-          :align="col.align"
-          :class="{ 'v-table__header--sort': col.isSort }"
+          :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
           @click="sortTable(col)"
         >
           <!-- 选择框 -->
@@ -18,12 +25,19 @@
             v-if="col.type === 'selection'"
             class="v-table__header__checkbox"
             :before-change="beforeSelectAll"
-            v-model="checkboxValue"
-            :hasValue="hasValue"
+            v-model="isSelectedAll"
+            :hasValue="isSelected"
             :disabled="isSelectAllDisabled"
           ></v-checkbox>
           <!-- 表头文字 -->
-          <span class="v-table__header__label">{{ col.label }}</span>
+          <!-- 支持显示html -->
+          <span
+            class="v-table__header__label"
+            v-if="col.isHtmlHeader"
+            v-html="col.label"
+          ></span>
+          <!-- text格式显示 -->
+          <span class="v-table__header__label" v-else>{{ col.label }}</span>
           <!-- 排序 -->
           <span v-if="col.isSort" class="v-table__sort">
             <span
@@ -45,7 +59,6 @@
   </table>
 </template>
 <script>
-import { size } from "../filters";
 export default {
   props: {
     //全选值
@@ -57,13 +70,13 @@ export default {
     //排序元素
     sortProp: String,
     //是否有选项框被选中
-    hasValue: Boolean,
+    isSelected: Boolean,
     beforeSelectAll: Function,
     isSelectAllDisabled: Boolean,
     disabled: Boolean
   },
   computed: {
-    checkboxValue: {
+    isSelectedAll: {
       get() {
         return this.value;
       },
@@ -76,8 +89,11 @@ export default {
     }
   },
   methods: {
-    getColWidth(width) {
-      return size(width);
+    getHeight() {
+      return parseInt(this.$refs.table.scrollHeight);
+    },
+    getWidth() {
+      return parseInt(this.$refs.table.scrollWidth);
     },
     sortTable(col) {
       if (this.isDisabled) {

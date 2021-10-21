@@ -3,7 +3,7 @@
     <div class="v-pagination__item" v-if="isShowTotal">
       {{ dataTips }}
     </div>
-    <div class="v-pagination__item" v-if="totalPage > 1">
+    <div class="v-pagination__item">
       <a
         class="v-pagination__button v-pagonation__icon v-icon-left"
         @click="gotoPage('prev')"

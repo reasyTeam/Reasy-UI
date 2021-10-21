@@ -160,7 +160,7 @@ Vue.use(Scroll);
 <v-row :gutter="24">
   <v-col :span="8">
     to-x: 100
-    <v-scroll class="scroll-demo" :toX="100" :height="200">
+    <v-scroll class="scroll-demo" :toX="100" :height="200" active>
       <ul style="width: 400px;">
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:x #{{ i }}
@@ -293,6 +293,7 @@ Vue.use(Scroll);
 | to-index | 滚动到第几个元素               | number         | -                   | -            |
 | to-index | 滚动到第几个元素               | number         | -                   | -            |
 | animate  | 是否添加滚动动画               | boolean         | -                   | false            |
+| active   | 是否一直显示滚动条               | boolean         | -                   | false            |
 
 - `height`为`inherit`时继承父级容器的高度，要保证外层容器可以取得高。为`auto`时表示不会出现垂直滚动条。
 - 不设置`width`时，要保证外层容器可以取得高或者宽
@@ -313,6 +314,8 @@ Vue.use(Scroll);
 | scrollToY(to)        | 垂直滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
 | scrollToIndex(index) | 滚动到第几个元素                                   | 元素索引，从 1 开始                     |
 | setSize(height, width, isScrollToTop) | 修改容器的宽高           | 高，框，是否滚动到左上角                     |
+| setHeight(height, isScrollToTop) | 修改容器的高           | 高，框，是否滚动到最上面                     |
+| setWidth(width, isScrollToLeft) | 修改容器的宽           | 高，框，是否滚动到最左边                    |
 
 ### Slot
 

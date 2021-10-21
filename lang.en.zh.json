@@ -53,5 +53,6 @@
   "Please select": "请选择",
   "Add": "添加",
   "Select File": "选择文件",
-  "Drop-down menu": "下拉菜单"
+  "Drop-down menu": "下拉菜单",
+  "%s items in total": "共 %s 条"
 }

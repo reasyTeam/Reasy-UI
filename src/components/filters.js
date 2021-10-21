@@ -5,7 +5,13 @@
 import { isUndefinedOrNull, SIZE_TO_CSS } from "./libs";
 
 export function size(val) {
+  if (val === "") {
+    return val;
+  }
   if (typeof val === "string") {
+    if (/^\d*$/.test(val)) {
+      return `${val}px`;
+    }
     return val;
   }
   if (isUndefinedOrNull(val)) {

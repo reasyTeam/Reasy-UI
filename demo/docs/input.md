@@ -365,7 +365,7 @@ Vue.use(Input);
 
 | 参数            | 说明                                                                 | 类型            | 可选值                               | 默认值 |
 | --------------- | -------------------------------------------------------------------- | --------------- | ------------------------------------ | ------ |
-| v-model         | 绑定值，type=number 时，值类型为 number，<br />其他情况类型为 string | string / number | —                                    | —      |
+| v-model         | 绑定值 | string / number | —                                    | —      |
 | type            | 类型                                                                 | string          | text/textarea,其他 input type 的类型 | —      |
 | name            | 原生属性                                                             | string          | —                                    | —      |
 | maxlength       | 最大输入长度                                                         | number          | —                                    | —      |

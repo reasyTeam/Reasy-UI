@@ -93,7 +93,10 @@
         .v-dropdown__icon {
           margin-right: 4px;
           // font-size: $font-size-s;
-          vertical-align: -1px;
+          vertical-align: middle;
+        }
+        .v-dropdown__text {
+          vertical-align: middle;
         }
       }
     }

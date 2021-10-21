@@ -120,6 +120,7 @@ function createDocumentHandler(el, binding, vnode) {
 const install = function(Vue) {
   const tooltipComponent = Vue.extend(Tooltip);
   tooltipConfig.singleVm = new tooltipComponent();
+  tooltipConfig.singleVm.enterable = false;
 
   let directiveConfig = {
     clickoutside: {

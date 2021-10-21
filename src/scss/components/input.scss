@@ -214,7 +214,7 @@ input[type="number"] {
 .v-input-group {
   width: $elem-width;
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
 
   &__splitter {
     position: absolute;
@@ -271,6 +271,7 @@ input[type="number"] {
   display: inline-block;
   position: relative;
   width: $elem-width;
+  vertical-align: top;
 
   .v-input {
     display: block;

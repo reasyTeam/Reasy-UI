@@ -1,11 +1,15 @@
 .v-radio {
   display: inline-block;
   position: relative;
+  vertical-align: top;
   line-height: $form-line-height;
+  &__list{
+    font-size: 0;
+  }
   &__item {
     cursor: pointer;
-    display: inline-block;
-    font-size: $font-size-m;
+    // display: inline-block;
+    // font-size: $font-size-m;
 
     &--disabled {
       cursor: not-allowed;
@@ -60,6 +64,7 @@
     display: inline-block;
     vertical-align: middle;
     color: $title-color;
+    font-size: $font-size-m;
 
     &_tips {
       color: $light-color;

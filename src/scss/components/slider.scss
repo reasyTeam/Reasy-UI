@@ -14,6 +14,7 @@ $slider-line-height: 4px;
 
 .v-slider {
   display: inline-block;
+  vertical-align: top;
 
   &:after,
   &:before {

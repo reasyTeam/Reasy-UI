@@ -230,7 +230,7 @@ export default {
       //返回为真 时表示有错误，result为错误文字
       let result = this.checkData(val);
       //错误文字信息
-      this.setError(result);
+      this.setError(result || "");
       return !result;
     },
     //子组件覆盖此函数
@@ -266,18 +266,25 @@ export default {
     showError: {
       handler(val) {
         if (val) {
+          //nextTick是为了拿到$refs.error节点元素
           this.$nextTick(() => {
             let errorHeight = 20,
               lineheight = 20;
             if (this.$refs.error) {
-              errorHeight = this.$refs.error.clientHeight;
-              lineheight =
-                parseInt(
-                  window.getComputedStyle(this.$refs.error).lineHeight
-                ) || 20;
-            }
-            if (errorHeight > lineheight) {
-              this.errHeight = errorHeight - lineheight + "px";
+              //nextTick是为了在当前错误提示内容变化时更新errorHeight高度
+              this.$nextTick(() => {
+                errorHeight = this.$refs.error.clientHeight;
+                lineheight =
+                  parseInt(
+                    window.getComputedStyle(this.$refs.error).lineHeight
+                  ) || 20;
+
+                if (errorHeight > lineheight) {
+                  this.errHeight = errorHeight - lineheight + "px";
+                } else {
+                  this.errHeight = "";
+                }
+              });
             } else {
               this.errHeight = "";
             }

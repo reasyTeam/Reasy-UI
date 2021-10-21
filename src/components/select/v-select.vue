@@ -87,6 +87,7 @@
         :is-multiple="isMultiple"
         :multiple-limit="multipleLimit"
         :select-value="value"
+        :count="displayOptionsNumber"
         @click-options="clickOptions"
         @hide="hide"
       ></dropdown-list>
@@ -181,7 +182,11 @@ export default {
     //后缀图标
     suffixIcon: String,
     //允许输入字符的正则表达式
-    allow: RegExp
+    allow: RegExp,
+    displayOptionsNumber: {
+      type: Number,
+      default: 5
+    }
   },
   computed: {
     //大小

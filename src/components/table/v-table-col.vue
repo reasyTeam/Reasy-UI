@@ -9,6 +9,10 @@ export default {
   name: "v-table-col",
   props: {
     type: String,
+    fixed: {
+      type: [String, Boolean],
+      default: false
+    },
     label: {
       //表头文字
       default: "",
@@ -21,7 +25,13 @@ export default {
     },
     width: {
       //宽度
-      type: [String, Number]
+      type: [String, Number],
+      default: ""
+    },
+    isHtmlHeader: {
+      //是否支持html
+      type: Boolean,
+      default: false
     },
     isTooltip: {
       //是否支持提示信息
@@ -67,6 +77,7 @@ export default {
     }
   },
   computed: {
+    // 当前列对应的字段
     tableProp() {
       if (this.prop === "") {
         return IGuid();
@@ -81,18 +92,20 @@ export default {
     getProps() {
       let props = copyDeepData(this.$props);
       props.sortType = "";
+      // vue作用域插槽渲染函数,该函数返回相应VNode。
       props.fn = this.$scopedSlots.default;
       props.expandFn = this.$scopedSlots.expand || expandFn;
+      // 表格字段
       props.prop = this.tableProp;
       return props;
     }
   },
   beforeDestroy() {
-    this.$dispatch("VTable", "remove.column", this.tableProp);
+    this.$dispatch("v-table", "remove.column", this.tableProp);
   },
   watch: {
     label() {
-      this.$dispatch("VTable", "update.column", this.getProps());
+      this.$dispatch("v-table", "update.column", this.getProps());
     }
   }
 };

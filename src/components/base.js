@@ -5,7 +5,7 @@ import Derectives from "./directives";
 
 if (typeof window._ !== "function") {
   window._ = function(key, replacements) {
-    var nkey = key.replace(/^[a-zA-Z]\#[a-zA-Z][a-zA-Z][a-zA-Z]\#/g, ""),
+    var nkey = key.replace(/^[a-zA-Z]#[a-zA-Z][a-zA-Z][a-zA-Z]#/g, ""),
       index,
       count = 0;
     if (!replacements) {

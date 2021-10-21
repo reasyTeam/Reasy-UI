@@ -82,6 +82,9 @@ Vue.use(Form);
   <v-form-item label="加密" prop="security">
     <v-radio v-model="ruleForm.security" :options="radioOptions"></v-radio>
   </v-form-item>
+  <v-form-item label="开启" prop="on">
+    <v-switch v-model="ruleForm.on"></v-switch>
+  </v-form-item>
   <v-form-item label="限速" prop="downLimit">
     <v-select
       v-model="ruleForm.downLimit"
@@ -133,6 +136,7 @@ Vue.use(Form);
           time: "10:12",
           date: "",
           date1: [],
+          on: true,
           security: ""
         },
         options: [

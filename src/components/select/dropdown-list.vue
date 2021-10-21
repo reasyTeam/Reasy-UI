@@ -1,6 +1,6 @@
 <template>
   <div class="v-select-options">
-    <v-x-scroll ref="scroll" @mounted="setPosition">
+    <v-x-scroll ref="scroll" @mounted="setPosition" :count="count">
       <!-- 下拉选项列表 -->
       <ul class="v-select-options__list">
         <li
@@ -41,7 +41,8 @@ export default {
     //多选长度限制
     multipleLimit: Number,
     //是否支持多选
-    isMultiple: Boolean
+    isMultiple: Boolean,
+    count: Number
   },
   methods: {
     clickOption(options) {

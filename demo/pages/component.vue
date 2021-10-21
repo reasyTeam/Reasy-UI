@@ -70,6 +70,9 @@ $nav-width: 256px;
 .page-content .content > h3 {
   margin: 55px 0 20px;
 }
+.page-content .content > h4 {
+  margin: 24px 0 14px;
+}
 .page-content .content > table {
   border-collapse: collapse;
   width: 100%;

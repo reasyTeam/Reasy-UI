@@ -88,6 +88,7 @@ export default {
       type: Boolean,
       default: false
     },
+    // 滚动条一直显示
     active: {
       type: Boolean,
       default: false
@@ -154,6 +155,7 @@ export default {
           wrapStyle.height = `${this.wrapHeight + this.barWidth}px`;
         }
         wrapStyle["overflow-x"] = "scroll";
+        wrapStyle["margin-bottom"] = `-${this.barWidth}px`;
       } else {
         if (this.wrapHeight) {
           wrapStyle.height = `${this.wrapHeight}px`;
@@ -278,7 +280,7 @@ export default {
       }
     },
     /**
-     * 重新设置容器的宽和高
+     * 重新设置容器的宽和高，如果设置了overflow后，则overflow优先级更高
      * @param {Number} height 容器高
      * @param {Number} width 容器宽
      * @param {Boolean} isScrollToTop 是否滚动到初始位置
@@ -290,16 +292,85 @@ export default {
         this.view.scrollTop = this.scrollTop = 0;
         this.view.scrollLeft = this.scrollLeft = 0;
       }
-      this.isVertical = false;
-      this.isHorizontal = false;
+      // this.isVertical = false;
+      // this.isHorizontal = false;
 
       this.update();
+    },
+
+    setHeight(height, isScrollToTop) {
+      this.newHeight = height;
+      if (isScrollToTop) {
+        this.view.scrollTop = this.scrollTop = 0;
+      }
+      this.isVertical = false;
+
+      if (this.newHeight === "inherit") {
+        this.wrapHeight = this.$el.parentNode.offsetHeight;
+      } else if (this.newHeight === "auto") {
+        this.wrapHeight = 0;
+      } else {
+        this.wrapHeight = this.newHeight;
+      }
+
+      this.$nextTick(() => {
+        let height = this.view.scrollHeight;
+
+        this.isVertical = this.overflow === "auto" || this.overflow === "y";
+        this.isVertical = this.isVertical && this.wrapHeight < height;
+
+        if (this.isVertical) {
+          this.vbarHeight = parseInt(
+            (this.wrapHeight / height) * this.wrapHeight
+          );
+          this.scrollTopRange = height - this.wrapHeight;
+          this.scrollSize.height = this.wrapHeight;
+        } else {
+          this.vbarHeight = 0;
+          this.scrollTopRange = 0;
+          this.scrollSize.height = 0;
+        }
+        this.scroll();
+        this.$emit("mounted");
+      });
+    },
+
+    setWidth(width, isScrollToLeft) {
+      this.newWidth = width;
+      if (isScrollToLeft) {
+        this.view.scrollLeft = this.scrollLeft = 0;
+      }
+      this.isHorizontal = false;
+
+      this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
+
+      this.$nextTick(() => {
+        let width = this.view.scrollWidth;
+
+        this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
+        this.isHorizontal = this.isHorizontal && this.wrapWidth < width;
+
+        if (this.isHorizontal) {
+          this.hBarWidth = parseInt((this.wrapWidth / width) * this.wrapWidth);
+          this.scrollLeftRange = width - this.wrapWidth;
+          this.scrollSize.width = this.wrapWidth;
+        } else {
+          this.hBarWidth = 0;
+          this.scrollLeftRange = 0;
+          this.scrollSize.width = 0;
+        }
+
+        this.scroll();
+        this.$emit("mounted");
+      });
     },
     /**
      * 更新滚动条相关配置
      * 内部内容变化需要手动调用重新计算高度
      */
     update() {
+      this.isHorizontal = false;
+      this.isVertical = false;
       this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
       if (this.newHeight === "inherit") {
         this.wrapHeight = this.$el.parentNode.offsetHeight;
@@ -380,15 +451,17 @@ export default {
       }
       // 节流
       this.timer = setTimeout(() => {
+        // this.isHorizontal = false;
+        // this.isVertical = false;
         this.$nextTick(() => {
           this.update();
         });
-      }, 100);
+      }, 50);
     }
   },
   mounted() {
-    this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
-    this.isVertical = this.overflow === "auto" || this.overflow === "y";
+    // this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
+    // this.isVertical = this.overflow === "auto" || this.overflow === "y";
     this.update();
     on(window, "resize", this.resizeHandle);
 

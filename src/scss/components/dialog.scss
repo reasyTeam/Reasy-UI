@@ -42,10 +42,13 @@
   &__title {
     padding: $box-padding-top $box-padding;
     font-size: $font-size-l;
-    font-weight: 500;
+    font-weight: 600;
     color: $title-color;
     line-height: 21px;
     border-bottom: 1px solid #f5f5f5;
+    &-inner {
+      font-weight: 600;
+    }
   }
   &__close {
     position: absolute;

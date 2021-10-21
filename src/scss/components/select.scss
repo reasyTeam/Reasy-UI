@@ -150,9 +150,9 @@
     .v-select__icon--right {
       line-height: 28px;
     }
-    &.v-select-options {
-      max-height: 200px;
-    }
+    // &.v-select-options {
+    //   max-height: 200px;
+    // }
   }
 
   &--medium {
@@ -166,9 +166,9 @@
     .v-select__icon--right {
       line-height: 24px;
     }
-    &.v-select-options {
-      max-height: 160px;
-    }
+    // &.v-select-options {
+    //   max-height: 160px;
+    // }
   }
 
   &--small {
@@ -187,9 +187,9 @@
       padding-right: 24px;
     }
 
-    &.v-select-options {
-      max-height: 120px;
-    }
+    // &.v-select-options {
+    //   max-height: 120px;
+    // }
   }
 
   .v-input__icon--suffix {

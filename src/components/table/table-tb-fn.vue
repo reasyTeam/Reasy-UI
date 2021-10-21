@@ -1,12 +1,12 @@
 <script>
 export default {
   props: {
-    rowsData: Object,
+    rowData: Object,
     index: Number,
     fn: Function
   },
   render(createElement) {
-    return createElement("div", this.fn(this.rowsData));
+    return createElement("div", this.fn(this.rowData));
   }
 };
 </script>
