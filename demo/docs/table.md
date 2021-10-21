@@ -21,6 +21,9 @@ Vue.use(Table);
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
   <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col prop="age1" label="template">
+    <template>测试</template>
+  </v-table-col>
 </v-table>
 <script>
   export default {
@@ -906,7 +909,7 @@ Vue.use(Table);
 
 ### 表格高度
 
-`max-row`配置表格显示多少条数据，超过条数时，出现滚动条，默认为`10`
+`max-row`配置表格显示多少条数据，超过条数时，出现滚动条，默认为`0`不限制
 
 ::: demo
 
@@ -1292,7 +1295,7 @@ Vue.use(Table);
 ```html
 <p>固定列宽</p>
 <v-table :data="table1" is-pagination is-change-size is-input-page :max-row="5">
-  <v-table-col type="selection" fixed width="60"></v-table-col>
+  <v-table-col type="selection" fixed width="50"></v-table-col>
   <v-table-col type="index" label="序号" width="80" fixed="left" align="center">
   </v-table-col>
   <v-table-col prop="ip" label="IP地址" width="180"> </v-table-col>
@@ -1302,7 +1305,7 @@ Vue.use(Table);
   <v-table-col prop="upLimit" label="上传限速" width="120"></v-table-col>
   <v-table-col prop="downLimit" label="下载限速" width="120"></v-table-col>
   <v-table-col label="操作" fixed="right" width="100">
-    <template>
+    <template v-slot="slotProps">
       <v-button type="text" icon="v-icon-edit"></v-button>
       <v-button type="text" icon="v-icon-delete"></v-button>
     </template>
@@ -1513,7 +1516,8 @@ Vue.use(Table);
   <v-table-col prop="upLimit" label="上传限速"></v-table-col>
   <v-table-col label="操作">
     <template>
-      <v-button type="text" icon="v-icon-delete" @click="del"></v-button>
+      <span class="v-icon-delete"></span>
+      <span class="v-icon-edit"></span>
     </template>
   </v-table-col>
 </v-table>

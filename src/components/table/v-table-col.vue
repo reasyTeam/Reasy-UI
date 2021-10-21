@@ -94,6 +94,9 @@ export default {
       props.sortType = "";
       // vue作用域插槽渲染函数,该函数返回相应VNode。
       props.fn = this.$scopedSlots.default;
+      if (props.fn === undefined && this.$slots.default) {
+        props.fn = this.$slots.default;
+      }
       props.expandFn = this.$scopedSlots.expand || expandFn;
       // 表格字段
       props.prop = this.tableProp;
