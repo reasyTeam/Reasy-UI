@@ -357,6 +357,7 @@ Vue.use(Select);
 | manual-text    | 手动输入时选项的文字                         | string                            | —                   | 自定义 |
 | position       | 选项框位置，对应上 、下、 自适应             | string                            | top / bottom / auto | auto   |
 | display-options-number | 设置可显示选项的数量，如options.length大于该值，则显示滚动条 | number         | -           | 5        |
+| unit | 手动输入时，输入框支持的单位，同v-input | string | - | - |
 
 **当支持手动输入时，支持输入框组件的属性**
 

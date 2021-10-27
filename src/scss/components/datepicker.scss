@@ -185,7 +185,6 @@
   &--info {
     position: relative;
     border-radius: 1px;
-    // border: 1px solid transparent;
     display: block;
     margin: 0 3px 0 0;
     line-height: 24px;
@@ -195,16 +194,17 @@
 
     &:hover {
       border-color: $main-active-color;
+      background: transparent;
+      color: $title-color;
     }
   }
-
   &--range {
     color: $title-color;
     background-color: rgba($main-active-color, 0.1);
     display: block;
   }
 
-  &--active {
+  &--panel__date-list &--active {
     color: #fff;
     background-color: $main-active-color;
     display: block;
@@ -223,8 +223,8 @@
   &__pre-month.pointer,
   &__next-month.pointer {
     color: $disabled-color;
-
     .v-datepicker--info:hover {
+      color: $disabled-color;
       border-color: transparent;
     }
   }

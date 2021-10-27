@@ -3,6 +3,7 @@
     class="v-datepicker"
     :class="sizeCss"
     :style="{ width: datePickerWidth }"
+    ref="datepicker"
   >
     <div
       :name="name"
@@ -60,7 +61,7 @@
       :data-name="_name"
       class="v-datepicker--panel"
       :show="showDatePanel"
-      v-clickoutside="hide"
+      v-clickoutside="() => hide(true)"
       :width="isRange || hasTime ? '456px' : '228px'"
     >
       <!-- 日期设置 -->
@@ -70,6 +71,8 @@
           <template v-if="isSetStartTime">
             <v-col :span="12">
               <date-panel
+                :realDate="realDate"
+                :realEndDate="realEndDate"
                 :isRange="isRange"
                 :date="tmpDate"
                 :originDate="originDate"
@@ -97,13 +100,15 @@
           <template v-else>
             <v-col :span="12">
               <date-panel
+                :realDate="realDate"
+                :realEndDate="realEndDate"
                 :isRange="isRange"
                 :date="tmpEndDate"
                 :originDate="originDate"
                 :originEndDate="originEndDate"
                 :minDate="minSetDate"
                 :maxDate="maxSetDate"
-                @change="changeTmpEndDate"
+                @change="changeTmpDate"
                 @change-header="changeHeader"
                 @mouseover="handlerDateMouseover"
                 @hide="hide"
@@ -126,6 +131,7 @@
           <!-- 日期选择 -->
           <v-col :span="hasTime || isRange ? 12 : 24">
             <date-panel
+              :realEndDate="realEndDate"
               :isRange="isRange"
               :date="tmpDate"
               type="start"
@@ -143,6 +149,8 @@
           <!-- 结束日期 -->
           <v-col :span="12" v-if="isRange">
             <date-panel
+              :realEndDate="realEndDate"
+              :realDate="realDate"
               :isRange="isRange"
               :date="tmpEndDate"
               type="end"
@@ -150,7 +158,7 @@
               :originEndDate="originEndDate"
               :minDate="minSetDate"
               :maxDate="maxSetDate"
-              @change="changeTmpEndDate"
+              @change="changeTmpDate"
               @change-header="changeHeader"
               @mouseover="handlerDateMouseover"
               @hide="hide"
@@ -195,7 +203,14 @@ import TimePanel from "./time-select-panel.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
 
-import { parseDate, preFormatDate, formatDate, isValidDate } from "../libs";
+import {
+  parseDate,
+  preFormatDate,
+  formatDate,
+  isValidDate,
+  getTimeNumber,
+  on
+} from "../libs";
 export default {
   name: "v-datepicker",
   mixins: [FormMixin],
@@ -306,8 +321,10 @@ export default {
         this.isRange &&
         !this.isSetStartTime
       ) {
+        //用于切换后禁用表盘不可选的日期
         return parseDate(this.startDate, this.dateFormat);
       }
+      //用于设置header-panel最小年份
       return this.minDate;
     },
     maxSetDate() {
@@ -329,17 +346,20 @@ export default {
     },
     realDate() {
       return parseDate(this.initStartDate, this.dateFormat);
+    },
+    realEndDate() {
+      return parseDate(this.initEndDate, this.dateFormat);
     }
   },
   data() {
     return {
       isSetTime: false,
       isSetStartTime: true, //是否设置开始时间
-      isChangedInput: false, //是否
-      isStartFocus: false,
-      isEndFocus: false,
+      isChangedInput: false, //是否输入框聚焦已切换
+      isStartFocus: false, //当前聚焦是否是开始日期
+      isEndFocus: false, //当前聚焦是否是结束日期
       originDate: {
-        //真实数据
+        //实时变化的开始日期，会随mousemove事件变化
         year: "",
         month: "",
         day: "",
@@ -348,6 +368,7 @@ export default {
         second: ""
       },
       originEndDate: {
+        //实时变化的结束日期，会随mousemove事件变化
         year: "",
         month: "",
         day: "",
@@ -356,31 +377,33 @@ export default {
         second: ""
       },
       tmpDate: {
-        //当前显示年月日数据
+        //当前表盘显示的开始年月日数据
         year: "",
         month: "",
         day: ""
       },
       tmpEndDate: {
+        //当前表盘显示的结束年月日数据
         year: "",
         month: "",
         day: ""
       },
-      startDate: "",
-      endDate: "",
-      initStartDate: "",
-      initEndDate: "",
-      startTime: "",
-      endTime: "",
+      startDate: "", //实时变化的开始日期 浅灰色字体显示
+      endDate: "", //实时变化的开始日期 浅灰色字体显示
+      initStartDate: "", //当前选中的开始日期 黑色字体显示
+      initEndDate: "", //当前选中的结束日期 黑色字体显示
+      // startTime: "",
+      // endTime: "",
       maxDate: {},
       minDate: {},
       isMouseover: false,
-      showDatePanel: false,
+      showDatePanel: false, //是否显示表盘弹窗
       isDateMouseover: false,
       isEndDateMouseover: false
     };
   },
   methods: {
+    //年月日表盘Mouseover事件
     handlerDateMouseover(year, month, day, isOver) {
       if (this.isSetStartTime) {
         this.isDateMouseover = isOver;
@@ -396,8 +419,11 @@ export default {
           ),
           this.dateFormat
         );
-        this.startDate = startDate;
-        if (!isOver) {
+        if (this.validateDate(year, month, day, true)) {
+          this.startDate = startDate;
+        }
+        if (!isOver || !this.validateDate(year, month, day, true)) {
+          //如果未选中或移入区域为禁用区域，则还原表盘
           this.startDate = this.initStartDate;
         }
       } else {
@@ -414,8 +440,10 @@ export default {
           ),
           this.dateFormat
         );
-        this.endDate = endDate;
-        if (!isOver) {
+        if (this.validateDate(year, month, day, false)) {
+          this.endDate = endDate;
+        }
+        if (!isOver || !this.validateDate(year, month, day, false)) {
           this.endDate = this.initEndDate;
         }
       }
@@ -438,6 +466,10 @@ export default {
     },
     showPanel() {
       if (this.isDisabled) return;
+      if (!this.isStartFocus && !this.isEndFocus) {
+        //点击除输入框外的其他地方，如中间箭头
+        this.setStartFocus();
+      }
       this.showDatePanel = !this.showDatePanel;
     },
     clickIcon() {
@@ -484,7 +516,7 @@ export default {
         return;
       }
       //修改日期
-      this.changeTmpEndDate(dateObj.year, dateObj.month, dateObj.day, true);
+      this.changeTmpDate(dateObj.year, dateObj.month, dateObj.day, true);
       if (this.hasTime) {
         //修改时间
         this.setTime(
@@ -540,6 +572,10 @@ export default {
     },
 
     handlerStartFocus() {
+      if (this.showDatePanel && !this.isStartFocus && this.originEndDate.day) {
+        //未点击确认按钮，直接点击输入框切换
+        this.changeSetInput();
+      }
       this.isSetStartTime = true;
       let year = this.tmpDate.year,
         month = this.tmpDate.month;
@@ -556,6 +592,9 @@ export default {
       this.updateTmpDate(year, month);
     },
     handlerEndFocus() {
+      if (this.showDatePanel && !this.isEndFocus && this.originDate.day > 0) {
+        this.changeSetInput();
+      }
       this.isSetStartTime = false;
       let year = this.tmpEndDate.year,
         month = this.tmpEndDate.month;
@@ -566,18 +605,18 @@ export default {
       }
       this.isStartFocus = false;
       this.isEndFocus = true;
-      if (
-        this.tmpDate.year === year &&
-        this.tmpDate.month === month &&
-        this.isRange &&
-        !this.hasTime
-      ) {
-        month += 1;
-        if (month > 11) {
-          month = 0;
-          year += 1;
-        }
-      }
+      // if (
+      //   this.tmpDate.year === year &&
+      //   this.tmpDate.month === month &&
+      //   this.isRange &&
+      //   !this.hasTime
+      // ) {
+      //   // month += 1;
+      //   if (month > 11) {
+      //     month = 0;
+      //     year += 1;
+      //   }
+      // }
       this.updateTmpEndDate(year, month);
     },
 
@@ -604,7 +643,9 @@ export default {
       this.isDateMouseover = false;
       this.$refs.end && this.$refs.end.focus();
     },
-    hide() {
+    hide(beforeHide = false) {
+      //isRange组件关闭弹窗前需要保存数据
+      beforeHide && this.beforeHide();
       this.isEndDateMouseover = false;
       this.isDateMouseover = false;
       this.showDatePanel = false;
@@ -614,6 +655,7 @@ export default {
     handlerMouseover() {
       if (!this.isDisabled) this.isMouseover = true;
     },
+    //年月日盘改变后的回调
     changeTmpDate(year, month, day, isInput = false) {
       if (this.isSetStartTime) {
         this.originDate.year = this.tmpDate.year = year;
@@ -634,26 +676,11 @@ export default {
         if (!this.isRangeDatetime && this.isRange) {
           this.updateTmpDate(year, month);
         }
-      }
-
-      if (isInput || this.isRangeDatetime) {
-        return;
-      }
-      if (this.isRange && !this.isChangedInput) {
-        this.changeSetInput();
+        this.setStartFocus();
       } else {
-        if (!this.hasTime) {
-          this.changeDate();
-        }
-      }
-    },
-    //选择结束时间事件
-    changeTmpEndDate(year, month, day, isInput = false) {
-      if (!this.isSetStartTime) {
         this.originEndDate.year = this.tmpEndDate.year = year;
         this.originEndDate.month = this.tmpEndDate.month = month;
         this.originEndDate.day = this.tmpEndDate.day = day;
-
         this.initEndDate = formatDate(
           new Date(
             this.originEndDate.year,
@@ -668,50 +695,155 @@ export default {
         if (!this.isRangeDatetime) {
           this.updateTmpEndDate(year, month);
         }
-      }
-      if (isInput) {
-        return;
-      }
-      if (!this.isRangeDatetime && !this.isChangedInput) {
-        this.changeSetInput();
-      } else {
-        if (!this.isRangeDatetime) {
-          this.changeDate();
-        }
-      }
-    },
-    //
-    changeSetInput() {
-      //结束日期 >= 开始日期
-      let startTime = new Date(
-        this.originDate.year,
-        this.originDate.month,
-        this.originDate.day
-      ).getTime();
-      let endTime = new Date(
-        this.originEndDate.year,
-        this.originEndDate.month,
-        this.originEndDate.day
-      ).getTime();
-      let isCheckValid = endTime >= startTime;
-      if (this.isSetStartTime) {
-        if (!isCheckValid) {
-          this.endDate = "";
-        }
         this.setEndFocus();
-      } else {
-        if (!isCheckValid) {
-          this.startDate = "";
+      }
+
+      if (!isInput && !this.hasTime) {
+        //直接输入的形式和有时分秒盘的形式都需要下一步操作,其他不需要下一步操作
+        this.setDateTime();
+      }
+      // if (this.isRange && !this.isChangedInput) {
+      // //   this.changeSetInput();
+      // // } else {
+      //   // if (!this.hasTime) {
+      //     this.changeDate();
+      //   // }
+      // }
+    },
+    //选择结束时间事件
+    // changeTmpEndDate(year, month, day, isInput = false) {
+    //   if (!this.isSetStartTime) {
+    //     this.originEndDate.year = this.tmpEndDate.year = year;
+    //     this.originEndDate.month = this.tmpEndDate.month = month;
+    //     this.originEndDate.day = this.tmpEndDate.day = day;
+    //     this.initEndDate = formatDate(
+    //       new Date(
+    //         this.originEndDate.year,
+    //         this.originEndDate.month,
+    //         this.originEndDate.day,
+    //         this.originEndDate.hour,
+    //         this.originEndDate.minute,
+    //         this.originEndDate.second
+    //       ),
+    //       this.dateFormat
+    //     );
+    //     if (!this.isRangeDatetime) {
+    //       this.updateTmpEndDate(year, month);
+    //     }
+    //   }
+    //   if (isInput) {
+    //     return;
+    //   }
+    //   if (!this.isRangeDatetime && !this.isChangedInput) {
+    //     this.changeSetInput();
+    //   } else {
+    //     if (!this.isRangeDatetime) {
+    //       this.changeDate();
+    //     }
+    //   }
+    // },
+    //
+
+    /**
+     * 是否交换位置并设置新的聚焦
+     * @param { Boolean } setFocus  true：第一次交换聚焦  false: 弹窗关闭前的调用
+     */
+    changeSetInput(setFocus = true) {
+      //结束日期 >= 开始日期
+      let startDate = new Date(
+          this.originDate.year,
+          this.originDate.month,
+          this.originDate.day
+        ).getTime(),
+        endDate = new Date(
+          this.originEndDate.year,
+          this.originEndDate.month,
+          this.originEndDate.day
+        ).getTime(),
+        startTime,
+        endTime,
+        isTimeCheckValid = true;
+
+      if (this.hasTime) {
+        startTime = getTimeNumber({
+          hour: this.originDate.hour,
+          minute: this.originDate.minute,
+          second: this.originDate.second
+        });
+        endTime = getTimeNumber({
+          hour: this.originEndDate.hour,
+          minute: this.originEndDate.minute,
+          second: this.originEndDate.second
+        });
+        isTimeCheckValid = endTime >= startTime;
+      }
+
+      let isCheckValid = endDate >= startDate;
+      if (this.isSetStartTime) {
+        if (!isCheckValid && setFocus) {
+          this.endDate = this.initEndDate = "";
+
+          //等待聚焦事件更新表盘头部年月后再更新
+          this.$nextTick(() => {
+            //清空结束日期后，聚焦到结束表盘，结束表盘的头部年月设置为开始表盘的年月
+            this.updateTmpEndDate(this.originDate.year, this.originDate.month);
+          });
+        } else if (
+          (endDate == startDate && !isTimeCheckValid) ||
+          !isCheckValid
+        ) {
+          // 1.日期相同，时分秒结束小于开始
+          // 2.通过直接输入值或enter事件使切换后的结束日期小于开始日期
+          this.changeDatePosition();
         }
-        this.setStartFocus();
+        setFocus && this.setEndFocus();
+      } else {
+        if (!isCheckValid && setFocus) {
+          this.startDate = this.initStartDate = "";
+          this.$nextTick(() => {
+            this.updateTmpDate(
+              this.originEndDate.year,
+              this.originEndDate.month
+            );
+          });
+        } else if (
+          (endDate == startDate && !isTimeCheckValid) ||
+          !isCheckValid
+        ) {
+          this.changeDatePosition();
+        }
+        setFocus && this.setStartFocus();
       }
       this.isChangedInput = true;
+    },
+    //交换开始和结束的日期
+    changeDatePosition() {
+      const dateStart = new Date(
+          this.originEndDate.year,
+          this.originEndDate.month,
+          this.originEndDate.day,
+          this.originEndDate.hour,
+          this.originEndDate.minute,
+          this.originEndDate.second
+        ),
+        dateEnd = new Date(
+          this.originDate.year,
+          this.originDate.month,
+          this.originDate.day,
+          this.originDate.hour,
+          this.originDate.minute,
+          this.originDate.second
+        ),
+        startDate = formatDate(dateStart, this.dateFormat),
+        endDate = dateEnd === "" ? "" : formatDate(dateEnd, this.dateFormat);
+
+      this.startDate = this.initStartDate = startDate;
+      this.endDate = this.initEndDate = endDate;
     },
     //更新开始日期的显示年月
     updateTmpDate(year, month) {
       this.tmpDate.year = year;
       this.tmpDate.month = month;
-
       //范围选择且不支持时间时
       if (this.isRange && !this.hasTime) {
         if (month === 11) {
@@ -739,7 +871,7 @@ export default {
         }
       }
     },
-    //切换时间
+    //切换time-panel时分秒盘
     setTime(time, isStart) {
       let nowObj = {},
         setDate = isStart ? this.originDate : this.originEndDate,
@@ -757,12 +889,12 @@ export default {
       }
       this.changeDate();
     },
-    //修改起始时间
+    //time-panel时分秒盘改变的回调：修改起始时间
     changeTime(time) {
       this.setTime(time, true);
       this.setStartFocus();
     },
-    //修改结束时间
+    //time-panel时分秒盘改变的回调：修改结束时间
     changeEndTime(time) {
       this.setTime(time, false);
       this.setEndFocus();
@@ -799,23 +931,34 @@ export default {
       this.updateTmpDate(year, month);
     },
 
+    //用于时分秒盘赋值
     changeDate() {
-      //开始日期
-      let startDate = new Date(
-          this.originDate.year,
-          this.originDate.month,
-          this.originDate.day
-        ),
-        //结束日期
-        endDate = new Date(
-          this.originEndDate.year,
-          this.originEndDate.month,
-          this.originEndDate.day
-        ),
-        isReverse; //开始时间是否大于结束时间
+      //未设置年月日，直接设置时分秒，初始化年月日
+      if (this.originDate.day == 0 && this.isStartFocus) {
+        if (this.originEndDate.day) {
+          //结束日期存在
+          this.originDate.day = this.originEndDate.day;
+          this.originDate.month = this.originEndDate.month;
+          this.originDate.year = this.originEndDate.year;
+        } else {
+          //结束日期不存在
+          this.originDate.day = new Date().getDate();
+        }
+      }
 
-      //开始时间
-      let dateStart = new Date(
+      if (this.originEndDate.day == 0 && this.isEndFocus) {
+        if (this.originDate.day) {
+          //开始日期存在
+          this.originEndDate.day = this.originDate.day;
+          this.originEndDate.month = this.originDate.month;
+          this.originEndDate.year = this.originDate.year;
+        } else {
+          //开始日期不存在
+          this.originEndDate.day = new Date().getDate();
+        }
+      }
+
+      const dateStart = new Date(
           this.originDate.year,
           this.originDate.month,
           this.originDate.day,
@@ -830,67 +973,51 @@ export default {
           this.originEndDate.hour,
           this.originEndDate.minute,
           this.originEndDate.second
-        );
-
-      if (this.isRange) {
-        //支持范围选择 && 第二次点击
-
-        isReverse = startDate.getTime() > endDate.getTime();
-        //开始日期大于结束日期
-        if (isReverse) {
-          //交换年月日
-          dateStart = new Date(
-            this.originEndDate.year,
-            this.originEndDate.month,
-            this.originEndDate.day,
-            this.originDate.hour,
-            this.originDate.minute,
-            this.originDate.second
-          );
-          dateEnd = new Date(
-            this.originDate.year,
-            this.originDate.month,
-            this.originDate.day,
-            this.originEndDate.hour,
-            this.originEndDate.minute,
-            this.originEndDate.second
-          );
-        }
-      } else {
-        isReverse = false;
-      }
-      startDate = formatDate(dateStart, this.dateFormat);
-      endDate = dateEnd === "" ? "" : formatDate(dateEnd, this.dateFormat);
+        ),
+        startDate = formatDate(dateStart, this.dateFormat),
+        endDate = dateEnd === "" ? "" : formatDate(dateEnd, this.dateFormat);
 
       //起止日期赋值
-      this.startDate = startDate;
-      this.endDate = endDate;
-
-      //点击后是否隐藏
-      let isHide = false;
-      if (this.isRange) {
-        //支持范围选择
-        if (!this.hasTime) {
-          //第二次点击 && 不支持时间配置时
-          isHide = true;
-        }
-      } else {
-        //不支持范围
-        if (!this.hasTime) {
-          //不支持时间配置
-          isHide = true;
-        }
+      if (this.isStartFocus) {
+        this.startDate = this.initStartDate = startDate;
       }
-      this.setDateTime(isHide);
+      if (this.isEndFocus) {
+        this.endDate = this.initEndDate = endDate;
+      }
+
+      // //点击后是否隐藏
+      // // let isHide = false;
+      // if (this.isRange) {
+      //   //支持范围选择
+      //   if (!this.hasTime) {
+      //     //第二次点击 && 不支持时间配置时
+      //     isHide = true;
+      //   }
+      // } else {
+      //   //不支持范围
+      //   if (!this.hasTime) {
+      //     //不支持时间配置
+      //     isHide = true;
+      //   }
+      // }
+      // this.setDateTime(isHide);
     },
-    //设置日期时间
-    setDateTime(isHide = true) {
+
+    //向外emit时间，弹窗的关闭
+    setDateTime() {
       //不隐藏面板时，不处理
-      if (!isHide) return;
-      if (this.isRangeDatetime && !this.isChangedInput) {
+      //if (!isHide) return;
+
+      if (this.isRange && !this.isChangedInput) {
+        //还未切换，进入切换流程
         this.changeSetInput();
         return;
       }
+
+      if (this.isRange) {
+        this.changeSetInput(false);
+      }
+
       let dateTime = this.startDate;
 
       if (this.isRange) {
@@ -956,6 +1083,53 @@ export default {
         } else if (!endTime) {
           return _("Please choose the end time");
         }
+      }
+    },
+    beforeHide() {
+      if (this.isRange && this.isChangedInput) {
+        let dateTime = this.startDate,
+          endDateTime = this.endDate;
+
+        if (dateTime != this.value[0] && this.isEndFocus && endDateTime) {
+          //开始日期改了且已保存
+          this.changeValue([dateTime, this.value[1]]);
+        } else if (
+          endDateTime !== this.value[1] &&
+          this.isStartFocus &&
+          dateTime
+        ) {
+          //结束日期改了且已保存
+          this.changeValue([this.value[0], endDateTime]);
+        }
+      }
+    },
+    /**
+     * 是否在可选范围内
+     * @param { Boolean } exceed true：设置开始日期 false: 设置结束日期
+     * @returns { Boolean } true：在范围内 false: 不在范围内
+     */
+    validateDate(year, month, day, exceed) {
+      if (!this.isRange || !this.isChangedInput) {
+        return true;
+      }
+      if (exceed) {
+        return (
+          new Date(year, month, day).getTime() <=
+          new Date(
+            this.realEndDate.year,
+            this.realEndDate.month,
+            this.realEndDate.day
+          ).getTime()
+        );
+      } else {
+        return (
+          new Date(year, month, day).getTime() >=
+          new Date(
+            this.realDate.year,
+            this.realDate.month,
+            this.realDate.day
+          ).getTime()
+        );
       }
     }
   },
@@ -1038,6 +1212,28 @@ export default {
       },
       immediate: true
     }
+  },
+  mounted() {
+    const vm = this;
+
+    on(this.$refs.datepicker, "keydown", e => {
+      if (e.keyCode == 13) {
+        if (
+          (!vm.startDate && vm.isStartFocus) ||
+          (!vm.endDate && vm.isEndFocus)
+        ) {
+          //有一个没填都关闭弹窗
+          vm.hide();
+        } else {
+          if (vm.isSetStartTime) {
+            vm.initStartDate = vm.startDate;
+          } else {
+            vm.initEndDate = vm.endDate;
+          }
+          vm.setDateTime();
+        }
+      }
+    });
   }
 };
 </script>

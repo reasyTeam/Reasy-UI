@@ -5,12 +5,10 @@
     </v-row>
     <div class="v-timepicker__wrapper">
       <time-panel
-        :format="format"
+        :format="timeFormat"
         :minuteInterval="minuteInterval"
         :secondInterval="secondInterval"
-        :time="time"
-        :min="minTime"
-        :max="maxTime"
+        :time="currentTime"
         @change="changeTime"
       ></time-panel>
     </div>
@@ -19,7 +17,7 @@
 
 <script>
 import TimePanel from "../timepicker/time-panel.vue";
-import { parseDate, formatDate, formatTime } from "../libs";
+import { parseDate, formatTime } from "../libs";
 
 export default {
   components: {
@@ -36,14 +34,14 @@ export default {
     max: String
   },
   computed: {
-    minTime() {
-      return formatDate(new Date(2020, 1, 1, 0, 0, 0), this.format);
-    },
-    maxTime() {
-      return formatDate(new Date(2020, 1, 1, 23, 59, 59), this.format);
-    },
+    // minTime() {
+    //   return formatDate(new Date(2020, 1, 1, 0, 0, 0), this.format);
+    // },
+    // maxTime() {
+    //   return formatDate(new Date(2020, 1, 1, 23, 59, 59), this.format);
+    // },
     headerTime() {
-      let dateObj = parseDate(this.time, this.format);
+      let dateObj = parseDate(this.currentTime, this.timeFormat);
       return formatTime(
         {
           hour: dateObj.hour,
@@ -52,17 +50,29 @@ export default {
         },
         "hh:mm:ss"
       );
+    },
+    timeFormat() {
+      //生成time-panel时分秒表盘需要的时间格式
+      return this.format.split(" ")[1];
+    },
+    currentTime() {
+      //生成time-panel时分秒表盘需要的时间
+      if (this.time) {
+        return this.time.split(" ")[1];
+      } else {
+        return "00:00:00";
+      }
     }
   },
   methods: {
     //解析成时间
     formatTimeNumber(timeStr) {
-      let dateObj = parseDate(timeStr, this.format);
+      let dateObj = parseDate(timeStr, this.timeFormat);
       let time = new Date(dateObj.year, dateObj.month, dateObj.day, 0, 0, 0);
       return time.getTime();
     },
     formTime(time) {
-      let timeObj = parseDate(time, this.format);
+      let timeObj = parseDate(time, this.timeFormat);
       return {
         hour: timeObj.hour,
         minute: timeObj.minute,

@@ -171,6 +171,10 @@ if (isProd) {
   // webpackConfig.optimization.minimize = false;
   webpackConfig.optimization.splitChunks = {
     cacheGroups: {
+      lang: {
+        test: /lang.js/,
+        name: "lang"
+      },
       vendor: {
         test: /[\\/]src[\\/]/,
         name: "reasy-ui",

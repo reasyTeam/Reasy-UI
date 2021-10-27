@@ -603,3 +603,12 @@ export const SIZE_TO_CSS = {
   M: "medium",
   L: "large"
 };
+
+//获取时分秒的数字
+export function getTimeNumber(timeObj) {
+  return (
+    (timeObj.hour || 0) * 60 * 60 +
+    (timeObj.minute || 0) * 60 +
+    (timeObj.second || 0)
+  );
+}

@@ -78,7 +78,9 @@ export default {
   computed: {
     headerText() {
       const { type, year, month, monthMap } = this;
-      return type !== "month" ? _("Y#eaR#%s %s", [year, monthMap[month]]) : _("Y#eaR#%s", [year]);
+      return type !== "month"
+        ? _("Y#eaR#%s %s", [year, monthMap[month]])
+        : _("Y#eaR#%s", [year]);
     }
   },
   methods: {
@@ -109,7 +111,7 @@ export default {
     },
     // 下一月
     nextMonth() {
-      if (this.isRange && this.tmpMonth >= 10) {
+      if (this.isRange && this.tmpMonth >= 11) {
         if (this.tmpYear + 1 >= this.maxYear) return;
       }
       if (this.tmpMonth === 11) {

@@ -93,7 +93,6 @@ $slider-line-height: 4px;
     }
     &__content {
       position: absolute;
-      transition: 0.2s;
       width: 14px;
       height: 14px;
       margin-top: -7px;
@@ -107,7 +106,6 @@ $slider-line-height: 4px;
       border: 3px solid $main-active-color;
       background: #fff;
       border-radius: 50%;
-      transition: 0.2s;
       cursor: pointer;
       user-select: none;
 
@@ -121,7 +119,6 @@ $slider-line-height: 4px;
     &__inner {
       background-color: $main-active-color;
       border-radius: 2px;
-      transition: 0.2s;
       height: 100%;
     }
   }

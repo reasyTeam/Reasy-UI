@@ -18,7 +18,7 @@ Vue.use(Input);
 
 ```html
 <v-form ref="form">
-  <v-form-item label="IP/网关等其它">
+  <v-form-item label="IP/Mask等其它">
     <v-input-group type="ip" v-model="ip"></v-input-group>
   </v-form-item>
   <v-form-item label="MAC地址">
@@ -121,6 +121,7 @@ Vue.use(Input);
 | allow      | 输入框允许输入的字符的正则表达式                   | RegExp          | —         | —      |
 | auto-correction | 自动纠错，仅支持按范围进行数字纠错             | Array          | —         | []      |
 
+> type为IP时，可输入ip或mask等类似格式字符串
 ### v-input-group Events
 
 | 事件名 | 说明               | 参数       |

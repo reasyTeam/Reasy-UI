@@ -2,12 +2,20 @@ import Message from "./message/message.js";
 import Notification from "./notification/notification.js";
 //全局指令
 import Derectives from "./directives";
-
+if (window.langData === undefined) {
+  window.langData = {};
+}
 if (typeof window._ !== "function") {
   window._ = function(key, replacements) {
-    var nkey = key.replace(/^[a-zA-Z]#[a-zA-Z][a-zA-Z][a-zA-Z]#/g, ""),
+    var nkey = window.langData[key],
       index,
       count = 0;
+
+    if (nkey === undefined) {
+      nkey = key.replace(/^[a-zA-Z]#[a-zA-Z][a-zA-Z][a-zA-Z]#/g, "");
+      nkey = window.langData[nkey] || nkey;
+    }
+
     if (!replacements) {
       return nkey;
     }

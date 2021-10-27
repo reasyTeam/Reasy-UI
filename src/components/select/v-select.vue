@@ -3,6 +3,8 @@
     class="v-select"
     :class="[sizeCss, { 'is-disabled': isDisabled }]"
     :style="{ width: selectWidth }"
+    @mouseover="handlerMouseover"
+    @mouseout="isMouseover = false"
   >
     <v-input
       class="v-select__input"
@@ -21,6 +23,7 @@
       @input="handlerInput"
       @focus="handlerFoucs"
       @change="changeValue"
+      :unit="unit"
       :placeholder="placeholder"
       :allow="allow"
       :size="size"
@@ -70,8 +73,6 @@
         'v-icon-down': !hasClear,
         'v-icon-close-plane': hasClear
       }"
-      @mouseover="handlerMouseover"
-      @mouseout="isMouseover = false"
       @click="showOptions(true)"
     ></span>
     <create-to-body
@@ -186,6 +187,10 @@ export default {
     displayOptionsNumber: {
       type: Number,
       default: 5
+    },
+    unit: {
+      type: String,
+      default: ""
     }
   },
   computed: {
@@ -275,7 +280,7 @@ export default {
   methods: {
     showOptions(isArrow) {
       if (this.isDisabled) return;
-      if (isArrow) {
+      if (isArrow === true) {
         if (this.hasClear) {
           this.$emit("change", this.isMultiple ? [] : "");
           this.$dispatch("v-form", "form:change");

@@ -1,6 +1,6 @@
 {
   "name": "@reasy-team/reasy-ui",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "main": "dist/reasy-ui.js",
   "scripts": {
     "publish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publish.js --mode production",

@@ -7,8 +7,8 @@
         :isRange="isRange"
         :icon-type="type"
         :type="headerType"
-        :maxYear="maxDate.year"
-        :minYear="minDate.year"
+        :maxYear="initMaxYear"
+        :minYear="initMinYear"
         @change="changeHeader"
         @clickHeader="clickHeader"
       ></header-panel>
@@ -118,7 +118,15 @@ export default {
         return {};
       }
     },
+    //真正选中的开始日期（黑色字体）
     realDate: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
+    //真正选中的结束日期（黑色字体）
+    realEndDate: {
       type: Object,
       default() {
         return {};
@@ -195,7 +203,9 @@ export default {
       tmpYear: 0,
       tmpMonth: 0,
       tmpDay: 0,
-      headerType: "init"
+      headerType: "init",
+      initMaxYear: 0,
+      initMinYear: 0
     };
   },
   mounted() {
@@ -242,7 +252,8 @@ export default {
       if (
         this.isRange &&
         this.originEndDate.year > 0 &&
-        this.originEndDate.day > 0
+        this.originEndDate.day > 0 &&
+        this.originDate.day > 0
       ) {
         let time = new Date(this.tmpYear, this.tmpMonth, item.value).getTime();
         let start, end;
@@ -257,22 +268,31 @@ export default {
     isSelected(item) {
       if (this.isRange && this.originEndDate.year > 0) {
         let isEqualStart =
-            this.tmpYear === this.originDate.year &&
-            this.tmpMonth === this.originDate.month &&
-            this.originDate.day === item.value,
+            this.tmpYear === this.realDate.year &&
+            this.tmpMonth === this.realDate.month &&
+            this.realDate.day === item.value,
           isEqualEnd =
-            this.tmpYear === this.originEndDate.year &&
-            this.tmpMonth === this.originEndDate.month &&
-            this.originEndDate.day === item.value;
+            this.tmpYear === this.realEndDate.year &&
+            this.tmpMonth === this.realEndDate.month &&
+            this.realEndDate.day === item.value;
 
         return item.currentMonth && (isEqualStart || isEqualEnd);
       }
-      return (
-        this.realDate.day === item.value &&
-        item.currentMonth &&
-        this.realDate.month === this.tmpMonth &&
-        this.realDate.year === this.tmpYear
-      );
+      if (this.realDate.day) {
+        return (
+          this.realDate.day === item.value &&
+          item.currentMonth &&
+          this.realDate.month === this.tmpMonth &&
+          this.realDate.year === this.tmpYear
+        );
+      } else {
+        return (
+          this.tmpDay === item.value &&
+          item.currentMonth &&
+          this.tmpMonth === this.originDate.month &&
+          this.tmpYear === this.originDate.year
+        );
+      }
     },
     isActive(item) {
       //去掉上月和下月
@@ -343,7 +363,6 @@ export default {
           month = this.tmpMonth + 1;
         }
       }
-      //}
       this.$emit("change", year, month, day);
       this.$emit("change-select", year, month, day);
       this.$emit("clickDate");
@@ -361,6 +380,23 @@ export default {
       },
       immediate: true,
       deep: true
+    },
+    minDate: {
+      handler(value) {
+        if (!this.initMinYear) {
+          //初始化header-panel的最小年份
+          this.initMinYear = value.year;
+        }
+      },
+      immediate: true
+    },
+    maxDate: {
+      handler(value) {
+        if (!this.initMaxYear) {
+          this.initMaxYear = value.year;
+        }
+      },
+      immediate: true
     }
   }
 };
