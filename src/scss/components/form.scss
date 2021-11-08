@@ -95,13 +95,12 @@
       font-size: 16px;
     }
   }
-  &__tip {
-    margin-left: 8px;
-  }
   &__unit {
     color: $title-color;
+    margin-left: 8px;
   }
   &__description {
+    margin-left: 8px;
     color: $light-color;
   }
 }

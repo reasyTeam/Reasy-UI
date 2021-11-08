@@ -72,6 +72,7 @@ input[type="number"] {
     &--suffix {
       @extend .v-input__icon--prefix;
       right: 0;
+      top: 0;
 
       .input-icon + .input-icon {
         padding-left: 8px;

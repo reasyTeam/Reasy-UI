@@ -8,7 +8,10 @@
   >
     <v-input
       class="v-select__input"
-      :class="{ 'v-select__input--clear': inputValue && isClear }"
+      :class="{
+        'v-select__input--clear': inputValue && isClear,
+        'is-focus': dropdownShow
+      }"
       v-if="isShowInput"
       v-model="inputValue"
       ref="input"

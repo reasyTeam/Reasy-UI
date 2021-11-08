@@ -40,15 +40,26 @@
       <slot></slot>
       <slot name="content"></slot>
 
-      <label class="v-form-item__tip">
+      <!-- <label class="v-form-item__tip" v-show="showUnit">
         <label class="v-form-item__unit">
-          <template v-if="unit">{{ unit }}</template>
-          <slot name="unit" v-else></slot>
+          <slot name="unit">{{ unit }}</slot>
         </label>
-        <label class=" v-form-item__description" v-if="description"
-          >{{ description }}
-        </label>
-        <slot name="description" v-else> </slot>
+        <slot name="description">
+          <label class=" v-form-item__description" v-if="description">
+            {{ description }}
+          </label>
+        </slot>
+      </label> -->
+      <label class="v-form-item__tip">
+        <slot name="unit">
+          <label class=" v-form-item__unit" v-if="unit">{{ unit }}</label>
+        </slot>
+
+        <slot name="description">
+          <label class=" v-form-item__description" v-if="description"
+            >{{ description }}
+          </label>
+        </slot>
       </label>
 
       <div
@@ -157,6 +168,14 @@ export default {
     isDisabled() {
       return (this.elForm && this.elForm.disabled) || this.disabled;
     }
+    // showUnit() {
+    //   return !!(
+    //     this.unit ||
+    //     this.description ||
+    //     this.$slots.unit ||
+    //     this.$slots.description
+    //   );
+    // }
   },
   data() {
     return {
@@ -168,6 +187,7 @@ export default {
       errorMsg: "", //错误信息
       //valid: [], //数据验证规则，由form表单处理
       isShowError: true, //是否显示错误
+      showUnit: false,
       labelPosition: "left" //标题文字方向
     };
   },
@@ -223,6 +243,12 @@ export default {
       //标题文字长度改变事件
       this.changeTitle();
     });
+    this.showUnit = !!(
+      this.unit ||
+      this.description ||
+      this.$slots.unit ||
+      this.$slots.description
+    );
   },
   methods: {
     //数据验证
@@ -270,9 +296,10 @@ export default {
           this.$nextTick(() => {
             let errorHeight = 20,
               lineheight = 20;
-            if (this.$refs.error) {
-              //nextTick是为了在当前错误提示内容变化时更新errorHeight高度
-              this.$nextTick(() => {
+
+            //nextTick是为了在当前错误提示内容变化时更新errorHeight高度
+            this.$nextTick(() => {
+              if (this.$refs.error) {
                 errorHeight = this.$refs.error.clientHeight;
                 lineheight =
                   parseInt(
@@ -284,10 +311,10 @@ export default {
                 } else {
                   this.errHeight = "";
                 }
-              });
-            } else {
-              this.errHeight = "";
-            }
+              } else {
+                this.errHeight = "";
+              }
+            });
           });
         } else {
           this.errHeight = "";

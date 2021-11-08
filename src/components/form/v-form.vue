@@ -26,12 +26,12 @@ export default {
       }
     },
     //表单数据对象
-    model: {
-      type: Object,
-      default() {
-        return {};
-      }
-    },
+    // model: {
+    //   type: Object,
+    //   default() {
+    //     return {};
+    //   }
+    // },
     //文字方向
     isLabelRight: {
       type: Boolean,

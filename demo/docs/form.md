@@ -58,13 +58,15 @@ Vue.use(Form);
 ::: demo
 
 ```html
-<v-form ref="form" :model="ruleForm" :rules="rules" @submit="submit">
+<v-form ref="form" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid" unit="秒">
     <v-input v-model="ruleForm.ssid"></v-input>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
-    <template v-slot:unit>这里显示单位信息</template>
+    <template v-slot:unit>
+      <label class="v-form-item__unit">这里显示单位信息</label>
+    </template>
   </v-form-item>
   <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
     <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
@@ -248,7 +250,9 @@ Vue.use(Form);
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
     <v-input v-model="ruleForm.pwd"></v-input>
-    <template v-slot:description>这里显示单位信息</template>
+    <template v-slot:description>
+      <label class="v-form-item__description">这里显示单位信息</label>
+    </template>
   </v-form-item>
   <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
     <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
@@ -421,7 +425,6 @@ Vue.use(Form);
 | -------------- | ----------------------------------------------------------------------- | -------- | ------ | ------ |
 | rules          | 数据验证规则                                                            | boolean  |        | {}     |
 | padding-width  | 表单选项文字与右边组件的距离                                            | number   |        | 24     |
-| model          | 表单数据对象                                                            | Object   | —      | {}     |
 | is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
 | beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
 | disabled       | 表单是否禁用                                                            | boolean  |        | false  |

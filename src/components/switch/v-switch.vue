@@ -29,7 +29,7 @@ export default {
   mixins: [FormMixin],
   model: {
     prop: "value",
-    event: "change"
+    event: "input"
   },
   props: {
     value: [String, Number, Boolean],
@@ -83,6 +83,7 @@ export default {
       if (result === false) {
         return;
       }
+      this.$emit("input", changedValue);
       this.$emit("change", changedValue);
     }
   }

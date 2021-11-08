@@ -184,6 +184,10 @@ export default {
     sizeToCss,
     // 输入框修改值
     handlerChange(value) {
+      if (!value) {
+        this.$emit("change", value);
+        return;
+      }
       let val = parseFloat(value);
       if (this.hasPrecision) {
         val = +val.toFixed(this.precisionVal);
