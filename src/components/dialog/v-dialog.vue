@@ -6,23 +6,21 @@
     @after-leave="animationAfterLeave"
   >
     <div ref="dialogBox" v-show="visible" class="v-dialog-box">
-      <div class="v-dialog-wrapper" :style="dialogWrapperStyle">
-        <transition name="v-dialog-fade">
-          <div
-            v-show="visible"
-            v-if="modal"
-            class="v-modal"
-            @click="handleClickModal"
-          ></div>
-        </transition>
-
-        <transition name="v-dialog-inner-fade" @after-enter="updateDialogStyle">
-          <div
-            ref="dialog"
-            class="v-dialog"
-            :style="dialogStyle"
-            v-if="visible"
-          >
+      <transition name="v-dialog-fade">
+        <div
+          v-show="visible"
+          v-if="modal"
+          class="v-modal"
+          @click="handleClickModal"
+        ></div>
+      </transition>
+      <transition name="v-dialog-inner-fade" @after-enter="updateDialogStyle">
+        <div
+          class="v-dialog-wrapper"
+          :style="dialogWrapperStyle"
+          v-if="visible"
+        >
+          <div ref="dialog" class="v-dialog" :style="dialogStyle">
             <div class="v-dialog__header" ref="header" v-if="showTitle">
               <slot name="title">
                 <div
@@ -78,8 +76,8 @@
               </slot>
             </div>
           </div>
-        </transition>
-      </div>
+        </div>
+      </transition>
     </div>
   </transition>
 </template>
@@ -194,13 +192,12 @@ export default {
     },
 
     updateDialogStyle() {
-      const $dialog = this.$refs.dialog,
-        { width, height } = $dialog.getBoundingClientRect();
-
-      this.dialogWrapperStyle = {
-        minWidth: `${width / 0.9}px`,
-        minHeight: `${height / 0.9}px`
-      };
+      // const $dialog = this.$refs.dialog,
+      //   { width, height } = $dialog.getBoundingClientRect();
+      // this.dialogWrapperStyle = {
+      //   minWidth: `${width / 0.9}px`,
+      //   minHeight: `${height / 0.9}px`
+      // };
     },
     animationAfterLeave() {
       this.setBodyOverflow("remove");

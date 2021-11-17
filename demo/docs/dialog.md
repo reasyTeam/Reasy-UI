@@ -42,11 +42,15 @@ Vue.use(Dialog);
   >
     我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
   </v-dialog>
+  <v-dialog v-model="showBigDialog" :title="dialogTitle" :modal="true">
+    <div style="height: 1000px;">超高弹出框！</div>
+  </v-dialog>
 
   <v-button type="text" @click="handleButtonClick">点我打开 Dialog</v-button>
   <v-button type="text" @click="handleButtonClick1"
     >点击外部不关闭 Dialog</v-button
   >
+  <v-button type="text" @click="handleBigClick">超高弹出框</v-button>
 </template>
 
 <script>
@@ -54,6 +58,7 @@ Vue.use(Dialog);
     data() {
       return {
         showDialog: false,
+        showBigDialog: false,
         closeOnClickModal: true,
         dialogTitle: "对话框的标题",
 
@@ -85,6 +90,9 @@ Vue.use(Dialog);
       },
       handleDialogInputClick() {
         this.showInputDialog = !this.showInputDialog;
+      },
+      handleBigClick() {
+        this.showBigDialog = !this.showBigDialog;
       }
     }
   };
@@ -109,7 +117,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
     @after-close="handleAfterClose"
     @confirm="handleConfirm"
   >
-    <v-form ref="form" :model="ruleForm" :rules="rules" @submit="submit">
+    <v-form ref="form" :model="ruleForm">
       <v-form-item label="姓名" prop="name">
         <v-input v-model="ruleForm.name"></v-input>
       </v-form-item>

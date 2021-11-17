@@ -80,7 +80,7 @@ export default {
     },
     label: {
       type: String,
-      default: _("Drop-down menu")
+      default: ""
     },
     disabled: {
       type: Boolean,

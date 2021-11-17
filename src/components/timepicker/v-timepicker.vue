@@ -3,6 +3,8 @@
     class="v-timepicker"
     :class="sizeCss"
     :style="{ width: timePickerWidth }"
+    @mouseover="handlerMouseover"
+    @mouseout="isMouseover = false"
   >
     <div
       :name="name"
@@ -46,8 +48,6 @@
         hasClear ? 'v-icon-close-plane' : 'v-icon-time',
         { 'v-timepicker__icon--disabled': isDisabled }
       ]"
-      @mouseover="handlerMouseover"
-      @mouseout="isMouseover = false"
       @click="clickIcon"
     ></span>
     <!-- 下拉内容 -->
@@ -115,7 +115,7 @@ import TimePanel from "./time-panel";
 import CreateToBody from "../create-to-body.vue";
 import FormMixin from "../form-mixins";
 import { size } from "../filters";
-import { preFormatDate, isValidTime, parseDate } from "../libs";
+import { preFormatDate, isValidTime, parseDate, getTimeNumber } from "../libs";
 export default {
   name: "v-timepicker",
   mixins: [FormMixin],
@@ -330,7 +330,24 @@ export default {
     },
     setTime() {
       if (this.isRange) {
-        this.$emit("change", [this.startTime, this.endTime]);
+        const startTimeObj = parseDate(this.startTime, this.format),
+          endTimeObj = parseDate(this.endTime, this.format),
+          startTime = getTimeNumber({
+            hour: startTimeObj.hour,
+            minute: startTimeObj.minute,
+            second: startTimeObj.second
+          }),
+          endTime = getTimeNumber({
+            hour: endTimeObj.hour,
+            minute: endTimeObj.minute,
+            second: endTimeObj.second
+          });
+
+        if (startTime > endTime) {
+          this.$emit("change", [this.endTime, this.startTime]);
+        } else {
+          this.$emit("change", [this.startTime, this.endTime]);
+        }
       } else {
         this.$emit("change", this.startTime);
       }
@@ -346,11 +363,11 @@ export default {
         let startTime = val[0] || "",
           endTime = val[1] || "";
         if (!startTime && !endTime) {
-          return _("Please select a time period");
+          return _("Please select the peroid");
         } else if (!startTime) {
-          return _("Please choose the start time");
+          return _("Please select the start time");
         } else if (!endTime) {
-          return _("Please choose the end time");
+          return _("Please select the end time");
         }
       }
     }

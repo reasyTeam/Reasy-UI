@@ -75,18 +75,18 @@ export default {
   filters: {
     month: item => {
       return {
-        0: _("s#hOr#Jan"),
-        1: _("s#hOr#Feb"),
-        2: _("s#hOr#Mar"),
-        3: _("s#hOr#Apr"),
-        4: _("s#hOr#May"),
-        5: _("s#hOr#Jun"),
-        6: _("s#hOr#Jul"),
-        7: _("s#hOr#Aug"),
-        8: _("s#hOr#Sep"),
-        9: _("s#hOr#Oct"),
-        10: _("s#hOr#Nov"),
-        11: _("s#hOr#Dec")
+        0: _("Jan."),
+        1: _("Feb."),
+        2: _("Mar."),
+        3: _("Apr."),
+        4: _("May"),
+        5: _("June"),
+        6: _("July"),
+        7: _("Aug."),
+        8: _("Sept."),
+        9: _("Oct."),
+        10: _("Nov."),
+        11: _("Dec.")
       }[item];
     }
   },

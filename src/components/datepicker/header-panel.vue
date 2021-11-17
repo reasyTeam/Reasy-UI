@@ -57,18 +57,18 @@ export default {
   },
   data() {
     this.monthMap = {
-      0: _("January"),
-      1: _("February"),
-      2: _("March"),
-      3: _("April"),
+      0: _("Jan."),
+      1: _("Feb."),
+      2: _("Mar."),
+      3: _("Apr."),
       4: _("May"),
       5: _("June"),
       6: _("July"),
-      7: _("August"),
-      8: _("September"),
-      9: _("October"),
-      10: _("November"),
-      11: _("December")
+      7: _("Aug."),
+      8: _("Sept."),
+      9: _("Oct."),
+      10: _("Nov."),
+      11: _("Dec.")
     };
     return {
       tmpYear: 0,

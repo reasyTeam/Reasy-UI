@@ -9,6 +9,11 @@
     line-height: $lineHeight;
   }
 
+  
+  .input-text{
+    line-height: $lineHeight - 2px;
+  }
+
   .v-datepicker__icon {
     height: $lineHeight;
     line-height: $lineHeight;

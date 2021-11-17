@@ -16,6 +16,10 @@
     height: $lineHeight;
     line-height: $lineHeight;
   }
+
+  .v-timepicker__splitter {
+    line-height: $lineHeight - 2px;
+  }
 }
 .v-timepicker {
   position: relative;

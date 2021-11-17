@@ -7,14 +7,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   z-index: 1000;
 }
 .v-dialog-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  max-height: 100%;
   z-index: 1000;
+  overflow: auto;
+  top: 50%;
+  padding: 40px 0;
+  transform: translate3d(0, -50%, 0px);
 }
 .v-dialog {
   $close-font-size: 16px;
@@ -22,16 +26,16 @@
   $box-padding: 24px;
   $box-padding-top: 12px;
 
-  position: absolute;
-  // display: inline-block;
-  top: 50%;
+  position: relative;
+  display: inline-block;
+  // top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, 0, 0);
   // min-width: 400px;
   max-width: 100%;
   min-width: 400px;
   min-height: 160px;
-  max-height: 90%;
+  // max-height: 90%;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12),
@@ -145,10 +149,28 @@
 }
 
 .v-dialog-inner-fade-enter-active {
-  animation: dialog-fade-in 0.3s;
+  animation: dialog-inner-fade-in 0.3s;
 }
 .v-dialog-inner-fade-leave-active {
-  animation: dialog-fade-out 0.3s;
+  animation: dialog-out-fade-out 0.3s;
+}
+@keyframes dialog-inner-fade-in {
+  0% {
+    transform: translate3d(0, -55%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+@keyframes dialog-out-fade-out {
+  0% {
+    transform: translate3d(0, -50%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -55%, 0);
+  }
 }
 @keyframes dialog-fade-in {
   0% {

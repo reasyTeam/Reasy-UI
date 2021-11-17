@@ -4,6 +4,8 @@
     :class="sizeCss"
     :style="{ width: datePickerWidth }"
     ref="datepicker"
+    @mouseover="handlerMouseover"
+    @mouseout="isMouseover = false"
   >
     <div
       :name="name"
@@ -52,8 +54,6 @@
         hasClear ? 'v-icon-close-plane' : 'v-icon-calendar',
         { 'v-datepicker__icon--disabled': isDisabled }
       ]"
-      @mouseover="handlerMouseover"
-      @mouseout="isMouseover = false"
       @click="clickIcon"
     ></span>
     <create-to-body
@@ -1077,11 +1077,11 @@ export default {
         let startTime = val[0] || "",
           endTime = val[1] || "";
         if (!startTime && !endTime) {
-          return _("Please select a time period");
+          return _("Please select the peroid");
         } else if (!startTime) {
-          return _("Please choose the start time");
+          return _("Please select the start time");
         } else if (!endTime) {
-          return _("Please choose the end time");
+          return _("Please select the end time");
         }
       }
     },
