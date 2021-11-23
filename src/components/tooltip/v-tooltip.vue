@@ -4,7 +4,11 @@
       ref="popups"
       v-model="value"
       :effect="effect"
-      :custom-style="{ maxWidth: `${maxWidth}px`, whiteSpace }"
+      :custom-style="{
+        maxWidth: `${maxWidth}px`,
+        whiteSpace,
+        wordBreak
+      }"
       :trigger="trigger"
       :show-arrow="showArrow"
       :arrow-offset="arrowOffset"
@@ -44,6 +48,10 @@ export default {
     },
     maxWidth: Number,
     whiteSpace: {
+      type: String,
+      default: "normal"
+    },
+    wordBreak: {
       type: String,
       default: "normal"
     },

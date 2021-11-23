@@ -327,9 +327,16 @@ Vue.use(Table);
 
 ```html
 <v-table :data="table1">
+  <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ssid" label="SSID">
     <template v-slot="slotProps">
       当前SSID：{{ slotProps.ssid }}
+    </template>
+  </v-table-col>
+  <v-table-col prop="ssid1" label="修改SSID">
+    <template v-slot="slotProps">
+      {{show(slotProps)}}
+      <v-input v-model="slotProps.ssid" :width="120"></v-input>
     </template>
   </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -367,6 +374,105 @@ Vue.use(Table);
           }
         ]
       };
+    },
+    methods:{
+      show(slotProps){
+        console.log(slotProps);
+        console.log(this.table1);
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+### 文字过长提示
+
+::: demo
+
+```html
+<v-table :data="table1">
+  <v-table-col 
+    prop="ssid" 
+    label="SSID" 
+    is-tooltip
+    :tooltip-option="{
+      effect: 'light',
+      position: 'top-center'
+    }"
+  ></v-table-col>
+
+  <v-table-col 
+    prop="password" 
+    label="密码" 
+    is-tooltip
+    :tooltip-option="{
+      effect: 'light',
+      position: 'top-center'
+    }"
+  ></v-table-col>
+
+  <v-table-col 
+    prop="name" 
+    label="名字" 
+    is-tooltip
+    :tooltip-option="{
+      effect: 'light',
+      position: 'top-center'
+    }"
+  ></v-table-col>
+  <v-table-col 
+    prop="age" 
+    label="年龄" 
+    is-tooltip
+    :tooltip-option="{
+      effect: 'light',
+      position: 'top-center'
+    }"
+  ></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit" @click="editData(slotProps)"></span>
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1666666666666666",
+            password: '2"</span>',
+            name: "jack66666666666666",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    },
+    methods: {
+      editData(data) {
+        console.log("edit data", data);
+      }
     }
   };
 </script>
@@ -593,9 +699,9 @@ Vue.use(Table);
 ```html
 <v-table :data="table1" row-key="ssid" :select-data="[table1[2]]">
   <v-table-col type="selection"></v-table-col>
-  <v-table-col prop="ssid" label="SSID"> </v-table-col>
-  <v-table-col prop="password" label="密码"></v-table-col>
-  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col is-sort prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
   <v-table-col prop="age" label="年龄"></v-table-col>
 </v-table>
 <script>
@@ -1754,7 +1860,8 @@ Vue.use(Table);
 | label           | 表头列文字                                                                                                             | string          | —                          | —      |
 | prop            | 表头列属性，定义 type 的三种类型时可不填，其他情况必填                                                                 | string          | —                          | —      |
 | width           | 列宽度，百分比或者 xxpx                                                                                                | string / number | —                          | —      |
-| is-tooltip      | 鼠标放上去是否显示 tooltip                                                                                             | boolean         | —                          | false  |
+| is-tooltip      | 鼠标放上去是否显示 tooltip 默认是过长显示，如不需要可在`tooltip-option`中修改配置                                      | boolean         | —                          | false  |
+| tooltip-option  | tooltip的配置项参考`v-tooltip`                                                                                         | boolean         | —                          | false  |
 | is-search       | 是否支持搜索                                                                                                           | boolean         | —                          | false  |
 | is-sort         | 是否支持排序                                                                                                           | boolean         | —                          | false  |
 | align           | 对齐方式                                                                                                               | string          | left / center / right      | left   |

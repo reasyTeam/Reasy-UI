@@ -68,11 +68,6 @@
     border-radius: 1px;
     border: 1px solid $border-color;
 
-    &:focus {
-      color: $main-active-color;
-      box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
-    }
-
     &--active {
       border-width: 0;
       color: #fff;

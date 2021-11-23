@@ -42,15 +42,13 @@
       >
       </v-td>
       <!-- tooltip处理 -->
-      <span
+      <p
         v-else-if="column.isTooltip"
-        v-tooltip="{
-          enterable: false,
-          content: column.format(column.prop, rowData)
-        }"
+        class="fixed"
+        v-tooltip="getTooltipOption(column, rowData)"
       >
         {{ column.format(column.prop, rowData) }}
-      </span>
+      </p>
       <!-- search值处理 -->
       <span
         v-else-if="column.isSearch"
@@ -83,6 +81,19 @@ export default {
   computed: {
     disabled() {
       return this.column.getDisabled(this.rowData);
+    }
+  },
+  methods: {
+    // 生成配置信息
+    getTooltipOption(column, rowData) {
+      return Object.assign(
+        {
+          enterable: false,
+          showOnlyEllipsis: true,
+          content: column.format(column.prop, rowData)
+        },
+        column.tooltipOption
+      );
     }
   }
 };

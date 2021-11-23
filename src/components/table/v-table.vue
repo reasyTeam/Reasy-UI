@@ -390,11 +390,6 @@ export default {
       type: Boolean,
       default: false
     },
-    // 表格的最大宽度 超出宽度出现横向滚动条
-    maxWidth: {
-      type: Number,
-      default: 0
-    },
     placeholder: String,
     isLoading: {
       type: Boolean,
@@ -542,7 +537,7 @@ export default {
       if (item.width) {
         item.width = size(item.width);
       } else if (item.fixed) {
-        item.width = item.type === "selection" ? 60 : 100;
+        item.width = item.type === "selection" ? 48 : 100;
       }
 
       if (item.fixed === "left") {

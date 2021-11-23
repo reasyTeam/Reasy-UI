@@ -38,6 +38,13 @@ export default {
       type: Boolean,
       default: false
     },
+    // 提示信息的配置信息
+    tooltipOption: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    },
     isNoFixed: {
       //是否没有fixed样式
       type: Boolean,
