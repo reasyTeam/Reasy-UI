@@ -37,6 +37,7 @@
         @blur="blur"
         @change="changeValue"
         @keydown="$emit('keydown', $event)"
+        @keyup="$emit('keyup', $event)"
         @input="handlerInput"
         :placeholder="placeholder"
       />

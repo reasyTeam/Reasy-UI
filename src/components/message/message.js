@@ -39,21 +39,34 @@ const Msg = function(...args) {
       });
     };
 
-    instance = new MsgConstructor({
-      data: options
-    });
-    instance.$mount();
-    document.body.appendChild(instance.$el);
-
-    let { verticalOffset } = instance;
-    instances.forEach(
-      item => (verticalOffset += item.$el.offsetHeight + betweenSpace)
+    // 查询当前是否有相同的instance  即内容相同
+    // 如果有相同则更新消失时间 即定时器
+    // 没有则创建
+    const index = instances.findIndex(
+      ({ content }) => content === options.content
     );
-    instance.verticalOffset = verticalOffset;
-    instance.id = zIndex;
-    instance.$el.style.zIndex = zIndex++;
-    instance.show();
-    instances.push(instance);
+
+    if (index > -1) {
+      instance = instances[index];
+      instance.clearTimer();
+      instance.startTimer();
+    } else {
+      instance = new MsgConstructor({
+        data: options
+      });
+      instance.$mount();
+      document.body.appendChild(instance.$el);
+
+      let { verticalOffset } = instance;
+      instances.forEach(
+        item => (verticalOffset += item.$el.offsetHeight + betweenSpace)
+      );
+      instance.verticalOffset = verticalOffset;
+      instance.id = zIndex;
+      instance.$el.style.zIndex = zIndex++;
+      instance.show();
+      instances.push(instance);
+    }
     return instance;
   } else {
     Msg.info(...args);

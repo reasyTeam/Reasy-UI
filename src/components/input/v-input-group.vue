@@ -33,6 +33,7 @@
           @input="handlerInput"
           @change="handlerChange"
           @keydown="handlerKeydown"
+          @keyup="handlerKeyUp"
           :auto-correction="item.correctArg"
         >
           <template #suffix>
@@ -135,7 +136,6 @@ export default {
     },
     handlerKeydown(event) {
       let evtTarget = event.target,
-        keyVal = event.char || event.key,
         keyCode = event.keyCode,
         position = getCursorPos(evtTarget); //光标位置
 
@@ -160,9 +160,27 @@ export default {
         if (position === 0) {
           this.setInputFocus(event, "prev");
         }
+      }
+    },
+    handlerKeyUp(event) {
+      let evtTarget = event.target,
+        keyVal = event.char || event.key,
+        keyCode = event.keyCode,
+        position = getCursorPos(evtTarget); //光标位置
+
+      if (
+        keyCode === 8 ||
+        keyCode === 9 ||
+        keyCode == 39 ||
+        keyCode == 40 ||
+        keyCode == 37 ||
+        keyCode == 38
+      ) {
+        return;
       } else if (keyVal === this.inputSplitter) {
         //按键为分隔符时
-        this.setInputFocus(event, "next");
+        //当前值为空时不跳转
+        evtTarget.value.length && this.setInputFocus(event, "next");
       } else {
         //输入框最大输入长度 == 当输入框内值长度 && 光标在最后一位时跳转
         if (
@@ -183,7 +201,7 @@ export default {
         if (index !== maxIndex) {
           inputElArr[index + 1].focus();
           // //设置光标在第一个位置
-          // setCursorPos(inputElArr[index + 1].getInput(), 0);
+          //setCursorPos(inputElArr[index + 1].getInput(), 0);
           inputElArr[index + 1].select();
           event.preventDefault();
         }
@@ -191,7 +209,10 @@ export default {
         if (index !== 0) {
           inputElArr[index - 1].focus();
           //设置光标在最后一位
-          setCursorPos(inputElArr[index - 1].getInput(), -1);
+          setCursorPos(
+            inputElArr[index - 1].getInput(),
+            inputElArr[index - 1].value.length
+          );
           event.preventDefault();
         }
       }
