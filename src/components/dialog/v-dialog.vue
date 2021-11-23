@@ -68,6 +68,7 @@
                     v-if="showConfirm"
                     class="v-dialog__button-item"
                     :type="confirmButtonType"
+                    :is-loading="isLoading"
                     size="M"
                     @click="handleConfirm"
                     >{{ confirmButtonText }}</v-button
@@ -131,6 +132,10 @@ export default {
     cancelButtonType: {
       type: String,
       default: ""
+    },
+    isLoading: {
+      type: Boolean,
+      default: false
     },
     alignCenter: {
       type: Boolean,
