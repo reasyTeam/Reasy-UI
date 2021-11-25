@@ -294,7 +294,7 @@ export default {
       return cssObj[this.size] || cssObj.M;
     },
     hasClear() {
-      return this.isClear && this.value !== "" && this.isMouseover;
+      return this.isClear && this.value.length && this.isMouseover;
     },
     hasTime() {
       return this.type === "datetime";

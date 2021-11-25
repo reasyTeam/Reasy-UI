@@ -7,7 +7,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
   z-index: 1000;
 }
 .v-dialog-wrapper {
@@ -15,7 +16,8 @@
   width: 100%;
   max-height: 100%;
   z-index: 1000;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   top: 50%;
   padding: 40px 0;
   transform: translate3d(0, -50%, 0px);
@@ -32,7 +34,7 @@
   left: 50%;
   transform: translate3d(-50%, 0, 0);
   // min-width: 400px;
-  max-width: 100%;
+  // max-width: 100%;
   min-width: 400px;
   min-height: 160px;
   // max-height: 90%;
@@ -118,35 +120,42 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(#000, 0.5);
   z-index: 1000;
+  background-color: rgba(#000, 0.5);
 }
 
 .v-dialog-fade-enter-active {
-  animation: pop-fade-in 0.3s;
+  // animation: pop-fade-in 0.3s;
+  transition: opacity 0.5s;
 }
 .v-dialog-fade-leave-active {
-  animation: pop-fade-out 0.3s;
+  // animation: pop-fade-out 0.3s;
+  transition: opacity 0.5s;
 }
 
-@keyframes pop-fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+.v-dialog-fade-enter-from,
+.v-dialog-fade-leave-to {
+  opacity: 0;
 }
-@keyframes pop-fade-out {
-  0% {
-    opacity: 1;
-  }
 
-  100% {
-    opacity: 0;
-  }
-}
+// @keyframes pop-fade-in {
+//   0% {
+//     opacity: 0;
+//   }
+
+//   100% {
+//     opacity: 1;
+//   }
+// }
+// @keyframes pop-fade-out {
+//   0% {
+//     opacity: 1;
+//   }
+
+//   100% {
+//     opacity: 0;
+//   }
+// }
 
 .v-dialog-inner-fade-enter-active {
   animation: dialog-inner-fade-in 0.3s;

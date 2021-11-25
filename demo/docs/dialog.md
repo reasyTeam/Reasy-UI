@@ -42,7 +42,7 @@ Vue.use(Dialog);
   >
     我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
   </v-dialog>
-  <v-dialog v-model="showBigDialog" :title="dialogTitle" :modal="true">
+  <v-dialog v-model="showBigDialog" :title="dialogTitle" :width="800" :modal="true">
     <div style="height: 1000px;">超高弹出框！</div>
   </v-dialog>
 

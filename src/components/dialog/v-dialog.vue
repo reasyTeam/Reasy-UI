@@ -11,6 +11,7 @@
           v-show="visible"
           v-if="modal"
           class="v-modal"
+          :style="dialogWrapperStyle"
           @click="handleClickModal"
         ></div>
       </transition>
@@ -197,13 +198,13 @@ export default {
     },
 
     updateDialogStyle() {
-      // const $dialog = this.$refs.dialog,
-      //   { width, height } = $dialog.getBoundingClientRect();
-      // this.dialogWrapperStyle = {
-      //   minWidth: `${width / 0.9}px`,
-      //   minHeight: `${height / 0.9}px`
-      // };
+      const $dialog = this.$refs.dialog,
+        { width } = $dialog.getBoundingClientRect();
+      this.dialogWrapperStyle = {
+        minWidth: `${width}px`
+      };
     },
+
     animationAfterLeave() {
       this.setBodyOverflow("remove");
       this.$emit("after-close");

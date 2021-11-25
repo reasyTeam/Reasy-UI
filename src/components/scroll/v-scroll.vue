@@ -341,9 +341,7 @@ export default {
         this.view.scrollLeft = this.scrollLeft = 0;
       }
       this.isHorizontal = false;
-
       this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
-
       this.$nextTick(() => {
         let width = this.view.scrollWidth;
 
@@ -372,6 +370,7 @@ export default {
       this.isHorizontal = false;
       this.isVertical = false;
       this.wrapWidth = this.newWidth || this.$el.parentNode.offsetWidth;
+
       if (this.newHeight === "inherit") {
         this.wrapHeight = this.$el.parentNode.offsetHeight;
       } else if (this.newHeight === "auto") {

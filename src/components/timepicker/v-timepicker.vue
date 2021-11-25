@@ -197,7 +197,7 @@ export default {
     },
     //是否显示清除标志 支持清除 && 时间不为空 && 鼠标放在上面
     hasClear() {
-      return this.isClear && this.value !== "" && this.isMouseover;
+      return this.isClear && this.value.length && this.isMouseover;
     },
     //宽度
     timePickerWidth() {
