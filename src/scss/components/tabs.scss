@@ -9,7 +9,7 @@
     }
   }
   @mixin tab-nav-item-disabled {
-    color: #c0c0c0;
+    color: $disabled-color;
     cursor: not-allowed;
   }
 
@@ -53,7 +53,7 @@
     &.tab-nav--disabled {
       .tab-nav-item {
         @include tab-nav-item-disabled;
-        border-color: #d8d8d8;
+        border-color: $border-color;
         &.tab-nav--active {
           color: lighten($main-active-color, 27%);
         }
@@ -101,15 +101,15 @@
     }
   }
   .tab-nav--card {
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid $border-color;
     .tab-nav-actions {
       margin-bottom: -1px;
-      border: 1px solid #d8d8d8;
+      border: 1px solid $border-color;
       border-bottom: none;
       border-radius: 4px 4px 0 0;
     }
     .tab-nav-item {
-      border-left: 1px solid #d8d8d8;
+      border-left: 1px solid $border-color;
       @include card-and-button-size;
       &:first-child {
         border-left: none;
@@ -129,7 +129,7 @@
     .tab-nav-item {
       position: relative;
       padding: 8px 24px;
-      border: 1px solid #d8d8d8;
+      border: 1px solid $border-color;
       @include card-and-button-size;
       &:first-child {
         border-radius: 4px 0 0 4px;

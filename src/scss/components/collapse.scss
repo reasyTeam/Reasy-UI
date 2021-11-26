@@ -55,9 +55,9 @@
   &.disabled{
     .v-collapse__header{
       cursor: not-allowed;
-      color: #c0c0c0;
+      color: $disabled-color;
       .v-collapse__arrow{
-        color: #c0c0c0;
+        color: $disabled-color;
       }
     }
   }

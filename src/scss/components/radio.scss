@@ -17,7 +17,7 @@
 
       .v-radio__icon {
         color: $border-color;
-        background-color: #f5f5f5;
+        background-color: $disabled-background-color;
         
         &:hover {
           color: $border-color;

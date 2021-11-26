@@ -23,7 +23,7 @@
 
       .v-checkbox__icon {
         border-color: $border-color;
-        background-color: #f5f5f5;
+        background-color: $disabled-background-color;
 
         &.v-checkbox__icon--active {
           border-color: rgba($main-active-color, 0.4);
@@ -33,7 +33,7 @@
 
         &.v-checkbox__process {
           border-color: $border-color;
-          background-color: #f5f5f5;
+          background-color: $disabled-background-color;
           &:before {
             background-color: rgba($main-active-color, 0.5);
           }

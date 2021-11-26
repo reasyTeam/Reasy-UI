@@ -45,14 +45,14 @@
   }
 
   &__success {
-    background-color: #17cc82;
+    background-color: $success-color;
   }
 
   &__error {
-    background-color: #f7421e;
+    background-color: $error-color;
   }
 
   &__warn {
-    background-color: #f4b71e;
+    background-color: $warn-color;
   }
 }
