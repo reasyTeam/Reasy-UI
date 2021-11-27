@@ -9,7 +9,8 @@
         'is-hover': isHover,
         'is-focus': isFocus,
         'is-controls': isControls && controlsPosition === 'right',
-        'is-disabled': isDisabled
+        'is-disabled': isDisabled,
+        'is-input-error': isError
       }"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
@@ -171,6 +172,9 @@ export default {
         return this.precision;
       }
       return getPrecision(this.step);
+    },
+    isError() {
+      return !!(this.elFormItem && this.elFormItem.showError);
     }
   },
   data() {

@@ -57,6 +57,9 @@ $nav-width: 256px;
     padding-left: 64px;
     padding-right: 24px;
     max-width: 1000px;
+    z-index: 2;
+    position: relative;
+    background-color: #fff;
   }
 
   .nav-scroll {

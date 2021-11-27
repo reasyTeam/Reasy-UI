@@ -5,8 +5,10 @@
 ### 按需引用
 
 ```js
-import { Popover } from "@reasy-team/reasy-ui";
+import { Popups, Popover } from "@reasy-team/reasy-ui";
 
+// Popover依赖于Popups
+Vue.use(Popups);
 Vue.use(Popover);
 ```
 

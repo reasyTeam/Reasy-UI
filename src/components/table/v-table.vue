@@ -154,114 +154,117 @@
           <!-- 默认slot -->
           <slot></slot>
         </table>
-        <div
-          v-if="leftFixedWidth > 0"
-          ref="tableLeft"
-          class="table--fixed table--left"
-          :style="{ width: `${leftFixedWidth}px` }"
-        >
-          <table
-            class="table"
-            :class="{ 'v-table__stripe': stripe }"
-            :style="{ width: `${tableWidth}px` }"
+
+        <template v-slot:content>
+          <div
+            v-if="leftFixedWidth > 0"
+            ref="tableLeft"
+            class="table--fixed table--left"
+            :style="{ width: `${leftFixedWidth}px` }"
           >
-            <colgroup>
-              <col
-                v-for="(col, index) in columns"
-                :width="col.width"
-                :key="index + 1"
-              />
-            </colgroup>
-            <tbody>
-              <template v-for="(rowData, rowIndex) in pageData">
-                <!-- 数据行信息 -->
-                <tr
-                  ref="table-body-tr"
-                  class="v-table__row"
-                  :class="{
-                    'v-table__row--active':
-                      getActive(rowData) || rowData[checkboxField],
-                    'v-table__row--hover': hoverIndex === rowIndex
-                  }"
-                  @click="clickRow(rowData)"
-                  @mouseenter="hoverIndex = rowIndex"
-                  :key="rowIndex + 1"
-                >
-                  <template v-for="(col, index) in columns">
-                    <v-td
-                      :column="col"
-                      :key="index + 1"
-                      :index="index"
-                      :checkbox-field="checkboxField"
-                      :expand-field="expandField"
-                      :row-data="rowData"
-                      :row-index="rowIndex"
-                      :filter-search="filterSearch.bind(this)"
-                      :click-checkbox="clickCheckbox.bind(this)"
-                      :expand-table="expandTable.bind(this)"
-                      :before-change="col.beforeSelected.bind(this, rowData)"
-                      ref="checktd"
-                    ></v-td>
-                  </template>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
-        <div
-          v-if="rightFixedWidth > 0"
-          ref="tableRight"
-          class="table--fixed table--right"
-          :style="{ width: `${rightFixedWidth}px` }"
-        >
-          <table
-            class="table"
-            :class="{ 'v-table__stripe': stripe }"
-            :style="{ width: `${tableWidth}px` }"
+            <table
+              class="table"
+              :class="{ 'v-table__stripe': stripe }"
+              :style="{ width: `${tableWidth}px` }"
+            >
+              <colgroup>
+                <col
+                  v-for="(col, index) in columns"
+                  :width="col.width"
+                  :key="index + 1"
+                />
+              </colgroup>
+              <tbody>
+                <template v-for="(rowData, rowIndex) in pageData">
+                  <!-- 数据行信息 -->
+                  <tr
+                    ref="table-body-tr"
+                    class="v-table__row"
+                    :class="{
+                      'v-table__row--active':
+                        getActive(rowData) || rowData[checkboxField],
+                      'v-table__row--hover': hoverIndex === rowIndex
+                    }"
+                    @click="clickRow(rowData)"
+                    @mouseenter="hoverIndex = rowIndex"
+                    :key="rowIndex + 1"
+                  >
+                    <template v-for="(col, index) in columns">
+                      <v-td
+                        :column="col"
+                        :key="index + 1"
+                        :index="index"
+                        :checkbox-field="checkboxField"
+                        :expand-field="expandField"
+                        :row-data="rowData"
+                        :row-index="rowIndex"
+                        :filter-search="filterSearch.bind(this)"
+                        :click-checkbox="clickCheckbox.bind(this)"
+                        :expand-table="expandTable.bind(this)"
+                        :before-change="col.beforeSelected.bind(this, rowData)"
+                        ref="checktd"
+                      ></v-td>
+                    </template>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+          <div
+            v-if="rightFixedWidth > 0"
+            ref="tableRight"
+            class="table--fixed table--right"
+            :style="{ width: `${rightFixedWidth}px` }"
           >
-            <colgroup>
-              <col
-                v-for="(col, index) in columns"
-                :width="col.width"
-                :key="index + 1"
-              />
-            </colgroup>
-            <tbody>
-              <template v-for="(rowData, rowIndex) in pageData">
-                <!-- 数据行信息 -->
-                <tr
-                  ref="table-body-tr"
-                  class="v-table__row"
-                  :class="{
-                    'v-table__row--active':
-                      getActive(rowData) || rowData[checkboxField],
-                    'v-table__row--hover': hoverIndex === rowIndex
-                  }"
-                  @click="clickRow(rowData)"
-                  @mouseenter="hoverIndex = rowIndex"
-                  :key="rowIndex + 1"
-                >
-                  <template v-for="(col, index) in columns">
-                    <v-td
-                      :column="col"
-                      :key="index + 1"
-                      :index="index"
-                      :checkbox-field="checkboxField"
-                      :expand-field="expandField"
-                      :row-data="rowData"
-                      :row-index="rowIndex"
-                      :filter-search="filterSearch.bind(this)"
-                      :click-checkbox="clickCheckbox.bind(this)"
-                      :expand-table="expandTable.bind(this)"
-                      :before-change="col.beforeSelected.bind(this, rowData)"
-                      ref="checktd"
-                    ></v-td>
-                  </template>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+            <table
+              class="table"
+              :class="{ 'v-table__stripe': stripe }"
+              :style="{ width: `${tableWidth}px` }"
+            >
+              <colgroup>
+                <col
+                  v-for="(col, index) in columns"
+                  :width="col.width"
+                  :key="index + 1"
+                />
+              </colgroup>
+              <tbody>
+                <template v-for="(rowData, rowIndex) in pageData">
+                  <!-- 数据行信息 -->
+                  <tr
+                    ref="table-body-tr"
+                    class="v-table__row"
+                    :class="{
+                      'v-table__row--active':
+                        getActive(rowData) || rowData[checkboxField],
+                      'v-table__row--hover': hoverIndex === rowIndex
+                    }"
+                    @click="clickRow(rowData)"
+                    @mouseenter="hoverIndex = rowIndex"
+                    :key="rowIndex + 1"
+                  >
+                    <template v-for="(col, index) in columns">
+                      <v-td
+                        :column="col"
+                        :key="index + 1"
+                        :index="index"
+                        :checkbox-field="checkboxField"
+                        :expand-field="expandField"
+                        :row-data="rowData"
+                        :row-index="rowIndex"
+                        :filter-search="filterSearch.bind(this)"
+                        :click-checkbox="clickCheckbox.bind(this)"
+                        :expand-table="expandTable.bind(this)"
+                        :before-change="col.beforeSelected.bind(this, rowData)"
+                        ref="checktd"
+                      ></v-td>
+                    </template>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+          </div>
+        </template>
       </v-scroll>
     </div>
     <!-- </v-scroll> -->
@@ -484,6 +487,8 @@ export default {
     }
   },
   data() {
+    this.lastScrollTop = 0;
+    this.lastScrollLeft = 0;
     return {
       columns: [], //表头信息
       leftFixedWidth: 0, // 固定在左侧列宽
@@ -536,8 +541,10 @@ export default {
 
       if (item.width) {
         item.width = size(item.width);
+      } else if (item.type === "selection") {
+        item.width = 48;
       } else if (item.fixed) {
-        item.width = item.type === "selection" ? 48 : 100;
+        item.width = 100;
       }
 
       if (item.fixed === "left") {
@@ -766,10 +773,17 @@ export default {
     },
     scroll() {
       let left = this.$refs.scroll.view.scrollLeft;
-      this.$refs.header.scrollLeft = left;
-      this.$refs.tableLeft && (this.$refs.tableLeft.style.left = `${left}px`);
-      this.$refs.tableRight &&
-        (this.$refs.tableRight.style.right = `-${left}px`);
+      if (this.lastScrollLeft !== left) {
+        this.$refs.header.scrollLeft = left;
+        this.lastScrollLeft = left;
+      }
+      let top = this.$refs.scroll.view.scrollTop;
+      if (this.lastScrollTop !== top) {
+        this.$refs.tableLeft && (this.$refs.tableLeft.style.top = `-${top}px`);
+        this.$refs.tableRight &&
+          (this.$refs.tableRight.style.top = `-${top}px`);
+        this.lastScrollTop = top;
+      }
     }
   },
   destroyed() {

@@ -4,6 +4,7 @@
     <div ref="view" class="v-scroll__wrap" :style="wrapStyle" @scroll="scroll">
       <slot></slot>
     </div>
+    <slot name="content"></slot>
     <!-- 垂直滚动条 -->
     <bar
       ref="ybar"

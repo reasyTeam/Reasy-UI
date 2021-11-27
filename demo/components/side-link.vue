@@ -111,7 +111,7 @@ export default {
 .side-link {
   position: fixed;
   top: 120px;
-  right: 24px;
+  right: 0;
   padding-left: 24px;
   background-color: #fff;
 

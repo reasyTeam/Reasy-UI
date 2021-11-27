@@ -7,7 +7,8 @@ const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const loader = require("sass-loader");
+// const loader = require("sass-loader");
+const ReplacePlugin = require("webpack-plugin-replace");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
@@ -152,6 +153,18 @@ if (isProd) {
     "highlight.js": "hljs"
   };
   webpackConfig.plugins.push(
+    new ReplacePlugin({
+      include: [/node_modules/],
+      patterns: [
+        {
+          regex: /#ff801f/gi,
+          value: "#d82228"
+        }
+      ],
+      values: {
+        "process.env.NODE_ENV": JSON.stringify("production")
+      }
+    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash:7].css"
