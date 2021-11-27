@@ -616,18 +616,23 @@ export default {
       });
     },
     updateScrollHeight(isChanged) {
-      let maxRow = this.maxRow;
+      let maxRow = this.maxRow,
+        height = 0;
       if (maxRow <= 0) {
         maxRow = Number.MAX_SAFE_INTEGER;
       }
-      let rowMinIndex = Math.min(maxRow, this.pageData.length) || 1,
-        height = 0,
-        trRefs = this.$refs["table-body-tr"],
-        trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
-      for (let i = 0; i < rowMinIndex; i++) {
-        if (trArr[i]) {
-          height += trArr[i].offsetHeight;
+
+      if (maxRow < this.pageData.length) {
+        let trRefs = this.$refs["table-body-tr"],
+          trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
+
+        for (let i = 0; i < maxRow; i++) {
+          if (trArr[i]) {
+            height += trArr[i].offsetHeight;
+          }
         }
+      } else {
+        height = "auto";
       }
 
       this.$refs.scroll.setSize(height, "", isChanged);
