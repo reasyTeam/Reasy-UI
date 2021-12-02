@@ -35,7 +35,7 @@
 
 <script>
 import { isEmpty } from "../libs";
-import scssVars from "../../scss/vars.scss";
+import scssVars from "../../scss/varibles.scss";
 
 const { stepIconSize, stepIconLineSpace } = scssVars;
 export default {

@@ -1,4 +1,3 @@
-// import "../scss/vars.scss";
 import "../scss/indexFull.scss";
 
 //全局方法，挂载到prototype上的方法

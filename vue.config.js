@@ -35,7 +35,7 @@ module.exports = {
     loaderOptions: {
       scss: {
         // eslint-disable-next-line prettier/prettier
-        prependData: `@import "src/scss/vars.scss";`
+        prependData: `@import "src/scss/varibles.scss";`
       }
     },
     extract: {

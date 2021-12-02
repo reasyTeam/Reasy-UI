@@ -1,10 +1,10 @@
 {
   "name": "@reasy-team/reasy-ui",
-  "version": "3.0.17",
+  "version": "3.0.19",
   "main": "dist/reasy-ui.js",
   "scripts": {
     "publish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publish.js --mode production",
-    "fullPublish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publishFull.js --mode production",
+    "fullPublish": "webpack --env.NODE_ENV=publish --color --config build/webpack.publish.full.js --mode production",
     "component": "webpack --env.NODE_ENV=publish --color --config build/webpack.component.js --mode production",
     "scss": "webpack --env.NODE_ENV=publish --color --config build/webpack.scss.js --mode production",
     "build": "npm run scss && npm run component && npm run publish && npm run fullPublish",
@@ -13,10 +13,10 @@
     "build:demo": "cross-env NODE_ENV=production webpack --config build/webpack.demo.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js",
     "pretty": "prettier --write \"./src/**/*.{js,vue}\"",
-    "theme-full": "webpack --env.NODE_ENV=publish --color --config theme/webpack.full.js --mode production",
-    "theme-single": "webpack --env.NODE_ENV=publish --color --config theme/webpack.single.js --mode production",
-    "copy-clear": "node theme/copyAndClear.js",
-    "theme": "npm run theme-full && npm run theme-single && npm run copy-clear"
+    "theme-full": "webpack --env.NODE_ENV=publish --color --config build/webpack.theme.full.js --mode production",
+    "theme-single": "webpack --env.NODE_ENV=publish --color --config build/webpack.theme.single.js --mode production",
+    "clear": "node build/clear.js",
+    "theme": "npm run theme-full && npm run theme-single && npm run clear"
   },
   "dependencies": {
     "core-js": "^3.6.4",

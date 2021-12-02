@@ -1,16 +1,13 @@
 const path = require("path");
 const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const config = require("./scss.js");
 
 module.exports = {
-  entry: {
-    style: "./src/scss/index.scss",
-    "style-full": "./src/scss/indexFull.scss"
-  }, // 入口文件路径
+  entry: config, // 入口文件路径
   output: {
-    path: path.join(root, "theme/out"), // 出口目录
-    filename: "[name].js",
+    path: path.join(root, "theme"), // 出口目录
+    filename: "components/[name].js",
     publicPath: "/"
   },
   resolve: {
@@ -34,7 +31,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              prependData: `@import "src/scss/vars.scss";@import "theme/variables.scss";`
+              prependData: `@import "src/scss/varibles.scss";`
             }
           }
         ],
@@ -56,9 +53,8 @@ module.exports = {
   },
   devtool: false,
   plugins: [
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: "components/[name].css",
       chunkFilename: "[id].css"
     })
   ]

@@ -1,23 +1,21 @@
 const path = require("path");
 const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const config = require("../build/scss.js");
-
-// 文件拷贝，将主题相关文件拷贝到theme文件夹
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: config, // 入口文件路径
+  entry: {
+    style: "./src/scss/index.scss",
+    "style-full": "./src/scss/indexFull.scss"
+  }, // 入口文件路径
   output: {
-    path: path.join(root, "theme/out"), // 出口目录
-    filename: "lib/[name]/index.js",
+    path: path.join(root, "theme"), // 出口目录
+    filename: "[name].js",
     publicPath: "/"
   },
   resolve: {
     alias: {
-      // 配置目录别名
-      // 在任意目录下require('components/example') 相当于require('项目根目录/src/components/example')
-      vue: "vue/dist/vue.js", //解决 [Vue warn]: You are using the runtime-only build of Vue
+      vue: "vue/dist/vue.js",
       "@": path.resolve("src")
     }
   },
@@ -34,7 +32,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              prependData: `@import "src/scss/vars.scss";@import "theme/variables.scss";`
+              prependData: `@import "src/scss/varibles.scss";`
             }
           }
         ],
@@ -56,9 +54,9 @@ module.exports = {
   },
   devtool: false,
   plugins: [
-    // new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "lib/[name]/style.css",
+      filename: "[name].css",
       chunkFilename: "[id].css"
     })
   ]

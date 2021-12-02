@@ -35,7 +35,7 @@
 
 <script>
 import { on, off } from "../libs";
-import scssVars from "../../scss/vars.scss";
+import scssVars from "../../scss/varibles.scss";
 let { arrowHeight, arrowBottomSideLength } = scssVars;
 
 let zIndex = 2000;
