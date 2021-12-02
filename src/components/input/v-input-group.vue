@@ -5,7 +5,8 @@
       :class="{
         'is-hover': isHover,
         'is-focus': isFocus,
-        'is-disabled': isDisabled
+        'is-disabled': isDisabled,
+        'is-input-error': isError
       }"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
@@ -110,6 +111,9 @@ export default {
       } else {
         return typeof this.width === "number" ? this.width + "px" : this.width;
       }
+    },
+    isError() {
+      return !!(this.elFormItem && this.elFormItem.showError);
     }
   },
   data() {
