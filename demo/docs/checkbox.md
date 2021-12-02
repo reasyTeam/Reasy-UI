@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Checkbox } from "@reasy-team/reasy-ui";
+import { Base, Checkbox } from "@reasy-team/reasy-ui";
 
 Vue.use(Checkbox);
+Vue.use(Base);
 ```
 
 ### 基础用法

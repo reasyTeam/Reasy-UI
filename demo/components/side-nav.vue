@@ -166,6 +166,7 @@ export default {
   box-sizing: border-box;
   transition: opacity 0.3s;
   border-right: 1px solid #e9e9e9;
+  background-color: #fff;
 
   &.is-fade {
     transition: opacity 3s;

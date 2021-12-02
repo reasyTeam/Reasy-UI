@@ -1,6 +1,3 @@
-$arrow-height: 6px;
-$arrow-bottom-side-length: 10px;
-
 .v-popups__wrapper {
   display: inline-block;
 }
@@ -76,9 +73,4 @@ $arrow-bottom-side-length: 10px;
       }
     }
   }
-}
-
-:export {
-  arrowHeight: $arrow-height;
-  arrowBottomSideLength: $arrow-bottom-side-length;
 }

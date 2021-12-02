@@ -4,9 +4,10 @@
 ### 按需引用
 
 ```js
-import { Switch } from "@reasy-team/reasy-ui";
+import { Base, Switch } from "@reasy-team/reasy-ui";
 
 Vue.use(Switch);
+Vue.use(Base);
 ```
 
 ### 基本用法

@@ -5,9 +5,10 @@ Tab 让用户可以在不同的子任务、视图、模式之间切换，它具�
 ### 按需引用
 
 ```js
-import { Tabs } from "@reasy-team/reasy-ui";
+import { Base, Tabs } from "@reasy-team/reasy-ui";
 
 Vue.use(Tabs);
+Vue.use(Base);
 ```
 
 ### 基础示例

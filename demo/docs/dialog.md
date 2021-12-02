@@ -5,9 +5,11 @@
 ### 按需引用
 
 ```js
-import { Dialog } from "@reasy-team/reasy-ui";
+import { Base, Dialog, Button } from "@reasy-team/reasy-ui";
 
 Vue.use(Dialog);
+Vue.use(Button);
+Vue.use(Base);
 ```
 
 ### 基础示例
@@ -25,6 +27,7 @@ Vue.use(Dialog);
     @open="handleOpen"
     @after-close="handleAfterClose"
     @cancel="handleCancel"
+    append-to-body
   >
     我是对话框区域内容。
   </v-dialog>
@@ -39,10 +42,12 @@ Vue.use(Dialog);
     @open="handleOpen"
     @after-close="handleAfterClose"
     @cancel="handleCancel"
+    append-to-body
   >
     我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
   </v-dialog>
-  <v-dialog v-model="showBigDialog" :title="dialogTitle" :width="800" :modal="true">
+  <v-dialog v-model="showBigDialog" :title="dialogTitle" :width="800" :modal="true"
+    append-to-body>
     <div style="height: 1000px;">超高弹出框！</div>
   </v-dialog>
 
@@ -116,6 +121,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
     :modal="true"
     @after-close="handleAfterClose"
     @confirm="handleConfirm"
+    append-to-body
   >
     <v-form ref="form" :model="ruleForm">
       <v-form-item label="姓名" prop="name">
@@ -196,6 +202,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
     :modal="true"
     :align-center="true"
     @confirm="handleConfirm"
+    append-to-body
   >
     <div>需要注意的是内容不居中。</div>
   </v-dialog>
@@ -244,6 +251,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
 | confirm-button-type  | 确认按钮类型                          | string  | 参考 button 组件类型 | primary |
 | cancel-button-type   | 取消按钮类型                          | string  | 参考 button 组件类型 | info    |
 | align-center         | 是否对头部和底部采用居中布局          | boolean | -                    | false   |
+| append-to-body       | 是否将内容插入到body中去          | boolean | -                    | false   |
 
 ### Events
 

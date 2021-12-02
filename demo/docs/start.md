@@ -61,3 +61,13 @@ Vue.use(Input);
 ```
 
 > 其中`Base`为组件基础支撑项，必须引入项，否则其它组件部分功能会不生效。
+
+### 主题
+
+支持自定义主题风格，只需要几个简单的步骤就可以完成风格切换。
+
+1. 进入组件安装目录`node_modules/@reasy-team/reasy-ui`
+
+2. 运行`npm install`安装依赖
+3. 修改`theme`文件加下的`scss`变量文件`varibles.scss`
+4. 运行`npm run theme`即可

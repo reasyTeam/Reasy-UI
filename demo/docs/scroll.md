@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Scroll } from "@reasy-team/reasy-ui";
+import { Base, Scroll } from "@reasy-team/reasy-ui";
 
 Vue.use(Scroll);
+Vue.use(Base);
 ```
 
 ### 基础示例

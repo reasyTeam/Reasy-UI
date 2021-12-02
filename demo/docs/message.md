@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Message } from "@reasy-team/reasy-ui";
+import { Base, Message } from "@reasy-team/reasy-ui";
 
 Vue.use(Message);
+Vue.use(Base);
 ```
 
 ### 基础示例

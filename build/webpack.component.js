@@ -3,8 +3,6 @@ const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const { VueLoaderPlugin } = require("vue-loader");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = require("./components.js");
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   //解决打包后出现多个Vue的问题
@@ -52,17 +50,11 @@ module.exports = {
         loader: "vue-loader",
         options: {
           loaders: {
-            js: "babel-loader",
-            //css: 'style-loader',
-            // scss: "vue-style-loader!css-loader!sass-loader?indentedSyntax"
+            js: "babel-loader"
           },
           extractCSS: true
         }
       },
-      // {
-      //   test: /\.js$/,
-      //   loader: "babel-loader"
-      // },
       {
         test: /\.(scss|css)$/,
         use: [
@@ -78,35 +70,9 @@ module.exports = {
       }
     ]
   },
-  // optimization: {
-  //   //webpack 4
-  //   minimize: false,
-  //   splitChunks: {
-  //     // chunks: "all",
-  //     cacheGroups: {
-  //       // common: {
-  //       //   // test: /[\\/]node_modules[\\/]/,
-  //       //   name: "common",
-  //       //   chunks: "all",
-  //       //   priority: 3,
-  //       //   minChunks: 4
-  //       // },
-  //       vender: {
-  //         name: "base/index",
-  //         chunks: "all",
-  //         priority: 2,
-  //         minChunks: 5
-  //       }
-  //     }
-  //     // minChunks: 2,
-  //     // name: 'base'
-  //   }
-  // },
   devtool: false,
-  plugins: [
-    // new CleanWebpackPlugin(),
-    new VueLoaderPlugin(),
-    new UglifyJsPlugin()
-    // new BundleAnalyzerPlugin()
-  ]
+  // optimization:{
+  //   minimize: false
+  // },
+  plugins: [new VueLoaderPlugin(), new UglifyJsPlugin()]
 };

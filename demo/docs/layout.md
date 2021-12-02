@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Layout } from "@reasy-team/reasy-ui";
+import { Base, Layout } from "@reasy-team/reasy-ui";
 
 Vue.use(Layout);
+Vue.use(Base);
 ```
 
 ### 栅格列的说明

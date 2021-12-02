@@ -82,12 +82,12 @@ const components = [
   Line,
   Pie,
   Alert,
-  Message,
-  Notification,
+  // Message,
+  // Notification,
   Popups,
   Popover,
   Popconfirm,
-  Tooltip,
+  // Tooltip,
   Dialog,
   Dropdown,
   Tabs,
@@ -101,6 +101,9 @@ const components = [
 const install = function(Vue) {
   window.Vue = Vue;
   Vue.use(Base);
+  Vue.use(Message);
+  Vue.use(Notification);
+  Vue.use(Tooltip);
   components.forEach(component => {
     Vue.component(component.name, component);
   });

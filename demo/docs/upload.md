@@ -4,9 +4,11 @@
 ### 按需引用
 
 ```js
-import { Upload } from "@reasy-team/reasy-ui";
+import { Base, Upload, Button } from "@reasy-team/reasy-ui";
 
 Vue.use(Upload);
+Vue.use(Button);
+Vue.use(Base);
 ```
 
 ### 基本用法

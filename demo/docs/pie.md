@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Pie } from "@reasy-team/reasy-ui";
+import { Base, Pie } from "@reasy-team/reasy-ui";
 
 Vue.use(Pie);
+Vue.use(Base);
 ```
 
 ### 基础示例

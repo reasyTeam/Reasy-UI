@@ -4,9 +4,10 @@
 ### 按需引用
 
 ```js
-import { Form } from "@reasy-team/reasy-ui";
+import { Base, Form } from "@reasy-team/reasy-ui";
 
 Vue.use(Form);
+Vue.use(Base);
 ```
 
 ### 前提条件

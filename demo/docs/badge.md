@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Badge } from "@reasy-team/reasy-ui";
+import { Base, Badge } from "@reasy-team/reasy-ui";
 
 Vue.use(Badge);
+Vue.use(Base);
 ```
 
 

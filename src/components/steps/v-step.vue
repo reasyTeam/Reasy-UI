@@ -35,10 +35,9 @@
 
 <script>
 import { isEmpty } from "../libs";
-import scssVars from "../../scss/components/steps.scss";
+import scssVars from "../../scss/vars.scss";
 
-const { iconSize, iconLineSpace } = scssVars;
-
+const { stepIconSize, stepIconLineSpace } = scssVars;
 export default {
   name: "v-step",
   props: {
@@ -51,8 +50,8 @@ export default {
     return {
       index: -1,
       stepStyle: {},
-      scssVarIconSize: parseInt(iconSize),
-      scssVarIconLineSpace: parseInt(iconLineSpace)
+      scssVarIconSize: parseInt(stepIconSize),
+      scssVarIconLineSpace: parseInt(stepIconLineSpace)
     };
   },
   beforeCreate() {

@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Radio } from "@reasy-team/reasy-ui";
+import { Base, Radio } from "@reasy-team/reasy-ui";
 
 Vue.use(Radio);
+Vue.use(Base);
 ```
 
 ### 基础用法

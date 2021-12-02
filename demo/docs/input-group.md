@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Input } from "@reasy-team/reasy-ui";
+import { Base, Input } from "@reasy-team/reasy-ui";
 
 Vue.use(Input);
+Vue.use(Base);
 ```
 
 ### 输入框大小

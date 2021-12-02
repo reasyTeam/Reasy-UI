@@ -4,9 +4,12 @@
 ### 按需引用
 
 ```js
-import { Input } from "@reasy-team/reasy-ui";
+// 依赖于v-button
+import { Base, Input, Button } from "@reasy-team/reasy-ui";
 
 Vue.use(Input);
+Vue.use(Button);
+Vue.use(Base);
 ```
 
 ### 输入框大小

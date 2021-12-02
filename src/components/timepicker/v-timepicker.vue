@@ -9,7 +9,7 @@
     <div
       :name="name"
       :data-name="_name"
-      class="v-timepicker__label input-text"
+      class="v-timepicker__label input-text size-0"
       :class="{ 'is-disabled': isDisabled, 'is-focus': showTimePanel }"
       @click="showPanel"
     >

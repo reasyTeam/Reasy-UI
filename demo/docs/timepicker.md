@@ -7,10 +7,14 @@
 该组件依赖于`v-scroll`组件。
 
 ```js
-import { Scroll, Timepicker } from "@reasy-team/reasy-ui";
+import { Base, Scroll, Timepicker, Input, Button, Layout } from "@reasy-team/reasy-ui";
 
 Vue.use(Scroll);
 Vue.use(Timepicker);
+Vue.use(Input);
+Vue.use(Button);
+Vue.use(Layout);
+Vue.use(Base);
 ```
 
 ### 基本用法

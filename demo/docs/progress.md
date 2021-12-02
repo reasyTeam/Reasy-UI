@@ -5,9 +5,11 @@
 ### 按需引用
 
 ```js
-import { Progress } from "@reasy-team/reasy-ui";
+import { Base, Progress, Percent } from "@reasy-team/reasy-ui";
 
 Vue.use(Progress);
+Vue.use(Percent);
+Vue.use(Base);
 ```
 
 ### 进度条

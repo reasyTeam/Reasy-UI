@@ -35,7 +35,7 @@
 
 <script>
 import { on, off } from "../libs";
-import scssVars from "../../scss/components/popups.scss";
+import scssVars from "../../scss/vars.scss";
 let { arrowHeight, arrowBottomSideLength } = scssVars;
 
 let zIndex = 2000;

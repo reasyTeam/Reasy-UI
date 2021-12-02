@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Percent } from "@reasy-team/reasy-ui";
+import { Base, Percent } from "@reasy-team/reasy-ui";
 
 Vue.use(Percent);
+Vue.use(Base);
 ```
 
 ### 基础示例

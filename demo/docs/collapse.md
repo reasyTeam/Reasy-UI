@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Collapse } from "@reasy-team/reasy-ui";
+import { Base, Collapse } from "@reasy-team/reasy-ui";
 
 Vue.use(Collapse);
+Vue.use(Base);
 ```
 
 ### 基础示例

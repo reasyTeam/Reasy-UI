@@ -3,6 +3,11 @@ const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const config = require("./scss.js");
+
+// 文件拷贝，将主题相关文件拷贝到theme文件夹
+
+// end
+
 module.exports = {
   entry: config, // 入口文件路径
   output: {

@@ -5,9 +5,12 @@
 ### 按需引用
 
 ```js
-import { Popconfirm } from "@reasy-team/reasy-ui";
+import { Base, Popconfirm, Button, Popups } from "@reasy-team/reasy-ui";
 
 Vue.use(Popconfirm);
+Vue.use(Button);
+Vue.use(Popups);
+Vue.use(Base);
 ```
 
 ### 基础示例

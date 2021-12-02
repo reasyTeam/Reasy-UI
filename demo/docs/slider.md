@@ -1,12 +1,17 @@
 ## 滑块
 
 滑动型输入器，在范围内滑动选择数据。
+
 ### 按需引用
 
 ```js
-import { Slider } from "@reasy-team/reasy-ui";
+// 当显示输入时需要同时引入Input和Button组件
+import { Base, Input, Button, Slider } from "@reasy-team/reasy-ui";
 
 Vue.use(Slider);
+Vue.use(Button);
+Vue.use(Input);
+Vue.use(Base);
 ```
 
 ### 基本用法

@@ -6,6 +6,9 @@
   box-sizing: border-box;
 }
 
+.size-0{
+  font-size: 0 !important;
+}
 .no-select {
   user-select: none;
 }
@@ -21,6 +24,30 @@
   border-color: $disabled-border-color !important;
 }
 
+.input-text,
+.input-textarea {
+  padding: 0 8px;
+  width: 100%;
+  resize: vertical;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  color: $title-color;
+  outline: 0;
+
+  &:hover {
+    border-color: $main-active-color;
+  }
+
+  &:focus {
+    border-color: $main-active-color;
+    box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
+  }
+
+  .placeholder-text {
+    padding: 0;
+  }
+}
+
 //面板样式
 .position-panel {
   position: absolute;
@@ -34,7 +61,7 @@
   top: 0;
   left: 0;
   display: inline-block;
-  color: $light-gray-color;
+  color: $placeholder-color;
   padding: 0 8px;
   line-height: $form-line-height;
 }

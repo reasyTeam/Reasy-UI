@@ -5,9 +5,12 @@
 ### 按需引用
 
 ```js
-import { Table } from "@reasy-team/reasy-ui";
+import { Base, Table, Scroll, Loading } from "@reasy-team/reasy-ui";
 
 Vue.use(Table);
+Vue.use(Scroll);
+Vue.use(Loading);
+Vue.use(Base);
 ```
 
 ### 基本用法

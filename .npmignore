@@ -4,7 +4,9 @@ node_modules
 .history
 build
 docs
-src
+langs
+src/
+!/src/scss
 public
 demo
 docs
@@ -13,5 +15,8 @@ img
 .eslintrc.js
 .browserslistrc
 babel.config.js
-postcss.config.js
 vue.config.js
+theme/out/
+build/
+!/build/scss.js
+组件API.md

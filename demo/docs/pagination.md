@@ -5,9 +5,10 @@
 ### 按需引用
 
 ```js
-import { Pagination } from "@reasy-team/reasy-ui";
+import { Base, Pagination } from "@reasy-team/reasy-ui";
 
 Vue.use(Pagination);
+Vue.use(Base);
 ```
 
 ### 基本样式

@@ -1,7 +1,9 @@
-import Message from "./message/message.js";
-import Notification from "./notification/notification.js";
+// import "./translate.js";
+// import Message from "./message/message.js";
+// import Notification from "./notification/notification.js";
 //全局指令
 import Derectives from "./directives";
+
 if (window.langData === undefined) {
   window.langData = {};
 }
@@ -34,6 +36,7 @@ if (typeof window._ !== "function") {
 }
 
 const install = function(Vue) {
+  Vue.prototype._ = window._;
   Vue.use(Derectives);
   //触发组件的祖先事件
   Vue.prototype.$dispatch = function(componentName, name, ...arsg) {
@@ -44,10 +47,8 @@ const install = function(Vue) {
     }
   };
 
-  Vue.prototype._ = window._;
-
-  Vue.prototype.$message = Message;
-  Vue.prototype.$notify = Notification;
+  // Vue.prototype.$message = Message;
+  // Vue.prototype.$notify = Notification;
 
   Vue.prototype.$getLabelWidth = function() {
     if (this.$options.name === "v-form" || this === this.$root) {

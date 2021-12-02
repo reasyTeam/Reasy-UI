@@ -6,10 +6,11 @@
 该组件依赖于`v-scroll`组件。
 
 ```js
-import { Scroll, Select } from "@reasy-team/reasy-ui";
+import { Base, Scroll, Select } from "@reasy-team/reasy-ui";
 
 Vue.use(Scroll);
 Vue.use(Select);
+Vue.use(Base);
 ```
 
 ### 基本用法
@@ -64,6 +65,32 @@ Vue.use(Select);
       return {
         select1: "1",
         selectOption: [1, 2, 3, 4, 5]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 自定义选项HTML结构
+
+通过设定默认的`slot`可以自定义显示的内容，`slotProps`包含`label`和`value`两个属性。
+
+::: demo
+
+```html
+<v-select v-model="select1" :options="selectOption">
+  <template v-slot="slotProps">
+    <li>自定义列-{{slotProps.value}}</li>
+  </template>
+</v-select>
+<script>
+  export default {
+    data() {
+      return {
+        select1: "white",
+        selectOption: ["red", "black", "white", "blue", "gray"]
       };
     }
   };

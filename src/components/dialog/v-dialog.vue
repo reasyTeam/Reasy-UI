@@ -145,6 +145,10 @@ export default {
     rendered: {
       type: Boolean,
       default: false
+    },
+    appendToBody: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -152,7 +156,11 @@ export default {
       dialogWrapperStyle: {}
     };
   },
-  mounted() {},
+  mounted() {
+    if (this.appendToBody) {
+      this.insertDialogToBody();
+    }
+  },
   computed: {
     visible() {
       return this.value;

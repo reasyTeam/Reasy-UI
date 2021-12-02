@@ -1,4 +1,3 @@
-// import "../scss/vars.scss";
 import "../scss/index.scss";
 
 //全局方法，挂载到prototype上的方法
@@ -53,7 +52,6 @@ const components = [
   CollapseTransition,
   Row,
   Col,
-  // Container,
   Scroll,
   Button,
   Input,
@@ -78,29 +76,28 @@ const components = [
   List,
   Loading,
   XScroll,
-  // Bar,
-  // Line,
-  // Pie,
   Alert,
-  Message,
-  Notification,
+  // Message,
+  // Notification,
   Popups,
   Popover,
   Popconfirm,
-  Tooltip,
+  // Tooltip,
   Dialog,
   Dropdown,
   Tabs,
   TabPane,
   Steps,
   Step,
-  // Percent,
   Progress
 ];
 
 const install = function(Vue) {
   window.Vue = Vue;
   Vue.use(Base);
+  Vue.use(Message);
+  Vue.use(Notification);
+  Vue.use(Tooltip);
   components.forEach(component => {
     Vue.component(component.name, component);
   });

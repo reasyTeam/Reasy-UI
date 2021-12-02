@@ -1,24 +1,21 @@
 @import "./step.scss";
 
-$icon-size: 32px;
-$icon-line-space: 8px;
-
 .v-steps {
   position: relative;
   width: 100%;
   overflow: auto;
   &__lines {
     position: absolute;
-    top: $icon-size / 2;
+    top: $step-icon-size / 2;
     width: 100%;
     font-size: 0;
     &-wrapper {
-      padding: 0 $icon-size / 2;
+      padding: 0 $step-icon-size / 2;
       white-space: nowrap;
     }
     .v-steps__line {
       display: inline-block;
-      padding: 0 $icon-size / 2 + $icon-line-space;
+      padding: 0 $step-icon-size / 2 + $step-icon-line-space;
       &-inner {
         width: 100%;
         height: 1px;
@@ -37,9 +34,4 @@ $icon-line-space: 8px;
     font-size: 0;
     white-space: nowrap;
   }
-}
-
-:export {
-  iconSize: $icon-size;
-  iconLineSpace: $icon-line-space;
 }

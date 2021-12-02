@@ -13,11 +13,14 @@
           }"
           @click="clickOption(item)"
         >
-          {{ item.label }}
-          <span
-            v-if="isMultiple && getSelected(item, index)"
-            class="v-select__icon--right--active v-icon-ok"
-          ></span>
+          <select-item v-if="fn && !item.isManual" :fn="fn" :option="item"></select-item>
+          <template v-else>
+            {{ item.label }}
+            <span
+              v-if="isMultiple && getSelected(item, index)"
+              class="v-select__icon--right--active v-icon-ok"
+            ></span>
+          </template>
         </li>
       </ul>
     </v-x-scroll>
@@ -25,6 +28,8 @@
 </template>
 
 <script>
+import SelectItem from "./select-item.vue";
+
 export default {
   props: {
     //下拉框选项
@@ -42,7 +47,11 @@ export default {
     multipleLimit: Number,
     //是否支持多选
     isMultiple: Boolean,
+    fn: Function,
     count: Number
+  },
+  components: {
+    SelectItem
   },
   methods: {
     clickOption(options) {

@@ -48,16 +48,6 @@ module.exports = {
               prependData: `@import "src/scss/vars.scss";`
             }
           }
-          // {
-          //   loader: "sass-loader"
-          // },
-          // {
-          //   loader: "sass-resources-loader",
-          //   options: {
-          //     // Provide path to the file with resources
-          //     resources: "./src/scss/vars.scss"
-          //   }
-          // }
         ],
         exclude: /node_modules/
       },

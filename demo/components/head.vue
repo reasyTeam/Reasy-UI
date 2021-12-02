@@ -26,7 +26,7 @@ $header-height: 80px;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 5px 17px 0px #f5f5f5;
-  z-index: 1;
+  z-index: 2;
   background-color: #fff;
 
   img {

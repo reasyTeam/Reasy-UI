@@ -159,7 +159,7 @@ input[type="number"] {
 }
 
 ::placeholder {
-  color: $light-gray-color;
+  color: $placeholder-color;
 }
 
 .v-input-textarea {
@@ -174,30 +174,6 @@ input[type="number"] {
   .placeholder-text {
     line-height: 20px;
     padding: 0 8px;
-  }
-}
-
-.input-text,
-.input-textarea {
-  padding: 0 8px;
-  width: 100%;
-  resize: vertical;
-  border: 1px solid $border-color;
-  border-radius: 2px;
-  color: $title-color;
-  outline: 0;
-
-  &:hover {
-    border-color: $main-active-color;
-  }
-
-  &:focus {
-    border-color: $main-active-color;
-    box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
-  }
-
-  .placeholder-text {
-    padding: 0;
   }
 }
 

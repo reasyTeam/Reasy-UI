@@ -92,6 +92,7 @@
         :multiple-limit="multipleLimit"
         :select-value="value"
         :count="displayOptionsNumber"
+        :fn="$scopedSlots.default"
         @click-options="clickOptions"
         @hide="hide"
       ></dropdown-list>
@@ -283,7 +284,7 @@ export default {
   methods: {
     showOptions(isArrow) {
       if (this.isDisabled) return;
-      if (isArrow === true) {
+      if (isArrow) {
         if (this.hasClear) {
           this.$emit("change", this.isMultiple ? [] : "");
           this.$dispatch("v-form", "form:change");
