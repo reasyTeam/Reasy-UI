@@ -1,2 +1,2 @@
-import * as langData from "../langs/zh/translate.json";
+import * as langData from "../langs/cn/translate.json";
 window.langData = langData.default;
