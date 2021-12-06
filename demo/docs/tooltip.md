@@ -23,7 +23,6 @@ Vue.use(Base);
       <v-col :offset="3" :span="2">
         <v-tooltip
           :max-width="210"
-          :enterable="false"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
           position="top-left"
         >
@@ -33,7 +32,6 @@ Vue.use(Base);
       <v-col :offset="1" :span="2">
         <v-tooltip
           :max-width="210"
-          :enterable="false"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
           position="top-center"
         >

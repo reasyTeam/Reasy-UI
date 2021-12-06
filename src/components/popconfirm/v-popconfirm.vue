@@ -15,14 +15,13 @@
       :click-outside-to-hide="clickOutsideToHide"
     >
       <div class="v-popconfirm__box">
-        <slot>
-          <div class="v-popconfirm__main">
-            <div :class="['v-popconfirm__title', { 'has-icon': icon }]">
-              {{ title }}
-            </div>
-            <i :class="['v-popconfirm__icon', icon]"></i>
+        <div class="v-popconfirm__main" v-if="!$slots.default">
+          <div :class="['v-popconfirm__title', { 'has-icon': icon }]">
+            {{ title }}
           </div>
-        </slot>
+          <i :class="['v-popconfirm__icon', icon]"></i>
+        </div>
+        <slot> </slot>
         <div v-if="showConfirm || showCancel" class="v-popconfirm__footer">
           <div class="v-popconfirm__button-group">
             <v-button

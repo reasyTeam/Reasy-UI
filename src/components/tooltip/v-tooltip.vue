@@ -21,9 +21,10 @@
       :auto-adjust-position="autoAdjustPosition"
     >
       <div class="v-tooltip__main">
-        <slot name="content">
-          <div class="v-tooltip__content">{{ content }}</div>
-        </slot>
+        <div v-if="!$slots.content" class="v-tooltip__content">
+          {{ content }}
+        </div>
+        <slot name="content"> </slot>
       </div>
 
       <template #reference>
