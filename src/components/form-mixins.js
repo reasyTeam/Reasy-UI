@@ -11,6 +11,10 @@ export default {
       type: Boolean,
       default: false
     }
+    // id: {
+    //   type: String,
+    //   required: true
+    // }
   },
   inject: {
     elFormItem: {
@@ -44,6 +48,16 @@ export default {
       this.elFormItem.isMounted = true;
     }
     this._name = this.name || this.elFormItem.prop;
+  },
+  mounted() {
+    // let i = 1;
+    // let key = `${this.$options.name}-${this.elFormItem.prop}-${this.name}`;
+    // let id = `${this.$options.name}-${hashKey(key)}`;
+    // while (this._ids[id]) {
+    //   id = `${this.$options.name}-${hashKey(key + i++)}`;
+    // }
+    // this._ids[id] = true;
+    // this.id = id;
   },
   methods: {
     getValue() {
@@ -118,4 +132,7 @@ export default {
       }
     }
   }
+  // beforeDestroy() {
+  //   delete this._ids[this.id];
+  // }
 };

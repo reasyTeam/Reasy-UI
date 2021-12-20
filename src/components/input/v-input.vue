@@ -1,6 +1,8 @@
 <template>
   <label
     class="v-input"
+    @mouseleave="hoverInput = false"
+    @mouseenter="hoverInput = true"
     :class="[
       {
         'v-input--prefix': icon,
@@ -252,7 +254,8 @@ export default {
       isFocus: false,
       subffixWidth: "",
       passwordVisible: false,
-      isZh: false //是否非英文输入法
+      isZh: false, //是否非英文输入法,
+      hoverInput: false //鼠标是否在输入框内
     };
   },
   mounted() {
@@ -328,6 +331,11 @@ export default {
       this.$refs.input.select();
     },
     blur(event) {
+      if (this.hoverInput) {
+        this.$refs.input.focus();
+        return;
+      }
+
       if (this.unit && this.inputValue) {
         this.setInputValue(this.inputValue + " " + this.unit);
       }

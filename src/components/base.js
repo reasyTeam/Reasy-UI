@@ -37,6 +37,7 @@ if (typeof window._ !== "function") {
 
 const install = function(Vue) {
   Vue.prototype._ = window._;
+  Vue.prototype._ids = {};
   Vue.use(Derectives);
   //触发组件的祖先事件
   Vue.prototype.$dispatch = function(componentName, name, ...arsg) {
