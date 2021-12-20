@@ -21,6 +21,9 @@
 import { on, off } from "../libs";
 import { renderTranslateStyle, PROPERTYS } from "./scroll-lib.js";
 
+// 滚动滑块的最小高度/宽度
+const MIN_SIZE = 25;
+
 export default {
   props: {
     direct: String, // x, y
@@ -59,7 +62,11 @@ export default {
         this.direct,
         this.scroll * this.maxTranslate
       );
-      style[this.direct === "x" ? "width" : "height"] = this.barsize + "px";
+      let barSize = this.barsize
+        ? Math.max(this.barsize, MIN_SIZE)
+        : this.barsize;
+
+      style[this.direct === "x" ? "width" : "height"] = barSize + "px";
 
       return style;
     },
@@ -75,11 +82,18 @@ export default {
   },
   watch: {
     barsize() {
-      this.size = this.$el[this.propertys.offset];
-      this.maxTranslate = this.size - this.barsize;
+      this.update();
     }
   },
   methods: {
+    computedSize() {
+      // 0的时候返回0  其他时候返回最小值和当前值中大的值
+      return this.barsize ? Math.max(this.barsize, MIN_SIZE) : this.barsize;
+    },
+    update() {
+      this.size = this.$el[this.propertys.offset];
+      this.maxTranslate = this.size - this.computedSize();
+    },
     emitChange(distance) {
       if (distance < 0) {
         distance = 0;
@@ -99,7 +113,7 @@ export default {
         e.target.getBoundingClientRect()[this.direct] - e[this.propertys.client]
       );
       // 去除滑块的一半高度或宽度
-      distance = distance - this.barsize / 2;
+      distance = distance - this.computedSize() / 2;
       this.emitChange(distance);
     },
     mousedown(e) {
@@ -131,8 +145,7 @@ export default {
     }
   },
   mounted() {
-    this.size = this.$el[this.propertys.offset];
-    this.maxTranslate = this.size - this.barsize;
+    this.update();
   }
 };
 </script>
