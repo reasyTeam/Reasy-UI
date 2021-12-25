@@ -13,7 +13,7 @@
 
   @each $type, $color, $bgcolor in (success, $success-color, #e7fdeb),
                          (warn, $warn-color, #fefae3),
-                         (info, $main-active-color, lighten($main-active-color, 45%)),
+                         (info, $main-active-color, rgba($main-active-color, 0.1)),
                          (error, darken($error-color, 1.4%), #fef1e3) {
     &--#{$type} {
       background-color: $bgcolor;

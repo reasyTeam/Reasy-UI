@@ -63,7 +63,7 @@
     color: #fff;
 
     &:hover {
-      background-color: lighten($main-active-color, 15%);
+      background-color: rgba($main-active-color, 0.85);
     }
 
     &:focus {
@@ -116,11 +116,11 @@
     color: #fff;
 
     &:hover {
-      background-color: lighten($error-color, 15%);
+      background-color: rgba($error-color, 0.85);
     }
 
     &:focus {
-      background-color: lighten($error-color, 10%);
+      background-color: rgba($error-color, 0.9);
       box-shadow: 0 0 2px 2px scale-color($error-color, $alpha: -60%);
     }
 
@@ -146,7 +146,7 @@
     height: auto;
 
     &:hover {
-      color: lighten($main-active-color, 15%);
+      color: rgba($main-active-color, 0.85);
     }
 
     &:focus {

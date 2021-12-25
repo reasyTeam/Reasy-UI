@@ -1,4 +1,4 @@
-$main-active-light-color: lighten($main-active-color, 10%);
+$main-active-light-color: rgba($main-active-color, 0.9);
 
 @mixin input-size($fontSize, $lineHeight) {
   font-size: $fontSize;
@@ -92,7 +92,7 @@ input[type="number"] {
     // border-left: 1px solid $border-color;
 
     &:hover {
-      background-color: lighten($main-active-color, 45%);
+      background-color: rgba($main-active-color, 0.55);
       color: $main-active-color;
       // border-left: 1px solid $main-active-color;
     }
@@ -103,7 +103,7 @@ input[type="number"] {
     }
 
     &:active {
-      background-color: lighten($main-active-color, 30%);
+      background-color: rgba($main-active-color, 0.7);
       color: darken($main-active-color, 5%);
       // border-left: 1px solid darken($main-active-color, 5%);
     }

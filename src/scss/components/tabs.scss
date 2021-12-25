@@ -1,8 +1,6 @@
 .v-tabs {
   @mixin card-and-button-size {
-    @each $size, $padding in (S, 6px 24px),
-                                (M, 8px 24px),
-                                (L, 10px 24px) {
+    @each $size, $padding in (S, 6px 24px), (M, 8px 24px), (L, 10px 24px) {
       &.tab-nav--#{$size} {
         padding: $padding;
       }
@@ -26,8 +24,8 @@
       display: inline-block;
       cursor: pointer;
       @each $size, $line-height, $font-size, $padding in (S, 20px, 12px, 12px),
-                                                (M, 22px, 14px, 16px),
-                                                (L, 24px, 16px, 20px) {
+        (M, 22px, 14px, 16px), (L, 24px, 16px, 20px)
+      {
         &.tab-nav--#{$size} {
           line-height: $line-height;
           font-size: $font-size;
@@ -35,7 +33,7 @@
         }
       }
       &:hover {
-        color: lighten($main-active-color, 10%);
+        color: rgba($main-active-color, 0.9);
       }
       &.tab-nav--active {
         @include bold;
@@ -45,27 +43,27 @@
       &.tab-nav-item--disabled {
         @include tab-nav-item-disabled;
         &.tab-nav--active {
-          color: lighten($main-active-color, 27%);
+          color: rgba($main-active-color, 0.73);
         }
       }
     }
-    
+
     &.tab-nav--disabled {
       .tab-nav-item {
         @include tab-nav-item-disabled;
         border-color: $border-color;
         &.tab-nav--active {
-          color: lighten($main-active-color, 27%);
+          color: rgba($main-active-color, 0.73);
         }
       }
       &.tab-nav--button {
         .tab-nav--active {
-          border-color: lighten($main-active-color, 40%);
+          border-color: rgba($main-active-color, 0.6);
         }
       }
       &.tab-nav--link {
         .tab-active-border {
-          background-color: lighten($main-active-color, 27%);
+          background-color: rgba($main-active-color, 0.73);
         }
       }
     }
@@ -77,7 +75,7 @@
       height: 2px;
       background-color: $main-active-color;
       &.tab-active-border--transition {
-        transition: all .2s ease-out .1s;
+        transition: all 0.2s ease-out 0.1s;
       }
     }
   }
@@ -85,9 +83,7 @@
   .tab-nav--link {
     border-bottom: 1px solid #f5f5f5;
     .tab-nav-item {
-      @each $size, $margin in (S, 0 0 1px),
-                              (M, 0 0 8px),
-                              (L, 0 0 10px) {
+      @each $size, $margin in (S, 0 0 1px), (M, 0 0 8px), (L, 0 0 10px) {
         &.tab-nav--#{$size} {
           margin: $margin;
         }
@@ -122,10 +118,10 @@
   .tab-nav--button {
     .tab-nav-item--disabled {
       &.tab-nav--active {
-        border-color: lighten($main-active-color, 40%);
+        border-color: rgba($main-active-color, 0.6);
       }
     }
-    
+
     .tab-nav-item {
       position: relative;
       padding: 8px 24px;
@@ -137,12 +133,12 @@
       &:last-child {
         border-radius: 0 4px 4px 0;
       }
-      &:nth-of-type(n+2) {
+      &:nth-of-type(n + 2) {
         margin-left: -1px;
       }
     }
     .tab-nav--active {
-      border-color: lighten($main-active-color, 10%);
+      border-color: rgba($main-active-color, 0.9);
       z-index: 2;
     }
   }

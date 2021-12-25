@@ -24,7 +24,7 @@
     }
     .v-steps__line--finish {
       .v-steps__line-inner {
-        background-color: lighten($main-active-color, 10%);
+        background-color: rgba($main-active-color, 0.9);
       }
     }
   }

@@ -22,10 +22,10 @@
       }
       &:not(.v-dropdown__label--disabled) {
         &:hover {
-          border-color: lighten($main-active-color, 10%);
+          border-color: rgba($main-active-color, 0.9);
         }
         &:focus {
-          border-color: lighten($main-active-color, 10%);
+          border-color: rgba($main-active-color, 0.9);
         }
         &:active {
           border-color: darken($main-active-color, 10%);
@@ -48,10 +48,10 @@
     }
 
     &:hover {
-      color: lighten($main-active-color, 10%);
+      color: rgba($main-active-color, 0.9);
     }
     &:focus {
-      color: lighten($main-active-color, 10%);
+      color: rgba($main-active-color, 0.9);
     }
     &:active {
       color: darken($main-active-color, 10%);

@@ -64,7 +64,7 @@ Vue.use(Base);
     <v-input v-model="ruleForm.ssid"></v-input>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
-    <v-input v-model="ruleForm.pwd"></v-input>
+    <v-input v-model="ruleForm.pwd" show-password type="password"></v-input>
     <template v-slot:unit>
       <label class="v-form-item__unit">这里显示单位信息</label>
     </template>
