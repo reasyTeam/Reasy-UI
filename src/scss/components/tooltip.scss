@@ -1,6 +1,9 @@
 .v-tooltip {
   display: inline-block;
 }
+.v-tooltip--block {
+  display: block;
+}
 
 .v-tooltip__main {
   padding: 5px 8px;

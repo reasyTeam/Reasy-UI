@@ -1,15 +1,16 @@
 <template>
-  <div class="v-tooltip">
+  <div ref="tooltip" :class="['v-tooltip', tooltipClass]">
     <v-popups
       ref="popups"
       v-model="value"
       :effect="effect"
+      :class="tooltipClass"
       :custom-style="{
         maxWidth: `${maxWidth}px`,
         whiteSpace,
         wordBreak
       }"
-      :trigger="trigger"
+      :trigger="popupsTrigger"
       :show-arrow="showArrow"
       :arrow-offset="arrowOffset"
       :position="position"
@@ -84,7 +85,10 @@ export default {
     showOnlyEllipsis: Boolean
   },
   data() {
-    return {};
+    return {
+      tooltipClass: "",
+      popupsTrigger: this.trigger
+    };
   },
   mounted() {
     this.$nextTick(() => {
@@ -104,11 +108,23 @@ export default {
     },
     handleShowOnlyEllipsis() {
       if (this.showOnlyEllipsis) {
-        const popupsVm = this.$refs.popups,
-          ctt = popupsVm.parentElm,
-          trigger = ctt.scrollWidth > ctt.offsetWidth ? "hover" : "manual";
+        const { popups: popupsVm } = this.$refs;
+        let ctt; // 当前tooltip所依赖的标签
 
-        this.trigger = trigger;
+        if (this.$slots.default) {
+          // 组件方式
+          this.tooltipClass = "v-tooltip--block";
+          ctt = this.$slots.default[0].elm;
+        } else {
+          // 指令方式
+          ctt = popupsVm.parentElm;
+        }
+
+        // 使用nextTick兼容两种使用方式
+        this.$nextTick(() => {
+          this.popupsTrigger =
+            ctt.scrollWidth > ctt.offsetWidth ? "hover" : "manual";
+        });
       }
     }
   },
@@ -117,6 +133,9 @@ export default {
       if (newVal !== oldVal) {
         this.updatePosition();
       }
+    },
+    trigger(val) {
+      this.popupsTrigger = val;
     }
   }
 };
