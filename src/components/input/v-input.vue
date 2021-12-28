@@ -438,10 +438,10 @@ export default {
     isFocus(val) {
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
-        if (this.hoverInput) {
-          this.$dispatch("v-form-item", "form:error", false);
-          return;
-        }
+        // if (this.hoverInput) {
+        //   this.$dispatch("v-form-item", "form:error", false);
+        //   return;
+        // }
         this.$dispatch("v-form-item", "form:error", !val);
       }
     }
