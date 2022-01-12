@@ -146,7 +146,7 @@ export default {
   }
 
   &__list {
-    list-style: none;
+    list-style: none !important;
     margin: 0;
     padding: 0;
     &__item {

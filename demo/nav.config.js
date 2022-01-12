@@ -6,6 +6,10 @@ export default [
         groupName: "使用",
         list: [
           {
+            path: "introduce",
+            title: "简介"
+          },
+          {
             path: "start",
             title: "快速开始"
           }
