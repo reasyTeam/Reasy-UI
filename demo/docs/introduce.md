@@ -35,14 +35,13 @@ Reasy-UI 是一套为开发者、设计师和产品经理准备的桌面端组�
 > 项目开发过程中，直接使用组件库，无需适配，无需优化，开箱即用，降低开发成本，提升开发效率约**40%**
 
 
-### 维护
 
-#### 框架
+### 框架
 ![框架](../../img/1.png)
 <div style="color: #999;text-align: center;padding: 2px;margin-top: -40px;font-size: 12px;">表单组件框架</div>
 
 
-#### 代码结构
+### 代码结构
 
 ```
 ├─ build # 打包相关文件
@@ -72,10 +71,11 @@ Reasy-UI 是一套为开发者、设计师和产品经理准备的桌面端组�
 ```
 
 
-#### markdown解析原理
+markdown解析原理:
+
 将markdown转成抽象语法树AST，然后解析AST，生成html代码在浏览器中展示，对于自定义的指令进行解析，提取Vue相关代码，以插件的形式注入到页面中，显示为对应的组件。
 
-#### 组件打包
+组件打包:
 
 打包环境分为，组件合并打包、组件单独打包、使用文档打包三块，分别对应不同的配置文件。
 
@@ -158,7 +158,7 @@ export default {
 ```
 ::: demo
 
-\```html
+```html
 <div class="input-group">
   <v-input type="text" v-model="sizeL" size="L"></v-input>
 </div>
@@ -180,8 +180,7 @@ export default {
     }
   };
 </script>
-\```
-
+```                                                                   .
 :::
 ```
 以`::: demo`开始，以`:::`结束，中间填写合法的`Vue`代码即可正常解析显示。
