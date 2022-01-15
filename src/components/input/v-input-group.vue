@@ -232,7 +232,9 @@ export default {
       return inputValArr.join(this.inputSplitter).replace(reg, "");
     },
     handlerFocus(event) {
-      this.isFocus = true;
+      this.$nextTick(() => {
+        this.isFocus = true;
+      });
       this.focusIndex = +event.target.parentNode.getAttribute("data-index");
       this.$emit("focus");
     },
