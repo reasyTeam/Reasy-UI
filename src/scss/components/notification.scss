@@ -11,7 +11,8 @@
   width: 400px;
   max-width: 400px;
   background-color: #fff;
-  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12), 0px 4px 12px -8px rgba(0, 0, 0, 0.09);
+  box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12),
+    0px 4px 12px -8px rgba(0, 0, 0, 0.09);
   border-radius: 2px;
   // transition: opacity 0.3s, transform 0.4s;
 
@@ -53,16 +54,50 @@
     padding-right: $box-padding + $close-wrap-size;
   }
 
+  &--icon {
+    padding: 20px 24px 20px 72px;
+  }
+
+  &__iconbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 56px;
+    border-right: 1px solid #eeeef1;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    border-radius: 50%;
+
+    &--success {
+      color: $success-color;
+    }
+    &--error {
+      color: $error-color;
+    }
+    &--warning {
+      color: $warn-color;
+    }
+    &--notice {
+      color: $main-active-color;
+    }
+  }
+
   // .v-notification-fade-enter,
   // .v-notification-fade-leave-active {
   //   opacity: 0;
   //   transform: translate3d(100%, 0, 0);
   // }
 
-  @each $position1, $position2 in (top, right),
-                                  (top, left),
-                                  (bottom, right),
-                                  (bottom, left) {
+  @each $position1, $position2 in (top, right), (top, left), (bottom, right),
+    (bottom, left)
+  {
     &--#{$position1}-#{$position2} {
       transition: $base-transition, $position1 0.4s, $position2 0.4s;
 

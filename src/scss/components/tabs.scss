@@ -115,6 +115,29 @@
       }
     }
   }
+  .tab-nav--tag {
+    border-bottom: 1px solid $border-color;
+    .tab-nav-actions {
+      margin-bottom: -1px;
+    }
+    .tab-nav-item {
+      border: 1px solid transparent;
+      border-bottom: 1px solid $border-color;
+      margin-right: 4px;
+      border-radius: 4px 4px 0 0;
+      background-color: $disabled-background-color;
+      color: $light-color;
+
+      @include card-and-button-size;
+
+      &.tab-nav--active {
+        border-color: $border-color;
+        border-bottom-color: #fff;
+        background-color: #fff;
+        color: $title-color;
+      }
+    }
+  }
   .tab-nav--button {
     .tab-nav-item--disabled {
       &.tab-nav--active {

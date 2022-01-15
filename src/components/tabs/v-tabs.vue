@@ -46,7 +46,7 @@ export default {
       type: String,
       default: "link",
       validator(val) {
-        return ["link", "card", "button"].includes(val);
+        return ["link", "card", "button", "tag"].includes(val);
       }
     },
     size: {

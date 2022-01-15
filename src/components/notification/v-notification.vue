@@ -1,12 +1,25 @@
 <template>
   <transition :name="transitionName" @after-leave="handleAfterLeave">
     <div
-      :class="['v-notification', `v-notification--${position}`]"
+      :class="[
+        'v-notification',
+        `v-notification--${position}`,
+        { 'v-notification--icon': showIcon }
+      ]"
       :style="positionStyle"
       v-show="visible"
       @mouseenter="clearTimer"
       @mouseleave="startTimer"
     >
+      <div v-if="showIcon" class="v-notification__iconbox">
+        <i
+          class="v-notification__icon"
+          :class="[
+            `v-notification__icon--${status}`,
+            `v-icon-${STATUS_ICON[status]}`
+          ]"
+        ></i>
+      </div>
       <div class="v-notification__header">
         <h5
           v-if="title"
@@ -52,9 +65,26 @@
 </template>
 
 <script>
+const STATUS = {
+  NONE: "none",
+  SUCCESS: "success",
+  ERROR: "error",
+  WARNING: "warning",
+  NOTICE: "notice"
+};
+
+const STATUS_ICON = {
+  [STATUS.SUCCESS]: "ok-plane",
+  [STATUS.ERROR]: "close-plane",
+  [STATUS.WARNING]: "warning-plane",
+  [STATUS.NOTICE]: "notice-plane"
+};
+
 export default {
   name: "v-notification",
   data() {
+    this.STATUS = STATUS;
+    this.STATUS_ICON = STATUS_ICON;
     return {
       visible: false,
       title: "",
@@ -65,7 +95,8 @@ export default {
       showConfirm: false,
       confirmText: _("OK"),
       verticalOffset: 16,
-      dangerouslyUseHTMLString: false
+      dangerouslyUseHTMLString: false,
+      status: STATUS.NONE
     };
   },
   mounted() {
@@ -75,6 +106,9 @@ export default {
     this.clearTimer();
   },
   computed: {
+    showIcon() {
+      return this.status !== STATUS.NONE;
+    },
     positionArr() {
       return this.position.split("-");
     },

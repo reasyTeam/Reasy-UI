@@ -80,6 +80,7 @@
         @mouseover="isHover = true"
         @mouseout="isHover = false"
         class="v-input__search v-input__icon pointer v-icon-search"
+        :class="{ active: !!value }"
         @click="handlerSearch()"
       ></span>
       <!-- 清除图标 -->

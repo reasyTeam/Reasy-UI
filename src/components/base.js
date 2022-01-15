@@ -34,6 +34,10 @@ if (typeof window._ !== "function") {
     return nkey;
   };
 }
+// let isIpcom = process.env.product === "ipcom";
+// if (isIpcom) {
+//   document.body.className = document.body.className + " ipcom";
+// }
 
 const install = function(Vue) {
   Vue.prototype._ = window._;

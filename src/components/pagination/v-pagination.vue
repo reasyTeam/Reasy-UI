@@ -51,7 +51,7 @@
         :size="border ? 'M' : 'S'"
         :disabled="disabled"
         class="v-pagination__select"
-        :options="pageSizeOptions"
+        :options="pageSizeOptionsFormat"
         @change="changeSize"
       ></v-select>
       <span class="v-pagination__text">{{ _("P#erP#") }}</span>
@@ -197,6 +197,11 @@ export default {
         }
       }
       return footerArr;
+    },
+    pageSizeOptionsFormat() {
+      return this.pageSizeOptions.map(item => {
+        return { label: `${item}${_("I#tem#")}`, value: item };
+      });
     }
   },
 

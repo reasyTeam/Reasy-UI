@@ -15,8 +15,37 @@
         :key="value"
         :value="value"
       />
+      <!-- 图片上传 -->
+      <upload-image
+        v-if="type == 'picture'"
+        ref="image"
+        :disabled="disabled"
+        :upload-type="uploadType"
+        @clickFile="clickFile"
+        :data-image="imageBase64"
+      ></upload-image>
       <!-- 文件上传 -->
-      <div v-if="type !== 'picture'">
+      <div class="v-upload__row" v-else-if="type == 'file'">
+        <label
+          class="v-upload__row__file"
+          @click="clickFile"
+          :class="{
+            'has-file': fileName,
+            'v-upload__row__file-disabled': disabled
+          }"
+          >{{ fileName || _("Click Browse to select a file") }}</label
+        >
+        <v-button
+          :disabled="disabled"
+          class="v-upload__row__button"
+          @click="clickFile"
+        >
+          <span>{{ _("Browse") }}</span>
+        </v-button>
+      </div>
+
+      <!-- 其它上传类型 -->
+      <div v-else>
         <v-button
           icon="v-icon-upload"
           :disabled="disabled"
@@ -26,15 +55,6 @@
           <span>{{ _("Select File") }}</span>
         </v-button>
       </div>
-      <!-- 图片上传 -->
-      <upload-image
-        v-else
-        ref="image"
-        :disabled="disabled"
-        :upload-type="uploadType"
-        @clickFile="clickFile"
-        :data-image="imageBase64"
-      ></upload-image>
       <!-- 上传文件列表 -->
       <div
         v-if="fileName && showFileList"

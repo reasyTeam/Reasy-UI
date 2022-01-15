@@ -4,6 +4,11 @@ const { VueLoaderPlugin } = require("vue-loader");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = require("./components.js");
 
+const variables =
+  process.env.product === "ipcom"
+    ? `@import "src/scss/varibles-ipcom.scss";`
+    : `@import "src/scss/varibles-tenda.scss";`;
+
 module.exports = {
   //解决打包后出现多个Vue的问题
   externals: {
@@ -63,7 +68,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              prependData: `@import "src/scss/varibles.scss";`
+              prependData: variables //`@import "src/scss/varibles.scss";`
             }
           }
         ]

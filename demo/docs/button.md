@@ -64,10 +64,19 @@ Vue.use(Base);
     <v-button type="primary" size="S">按钮</v-button>
   </div>
   <div class="button-group">
+    <v-button type="primary" icon="v-icon-delete" size="S">按钮</v-button>
+  </div>
+  <div class="button-group">
     <v-button type="primary" size="M">按钮</v-button>
   </div>
   <div class="button-group">
+    <v-button type="primary" icon="v-icon-delete" size="M">按钮</v-button>
+  </div>
+  <div class="button-group">
     <v-button type="primary" size="L">按钮</v-button>
+  </div>
+  <div class="button-group">
+    <v-button type="primary" icon="v-icon-delete" size="L">按钮</v-button>
   </div>
 </section>
 ```

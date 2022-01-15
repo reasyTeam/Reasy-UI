@@ -13,6 +13,11 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 
+const variables =
+  process.env.product === "ipcom"
+    ? `@import "src/scss/varibles-ipcom.scss";`
+    : `@import "src/scss/varibles-tenda.scss";`;
+
 const webpackConfig = {
   mode: process.env.NODE_ENV,
   entry: "./demo/index.js",
@@ -92,7 +97,7 @@ const webpackConfig = {
           {
             loader: "sass-loader",
             options: {
-              prependData: `@import "src/scss/varibles.scss";`
+              prependData: variables //`@import "src/scss/varibles.scss";`
             }
           }
         ]

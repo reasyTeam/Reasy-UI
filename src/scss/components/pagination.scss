@@ -2,7 +2,7 @@
   font-size: 12px;
 
   &--border {
-    font-size: 14px;
+    font-size: $font-size-m;
   }
   &__item {
     display: inline-block;
@@ -19,7 +19,7 @@
     line-height: 20px;
     padding: 2px 0;
     width: 24px;
-    font-size: 14px;
+    font-size: $font-size-m;
     text-align: center;
     color: $info-color;
     cursor: pointer;

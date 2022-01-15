@@ -84,7 +84,7 @@
   }
 
   &--large {
-    @include switch-size(44px, 24px, $font-size-l);
+    @include switch-size($switch-size-l-w, $switch-size-l-h, $font-size-l);
 
     .v-switch__item {
       line-height: $form-line-height-l;
@@ -92,7 +92,7 @@
   }
 
   &--medium {
-    @include switch-size(36px, 20px, $font-size-m);
+    @include switch-size($switch-size-m-w,$switch-size-m-h, $font-size-m);
 
     .v-switch__item {
       line-height: $form-line-height;
@@ -100,7 +100,7 @@
   }
 
   &--small {
-    @include switch-size(28px, 16px, $font-size-s);
+    @include switch-size($switch-size-s-w,$switch-size-s-h, $font-size-s);
 
     .v-switch__item {
       line-height: $form-line-height-s;

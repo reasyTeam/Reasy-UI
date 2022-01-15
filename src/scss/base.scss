@@ -1,12 +1,13 @@
 // 公共样式类文件
 @import "./icon/style.css";
 @import "./reset.scss";
+@import "./ip-com.scss";
 
 * {
   box-sizing: border-box;
 }
 
-.size-0{
+.size-0 {
   font-size: 0 !important;
 }
 .no-select {
@@ -35,7 +36,7 @@
   outline: 0;
 
   &:hover {
-    border-color: $main-active-color;
+    border-color: $border-hover-color;
   }
 
   &:focus {
@@ -45,6 +46,10 @@
 
   .placeholder-text {
     padding: 0;
+  }
+
+  &.is-focus:hover {
+    border-color: $main-active-color;
   }
 }
 
@@ -72,6 +77,11 @@
 
 .disabled {
   cursor: not-allowed;
+}
+
+.is-focus {
+  border: 1px solid $main-active-color;
+  box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
 }
 
 @keyframes rotate {

@@ -9,8 +9,7 @@
     line-height: $lineHeight;
   }
 
-  
-  .input-text{
+  .input-text {
     line-height: $lineHeight - 2px;
   }
 
@@ -99,6 +98,7 @@
     .v-date-icon {
       color: $light-color;
       font-size: 16px;
+      line-height: inherit;
     }
     .v-icon-right {
       margin-right: 6px;

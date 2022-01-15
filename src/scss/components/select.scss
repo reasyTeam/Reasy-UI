@@ -111,7 +111,7 @@
       }
 
       &:hover {
-        background-color: rgba($main-active-color, 0.1);
+        background-color: rgba($main-active-color, 0.05);
         color: $main-active-color;
       }
     }
@@ -148,7 +148,7 @@
 
     .v-select__label__item,
     .v-select__icon--right {
-      line-height: 28px;
+      line-height: $form-line-height-l - 4px;
     }
     // &.v-select-options {
     //   max-height: 200px;
@@ -164,7 +164,7 @@
 
     .v-select__label__item,
     .v-select__icon--right {
-      line-height: 24px;
+      line-height: $form-line-height - 4px;
     }
     // &.v-select-options {
     //   max-height: 160px;
@@ -180,7 +180,7 @@
 
     .v-select__label__item,
     .v-select__icon--right {
-      line-height: 16px;
+      line-height: $form-line-height-s - 4px;
     }
 
     .v-select__label {
@@ -200,8 +200,14 @@
     transition: none;
   }
 
-  &:hover .input-text {
-    border-color: $main-active-color;
+  &:hover {
+    .input-text:not(.is-focus) {
+      border-color: $border-hover-color;
+    }
+
+    .is-focus .input-text {
+      border-color: $main-active-color;
+    }
   }
 }
 

@@ -102,6 +102,71 @@ export default {
 
 
 
+
+
+### tag样式
+
+:::demo `type`设置为`tag`。
+
+```html
+<template>
+  <div>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>小</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName" size="S" type="tag">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>中</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName1" size="M" type="tag">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+    <v-row class="tabs-demo__size">
+      <v-col :span="1">
+        <label>大</label>
+      </v-col>
+      <v-col :span="22">
+        <v-tabs v-model="activeName2" size="L" type="tag">
+          <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
+          <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
+          <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
+        </v-tabs>
+      </v-col>
+    </v-row>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeName: "",
+      activeName1: "",
+      activeName2: ""
+    };
+  }
+};
+</script>
+```
+
+:::
+
+
+
 ### 卡片样式
 
 :::demo `type`设置为`card`。
@@ -284,7 +349,7 @@ export default {
 | 参数         | 说明                                                                 | 类型                                  | 可选值           | 默认值              |
 | ------------ | -------------------------------------------------------------------- | ------------------------------------- | ---------------- | ------------------- |
 | v-model      | 当前激活tab的key                                                     | string                                | -                | 第一个选项卡的value |
-| type         | 风格类型                                                             | string                                | link/card/button | link                |
+| type         | 风格类型                                                             | string                                | link/card/button/tag | link                |
 | size         | 大小                                                                 | string                                | S/M/L            | M                   |
 | lazy         | tab内容加载方式。true使用v-if加载，false使用v-show              | string                                | -                | true                |
 | disabled     | 是否全部禁用                                                         | boolean                               | -                | false               |

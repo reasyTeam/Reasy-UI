@@ -1,13 +1,11 @@
 .v-button {
-  border-radius: 2px;
-  line-height: 20px;
   text-align: center;
   outline: 0;
   border: 0;
-  border-radius: 2px;
+  border-radius: $button-radius;
   cursor: pointer;
 
-  &+& {
+  & + & {
     margin-left: 12px;
   }
   &--inner {
@@ -15,22 +13,25 @@
   }
   &__item {
     display: inline-block;
+    vertical-align: middle;
   }
 
   &--medium {
     padding: 0 16px;
-    height: $form-line-height;
-    min-width: 60px;
+    height: $form-button-height;
+    min-width: 64px;
     font-size: $font-size-m;
-
-    .v-button__item + .v-button__item {
-      padding-left: 8px;
+    .v-button__item {
+      line-height: $form-button-height;
     }
+  }
+  .v-button__item + .v-button__item {
+    padding-left: 4px;
   }
 
   &--small {
     padding: 0 12px;
-    height: $form-line-height-s;
+    height: $form-button-height-s;
     min-width: 48px;
     font-size: $font-size-s;
 
@@ -41,12 +42,15 @@
     .button-suffix {
       padding-left: 4px;
     }
+    .v-button__item {
+      line-height: $form-button-height-s;
+    }
   }
 
   &--large {
     padding: 0 24px;
-    height: $form-line-height-l;
-    min-width: 80px;
+    height: $form-button-height-l;
+    min-width: 72px;
     font-size: $font-size-l;
 
     .button-prefix {
@@ -55,6 +59,9 @@
 
     .button-suffix {
       padding-left: 8px;
+    }
+    .v-button__item {
+      line-height: $form-button-height-l;
     }
   }
 
@@ -108,6 +115,18 @@
       border-color: $border-color !important;
       box-shadow: none !important;
       cursor: not-allowed;
+    }
+
+    &.v-button-- {
+      @each $type, $size in (large, $form-button-height-l - 2px),
+        (medium, $form-button-height - 2px), (small, $form-button-height-s - 2px)
+      {
+        &#{$type} {
+          .v-button__item {
+            line-height: #{$size};
+          }
+        }
+      }
     }
   }
 

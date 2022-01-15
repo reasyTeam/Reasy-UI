@@ -13,7 +13,7 @@
     &:hover {
       .v-checkbox__icon,
       .v-checkbox__process {
-        border-color: $main-active-color;
+        border-color: $border-hover-color;
       }
     }
 
@@ -65,7 +65,7 @@
     height: 16px;
     display: inline-block;
     vertical-align: middle;
-    border-radius: 1px;
+    border-radius: $check-radius;
     border: 1px solid $border-color;
 
     &--active {

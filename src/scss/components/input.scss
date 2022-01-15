@@ -225,12 +225,7 @@ input[type="number"] {
 }
 
 .is-hover {
-  border: 1px solid $main-active-color;
-}
-
-.is-focus {
-  border: 1px solid $main-active-color;
-  box-shadow: 0px 0px 4px 0px rgba($main-active-color, 0.5);
+  border: 1px solid $border-hover-color;
 }
 
 .is-input-error {

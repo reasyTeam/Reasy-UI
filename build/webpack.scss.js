@@ -3,6 +3,10 @@ const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const config = require("./scss.js");
+const variables =
+  process.env.product === "ipcom"
+    ? `@import "src/scss/varibles-ipcom.scss";`
+    : `@import "src/scss/varibles-tenda.scss";`;
 
 // 文件拷贝，将主题相关文件拷贝到theme文件夹
 
@@ -39,7 +43,7 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              prependData: `@import "src/scss/varibles.scss";`
+              prependData: variables //`@import "src/scss/varibles.scss";`
             }
           }
         ],

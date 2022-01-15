@@ -64,4 +64,31 @@
       vertical-align: middle;
     }
   }
+
+  &__row {
+    &__file {
+      width: $elem-width;
+      display: inline-block;
+      border: 1px solid $border-color;
+      border-right: 0;
+      line-height: $form-line-height - 2px;
+      height: $form-line-height;
+      border-radius: 4px 0 0 4px;
+      vertical-align: middle;
+      font-size: $font-size-m;
+      padding: 0 8px;
+      color: $border-color;
+      cursor: pointer;
+      &.has-file {
+        color: $title-color;
+      }
+      &.v-upload__row__file-disabled {
+        cursor: not-allowed;
+      }
+    }
+    &__button {
+      border-radius: 0 4px 4px 0;
+      vertical-align: middle;
+    }
+  }
 }

@@ -19,6 +19,7 @@ Vue.use(Base);
 <template>
   <v-button class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
   <v-button class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
+  <v-button class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
 </template>
 
 <script>
@@ -40,6 +41,13 @@ export default {
         duration: 0,
         position: "top-right"
       });
+    },handleStatueShowClick() {
+      this.$notify({
+        status: "success",
+        content: "显示状态",
+        duration: 0,
+        position: "top-right"
+      });
     }
   }
 };
@@ -49,6 +57,55 @@ export default {
 :::
 
 
+### 不同状态提醒
+
+:::demo 通过配置`status`显示预置的状态信息，目前可选的状态信息有`success`成功、`error`失败、`warning`警告、`notice`正常通知和`none`无状态，默认为`none`。
+
+```html
+<template>
+  <v-button class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
+  <v-button class="notify-btn" type="danger" @click="handleError">失败</v-button>
+  <v-button class="notify-btn" type="info" @click="handleWarning">警告</v-button>
+  <v-button class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleSuccess() {
+      this.$notify({
+        status: "success",
+        content: "这是一条成功信息！",
+        position: "top-right"
+      });
+    },
+    handleError() {
+      this.$notify({
+        status: "error",
+        content: "这是一条错误信息！",
+        position: "top-right"
+      });
+    },
+    handleWarning() {
+      this.$notify({
+        status: "warning",
+        content: "这是一条警告！",
+        position: "top-right"
+      });
+    },
+    handleNotice() {
+      this.$notify({
+        status: "notice",
+        content: "这是一条普通的消息提醒",
+        position: "top-right"
+      });
+    }
+  }
+};
+</script>
+```
+
+:::
 
 ### 自定义弹出位置
 
@@ -253,6 +310,7 @@ export default {
 | 参数                     | 说明                                    | 类型         | 可选值                                                  | 默认值    |
 | ------------------------ | --------------------------------------- | ------------ | ------------------------------------------------------- | --------- |
 | title                    | 标题                                    | string       | -                                                       | -         |
+| status                   | 状态，不同状态显示不同的图标  | string       | success、error、notice、warning、none                                                      | none         |
 | content                  | 说明文字                                | string | -                                                       | -         |
 | duration                 | 显示时间，单位：毫秒。设置为0则不会关闭 | number       | -                                                       | 4500      |
 | position                 | 自定义弹出位置                          | string       | top-right<br/>top-left<br/>bottom-right<br/>bottom-left | top-right |

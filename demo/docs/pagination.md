@@ -73,7 +73,7 @@ Vue.use(Base);
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title">简洁</v-col>
   <v-col :span="22">
-    <v-pagination :total="100" is-show-total is-change-size is-input-page :border="false" :current-page="8" ></v-pagination>
+    <v-pagination :total="100" is-show-total is-change-size is-input-page :border="false" :current-page="8" :pageSizeOptions="[10,20,50,100]"></v-pagination>
   </v-col>
 </v-row>
 ```

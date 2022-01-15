@@ -1,0 +1,82 @@
+@import "./varibles.scss";
+// 全局变量
+$padding: 14px;
+// 主色
+$main-active-color: #ff801f;
+
+// S-M-L 三种size元素高度
+$form-line-height-s: 24px;
+$form-line-height: 32px;
+$form-line-height-l: 40px;
+// 按钮尺寸
+$form-button-height-s: 24px;
+$form-button-height: 32px;
+$form-button-height-l: 40px;
+// S-M-L 三种size文字大小
+$font-size-s: 12px;
+$font-size-m: 14px;
+$font-size-l: 16px;
+// 不同组件radius大小
+$check-radius: 1px;
+$button-radius: 2px;
+// 不同尺寸开关大小
+$switch-size-l-w: 44px;
+$switch-size-l-h: 24px;
+$switch-size-m-w: 36px;
+$switch-size-m-h: 20px;
+$switch-size-s-w: 28px;
+$switch-size-s-h: 16px;
+
+// 成功相关颜色
+$success-color: #17cc82;
+// 警告相关颜色
+$warn-color: #f4b71e;
+// 错误相关颜色
+$error-color: #f7421e;
+// 标题颜色
+$title-color: #262626;
+// 普通文本颜色
+$info-color: #595959;
+// 弱化信息颜色
+$light-color: #8d8d8d;
+// 边框颜色
+$border-color: #d8d8d8;
+$border-hover-color: $main-active-color;
+// 禁用字体颜色
+$disabled-color: #c0c0c0;
+// 禁用边框颜色
+$disabled-border-color: #e9e9e9;
+// 禁用背景颜色
+$disabled-background-color: #f5f5f5;
+// placeholder颜色
+$placeholder-color: #ccc;
+
+// 表单元素宽度，例如：select、input等
+$elem-width: 228px;
+
+$--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
+  opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    visibility: hidden;
+    clear: both;
+  }
+}
+
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin bold {
+  font-weight: 600;
+}
+
+@mixin disabled-style {
+  color: $disabled-color !important;
+  cursor: not-allowed;
+}

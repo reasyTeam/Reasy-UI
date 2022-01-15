@@ -36,6 +36,34 @@ Vue.use(Base);
 
 :::
 
+### 文件上传
+
+`type` 配置上传的类型，支持`picture`、`file`和`text`，默认为`text`
+
+::: demo
+
+```html
+<v-upload
+  action="/cgi-bin/upload"
+  ref="upload"
+  type="file"
+  :on-change="changeCallBack"
+  ></v-upload>
+</div>
+<script>
+  export default {
+    methods: {
+      changeCallBack() {
+        this.$refs.upload.submit();
+      }
+    }
+  };
+</script>
+
+```
+
+:::
+
 ### 图片上传
 
 `type` 配置上传的类型，支持`picture`和`text`，默认为`text`
@@ -90,7 +118,34 @@ Vue.use(Base);
 
 :::
 
-图片禁用
+#### 文件禁用
+
+::: demo
+
+```html
+<v-upload
+  action="/cgi-bin/upload"
+  ref="upload"
+  disabled
+  type="file"
+  :on-change="changeCallBack"
+  ></v-upload>
+</div>
+<script>
+  export default {
+    methods: {
+      changeCallBack() {
+        this.$refs.upload.submit();
+      }
+    }
+  };
+</script>
+
+```
+
+:::
+
+#### 图片禁用
 
 ::: demo
 

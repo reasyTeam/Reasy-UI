@@ -36,10 +36,13 @@
   "Page %s/%s": "第%s/%s页",
   "P#erP#": "",
   "Go to": "前往",
-  "P#aGe#": "",
+  "P#aGe#": "页",
+  "I#tem#": "条/页",
   "Custom": "自定义",
   "Please select": "请选择",
   "Add": "添加",
   "Select File": "选择文件",
-  "%s items in total": "共%s条"
+  "%s items in total": "共%s条",
+  "Browse": "浏览",
+  "Click Browse to select a file": "点击浏览选择文件"
 }
