@@ -196,7 +196,6 @@ export default {
     //失焦后数据验证
     this.$on("form:blur", val => {
       this.checkValid(val);
-      if (!this.relativeProp) return;
 
       //获取关联验证组件
       if (!this.relativeProp) return;
@@ -209,7 +208,7 @@ export default {
         let relativeField = this.getField(item);
         relativeField.forEach(item => {
           //当关联元素没有错误 && 有验证函数时
-          !item.error && item.checkValid && item.checkValid();
+          !item.error && item.value && item.checkValid && item.checkValid();
         });
       });
     });
