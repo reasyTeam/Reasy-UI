@@ -38,8 +38,8 @@
         :style="{ paddingRight: subffixWidth }"
         @blur="blur"
         @change="changeValue"
-        @keydown="$emit('keydown', $event)"
-        @keyup="$emit('keyup', $event)"
+        @keydown="!isZh ? $emit('keydown', $event) : ''"
+        @keyup="!isZh ? $emit('keyup', $event) : ''"
         @input="handlerInput"
         :placeholder="placeholder"
       />
