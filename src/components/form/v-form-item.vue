@@ -208,7 +208,10 @@ export default {
         let relativeField = this.getField(item);
         relativeField.forEach(item => {
           //当关联元素没有错误 && 有验证函数时
-          !item.error && item.value && item.checkValid && item.checkValid();
+          !item.error &&
+            item.getValue() &&
+            item.checkValid &&
+            item.checkValid();
         });
       });
     });
