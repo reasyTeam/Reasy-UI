@@ -134,11 +134,11 @@ $slider-line-height: 4px;
     }
 
     .v-slider-line__inner {
-      background-color: #ffcd93;
+      background-color: lighten($main-active-color, 40%);
     }
 
     .v-slider-line__bar {
-      border-color: #ffcd93;
+      border-color: lighten($main-active-color, 40%);
       cursor: not-allowed;
 
       &:hover {

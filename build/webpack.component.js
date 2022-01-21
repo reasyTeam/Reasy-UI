@@ -1,15 +1,10 @@
 const path = require("path");
-const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const { VueLoaderPlugin } = require("vue-loader");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const config = require("./components.js");
 
-const variables =
-  process.env.product === "ipcom"
-    ? `@import "src/scss/varibles-ipcom.scss";`
-    : `@import "src/scss/varibles-tenda.scss";`;
-
 module.exports = {
+  noCss: true,
   //解决打包后出现多个Vue的问题
   externals: {
     vue: {
@@ -21,10 +16,8 @@ module.exports = {
   },
   entry: config, // 入口文件路径
   output: {
-    path: path.join(root, "dist/lib"), // 出口目录
     chunkFilename: "[name].js?[chunkhash:5]",
     filename: "[name]/index.js",
-    //library: 'reasyUIVue',
     libraryTarget: "commonjs2",
     libraryExport: "default"
   },
@@ -59,25 +52,9 @@ module.exports = {
           },
           extractCSS: true
         }
-      },
-      {
-        test: /\.(scss|css)$/,
-        use: [
-          "css-loader",
-          "postcss-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              prependData: variables //`@import "src/scss/varibles.scss";`
-            }
-          }
-        ]
       }
     ]
   },
   devtool: false,
-  // optimization:{
-  //   minimize: false
-  // },
   plugins: [new VueLoaderPlugin(), new UglifyJsPlugin()]
 };

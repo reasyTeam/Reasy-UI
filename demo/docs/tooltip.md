@@ -207,11 +207,33 @@ Vue.use(Base);
 
 ### 特殊用法
 
-:::demo 使用`v-tooltip`指令的配置`show-only-ellipsis`，设置为`true`即可生效。
+:::demo 使用组件用法时，组件的父级元素必须是`块级元素`；使用`v-tooltip`指令的配置`show-only-ellipsis`，设置为`true`即可生效。
 
 ```html
 <template>
   <section>
+    <h5>组件用法：</h5>
+    <v-tooltip
+        effect="light"
+        :enterable="false"
+        :between-space=0
+        show-only-ellipsis
+        :content="ellipsisLong"
+        position="top-left"
+      >
+        <p style="width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ ellipsisShort }}</p>
+    </v-tooltip>
+    <v-tooltip
+        effect="light"
+        :enterable="false"
+        :between-space=0
+        show-only-ellipsis
+        :content="ellipsisLong"
+        position="top-left"
+      >
+        <p style="width: 150px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">{{ ellipsisLong }}</p>
+    </v-tooltip>
+    <h5>指令用法：</h5>
     <p
       v-tooltip="{
         effect: 'light',

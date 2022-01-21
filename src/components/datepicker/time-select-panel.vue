@@ -9,6 +9,7 @@
         :minuteInterval="minuteInterval"
         :secondInterval="secondInterval"
         :time="currentTime"
+        :count="count"
         @change="changeTime"
       ></time-panel>
     </div>
@@ -24,6 +25,11 @@ export default {
     TimePanel
   },
   props: {
+    //内容区域最多显示多少条
+    count: {
+      type: Number,
+      default: 7
+    },
     format: String,
     isRange: Boolean,
     minuteInterval: Number,

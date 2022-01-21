@@ -2,10 +2,8 @@ const path = require("path");
 const root = path.resolve(__dirname, ".."); // 项目的根目录绝对路径
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const variables =
-  process.env.product === "ipcom"
-    ? `@import "src/scss/varibles-ipcom.scss";`
-    : `@import "src/scss/varibles-tenda.scss";`;
+const { getConfig } = require("./config");
+const { variables } = getConfig();
 
 module.exports = {
   entry: {

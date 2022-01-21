@@ -1,8 +1,11 @@
-// import "./translate.js";
-// import Message from "./message/message.js";
-// import Notification from "./notification/notification.js";
 //全局指令
 import Derectives from "./directives";
+import { addClass } from "./libs";
+
+// 商用主题风格全局样式（非IPCOM）
+if (process.env.THEME === "trade") {
+  addClass(document.body, "trade");
+}
 
 if (window.langData === undefined) {
   window.langData = {};
@@ -34,10 +37,6 @@ if (typeof window._ !== "function") {
     return nkey;
   };
 }
-// let isIpcom = process.env.product === "ipcom";
-// if (isIpcom) {
-//   document.body.className = document.body.className + " ipcom";
-// }
 
 const install = function(Vue) {
   Vue.prototype._ = window._;

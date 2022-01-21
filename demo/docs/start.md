@@ -64,6 +64,24 @@ Vue.use(Input);
 
 > 其中`Base`为组件基础支撑项，必须引入项，否则其它组件部分功能会不生效。
 
+### IPCOM风格引用
+
+```
+import ReasyUi from "@reasy-team/reasy-ui/dist/ipcom/reasy-ui.js";
+import "@reasy-team/reasy-ui/dist/ipcom/style.css";
+
+Vue.use(ReasyUi);
+```
+
+### 商用风格引用
+
+```
+import ReasyUi from "@reasy-team/reasy-ui/dist/trade/reasy-ui.js";
+import "@reasy-team/reasy-ui/dist/trade/style.css";
+
+Vue.use(ReasyUi);
+```
+
 ### 更改主题风格
 
 支持自定义主题风格，只需要几个简单的步骤就可以完成风格切换。

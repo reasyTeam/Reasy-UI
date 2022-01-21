@@ -2,7 +2,7 @@
   <div class="v-popconfirm">
     <v-popups
       ref="popups"
-      :custom-style="{ maxWidth }"
+      :custom-style="{ minWidth, maxWidth }"
       :show-arrow="showArrow"
       :position="position"
       :popups-offset="popupsOffset"
@@ -56,7 +56,7 @@ export default {
   name: "v-popconfirm",
   data() {
     return {
-      maxWidth: "400px"
+      minWidth: "200px"
     };
   },
   props: {
@@ -72,6 +72,10 @@ export default {
     position: {
       type: String,
       default: "top-center"
+    },
+    maxWidth: {
+      type: String,
+      default: "300px"
     },
     transition: String,
     showArrow: {

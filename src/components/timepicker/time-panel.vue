@@ -106,6 +106,11 @@ export default {
       type: Number,
       default: 1
     },
+    //内容区域最多显示多少条
+    count: {
+      type: Number,
+      default: 7
+    },
     //时间值
     time: String,
     min: String,
@@ -210,7 +215,7 @@ export default {
   },
   data() {
     return {
-      count: 7, //内容区域最多显示多少条
+      // count: 7, //内容区域最多显示多少条
       hour: "",
       minute: "",
       second: ""

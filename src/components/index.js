@@ -1,5 +1,4 @@
 import "../scss/index.scss";
-
 //全局方法，挂载到prototype上的方法
 import Base from "./base.js";
 

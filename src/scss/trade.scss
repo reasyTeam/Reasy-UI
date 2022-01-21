@@ -1,6 +1,9 @@
+/**
+ * 商用主题风格
+ */
 $icon-color: #dddde2;
 
-.ipcom {
+.trade {
   // input start
   .v-input__icon {
     color: #cbccd2;
@@ -186,7 +189,7 @@ $icon-color: #dddde2;
     padding: 0 16px;
   }
   .v-datepicker--panel__wrapper {
-    padding: 7px 16px;
+    padding: 8px 16px;
   }
   .v-datepicker--panel .date {
     font-size: 12px;
@@ -202,14 +205,12 @@ $icon-color: #dddde2;
     border-radius: 4px;
   }
 
-  .v-datepicker--panel__title .pointer {
+  .v-datepicker--panel__title .pointer,
+  .v-datepicker--panel__header {
     font-weight: 600;
     color: #676775;
   }
 
-  .v-datepicker--panel__date-list {
-    // padding: 16px 0;
-  }
   .v-datepicker--panel .year {
     display: inline-block;
     width: 48px;

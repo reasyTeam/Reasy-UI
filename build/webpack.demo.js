@@ -7,23 +7,15 @@ const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-// const loader = require("sass-loader");
-// const ReplacePlugin = require("webpack-plugin-replace");
 const CopyPlugin = require("copy-webpack-plugin");
-
-const isProd = process.env.NODE_ENV === "production";
-
-const variables =
-  process.env.product === "ipcom"
-    ? `@import "src/scss/varibles-ipcom.scss";`
-    : `@import "src/scss/varibles-tenda.scss";`;
+const { getConfig } = require("./config");
+const { variables, isProd } = getConfig();
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
   entry: "./demo/index.js",
   output: {
     path: path.resolve(process.cwd(), "./docs/"),
-    publicPath: process.env.CI_ENV || "",
     filename: "[name].[hash:7].js",
     chunkFilename: isProd ? "page/[name].[hash:7].js" : "[name].js",
     devtoolModuleFilenameTemplate: info => {
@@ -135,7 +127,8 @@ const webpackConfig = {
     new ProgressBarPlugin(),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      "process.env.FAAS_ENV": JSON.stringify(process.env.FAAS_ENV)
+      "process.env.FAAS_ENV": JSON.stringify(process.env.FAAS_ENV),
+      "process.env.THEME": JSON.stringify(process.env.THEME)
     }),
     new webpack.LoaderOptionsPlugin({
       vue: {

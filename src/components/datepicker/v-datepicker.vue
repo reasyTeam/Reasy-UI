@@ -62,7 +62,7 @@
       class="v-datepicker--panel"
       :show="showDatePanel"
       v-clickoutside="() => hide(true)"
-      :width="isRange || hasTime ? '456px' : '228px'"
+      :width="dateWrapperWidth"
     >
       <!-- 日期设置 -->
       <v-row>
@@ -94,6 +94,7 @@
                 :secondInterval="secondInterval"
                 @changeTime="changeTime"
                 :time="startDate"
+                :count="count"
               ></time-panel>
             </v-col>
           </template>
@@ -123,6 +124,7 @@
                 :secondInterval="secondInterval"
                 @changeTime="changeEndTime"
                 :time="endDate"
+                :count="count"
               ></time-panel>
             </v-col>
           </template>
@@ -174,6 +176,7 @@
               :secondInterval="secondInterval"
               @changeTime="changeTime"
               :time="startDate"
+              :count="count"
             ></time-panel>
           </v-col>
         </template>
@@ -211,6 +214,10 @@ import {
   getTimeNumber,
   on
 } from "../libs";
+
+const IS_TRADE = process.env.THEME === "trade";
+const DATE_WRAPPER_WIDTH = IS_TRADE ? 256 : 228;
+
 export default {
   name: "v-datepicker",
   mixins: [FormMixin],
@@ -285,6 +292,13 @@ export default {
     // }
   },
   computed: {
+    dateWrapperWidth() {
+      return `${
+        this.isRange || this.hasTime
+          ? DATE_WRAPPER_WIDTH * 2
+          : DATE_WRAPPER_WIDTH
+      }px`;
+    },
     sizeCss() {
       let cssObj = {
         M: "v-datepicker--medium",
@@ -353,6 +367,7 @@ export default {
   },
   data() {
     return {
+      count: IS_TRADE ? 8 : 7,
       isSetTime: false,
       isSetStartTime: true, //是否设置开始时间
       isChangedInput: false, //是否输入框聚焦已切换
