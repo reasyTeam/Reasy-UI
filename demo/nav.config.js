@@ -33,6 +33,10 @@ export default [
           {
             path: "scroll",
             title: "Scroll 滚动条"
+          },
+          {
+            path: "colorpicker",
+            title: "Colorpicker 颜色选择器"
           }
         ]
       },
@@ -54,6 +58,10 @@ export default [
           {
             path: "pagination",
             title: "Pagination 分页"
+          },
+          {
+            path: "menu",
+            title: "Menu 菜单栏"
           }
         ]
       },
@@ -71,6 +79,10 @@ export default [
           {
             path: "input-number",
             title: "Input Num 计数器"
+          },
+          {
+            path: "edit",
+            title: "Edit 编辑框"
           },
           {
             path: "select",
@@ -157,6 +169,10 @@ export default [
           {
             path: "percent",
             title: "Percent 百分比"
+          },
+          {
+            path: "qrcode",
+            title: "QR code 二维码"
           }
         ]
       },

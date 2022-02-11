@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'icomoon';
   src:
-    url('fonts/icomoon.ttf?t6zin6') format('truetype'),
-    url('fonts/icomoon.woff?t6zin6') format('woff'),
-    url('fonts/icomoon.svg?t6zin6#icomoon') format('svg');
+    url('fonts/icomoon.ttf?628fqz') format('truetype'),
+    url('fonts/icomoon.woff?628fqz') format('woff'),
+    url('fonts/icomoon.svg?628fqz#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,34 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.v-icon-operate .path1:before {
+  content: "\e92c";
+  color: rgb(244, 245, 247);
+}
+.v-icon-operate .path2:before {
+  content: "\e92d";
+  margin-left: -1em;
+  color: rgb(139, 140, 153);
+}
+.v-icon-operate .path3:before {
+  content: "\e92e";
+  margin-left: -1em;
+  color: rgb(139, 140, 153);
+}
+.v-icon-operate .path4:before {
+  content: "\e92f";
+  margin-left: -1em;
+  color: rgb(139, 140, 153);
+}
+.v-icon-sort-load:before {
+  content: "\e929";
+}
+.v-icon-sort-up:before {
+  content: "\e92a";
+}
+.v-icon-sort-down:before {
+  content: "\e92b";
+}
 .v-icon-radio-checked:before {
   content: "\e901";
 }

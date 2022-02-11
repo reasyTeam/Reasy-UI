@@ -1,0 +1,47 @@
+.v-colorpicker {
+  position: relative;
+  display: inline-block;
+  &__input {
+    width: $elem-width;
+    height: $form-line-height;
+    line-height: $form-line-height;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    span {
+      color: $info-color;
+      font-size: $font-size-m;
+      margin-right: 4px;
+    }
+    &--disabled {
+      span {
+        color: $disabled-color;
+      }
+    }
+  }
+  &__list {
+    overflow: hidden;
+    cursor: pointer;
+    &--disabled {
+      position: relative;
+      // opacity: 0.4;
+      cursor: not-allowed;
+    }
+    &--disabled:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      opacity: 0.4;
+    }
+    &__item {
+      list-style: none;
+      width: $form-line-height;
+      height: $form-line-height;
+      float: left;
+    }
+  }
+}

@@ -13,6 +13,32 @@ export default {
       type: [String, Boolean],
       default: false
     },
+    //表头列表项操作
+    addOperate: {
+      type: Boolean,
+      default: true
+    },
+    //表头列表项默认状态
+    isDefaultValue: {
+      type: Boolean,
+      default: true
+    },
+    //文字换行 数据为数组
+    wordWrap: {
+      type: Boolean,
+      default: false
+    },
+    //状态颜色 数据为对象
+    // textColor: {
+    //   type: Boolean,
+    //   default: false
+    // },
+    // colorObj: {
+    //   type: Object,
+    //   default: () => {
+    //     return {};
+    //   }
+    // },
     label: {
       //表头文字
       default: "",

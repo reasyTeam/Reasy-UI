@@ -1,6 +1,6 @@
 {
   "name": "@reasy-team/reasy-ui",
-  "version": "3.0.26",
+  "version": "3.1.0",
   "main": "dist/reasy-ui.js",
   "scripts": {
     "build": "node build/publish.js all",
@@ -27,6 +27,7 @@
     "lodash": "^4.17.21",
     "resize-observer-polyfill": "^1.5.1",
     "vue": "^2.6.11",
+    "vue-qr": "^3.2.4",
     "vue-router": "^3.1.6"
   },
   "devDependencies": {
