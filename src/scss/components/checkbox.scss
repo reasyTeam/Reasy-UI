@@ -129,3 +129,19 @@
     margin-right: 0;
   }
 }
+.v-custom {
+  &.v-checkbox-group {
+    display: block;
+  }
+  .v-checkbox {
+    display: initial;
+    &__item {
+      float: initial;
+      padding: 0 16px;
+    }
+  }
+  .line {
+    border: 1px solid #EEEFF1;
+    margin: 8px 16px 3px
+  }
+}

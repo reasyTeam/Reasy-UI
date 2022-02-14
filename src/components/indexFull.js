@@ -17,12 +17,14 @@ import Pie from "./chart/pie";
 import Percent from "./chart/percent";
 import Progress from "./chart/percent/progress";
 
+import Edit from "./edit";
+import Qrcode from "./qrcode";
 import Button from "./button";
 import { Input, InputGroup, InputNumber } from "./input";
 import Slider from "./slider";
 import Select from "./select";
 import Radio from "./radio";
-import { Checkbox, CheckboxGroup } from "./checkbox";
+import { Checkbox, CheckboxGroup, CheckboxGroupTrade } from "./checkbox";
 import Switch from "./switch";
 import TimePicker from "./timepicker";
 import DatePicker, { DatepickerPanel } from "./datepicker";
@@ -41,11 +43,14 @@ import Popconfirm from "./popconfirm";
 import Tooltip from "./tooltip";
 import Dialog from "./dialog";
 import Dropdown from "./dropdown";
+import DropdownCustom from './dropdown';
 import Tabs from "./tabs";
 import TabPane from "./tab-pane";
 import Steps from "./steps";
 import Step from "./step";
 import CollapseTransition from "./collapse/collapse-transition.js";
+import Colorpicker from "./colorpicker";
+import Menu from "./menu";
 
 const components = [
   Collapse,
@@ -58,10 +63,13 @@ const components = [
   Input,
   InputGroup,
   InputNumber,
+  Edit,
+  Qrcode,
   Slider,
   Radio,
   Checkbox,
   CheckboxGroup,
+  CheckboxGroupTrade,
   Select,
   Switch,
   TimePicker,
@@ -89,12 +97,15 @@ const components = [
   // Tooltip,
   Dialog,
   Dropdown,
+  DropdownCustom,
   Tabs,
   TabPane,
   Steps,
   Step,
   Percent,
-  Progress
+  Progress,
+  Colorpicker,
+  Menu
 ];
 
 const install = function(Vue) {

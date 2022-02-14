@@ -80,6 +80,16 @@ input[type="number"] {
     }
   }
 
+  &__pre-text {
+    position: absolute;
+    height: 100%;
+    padding: 0 8px;
+    vertical-align: middle;
+    color: $light-color;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
   &__search {
     position: relative;
     top: 1px;
@@ -184,6 +194,70 @@ input[type="number"] {
 
   &.is-disabled {
     border: 1px solid $disabled-border-color !important;
+  }
+}
+
+.strength {
+  position: absolute;
+  height: 12px;
+  margin-top: 4px;
+  line-height: 12px;
+  font-size: 12px;
+  white-space: nowrap;
+  &-intro {
+    color: $info-color;
+  }
+  &-list {
+    display: inline-block;
+    width: 121px;
+    height: 8px;
+    margin: 0 5px;
+    padding: 1px;
+    box-sizing: border-box;
+    border-radius: 1px;
+    background: white;
+    border: 1px solid #d8d8d8;
+    &-item {
+      float: left;
+      margin-right: 1px;
+      width: 38px;
+      height: 4px;
+      background: #d8d8d8;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  li {
+    list-style-type: none;
+  }
+}
+.strength-L {
+  .strength-list .strength-list-item:first-child {
+    background: $error-color;
+  }
+  .strength-text {
+    color: $error-color;
+  }
+}
+.strength-M {
+  .strength-list .strength-list-item:nth-child(1) {
+    background: $warn-color;
+  }
+  .strength-list .strength-list-item:nth-child(2) {
+    background: $warn-color;
+  }
+  .strength-text {
+    color: $warn-color;
+  }
+}
+.strength-H {
+  .strength-list .strength-list-item {
+    background: $success-color;
+  }
+  .strength-text {
+    color: $success-color;
   }
 }
 

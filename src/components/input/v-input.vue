@@ -1,8 +1,8 @@
 <template>
   <label
     class="v-input"
-    @mouseleave="hoverInput = false"
-    @mouseenter="hoverInput = true"
+    @mousedown="isClickIcon = true"
+    @mouseup="isClickIcon = false"
     :class="[
       {
         'v-input--prefix': icon,
@@ -17,6 +17,13 @@
       v-if="icon"
       :class="icon"
     ></span>
+    <span
+      v-if="preText"
+      ref="preText"
+      class="v-input__middle v-input__pre-text"
+      :style="icon && { left: '32px', paddingLeft: 0 }"
+      >{{ preText }}</span
+    >
     <template v-if="type !== 'textarea'">
       <input
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
@@ -35,7 +42,7 @@
         :readonly="readonly"
         :minlength="minlength"
         :maxlength="maxlength"
-        :style="{ paddingRight: subffixWidth }"
+        :style="inputStyle"
         @blur="blur"
         @change="changeValue"
         @keydown="!isZh ? $emit('keydown', $event) : ''"
@@ -112,6 +119,21 @@
     </span>
     <!-- 后缀内容 -->
     <slot name="suffix"></slot>
+    <!-- 密码强度 -->
+    <div
+      :class="['strength', `strength-${strength}`]"
+      v-show="showStrength && strength && !isError"
+    >
+      <span class="strength-intro">{{ _("Strength") }}</span>
+      <ul class="strength-list">
+        <li class="strength-list-item"></li>
+        <li class="strength-list-item"></li>
+        <li class="strength-list-item"></li>
+      </ul>
+      <span v-if="showStrengthText" class="strength-text">
+        {{ strengthText[strength] }}
+      </span>
+    </div>
   </label>
 </template>
 
@@ -195,7 +217,18 @@ export default {
     unit: {
       type: String,
       default: ""
-    }
+    },
+    //是否有密码强度判断
+    showStrength: {
+      type: Boolean,
+      default: false
+    },
+    showStrengthText: {
+      type: Boolean,
+      default: true
+    },
+    strength: String,
+    preText: String
   },
   computed: {
     //尺寸大小样式
@@ -246,9 +279,21 @@ export default {
     },
     isError() {
       return !!(this.elFormItem && this.elFormItem.showError);
+    },
+    inputStyle() {
+      let style = { paddingRight: this.subffixWidth };
+      if (this.preText) {
+        style.paddingLeft = this.preTextWidth + (this.icon ? 32 : 0) + "px";
+      }
+      return style;
     }
   },
   data() {
+    this.strengthText = {
+      L: _("low"),
+      M: _("middle"),
+      H: _("high")
+    };
     return {
       valueLen: 0, //输入框值长度
       isHover: false,
@@ -256,7 +301,8 @@ export default {
       subffixWidth: "",
       passwordVisible: false,
       isZh: false, //是否非英文输入法,
-      hoverInput: false //鼠标是否在输入框内
+      preTextWidth: 0, //前缀文本宽度
+      isClickIcon: false
     };
   },
   mounted() {
@@ -281,6 +327,17 @@ export default {
   },
   methods: {
     changeValue(event) {
+      const { autoCorrection } = this;
+
+      if (autoCorrection.length) {
+        //选择自动纠错，仅可纠正为数字
+        const minValue = autoCorrection[0],
+          maxValue = autoCorrection[1],
+          inputVal = event.target.value;
+
+        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
+        event.target.value = newVal;
+      }
       this.$emit("change", event.target.value);
       this.$dispatch("v-form", "form:change");
     },
@@ -332,11 +389,24 @@ export default {
       this.$refs.input.select();
     },
     blur(event) {
-      // if (this.hoverInput) {
-      //   this.$refs.input.focus();
-      //   return;
-      // }
+      if (this.isClickIcon) {
+        this.$refs.input.focus();
+        return;
+      }
+      const { autoCorrection } = this;
 
+      if (autoCorrection.length) {
+        const minValue = autoCorrection[0],
+          maxValue = autoCorrection[1],
+          inputVal = event.target.value;
+
+        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
+        //change事件未自动纠错，由blur事件来纠错
+        if (newVal !== inputVal) {
+          event.target.value = newVal;
+          this.$emit("change", newVal);
+        }
+      }
       if (this.unit && this.inputValue) {
         this.setInputValue(this.inputValue + " " + this.unit);
       }
@@ -344,18 +414,6 @@ export default {
       //this.$emit("change", this.$refs.input.value);
       this.isFocus = false;
       //if(this.isChild) return;
-      const { autoCorrection } = this;
-
-      if (autoCorrection.length) {
-        //选择自动纠错，仅可纠正为数字
-        const minValue = autoCorrection[0],
-          maxValue = autoCorrection[1],
-          inputVal = event.target.value;
-
-        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
-        event.target.value = newVal;
-        this.$emit("change", newVal);
-      }
       //失焦后数据验证
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
@@ -439,12 +497,18 @@ export default {
     isFocus(val) {
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
-        // if (this.hoverInput) {
-        //   this.$dispatch("v-form-item", "form:error", false);
-        //   return;
-        // }
         this.$dispatch("v-form-item", "form:error", !val);
       }
+    },
+
+    preText: {
+      handler() {
+        this.preText &&
+          this.$nextTick(() => {
+            this.preTextWidth = this.$refs.preText.clientWidth;
+          });
+      },
+      immediate: true
     }
   }
 };

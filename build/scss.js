@@ -34,5 +34,9 @@ module.exports = {
   line: "./src/scss/components/chart-line.scss",
   percent: "./src/scss/components/chart-percent.scss",
   pie: "./src/scss/components/chart-pie.scss",
-  progress: "./src/scss/components/chart-percent.scss"
+  progress: "./src/scss/components/chart-percent.scss",
+  colorpicker: "./src/scss/components/colorpicker.scss",
+  edit: "./src/scss/components/edit.scss",
+  qrcode: "./src/scss/components/qrcode.scss",
+  menu: "./components/menu.scss"
 };

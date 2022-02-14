@@ -13,7 +13,7 @@ Vue.use(Loading);
 Vue.use(Base);
 ```
 
-### 基本用法
+<!-- ### 基本用法
 
 ::: demo
 
@@ -53,7 +53,7 @@ Vue.use(Base);
           },
           {
             ssid: "ssid4",
-            password: "333333333333333333333333333333333333333333333333333333",
+            password: "3333333333",
             name: "jack",
             age: "16"
           }
@@ -65,6 +65,733 @@ Vue.use(Base);
 ```
 
 :::
+
+### 表格上方按钮
+
+表格上方自定义按钮或者文字，左右两边都存在插槽；如果存在搜索，那么搜索框是在最右边
+
+::: demo
+
+```html
+<v-table :data="data" @search="search">
+  <template #btnLeft>
+    <v-button size="S">左按钮</v-button>
+  </template>
+  <template #btnRight>
+    <v-button size="S">右按钮</v-button>
+  </template>
+  <v-table-col prop="ip" label="IP地址" width="150px"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
+  <v-table-col prop="download" label="下载速率"></v-table-col>
+  <v-table-col prop="upLimit" label="上传速率"></v-table-col>
+  <v-table-col prop="status" label="状态"></v-table-col>
+  <v-table-col prop="downLimit" label="下载限速" width="150px"></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = this.table1;
+    },
+    methods: {
+      search(searchValue, searchField) {
+        console.log(
+          "搜索的值为：" + searchValue + "，搜索的字段为：" + searchField
+        );
+        //dosomething
+      }
+    },
+    data() {
+      return {
+        data: [],
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "25"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 表格搜索
+
+`is-search`表示此列数据支持搜索，`realtime-search`可以定义搜索为实时搜索和失焦搜索，默认为失焦搜索
+
+::: demo
+
+```html
+<v-table :data="data" @search="search" realtime-search>
+  <v-table-col prop="ip" label="IP地址" width="150px"> </v-table-col>
+  <v-table-col prop="mac" is-search label="MAC地址" width="180px"></v-table-col>
+  <v-table-col prop="download" label="下载速率"></v-table-col>
+  <v-table-col prop="upLimit" label="上传速率"></v-table-col>
+  <v-table-col prop="status" label="状态"></v-table-col>
+  <v-table-col prop="downLimit" label="下载限速" width="150px"></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = this.table1;
+    },
+    methods: {
+      search(searchValue, searchField) {
+        console.log(
+          "搜索的值为：" + searchValue + "，搜索的字段为：" + searchField
+        );
+        //dosomething
+      }
+    },
+    data() {
+      return {
+        data: [],
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "25"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 表头操作列表项
+
+表头操作按钮可以设置显示的列表项，`head-operate`设置是否显示，默认不显示；`is-default-value`设置是否为默认显示列表项，默认显示；`add-operate`设置列表项是否可以操作，默认可以；注意：表头需要勾选默认一位；
+
+::: demo
+
+```html
+<v-table :data="data" head-operate>
+  <v-table-col type="selection"></v-table-col>
+  <v-table-col prop="ip" label="IP地址"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址"></v-table-col>
+  <v-table-col
+    prop="download"
+    :is-default-value="false"
+    label="下载速率"
+  ></v-table-col>
+  <v-table-col
+    prop="upLimit"
+    :is-default-value="false"
+    label="上传速率"
+  ></v-table-col>
+  <v-table-col prop="status" label="状态" :add-operate="false"></v-table-col>
+  <v-table-col
+    prop="downLimit"
+    :is-default-value="false"
+    label="下载限速"
+  ></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = this.table1;
+    },
+    methods: {},
+    data() {
+      return {
+        data: [],
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "25"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 分页
+
+`is-pagination`配置表格分页，`page-size`配置每页多少条数据，`is-change-size`配置是否支持修改每页条数，`page-size-options`配置每页条数的选择，`is-input-page`配置是否支持手动输入页数跳转，`current-page`设置当前页数，`total-length`总共有多少条数据
+
+::: demo
+
+```html
+<v-table
+  :data="data"
+  :total-length="totalLength"
+  @change-size="changeSize"
+  @change-page="changePage"
+  is-pagination
+  is-change-size
+  is-input-page
+  :page-size="pageSize"
+  :current-page="currentPage"
+>
+  <v-table-col prop="ip" label="IP地址"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址"></v-table-col>
+  <v-table-col prop="download" label="下载速率"></v-table-col>
+  <v-table-col prop="upLimit" label="上传速率"></v-table-col>
+  <v-table-col prop="status" label="状态"></v-table-col>
+  <v-table-col prop="downLimit" label="下载限速"></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = this.table1;
+    },
+    methods: {
+      changeSize(size) {
+        this.pageSize = size;
+        console.log(`获取${size}条数据`);
+        this.data = this.table2;
+      },
+      changePage(page) {
+        this.currentPage = page;
+        console.log(`获取第${page}页数据`);
+        this.data = this.table2;
+      }
+    },
+    data() {
+      return {
+        totalLength: 16,
+        currentPage: 1,
+        pageSize: 10,
+        data: [],
+        table2: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "在线",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ],
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "离线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "25"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 排序表格
+
+`is-sort`表示此列支持排序
+
+::: demo
+
+```html
+<v-table :data="data" @sort="sortTable">
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col is-sort prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col is-sort prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        data: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    },
+    methods: {
+      sortTable(prop, sortType) {
+        setTimeout(() => {
+          let type = sortType == "asc" ? "升序" : "降序";
+          console.log(`${prop}字段进行${type}排序`);
+          this.data = this.data.concat([]);
+        }, 1000);
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+### 空数据
+
+表格数据为空时，`emptyValue`可以自定义设置，默认填充 `-`
+
+::: demo
+
+```html
+<v-table :data="table1" emptyValue="-">
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col is-sort prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col is-sort prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 多行数据
+
+`word-wrap`参数设置列数据可以显示多行数据，默认为不显示多行，注意：数据需要存储为数组形式；
+
+::: demo
+
+```html
+<v-table :data="table1">
+  <v-table-col prop="ssid" label="SSID" word-wrap> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字" word-wrap></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: ["ssid1", "ssid1"],
+            password: '2"</span>',
+            name: ["jack", "peter"],
+            age: "12"
+          },
+          {
+            ssid: ["ssid2"],
+            password: "111111111",
+            name: ["jhon"],
+            age: "13"
+          },
+          {
+            ssid: ["ssid3", "ssid1"],
+            password: "2222222222",
+            name: ["jack"],
+            age: "15"
+          },
+          {
+            ssid: ["ssid4"],
+            password: "333333333333",
+            name: ["jack", "peter"],
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 表格操作项
+
+::: demo
+
+```html
+<v-table :data="table1">
+  <v-table-col prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit operate-icon" @click="editData(slotProps)"
+        >编辑</span
+      >
+      <span class="v-icon-disable operate-icon" @click="editData(slotProps)"
+        >禁用</span
+      >
+      <span
+        class="v-icon-delete operate-icon disable"
+        @click="editData(slotProps)"
+        >删除</span
+      >
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    methods: {
+      editData() {
+        //dosomething
+      }
+    },
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12",
+            status: "online"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13",
+            status: "offline"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15",
+            status: "upgrade"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16",
+            status: "offline"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16",
+            status: "upgrade"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16",
+            status: "offline"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+### 操作按钮
+
+新增 `is-add`设置是否显示新增按钮，`addConfig`设置新增弹窗内容
+编辑 `is-edit`设置是否显示编辑按钮，`editConfig`设置编辑弹窗内容
+删除 `is-delete`设置是否显示删除按钮，`deleteConfig`设置删除弹窗内容
+
+::: demo
+
+```html
+<v-table :data="table1" is-add is-edit is-delete>
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col is-sort prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col is-sort prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+::: -->
 
 ### 表格大小
 
@@ -378,8 +1105,8 @@ Vue.use(Base);
         ]
       };
     },
-    methods:{
-      show(slotProps){
+    methods: {
+      show(slotProps) {
         console.log(slotProps);
         console.log(this.table1);
       }
@@ -396,9 +1123,9 @@ Vue.use(Base);
 
 ```html
 <v-table :data="table1">
-  <v-table-col 
-    prop="ssid" 
-    label="SSID" 
+  <v-table-col
+    prop="ssid"
+    label="SSID"
     is-tooltip
     :tooltip-option="{
       effect: 'light',
@@ -406,9 +1133,9 @@ Vue.use(Base);
     }"
   ></v-table-col>
 
-  <v-table-col 
-    prop="password" 
-    label="密码" 
+  <v-table-col
+    prop="password"
+    label="密码"
     is-tooltip
     :tooltip-option="{
       effect: 'light',
@@ -416,18 +1143,18 @@ Vue.use(Base);
     }"
   ></v-table-col>
 
-  <v-table-col 
-    prop="name" 
-    label="名字" 
+  <v-table-col
+    prop="name"
+    label="名字"
     is-tooltip
     :tooltip-option="{
       effect: 'light',
       position: 'top-center'
     }"
   ></v-table-col>
-  <v-table-col 
-    prop="age" 
-    label="年龄" 
+  <v-table-col
+    prop="age"
+    label="年龄"
     is-tooltip
     :tooltip-option="{
       effect: 'light',
@@ -1864,7 +2591,7 @@ Vue.use(Base);
 | prop            | 表头列属性，定义 type 的三种类型时可不填，其他情况必填                                                                 | string          | —                          | —      |
 | width           | 列宽度，百分比或者 xxpx                                                                                                | string / number | —                          | —      |
 | is-tooltip      | 鼠标放上去是否显示 tooltip 默认是过长显示，如不需要可在`tooltip-option`中修改配置                                      | boolean         | —                          | false  |
-| tooltip-option  | tooltip的配置项参考`v-tooltip`                                                                                         | boolean         | —                          | false  |
+| tooltip-option  | tooltip 的配置项参考`v-tooltip`                                                                                        | boolean         | —                          | false  |
 | is-search       | 是否支持搜索                                                                                                           | boolean         | —                          | false  |
 | is-sort         | 是否支持排序                                                                                                           | boolean         | —                          | false  |
 | align           | 对齐方式                                                                                                               | string          | left / center / right      | left   |
