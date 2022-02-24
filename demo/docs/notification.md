@@ -73,32 +73,39 @@ export default {
 export default {
   methods: {
     handleSuccess() {
-      this.$notify({
-        status: "success",
-        content: "这是一条成功信息！",
-        position: "top-right"
-      });
+      // this.$notify({
+      //   status: "success",
+      //   content: "这是一条成功信息！",
+      //   position: "top-right"
+      // });
+      this.$notify.success("这是一条成功信息！")
     },
     handleError() {
-      this.$notify({
-        status: "error",
-        content: "这是一条错误信息！",
-        position: "top-right"
-      });
+      // this.$notify({
+      //   status: "error",
+      //   content: "这是一条错误信息！",
+      //   position: "top-right"
+      // });
+      this.$notify.error("这是一条成功信息！")
+
     },
     handleWarning() {
-      this.$notify({
-        status: "warning",
-        content: "这是一条警告！",
-        position: "top-right"
-      });
+      // this.$notify({
+      //   status: "warning",
+      //   content: "这是一条警告！",
+      //   position: "top-right"
+      // });
+      this.$notify.warning("这是一条成功信息！")
+
     },
     handleNotice() {
-      this.$notify({
-        status: "notice",
-        content: "这是一条普通的消息提醒",
-        position: "top-right"
-      });
+      // this.$notify({
+      //   status: "notice",
+      //   content: "这是一条普通的消息提醒",
+      //   position: "top-right"
+      // });
+      this.$notify.notice("这是一条成功信息！")
+
     }
   }
 };
@@ -307,14 +314,14 @@ export default {
 
 ### 属性 Attributes
 
-| 参数                     | 说明                                    | 类型         | 可选值                                                  | 默认值    |
-| ------------------------ | --------------------------------------- | ------------ | ------------------------------------------------------- | --------- |
-| title                    | 标题                                    | string       | -                                                       | -         |
-| status                   | 状态，不同状态显示不同的图标  | string       | success、error、notice、warning、none                                                      | none         |
-| content                  | 说明文字                                | string | -                                                       | -         |
-| duration                 | 显示时间，单位：毫秒。设置为0则不会关闭 | number       | -                                                       | 4500      |
-| position                 | 自定义弹出位置                          | string       | top-right<br/>top-left<br/>bottom-right<br/>bottom-left | top-right |
-| show-close               | 是否显示关闭按钮                        | boolean      | -                                                       | true      |
-| show-confirm             | 是否显示确定按钮                        | boolean      | -                                                       | false     |
-| confirm-text             | 确定按钮文本                            | string       | -                                                       | 确定      |
-| dangerouslyUseHTMLString | 把content当做html解析                   | Boolean      | -                                                       | false     |
+| 参数                     | 说明                                    | 类型    | 可选值                                                  | 默认值    |
+| ------------------------ | --------------------------------------- | ------- | ------------------------------------------------------- | --------- |
+| title                    | 标题                                    | string  | -                                                       | -         |
+| status                   | 状态，不同状态显示不同的图标            | string  | success、error、notice、warning、none                   | none      |
+| content                  | 说明文字                                | string  | -                                                       | -         |
+| duration                 | 显示时间，单位：毫秒。设置为0则不会关闭 | number  | -                                                       | 4500      |
+| position                 | 自定义弹出位置                          | string  | top-right<br/>top-left<br/>bottom-right<br/>bottom-left | top-right |
+| show-close               | 是否显示关闭按钮                        | boolean | -                                                       | true      |
+| show-confirm             | 是否显示确定按钮                        | boolean | -                                                       | false     |
+| confirm-text             | 确定按钮文本                            | string  | -                                                       | 确定      |
+| dangerouslyUseHTMLString | 把content当做html解析                   | Boolean | -                                                       | false     |
