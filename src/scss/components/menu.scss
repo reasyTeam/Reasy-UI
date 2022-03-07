@@ -1,4 +1,4 @@
-.menu {
+.v-menu {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -28,13 +28,13 @@
       line-height: 54px;
       text-align: center;
       transition: transform 0.3s;
-      &.menu__close {
+      &.v-menu__close {
         transform: rotate(180deg);
         transform-origin: center;
       }
     }
     &__active {
-      .menu-text {
+      .v-menu-text {
         font-weight: bold;
         &::before {
           font-weight: normal;
@@ -59,43 +59,43 @@
   }
 }
 
-.menu-first__disabled,
-.menu-sec__disabled {
+.v-menu-first__disabled,
+.v-menu-sec__disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 /** 腾达 or IP-COM风格*/
-.tenda {
+.v-menu-tenda {
   &,
   a {
     color: #262626;
   }
   font-size: 14px;
-  .menu-first__active,
-  .menu-sec__active,
-  .menu-first:not(.menu-first__disabled):hover,
-  .menu-sec:not(.menu-sec__disabled):hover {
+  .v-menu-first__active,
+  .v-menu-sec__active,
+  .v-menu-first:not(.v-menu-first__disabled):hover,
+  .v-menu-sec:not(.v-menu-sec__disabled):hover {
     color: #ff801f;
   }
-  .menu-sec__active {
+  .v-menu-sec__active {
     background-color: #fff5e4;
   }
 }
-.ipcom {
+.v-menu-ipcom {
   background-color: #000;
   &,
   a {
     color: rgba(255, 255, 255, 0.65);
   }
   font-size: 15px;
-  .menu-first__active,
-  .menu-sec__active,
-  .menu-first:not(.menu-first__disabled):hover,
-  .menu-sec:not(.menu-sec__disabled):hover {
+  .v-menu-first__active,
+  .v-menu-sec__active,
+  .v-menu-first:not(.v-menu-first__disabled):hover,
+  .v-menu-sec:not(.v-menu-sec__disabled):hover {
     color: #fff;
   }
-  .menu-sec__active {
+  .v-menu-sec__active {
     background-color: #d82228;
   }
 }

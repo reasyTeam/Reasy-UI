@@ -5,6 +5,7 @@
       sizeCss,
       { 'is-range': showRange, 'v-slider--disabled': isDisabled }
     ]"
+    :id="name"
   >
     <!-- 输入框控制器 -->
     <v-input-number
@@ -20,6 +21,8 @@
       :precision="precisionVal"
       :size="size"
       :step="step"
+      no-id
+      :name="name | id('input')"
       @change="changeValue"
     ></v-input-number>
     <!-- 显示输入框时的占位符 -->
@@ -55,6 +58,7 @@
         'margin-left': rangeMarginLeft + 'px',
         'margin-right': rangeMarginRight + 'px'
       }"
+      :name="name | id('line')"
     >
       <div
         class="v-slider-line__inner"
@@ -90,10 +94,11 @@
 <script>
 import { getPrecision, on, off, accSub } from "../libs";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 import SliderPopups from "./popups.vue";
 export default {
   name: "v-slider",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   components: {
     SliderPopups
   },
@@ -103,7 +108,6 @@ export default {
   },
   props: {
     value: [Number, String],
-    name: String,
     //最小值
     min: {
       type: Number,

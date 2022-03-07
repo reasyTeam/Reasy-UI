@@ -4,6 +4,7 @@
     <div
       :class="['v-dropdown__label', 'v-icon-down', dropdownLabelType]"
       @click="proxyDisabledHandler(disabled, handleLabelClick)"
+      :id="name"
       @mouseenter="proxyDisabledHandler(disabled, handleLabelMouseenter)"
       @mouseleave="proxyDisabledHandler(disabled, handleLabelMouseleave)"
     >
@@ -15,6 +16,7 @@
       :class="[panelClass]"
     >
       <div
+        :id="name | id('wrapper')"
         class="v-dropdown__menu"
         @mouseenter="handleDropdownMouseenter"
         @mouseleave="handleDropdownMouseleave"
@@ -64,12 +66,14 @@
 
 <script>
 import CreateToBody from "../create-to-body";
+import NameMixin from "../name-mixins";
 
 export default {
   name: "v-dropdown",
   components: {
     CreateToBody
   },
+  mixins: [NameMixin],
   props: {
     type: {
       type: String,

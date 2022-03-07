@@ -24,7 +24,7 @@ import { Input, InputGroup, InputNumber } from "./input";
 import Slider from "./slider";
 import Select from "./select";
 import Radio from "./radio";
-import { Checkbox, CheckboxGroup, CheckboxGroupTrade } from "./checkbox";
+import { Checkbox, CheckboxGroup } from "./checkbox";
 import Switch from "./switch";
 import TimePicker from "./timepicker";
 import DatePicker, { DatepickerPanel } from "./datepicker";
@@ -43,7 +43,6 @@ import Popconfirm from "./popconfirm";
 import Tooltip from "./tooltip";
 import Dialog from "./dialog";
 import Dropdown from "./dropdown";
-import DropdownCustom from './dropdown';
 import Tabs from "./tabs";
 import TabPane from "./tab-pane";
 import Steps from "./steps";
@@ -69,7 +68,6 @@ const components = [
   Radio,
   Checkbox,
   CheckboxGroup,
-  CheckboxGroupTrade,
   Select,
   Switch,
   TimePicker,
@@ -97,7 +95,6 @@ const components = [
   // Tooltip,
   Dialog,
   Dropdown,
-  DropdownCustom,
   Tabs,
   TabPane,
   Steps,

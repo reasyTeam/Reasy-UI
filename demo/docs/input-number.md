@@ -20,22 +20,22 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-input-number size="L" v-model="num"></v-input-number>
+  <v-input-number size="L" name="input-num-l" v-model="num"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="M" v-model="num"></v-input-number>
+  <v-input-number size="M" name="input-num-m" v-model="num"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="S" v-model="num"></v-input-number>
+  <v-input-number size="S" name="input-num-s" v-model="num"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="L" v-model="num" controls-position="right"></v-input-number>
+  <v-input-number size="L" no-id  v-model="num" controls-position="right"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="M" v-model="num" controls-position="right"></v-input-number>
+  <v-input-number size="M" name="input-num-m-r" v-model="num" controls-position="right"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="S" v-model="num" controls-position="right"></v-input-number>
+  <v-input-number size="S" name="input-num-s-r" v-model="num" controls-position="right"></v-input-number>
 </div>
 <script>
   export default {
@@ -57,11 +57,12 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number disabled v-model="num"></v-input-number>
+<v-input-number disabled no-id v-model="num"></v-input-number>
 
 <v-input-number
   v-model="num"
-  :min="0"
+  :min="0" 
+  name="input-num-range-d"
   :max="10"
   disabled
   controls-position="right"
@@ -87,7 +88,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" :min="1" :max="10"></v-input-number>
+<v-input-number v-model="num" no-id :min="1" :max="10"></v-input-number>
 <script>
   export default {
     data() {
@@ -110,7 +111,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" :is-controls="false"></v-input-number>
+<v-input-number v-model="num" no-id :is-controls="false"></v-input-number>
 <script>
   export default {
     data() {
@@ -133,7 +134,8 @@ Vue.use(Base);
 ```html
 <v-input-number
   v-model="num"
-  :min="0"
+  :min="0" 
+  name="input-num-r"
   :max="10"
   controls-position="right"
 ></v-input-number>
@@ -157,7 +159,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" :min="0" :max="10" :step="2"></v-input-number>
+<v-input-number v-model="num" name="input-num-step" :min="0" :max="10" :step="2"></v-input-number>
 <script>
   export default {
     data() {
@@ -181,6 +183,7 @@ Vue.use(Base);
 <v-input-number
   v-model="num"
   :min="0"
+  name="input-num-pre"
   :max="10"
   :precision="2"
 ></v-input-number>
@@ -202,7 +205,8 @@ Vue.use(Base);
 | 参数              | 说明                                               | 类型            | 可选值     | 默认值    |
 | ----------------- | -------------------------------------------------- | --------------- | ---------- | --------- |
 | v-model           | 绑定值                                             | number          | —          | —         |
-| name              | 原生属性                                           | string          |            |           |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled          | 是否禁用                                           | boolean         | —          | false     |
 | width             | 输入框长度，支持数字和字符串，如 70 或 70px 或 70% | string / number | —          | —         |
 | min               | 输入框最小值                                       | number          | —          | -Infinity |

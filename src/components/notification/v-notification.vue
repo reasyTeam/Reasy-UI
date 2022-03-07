@@ -48,6 +48,7 @@
       </div>
       <div v-if="showConfirm" class="v-notification__button">
         <v-button
+          no-id
           class="v-notification__button-confirm"
           type="primary"
           size="M"

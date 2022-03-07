@@ -22,7 +22,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker v-model="date"></v-datepicker>
+<v-datepicker name="datepicker" v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -41,7 +41,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker disabled v-model="date"></v-datepicker>
+<v-datepicker name="datepicker-d" disabled v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -62,7 +62,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker type="datetime" v-model="date"></v-datepicker>
+<v-datepicker name="datepicker-dt" type="datetime" v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -85,7 +85,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker is-range v-model="date"></v-datepicker>
+<v-datepicker no-id is-range v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -106,7 +106,8 @@ Vue.use(Base);
 ```html
 <v-datepicker
   width="400px"
-  is-range
+  is-range 
+  no-id
   type="datetime"
   v-model="date"
 ></v-datepicker>
@@ -134,7 +135,8 @@ Vue.use(Base);
 ```html
 <v-datepicker
   format="YYYY/MM/DD"
-  v-model="date"
+  v-model="date"  
+  no-id
   max="2037/12/31"
   min="2000/01/01"
 ></v-datepicker>

@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ width: `${width}px` }" class="qrWrap">
+  <div :style="{ width: `${width}px` }" class="qrWrap" :id="name">
     <header><slot name="top"></slot></header>
     <vue-qr
       ref="qrcode"
@@ -23,6 +23,8 @@
     <footer>
       <slot name="bottom"></slot>
       <v-button
+        no-id
+        :name="name | id('download')"
         v-if="isDownload"
         type="primary"
         :size="btnSize"
@@ -35,9 +37,11 @@
 </template>
 <script>
 import VueQr from "vue-qr";
+import NameMixin from "../name-mixins";
 
 export default {
   name: "v-qrcode",
+  mixins: [NameMixin],
   props: {
     text: { type: String, default: "" },
     bgSrc: String, //背景图片 实点缩放后才能见效果

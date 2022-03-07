@@ -1,5 +1,5 @@
 <template>
-  <div class="v-tabs form-group">
+  <div class="v-tabs form-group" :id="name">
     <div
       class="tab-nav"
       :class="[`tab-nav--${type}`, { 'tab-nav--disabled': disabled }]"
@@ -17,6 +17,7 @@
           :ref="`refNavItems`"
           v-for="item in navCfgs"
           :key="item.value"
+          :id="name | id(item.value)"
           @click="event => disabled || handleTabClick(item, event)"
         >
           {{ item.label }}
@@ -37,9 +38,11 @@
 
 <script>
 import { isEmpty } from "../libs";
+import NameMixin from "../name-mixins";
 
 export default {
   name: "v-tabs",
+  mixins: [NameMixin],
   props: {
     value: String,
     type: {

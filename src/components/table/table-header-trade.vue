@@ -4,27 +4,14 @@
     class="table v-table__header"
     :class="{ 'v-table__border': border }"
   >
-    <v-dropdown-trade
+    <v-header-operate
+      v-model="checked"
       v-if="headOperate"
       class="check-group"
-      @visible-change="visibleChange"
+      :options="options"
+      :default-select-value="defaultSelectValue"
     >
-      <template #head>
-        <div class="v-icon-more"></div>
-      </template>
-      <template #content>
-        <div>
-          <v-checkbox-group-trade
-            :min="1"
-            v-model="checked"
-            :options="options"
-            :default-select-value="defaultSelectValue"
-            is-select-all
-            is-default-select
-          ></v-checkbox-group-trade>
-        </div>
-      </template>
-    </v-dropdown-trade>
+    </v-header-operate>
     <colgroup>
       <col
         v-for="(col, index) in columns"
@@ -45,6 +32,7 @@
         >
           <!-- 选择框 -->
           <v-checkbox
+            no-id
             v-if="col.type === 'selection'"
             class="v-table__header__checkbox"
             :before-change="beforeSelectAll"
@@ -96,8 +84,7 @@
   </table>
 </template>
 <script>
-import VDropdownTrade from "../dropdown/v-dropdown-trade.vue";
-import VCheckboxGroupTrade from "../checkbox/v-checkbox-group-trade.vue";
+import VHeaderOperate from "./v-header-operate.vue";
 import { copyDeepData } from "../libs";
 export default {
   props: {
@@ -117,8 +104,7 @@ export default {
     headOperate: Boolean
   },
   components: {
-    VDropdownTrade,
-    VCheckboxGroupTrade
+    VHeaderOperate
   },
   data() {
     return {
@@ -144,7 +130,7 @@ export default {
   mounted() {
     this.$nextTick(function() {
       this.columnsCopy = copyDeepData(this.columns);
-      this.columns.forEach((element) => {
+      this.columns.forEach(element => {
         if (element.type == "selection") {
           return;
         }
@@ -199,7 +185,7 @@ export default {
     },
     visibleChange(isShow) {
       if (!isShow) {
-        let arr = this.columnsCopy.filter((element) => {
+        let arr = this.columnsCopy.filter(element => {
           if (element.type == "selection") {
             return true;
           }

@@ -17,6 +17,7 @@
       ref="input"
       is-child
       :name="name"
+      :id="name | id('input')"
       :data-name="_name"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -35,6 +36,7 @@
     </v-input>
     <div
       :name="name"
+      :id="name | id('text')"
       :data-name="_name"
       v-else
       class="v-select__label input-text"
@@ -110,6 +112,7 @@
         class="v-select__search"
         :placeholder="_('搜索')"
         is-search
+        :name="name | id('search')"
         @input="val => (searchText = val)"
       />
       <dropdown-list
@@ -122,6 +125,7 @@
         :fn="$scopedSlots.default"
         @click-options="clickOptions"
         @hide="hide"
+        :id="name | id('wrapper')"
       ></dropdown-list>
     </create-to-body>
   </div>
@@ -132,11 +136,12 @@ import DropdownList from "./dropdown-list";
 import CreateToBody from "../create-to-body.vue";
 import { size } from "../filters";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 import SearchInput from "../input/v-input.vue";
 
 export default {
   name: "v-select",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   components: {
     DropdownList,
     CreateToBody,
@@ -151,7 +156,6 @@ export default {
       type: [String, Number, Array, Boolean],
       default: ""
     },
-    name: String,
     disabled: {
       type: Boolean,
       default: false

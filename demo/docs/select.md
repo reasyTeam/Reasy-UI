@@ -19,7 +19,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" :options="selectOption"></v-select>
+<v-select v-model="select1" name="select" :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -59,7 +59,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" :options="selectOption"></v-select>
+<v-select v-model="select1" no-id :options="selectOption"></v-select>
 <script>
   export default {
     data() {
@@ -81,7 +81,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" :options="selectOption">
+<v-select v-model="select1" name="select-tem" :options="selectOption">
   <template v-slot="slotProps">
     <li>自定义列-{{slotProps.value}}</li>
   </template>
@@ -107,7 +107,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" disabled :options="selectOption"></v-select>
+<v-select v-model="select1" no-id disabled :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -145,7 +145,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" :options="selectOption"></v-select>
+<v-select v-model="select1" no-id :options="selectOption"></v-select>
 <script>
   export default {
     data() {
@@ -187,6 +187,7 @@ Vue.use(Base);
 ```html
 <v-select
   v-model="select1"
+   name="select-manual"
   is-manual
   manual-text="其他选项"
   :options="selectOption"
@@ -230,7 +231,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" is-clear :options="selectOption"></v-select>
+<v-select v-model="select1" name="select-clear" is-clear :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -270,7 +271,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select" is-search :options="selectOption"></v-select>
+<v-select v-model="select" name="select-search" is-search :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -315,6 +316,7 @@ Vue.use(Base);
   <v-col :span="22">
     <v-select
       v-model="select1"
+      name="select-top"
       position="top"
       :options="selectOption"
     ></v-select>
@@ -326,6 +328,7 @@ Vue.use(Base);
     <v-select
       v-model="select1"
       position="bottom"
+      no-id
       :options="selectOption"
     ></v-select>
   </v-col>
@@ -375,6 +378,7 @@ Vue.use(Base);
     <v-select
       v-model="select1"
       is-multiple
+      name="select-mul"
       :multiple-limit="4"
       :options="selectOption"
     ></v-select>
@@ -387,6 +391,7 @@ Vue.use(Base);
     <v-select
       v-model="select2"
       is-multiple
+      name="select-all"
       multiple-show-all
       :options="selectOption"
     ></v-select>
@@ -438,7 +443,7 @@ Vue.use(Base);
 | 参数                   | 说明                                                           | 类型                              | 可选值              | 默认值 |
 | ---------------------- | -------------------------------------------------------------- | --------------------------------- | ------------------- | ------ |
 | v-model                | 绑定值，多选时值为数组，单选时为字符串                         | string / Array / Number / Boolean | —                   | —      |
-| name                   | select input 的 name 属性                                      | string                            | —                   | —      |
+| name                   | 原生属性name，同时渲染为id属性，**必填**                                       | string                            | —                   | —      |
 | disabled               | 是否禁用                                                       | boolean                           | —                   | false  |
 | width                  | 选择器宽度                                                     | string / Number                   | —                   | —      |
 | is-clear               | 是否可以清空选项                                               | boolean                           | —                   | false  |

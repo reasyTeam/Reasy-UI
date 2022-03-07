@@ -1,6 +1,8 @@
 <template>
   <div class="v-table__footer">
     <v-pagination
+      no-id
+      :name="name"
       :total="total"
       :current-page="page"
       is-show-total
@@ -20,6 +22,7 @@ export default {
   props: {
     total: Number, //总条数
     page: Number, //当前页
+    name: String,
     pageSize: Number,
     isChangeSize: Boolean, //是否支持修改每页数
     isInputPage: Boolean, //是否支持手动修改页数

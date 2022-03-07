@@ -3,7 +3,7 @@
     <div class="v-pagination__item" v-if="isShowTotal">
       {{ dataTips }}
     </div>
-    <div class="v-pagination__item">
+    <div class="v-pagination__item" :id="name">
       <a
         class="v-pagination__button v-pagonation__icon v-icon-left"
         @click="gotoPage('prev')"
@@ -29,8 +29,8 @@
       >
         <template v-if="footerBtn.text !== 'more'">{{
           footerBtn.text
-        }}</template></a
-      >
+        }}</template>
+      </a>
       <a
         class="v-pagination__button v-pagonation__icon v-icon-right"
         @click="gotoPage('next')"
@@ -53,6 +53,8 @@
         class="v-pagination__select"
         :options="pageSizeOptionsFormat"
         @change="changeSize"
+        no-id
+        :name="name | id('size')"
       ></v-select>
       <span class="v-pagination__text">{{ _("P#erP#") }}</span>
     </div>
@@ -64,7 +66,9 @@
         :size="border ? 'M' : 'S'"
         class="v-pagination__input"
         :allow="/^\d+$/"
+        no-id
         @change="gotoPage(pageValue)"
+        :name="name | id('page')"
       ></v-input>
       <span class="v-pagination__text">{{ _("P#aGe#") }}</span>
     </div>
@@ -72,8 +76,10 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
 export default {
   name: "v-pagination",
+  mixins: [NameMixin],
   model: {
     prop: "currentPage",
     event: "change"

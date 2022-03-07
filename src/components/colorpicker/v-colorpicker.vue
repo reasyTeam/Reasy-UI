@@ -10,7 +10,9 @@
           v-model="formatColor[index]"
           :width="44"
           :allow="/[0-9]/g"
+          no-id
           :maxlength="3"
+          :name="name | id(index)"
           :auto-correction="[0, 255]"
           @change="handlerChange"
           @input="handlerInput"
@@ -39,6 +41,7 @@
 
 <script>
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 const COLORS = [
   "#39B09A",
   "#1599FF",
@@ -51,7 +54,7 @@ const COLORS = [
 ];
 export default {
   name: "v-colorpicker",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"

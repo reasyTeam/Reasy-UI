@@ -15,7 +15,7 @@ Vue.use(Qrcode);
 ::: demo
 
 ```html
-<v-qrcode :text="text" />
+<v-qrcode no-id :text="text" />
 <script>
   export default {
     data() {
@@ -36,7 +36,7 @@ Vue.use(Qrcode);
 ::: demo
 
 ```html
-<v-qrcode :text="text" is-download />
+<v-qrcode name="down" :text="text" is-download />
 <script>
   export default {
     data() {
@@ -57,7 +57,7 @@ Vue.use(Qrcode);
 ::: demo
 
 ```html
-<v-qrcode
+<v-qrcode  no-id
   :text="text"
   :bg-src="require('@/views/img/dog.jpg')"
   :dot-scale="0.3"
@@ -82,7 +82,7 @@ Vue.use(Qrcode);
 ::: demo
 
 ```html
-<v-qrcode
+<v-qrcode no-id
   :text="text"
   :logo-src="require('@/views/img/logo2.png')"
   :logo-scale="0.3"
@@ -106,7 +106,7 @@ Vue.use(Qrcode);
 ::: demo
 
 ```html
-<v-qrcode
+<v-qrcode no-id
   :text="text"
   :logo-src="require('@/views/img/logo2.png')"
   :logo-scale="0.3"

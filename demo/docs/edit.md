@@ -18,13 +18,13 @@ Vue.use(Edit);
 
 ```html
 <div class="input-group">
-  <v-edit v-model="sizeL" size="L" />
+  <v-edit v-model="sizeL" name="edit-l" size="L" />
 </div>
 <div class="input-group">
-  <v-edit v-model="sizeM" size="M" />
+  <v-edit v-model="sizeM" name="edit-m" size="M" />
 </div>
 <div class="input-group">
-  <v-edit v-model="sizeS" size="S" />
+  <v-edit v-model="sizeS" name="edit-s" size="S" />
 </div>
 
 <script>
@@ -49,7 +49,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit disabled v-model="edit" />
+<v-edit disabled no-id v-model="edit" />
 <script>
   export default {
     data() {
@@ -63,7 +63,7 @@ Vue.use(Edit);
 
 :::
 
-### 編輯框宽度
+### 编辑框宽度
 
 `width`配置编辑框长度，支持数字和字符串，数字时为具体的 px，字符串支持百分比显示和具体的宽度
 
@@ -71,13 +71,13 @@ Vue.use(Edit);
 
 ```html
 <div class="input-group">
-  <v-edit :width="200" placeholder="数字200" v-model="edit" />
+  <v-edit :width="200" placeholder="数字200" no-id v-model="edit" />
 </div>
 <div class="input-group">
-  <v-edit width="120px" placeholder="字符120px" v-model="edit1" />
+  <v-edit width="120px" placeholder="字符120px" no-id v-model="edit1" />
 </div>
 <div class="input-group">
-  <v-edit width="50%" placeholder="字符50%" v-model="edit2" />
+  <v-edit width="50%" placeholder="字符50%" no-id v-model="edit2" />
 </div>
 <script>
   export default {
@@ -101,7 +101,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit :maxlength="10" v-model="edit" />
+<v-edit :maxlength="10" no-id v-model="edit" />
 <script>
   export default {
     data() {
@@ -120,7 +120,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit :maxlength="100" v-model="edit" show-word-limit />
+<v-edit :maxlength="100" name="edit-limit" v-model="edit" show-word-limit />
 <script>
   export default {
     data() {
@@ -141,7 +141,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit is-clear v-model="edit" />
+<v-edit is-clear name="edit-clear" v-model="edit" />
 <script>
   export default {
     data() {
@@ -164,7 +164,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit :allow="/\d/g" v-model="edit" />
+<v-edit :allow="/\d/g" no-id v-model="edit" />
 <script>
   export default {
     data() {
@@ -185,7 +185,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit unit="KB/s" autofocus v-model="edit" />
+<v-edit unit="KB/s" autofocus no-id v-model="edit" />
 <script>
   export default {
     data() {
@@ -206,7 +206,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit v-model="edit" :auto-correction="[1, 10]" :allow="/\d/g" />
+<v-edit v-model="edit" name="edit-cor" :auto-correction="[1, 10]" :allow="/\d/g" />
 <script>
   export default {
     data() {
@@ -225,7 +225,8 @@ Vue.use(Edit);
 | 参数            | 说明                                               | 类型            | 可选值    | 默认值 |
 | --------------- | -------------------------------------------------- | --------------- | --------- | ------ |
 | v-model         | 绑定值                                             | string / number | —         | —      |
-| name            | 编辑状态时 input 的原生属性                        | string          | —         | —      |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | maxlength       | 最大输入长度                                       | number          | —         | —      |
 | disabled        | 是否禁用                                           | boolean         | —         | false  |
 | width           | 输入框长度，支持数字和字符串，如 70 或 70px 或 70% | string / number | —         | —      |

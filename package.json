@@ -1,6 +1,6 @@
 {
   "name": "@reasy-team/reasy-ui",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "main": "dist/reasy-ui.js",
   "scripts": {
     "build": "node build/publish.js all",

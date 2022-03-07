@@ -15,7 +15,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-switch v-model="enable"></v-switch>
+<v-switch name="switch" v-model="enable"></v-switch>
 
 <script>
   export default {
@@ -37,15 +37,15 @@ Vue.use(Base);
 ```html
 <div class="input-group">
   <div>L</div>
-  <v-switch size="L" v-model="enable"></v-switch>
+  <v-switch size="L" name="switch-l" v-model="enable"></v-switch>
 </div>
 <div class="input-group">
   <div>M</div>
-  <v-switch size="M" v-model="enable"></v-switch>
+  <v-switch size="M" name="switch-m" v-model="enable"></v-switch>
 </div>
 <div class="input-group">
   <div>S</div>
-  <v-switch size="S" v-model="enable"></v-switch>
+  <v-switch size="S" name="switch-s" v-model="enable"></v-switch>
 </div>
 <script>
   export default {
@@ -67,7 +67,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-switch on-value="on" off-value="off" v-model="enable"></v-switch>
+<v-switch on-value="on" name="switch-on" off-value="off" v-model="enable"></v-switch>
 
 <script>
   export default {
@@ -87,7 +87,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-switch on-text="开启" off-text="关闭" v-model="enable"></v-switch>
+<v-switch on-text="开启" off-text="关闭" name="switch-off" v-model="enable"></v-switch>
 
 <script>
   export default {
@@ -108,11 +108,11 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-switch disabled v-model="enable"></v-switch>
+  <v-switch disabled v-model="enable" no-id></v-switch>
 </div>
 
 <div class="input-group">
-  <v-switch disabled v-model="enable1"></v-switch>
+  <v-switch disabled v-model="enable1" no-id></v-switch>
 </div>
 
 <script>

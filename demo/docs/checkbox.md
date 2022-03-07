@@ -21,16 +21,16 @@ Vue.use(Base);
 <!-- `checked` 为 true 或 false -->
 <v-form>
   <v-form-item label="正常">
-    <v-checkbox v-model="unchecked">选项</v-checkbox>
+    <v-checkbox v-model="unchecked" name="checkbox-false">选项</v-checkbox>
   </v-form-item>
   <v-form-item label="选中">
-    <v-checkbox v-model="checked">选项</v-checkbox>
+    <v-checkbox v-model="checked" name="checkbox-true">选项</v-checkbox>
   </v-form-item>
   <v-form-item label="未选中禁用">
-    <v-checkbox v-model="unchecked" disabled>选项</v-checkbox>
+    <v-checkbox v-model="unchecked" disabled no-id>选项</v-checkbox>
   </v-form-item>
   <v-form-item label="选中禁用">
-    <v-checkbox v-model="checked" disabled>选项</v-checkbox>
+    <v-checkbox v-model="checked" disabled no-id>选项</v-checkbox>
   </v-form-item>
 </v-form>
 <script>
@@ -52,7 +52,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox v-model="checked" disabled>禁用</v-checkbox>
+<v-checkbox v-model="checked" no-id disabled>禁用</v-checkbox>
 <script>
   export default {
     data() {
@@ -73,7 +73,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox v-model="checked" on-value="on" off-value="off"
+<v-checkbox v-model="checked" name="checkbox-on" on-value="on" off-value="off"
   >自定义值</v-checkbox
 >
 <script>
@@ -94,7 +94,8 @@ Vue.use(Base);
 | 参数            | 说明                                                | 类型                      | 可选值 | 默认值                   |
 | --------------- | --------------------------------------------------- | ------------------------- | ------ | ------------------------ |
 | value / v-model | 绑定值                                              | string / number / boolean | —      | —                        |
-| name            | checkbox 的名称                                     | string                    | —      | —                        |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled        | 是否禁用                                            | boolean                   | —      | false                    |
 | on-value        | 选中时的值                                          | string / number / boolean | —      | true                     |
 | off-value       | 未选中时的值                                        | string / number / boolean | —      | false                    |

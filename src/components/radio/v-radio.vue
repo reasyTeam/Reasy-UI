@@ -1,5 +1,5 @@
 <template>
-  <div class="v-radio">
+  <div class="v-radio" :id="name">
     <div class="v-radio__list" :name="name">
       <label
         v-for="item in optionList"
@@ -9,6 +9,7 @@
         :class="{
           'v-radio__item--disabled': isDisabled || item.disabled
         }"
+        :id="name | id(item.value)"
       >
         <!-- 单选图标 -->
         <span
@@ -38,16 +39,16 @@
 
 <script>
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 export default {
   name: "v-radio",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"
   },
   props: {
     value: [String, Number, Boolean],
-    name: String,
     //选项
     options: {
       type: Array,

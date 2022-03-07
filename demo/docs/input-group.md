@@ -20,10 +20,10 @@ Vue.use(Base);
 ```html
 <v-form ref="form">
   <v-form-item label="IP/Mask等其它">
-    <v-input-group type="ip" v-model="ip"></v-input-group>
+    <v-input-group type="ip" name="input-ip"v-model="ip"></v-input-group>
   </v-form-item>
   <v-form-item label="MAC地址">
-    <v-input-group type="mac" v-model="mac"></v-input-group>
+    <v-input-group type="mac" name="input-mac" v-model="mac"></v-input-group>
   </v-form-item>
 </v-form>
 
@@ -48,13 +48,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-group
-  v-model="mac"
-  :input-nums="3"
-  splitter="-"
-  :maxlength="4"
-  :allow="/[\da-f]/ig"
-></v-input-group>
+<v-input-group v-model="mac" no-id :input-nums="3" splitter="-" :maxlength="4" :allow="/[\da-f]/ig"></v-input-group>
 <script>
   export default {
     data() {
@@ -78,13 +72,14 @@ Vue.use(Base);
  <v-input-group
   v-model="num"
   splitter="-"
+  name="input-num"
   :input-nums="2"
   :allow="/\d/g"
   :auto-correction="['0-0', '500-500']"
 ></v-input-group>
- <v-input-group
-  type="ip"
+ <v-input-group type="ip"
   v-model="ip"
+  name="input-auto-ip"
   :auto-correction="[
     [0, 223],
     [0, 255],
@@ -112,7 +107,8 @@ Vue.use(Base);
 | ---------- | -------------------------------------------------- | --------------- | --------- | ------ |
 | v-model    | 绑定值                                             | string          | —         | —      |
 | type       | 输入框组类型                                       | string          | ip / mac  | —      |
-| name       | 原生属性                                           | string          | —         | —      |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled   | 是否禁用                                           | boolean         | —         | false  |
 | width      | 输入框长度，支持数字和字符串，如 70 或 70px 或 70% | string / number |           |        |
 | size       | 输入框大小                                         | string          | S / M / L | M      |

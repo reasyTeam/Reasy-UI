@@ -323,6 +323,9 @@
       vertical-align: middle;
     }
   }
+  .v-table__header-wrap {
+    position: relative;
+  }
   .v-table__header {
     position: relative;
     .check-group {
@@ -333,11 +336,14 @@
       height: 34px;
       cursor: pointer;
       background: #f4f5f7;
-      .v-icon-more {
-        font-size: 22px;
-        color: #aaabb4;
-        transform: rotateZ(90deg);
-        margin-top: 6px;
+      .operate-btn {
+        height: 100%;
+        .v-icon-more {
+          font-size: 22px;
+          color: #aaabb4;
+          transform: rotateZ(90deg);
+          margin-top: 6px;
+        }
       }
     }
   }
@@ -362,10 +368,10 @@
       margin-right: 4px;
     }
     &:hover {
-      color: #2670E8;
+      color: #2670e8;
     }
     &.disable {
-      color: #B2CFFF;
+      color: #b2cfff;
       cursor: not-allowed;
     }
   }

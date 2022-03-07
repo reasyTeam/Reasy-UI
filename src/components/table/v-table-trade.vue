@@ -17,6 +17,8 @@
       <div class="float_right">
         <slot name="btnRight"></slot>
         <v-input
+          no-id
+          :name="name | id('search')"
           v-if="search"
           class="search-input"
           v-model="searchValue"
@@ -559,14 +561,14 @@ export default {
     searchPlaceholder() {
       if (this.placeholder) return this.placeholder;
       let searchArr = [];
-      this.searchSupportArr.forEach((item) => {
+      this.searchSupportArr.forEach(item => {
         searchArr.push(item.label);
       });
       return searchArr.join("/");
     },
     //非全选时是否有选中的项
     hasCheckBoxSelect() {
-      let isSelect = this.data.some((item) => {
+      let isSelect = this.data.some(item => {
         return item[this.checkboxField] === CHECKBOX_CHECKED;
       });
       return this.checkboxAllVal === CHECKBOX_UNCHECKED && isSelect;
@@ -606,8 +608,8 @@ export default {
     this.rightFixedWidth = 0;
     // 列信息收集
     // 添加表格列信息
-    this.$on("add.column", (item) => {
-      if (this.columns.some((colItem) => item.prop == colItem.prop)) {
+    this.$on("add.column", item => {
+      if (this.columns.some(colItem => item.prop == colItem.prop)) {
         return;
       }
 
@@ -671,7 +673,7 @@ export default {
     });
 
     //删除列
-    this.$on("remove.column", (prop) => {
+    this.$on("remove.column", prop => {
       let exsitIndex = findColumn(this.columns, prop);
       if (exsitIndex == -1) {
         return;
@@ -686,7 +688,7 @@ export default {
       if (this.selectData.length < 1 || !this.rowKey) {
         return false;
       }
-      return this.selectData.some((item) => {
+      return this.selectData.some(item => {
         if (item[this.rowKey] === rowData[this.rowKey]) {
           if (isUndefinedOrNull(rowData[this.checkboxField])) {
             this.$set(rowData, this.checkboxField, true);
@@ -749,7 +751,7 @@ export default {
       this.sortProp = "";
       // if (this.searchValue != "") {
       let searchField = [];
-      this.searchSupportArr.forEach((item) => {
+      this.searchSupportArr.forEach(item => {
         searchField.push(item.prop);
       });
       this.$emit("search", this.searchValue, searchField);
@@ -798,7 +800,7 @@ export default {
     clickCheckbox() {
       if (this.checkboxAllVal == CHECKBOX_UNCHECKED) {
         //未选中时，如果全部都选中，则选中
-        let result = this.data.every((item) => {
+        let result = this.data.every(item => {
           return item[this.checkboxField] == CHECKBOX_CHECKED;
         });
         if (result) {
@@ -806,7 +808,7 @@ export default {
         }
       } else {
         //选中时，如果存在未选中的，则取消选中
-        let result = this.data.some((item) => {
+        let result = this.data.some(item => {
           return item[this.checkboxField] == CHECKBOX_UNCHECKED;
         });
         if (result) {
@@ -832,11 +834,11 @@ export default {
     },
     //获取选中的数据
     getSelected() {
-      let result = this.data.filter((item) => {
+      let result = this.data.filter(item => {
         return item[this.checkboxField] == CHECKBOX_CHECKED;
       });
       let selectArr = copyDeepData(result);
-      selectArr.forEach((item) => {
+      selectArr.forEach(item => {
         delete item[this.checkboxField];
       });
       return selectArr;
@@ -913,7 +915,7 @@ export default {
     data: {
       handler() {
         this.sortProp &&
-          this.columns.forEach((element) => {
+          this.columns.forEach(element => {
             let load = element.prop == this.sortProp ? false : true;
             this.$set(element, "load", load);
           });

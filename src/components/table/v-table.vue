@@ -1,8 +1,10 @@
 <template>
-  <div class="v-table" :class="[sizeCss, { disabled: disabled }]">
+  <div class="v-table" :id="name" :class="[sizeCss, { disabled: disabled }]">
     <!-- 搜索 -->
     <div class="v-table__search" v-if="search">
       <v-input
+        no-id
+        :name="name | id('search')"
         v-model="searchValue"
         :placeholder="searchPlaceholder"
         suffix-icon="v-icon-search"
@@ -272,6 +274,7 @@
     <table-footer
       v-if="isPagination && tableData.length > 0"
       :page="page"
+      :name="name | id('bar')"
       :total="tableData.length"
       :border="showPageBorder"
       :pageSize="pageSizeValue"
@@ -299,6 +302,7 @@ import CollapseTransition from "../collapse/collapse-transition.js";
 import TableExpand from "./table-tb-fn.vue";
 import TableHeader from "./table-header.vue";
 import TableFooter from "./table-footer.vue";
+import NameMixin from "../name-mixins";
 import {
   copyDeepData,
   sortByKey,
@@ -363,6 +367,7 @@ const EXPAND_NAME = "$expand"; //展开属性
 
 export default {
   name: "v-table",
+  mixins: [NameMixin],
   components: {
     VTd,
     TableHeader,

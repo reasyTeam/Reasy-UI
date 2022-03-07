@@ -17,9 +17,9 @@ Vue.use(Base);
 
 ```html
 <template>
-  <v-button class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
-  <v-button class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
-  <v-button class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
+  <v-button no-id  class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
+  <v-button no-id  class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
+  <v-button no-id  class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
 </template>
 
 <script>
@@ -63,10 +63,10 @@ export default {
 
 ```html
 <template>
-  <v-button class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
-  <v-button class="notify-btn" type="danger" @click="handleError">失败</v-button>
-  <v-button class="notify-btn" type="info" @click="handleWarning">警告</v-button>
-  <v-button class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
+  <v-button no-id  class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
+  <v-button no-id  class="notify-btn" type="danger" @click="handleError">失败</v-button>
+  <v-button no-id  class="notify-btn" type="info" @click="handleWarning">警告</v-button>
+  <v-button no-id  class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
 </template>
 
 <script>
@@ -122,10 +122,10 @@ export default {
 
 ```html
 <template>
-  <v-button class="notify-btn" @click="handleTopRightClick">右上角</v-button>
-  <v-button class="notify-btn" @click="handleBottomRightClick">右下角</v-button>
-  <v-button class="notify-btn" @click="handleTopLeftClick">左上角</v-button>
-  <v-button class="notify-btn" @click="handleBottomLeftClick">左下角</v-button>
+  <v-button no-id  class="notify-btn" @click="handleTopRightClick">右上角</v-button>
+  <v-button no-id  class="notify-btn" @click="handleBottomRightClick">右下角</v-button>
+  <v-button no-id  class="notify-btn" @click="handleTopLeftClick">左上角</v-button>
+  <v-button no-id  class="notify-btn" @click="handleBottomLeftClick">左下角</v-button>
 </template>
 
 <script>
@@ -177,7 +177,7 @@ export default {
 
 ```html
 <template>
-  <v-button class="notify-btn" @click="handleClick">关闭后的回调使用</v-button>
+  <v-button no-id  class="notify-btn" @click="handleClick">关闭后的回调使用</v-button>
 </template>
 
 <script>
@@ -211,12 +211,12 @@ export default {
 
 ```html
 <template>
-  <v-button class="notify-btn" @click="handleShowCloseBtnClick">仅显示关闭按钮</v-button>
-  <v-button class="notify-btn" @click="handleshowConfirmBtnClick">仅显示确定按钮</v-button>
-  <v-button class="notify-btn" @click="handleshowCloseConfirmBtnClick">显示确定和关闭按钮</v-button>
-  <v-button class="notify-btn" @click="handleHideAllBtnClick">不显示按钮</v-button>
-  <v-button class="notify-btn" @click="handleCustomConfirmTextBtnClick">自定义确定文本</v-button>
-  <v-button class="notify-btn" @click="handleNoTitleClick">无标题</v-button>
+  <v-button no-id  class="notify-btn" @click="handleShowCloseBtnClick">仅显示关闭按钮</v-button>
+  <v-button no-id  class="notify-btn" @click="handleshowConfirmBtnClick">仅显示确定按钮</v-button>
+  <v-button no-id  class="notify-btn" @click="handleshowCloseConfirmBtnClick">显示确定和关闭按钮</v-button>
+  <v-button no-id  class="notify-btn" @click="handleHideAllBtnClick">不显示按钮</v-button>
+  <v-button no-id  class="notify-btn" @click="handleCustomConfirmTextBtnClick">自定义确定文本</v-button>
+  <v-button no-id  class="notify-btn" @click="handleNoTitleClick">无标题</v-button>
 </template>
 
 <script>
@@ -287,7 +287,7 @@ export default {
 
 ```html
 <template>
-  <v-button class="notify-btn" @click="handleClick">使用HTML片段</v-button>
+  <v-button no-id  class="notify-btn" @click="handleClick">使用HTML片段</v-button>
 </template>
 
 <script>

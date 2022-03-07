@@ -8,6 +8,7 @@
         'is-disabled': isDisabled,
         'is-input-error': isError
       }"
+      :id="name"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
     >
@@ -29,7 +30,8 @@
           ref="input"
           @focus="handlerFocus"
           @blur="handlerBlur"
-          :name="name"
+          :name="name | id(item.index)"
+          no-id
           :size="size"
           @input="handlerInput"
           @change="handlerChange"
@@ -54,9 +56,10 @@
 <script>
 import { getCursorPos, setCursorPos } from "../libs";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 export default {
   name: "v-input-group",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"
@@ -70,7 +73,6 @@ export default {
       type: String,
       default: ""
     },
-    name: String,
     maxlength: Number,
     width: [String, Number],
     disabled: {

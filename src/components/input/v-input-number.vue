@@ -21,12 +21,15 @@
         :class="{ 'btn-disabled': subDisabled }"
         :disabled="isDisabled"
         @click="subNum"
+        :name="name | id('minus')"
+        no-id
         :size="size"
         v-if="isControls && controlsPosition != 'right'"
       ></v-button>
       <!-- 输入框组件 -->
       <v-input
         v-model="inputValue"
+        no-id
         :name="name"
         :data-name="_name"
         is-child
@@ -53,6 +56,8 @@
           :disabled="isDisabled"
           v-if="controlsPosition !== 'right'"
           @click="addNum"
+          no-id
+          :name="name | id('add')"
           :size="size"
         ></v-button>
         <!-- 控制器在右边时 -->
@@ -79,16 +84,16 @@
 import { accSub, getPrecision } from "../libs";
 import { sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 export default {
   name: "v-input-number",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"
   },
   props: {
     value: [Number, String],
-    name: String,
     disabled: {
       type: Boolean,
       default: false

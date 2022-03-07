@@ -2,6 +2,8 @@
   <button
     type="button"
     ref="btn"
+    :name="name"
+    :id="name"
     @click="clickBtn"
     class="v-button"
     :class="[
@@ -39,8 +41,10 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
 export default {
   name: "v-button",
+  mixins: [NameMixin],
   props: {
     type: {
       type: String,
@@ -88,7 +92,7 @@ export default {
       if (this.disabled) {
         return true;
       }
-      
+
       if (
         this.$parent &&
         this.$parent.$options._componentTag === "v-form-item" &&

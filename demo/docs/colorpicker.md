@@ -18,7 +18,7 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-colorpicker v-model="color"></v-colorpicker>
+  <v-colorpicker v-model="color" no-id></v-colorpicker>
 </div>
 
 <script>
@@ -42,7 +42,7 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-colorpicker v-model="color" :colors="colors"></v-colorpicker>
+  <v-colorpicker v-model="color" :colors="colors" name="colorpicker-color"></v-colorpicker>
 </div>
 
 <script>
@@ -67,7 +67,7 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-colorpicker v-model="color" format="hex"></v-colorpicker>
+  <v-colorpicker v-model="color" format="hex"  name="colorpicker-self"></v-colorpicker>
 </div>
 
 <script>
@@ -91,7 +91,7 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-colorpicker v-model="color" :disabled="true"></v-colorpicker>
+  <v-colorpicker v-model="color" :disabled="true" name="colorpicker-disabled"></v-colorpicker>
 </div>
 
 <script>
@@ -112,6 +112,8 @@ Vue.use(Base);
 | 参数       | 说明               | 类型    | 可选值                    | 默认值                                                                            |
 | ---------- | ------------------ | ------- | ------------------------- | --------------------------------------------------------------------------------- |
 | v-model    | 绑定值             | string  | RGB 、 HEX 或数组颜色格式 | —                                                                                 |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | colors     | 预设可选颜色       | array   | RGB 、 HEX 或数组颜色格式 | ["#39B09A","#1599FF","#FF9800","#0165B1","#A90000","#2D3195","#727272","#D2B98D"] |
 | format     | 返回的颜色格式     | string  | rgb / hex / array         | rgb                                                                               |
 | disabled   | 是否禁用           | boolean | —                         | false                                                                             |

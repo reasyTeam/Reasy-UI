@@ -38,7 +38,7 @@ Vue.use(Base);
     </v-steps>
 
     <div class="next-step-btn-wrapper">
-      <v-button class="next-step-btn" @click="handleButtonClick"
+      <v-button name="button-step" class="next-step-btn" @click="handleButtonClick"
         >下一步</v-button
       >
     </div>
@@ -63,8 +63,6 @@ export default {
 ```
 
 :::
-
-
 
 ### 文字左对齐
 

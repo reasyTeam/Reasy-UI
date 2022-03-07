@@ -19,6 +19,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
+  no-id
   :on-change="changeCallBack"
   ></v-upload>
 </div>
@@ -46,6 +47,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
+  no-id
   type="file"
   :on-change="changeCallBack"
   ></v-upload>
@@ -74,6 +76,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
+  name="upload-img"
   type="picture"
   :on-change="changeCallBack"
   ></v-upload>
@@ -100,6 +103,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
+  name="upload-d"
   disabled
   :on-change="changeCallBack"
   ></v-upload>
@@ -128,6 +132,7 @@ Vue.use(Base);
   ref="upload"
   disabled
   type="file"
+  name="upload-file"
   :on-change="changeCallBack"
   ></v-upload>
 </div>
@@ -155,6 +160,7 @@ Vue.use(Base);
   ref="upload"
   disabled
   type="picture"
+  name="upload-img-d"
   :on-change="changeCallBack"
   ></v-upload>
 </div>
@@ -176,7 +182,8 @@ Vue.use(Base);
 
 | 参数           | 说明                                                              | 类型               | 可选值       | 默认值 |
 | -------------- | ----------------------------------------------------------------- | ------------------ | ------------ | ------ |
-| name           | 上传的文件字段名                                                  | string             | —            | file   |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | action         | 必选参数，上传的地址                                              | string             | —            | —      |
 | accept         | 接受上传的文件类型，例如 .bin                                     | string             |              |        |
 | disabled       | 是否禁用                                                          | boolean            | —            | false  |

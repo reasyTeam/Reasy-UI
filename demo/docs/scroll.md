@@ -219,7 +219,7 @@ Vue.use(Base);
       </ul>
     </v-scroll>
     <div class="scroll-btn">
-      <v-button @click="$refs.scroll1.scrollTo('#selector12')" type="secondary">
+      <v-button @click="$refs.scroll1.scrollTo('#selector12')" name="button-to-12" type="secondary">
         scrollTo('#selector12')
       </v-button>
     </div>
@@ -233,7 +233,7 @@ Vue.use(Base);
       </ul>
     </v-scroll>
     <div class="scroll-btn">
-      <v-button @click="$refs.scroll2.scrollToX(100)" type="secondary">
+      <v-button @click="$refs.scroll2.scrollToX(100)" name="button-to-x100" type="secondary">
         scrollToX(100)
       </v-button>
     </div>
@@ -247,7 +247,7 @@ Vue.use(Base);
       </ul>
     </v-scroll>
     <div class="scroll-btn">
-      <v-button @click="$refs.scroll3.scrollToY(100)" type="secondary">
+      <v-button @click="$refs.scroll3.scrollToY(100)" name="button-to-100" type="secondary">
         scrollToY(100)
       </v-button>
     </div>
@@ -261,7 +261,7 @@ Vue.use(Base);
       </ul>
     </v-scroll>
     <div class="scroll-btn">
-      <v-button @click="$refs.scroll4.scrollToIndex(8)" type="secondary">
+      <v-button @click="$refs.scroll4.scrollToIndex(8)" name="button-to-8" type="secondary">
         scrollToIndex(8)
       </v-button>
     </div>

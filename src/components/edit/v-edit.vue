@@ -9,6 +9,8 @@
         readonly
         :title="labelVal"
         :value="labelVal"
+        :id="name | id('disabled')"
+        :name="name"
         class="edit-plane edit__lable"
         disabled
       />
@@ -21,6 +23,7 @@
       <input
         ref="input"
         :name="name"
+        :id="name"
         type="text"
         :class="['edit-plane', 'edit__text', { 'is-input-error': isError }]"
         @input="handlerInput"
@@ -54,11 +57,12 @@
 <script>
 import { size, sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 
 export default {
   name: "v-edit",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"
@@ -68,7 +72,6 @@ export default {
       type: [String, Number],
       default: ""
     },
-    name: String,
     maxlength: Number,
     minlength: Number,
     disabled: {

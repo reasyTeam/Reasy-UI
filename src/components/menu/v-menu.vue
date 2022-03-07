@@ -1,7 +1,8 @@
 <template>
   <div
     :style="{ width: menuWidth + 'px' }"
-    :class="['menu', isIpcom ? 'ipcom' : 'tenda']"
+    :class="['v-menu', isIpcom ? 'v-menu-ipcom' : 'v-menu-tenda']"
+    :id="name"
   >
     <slot name="header"></slot>
     <!-- 一级菜单 -->
@@ -13,18 +14,19 @@
       "
     >
       <div
-        :class="['menu-first menu-el', menuFirstCss(menuFirst)]"
+        :class="['v-menu-first v-menu-el', menuFirstCss(menuFirst)]"
         @click="clickFirst(menuFirst)"
       >
         <slot name="menuFirst" :menuFirst="menuFirst">
           <!-- 默认一级菜单内容 -->
-          <span :class="['menu-text', menuFirst.meta && menuFirst.meta.icon]">{{
-            menuFirst.meta.title
-          }}</span>
+          <span
+            :class="['v-menu-text', menuFirst.meta && menuFirst.meta.icon]"
+            >{{ menuFirst.meta.title }}</span
+          >
           <span
             v-if="menuFirst.children && menuFirst.children.length"
             :class="[
-              'menu-first-suffix  v-icon-down',
+              'v-menu-first-suffix  v-icon-down',
               { menu__close: menuFirst.name == activeFirst && openSecEn }
             ]"
           ></span>
@@ -34,14 +36,14 @@
       <div
         v-show="menuFirst.children"
         :ref="`secMenu-${menuFirst.name}`"
-        class="menu-sec-wrap"
+        class="v-menu-sec-wrap"
       >
         <div>
           <router-link
             v-for="menuSec in menuFirst.children"
             :key="menuSec.name"
             :to="(isRouter && !menuSec.meta.disabled && menuSec.path) || ''"
-            :class="['menu-sec menu-el menu-text', menuSecCss(menuSec)]"
+            :class="['v-menu-sec v-menu-el v-menu-text', menuSecCss(menuSec)]"
             @click.native="clickSec(menuSec)"
           >
             <slot name="menuSecond" :menuSec="menuSec">{{
@@ -51,12 +53,14 @@
         </div>
       </div>
     </router-link>
-    <div class="menu-footer"><slot name="footer"></slot></div>
+    <div class="v-menu-footer"><slot name="footer"></slot></div>
   </div>
 </template>
 <script>
+import NameMixin from "../name-mixins";
 export default {
   name: "v-menu",
+  mixins: [NameMixin],
   props: {
     isIpcom: {
       type: Boolean,
@@ -135,19 +139,19 @@ export default {
     menuFirstCss(menuFirst) {
       if (menuFirst.name == this.activeFirst) {
         return menuFirst.children
-          ? "menu-first__active"
-          : "menu-first__active menu-sec__active";
+          ? "v-menu-first__active"
+          : "v-menu-first__active v-menu-sec__active";
       }
       if (menuFirst.meta.disabled) {
-        return "menu-first__disabled";
+        return "v-menu-first__disabled";
       }
     },
 
     menuSecCss(menuSec) {
       return menuSec.name == this.activeSec
-        ? "menu-sec__active"
+        ? "v-menu-sec__active"
         : menuSec.meta.disabled
-        ? "menu-sec__disabled"
+        ? "v-menu-sec__disabled"
         : "";
     },
 

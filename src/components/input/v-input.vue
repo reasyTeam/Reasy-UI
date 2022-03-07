@@ -1,8 +1,7 @@
 <template>
   <label
     class="v-input"
-    @mousedown="isClickIcon = true"
-    @mouseup="isClickIcon = false"
+    @mousedown="mouseDown"
     :class="[
       {
         'v-input--prefix': icon,
@@ -28,6 +27,7 @@
       <input
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :name="name"
+        :id="name"
         :data-name="_name"
         ref="input"
         class="input-text"
@@ -55,6 +55,7 @@
       <textarea
         :rows="rows"
         :name="name"
+        :id="name"
         :data-name="_name"
         ref="input"
         class="input-textarea"
@@ -141,9 +142,10 @@
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 import { size, sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
+import NameMixin from "../name-mixins";
 export default {
   name: "v-input",
-  mixins: [FormMixin],
+  mixins: [FormMixin, NameMixin],
   model: {
     prop: "value",
     event: "change"
@@ -157,7 +159,6 @@ export default {
       type: String,
       default: "text"
     },
-    name: String,
     maxlength: Number,
     minlength: Number,
     disabled: {
@@ -476,6 +477,14 @@ export default {
       }
       this.valueLen = inputVal.length;
       this.$emit("input", inputVal);
+    },
+    mouseDown() {
+      this.isClickIcon = true;
+      on(window, "mouseup", this.mouseUp);
+    },
+    mouseUp() {
+      this.isClickIcon = false;
+      off(window, "mouseup", this.mouseUp);
     }
   },
   beforeDestroy() {

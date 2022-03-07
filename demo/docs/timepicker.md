@@ -22,7 +22,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker v-model="time"></v-timepicker>
+<v-timepicker no-id v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -41,7 +41,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker disabled v-model="time"></v-timepicker>
+<v-timepicker name="timepicker-d" disabled v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -62,7 +62,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker format="hh:mm:ss" is-clear v-model="time"></v-timepicker>
+<v-timepicker name="timepicker-s" format="hh:mm:ss" is-clear v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -83,7 +83,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker format="hh:mm:ss" is-all-day v-model="time"></v-timepicker>
+<v-timepicker format="hh:mm:ss" name="timepicker-24" is-all-day v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -107,6 +107,7 @@ Vue.use(Base);
 <v-timepicker
   :minute-interval="5"
   :second-interval="10"
+  name="timepicker-f"
   format="hh:mm:ss"
   is-clear
   v-model="time"
@@ -133,7 +134,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker v-model="time" format="hh%mm-ss"></v-timepicker>
+<v-timepicker name="timepicker-l" v-model="time" format="hh%mm-ss"></v-timepicker>
 <script>
   export default {
     data() {
@@ -156,7 +157,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker v-model="time" min="12:00" max="18:00"></v-timepicker>
+<v-timepicker no-id v-model="time" min="12:00" max="18:00"></v-timepicker>
 <script>
   export default {
     data() {
@@ -179,7 +180,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker is-range v-model="time"></v-timepicker>
+<v-timepicker no-id is-range v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -202,7 +203,7 @@ Vue.use(Base);
   is-range
   placeholder="开始时间"
   end-placeholder="结束时间"
-  v-model="time"
+  v-model="time" name="timepicker-p"
 ></v-timepicker>
 <script>
   export default {

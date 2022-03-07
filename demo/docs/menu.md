@@ -21,7 +21,7 @@ Vue.use(Menu);
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes" />
+    <v-menu :routes="routes"  no-id/>
   </div>
 </template>
 
@@ -94,7 +94,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes" is-router/></v-menu>
+    <v-menu :routes="routes" is-router name="route"/></v-menu>
     <router-view></router-view>
   </div>
 </template>
@@ -190,7 +190,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes"/></v-menu>
+    <v-menu :routes="routes" no-id/></v-menu>
   </div>
 </template>
 
@@ -265,7 +265,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes"/></v-menu>
+    <v-menu :routes="routes" no-id/></v-menu>
   </div>
 </template>
 
@@ -341,7 +341,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes" is-ipcom/></v-menu>
+    <v-menu :routes="routes" is-ipcom no-id/></v-menu>
   </div>
 </template>
 

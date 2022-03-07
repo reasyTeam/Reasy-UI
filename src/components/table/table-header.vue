@@ -23,6 +23,7 @@
         >
           <!-- 选择框 -->
           <v-checkbox
+            no-id
             v-if="col.type === 'selection'"
             class="v-table__header__checkbox"
             :before-change="beforeSelectAll"

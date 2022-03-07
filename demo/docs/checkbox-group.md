@@ -16,7 +16,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox-group v-model="checked" :options="options"></v-checkbox-group>
+<v-checkbox-group v-model="checked" name="check-group" :options="options"></v-checkbox-group>
 <script>
   export default {
     data() {
@@ -53,7 +53,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox-group v-model="checked" :options="options"></v-checkbox-group>
+<v-checkbox-group v-model="checked" no-id :options="options"></v-checkbox-group>
 <script>
   export default {
     data() {
@@ -77,6 +77,7 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
+  no-id
   v-model="checked"
   :options="options"
 ></v-checkbox-group>
@@ -120,6 +121,7 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
+  no-id
   select-text="选中所有"
   v-model="checked"
   :options="options"
@@ -164,12 +166,14 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
+  no-id
   disabled
   v-model="selected"
   :options="options"
 ></v-checkbox-group>
 <v-checkbox-group
   is-select-all
+  name="check-group-d"
   disabled
   v-model="checked"
   :options="options"
@@ -211,7 +215,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox-group v-model="checked" :options="options"></v-checkbox-group>
+<v-checkbox-group v-model="checked" name="check-group-part" :options="options"></v-checkbox-group>
 <script>
   export default {
     data() {
@@ -256,6 +260,7 @@ Vue.use(Base);
   :min="2"
   :max="4"
   v-model="checked"
+  no-id
   :options="options"
 ></v-checkbox-group>
 <script>
@@ -302,7 +307,8 @@ Vue.use(Base);
 | 参数               | 说明                                                                                                                              | 类型    | 可选值 | 默认值 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
 | value / v-model    | 绑定值                                                                                                                            | Arrray  | —      | []     |
-| name               | checkbox 的名称                                                                                                                   | string  | —      |        |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled           | 是否禁用全部复选框，包括全选复选框                                                                                                | boolean | —      | false  |
 | disabled-check-all | 是否仅禁用全选复选框。特殊情况下使用(一般配合options中的disabled，在多个checkbox组之间修改交互而使用)                             | boolean | —      | false  |
 | options            | 选项数组对象[{label: 显示文字，<br /> value：值，disabled: 是否禁用此项}]                                                         | Array   | —      | []     |

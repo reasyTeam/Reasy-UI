@@ -16,7 +16,18 @@ Tenda 基于 Vue2.x 的 PC 组件库，[查看源码](https://github.com/reasyTe
 npm i @reasy-team/reasy-ui -S
 ```
 
+#### 注意：
+
+次版本号多为新增功能或对现有功能有一定的调整，所以在安装插件包的时候建议控制版本号修饰符为`~`，比如`~1.2.5`，代表版本范围`1.2.*`。
+
+`npm`在使用`--save`更新`package.json`时，默认使用前缀`^`。修改方法如下：
+- 默认使用前缀`~`：`npm config set save-prefix '~'`
+- 不使用前缀，保存确切版本：`npm config set save-exact true`
+
+> 软件包通过版本控制，版本依次为【主版本号.次版本号.修补版本号】
+
 ### 常用组件引用
+
 不包含折线图、饼图、柱图、和百分比
 
 ```
@@ -25,7 +36,9 @@ import "@reasy-team/reasy-ui/dist/style.css";
 
 Vue.use(ReasyUi);
 ```
+
 ### 完全引用
+
 包含所有组件
 
 ```
@@ -64,7 +77,7 @@ Vue.use(Input);
 
 > 其中`Base`为组件基础支撑项，必须引入项，否则其它组件部分功能会不生效。
 
-### IPCOM风格引用
+### IPCOM 风格引用
 
 ```
 import ReasyUi from "@reasy-team/reasy-ui/dist/ipcom/reasy-ui.js";
@@ -86,38 +99,43 @@ Vue.use(ReasyUi);
 
 支持自定义主题风格，只需要几个简单的步骤就可以完成风格切换。
 
-  1. clone组件源码`git clone https://github.com/reasyTeam/Reasy-UI.git`。
+1. clone 组件源码`git clone https://github.com/reasyTeam/Reasy-UI.git`。
 
-  2. 进入组件代码目录，运行`npm install`安装依赖。
+2. 进入组件代码目录，运行`npm install`安装依赖。
 
-  3. 修改`src/scss`文件夹下的`scss`变量文件`varibles.scss`。
+3. 修改`src/scss`文件夹下的`scss`变量文件`varibles.scss`。
 
-  4. 运行`npm run theme`即可生成样式文件到根目录的`theme`文件夹内。
+4. 运行`npm run theme`即可生成样式文件到根目录的`theme`文件夹内。
 
-  5. 拷贝生成的样式文件直接在项目中使用即可。
+5. 拷贝生成的样式文件直接在项目中使用即可。
 
 **具体的替换方式如下：**
 
 **常用组件引用**
+
 ```js
 - import "@reasy-team/reasy-ui/dist/style.css";
 + import 生成的style.css
 ```
 
 **完全引用**
+
 ```js
 - import "@reasy-team/reasy-ui/dist/style-full.css";
 + import 生成的style-full.css
 ```
 
 **按需引用**
-在`babel-plugin-component`配置中添加如下配置，取消自动引入CSS文件。
+在`babel-plugin-component`配置中添加如下配置，取消自动引入 CSS 文件。
+
 ```js
 {
   "style": false // 取消自动引入CSS文件
 }
 ```
-然后手动引入所需组件对应的CSS文件，比如`Button`组件
+
+然后手动引入所需组件对应的 CSS 文件，比如`Button`组件
+
 ```js
 import "theme/components/button.css"; // 具体路径根据代码路径进行修改
 ```
