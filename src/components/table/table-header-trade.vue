@@ -74,7 +74,7 @@
               class="v-table__icon v-icon-sort-up text--active"
             ></span>
             <span
-              v-else-if="col.sortType === 'desc' && sortProp === col.prop"
+              v-else-if="col.sortType === 'des' && sortProp === col.prop"
               class="v-table__icon v-icon-sort-down text--active"
             ></span>
           </span>
@@ -173,7 +173,7 @@ export default {
       }
       this.$set(col, "load", true);
       if (col.sortType === "asc") {
-        col.sortType = "desc";
+        col.sortType = "des";
       } else {
         col.sortType = "asc";
       }

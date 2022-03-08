@@ -38,6 +38,13 @@ export default {
     //宽度
     width: String
   },
+  computed: {
+    elWidth() {
+      let width = parseInt(this.width);
+      if (width !== width) return 0;
+      return width;
+    }
+  },
   data() {
     return {
       popperElm: null,
@@ -75,7 +82,15 @@ export default {
 
       //更新dom
       //this.popperElm = this.$el;
-      this.style.left = parentRect.left + scrollLeft + "px";
+      let left = parentRect.left + scrollLeft,
+        elWidth = this.elWidth;
+      if (
+        left + elWidth >
+        (document.documentElement.scrollWidth || document.body.scrollWidth)
+      ) {
+        left -= elWidth - parentRect.width;
+      }
+      this.style.left = left + "px";
       this.style.top = parentRect.bottom + scrollTop + "px";
       //宽度和放大倍数同时存在时优先宽度
       this.style.minWidth = this.width

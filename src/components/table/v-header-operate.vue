@@ -5,7 +5,7 @@
     </div>
     <create-to-body width="180px" :show="dropdownShow">
       <div class="v-dropdown__menu">
-        <v-scroll v-clickoutside="visibleChange" @mounted="setPosition">
+        <v-scroll v-clickoutside="visibleChange">
           <div class="v-checkbox-trade v-checkbox-group">
             <v-checkbox
               no-id
@@ -184,9 +184,6 @@ export default {
     },
     visibleChange() {
       this.dropdownShow = !this.dropdownShow;
-    },
-    setPosition() {
-      this.$dispatch("create-to-body", "update:position");
     }
   }
 };

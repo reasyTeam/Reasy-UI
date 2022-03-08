@@ -312,7 +312,8 @@
     font-weight: 600;
   }
   .v-table__search {
-    min-height: 24px;
+    // min-height: 24px;
+    margin-bottom: 0;
     .button {
       display: inline-block;
       margin-right: 20px;
@@ -321,6 +322,10 @@
       display: inline-block;
       margin-right: 20px;
       vertical-align: middle;
+    }
+    .search-input {
+      float: left;
+      margin-bottom: 16px;
     }
   }
   .v-table__header-wrap {
@@ -346,6 +351,10 @@
         }
       }
     }
+  }
+  .v-table__content
+  {
+    position: relative;
   }
   .v-table__body {
     position: relative;

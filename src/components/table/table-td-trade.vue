@@ -42,14 +42,6 @@
         :index="rowIndex"
       >
       </v-td>
-      <!-- tooltip处理 -->
-      <div
-        v-else-if="column.isTooltip"
-        class="fixed"
-        v-tooltip="getTooltipOption()"
-      >
-        {{ tdValue }}
-      </div>
       <!-- 换行 -->
       <div
         v-else-if="column.wordWrap"
@@ -58,10 +50,14 @@
       >
         {{ col == "" ? emptyValue : col }}
       </div>
+      <!-- tooltip处理 -->
+      <div v-else class="fixed" v-tooltip="getTooltipOption()">
+        {{ tdValue }}
+      </div>
       <!-- search值处理 -->
       <!-- <span v-else-if="column.isSearch" v-html="filterSearch(tdValue)"></span> -->
       <!-- 正常值处理 -->
-      <span v-else>{{ tdValue }}</span>
+      <!-- <span v-else>{{ tdValue }}</span> -->
     </div>
   </td>
 </template>
