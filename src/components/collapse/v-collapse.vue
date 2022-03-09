@@ -5,10 +5,7 @@
       :class="{ 'is-active': isActive }"
       @click="change(!isActive)"
     >
-      <slot name="title" v-if="$slots.title"></slot>
-      <template v-else>
-        {{ title }}
-      </template>
+      <slot name="title">{{ title }}</slot>
       <i
         class="v-collapse__arrow v-icon-down"
         :class="{ 'is-active': isActive }"

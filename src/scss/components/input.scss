@@ -191,6 +191,7 @@ input[type="number"] {
   border: 1px solid $border-color;
   border-radius: 2px;
   padding: 4px 8px;
+  vertical-align: top;
 
   &.is-disabled {
     border: 1px solid $disabled-border-color !important;

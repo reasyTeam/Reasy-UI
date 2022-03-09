@@ -125,6 +125,7 @@
         :fn="$scopedSlots.default"
         @click-options="clickOptions"
         @hide="hide"
+        :is-exsit="!!isExsitOption"
         :id="name | id('wrapper')"
       ></dropdown-list>
     </create-to-body>

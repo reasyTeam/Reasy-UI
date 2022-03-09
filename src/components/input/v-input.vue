@@ -112,11 +112,18 @@
       ></span>
       <!-- 字数限制文字 -->
       <span
-        v-if="showWordLimit && this.maxlength"
+        v-if="showWordLimit && this.maxlength && type !== 'textarea'"
         class="v-input__middle input-word-limit"
       >
         {{ valueLen + "/" + this.maxlength }}
       </span>
+    </span>
+    <!-- 字数限制文字 -->
+    <span
+      v-if="showWordLimit && this.maxlength && type === 'textarea'"
+      class="v-input__middle input-word-limit input-word-limit-textarea"
+    >
+      {{ valueLen + "/" + this.maxlength }}
     </span>
     <!-- 后缀内容 -->
     <slot name="suffix"></slot>

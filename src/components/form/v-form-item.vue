@@ -5,6 +5,7 @@
       { 'v-form-item--inline': isInline, 'v-form-item--disabled': isDisabled },
       itemCss
     ]"
+    :data-help="help || prop"
   >
     <!-- 左边文字 -->
     <label
@@ -61,7 +62,10 @@
           </label>
         </slot>
       </label>
-
+      <!-- 添加备注类提示 -->
+      <slot name="remark">
+        <div class="v-form-item__remark" v-if="remark">{{ remark }}</div>
+      </slot>
       <div
         :style="{ height: showPopError ? '' : errHeight }"
         :class="{ 'v-form-item__content__error-pop': showPopError }"
@@ -117,6 +121,8 @@ export default {
     },
     //属性值，数据验证和提交数据时必填
     prop: String,
+    // help值，帮助信息和prop不一样或无prop时填写
+    help: String,
     //关联元素的prop
     relativeProp: [String, Array],
     //是否必填
@@ -144,6 +150,10 @@ export default {
     },
     unit: {
       type: [String, Number],
+      default: ""
+    },
+    remark: {
+      type: String,
       default: ""
     }
   },

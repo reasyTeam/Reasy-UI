@@ -9,7 +9,7 @@
       v-if="headOperate"
       class="check-group"
       :options="options"
-      :default-select-value="defaultSelectValue"
+      :default-selected="defaultSelectValue"
     >
     </v-header-operate>
     <colgroup>
@@ -26,6 +26,7 @@
           v-for="(col, index) in columns"
           :key="index + 1"
           :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
+          :data-help="col.help || col.prop"
           @click="sortTable(col)"
           @mouseenter="mouseenter(col)"
           @mouseleave="mouseleave(col)"

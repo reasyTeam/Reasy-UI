@@ -23,22 +23,12 @@
             </v-checkbox>
             <div class="line"></div>
             <!-- 选项 -->
-            <v-checkbox
+            <v-checkbox-group
+              v-model="value"
+              :min="1"
               no-id
-              class="v-checkbox-group__item"
-              :class="{
-                'v-checkbox-group__item--active': activeValue === item.value
-              }"
-              v-for="(item, index) in optionList"
-              :key="item.value"
-              :value="checkboxValueList[index]"
-              :disabled="item.disabled"
-              :on-value="item.value"
-              :off-value="offValue"
-              @change="changeValue(item)"
-            >
-              {{ item.label }}
-            </v-checkbox>
+              :options="optionList"
+            ></v-checkbox-group>
           </div>
         </v-scroll>
       </div>
@@ -47,7 +37,17 @@
 </template>
 <script>
 import CreateToBody from "../create-to-body";
-import { copyDeepData } from "../libs";
+
+// 两个数值是否相等
+function equal(a, b) {
+  return (
+    a.length === b.length &&
+    a
+      .slice()
+      .sort()
+      .toString() === b.toString()
+  );
+}
 
 export default {
   components: {
@@ -60,13 +60,16 @@ export default {
   props: {
     value: {},
     options: {},
-    defaultSelectValue: {},
-    activeValue: [String, Number, Boolean]
+    defaultSelected: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
   data() {
     return {
-      dropdownShow: false,
-      offValue: undefined
+      dropdownShow: false
     };
   },
   computed: {
@@ -86,58 +89,37 @@ export default {
       });
       return list;
     },
-    //选项值列表
-    checkboxValueList() {
+    // 全部选中
+    allChecked() {
+      return this.optionList
+        .map(item => {
+          if (item.disabled && !this.defaultSelected.includes(item.value)) {
+            this.defaultSelected.push(item.value);
+          }
+          return item.value;
+        })
+        .sort();
+    },
+    // 默认选中
+    defaultChecked() {
+      return this.defaultSelected.slice().sort();
+    },
+    // 最少选中
+    defaultLeastChecked() {
       let list = [];
       this.optionList.forEach(item => {
-        if (this.value.indexOf(item.value) !== -1) {
-          list.push(item.value);
-        } else {
-          list.push(this.offValue);
-        }
-      });
-      return list;
-    },
-    selectAllValue() {
-      let list = [];
-      this.optionList.forEach(item => {
-        //为禁用 或者 禁用却被选中
-        if (!item.disabled || this.value.indexOf(item.value) !== -1) {
+        if (item.disabled) {
           list.push(item.value);
         }
       });
-      return list;
-    },
-    defaultSelectArr() {
-      let list = copyDeepData(this.defaultSelectValue);
-      this.optionList.forEach(item => {
-        //为禁用 或者 禁用却被选中
-        if (
-          item.disabled &&
-          this.value.indexOf(item.value) !== -1 &&
-          list.indexOf(item.value) == -1
-        ) {
-          list.push(item.value);
-        }
-      });
-      return list;
-    },
-    unSelectedAllValue() {
-      let list = [];
-      this.optionList.forEach(item => {
-        //为禁用 且 被选中
-        if (item.disabled && this.value.indexOf(item.value) !== -1) {
-          list.push(item.value);
-        }
-      });
-      return list;
+      if (list.length === 0 && this.defaultChecked.length > 0) {
+        list = [this.defaultChecked[0]];
+      }
+      return list.sort();
     },
     isAllChecked: {
       get() {
-        return (
-          this.value.length === this.selectAllValue.length &&
-          this.selectAllValue.every(ele => this.value.includes(ele))
-        );
+        return equal(this.value, this.allChecked);
       },
       set(value) {
         this.selectAll(value);
@@ -145,10 +127,7 @@ export default {
     },
     isDefaultChecked: {
       get() {
-        return (
-          this.value.length === this.defaultSelectArr.length &&
-          this.defaultSelectArr.every(ele => this.value.includes(ele))
-        );
+        return equal(this.value, this.defaultChecked);
       },
       set(value) {
         this.selectDefault(value);
@@ -156,31 +135,19 @@ export default {
     }
   },
   methods: {
-    changeValue(options) {
-      if (this.disabled || options.disabled) return;
-
-      let index = this.value.indexOf(options.value);
-      if (index === -1) {
-        this.value.push(options.value);
-      } else {
-        this.value.splice(index, 1);
-      }
-      this.$emit("change", this.value);
-    },
     selectAll(value) {
-      let allValue = [].concat(this.selectAllValue);
-      if (value) {
-        this.$emit("change", allValue);
-      } else {
-        this.$emit("change", this.unSelectedAllValue);
-      }
+      this.value.splice(
+        0,
+        this.value.length,
+        ...(value ? this.allChecked : this.defaultChecked)
+      );
     },
     selectDefault(value) {
-      if (value) {
-        this.$emit("change", this.defaultSelectArr);
-      } else {
-        this.$emit("change", this.unSelectedAllValue);
-      }
+      this.value.splice(
+        0,
+        this.value.length,
+        ...(value ? this.defaultChecked : this.defaultLeastChecked)
+      );
     },
     visibleChange() {
       this.dropdownShow = !this.dropdownShow;

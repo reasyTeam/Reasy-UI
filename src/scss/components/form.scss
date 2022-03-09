@@ -103,6 +103,11 @@
     margin-left: 8px;
     color: $light-color;
   }
+
+  &__remark {
+    color: $disabled-color;
+    font-size: $font-size-m;
+  }
 }
 
 .is-error {

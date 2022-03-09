@@ -186,6 +186,7 @@ Vue.use(Base);
 
 ```html
 <v-input type="text" name="input-limit" :maxlength="10" v-model="input" show-word-limit></v-input>
+<v-input type="textarea" no-id :maxlength="100" v-model="input" show-word-limit></v-input>
 <script>
   export default {
     data() {
