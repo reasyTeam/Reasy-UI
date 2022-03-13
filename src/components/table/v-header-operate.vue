@@ -38,7 +38,7 @@
 <script>
 import CreateToBody from "../create-to-body";
 
-// 两个数值是否相等
+// 两个数组是否相等
 function equal(a, b) {
   return (
     a.length === b.length &&

@@ -360,6 +360,7 @@ Vue.use(Base);
 ```html
 <v-table
   no-id
+  head-operate
   :data="data"
   :total-length="totalLength"
   @change-size="changeSize"
