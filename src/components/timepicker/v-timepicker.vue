@@ -158,6 +158,10 @@ export default {
       type: Boolean,
       default: false
     },
+    isCrossDay: {
+      type: Boolean,
+      default: false
+    },
     placeholder: {
       type: String,
       default() {
@@ -352,7 +356,7 @@ export default {
             second: endTimeObj.second
           });
 
-        if (startTime > endTime) {
+        if (startTime > endTime && !this.isCrossDay) {
           this.$emit("change", [this.endTime, this.startTime]);
         } else {
           this.$emit("change", [this.startTime, this.endTime]);
