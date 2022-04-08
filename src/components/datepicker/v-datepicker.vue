@@ -25,8 +25,6 @@
         }"
         v-model="startDate"
         :disabled="isDisabled"
-        no-id
-        :name="name | id('i-start')"
         @click.native="clickInput"
         :placeholder="placeholder"
         ref="start"
@@ -42,8 +40,6 @@
           v-model="endDate"
           ref="end"
           :disabled="isDisabled"
-          no-id
-          :name="name | id('i-end')"
           @click.native="clickInput"
           :placeholder="endPlaceholder"
           @input="inputEndDate"
@@ -87,7 +83,6 @@
                 @change="changeTmpDate"
                 @mouseover="handlerDateMouseover"
                 @hide="hide"
-                :id="name | id('d-start')"
               ></date-panel>
             </v-col>
             <v-col :span="12" class="v-datepicker__time-border">
@@ -100,7 +95,6 @@
                 @changeTime="changeTime"
                 :time="startDate"
                 :count="count"
-                :id="name | id('t-start')"
               ></time-panel>
             </v-col>
           </template>
@@ -119,7 +113,6 @@
                 @change-header="changeHeader"
                 @mouseover="handlerDateMouseover"
                 @hide="hide"
-                :id="name | id('d-end')"
               ></date-panel>
             </v-col>
             <v-col :span="12" class="v-datepicker__time-border">
@@ -132,7 +125,6 @@
                 @changeTime="changeEndTime"
                 :time="endDate"
                 :count="count"
-                :id="name | id('t-end')"
               ></time-panel>
             </v-col>
           </template>
@@ -154,7 +146,6 @@
               @change="changeTmpDate"
               @mouseover="handlerDateMouseover"
               @hide="hide"
-              :id="name | id('d-start')"
             ></date-panel>
           </v-col>
           <!-- 结束日期 -->
@@ -173,7 +164,6 @@
               @change-header="changeHeader"
               @mouseover="handlerDateMouseover"
               @hide="hide"
-              :id="name | id('d-end')"
             ></date-panel>
           </v-col>
           <!-- 时间 -->
@@ -187,7 +177,6 @@
               @changeTime="changeTime"
               :time="startDate"
               :count="count"
-              :id="name | id('time')"
             ></time-panel>
           </v-col>
         </template>
@@ -200,10 +189,8 @@
             :disabled="submitDisabled"
             type="primary"
             @click="setDateTime"
-            no-id
-            :name="name | id('ok')"
-            >{{ _("OK") }}
-          </v-button>
+            >{{ _("OK") }}</v-button
+          >
         </div>
       </div>
     </create-to-body>
@@ -217,7 +204,6 @@ import DatePanel from "./date-panel.vue";
 import TimePanel from "./time-select-panel.vue";
 //import HeaderPanel from "./header-panel.vue";
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 import { size } from "../filters";
 
 import {
@@ -234,7 +220,7 @@ const DATE_WRAPPER_WIDTH = IS_TRADE ? 256 : 228;
 
 export default {
   name: "v-datepicker",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   components: {
     CreateToBody,
     DatePanel, //日期面板
@@ -253,6 +239,7 @@ export default {
       type: String,
       default: "date"
     },
+    name: String,
     //是否禁用
     disabled: {
       type: Boolean,

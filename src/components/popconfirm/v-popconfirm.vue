@@ -1,5 +1,5 @@
 <template>
-  <div class="v-popconfirm" :id="name">
+  <div class="v-popconfirm">
     <v-popups
       ref="popups"
       :custom-style="{ minWidth, maxWidth }"
@@ -25,8 +25,6 @@
         <div v-if="showConfirm || showCancel" class="v-popconfirm__footer">
           <div class="v-popconfirm__button-group">
             <v-button
-              no-id
-              :name="name | id('pp-cancel')"
               v-if="showCancel"
               class="v-popconfirm__button-item"
               :type="cancelButtonType"
@@ -35,8 +33,6 @@
               >{{ cancelButtonText }}</v-button
             >
             <v-button
-              no-id
-              :name="name | id('pp-ok')"
               v-if="showConfirm"
               class="v-popconfirm__button-item"
               :type="confirmButtonType"
@@ -56,10 +52,8 @@
 </template>
 
 <script>
-import NameMixin from "../name-mixins";
 export default {
   name: "v-popconfirm",
-  mixins: [NameMixin],
   data() {
     return {
       minWidth: "200px"

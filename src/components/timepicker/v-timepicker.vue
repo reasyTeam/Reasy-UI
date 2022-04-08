@@ -5,7 +5,6 @@
     :style="{ width: timePickerWidth }"
     @mouseover="handlerMouseover"
     @mouseout="isMouseover = false"
-    :id="name"
   >
     <div
       :name="name"
@@ -25,8 +24,6 @@
         ref="start"
         @input="inputStartTime"
         @change="changeStartTime"
-        :name="name | id('start')"
-        no-id
       ></v-input>
       <!-- 结束时间 -->
       <template v-if="isRange">
@@ -41,8 +38,6 @@
           ref="end"
           @input="inputEndTime"
           @change="changeEndTime"
-          :name="name | id('end')"
-          no-id
         ></v-input>
       </template>
     </div>
@@ -85,7 +80,6 @@
             :min="min"
             :max="max"
             @change="changeStartTime"
-            :id="name | id('start-panel')"
           ></time-panel>
         </v-col>
         <!-- 结束时间 -->
@@ -100,7 +94,6 @@
             :min="min"
             :max="max"
             @change="changeEndTime"
-            :id="name | id('end-panel')"
           ></time-panel>
         </v-col>
       </v-row>
@@ -110,8 +103,6 @@
           size="S"
           :disabled="isSubmitDisabled"
           @click="setTime"
-          no-id
-          :name="name | id('ok')"
           >{{ _("OK") }}</v-button
         >
       </div>
@@ -123,12 +114,11 @@
 import TimePanel from "./time-panel";
 import CreateToBody from "../create-to-body.vue";
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 import { size } from "../filters";
 import { preFormatDate, isValidTime, parseDate, getTimeNumber } from "../libs";
 export default {
   name: "v-timepicker",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   components: {
     TimePanel,
     CreateToBody
@@ -140,6 +130,7 @@ export default {
   props: {
     //时间值  支持范围时为数组形式
     value: [String, Array],
+    name: String,
     disabled: {
       type: Boolean,
       default: false
@@ -155,6 +146,10 @@ export default {
     },
     //是否支持范围
     isRange: {
+      type: Boolean,
+      default: false
+    },
+    isCrossDay: {
       type: Boolean,
       default: false
     },
@@ -352,7 +347,7 @@ export default {
             second: endTimeObj.second
           });
 
-        if (startTime > endTime) {
+        if (startTime > endTime && !this.isCrossDay) {
           this.$emit("change", [this.endTime, this.startTime]);
         } else {
           this.$emit("change", [this.startTime, this.endTime]);

@@ -5,7 +5,7 @@
     @after-enter="() => setBodyOverflow('add')"
     @after-leave="animationAfterLeave"
   >
-    <div :id="name" ref="dialogBox" v-show="visible" class="v-dialog-box">
+    <div ref="dialogBox" v-show="visible" class="v-dialog-box">
       <transition name="v-dialog-fade">
         <div
           v-show="visible"
@@ -58,8 +58,6 @@
                   ]"
                 >
                   <v-button
-                    no-id
-                    :name="name | id('md-cancel')"
                     v-if="showCancel"
                     class="v-dialog__button-item"
                     :type="cancelButtonType"
@@ -68,8 +66,6 @@
                     >{{ cancelButtonText }}</v-button
                   >
                   <v-button
-                    no-id
-                    :name="name | id('md-ok')"
                     v-if="showConfirm"
                     class="v-dialog__button-item"
                     :type="confirmButtonType"
@@ -89,10 +85,8 @@
 </template>
 
 <script>
-import NameMixin from "../name-mixins";
 export default {
   name: "v-dialog",
-  mixins: [NameMixin],
   props: {
     value: {
       type: Boolean,

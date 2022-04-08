@@ -1,10 +1,8 @@
 import Vue from "vue";
 import Notification from "./v-notification.vue";
-import { isObject, isEmpty } from "../libs";
+import { isObject } from "../libs";
 
 const NotifyConstructor = Vue.extend(Notification);
-const typeList = ["success", "error", "warning", "notice"];
-
 const betweenSpace = 16;
 
 let instance = {},
@@ -76,20 +74,5 @@ const Nofify = function(...args) {
     }
   });
 };
-
-typeList.forEach(msgType => {
-  Nofify[msgType] = function(content, duration) {
-    const options = {
-      status: msgType,
-      content
-    };
-
-    if (!isEmpty(duration)) {
-      options.duration = duration;
-    }
-
-    Nofify(options);
-  };
-});
 
 export default Nofify;

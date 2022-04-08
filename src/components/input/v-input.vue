@@ -1,7 +1,8 @@
 <template>
   <label
     class="v-input"
-    @mousedown="mouseDown"
+    @mouseleave="hoverInput = false"
+    @mouseenter="hoverInput = true"
     :class="[
       {
         'v-input--prefix': icon,
@@ -16,18 +17,10 @@
       v-if="icon"
       :class="icon"
     ></span>
-    <span
-      v-if="preText"
-      ref="preText"
-      class="v-input__middle v-input__pre-text"
-      :style="icon && { left: '32px', paddingLeft: 0 }"
-      >{{ preText }}</span
-    >
     <template v-if="type !== 'textarea'">
       <input
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :name="name"
-        :id="name"
         :data-name="_name"
         ref="input"
         class="input-text"
@@ -42,7 +35,7 @@
         :readonly="readonly"
         :minlength="minlength"
         :maxlength="maxlength"
-        :style="inputStyle"
+        :style="{ paddingRight: subffixWidth }"
         @blur="blur"
         @change="changeValue"
         @keydown="!isZh ? $emit('keydown', $event) : ''"
@@ -55,7 +48,6 @@
       <textarea
         :rows="rows"
         :name="name"
-        :id="name"
         :data-name="_name"
         ref="input"
         class="input-textarea"
@@ -112,36 +104,14 @@
       ></span>
       <!-- 字数限制文字 -->
       <span
-        v-if="showWordLimit && this.maxlength && type !== 'textarea'"
+        v-if="showWordLimit && this.maxlength"
         class="v-input__middle input-word-limit"
       >
         {{ valueLen + "/" + this.maxlength }}
       </span>
     </span>
-    <!-- 字数限制文字 -->
-    <span
-      v-if="showWordLimit && this.maxlength && type === 'textarea'"
-      class="v-input__middle input-word-limit input-word-limit-textarea"
-    >
-      {{ valueLen + "/" + this.maxlength }}
-    </span>
     <!-- 后缀内容 -->
     <slot name="suffix"></slot>
-    <!-- 密码强度 -->
-    <div
-      :class="['strength', `strength-${strength}`]"
-      v-show="showStrength && strength && !isError"
-    >
-      <span class="strength-intro">{{ _("Strength") }}</span>
-      <ul class="strength-list">
-        <li class="strength-list-item"></li>
-        <li class="strength-list-item"></li>
-        <li class="strength-list-item"></li>
-      </ul>
-      <span v-if="showStrengthText" class="strength-text">
-        {{ strengthText[strength] }}
-      </span>
-    </div>
   </label>
 </template>
 
@@ -149,10 +119,9 @@
 import { setCursorPos, getCursorPos, on, off } from "../libs";
 import { size, sizeToCss } from "../filters";
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 export default {
   name: "v-input",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   model: {
     prop: "value",
     event: "change"
@@ -166,6 +135,7 @@ export default {
       type: String,
       default: "text"
     },
+    name: String,
     maxlength: Number,
     minlength: Number,
     disabled: {
@@ -225,18 +195,7 @@ export default {
     unit: {
       type: String,
       default: ""
-    },
-    //是否有密码强度判断
-    showStrength: {
-      type: Boolean,
-      default: false
-    },
-    showStrengthText: {
-      type: Boolean,
-      default: true
-    },
-    strength: String,
-    preText: String
+    }
   },
   computed: {
     //尺寸大小样式
@@ -287,21 +246,9 @@ export default {
     },
     isError() {
       return !!(this.elFormItem && this.elFormItem.showError);
-    },
-    inputStyle() {
-      let style = { paddingRight: this.subffixWidth };
-      if (this.preText) {
-        style.paddingLeft = this.preTextWidth + (this.icon ? 32 : 0) + "px";
-      }
-      return style;
     }
   },
   data() {
-    this.strengthText = {
-      L: _("low"),
-      M: _("middle"),
-      H: _("high")
-    };
     return {
       valueLen: 0, //输入框值长度
       isHover: false,
@@ -309,8 +256,7 @@ export default {
       subffixWidth: "",
       passwordVisible: false,
       isZh: false, //是否非英文输入法,
-      preTextWidth: 0, //前缀文本宽度
-      isClickIcon: false
+      hoverInput: false //鼠标是否在输入框内
     };
   },
   mounted() {
@@ -335,17 +281,6 @@ export default {
   },
   methods: {
     changeValue(event) {
-      const { autoCorrection } = this;
-
-      if (autoCorrection.length) {
-        //选择自动纠错，仅可纠正为数字
-        const minValue = autoCorrection[0],
-          maxValue = autoCorrection[1],
-          inputVal = event.target.value;
-
-        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
-        event.target.value = newVal;
-      }
       this.$emit("change", event.target.value);
       this.$dispatch("v-form", "form:change");
     },
@@ -397,24 +332,11 @@ export default {
       this.$refs.input.select();
     },
     blur(event) {
-      if (this.isClickIcon) {
-        this.$refs.input.focus();
-        return;
-      }
-      const { autoCorrection } = this;
+      // if (this.hoverInput) {
+      //   this.$refs.input.focus();
+      //   return;
+      // }
 
-      if (autoCorrection.length) {
-        const minValue = autoCorrection[0],
-          maxValue = autoCorrection[1],
-          inputVal = event.target.value;
-
-        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
-        //change事件未自动纠错，由blur事件来纠错
-        if (newVal !== inputVal) {
-          event.target.value = newVal;
-          this.$emit("change", newVal);
-        }
-      }
       if (this.unit && this.inputValue) {
         this.setInputValue(this.inputValue + " " + this.unit);
       }
@@ -422,6 +344,18 @@ export default {
       //this.$emit("change", this.$refs.input.value);
       this.isFocus = false;
       //if(this.isChild) return;
+      const { autoCorrection } = this;
+
+      if (autoCorrection.length) {
+        //选择自动纠错，仅可纠正为数字
+        const minValue = autoCorrection[0],
+          maxValue = autoCorrection[1],
+          inputVal = event.target.value;
+
+        const newVal = this.correctInputValue(inputVal, minValue, maxValue);
+        event.target.value = newVal;
+        this.$emit("change", newVal);
+      }
       //失焦后数据验证
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
@@ -484,14 +418,6 @@ export default {
       }
       this.valueLen = inputVal.length;
       this.$emit("input", inputVal);
-    },
-    mouseDown() {
-      this.isClickIcon = true;
-      on(window, "mouseup", this.mouseUp);
-    },
-    mouseUp() {
-      this.isClickIcon = false;
-      off(window, "mouseup", this.mouseUp);
     }
   },
   beforeDestroy() {
@@ -513,18 +439,12 @@ export default {
     isFocus(val) {
       if (this.elFormItem && !this.elFormItem.ignore) {
         //当form组件存在且需要数据验证时
+        // if (this.hoverInput) {
+        //   this.$dispatch("v-form-item", "form:error", false);
+        //   return;
+        // }
         this.$dispatch("v-form-item", "form:error", !val);
       }
-    },
-
-    preText: {
-      handler() {
-        this.preText &&
-          this.$nextTick(() => {
-            this.preTextWidth = this.$refs.preText.clientWidth;
-          });
-      },
-      immediate: true
     }
   }
 };

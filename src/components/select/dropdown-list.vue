@@ -13,11 +13,7 @@
           }"
           @click="clickOption(item)"
         >
-          <select-item
-            v-if="fn && !item.isManual"
-            :fn="fn"
-            :option="item"
-          ></select-item>
+          <select-item v-if="fn && !item.isManual" :fn="fn" :option="item"></select-item>
           <template v-else>
             {{ item.label }}
             <span
@@ -52,7 +48,6 @@ export default {
     //是否支持多选
     isMultiple: Boolean,
     fn: Function,
-    isExsit: Boolean,
     count: Number
   },
   components: {
@@ -75,12 +70,6 @@ export default {
         return this.selectValue.indexOf(options.value) >= 0;
       }
       if (this.selectValue === options.value) {
-        this.$nextTick(() => {
-          this.$refs.scroll.scrollToIndex(index + 1);
-        });
-        return true;
-      }
-      if (this.selectValue && options.isManual && !this.isExsit) {
         this.$nextTick(() => {
           this.$refs.scroll.scrollToIndex(index + 1);
         });

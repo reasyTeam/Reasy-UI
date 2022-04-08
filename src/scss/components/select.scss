@@ -50,17 +50,10 @@
       display: inline-block;
       line-height: 20px;
       border-radius: 2px;
-      margin-right: 4px;
-    }
-  }
 
-  &__search {
-    width: 90%;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
-    .input-text{
-      border-radius: 4px;
+      & + & {
+        margin-left: 4px;
+      }
     }
   }
 

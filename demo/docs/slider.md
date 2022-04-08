@@ -19,7 +19,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider name="slider" v-model="slider"></v-slider>
+<v-slider v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -38,7 +38,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider no-id :min="10" :max="15" v-model="slider"></v-slider>
+<v-slider :min="10" :max="15" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -57,7 +57,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider name="slider-show" show-range :min="10" :max="15" v-model="slider"></v-slider>
+<v-slider show-range :min="10" :max="15" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -76,7 +76,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider show-input no-id :min="10" :max="15" v-model="slider"></v-slider>
+<v-slider show-input :min="10" :max="15" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -96,7 +96,6 @@ Vue.use(Base);
 
 ```html
 <v-slider
-  name="slider-ctr"
   show-input
   show-input-controls
   :min="10"
@@ -129,7 +128,6 @@ Vue.use(Base);
   :min="0"
   :max="1"
   v-model="slider"
-  name="slider-step"
 ></v-slider>
 <script>
   export default {
@@ -149,7 +147,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider show-tooltip name="slider-tip" v-model="slider"></v-slider>
+<v-slider show-tooltip v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -168,7 +166,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider show-tooltip no-id :format="format" v-model="slider"></v-slider>
+<v-slider show-tooltip :format="format" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -200,7 +198,6 @@ Vue.use(Base);
   show-input-controls
   :min="0"
   :max="1"
-  name="slider-d"
   v-model="slider"
 ></v-slider>
 <script>

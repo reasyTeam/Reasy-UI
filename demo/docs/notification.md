@@ -17,9 +17,9 @@ Vue.use(Base);
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
-  <v-button no-id  class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
-  <v-button no-id  class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
+  <v-button class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
+  <v-button class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
+  <v-button class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
 </template>
 
 <script>
@@ -63,49 +63,42 @@ export default {
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
-  <v-button no-id  class="notify-btn" type="danger" @click="handleError">失败</v-button>
-  <v-button no-id  class="notify-btn" type="info" @click="handleWarning">警告</v-button>
-  <v-button no-id  class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
+  <v-button class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
+  <v-button class="notify-btn" type="danger" @click="handleError">失败</v-button>
+  <v-button class="notify-btn" type="info" @click="handleWarning">警告</v-button>
+  <v-button class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
 </template>
 
 <script>
 export default {
   methods: {
     handleSuccess() {
-      // this.$notify({
-      //   status: "success",
-      //   content: "这是一条成功信息！",
-      //   position: "top-right"
-      // });
-      this.$notify.success("这是一条成功信息！")
+      this.$notify({
+        status: "success",
+        content: "这是一条成功信息！",
+        position: "top-right"
+      });
     },
     handleError() {
-      // this.$notify({
-      //   status: "error",
-      //   content: "这是一条错误信息！",
-      //   position: "top-right"
-      // });
-      this.$notify.error("这是一条成功信息！")
-
+      this.$notify({
+        status: "error",
+        content: "这是一条错误信息！",
+        position: "top-right"
+      });
     },
     handleWarning() {
-      // this.$notify({
-      //   status: "warning",
-      //   content: "这是一条警告！",
-      //   position: "top-right"
-      // });
-      this.$notify.warning("这是一条成功信息！")
-
+      this.$notify({
+        status: "warning",
+        content: "这是一条警告！",
+        position: "top-right"
+      });
     },
     handleNotice() {
-      // this.$notify({
-      //   status: "notice",
-      //   content: "这是一条普通的消息提醒",
-      //   position: "top-right"
-      // });
-      this.$notify.notice("这是一条成功信息！")
-
+      this.$notify({
+        status: "notice",
+        content: "这是一条普通的消息提醒",
+        position: "top-right"
+      });
     }
   }
 };
@@ -122,10 +115,10 @@ export default {
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" @click="handleTopRightClick">右上角</v-button>
-  <v-button no-id  class="notify-btn" @click="handleBottomRightClick">右下角</v-button>
-  <v-button no-id  class="notify-btn" @click="handleTopLeftClick">左上角</v-button>
-  <v-button no-id  class="notify-btn" @click="handleBottomLeftClick">左下角</v-button>
+  <v-button class="notify-btn" @click="handleTopRightClick">右上角</v-button>
+  <v-button class="notify-btn" @click="handleBottomRightClick">右下角</v-button>
+  <v-button class="notify-btn" @click="handleTopLeftClick">左上角</v-button>
+  <v-button class="notify-btn" @click="handleBottomLeftClick">左下角</v-button>
 </template>
 
 <script>
@@ -177,7 +170,7 @@ export default {
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" @click="handleClick">关闭后的回调使用</v-button>
+  <v-button class="notify-btn" @click="handleClick">关闭后的回调使用</v-button>
 </template>
 
 <script>
@@ -211,12 +204,12 @@ export default {
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" @click="handleShowCloseBtnClick">仅显示关闭按钮</v-button>
-  <v-button no-id  class="notify-btn" @click="handleshowConfirmBtnClick">仅显示确定按钮</v-button>
-  <v-button no-id  class="notify-btn" @click="handleshowCloseConfirmBtnClick">显示确定和关闭按钮</v-button>
-  <v-button no-id  class="notify-btn" @click="handleHideAllBtnClick">不显示按钮</v-button>
-  <v-button no-id  class="notify-btn" @click="handleCustomConfirmTextBtnClick">自定义确定文本</v-button>
-  <v-button no-id  class="notify-btn" @click="handleNoTitleClick">无标题</v-button>
+  <v-button class="notify-btn" @click="handleShowCloseBtnClick">仅显示关闭按钮</v-button>
+  <v-button class="notify-btn" @click="handleshowConfirmBtnClick">仅显示确定按钮</v-button>
+  <v-button class="notify-btn" @click="handleshowCloseConfirmBtnClick">显示确定和关闭按钮</v-button>
+  <v-button class="notify-btn" @click="handleHideAllBtnClick">不显示按钮</v-button>
+  <v-button class="notify-btn" @click="handleCustomConfirmTextBtnClick">自定义确定文本</v-button>
+  <v-button class="notify-btn" @click="handleNoTitleClick">无标题</v-button>
 </template>
 
 <script>
@@ -287,7 +280,7 @@ export default {
 
 ```html
 <template>
-  <v-button no-id  class="notify-btn" @click="handleClick">使用HTML片段</v-button>
+  <v-button class="notify-btn" @click="handleClick">使用HTML片段</v-button>
 </template>
 
 <script>
@@ -314,14 +307,14 @@ export default {
 
 ### 属性 Attributes
 
-| 参数                     | 说明                                    | 类型    | 可选值                                                  | 默认值    |
-| ------------------------ | --------------------------------------- | ------- | ------------------------------------------------------- | --------- |
-| title                    | 标题                                    | string  | -                                                       | -         |
-| status                   | 状态，不同状态显示不同的图标            | string  | success、error、notice、warning、none                   | none      |
-| content                  | 说明文字                                | string  | -                                                       | -         |
-| duration                 | 显示时间，单位：毫秒。设置为0则不会关闭 | number  | -                                                       | 4500      |
-| position                 | 自定义弹出位置                          | string  | top-right<br/>top-left<br/>bottom-right<br/>bottom-left | top-right |
-| show-close               | 是否显示关闭按钮                        | boolean | -                                                       | true      |
-| show-confirm             | 是否显示确定按钮                        | boolean | -                                                       | false     |
-| confirm-text             | 确定按钮文本                            | string  | -                                                       | 确定      |
-| dangerouslyUseHTMLString | 把content当做html解析                   | Boolean | -                                                       | false     |
+| 参数                     | 说明                                    | 类型         | 可选值                                                  | 默认值    |
+| ------------------------ | --------------------------------------- | ------------ | ------------------------------------------------------- | --------- |
+| title                    | 标题                                    | string       | -                                                       | -         |
+| status                   | 状态，不同状态显示不同的图标  | string       | success、error、notice、warning、none                                                      | none         |
+| content                  | 说明文字                                | string | -                                                       | -         |
+| duration                 | 显示时间，单位：毫秒。设置为0则不会关闭 | number       | -                                                       | 4500      |
+| position                 | 自定义弹出位置                          | string       | top-right<br/>top-left<br/>bottom-right<br/>bottom-left | top-right |
+| show-close               | 是否显示关闭按钮                        | boolean      | -                                                       | true      |
+| show-confirm             | 是否显示确定按钮                        | boolean      | -                                                       | false     |
+| confirm-text             | 确定按钮文本                            | string       | -                                                       | 确定      |
+| dangerouslyUseHTMLString | 把content当做html解析                   | Boolean      | -                                                       | false     |

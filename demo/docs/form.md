@@ -61,35 +61,35 @@ Vue.use(Base);
 ```html
 <v-form ref="form" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid" unit="秒">
-    <v-input name="ssid" v-model="ruleForm.ssid"></v-input>
+    <v-input v-model="ruleForm.ssid"></v-input>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
-    <v-input name="pwd" v-model="ruleForm.pwd" show-password type="password"></v-input>
+    <v-input v-model="ruleForm.pwd" show-password type="password"></v-input>
     <template v-slot:unit>
       <label class="v-form-item__unit">这里显示单位信息</label>
     </template>
   </v-form-item>
   <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
-    <v-input-group name="ip" type="ip" v-model="ruleForm.ip"></v-input-group>
+    <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
   </v-form-item>
   <v-form-item label="个数" prop="index">
-    <v-input-number name="index"
+    <v-input-number
       v-model="ruleForm.index"
       :min="1"
       :max="12"
     ></v-input-number>
   </v-form-item>
   <v-form-item label="功率" prop="power">
-    <v-slider name="power" :min="0" :max="100" v-model="ruleForm.power"></v-slider>
+    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
   </v-form-item>
   <v-form-item label="加密" prop="security">
-    <v-radio name="security" v-model="ruleForm.security" :options="radioOptions"></v-radio>
+    <v-radio v-model="ruleForm.security" :options="radioOptions"></v-radio>
   </v-form-item>
   <v-form-item label="开启" prop="on">
-    <v-switch name="pn" v-model="ruleForm.on"></v-switch>
+    <v-switch v-model="ruleForm.on"></v-switch>
   </v-form-item>
   <v-form-item label="限速" prop="downLimit">
-    <v-select name="limit"
+    <v-select
       v-model="ruleForm.downLimit"
       :options="options"
       is-manual
@@ -98,7 +98,6 @@ Vue.use(Base);
   <v-form-item label="日期" prop="day">
     <v-checkbox-group
       is-select-all
-      name="day"
       selectText="每天"
       v-model="ruleForm.day"
       :options="checkboxOptions"
@@ -106,14 +105,13 @@ Vue.use(Base);
     ></v-checkbox-group>
   </v-form-item>
   <v-form-item label="时间" prop="time">
-    <v-timepicker name="time" v-model="ruleForm.time"></v-timepicker>
+    <v-timepicker v-model="ruleForm.time"></v-timepicker>
     <v-form-item prop="time" is-no-label is-inline>
-      <v-datepicker name="date" v-model="ruleForm.date" type="datetime"></v-datepicker>
+      <v-datepicker v-model="ruleForm.date" type="datetime"></v-datepicker>
     </v-form-item>
   </v-form-item>
   <v-form-item label="日期时间" prop="date1">
     <v-datepicker
-      name="date1"
       v-model="ruleForm.date1"
       :width="400"
       is-range
@@ -121,8 +119,8 @@ Vue.use(Base);
     ></v-datepicker>
   </v-form-item>
   <v-form-item>
-    <v-button name="ok" type="primary" @click="submitForm">保存</v-button>
-    <v-button name="cancel" @click="cancel">取消</v-button>
+    <v-button type="primary" @click="submitForm">保存</v-button>
+    <v-button @click="cancel">取消</v-button>
   </v-form-item>
 </v-form>
 
@@ -249,51 +247,50 @@ Vue.use(Base);
 
 <v-form ref="form" disabled :model="ruleForm" :rules="rules" @submit="submit">
   <v-form-item label="数字" prop="ssid" unit="秒">
-    <v-input no-id v-model="ruleForm.ssid"></v-input>
+    <v-input v-model="ruleForm.ssid"></v-input>
   </v-form-item>
   <v-form-item label="密码" prop="pwd">
-    <v-input no-id v-model="ruleForm.pwd"></v-input>
+    <v-input v-model="ruleForm.pwd"></v-input>
     <template v-slot:description>
       <label class="v-form-item__description">这里显示单位信息</label>
     </template>
   </v-form-item>
   <v-form-item label="IP地址" prop="ip" description="这里显示描述信息描述信息">
-    <v-input-group no-id type="ip" v-model="ruleForm.ip"></v-input-group>
+    <v-input-group type="ip" v-model="ruleForm.ip"></v-input-group>
   </v-form-item>
   <v-form-item label="个数" prop="index">
-    <v-input-number no-id
+    <v-input-number
       v-model="ruleForm.index"
       :min="1"
       :max="12"
     ></v-input-number>
   </v-form-item>
   <v-form-item label="功率" prop="power">
-    <v-slider no-id :min="0" :max="100" v-model="ruleForm.power"></v-slider>
+    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
   </v-form-item>
   <v-form-item disabled>
-    <v-button no-id type="primary" @click="submitForm">保存</v-button>
-    <v-button no-id @click="cancel">取消</v-button>
+    <v-button type="primary" @click="submitForm">保存</v-button>
+    <v-button @click="cancel">取消</v-button>
   </v-form-item>
 </v-form>
 
 <p>部分禁用</p>
 <v-form>
   <v-form-item label="功率" prop="power">
-    <v-slider no-id :min="0" :max="100" v-model="ruleForm.power"></v-slider>
+    <v-slider :min="0" :max="100" v-model="ruleForm.power"></v-slider>
   </v-form-item>
   <v-form-item disabled label="加密" prop="security">
-    <v-radio no-id v-model="ruleForm.security" :options="radioOptions"></v-radio>
+    <v-radio v-model="ruleForm.security" :options="radioOptions"></v-radio>
   </v-form-item>
   <v-form-item label="限速" prop="downLimit">
-    <v-select no-id
+    <v-select
       v-model="ruleForm.downLimit"
       :options="options"
       is-manual
     ></v-select>
   </v-form-item>
   <v-form-item disabled label="日期" prop="day">
-    <v-checkbox-group 
-      no-id
+    <v-checkbox-group
       is-select-all
       selectText="每天"
       v-model="ruleForm.day"
@@ -302,14 +299,14 @@ Vue.use(Base);
     ></v-checkbox-group>
   </v-form-item>
   <v-form-item label="时间" prop="time">
-    <v-timepicker no-id v-model="ruleForm.time"></v-timepicker>
+    <v-timepicker v-model="ruleForm.time"></v-timepicker>
     <v-form-item prop="time" is-no-label is-inline>
-      <v-datepicker no-id v-model="ruleForm.date" type="datetime"></v-datepicker>
+      <v-datepicker v-model="ruleForm.date" type="datetime"></v-datepicker>
     </v-form-item>
   </v-form-item>
   <v-form-item>
-    <v-button no-id type="primary" @click="submitForm">保存</v-button>
-    <v-button no-id @click="cancel">取消</v-button>
+    <v-button type="primary" @click="submitForm">保存</v-button>
+    <v-button @click="cancel">取消</v-button>
   </v-form-item>
 </v-form>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="v-checkbox-group" :id="name">
+  <div class="v-checkbox-group">
     <!-- 全选 -->
     <v-checkbox
       class="v-checkbox-group__item"
@@ -8,8 +8,6 @@
       v-model="isAllChecked"
       :disabled="disabledCheckAll || disabled"
       @click="handleAllClick"
-      no-id
-      :name="name | id('all')"
     >
       {{ selectText }}
     </v-checkbox>
@@ -26,8 +24,6 @@
       :tooltip="tooltip | formatTooltip(item.label)"
       @change="changeValue(item)"
       @click="handlerClick(item)"
-      :name="name | id(item.value)"
-      no-id
     >
       {{ item.label }}
     </v-checkbox>
@@ -36,10 +32,9 @@
 
 <script>
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 export default {
   name: "v-checkbox-group",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   model: {
     prop: "value",
     event: "change"
@@ -47,6 +42,7 @@ export default {
   props: {
     activeValue: [String, Number, Boolean],
     value: Array,
+    name: String,
     disabled: {
       type: Boolean,
       default: false

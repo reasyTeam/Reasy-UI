@@ -1,5 +1,5 @@
 <template>
-  <div class="v-upload" :id="name">
+  <div class="v-upload">
     <form
       ref="iform"
       class="iform"
@@ -29,7 +29,6 @@
         <label
           class="v-upload__row__file"
           @click="clickFile"
-          :id="name | id('file')"
           :class="{
             'has-file': fileName,
             'v-upload__row__file-disabled': disabled
@@ -40,8 +39,6 @@
           :disabled="disabled"
           class="v-upload__row__button"
           @click="clickFile"
-          no-id
-          :name="name | id('upload')"
         >
           <span>{{ _("Browse") }}</span>
         </v-button>
@@ -53,9 +50,7 @@
           icon="v-icon-upload"
           :disabled="disabled"
           class="v-upload__button"
-          no-id
           @click="clickFile"
-          :name="name | id('upload')"
         >
           <span>{{ _("Select File") }}</span>
         </v-button>
@@ -91,7 +86,6 @@
 
 <script>
 import UploadImage from "./upload-image.vue";
-import NameMixin from "../name-mixins";
 const UPLOAD_TYPE = {
   INIT: 0, //初始状态
   LOADING: 1, //上传中
@@ -99,13 +93,16 @@ const UPLOAD_TYPE = {
 };
 export default {
   name: "v-upload",
-  mixins: [NameMixin],
   components: {
     UploadImage
   },
   props: {
     //上传的url路径
     action: String,
+    name: {
+      type: String,
+      default: "file"
+    },
     //支持上传的文件类型
     accept: String,
     crossDomain: {

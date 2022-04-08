@@ -19,7 +19,6 @@ Vue.use(Base);
 ```html
 <template>
   <v-dialog
-    name="basic"
     v-model="showDialog"
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal"
@@ -34,7 +33,6 @@ Vue.use(Base);
   </v-dialog>
 
   <v-dialog
-    name="basic-t"
     v-model="showDialog1"
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal1"
@@ -48,24 +46,16 @@ Vue.use(Base);
   >
     我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框我是对话框区域内容对话框。
   </v-dialog>
-  <v-dialog
-    no-id
-    v-model="showBigDialog"
-    :title="dialogTitle"
-    :width="800"
-    :modal="true"
-    append-to-body
-  >
+  <v-dialog v-model="showBigDialog" :title="dialogTitle" :width="800" :modal="true"
+    append-to-body>
     <div style="height: 1000px;">超高弹出框！</div>
   </v-dialog>
 
-  <v-button no-id type="text" @click="handleButtonClick"
-    >点我打开 Dialog</v-button
-  >
-  <v-button no-id type="text" @click="handleButtonClick1"
+  <v-button type="text" @click="handleButtonClick">点我打开 Dialog</v-button>
+  <v-button type="text" @click="handleButtonClick1"
     >点击外部不关闭 Dialog</v-button
   >
-  <v-button no-id type="text" @click="handleBigClick">超高弹出框</v-button>
+  <v-button type="text" @click="handleBigClick">超高弹出框</v-button>
 </template>
 
 <script>
@@ -125,7 +115,6 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
 ```html
 <template>
   <v-dialog
-    no-id
     v-model="showInputDialog"
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal"
@@ -136,14 +125,14 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
   >
     <v-form ref="form" :model="ruleForm">
       <v-form-item label="姓名" prop="name">
-        <v-input no-id v-model="ruleForm.name"></v-input>
+        <v-input v-model="ruleForm.name"></v-input>
       </v-form-item>
       <v-form-item label="爱好" prop="hobit">
-        <v-select no-id v-model="ruleForm.hobit" :options="selectOptions"></v-select>
+        <v-select v-model="ruleForm.hobit" :options="selectOptions"></v-select>
       </v-form-item>
     </v-form>
   </v-dialog>
-  <v-button no-id type="text" @click="handleDialogInputClick"
+  <v-button type="text" @click="handleDialogInputClick"
     >内嵌表单的 Dialog</v-button
   >
 </template>
@@ -206,7 +195,6 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
 ```html
 <template>
   <v-dialog
-    no-id
     v-model="showDialog"
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal"
@@ -218,9 +206,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
   >
     <div>需要注意的是内容不居中。</div>
   </v-dialog>
-  <v-button no-id type="text" @click="handleDialogClick"
-    >居中布局的 Dialog</v-button
-  >
+  <v-button type="text" @click="handleDialogClick">居中布局的 Dialog</v-button>
 </template>
 
 <script>
@@ -265,7 +251,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
 | confirm-button-type  | 确认按钮类型                          | string  | 参考 button 组件类型 | primary |
 | cancel-button-type   | 取消按钮类型                          | string  | 参考 button 组件类型 | info    |
 | align-center         | 是否对头部和底部采用居中布局          | boolean | -                    | false   |
-| append-to-body       | 是否将内容插入到 body 中去            | boolean | -                    | false   |
+| append-to-body       | 是否将内容插入到body中去          | boolean | -                    | false   |
 
 ### Events
 

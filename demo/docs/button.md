@@ -20,32 +20,32 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="primary" no-id>主按钮</v-button>
-    <v-button type="primary" no-id disabled>主按钮</v-button>
+    <v-button type="primary">主按钮</v-button>
+    <v-button type="primary" disabled>主按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="info" name="button-info">次按钮</v-button>
-    <v-button type="info" no-id disabled>次按钮</v-button>
+    <v-button type="info">次按钮</v-button>
+    <v-button type="info" disabled>次按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="danger" no-id >高危按钮</v-button>
-    <v-button type="danger" no-id disabled>高危按钮</v-button>
+    <v-button type="danger">高危按钮</v-button>
+    <v-button type="danger" disabled>高危按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" name="button-text">文本按钮</v-button>
-    <v-button type="text" no-id disabled>文本按钮</v-button>
+    <v-button type="text">文本按钮</v-button>
+    <v-button type="text" disabled>文本按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id icon="v-icon-delete"></v-button>
+    <v-button type="text" icon="v-icon-delete"></v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id icon="v-icon-upload">图标按钮</v-button>
+    <v-button type="text" icon="v-icon-upload">图标按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" name="button-down" suffix-icon="v-icon-down">后缀按钮</v-button>
+    <v-button type="text" suffix-icon="v-icon-down">后缀按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id :is-loading="true">加载中</v-button>
+    <v-button type="primary" :is-loading="true">加载中</v-button>
   </div>
 </section>
 ```
@@ -61,22 +61,22 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="primary" no-id size="S">按钮</v-button>
+    <v-button type="primary" size="S">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" name="button-size-s-d"icon="v-icon-delete" size="S">按钮</v-button>
+    <v-button type="primary" icon="v-icon-delete" size="S">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id size="M">按钮</v-button>
+    <v-button type="primary" size="M">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id size="M">按钮</v-button>
+    <v-button type="primary" icon="v-icon-delete" size="M">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" name="button-size-l" size="L">按钮</v-button>
+    <v-button type="primary" size="L">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id icon="v-icon-delete" size="L">按钮</v-button>
+    <v-button type="primary" icon="v-icon-delete" size="L">按钮</v-button>
   </div>
 </section>
 ```
@@ -90,10 +90,10 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="text" name="button-text1">文本按钮</v-button>
+    <v-button type="text">文本按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id disabled>文本按钮</v-button>
+    <v-button type="text" disabled>文本按钮</v-button>
   </div>
 </section>
 ```
@@ -105,8 +105,6 @@ Vue.use(Base);
 | 参数        | 说明         | 类型    | 可选值                                                                                                    | 默认值 |
 | ----------- | ------------ | ------- | --------------------------------------------------------------------------------------------------------- | ------ |
 | type        | 类型         | string  | primary 主按钮<br />info 次按钮 常用按钮<br />danger 高危按钮<br />text 文字按钮 | info   |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled    | 是否禁用     | boolean | —                                                                                                         | false  |
 | is-loading  | 是否在加载中 | boolean | —                                                                                                         | false  |
 | icon        | 图标类名     | string  | —                                                                                                         | —      |

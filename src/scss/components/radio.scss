@@ -8,7 +8,8 @@
   }
   &__item {
     cursor: pointer;
-    display: inline-block;
+    // display: inline-block;
+    // font-size: $font-size-m;
 
     &--disabled {
       cursor: not-allowed;
@@ -41,7 +42,7 @@
 
   &__icon {
     color: $border-color;
-    padding-right: 8px;
+    margin-right: 8px;
     font-size: 16px;
     display: inline-block;
     vertical-align: middle;

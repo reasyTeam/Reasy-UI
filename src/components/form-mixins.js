@@ -11,12 +11,24 @@ export default {
       type: Boolean,
       default: false
     }
+    // id: {
+    //   type: String,
+    //   required: true
+    // }
   },
   inject: {
     elFormItem: {
       default: ""
     }
   },
+  // computed: {
+  //   errorMsg() {
+  //     if (this.elFormItem) {
+  //       return this.elFormItem.errorMsg;
+  //     }
+  //     return false;
+  //   }
+  // },
   computed: {
     isDisabled() {
       return (this.elFormItem && this.elFormItem.isDisabled) || this.disabled;
@@ -36,6 +48,16 @@ export default {
       this.elFormItem.isMounted = true;
     }
     this._name = this.name || this.elFormItem.prop;
+  },
+  mounted() {
+    // let i = 1;
+    // let key = `${this.$options.name}-${this.elFormItem.prop}-${this.name}`;
+    // let id = `${this.$options.name}-${hashKey(key)}`;
+    // while (this._ids[id]) {
+    //   id = `${this.$options.name}-${hashKey(key + i++)}`;
+    // }
+    // this._ids[id] = true;
+    // this.id = id;
   },
   methods: {
     getValue() {
@@ -89,6 +111,14 @@ export default {
     this.$emit("form-item:remove");
   },
   watch: {
+    // errorMsg(val) {
+    //   if (
+    //     (this.elFormItem && this.elFormItem.childVm === this) ||
+    //     (!this.elFormItem && !this.isChild)
+    //   ) {
+    //     this.error = val;
+    //   }
+    // },
     size: {
       handler(val) {
         this.$dispatch("v-form-item", "form:size", val);
@@ -102,4 +132,7 @@ export default {
       }
     }
   }
+  // beforeDestroy() {
+  //   delete this._ids[this.id];
+  // }
 };

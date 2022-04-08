@@ -22,7 +22,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id v-model="time"></v-timepicker>
+<v-timepicker v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -41,7 +41,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker name="timepicker-d" disabled v-model="time"></v-timepicker>
+<v-timepicker disabled v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -62,7 +62,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker name="timepicker-s" format="hh:mm:ss" is-clear v-model="time"></v-timepicker>
+<v-timepicker format="hh:mm:ss" is-clear v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -83,7 +83,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker format="hh:mm:ss" name="timepicker-24" is-all-day v-model="time"></v-timepicker>
+<v-timepicker format="hh:mm:ss" is-all-day v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -94,7 +94,6 @@ Vue.use(Base);
   };
 </script>
 ```
-
 :::
 
 ### 配置间隔
@@ -107,7 +106,6 @@ Vue.use(Base);
 <v-timepicker
   :minute-interval="5"
   :second-interval="10"
-  name="timepicker-f"
   format="hh:mm:ss"
   is-clear
   v-model="time"
@@ -134,7 +132,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker name="timepicker-l" v-model="time" format="hh%mm-ss"></v-timepicker>
+<v-timepicker v-model="time" format="hh%mm-ss"></v-timepicker>
 <script>
   export default {
     data() {
@@ -157,7 +155,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id v-model="time" min="12:00" max="18:00"></v-timepicker>
+<v-timepicker v-model="time" min="12:00" max="18:00"></v-timepicker>
 <script>
   export default {
     data() {
@@ -168,7 +166,6 @@ Vue.use(Base);
   };
 </script>
 ```
-
 :::
 
 ### 支持时间范围
@@ -180,7 +177,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id is-range v-model="time"></v-timepicker>
+<v-timepicker is-range v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -203,7 +200,7 @@ Vue.use(Base);
   is-range
   placeholder="开始时间"
   end-placeholder="结束时间"
-  v-model="time" name="timepicker-p"
+  v-model="time"
 ></v-timepicker>
 <script>
   export default {
@@ -218,6 +215,26 @@ Vue.use(Base);
 
 :::
 
+### 支持跨天选择
+
+`is-cross-day`配置是否支持 跨天选择，也就是不限定起始和结束时间的大小
+
+::: demo
+
+```html
+<v-timepicker format="hh:mm:ss" is-range is-cross-day v-model="time"></v-timepicker>
+<script>
+  export default {
+    data() {
+      return {
+        time: ["22:11:00", "12:11:00"]
+      };
+    }
+  };
+</script>
+```
+:::
+
 ### v-timepicker Attributes
 
 | 参数            | 说明                                                                             | 类型            | 可选值 | 默认值                                               |
@@ -228,6 +245,7 @@ Vue.use(Base);
 | width           | 时间选择器宽度                                                                   | string / number | —      | —                                                    |
 | is-clear        | 是否支持清除                                                                     | boolean         | —      | true                                                 |
 | is-range        | 是否支持范围选择                                                                 | boolean         | —      | false                                                |
+| is-cross-day           | 是否支持跨天选择                                                          |boolean          | —      | false                                                   |
 | placeholder     | 占位内容，支持范围选择时为开始时间的占位符<br />不支持范围时为时间选择框的占位符 | string          | —      | `is-range`为真时，默认是开始时间，其他默认是选择时间 |
 | end-placeholder | 支持范围选择时结束时间的占位符                                                   | string          |        | 结束时间                                             |
 | format          | 时间格式，支持 hh、mm、ss 与任意字符组合，小时 hh 为必填项                       | string          | —      | hh:mm                                                |

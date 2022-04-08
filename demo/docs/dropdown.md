@@ -25,7 +25,6 @@ Vue.use(Base);
   ref="dropdown"
   class="dropdown-item"
   label="普通样式"
-  no-id
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -35,7 +34,6 @@ Vue.use(Base);
   ref="dropdown1"
   class="dropdown-item"
   label="按钮样式"
-  name="dropdown-btns"
   type="button"
   :options="options1"
   @visible-change="visibleChange"
@@ -103,7 +101,6 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="点击显示"
-  name="dropdown-click"
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -113,7 +110,6 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="移入显示"
-  no-id
   trigger="hover"
   :options="options1"
   @visible-change="visibleChange"
@@ -178,7 +174,6 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="选后关闭"
-  no-id
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -188,7 +183,6 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="选后不关闭"
-  no-id
   :hide-after-selected="false"
   :options="options1"
   @visible-change="visibleChange"
@@ -254,7 +248,6 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="普通样式"
-  no-id
   :options="options"
   :disabled="true"
   @visible-change="visibleChange"
@@ -265,7 +258,6 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="按钮样式"
-  no-id
   type="button"
   :disabled="true"
   :options="options1"
@@ -332,7 +324,6 @@ export default {
   class="dropdown-item"
   label="带有图标"
   :options="options"
-  name="dropdown-icon"
   @visible-change="visibleChange"
   @click-item="clickItem"
 ></v-dropdown>
@@ -341,7 +332,6 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="其他配置"
-  no-id
   :options="options1"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -396,13 +386,13 @@ export default {
 :::
 
 
+
+
 ### 属性 Attributes
 
 | 参数                   | 说明                                                         | 类型           | 可选值      | 默认值   |
 | ---------------------- | ------------------------------------------------------------ | -------------- | ----------- | -------- |
 | type                   | 下拉菜单类型                                                 | string         | link/button | link     |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | label                  | 下拉菜单标签名称                                             | string         | -           | 下拉菜单 |
 | disabled               | 菜单是否禁用                                                 | boolean        | -           | false    |
 | trigger                | 触发下拉的行为                                               | string         | hover/click | click    |

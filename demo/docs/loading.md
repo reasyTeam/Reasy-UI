@@ -43,7 +43,7 @@ Vue.use(Base);
 </div>
 <div>
   <label>显示loading：</label>
-  <v-switch no-id v-model="show"></v-switch>
+  <v-switch v-model="show"></v-switch>
 </div>
 
 <script>

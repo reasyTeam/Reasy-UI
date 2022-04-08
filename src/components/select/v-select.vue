@@ -17,7 +17,6 @@
       ref="input"
       is-child
       :name="name"
-      :id="name | id('input')"
       :data-name="_name"
       :maxlength="maxlength"
       :minlength="minlength"
@@ -36,38 +35,18 @@
     </v-input>
     <div
       :name="name"
-      :id="name | id('text')"
       :data-name="_name"
       v-else
       class="v-select__label input-text"
       :class="{ 'is-disabled': isDisabled, 'is-focus': dropdownShow }"
       @click="showOptions"
-      :style="multipleShowAll && { height: 'auto' }"
     >
       <div v-if="!isMultiple" class="v-select__label--text">
         {{ selectLabel }}
       </div>
       <!--多选-->
-      <div
-        v-else-if="multipleLabel.length > 0"
-        class="v-select__label--text v-select__label--position"
-        :style="multipleShowAll && { whiteSpace: 'normal' }"
-      >
-        <!-- 完整显示所有已选项 -->
-        <template v-if="multipleShowAll">
-          <span
-            v-for="item in multipleLabel"
-            :key="item.label"
-            class="v-select__label__item"
-          >
-            <span class="v-select__label--text__item">{{ item.label }}</span>
-            <span
-              class="v-select__icon--right v-icon-close"
-              @click.stop.prevent="delValue(item)"
-            ></span>
-          </span>
-        </template>
-        <template v-else>
+      <div v-else class="v-select__label--text v-select__label--position">
+        <template v-if="multipleLabel.length > 0">
           <span class="v-select__label__item">
             <span class="v-select__label--text__item">{{
               multipleLabel[0].label
@@ -106,18 +85,9 @@
       v-clickoutside="hide"
       :position="position"
     >
-      <search-input
-        v-if="isSearch"
-        v-model="searchText"
-        class="v-select__search"
-        :placeholder="_('搜索')"
-        is-search
-        :name="name | id('search')"
-        @input="val => (searchText = val)"
-      />
       <dropdown-list
         :class="sizeCss"
-        :options="searchText ? searchList : optionList"
+        :options="optionList"
         :is-multiple="isMultiple"
         :multiple-limit="multipleLimit"
         :select-value="value"
@@ -125,8 +95,6 @@
         :fn="$scopedSlots.default"
         @click-options="clickOptions"
         @hide="hide"
-        :is-exsit="!!isExsitOption"
-        :id="name | id('wrapper')"
       ></dropdown-list>
     </create-to-body>
   </div>
@@ -137,16 +105,13 @@ import DropdownList from "./dropdown-list";
 import CreateToBody from "../create-to-body.vue";
 import { size } from "../filters";
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
-import SearchInput from "../input/v-input.vue";
 
 export default {
   name: "v-select",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   components: {
     DropdownList,
-    CreateToBody,
-    SearchInput
+    CreateToBody
   },
   model: {
     prop: "value",
@@ -157,6 +122,7 @@ export default {
       type: [String, Number, Array, Boolean],
       default: ""
     },
+    name: String,
     disabled: {
       type: Boolean,
       default: false
@@ -170,14 +136,6 @@ export default {
     multipleLimit: {
       type: Number,
       default: 0
-    },
-    multipleShowAll: {
-      type: Boolean,
-      default: false
-    },
-    isSearch: {
-      type: Boolean,
-      default: false
     },
     //选项
     options: {
@@ -277,10 +235,6 @@ export default {
       }
       return list;
     },
-    searchList() {
-      let { searchText, optionList } = this;
-      return optionList.filter(item => item.label.indexOf(searchText) !== -1);
-    },
     //值是否在选项内
     isExsitOption() {
       let isExsitOptions = this.optionList.filter(item => {
@@ -324,8 +278,7 @@ export default {
       dropdownShow: false,
       isInput: false,
       inputValue: "",
-      isMouseover: false,
-      searchText: ""
+      isMouseover: false
     };
   },
   methods: {
@@ -418,13 +371,11 @@ export default {
 
       this.checkValid(this.value);
     },
-    delValue(item) {
+    delValue() {
       if (this.isDisabled) {
         return;
       }
-      this.multipleShowAll
-        ? this.value.splice(this.value.indexOf(item.value), 1)
-        : this.value.shift();
+      this.value.shift();
       this.checkValid(this.value);
     },
     hide() {
@@ -445,15 +396,11 @@ export default {
     value: {
       handler(val) {
         this.inputValue = val;
-        this.$nextTick(() => {
-          this.isMultiple && val.length > 1 && this.$refs.body.setPotion();
-        });
       },
       immediate: true
     },
     dropdownShow(val) {
       this.$emit("visible-change", val);
-      this.searchText = "";
     },
     isShowError(val) {
       if (this.elFormItem && !this.elFormItem.ignore) {

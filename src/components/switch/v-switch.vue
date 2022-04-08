@@ -3,7 +3,7 @@
     class="v-switch"
     :class="[sizeCss, { 'v-switch--disabled': isDisabled }]"
   >
-    <span class="v-switch__item" @click="clickSwitch" :id="name">
+    <span class="v-switch__item" @click="clickSwitch">
       <!-- 开关按钮 -->
       <span
         :name="name"
@@ -24,16 +24,16 @@
 
 <script>
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 export default {
   name: "v-switch",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   model: {
     prop: "value",
     event: "input"
   },
   props: {
     value: [String, Number, Boolean],
+    name: String,
     disabled: {
       type: Boolean,
       default: false

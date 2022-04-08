@@ -6,8 +6,17 @@
       @click="clickCheckbox"
       :name="name"
       :data-name="_name"
-      :id="name"
     >
+      <!-- <span
+        class="v-checkbox__icon"
+        :class="
+          value === onValue
+            ? 'v-checkbox__icon--active v-icon-checkbox-checked'
+            : hasValue
+            ? 'v-checkbox__icon--active v-icon-minus-square'
+            : 'v-icon-checkbox'
+        "
+      ></span> -->
       <span
         class="v-checkbox__icon"
         :class="
@@ -31,16 +40,16 @@
 
 <script>
 import FormMixin from "../form-mixins";
-import NameMixin from "../name-mixins";
 export default {
   name: "v-checkbox",
-  mixins: [FormMixin, NameMixin],
+  mixins: [FormMixin],
   model: {
     prop: "value",
     event: "change"
   },
   props: {
     value: [String, Number, Boolean],
+    name: String,
     disabled: {
       type: Boolean,
       default: false

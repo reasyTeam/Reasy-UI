@@ -20,14 +20,13 @@ Vue.use(Base);
 ```html
 <template>
   <v-popconfirm
-    no-id
     ref="popconfirm"
     icon="v-icon-help-plane popconfirm-custom-icon"
     title="确定要删除这一段内容吗？"
     @confirm="handleConfirm"
     @cancel="handleCancel"
   >
-    <v-button no-id  slot="reference">删除</v-button>
+    <v-button slot="reference">删除</v-button>
   </v-popconfirm>
 </template>
 
@@ -55,7 +54,6 @@ export default {
 ```html
 <template>
   <v-popconfirm
-    no-id
     :show-cancel="false"
     confirm-button-type="text"
     confirm-button-text="知道了"
@@ -68,7 +66,7 @@ export default {
         这里是<strong class="popconfirm-demo__content--height-line">自定义自定义自定义自定义</strong>内容
       </div>
     </div>
-    <v-button no-id  slot="reference">自定义内容确认框</v-button>
+    <v-button slot="reference">自定义内容确认框</v-button>
   </v-popconfirm>
 </template>
 ```

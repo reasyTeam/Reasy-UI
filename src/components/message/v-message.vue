@@ -22,15 +22,12 @@
           </div>
         </template>
       </template>
-      <template v-if="!$slots.default">
+      <slot>
         <p v-if="!dangerouslyUseHTMLString" :class="contentClass">
           {{ content }}
         </p>
         <p v-else v-html="content" :class="contentClass"></p>
-      </template>
-      <template v-else>
-        <slot></slot>
-      </template>
+      </slot>
     </div>
   </transition>
 </template>

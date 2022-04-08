@@ -18,7 +18,7 @@ Vue.use(Base);
 :::demo 在全局注册了$message方法，接收一个options字面量参数。在最简单的情况下，直接传入一个字符串即可设置提示内容，或通过传入的options中的`content`字段的值来设置内容。默认情况下，经过一段时间后Message组件会关闭，可以通过设置`duration`控制关闭的时间间隔，特别的是，如果设置为`0`，则不会关闭。注：`duration`接收一个`Number`，单位为毫秒，默认为`2000`。
 
 ```html
-<v-button no-id  class="msg-btn" @click="handleInfoClick">打开消息提醒</v-button>
+<v-button class="msg-btn" @click="handleInfoClick">打开消息提醒</v-button>
 
 <script>
 export default {
@@ -47,11 +47,11 @@ export default {
 :::demo
 
 ```html
-<!-- <v-button no-id  class="msg-btn" @click="handleInfoClick">Info</v-button> -->
-<v-button no-id  class="msg-btn" @click="handleSuccessClick">Success</v-button>
-<v-button no-id  class="msg-btn" @click="handleErrorClick">Error</v-button>
-<v-button no-id  class="msg-btn" @click="handleWarnClick">Warn</v-button>
-<v-button no-id  class="msg-btn" @click="handleLoadingClick">Loading</v-button>
+<!-- <v-button class="msg-btn" @click="handleInfoClick">Info</v-button> -->
+<v-button class="msg-btn" @click="handleSuccessClick">Success</v-button>
+<v-button class="msg-btn" @click="handleErrorClick">Error</v-button>
+<v-button class="msg-btn" @click="handleWarnClick">Warn</v-button>
+<v-button class="msg-btn" @click="handleLoadingClick">Loading</v-button>
 
 <script>
 export default {
@@ -85,7 +85,7 @@ export default {
 :::demo
 
 ```html
-<v-button no-id  class="msg-btn" @click="handleCustomClick">使用HTML片段</v-button>
+<v-button class="msg-btn" @click="handleCustomClick">使用HTML片段</v-button>
 
 <script>
 export default {
@@ -112,7 +112,7 @@ export default {
 :::demo 通过`this.$message(options).close()`来关闭提示窗。
 
 ```html
-<v-button no-id  class="msg-btn" @click="handleCustomClick">{{ buttonText }}</v-button>
+<v-button class="msg-btn" @click="handleCustomClick">{{ buttonText }}</v-button>
 
 <script>
 const textSet = ["关闭", "打开"];

@@ -16,7 +16,7 @@ Vue.use(Base);
 :::demo
 
 ```html
-<v-radio v-model="radio1" name="radio" :options="options"></v-radio>
+<v-radio v-model="radio1" :options="options"></v-radio>
 <script>
   export default {
     data() {
@@ -36,9 +36,9 @@ Vue.use(Base);
 :::demo
 
 ```html
-<v-radio v-model="radio1" no-id disabled :options="options1"></v-radio>
+<v-radio v-model="radio1" disabled :options="options1"></v-radio>
 <div>
-  <v-radio v-model="radio2" no-id :options="options2"></v-radio>
+  <v-radio v-model="radio2" :options="options2"></v-radio>
 </div>
 <script>
   export default {

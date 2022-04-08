@@ -10,7 +10,6 @@
       {{ rowIndex + 1 }}
     </template>
     <v-checkbox
-      no-id
       v-if="column.type === 'selection'"
       class="v-table__header__checkbox"
       v-model="rowData[checkboxField]"

@@ -17,8 +17,6 @@ import Pie from "./chart/pie";
 import Percent from "./chart/percent";
 import Progress from "./chart/percent/progress";
 
-import Edit from "./edit";
-import Qrcode from "./qrcode";
 import Button from "./button";
 import { Input, InputGroup, InputNumber } from "./input";
 import Slider from "./slider";
@@ -48,8 +46,6 @@ import TabPane from "./tab-pane";
 import Steps from "./steps";
 import Step from "./step";
 import CollapseTransition from "./collapse/collapse-transition.js";
-import Colorpicker from "./colorpicker";
-import Menu from "./menu";
 
 const components = [
   Collapse,
@@ -62,8 +58,6 @@ const components = [
   Input,
   InputGroup,
   InputNumber,
-  Edit,
-  Qrcode,
   Slider,
   Radio,
   Checkbox,
@@ -100,9 +94,7 @@ const components = [
   Steps,
   Step,
   Percent,
-  Progress,
-  Colorpicker,
-  Menu
+  Progress
 ];
 
 const install = function(Vue) {

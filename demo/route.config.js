@@ -36,10 +36,7 @@ const registerRoute = navConfig => {
   });
 
   function addRoute(page, index) {
-    const component =
-      process.env.THEME === "trade" && page.path == "table"
-        ? loadDocs("table-trade")
-        : loadDocs(page.path);
+    const component = loadDocs(page.path);
     let child = {
       path: page.path,
       meta: {

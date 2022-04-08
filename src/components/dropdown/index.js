@@ -6,4 +6,3 @@ Dropdown.install = function(Vue) {
 };
 
 export default Dropdown;
-export { Dropdown };
