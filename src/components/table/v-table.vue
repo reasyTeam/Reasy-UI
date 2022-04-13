@@ -506,7 +506,8 @@ export default {
       searchSupportArr: [], //支持search字段
       expandFunc: false, //展开事件
       sortProp: "", //当前排序元素
-      pageSizeValue: 10 //每页条数
+      pageSizeValue: 10, //每页条数
+      currentSelectData: [] //当前的选中项
     };
   },
   created() {
@@ -591,10 +592,10 @@ export default {
   },
   methods: {
     getActive(rowData) {
-      if (this.selectData.length < 1 || !this.rowKey) {
+      if (this.currentSelectData.length < 1 || !this.rowKey) {
         return false;
       }
-      return this.selectData.some(item => {
+      return this.currentSelectData.some(item => {
         if (item[this.rowKey] === rowData[this.rowKey]) {
           if (isUndefinedOrNull(rowData[this.checkboxField])) {
             this.$set(rowData, this.checkboxField, true);
@@ -607,12 +608,21 @@ export default {
       });
     },
     updateTable(isChanged) {
-      this.checkboxAllVal = CHECKBOX_UNCHECKED;
       this.pageData = this.getPageData();
 
       this.$nextTick(() => {
         this.updateScrollHeight(isChanged);
         this.$emit("after-update", this.pageData);
+        // 更新表头选中的值
+        // 是否有未选中的
+        const hasNoSelect = this.pageData.some(item => {
+          return item[this.checkboxField] !== CHECKBOX_CHECKED;
+        });
+        if (hasNoSelect || this.pageData.length == 0) {
+          this.checkboxAllVal = CHECKBOX_UNCHECKED;
+        } else {
+          this.checkboxAllVal = CHECKBOX_CHECKED;
+        }
       });
     },
     updateScrollHeight(isChanged) {
@@ -698,7 +708,8 @@ export default {
           this.$set(item, this.checkboxField, val);
         }
       });
-      this.$emit("selection-change", this.getSelected());
+      // 更新
+      this.updateCurrentSelectData();
     },
     //单选
     clickCheckbox() {
@@ -719,7 +730,12 @@ export default {
           this.checkboxAllVal = CHECKBOX_UNCHECKED;
         }
       }
-      this.$emit("selection-change", this.getSelected());
+      // 更新
+      this.updateCurrentSelectData();
+    },
+    updateCurrentSelectData() {
+      this.currentSelectData = this.getSelected();
+      this.$emit("selection-change", this.currentSelectData);
     },
     //展开
     expandTable(rowData, index) {
@@ -816,6 +832,9 @@ export default {
           }
         }
         this.updateTable();
+        this.$nextTick(() => {
+          this.updateCurrentSelectData();
+        });
       },
       immediate: true
     },
@@ -825,6 +844,12 @@ export default {
         this.$nextTick(() => {
           this.updateBodyWidth();
         });
+      },
+      immediate: true
+    },
+    selectData: {
+      handler(val) {
+        this.currentSelectData = copyDeepData(val || []);
       },
       immediate: true
     }
