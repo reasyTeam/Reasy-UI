@@ -266,6 +266,7 @@ Dialog 的内容可以是任意的，甚至可以是表格和表单，下面是�
 | cancel-button-type   | 取消按钮类型                          | string  | 参考 button 组件类型 | info    |
 | align-center         | 是否对头部和底部采用居中布局          | boolean | -                    | false   |
 | append-to-body       | 是否将内容插入到 body 中去            | boolean | -                    | false   |
+| append-to-id         | 有id则将内容插入到 id 中去            | string  | -                    | 空      |
 
 ### Events
 

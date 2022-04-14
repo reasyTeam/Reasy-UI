@@ -155,6 +155,10 @@ export default {
     appendToBody: {
       type: Boolean,
       default: false
+    },
+    appendToId: {
+      type: String,
+      default: ""
     }
   },
   data() {
@@ -165,6 +169,10 @@ export default {
   mounted() {
     if (this.appendToBody) {
       this.insertDialogToBody();
+    }
+
+    if (this.appendToId) {
+      this.insertDialogToId();
     }
   },
   computed: {
@@ -230,6 +238,11 @@ export default {
       const $dialogBox = this.$refs.dialogBox;
 
       document.body.appendChild($dialogBox);
+    },
+    insertDialogToId() {
+      const $dialogBox = this.$refs.dialogBox;
+      const dom = document.getElementById(this.appendToId);
+      dom && dom.appendChild($dialogBox);
     }
   },
   watch: {
@@ -237,6 +250,16 @@ export default {
       if (newVal) {
         this.$emit("open");
       }
+    }
+  },
+  beforeDestroy() {
+    const $dialogBox = this.$refs.dialogBox;
+    if (this.appendToBody) {
+      document.body.removeChild($dialogBox);
+    }
+    if (this.appendToId) {
+      const dom = document.getElementById(this.appendToId);
+      dom && dom.removeChild($dialogBox);
     }
   }
 };

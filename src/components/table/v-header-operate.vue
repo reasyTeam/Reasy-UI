@@ -1,9 +1,9 @@
 <template>
   <div class="header-operate">
-    <div class="operate-btn" @click="visibleChange">
+    <div class="operate-btn" @click="visibleChange" ref="operate">
       <div class="v-icon-more"></div>
     </div>
-    <create-to-body width="180px" :show="dropdownShow">
+    <create-to-body width="180px" :show="dropdownShow" :style="style">
       <div class="v-dropdown__menu">
         <v-scroll v-clickoutside="visibleChange">
           <div class="v-checkbox-trade v-checkbox-group">
@@ -69,7 +69,11 @@ export default {
   },
   data() {
     return {
-      dropdownShow: false
+      dropdownShow: false,
+      style: {
+        maxHeight: 0,
+        overflow: "auto"
+      }
     };
   },
   computed: {
@@ -151,6 +155,16 @@ export default {
     },
     visibleChange() {
       this.dropdownShow = !this.dropdownShow;
+    }
+  },
+  watch: {
+    dropdownShow(val) {
+      if (val) {
+        let bodyHeight =
+            document.documentElement.clientHeight || document.body.clientHeight,
+          parentRect = this.$refs.operate.getBoundingClientRect();
+        this.style.maxHeight = bodyHeight - parentRect.bottom + "px";
+      }
     }
   }
 };

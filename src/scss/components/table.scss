@@ -338,22 +338,24 @@
       top: 0;
       right: 0;
       width: 35px;
-      height: 34px;
+      height: calc(100% - 1px);
       cursor: pointer;
       background: #f4f5f7;
       .operate-btn {
         height: 100%;
         .v-icon-more {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: calc(50% - 11px);
           font-size: 22px;
           color: #aaabb4;
           transform: rotateZ(90deg);
-          margin-top: 6px;
         }
       }
     }
   }
-  .v-table__content
-  {
+  .v-table__content {
     position: relative;
   }
   .v-table__body {
