@@ -20,32 +20,32 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="primary" no-id>主按钮</v-button>
-    <v-button type="primary" no-id disabled>主按钮</v-button>
+    <v-button type="primary" name="btn-pri">主按钮</v-button>
+    <v-button type="primary" name="btn-pri-d" disabled>主按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="info" name="button-info">次按钮</v-button>
-    <v-button type="info" no-id disabled>次按钮</v-button>
+    <v-button type="info" name="btn-info">次按钮</v-button>
+    <v-button type="info" name="btn-info-d" disabled>次按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="danger" no-id >高危按钮</v-button>
-    <v-button type="danger" no-id disabled>高危按钮</v-button>
+    <v-button type="danger" name="btn-danger" >高危按钮</v-button>
+    <v-button type="danger" name="btn-danger-d" disabled>高危按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" name="button-text">文本按钮</v-button>
-    <v-button type="text" no-id disabled>文本按钮</v-button>
+    <v-button type="text" name="btn-text">文本按钮</v-button>
+    <v-button type="text" name="btn-text-d" disabled>文本按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id icon="v-icon-delete"></v-button>
+    <v-button type="text" name="btn-delete" icon="v-icon-delete"></v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id icon="v-icon-upload">图标按钮</v-button>
+    <v-button type="text" name="btn-upload" icon="v-icon-upload">图标按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" name="button-down" suffix-icon="v-icon-down">后缀按钮</v-button>
+    <v-button type="text" name="btn-down" suffix-icon="v-icon-down">后缀按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id :is-loading="true">加载中</v-button>
+    <v-button type="primary" name="btn-loading" :is-loading="true">加载中</v-button>
   </div>
 </section>
 ```
@@ -61,22 +61,22 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="primary" no-id size="S">按钮</v-button>
+    <v-button type="primary" name="btn-s" size="S">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" name="button-size-s-d"icon="v-icon-delete" size="S">按钮</v-button>
+    <v-button type="primary" name="btn-s-del"icon="v-icon-delete" size="S">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id size="M">按钮</v-button>
+    <v-button type="primary" name="btn-m" size="M">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id size="M">按钮</v-button>
+    <v-button type="primary" name="btn-m-del" icon="v-icon-delete" size="M">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" name="button-size-l" size="L">按钮</v-button>
+    <v-button type="primary" name="btn-l" size="L">按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="primary" no-id icon="v-icon-delete" size="L">按钮</v-button>
+    <v-button type="primary" name="btn-l-del" icon="v-icon-delete" size="L">按钮</v-button>
   </div>
 </section>
 ```
@@ -90,10 +90,10 @@ Vue.use(Base);
 ```html
 <section class="button-content">
   <div class="button-group">
-    <v-button type="text" name="button-text1">文本按钮</v-button>
+    <v-button type="text" name="btn-text1">文本按钮</v-button>
   </div>
   <div class="button-group">
-    <v-button type="text" no-id disabled>文本按钮</v-button>
+    <v-button type="text" name="btn-text1-d" disabled>文本按钮</v-button>
   </div>
 </section>
 ```

@@ -50,7 +50,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="password" no-id disabled v-model="input"></v-input>
+<v-input type="password" name="input-p-d" disabled v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -71,7 +71,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="password" no-id show-password v-model="input"></v-input>
+<v-input type="password" name="input-p-s1" show-password v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -92,7 +92,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="password" v-model="input" no-id show-strength :strength="strength"></v-input>
+<v-input type="password" v-model="input" name="input-p-s" show-strength :strength="strength"></v-input>
 <script>
   export default {
     data() {
@@ -114,7 +114,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="text" no-id autofocus v-model="input"></v-input>
+<v-input type="text" name="input-auto" autofocus v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -139,10 +139,10 @@ Vue.use(Base);
   <v-input type="text" name="input-width" :width="200" placeholder="数字200" v-model="input"></v-input>
 </div>
 <div class="input-group">
-  <v-input type="text" no-id width="120px" placeholder="字符120px" v-model="input1"></v-input>
+  <v-input type="text" name="input-3" width="120px" placeholder="字符120px" v-model="input1"></v-input>
 </div>
 <div class="input-group">
-  <v-input type="text" width="50%" placeholder="字符50%" no-id v-model="input2"></v-input>
+  <v-input type="text" width="50%" placeholder="字符50%" name="input-4" v-model="input2"></v-input>
 </div>
 <script>
   export default {
@@ -166,7 +166,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="text" no-id :maxlength="10" v-model="input"></v-input>
+<v-input type="text" name="input-max" :maxlength="10" v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -186,7 +186,7 @@ Vue.use(Base);
 
 ```html
 <v-input type="text" name="input-limit" :maxlength="10" v-model="input" show-word-limit></v-input>
-<v-input type="textarea" no-id :maxlength="100" v-model="input" show-word-limit></v-input>
+<v-input type="textarea" name="input-limit1" :maxlength="100" v-model="input" show-word-limit></v-input>
 <script>
   export default {
     data() {
@@ -207,7 +207,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="text" no-id is-clear v-model="input"></v-input>
+<v-input type="text" name="input-clear" is-clear v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -228,7 +228,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="text" no-id is-search v-model="input"></v-input>
+<v-input type="text" name="input-search1" is-search v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -352,7 +352,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="textarea" no-id :rows="8" v-model="input"></v-input>
+<v-input type="textarea" name="input-row" :rows="8" v-model="input"></v-input>
 <script>
   export default {
     data() {
@@ -373,7 +373,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input type="text" no-id v-model="input" :auto-correction="[1, 10]" :allow="/\d/g"></v-input>
+<v-input type="text" name="input-co" v-model="input" :auto-correction="[1, 10]" :allow="/\d/g"></v-input>
 <script>
   export default {
     data() {

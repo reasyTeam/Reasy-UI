@@ -48,7 +48,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-group v-model="mac" no-id :input-nums="3" splitter="-" :maxlength="4" :allow="/[\da-f]/ig"></v-input-group>
+<v-input-group v-model="mac" name="input-g1" :input-nums="3" splitter="-" :maxlength="4" :allow="/[\da-f]/ig"></v-input-group>
 <script>
   export default {
     data() {

@@ -53,7 +53,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox-group v-model="checked" no-id :options="options"></v-checkbox-group>
+<v-checkbox-group v-model="checked" name="check-g5" :options="options"></v-checkbox-group>
 <script>
   export default {
     data() {
@@ -77,7 +77,7 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
-  no-id
+  name="check-g1"
   v-model="checked"
   :options="options"
 ></v-checkbox-group>
@@ -121,7 +121,7 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
-  no-id
+  name="check-g2"
   select-text="选中所有"
   v-model="checked"
   :options="options"
@@ -166,7 +166,7 @@ Vue.use(Base);
 ```html
 <v-checkbox-group
   is-select-all
-  no-id
+  name="check-g3"
   disabled
   v-model="selected"
   :options="options"
@@ -260,7 +260,7 @@ Vue.use(Base);
   :min="2"
   :max="4"
   v-model="checked"
-  no-id
+  name="check-g4"
   :options="options"
 ></v-checkbox-group>
 <script>

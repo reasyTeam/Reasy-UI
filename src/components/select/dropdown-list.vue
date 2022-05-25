@@ -1,5 +1,5 @@
 <template>
-  <div class="v-select-options">
+  <div class="v-select-options" :id="name">
     <v-x-scroll ref="scroll" @mounted="setPosition" :count="count">
       <!-- 下拉选项列表 -->
       <ul class="v-select-options__list">
@@ -11,6 +11,7 @@
             active: getSelected(item, index),
             'v-select-options__item--disabled': getDisabled(item, index)
           }"
+          :id="name | id(index)"
           @click="clickOption(item)"
         >
           <select-item
@@ -33,8 +34,10 @@
 
 <script>
 import SelectItem from "./select-item.vue";
+import NameMixin from "../name-mixins";
 
 export default {
+  mixins: [NameMixin],
   props: {
     //下拉框选项
     options: {
@@ -53,7 +56,8 @@ export default {
     isMultiple: Boolean,
     fn: Function,
     isExsit: Boolean,
-    count: Number
+    count: Number,
+    name: String
   },
   components: {
     SelectItem

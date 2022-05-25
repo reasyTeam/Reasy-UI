@@ -16,6 +16,7 @@
       />
       <span
         class="v-icon-edit v-edit__icon pointer edit-gray"
+        :id="name | id('edit')"
         @click="changeEditStatus"
       ></span>
     </div>
@@ -38,11 +39,13 @@
         v-if="hasSuffix"
         ref="suffix"
         class="v-edit__icon--suffix"
+        :id="name | id('suff')"
         @mousedown="isClickSuffix = true"
       >
         <!-- 清除图标 -->
         <span
           v-if="valueLen && isClear"
+          :id="name | id('clear')"
           class="v-icon-close-plane v-edit__icon pointer edit-gray"
           @click="clearValue"
         ></span>

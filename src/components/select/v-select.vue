@@ -36,7 +36,7 @@
     </v-input>
     <div
       :name="name"
-      :id="name | id('text')"
+      :id="name | id('body')"
       :data-name="_name"
       v-else
       class="v-select__label input-text"
@@ -44,7 +44,11 @@
       @click="showOptions"
       :style="multipleShowAll && { height: 'auto' }"
     >
-      <div v-if="!isMultiple" class="v-select__label--text">
+      <div
+        v-if="!isMultiple"
+        :id="name | id('text')"
+        class="v-select__label--text"
+      >
         {{ selectLabel }}
       </div>
       <!--多选-->
@@ -63,6 +67,7 @@
             <span class="v-select__label--text__item">{{ item.label }}</span>
             <span
               class="v-select__icon--right v-icon-close"
+              :id="name | id(`${item.label}-del`)"
               @click.stop.prevent="delValue(item)"
             ></span>
           </span>
@@ -74,6 +79,7 @@
             }}</span>
             <span
               class="v-select__icon--right v-icon-close"
+              :id="name | id('del')"
               @click.stop.prevent="delValue"
             ></span>
           </span>
@@ -112,6 +118,7 @@
         class="v-select__search"
         :placeholder="_('搜索')"
         is-search
+        no-id
         :name="name | id('search')"
         @input="val => (searchText = val)"
       />
@@ -126,7 +133,7 @@
         @click-options="clickOptions"
         @hide="hide"
         :is-exsit="!!isExsitOption"
-        :id="name | id('wrapper')"
+        :name="name | id('list')"
       ></dropdown-list>
     </create-to-body>
   </div>

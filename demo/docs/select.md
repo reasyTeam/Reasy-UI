@@ -59,7 +59,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" no-id :options="selectOption"></v-select>
+<v-select v-model="select1" name="select-num" :options="selectOption"></v-select>
 <script>
   export default {
     data() {
@@ -107,7 +107,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" no-id disabled :options="selectOption"></v-select>
+<v-select v-model="select1" name="select-d" disabled :options="selectOption"></v-select>
 
 <script>
   export default {
@@ -145,7 +145,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-select v-model="select1" no-id :options="selectOption"></v-select>
+<v-select v-model="select1" name="select-3" :options="selectOption"></v-select>
 <script>
   export default {
     data() {
@@ -328,7 +328,7 @@ Vue.use(Base);
     <v-select
       v-model="select1"
       position="bottom"
-      no-id
+      name="select-5"
       :options="selectOption"
     ></v-select>
   </v-col>
@@ -443,6 +443,7 @@ Vue.use(Base);
 | 参数                   | 说明                                                           | 类型                              | 可选值              | 默认值 |
 | ---------------------- | -------------------------------------------------------------- | --------------------------------- | ------------------- | ------ |
 | v-model                | 绑定值，多选时值为数组，单选时为字符串                         | string / Array / Number / Boolean | —                   | —      |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
 | name                   | 原生属性name，同时渲染为id属性，**必填**                                       | string                            | —                   | —      |
 | disabled               | 是否禁用                                                       | boolean                           | —                   | false  |
 | width                  | 选择器宽度                                                     | string / Number                   | —                   | —      |

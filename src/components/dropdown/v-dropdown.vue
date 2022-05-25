@@ -14,9 +14,9 @@
       :show="dropdownShow"
       v-clickoutside="hide"
       :class="[panelClass]"
+      :id="name | id('wrapper')"
     >
       <div
-        :id="name | id('wrapper')"
         class="v-dropdown__menu"
         @mouseenter="handleDropdownMouseenter"
         @mouseleave="handleDropdownMouseleave"
@@ -31,6 +31,7 @@
           <ul>
             <li
               v-for="(item, idx) in options"
+              :id="name | id(idx)"
               :key="item.value + idx"
               :class="[
                 'v-dropdown__option',

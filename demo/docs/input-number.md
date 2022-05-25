@@ -29,7 +29,7 @@ Vue.use(Base);
   <v-input-number size="S" name="input-num-s" v-model="num"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="L" no-id  v-model="num" controls-position="right"></v-input-number>
+  <v-input-number size="L" name="input-num-r1"  v-model="num" controls-position="right"></v-input-number>
 </div>
 <div class="input-group">
   <v-input-number size="M" name="input-num-m-r" v-model="num" controls-position="right"></v-input-number>
@@ -57,12 +57,12 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number disabled no-id v-model="num"></v-input-number>
+<v-input-number disabled name="input-num-d" v-model="num"></v-input-number>
 
 <v-input-number
   v-model="num"
-  :min="0" 
-  name="input-num-range-d"
+  :min="0"
+  name="input-num-r-d"
   :max="10"
   disabled
   controls-position="right"
@@ -88,7 +88,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" no-id :min="1" :max="10"></v-input-number>
+<v-input-number v-model="num" name="input-range" :min="1" :max="10"></v-input-number>
 <script>
   export default {
     data() {
@@ -111,7 +111,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" no-id :is-controls="false"></v-input-number>
+<v-input-number v-model="num" name="input-no-c" :is-controls="false"></v-input-number>
 <script>
   export default {
     data() {

@@ -20,22 +20,31 @@
       <span
         class="v-button__icon v-button__item"
         v-if="icon"
+        :id="name | id('pre')"
         :class="icon"
       ></span>
       <!-- 按钮内容 -->
-      <span class="v-button__item" v-if="$slots.default">
+      <span
+        class="v-button__item"
+        :id="name | id('item')"
+        v-if="$slots.default"
+      >
         <slot></slot>
       </span>
       <!-- 按钮后缀图标 -->
       <span
         class="v-button__icon v-button__item"
         v-if="suffixIcon"
+        :id="name | id('icon')"
         :class="suffixIcon"
       ></span>
     </template>
     <!-- 加载中 -->
     <template v-else>
-      <span class="v-button--loading v-button__icon v-icon-loading"></span>
+      <span
+        :id="name | id('load')"
+        class="v-button--loading v-button__icon v-icon-loading"
+      ></span>
     </template>
   </button>
 </template>

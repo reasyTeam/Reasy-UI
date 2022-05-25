@@ -74,6 +74,7 @@
     </template>
     <div
       @click="focus()"
+      :id="name | id('ph')"
       class="placeholder-text"
       v-if="!supportPlaceholder && !inputValue"
     >
@@ -85,6 +86,7 @@
       <!-- 搜索 -->
       <span
         v-if="isSearch"
+        :id="name | id('search')"
         @mouseover="isHover = true"
         @mouseout="isHover = false"
         class="v-input__search v-input__icon pointer v-icon-search"
@@ -94,12 +96,14 @@
       <!-- 清除图标 -->
       <span
         v-if="inputValue && isClear !== false"
+        :id="name | id('clear')"
         class="v-input__middle v-input__icon pointer input-gray v-icon-close-plane"
         @click="clearValue()"
       ></span>
       <!-- 显示密码图标 -->
       <span
         v-if="showPassword"
+        :id="name | id('pass')"
         class="v-input__middle v-input__icon pointer input-gray"
         :class="passwordVisible ? 'v-icon-eye-on' : 'v-icon-eye-off'"
         @click="handlerPasswordVisible"
@@ -107,6 +111,7 @@
       <!-- 自定义后缀图标 -->
       <span
         v-if="suffixIcon"
+        :id="name | id('suff')"
         class="v-input__middle v-input__icon"
         :class="suffixIcon"
       ></span>

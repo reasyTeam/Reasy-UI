@@ -31,6 +31,7 @@
       <li
         v-for="(color, index) in formatColors"
         :key="index"
+        :id="name | id(`pick-${index}`)"
         class="v-colorpicker__list__item"
         :style="{ background: color }"
         @click="chooseColor(color)"

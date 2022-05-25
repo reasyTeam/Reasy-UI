@@ -189,6 +189,7 @@ export default {
   },
   data() {
     return {
+      titleWidth: 0,
       errHeight: "", //错误文字高度
       value: "",
       size: "M",
@@ -285,8 +286,10 @@ export default {
         if (width % 2 === 1) {
           width += 1;
         }
-        //将宽度广播到表单组件
-        this.$dispatch("v-form", "label-width", width);
+        this.titleWidth = width;
+
+        //广播到表单组件 重新计算最大宽度
+        this.$dispatch("v-form", "label-width");
       }
     },
     //子元素值

@@ -67,14 +67,14 @@ export default {
   created() {
     this.$on("form.addField", field => {
       this.addField(field);
+      this.updateWidth();
     });
     this.$on("form.removeField", field => {
       this.removeField(field);
+      this.updateWidth();
     });
-    this.$on("label-width", width => {
-      if (width > this.labelWidth) {
-        this.labelWidth = width;
-      }
+    this.$on("label-width", () => {
+      this.updateWidth();
     });
     this.$on("form:change", () => {
       this.$emit("change");
@@ -98,6 +98,12 @@ export default {
 
     getValidateType(prop) {
       return this.rules[prop] || [];
+    },
+    // 更新最大宽度
+    updateWidth() {
+      this.labelWidth = this.fields.reduce((width, field) => {
+        return Math.max(width, field.titleWidth);
+      }, 0);
     },
 
     //表单数据验证

@@ -30,7 +30,7 @@
         :class="{ 'tab-active-border--transition': activeBorderTransition }"
       ></div>
     </div>
-    <div class="tab-pane-wrapper">
+    <div class="tab-pane-wrapper" :id="name | id('content')">
       <slot></slot>
     </div>
   </div>

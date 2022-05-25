@@ -18,7 +18,7 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-colorpicker v-model="color" no-id></v-colorpicker>
+  <v-colorpicker v-model="color" name="cp-color"></v-colorpicker>
 </div>
 
 <script>

@@ -27,10 +27,10 @@ Vue.use(Base);
     <v-checkbox v-model="checked" name="checkbox-true">选项</v-checkbox>
   </v-form-item>
   <v-form-item label="未选中禁用">
-    <v-checkbox v-model="unchecked" disabled no-id>选项</v-checkbox>
+    <v-checkbox v-model="unchecked" disabled name="checkbox1">选项</v-checkbox>
   </v-form-item>
   <v-form-item label="选中禁用">
-    <v-checkbox v-model="checked" disabled no-id>选项</v-checkbox>
+    <v-checkbox v-model="checked" disabled name="checkbox2">选项</v-checkbox>
   </v-form-item>
 </v-form>
 <script>
@@ -52,7 +52,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox v-model="checked" no-id disabled>禁用</v-checkbox>
+<v-checkbox v-model="checked" name="checkbox3" disabled>禁用</v-checkbox>
 <script>
   export default {
     data() {

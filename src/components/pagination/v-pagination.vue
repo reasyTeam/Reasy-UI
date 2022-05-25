@@ -6,6 +6,7 @@
     <div class="v-pagination__item" :id="name">
       <a
         class="v-pagination__button v-pagonation__icon v-icon-left"
+        :id="name | id('pre')"
         @click="gotoPage('prev')"
         :class="{
           'v-pagination__button--disabled': page === 1 || disabled,
@@ -14,6 +15,7 @@
       ></a>
       <a
         class="v-pagination__button"
+        :id="name | id(footerBtn.value)"
         :class="{
           'v-pagination__button--active': footerBtn.value == page,
           'v-pagination__button--border':
@@ -33,6 +35,7 @@
       </a>
       <a
         class="v-pagination__button v-pagonation__icon v-icon-right"
+        :id="name | id('next')"
         @click="gotoPage('next')"
         :class="{
           'v-pagination__button--disabled': page >= totalPage || disabled,

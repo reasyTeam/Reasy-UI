@@ -25,7 +25,7 @@ Vue.use(Base);
   ref="dropdown"
   class="dropdown-item"
   label="普通样式"
-  no-id
+  name="drop-nromal"
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -35,7 +35,7 @@ Vue.use(Base);
   ref="dropdown1"
   class="dropdown-item"
   label="按钮样式"
-  name="dropdown-btns"
+  name="drop-btns"
   type="button"
   :options="options1"
   @visible-change="visibleChange"
@@ -103,7 +103,7 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="点击显示"
-  name="dropdown-click"
+  name="drop-click"
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -113,7 +113,7 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="移入显示"
-  no-id
+  name="drop-hover"
   trigger="hover"
   :options="options1"
   @visible-change="visibleChange"
@@ -178,7 +178,7 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="选后关闭"
-  no-id
+  name="drop-close"
   :options="options"
   @visible-change="visibleChange"
   @click-item="clickItem"
@@ -188,7 +188,7 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="选后不关闭"
-  no-id
+  name="drop-visible"
   :hide-after-selected="false"
   :options="options1"
   @visible-change="visibleChange"
@@ -254,7 +254,7 @@ export default {
   ref="dropdown"
   class="dropdown-item"
   label="普通样式"
-  no-id
+  name="drop-nromal-d"
   :options="options"
   :disabled="true"
   @visible-change="visibleChange"
@@ -265,7 +265,7 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="按钮样式"
-  no-id
+  name="drop-btn-d"
   type="button"
   :disabled="true"
   :options="options1"
@@ -341,7 +341,7 @@ export default {
   ref="dropdown1"
   class="dropdown-item"
   label="其他配置"
-  no-id
+  name="drop-other"
   :options="options1"
   @visible-change="visibleChange"
   @click-item="clickItem"

@@ -17,7 +17,7 @@ Vue.use(Base);
 
 ```html
 <template>
-  <v-tabs v-model="activeName" no-id>
+  <v-tabs v-model="activeName" name="tabs-base">
     <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
     <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
     <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -63,7 +63,7 @@ export default {
         <label>中</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName1" no-id size="M">
+        <v-tabs v-model="activeName1" name="tabs-m" size="M">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -112,7 +112,7 @@ export default {
         <label>小</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName" size="S" no-id type="tag">
+        <v-tabs v-model="activeName" size="S" name="tabs-tag" type="tag">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -124,7 +124,7 @@ export default {
         <label>中</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName1" no-id size="M" type="tag">
+        <v-tabs v-model="activeName1" name="tabs-tag-m" size="M" type="tag">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -136,7 +136,7 @@ export default {
         <label>大</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName2" no-id size="L" type="tag">
+        <v-tabs v-model="activeName2" name="tabs-tag-l" size="L" type="tag">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -185,7 +185,7 @@ export default {
         <label>中</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName1" no-id size="M" type="card">
+        <v-tabs v-model="activeName1" name="tabs-card-m" size="M" type="card">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -197,7 +197,7 @@ export default {
         <label>大</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName2" no-id size="L" type="card">
+        <v-tabs v-model="activeName2" name="tabs-card-l" size="L" type="card">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -234,7 +234,7 @@ export default {
         <label>小</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName" name="tabs-s-button" size="S" type="button">
+        <v-tabs v-model="activeName" name="tabs-s-btn" size="S" type="button">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -246,7 +246,7 @@ export default {
         <label>中</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName1" no-id size="M" type="button">
+        <v-tabs v-model="activeName1" name="tabs-btn-m" size="M" type="button">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -258,7 +258,7 @@ export default {
         <label>大</label>
       </v-col>
       <v-col :span="22">
-        <v-tabs v-model="activeName2" no-id size="L" type="button">
+        <v-tabs v-model="activeName2" name="tabs-btn-l" size="L" type="button">
           <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
           <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
           <v-tab-pane label="标签3" value="3">标签3内容</v-tab-pane>
@@ -292,7 +292,7 @@ export default {
 <template>
   <div class="tabs-demo">
     <h5></h5>
-    <v-tabs v-model="activeName" name="tabs-m-disabled">
+    <v-tabs v-model="activeName" name="tabs-m-d">
       <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
       <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
       <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>
@@ -300,7 +300,7 @@ export default {
   </div>
   <div class="tabs-demo">
     <h5></h5>
-    <v-tabs v-model="activeName1" no-id type="card">
+    <v-tabs v-model="activeName1" name="tabs-card-d" type="card">
       <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
       <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
       <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>
@@ -308,7 +308,7 @@ export default {
   </div>
   <div class="tabs-demo">
     <h5></h5>
-    <v-tabs v-model="activeName2" no-id type="button">
+    <v-tabs v-model="activeName2" name="tbas-btn-d" type="button">
       <v-tab-pane label="标签1" value="1">标签1内容</v-tab-pane>
       <v-tab-pane label="标签2" value="2">标签2内容</v-tab-pane>
       <v-tab-pane label="标签3" value="3" :disabled="true">标签3内容</v-tab-pane>

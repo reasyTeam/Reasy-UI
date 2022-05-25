@@ -18,7 +18,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-pagination :total="100" no-id :current-page="5"></v-pagination>
+<v-pagination :total="100" name="page-base" :current-page="5"></v-pagination>
 ```
 
 :::
@@ -45,13 +45,13 @@ Vue.use(Base);
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title page-row__border">基础</v-col>
   <v-col :span="22">
-    <v-pagination :total="100" no-id :current-page="6"></v-pagination>
+    <v-pagination :total="100" name="page-border" :current-page="6"></v-pagination>
   </v-col>
 </v-row>
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title">简洁</v-col>
   <v-col :span="22">
-    <v-pagination :border="false" no-id :total="100" :current-page="1"></v-pagination>
+    <v-pagination :border="false" name="page-noborder" :total="100" :current-page="1"></v-pagination>
   </v-col>
 </v-row>
 ```
@@ -73,7 +73,7 @@ Vue.use(Base);
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title">简洁</v-col>
   <v-col :span="22">
-    <v-pagination :total="100" no-id is-show-total is-change-size is-input-page :border="false" :current-page="8" :pageSizeOptions="[10,20,50,100]"></v-pagination>
+    <v-pagination :total="100" name="page-total" is-show-total is-change-size is-input-page :border="false" :current-page="8" :pageSizeOptions="[10,20,50,100]"></v-pagination>
   </v-col>
 </v-row>
 ```
@@ -88,13 +88,13 @@ Vue.use(Base);
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title page-row__border">基础</v-col>
   <v-col :span="22">
-    <v-pagination :total="100" name="page-disabled" is-show-total is-change-size is-input-page :current-page="2" disabled></v-pagination>
+    <v-pagination :total="100" name="page-d" is-show-total is-change-size is-input-page :current-page="2" disabled></v-pagination>
   </v-col>
 </v-row>
 <v-row class="page-row">
   <v-col :span="2" class="page-row__title">简洁</v-col>
   <v-col :span="22">
-    <v-pagination :total="100" no-id is-show-total is-change-size is-show-total-page is-input-page :border="false" :current-page="8" disabled></v-pagination>
+    <v-pagination :total="100" name="page-max-d" is-show-total is-change-size is-show-total-page is-input-page :border="false" :current-page="8" disabled></v-pagination>
   </v-col>
 </v-row>
 ```
@@ -109,21 +109,21 @@ Vue.use(Base);
 <v-row class="page-row">
   <v-col :span="3" class="page-row__title page-row__border">显示总页</v-col>
   <v-col :span="21">
-    <v-pagination :total="100" no-id is-show-total-page :current-page="3"></v-pagination>
+    <v-pagination :total="100" name="page-1" is-show-total-page :current-page="3"></v-pagination>
  </v-col>
 </v-row>
 
 <v-row class="page-row">
   <v-col :span="3" class="page-row__title page-row__border">显示总条数</v-col>
   <v-col :span="21">
-    <v-pagination :total="100" no-id is-show-total :current-page="4"></v-pagination>
+    <v-pagination :total="100" name="page-2" is-show-total :current-page="4"></v-pagination>
  </v-col>
 </v-row>
 
 <v-row class="page-row">
   <v-col :span="3" class="page-row__title">显示完整</v-col>
   <v-col :span="21">
-    <v-pagination :total="100" no-id is-show-total is-show-total-page is-change-size is-input-page :border="false" :current-page="5" ></v-pagination>
+    <v-pagination :total="100" name="page-3" is-show-total is-show-total-page is-change-size is-input-page :border="false" :current-page="5" ></v-pagination>
   </v-col>
 </v-row>
 ```

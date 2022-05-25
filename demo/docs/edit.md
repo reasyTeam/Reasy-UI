@@ -49,7 +49,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit disabled no-id v-model="edit" />
+<v-edit disabled name="input-e" v-model="edit" />
 <script>
   export default {
     data() {
@@ -71,13 +71,13 @@ Vue.use(Edit);
 
 ```html
 <div class="input-group">
-  <v-edit :width="200" placeholder="数字200" no-id v-model="edit" />
+  <v-edit :width="200" placeholder="数字200" name="input-e-1" v-model="edit" />
 </div>
 <div class="input-group">
-  <v-edit width="120px" placeholder="字符120px" no-id v-model="edit1" />
+  <v-edit width="120px" placeholder="字符120px" name="input-e-2" v-model="edit1" />
 </div>
 <div class="input-group">
-  <v-edit width="50%" placeholder="字符50%" no-id v-model="edit2" />
+  <v-edit width="50%" placeholder="字符50%" name="input-e-3" v-model="edit2" />
 </div>
 <script>
   export default {
@@ -101,7 +101,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit :maxlength="10" no-id v-model="edit" />
+<v-edit :maxlength="10" name="input-e-4" v-model="edit" />
 <script>
   export default {
     data() {
@@ -164,7 +164,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit :allow="/\d/g" no-id v-model="edit" />
+<v-edit :allow="/\d/g" name="input-e-5" v-model="edit" />
 <script>
   export default {
     data() {
@@ -185,7 +185,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit unit="KB/s" autofocus no-id v-model="edit" />
+<v-edit unit="KB/s" autofocus name="input-e-6" v-model="edit" />
 <script>
   export default {
     data() {

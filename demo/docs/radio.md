@@ -36,9 +36,9 @@ Vue.use(Base);
 :::demo
 
 ```html
-<v-radio v-model="radio1" no-id disabled :options="options1"></v-radio>
+<v-radio v-model="radio1" name="radio-d" disabled :options="options1"></v-radio>
 <div>
-  <v-radio v-model="radio2" no-id :options="options2"></v-radio>
+  <v-radio v-model="radio2" name="radio-d1" :options="options2"></v-radio>
 </div>
 <script>
   export default {
@@ -79,7 +79,8 @@ Vue.use(Base);
 | 参数          | 说明                                            | 类型               | 可选值 | 默认值                   |
 | ------------- | ----------------------------------------------- | ------------------ | ------ | ------------------------ |
 | v-model       | 绑定值                                          | string             | —      | —                        |
-| name          | radio 的名称                                    | string             | —      | —                        |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | options       | 下拉选项数组对象                                | Array              | —      | []                       |
 | disabled      | 是否禁用                                        | boolean            |        | false                    |
 | before-change | 切换选中前的钩子，返回 false 时，不会修改选中项 | function(value) {} | —      | function() {return true} |
