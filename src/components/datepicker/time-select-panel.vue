@@ -10,6 +10,7 @@
         :secondInterval="secondInterval"
         :time="currentTime"
         :count="count"
+        :name="name"
         @change="changeTime"
       ></time-panel>
     </div>
@@ -37,7 +38,8 @@ export default {
     time: String,
     endTime: String,
     min: String,
-    max: String
+    max: String,
+    name: String
   },
   computed: {
     // minTime() {

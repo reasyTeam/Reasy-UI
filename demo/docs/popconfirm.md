@@ -20,14 +20,14 @@ Vue.use(Base);
 ```html
 <template>
   <v-popconfirm
-    no-id
+    name="confirm1"
     ref="popconfirm"
     icon="v-icon-help-plane popconfirm-custom-icon"
     title="确定要删除这一段内容吗？"
     @confirm="handleConfirm"
     @cancel="handleCancel"
   >
-    <v-button no-id  slot="reference">删除</v-button>
+    <v-button name="button1" slot="reference">删除</v-button>
   </v-popconfirm>
 </template>
 
@@ -55,7 +55,7 @@ export default {
 ```html
 <template>
   <v-popconfirm
-    no-id
+    name="confirm2"
     :show-cancel="false"
     confirm-button-type="text"
     confirm-button-text="知道了"
@@ -68,7 +68,7 @@ export default {
         这里是<strong class="popconfirm-demo__content--height-line">自定义自定义自定义自定义</strong>内容
       </div>
     </div>
-    <v-button no-id  slot="reference">自定义内容确认框</v-button>
+    <v-button name="button2" slot="reference">自定义内容确认框</v-button>
   </v-popconfirm>
 </template>
 ```
@@ -76,12 +76,12 @@ export default {
 :::
 
 
-
-
 ### 属性 Attributes
 
 | 参数                | 说明                                                 | 类型    | 可选值                                                                                                                                                                                  | 默认值           |
 | ------------------- | ---------------------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | title               | 标题                                                 | string  | -                                                                                                                                                                                       | -                |
 | icon                | Icon图标类名；<br /> 如不配置，则隐藏                | string  | -                                                                                                                                                                                       | -                |
 | position            | popconfirm出现的位置                                 | string  | top-left<br/>top-center<br/> top-right<br/>right-top<br/>right-center<br/>right-bottom<br/>bottom-right<br/> bottom-center<br/>bottom-left<br/>left-bottom<br/>left-center<br/>left-top | top-center       |

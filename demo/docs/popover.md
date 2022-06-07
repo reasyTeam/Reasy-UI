@@ -27,7 +27,7 @@ Vue.use(Base);
     position="top-left"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference">hover 触发</v-button>
+    <v-button name="button1" slot="reference">hover 触发</v-button>
   </v-popover>
   <v-popover
     class="popover-demo"
@@ -37,7 +37,7 @@ Vue.use(Base);
     position="top-center"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference">click 触发</v-button>
+    <v-button name="button2" slot="reference">click 触发</v-button>
   </v-popover>
   <v-popover
     v-model="visible"
@@ -48,7 +48,7 @@ Vue.use(Base);
     position="bottom-center"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference" @click="handleClick">手动触发</v-button>
+    <v-button name="button3" slot="reference" @click="handleClick">手动触发</v-button>
   </v-popover>
 </template>
 
@@ -87,7 +87,7 @@ export default {
     position="top-left"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference">不可移入弹出框</v-button>
+    <v-button name="button4" slot="reference">不可移入弹出框</v-button>
   </v-popover>
   <v-popover
     class="popover-demo"
@@ -98,7 +98,7 @@ export default {
     transition="el-zoom-in-top"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference">触发动画</v-button>
+    <v-button name="button5" slot="reference">触发动画</v-button>
   </v-popover>
   <v-popover
     class="popover-demo"
@@ -108,7 +108,7 @@ export default {
     position="top-right"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
-    <v-button no-id  slot="reference">宽度自适应</v-button>
+    <v-button name="button6" slot="reference">宽度自适应</v-button>
   </v-popover>
 </template>
 ```

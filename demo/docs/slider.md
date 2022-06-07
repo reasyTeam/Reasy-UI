@@ -38,7 +38,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider no-id :min="10" :max="15" v-model="slider"></v-slider>
+<v-slider name="slider-range" :min="10" :max="15" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -76,7 +76,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider show-input no-id :min="10" :max="15" v-model="slider"></v-slider>
+<v-slider show-input name="slider-input" :min="10" :max="15" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -168,7 +168,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-slider show-tooltip no-id :format="format" v-model="slider"></v-slider>
+<v-slider show-tooltip name="slider-f" :format="format" v-model="slider"></v-slider>
 <script>
   export default {
     data() {
@@ -221,7 +221,8 @@ Vue.use(Base);
 | 参数                | 说明                                              | 类型     | 可选值    | 默认值 |
 | ------------------- | ------------------------------------------------- | -------- | --------- | ------ |
 | v-model             | 绑定值                                            | number   | —         | —      |
-| name                | 滑动条 name                                       | string   |           |        |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | min                 | 最小值                                            | number   | —         | 0      |
 | max                 | 最大值                                            | number   | —         | 100    |
 | disabled            | 是否禁用                                          | boolean  | —         | false  |

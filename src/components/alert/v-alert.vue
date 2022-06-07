@@ -33,12 +33,14 @@
           v-if="showDetailsButton"
           class="v-alert__show-detail"
           @click="$emit('handle-details-click')"
-          >{{_('Details')}}</span
+          :id="name | id('detail')"
+          >{{ _("Details") }}</span
         >
         <span
           v-if="showClose"
           class="v-alert__close v-icon-close"
           @click="close"
+          :id="name | id('close')"
         ></span>
       </div>
     </div>
@@ -47,6 +49,7 @@
 
 <script>
 // 类型--字体图标映射表
+import NameMixin from "../name-mixins";
 const typeToIcon = {
   success: "v-icon-ok-plane",
   warn: "v-icon-remind-plane",
@@ -56,6 +59,7 @@ const typeToIcon = {
 
 export default {
   name: "v-alert",
+  mixins: [NameMixin],
   props: {
     type: {
       type: String,

@@ -26,7 +26,7 @@
           <div class="v-popconfirm__button-group">
             <v-button
               no-id
-              :name="name | id('pp-cancel')"
+              :name="name | id('cancel')"
               v-if="showCancel"
               class="v-popconfirm__button-item"
               :type="cancelButtonType"
@@ -36,7 +36,7 @@
             >
             <v-button
               no-id
-              :name="name | id('pp-ok')"
+              :name="name | id('ok')"
               v-if="showConfirm"
               class="v-popconfirm__button-item"
               :type="confirmButtonType"

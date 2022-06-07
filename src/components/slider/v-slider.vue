@@ -51,6 +51,7 @@
     >
     <!-- 线条 -->
     <div
+      :id="name | id('line')"
       class="v-slider-line"
       ref="line"
       @click="handlerClickLine"
@@ -58,7 +59,6 @@
         'margin-left': rangeMarginLeft + 'px',
         'margin-right': rangeMarginRight + 'px'
       }"
-      :name="name | id('line')"
     >
       <div
         class="v-slider-line__inner"
@@ -70,6 +70,7 @@
         ref="bar"
         :style="{ left: leftPercent + '%' }"
         @mousedown.stop="mouseStart"
+        :id="name | id('line')"
       >
         <!-- 滑块信息 -->
         <div
@@ -77,6 +78,7 @@
           :class="{ 'v-slider-line__bar--active': moveStart }"
           @mouseenter="isMouseOver = true"
           @mouseleave="isMouseOver = false"
+          :id="name | id('bar')"
         ></div>
         <!-- 滑块显示文字 -->
         <template v-if="showTooltip">

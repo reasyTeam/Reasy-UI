@@ -44,6 +44,7 @@
                 v-if="showClose"
                 class="v-dialog__close v-icon-close"
                 @click="close"
+                :id="name | id('close')"
               ></i>
             </div>
             <div class="v-dialog__main" ref="main">
@@ -59,7 +60,7 @@
                 >
                   <v-button
                     no-id
-                    :name="name | id('md-cancel')"
+                    :name="name | id('cancel')"
                     v-if="showCancel"
                     class="v-dialog__button-item"
                     :type="cancelButtonType"
@@ -69,7 +70,7 @@
                   >
                   <v-button
                     no-id
-                    :name="name | id('md-ok')"
+                    :name="name | id('ok')"
                     v-if="showConfirm"
                     class="v-dialog__button-item"
                     :type="confirmButtonType"

@@ -7,6 +7,7 @@
       :type="headerType"
       :maxYear="maxYear"
       :minYear="minYear"
+      :name="name"
       @change="changeHeader"
       @clickHeader="clickHeader"
     ></header-panel>
@@ -20,6 +21,7 @@
             :class="{
               'v-datepicker--invalid': validateYear(item)
             }"
+            :id="name | id('yp' + item)"
             @click="selectYear(item)"
           >
             <span
@@ -41,6 +43,7 @@
             :class="{
               'v-datepicker--invalid': validateMonth(item)
             }"
+            :id="name | id('mp' + item)"
             @click="selectMonth(item)"
           >
             <span
@@ -61,7 +64,9 @@
 
 <script>
 import HeaderPanel from "./header-panel.vue";
+import NameMixin from "../name-mixins";
 export default {
+  mixins: [NameMixin],
   components: {
     HeaderPanel
   },
@@ -70,7 +75,8 @@ export default {
     year: Number,
     month: Number,
     maxYear: Number,
-    minYear: Number
+    minYear: Number,
+    name: String
   },
   filters: {
     month: item => {

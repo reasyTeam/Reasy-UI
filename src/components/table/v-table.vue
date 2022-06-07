@@ -14,6 +14,7 @@
     <!-- 表头 -->
     <div class="v-table__header-wrap" ref="header">
       <table-header
+        :name="name | id('h')"
         :columns="columns"
         :border="border"
         :sortProp="sortProp"
@@ -30,6 +31,7 @@
         :style="{ width: `${leftFixedWidth}px` }"
       >
         <table-header
+          :name="name | id('lh')"
           :columns="columns"
           :border="border"
           :sortProp="sortProp"
@@ -49,6 +51,7 @@
         :style="{ width: `${rightFixedWidth}px` }"
       >
         <table-header
+          :name="name | id('rh')"
           :columns="columns"
           :border="border"
           :sortProp="sortProp"
@@ -100,6 +103,7 @@
                 @click="clickRow(rowData)"
                 @mouseenter="hoverIndex = rowIndex"
                 :key="rowIndex + 1"
+                :id="name | id(rowIndex)"
               >
                 <template v-for="(col, index) in columns">
                   <v-td
@@ -190,6 +194,7 @@
                     @click="clickRow(rowData)"
                     @mouseenter="hoverIndex = rowIndex"
                     :key="rowIndex + 1"
+                    :id="name | id('l-' + rowIndex)"
                   >
                     <template v-for="(col, index) in columns">
                       <v-td
@@ -244,6 +249,7 @@
                     @click="clickRow(rowData)"
                     @mouseenter="hoverIndex = rowIndex"
                     :key="rowIndex + 1"
+                    :id="name | id('r-' + rowIndex)"
                   >
                     <template v-for="(col, index) in columns">
                       <v-td

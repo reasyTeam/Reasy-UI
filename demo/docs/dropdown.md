@@ -42,6 +42,18 @@ Vue.use(Base);
   @click-item="clickItem"
 ></v-dropdown>
 
+<v-dropdown
+  ref="dropdown1"
+  class="dropdown-item"
+  label="可操作按钮组"
+  name="drop-btns"
+  type="button-group"
+  :options="options1"
+  @content-click="contentClick"
+  @visible-change="visibleChange"
+  @click-item="clickItem"
+></v-dropdown>
+
 <script>
 // 生成假数据
 const getOptions = (num, disabledIdxs = [], dividedIdxs = [], hasIcon) => {
@@ -82,7 +94,10 @@ export default {
       console.log(`cfg of click-item: `);
       console.log(cfg);
       console.log(`idx of click-item: ${idx}`);
-    }
+    },
+    contentClick(){
+      console.log("label内容点击")
+     }
   }
 };
 </script>
@@ -398,18 +413,18 @@ export default {
 
 ### 属性 Attributes
 
-| 参数                   | 说明                                                         | 类型           | 可选值      | 默认值   |
-| ---------------------- | ------------------------------------------------------------ | -------------- | ----------- | -------- |
-| type                   | 下拉菜单类型                                                 | string         | link/button | link     |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| label                  | 下拉菜单标签名称                                             | string         | -           | 下拉菜单 |
-| disabled               | 菜单是否禁用                                                 | boolean        | -           | false    |
-| trigger                | 触发下拉的行为                                               | string         | hover/click | click    |
-| hide-after-selected    | 选择完成后隐藏下拉选项                                       | boolean        | -           | true     |
-| display-options-number | 设置可显示选项的数量，如options.length大于该值，则显示滚动条 | number         | -           | 4        |
-| options                | 菜单项配置<br />                                             | Array\<object> | -           | -        |
-| panel-class                | 下拉菜单项容器的类名                                             | String | -           | -        |-        |
+| 参数                   | 说明                                                                    | 类型           | 可选值      | 默认值   |
+| ---------------------- | ----------------------------------------------------------------------- | -------------- | ----------- | -------- |
+| type                   | 下拉菜单类型                                                            | string         | link/button | link     |
+| no-id                  | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id | boolean        | -           | false    |
+| name                   | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**              | string         | -           | -        |
+| label                  | 下拉菜单标签名称                                                        | string         | -           | 下拉菜单 |
+| disabled               | 菜单是否禁用                                                            | boolean        | -           | false    |
+| trigger                | 触发下拉的行为                                                          | string         | hover/click | click    |
+| hide-after-selected    | 选择完成后隐藏下拉选项                                                  | boolean        | -           | true     |
+| display-options-number | 设置可显示选项的数量，如options.length大于该值，则显示滚动条            | number         | -           | 4        |
+| options                | 菜单项配置<br />                                                        | Array\<object> | -           | -        |
+| panel-class            | 下拉菜单项容器的类名                                                    | String         | -           | -        | - |
 
 
 ### Options Attributes

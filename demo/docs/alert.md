@@ -18,21 +18,25 @@ Vue.use(Base);
 ```html
 <template>
   <v-alert
+    name="alert1"
     class="alert-box"
     type="success"
     title="恭喜！这里是成功成功成功成功成功的提示信息。"
   ></v-alert>
   <v-alert
+    name="alert2"
     class="alert-box"
     type="warn"
     title="这里是警告警告警告警告警告警告警告的提示信息。"
   ></v-alert>
   <v-alert
+    name="alert3"
     class="alert-box"
     type="info"
     title="这里是常规常规常规常规常规常规常规的提示信息。"
   ></v-alert>
   <v-alert
+    name="alert4"
     class="alert-box"
     type="error"
     title="这里是错误错误错误错误错误错误错误的提示信息。"
@@ -50,6 +54,7 @@ Vue.use(Base);
 ```html
 <template>
   <v-alert
+    name="alert5"
     class="alert-box"
     type="success"
     title="恭喜！这里是成功成功成功成功成功的提示信息。"
@@ -67,6 +72,7 @@ Vue.use(Base);
 ```html
 <template>
   <v-alert
+    name="alert6"
     class="alert-box"
     type="success"
     title="恭喜！这里是成功成功成功成功成功的提示信息。"
@@ -76,6 +82,7 @@ Vue.use(Base);
     @handle-details-click="handleDetailsClick"
   ></v-alert>
   <v-alert
+    name="alert7"
     class="alert-box"
     type="warn"
     title="这里是警告警告警告警告警告警告警告的提示信息。"
@@ -85,6 +92,7 @@ Vue.use(Base);
     @handle-details-click="handleDetailsClick"
   ></v-alert>
   <v-alert
+    name="alert8"
     class="alert-box"
     type="info"
     title="这里是常规常规常规常规常规常规常规的提示信息。"
@@ -94,6 +102,7 @@ Vue.use(Base);
     @handle-details-click="handleDetailsClick"
   ></v-alert>
   <v-alert
+    name="alert9"
     class="alert-box"
     type="error"
     title="这里是错误错误错误错误错误错误错误的提示信息。"
@@ -124,6 +133,7 @@ export default {
 ```html
 <template>
   <v-alert
+    name="alert10"
     class="alert-box"
     type="success"
     title="成功提示信息标题"
@@ -142,6 +152,7 @@ export default {
 ```html
 <template>
   <v-alert
+    name="alert11"
     class="alert-box"
     type="success"
     title="提示信息标题"
@@ -159,6 +170,8 @@ export default {
 
 | 参数                | 说明                               | 类型    | 可选值                  | 默认值 |
 | ------------------- | ---------------------------------- | ------- | ----------------------- | ------ |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | title               | 标题                               | string  | -                       | -      |
 | type                | 消息类型                           | string  | success/warn/info/error | info   |
 | description         | 消息详细描述，也可通过默认slot传入 | string  | -                       | -      |

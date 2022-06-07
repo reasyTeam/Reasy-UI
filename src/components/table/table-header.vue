@@ -19,6 +19,7 @@
           :key="index + 1"
           :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
           @click="sortTable(col)"
+          :id="name | id(col.prop)"
           :data-name="col.prop"
         >
           <!-- 选择框 -->
@@ -61,7 +62,9 @@
   </table>
 </template>
 <script>
+import NameMixin from "../name-mixins";
 export default {
+  mixins: [NameMixin],
   props: {
     //全选值
     value: Boolean,

@@ -8,7 +8,11 @@
       @mouseenter="proxyDisabledHandler(disabled, handleLabelMouseenter)"
       @mouseleave="proxyDisabledHandler(disabled, handleLabelMouseleave)"
     >
-      {{ label }}
+      <span
+        class="v-dropdown__label__content"
+        @click.stop="proxyDisabledHandler(disabled, handleLabelContentClick)"
+        >{{ label }}</span
+      >
     </div>
     <create-to-body
       :show="dropdownShow"
@@ -80,7 +84,7 @@ export default {
       type: String,
       default: "link",
       validator(val) {
-        return ["link", "button"].includes(val);
+        return ["link", "button", "button-group"].includes(val);
       }
     },
     label: {
@@ -143,6 +147,16 @@ export default {
     handleLabelClick() {
       if (this.trigger === "click") {
         this.menuVisible(!this.dropdownShow);
+      }
+    },
+    handleLabelContentClick() {
+      if (this.trigger === "click") {
+        if (this.type == "button-group") {
+          // button-group的菜单按钮 只有点击下拉按钮的时候才可以下拉 其他时候直接生效
+          this.$emit("content-click");
+        } else {
+          this.handleLabelClick();
+        }
       }
     },
     menuVisible(isShow) {

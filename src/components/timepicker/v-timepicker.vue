@@ -53,6 +53,7 @@
         hasClear ? 'v-icon-close-plane' : 'v-icon-time',
         { 'v-timepicker__icon--disabled': isDisabled }
       ]"
+      :id="name | id('icon')"
       @click="clickIcon"
     ></span>
     <!-- 下拉内容 -->
@@ -85,7 +86,7 @@
             :min="min"
             :max="max"
             @change="changeStartTime"
-            :id="name | id('start-panel')"
+            :name="name | id('start')"
           ></time-panel>
         </v-col>
         <!-- 结束时间 -->
@@ -100,7 +101,7 @@
             :min="min"
             :max="max"
             @change="changeEndTime"
-            :id="name | id('end-panel')"
+            :name="name | id('end')"
           ></time-panel>
         </v-col>
       </v-row>

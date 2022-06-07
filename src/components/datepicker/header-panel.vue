@@ -7,11 +7,13 @@
     >
       <span
         class="v-icon-double-left v-datepicker--panel__icon pointer v-date-icon"
+        :id="name | id('y-p')"
         @click="previousYear()"
       ></span>
       <span
         v-if="type === 'init'"
         class="v-icon-left v-datepicker--panel__icon pointer v-date-icon"
+        :id="name | id('m-p')"
         @click="previousMonth()"
       ></span>
     </div>
@@ -23,16 +25,18 @@
       <span
         v-if="type === 'init'"
         class="v-icon-right v-datepicker--panel__icon pointer v-date-icon"
+        :id="name | id('m-n')"
         @click="nextMonth()"
       ></span>
       <span
         class="v-icon-double-right v-datepicker--panel__icon pointer v-date-icon"
+        :id="name | id('y-n')"
         @click="nextYear()"
       ></span>
     </div>
     <!-- 中间文字显示 -->
     <v-row class="v-datepicker--panel__title">
-      <div class="pointer" @click="showYear()">
+      <div class="pointer" @click="showYear()" :id="name | id('show')">
         {{ headerText }}
       </div>
     </v-row>
@@ -40,7 +44,9 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
 export default {
+  mixins: [NameMixin],
   props: {
     //面板类型 支持start / end
     iconType: {
@@ -53,7 +59,8 @@ export default {
     year: Number,
     month: Number,
     minYear: Number,
-    maxYear: Number
+    maxYear: Number,
+    name: String
   },
   data() {
     this.monthMap = {

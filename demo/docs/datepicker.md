@@ -22,7 +22,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker name="datepicker" v-model="date"></v-datepicker>
+<v-datepicker name="datepicker6" v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -41,7 +41,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker name="datepicker-d" disabled v-model="date"></v-datepicker>
+<v-datepicker name="datepicker1" disabled v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -62,7 +62,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker name="datepicker-dt" type="datetime" v-model="date"></v-datepicker>
+<v-datepicker name="datepicker2" type="datetime" v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -85,7 +85,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-datepicker no-id is-range v-model="date"></v-datepicker>
+<v-datepicker name="datepicker3" is-range v-model="date"></v-datepicker>
 <script>
   export default {
     data() {
@@ -107,7 +107,7 @@ Vue.use(Base);
 <v-datepicker
   width="400px"
   is-range 
-  no-id
+  name="datepicker4"
   type="datetime"
   v-model="date"
 ></v-datepicker>
@@ -136,7 +136,7 @@ Vue.use(Base);
 <v-datepicker
   format="YYYY/MM/DD"
   v-model="date"  
-  no-id
+  name="datepicker5"
   max="2037/12/31"
   min="2000/01/01"
 ></v-datepicker>
@@ -159,7 +159,8 @@ Vue.use(Base);
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- | --------------- | ---------------------------------------------------- |
 | value / v-model | 绑定值                                                                                                                                                                   | string          | —               | —                                                    |
 | type            | 日期时间类型，date 日期 <br />datetime 时间日期                                                                                                                          | string          | date / datetime | date                                                 |
-| name            | 时间框名称                                                                                                                                                               | string          | —               | —                                                    |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled        | 是否禁用                                                                                                                                                                 | boolean         | —               | false                                                |
 | width           | 日期选择器宽度                                                                                                                                                           | string / Number | —               | —                                                    |
 | is-clear        | 是否支持清除                                                                                                                                                             | boolean         | —               | true                                                 |

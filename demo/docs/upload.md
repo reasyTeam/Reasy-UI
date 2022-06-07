@@ -19,7 +19,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
-  no-id
+  name="upload"
   :on-change="changeCallBack"
   ></v-upload>
 </div>
@@ -47,7 +47,7 @@ Vue.use(Base);
 <v-upload
   action="/cgi-bin/upload"
   ref="upload"
-  no-id
+  name="upload1"
   type="file"
   :on-change="changeCallBack"
   ></v-upload>

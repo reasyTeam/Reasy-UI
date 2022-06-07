@@ -18,7 +18,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale1" :data="table1">
   <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -75,7 +75,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id size="L" :data="table1">
+<v-table name="table2" size="L" :data="table1">
   <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -125,7 +125,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id size="M" :data="table1">
+<v-table name="table3" size="M" :data="table1">
   <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -175,7 +175,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id size="S" :data="table1">
+<v-table name="tbale4" size="S" :data="table1">
   <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -227,7 +227,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" stripe>
+<v-table name="tbale5" :data="table1" stripe>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -278,7 +278,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" border>
+<v-table name="tbale6" :data="table1" border>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -329,7 +329,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale7" :data="table1">
   <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ssid" label="SSID">
     <template v-slot="slotProps">
@@ -395,7 +395,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale8" :data="table1">
   <v-table-col 
     prop="ssid" 
     label="SSID" 
@@ -488,7 +488,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale9" :data="table1">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -549,7 +549,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" is-loading>
+<v-table name="tbale25" :data="table1" is-loading>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -598,7 +598,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" is-loading>
+<v-table name="tbale24" :data="table1" is-loading>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -631,7 +631,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id
+<v-table name="tbale10"
   :data="table1"
   row-key="ssid"
   :before-select-all="beforeSelectAll"
@@ -700,7 +700,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" row-key="ssid" :select-data="[table1[2]]">
+<v-table name="tbale11" :data="table1" row-key="ssid" :select-data="[table1[2]]">
   <v-table-col type="selection"></v-table-col>
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
@@ -752,7 +752,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale12"  :data="table1">
   <v-table-col type="index" label="序号"></v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -804,7 +804,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale13" :data="table1">
   <v-table-col type="expand" prop="ssid" label="SSID">
     <template #expand="slotScope">
         <div>SSID: {{ slotScope.ssid }}</div>
@@ -863,7 +863,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale14" :data="table1">
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
@@ -914,7 +914,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" border disabled>
+<v-table name="tbale15" :data="table1" border disabled>
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
@@ -972,7 +972,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table name="tbale16" :data="table1">
   <v-table-col is-search prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-search prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -1023,7 +1023,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" :max-row="5">
+<v-table name="tbale17" :data="table1" :max-row="5">
   <v-table-col type="index" label="序号"> </v-table-col>
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
@@ -1403,7 +1403,7 @@ Vue.use(Base);
 
 ```html
 <p>固定列宽</p>
-<v-table no-id :data="table1" is-pagination is-change-size is-input-page :max-row="5">
+<v-table name="tbale18" :data="table1" is-pagination is-change-size is-input-page :max-row="5">
   <v-table-col type="selection" fixed width="50"></v-table-col>
   <v-table-col type="index" label="序号" width="80" fixed="left" align="center">
   </v-table-col>
@@ -1422,7 +1422,7 @@ Vue.use(Base);
 </v-table>
 
 <p>不固定列宽</p>
-<v-table no-id :data="table1" is-pagination is-change-size is-input-page :max-row="5">
+<v-table name="tbale19" :data="table1" is-pagination is-change-size is-input-page :max-row="5">
   <v-table-col type="selection" fixed="left"></v-table-col>
   <v-table-col type="index" label="序号" fixed> </v-table-col>
   <v-table-col prop="ip" label="IP地址"> </v-table-col>
@@ -1432,7 +1432,7 @@ Vue.use(Base);
   <v-table-col prop="upLimit" label="上传限速"></v-table-col>
   <v-table-col prop="downLimit" label="下载限速"></v-table-col>
   <v-table-col label="操作" fixed="right">
-    <template>
+    <template v-slot="slotProps">
       <v-button no-id type="text" icon="v-icon-edit"></v-button>
       <v-button no-id type="text" icon="v-icon-delete"></v-button>
     </template>
@@ -1444,6 +1444,7 @@ Vue.use(Base);
       return {
         table1: [
           {
+            id: 1,
             ip: "192.168.0.100",
             mac: "C8:3A:35:22:11:11",
             onlineTime: "1000",
@@ -1454,6 +1455,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 2,
             ip: "192.168.0.101",
             mac: "C8:3A:35:22:11:12",
             onlineTime: "100",
@@ -1464,6 +1466,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 3,
             ip: "192.168.0.102",
             mac: "C8:3A:35:22:11:13",
             onlineTime: "67567",
@@ -1474,6 +1477,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 4,
             ip: "192.168.0.103",
             mac: "C8:3A:35:22:11:14",
             onlineTime: "1000",
@@ -1484,6 +1488,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 5,
             ip: "192.168.0.104",
             mac: "C8:3A:35:22:11:15",
             onlineTime: "1000",
@@ -1494,6 +1499,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 6,
             ip: "192.168.0.105",
             mac: "C8:3A:35:22:11:16",
             onlineTime: "1000",
@@ -1504,6 +1510,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 7,
             ip: "192.168.0.106",
             mac: "C8:3A:35:22:11:17",
             onlineTime: "67567",
@@ -1514,6 +1521,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 8,
             ip: "192.168.0.107",
             mac: "C8:3A:35:22:11:18",
             onlineTime: "1000",
@@ -1524,6 +1532,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 9,
             ip: "192.168.0.108",
             mac: "C8:3A:35:22:11:19",
             onlineTime: "1000",
@@ -1534,6 +1543,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 10,
             ip: "192.168.0.109",
             mac: "C8:3A:35:22:11:20",
             onlineTime: "1000",
@@ -1544,6 +1554,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 11,
             ip: "192.168.0.108",
             mac: "C8:3A:35:22:11:19",
             onlineTime: "1000",
@@ -1554,6 +1565,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 12,
             ip: '2"</span>',
             mac: "C8:3A:35:22:11:20",
             onlineTime: "1000",
@@ -1564,6 +1576,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 13,
             ip: "192.168.0.128",
             mac: "C8:3A:35:22:11:29",
             onlineTime: "1000",
@@ -1574,6 +1587,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 14,
             ip: "192.168.0.139",
             mac: "C8:3A:35:22:11:32",
             onlineTime: "1000",
@@ -1584,6 +1598,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 15,
             ip: "192.168.0.148",
             mac: "C8:3A:35:22:11:65",
             onlineTime: "1000",
@@ -1594,6 +1609,7 @@ Vue.use(Base);
             downLimit: "100"
           },
           {
+            id: 16,
             ip: "192.168.0.123",
             mac: "C8:3A:35:22:11:87",
             onlineTime: "1000",
@@ -1617,7 +1633,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table" is-pagination is-change-size is-input-page :max-row="5">
+<v-table name="tbale20" :data="table" is-pagination is-change-size is-input-page :max-row="5">
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="upload" label="上传速率"></v-table-col>
@@ -1764,7 +1780,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table">
+<v-table name="tbale21" :data="table">
   <v-table-col prop="ip" fixed="left" label="IP地址" width="180px">
   </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
@@ -1773,7 +1789,7 @@ Vue.use(Base);
   <v-table-col prop="upLimit" label="上传限速"></v-table-col>
 </v-table>
 
-<v-table no-id :data="table" empty-text="暂无数据">
+<v-table name="tbale22" :data="table" empty-text="暂无数据">
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="upload" label="上传速率"></v-table-col>
@@ -1781,7 +1797,7 @@ Vue.use(Base);
   <v-table-col prop="upLimit" label="上传限速"></v-table-col>
 </v-table>
 
-<v-table no-id :data="table" empty-text="暂无数据">
+<v-table name="tbale23" :data="table" empty-text="暂无数据">
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="upload" label="上传速率"></v-table-col>

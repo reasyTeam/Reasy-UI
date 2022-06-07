@@ -22,7 +22,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id v-model="time"></v-timepicker>
+<v-timepicker name="tp-base" v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -157,7 +157,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id v-model="time" min="12:00" max="18:00"></v-timepicker>
+<v-timepicker  name="tp-range" v-model="time" min="12:00" max="18:00"></v-timepicker>
 <script>
   export default {
     data() {
@@ -180,7 +180,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id is-range v-model="time"></v-timepicker>
+<v-timepicker name="tp-range1" is-range v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -225,7 +225,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-timepicker no-id format="hh:mm:ss" is-range is-cross-day v-model="time"></v-timepicker>
+<v-timepicker  name="tp-cross" format="hh:mm:ss" is-range is-cross-day v-model="time"></v-timepicker>
 <script>
   export default {
     data() {
@@ -242,8 +242,9 @@ Vue.use(Base);
 
 | 参数            | 说明                                                                             | 类型            | 可选值 | 默认值                                               |
 | --------------- | -------------------------------------------------------------------------------- | --------------- | ------ | ---------------------------------------------------- |
-| value / v-model | 绑定值                                                                           | string          | —      | —                                                    |
-| name            | 时间框名称                                                                       | string          | —      | —                                                    |
+| value / v-model | 绑定值      | string          | —      | —       |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled        | 是否禁用                                                                         | boolean         | —      | false                                                |
 | width           | 时间选择器宽度                                                                   | string / number | —      | —                                                    |
 | is-clear        | 是否支持清除                                                                     | boolean         | —      | true                                                 |

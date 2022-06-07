@@ -8,7 +8,7 @@
     @mouseout="isMouseover = false"
   >
     <div
-      :name="name"
+      :id="name"
       :data-name="_name"
       class="v-datepicker__label input-text"
       :class="{ 'is-disabled': isDisabled, 'is-focus': showDatePanel }"
@@ -59,6 +59,7 @@
         { 'v-datepicker__icon--disabled': isDisabled }
       ]"
       @click="clickIcon"
+      :id="name | id('icon')"
     ></span>
     <create-to-body
       :class="sizeCss"
@@ -87,7 +88,7 @@
                 @change="changeTmpDate"
                 @mouseover="handlerDateMouseover"
                 @hide="hide"
-                :id="name | id('d-start')"
+                :name="name | id('d')"
               ></date-panel>
             </v-col>
             <v-col :span="12" class="v-datepicker__time-border">
@@ -100,7 +101,7 @@
                 @changeTime="changeTime"
                 :time="startDate"
                 :count="count"
-                :id="name | id('t-start')"
+                :name="name | id('t')"
               ></time-panel>
             </v-col>
           </template>
@@ -119,7 +120,7 @@
                 @change-header="changeHeader"
                 @mouseover="handlerDateMouseover"
                 @hide="hide"
-                :id="name | id('d-end')"
+                :name="name | id('d')"
               ></date-panel>
             </v-col>
             <v-col :span="12" class="v-datepicker__time-border">
@@ -132,7 +133,7 @@
                 @changeTime="changeEndTime"
                 :time="endDate"
                 :count="count"
-                :id="name | id('t-end')"
+                :name="name | id('t')"
               ></time-panel>
             </v-col>
           </template>
@@ -154,7 +155,7 @@
               @change="changeTmpDate"
               @mouseover="handlerDateMouseover"
               @hide="hide"
-              :id="name | id('d-start')"
+              :name="name | id('ds')"
             ></date-panel>
           </v-col>
           <!-- 结束日期 -->
@@ -173,7 +174,7 @@
               @change-header="changeHeader"
               @mouseover="handlerDateMouseover"
               @hide="hide"
-              :id="name | id('d-end')"
+              :name="name | id('de')"
             ></date-panel>
           </v-col>
           <!-- 时间 -->
@@ -187,7 +188,7 @@
               @changeTime="changeTime"
               :time="startDate"
               :count="count"
-              :id="name | id('time')"
+              :name="name | id('time')"
             ></time-panel>
           </v-col>
         </template>
@@ -212,10 +213,8 @@
 
 <script>
 import CreateToBody from "../create-to-body.vue";
-//import YearPanel from "./year-panel.vue";
 import DatePanel from "./date-panel.vue";
 import TimePanel from "./time-select-panel.vue";
-//import HeaderPanel from "./header-panel.vue";
 import FormMixin from "../form-mixins";
 import NameMixin from "../name-mixins";
 import { size } from "../filters";

@@ -108,11 +108,11 @@ Vue.use(Base);
 
 ```html
 <div class="input-group">
-  <v-switch disabled v-model="enable" no-id></v-switch>
+  <v-switch disabled v-model="enable" name="enable1"></v-switch>
 </div>
 
 <div class="input-group">
-  <v-switch disabled v-model="enable1" no-id></v-switch>
+  <v-switch disabled v-model="enable1" name="enable2"></v-switch>
 </div>
 
 <script>
@@ -134,7 +134,8 @@ Vue.use(Base);
 | 参数            | 说明                                                | 类型                      | 可选值    | 默认值                   |
 | --------------- | --------------------------------------------------- | ------------------------- | --------- | ------------------------ |
 | value / v-model | 绑定值                                              | string / number / boolean | —         | —                        |
-| name            | 开关的名称                                          | string                    | —         | —                        |
+| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
+| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
 | disabled        | 是否禁用                                            | boolean                   | —         | false                    |
 | on-value        | 选中时的值                                          | string / number / boolean | —         | true                     |
 | off-value       | 未选中时的值                                        | string / number / boolean | —         | false                    |

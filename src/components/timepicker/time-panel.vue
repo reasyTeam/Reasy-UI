@@ -1,5 +1,5 @@
 <template>
-  <div class="v-timepicker--panel">
+  <div class="v-timepicker--panel" :id="name">
     <v-row>
       <!-- 时 -->
       <v-col class="v-timepicker__group" :span="colSpan">
@@ -20,6 +20,7 @@
                 'v-timepicker__li--disabled': getHourDisabled(hours)
               }"
               @click="clickList('hour', hours, getHourDisabled(hours))"
+              :id="name | id('h-' + hours)"
             >
               {{ hours }}
             </li>
@@ -49,6 +50,7 @@
                 'v-timepicker__li--disabled': getMinuteDisabled(minutes)
               }"
               @click="clickList('minute', minutes, getMinuteDisabled(minutes))"
+              :id="name | id('m-' + minutes)"
             >
               {{ minutes }}
             </li>
@@ -78,6 +80,7 @@
                 'v-timepicker__li--disabled': getSecondDisabled(seconds)
               }"
               @click="clickList('second', seconds, getSecondDisabled(seconds))"
+              :id="name | id('s-' + seconds)"
             >
               {{ seconds }}
             </li>
@@ -94,7 +97,9 @@
 </template>
 <script>
 import { parseDate, formatTime } from "../libs";
+import NameMixin from "../name-mixins";
 export default {
+  mixins: [NameMixin],
   props: {
     //时间格式
     format: String,
@@ -115,7 +120,8 @@ export default {
     time: String,
     min: String,
     max: String,
-    isAllDay: Boolean
+    isAllDay: Boolean,
+    name: String
   },
   computed: {
     //是否支持分钟

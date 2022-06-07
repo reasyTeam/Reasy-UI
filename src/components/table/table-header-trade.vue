@@ -28,6 +28,7 @@
           :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
           :data-help="col.help || col.prop"
           @click="sortTable(col)"
+          :id="name | id(col.prop)"
           @mouseenter="mouseenter(col)"
           @mouseleave="mouseleave(col)"
         >
@@ -85,9 +86,11 @@
   </table>
 </template>
 <script>
+import NameMixin from "../name-mixins";
 import VHeaderOperate from "./v-header-operate.vue";
 import { copyDeepData } from "../libs";
 export default {
+  mixins: [NameMixin],
   props: {
     //全选值
     value: Boolean,

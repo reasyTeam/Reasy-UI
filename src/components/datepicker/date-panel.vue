@@ -9,6 +9,7 @@
         :type="headerType"
         :maxYear="initMaxYear"
         :minYear="initMinYear"
+        :name="name"
         @change="changeHeader"
         @clickHeader="clickHeader"
       ></header-panel>
@@ -30,6 +31,7 @@
                 'v-datepicker__next-month': item.nextMonth,
                 'v-datepicker--invalid': validateDate(item)
               }"
+              :id="name | id('d' + index)"
               @click="clickDate(item)"
               @mouseover="handlerOver(item)"
             >
@@ -58,6 +60,7 @@
       :month="date.month"
       :minYear="minDate.year"
       :maxYear="maxDate.year"
+      :name="name"
       @change="changeYear"
       @clickHeader="clickHeader"
     ></year-panel>
@@ -67,7 +70,9 @@
 <script>
 import HeaderPanel from "./header-panel.vue";
 import YearPanel from "./year-panel.vue";
+import NameMixin from "../name-mixins";
 export default {
+  mixins: [NameMixin],
   components: {
     HeaderPanel,
     YearPanel
@@ -131,7 +136,8 @@ export default {
       default() {
         return {};
       }
-    }
+    },
+    name: String
   },
   computed: {
     //日期列表
@@ -151,7 +157,7 @@ export default {
         }
       );
       let startDay = new Date(this.tmpYear, this.tmpMonth, 1).getDay();
-      let previousMongthLength = new Date(
+      let previousMonthLength = new Date(
         this.tmpYear,
         this.tmpMonth,
         0
@@ -159,7 +165,7 @@ export default {
 
       for (let i = 0, len = startDay; i < len; i++) {
         dateList = [
-          { previousMonth: true, value: previousMongthLength - i }
+          { previousMonth: true, value: previousMonthLength - i }
         ].concat(dateList);
       }
       for (let i = dateList.length, item = 1; i < 42; i++, item++) {
