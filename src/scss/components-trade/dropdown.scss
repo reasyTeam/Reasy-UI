@@ -1,0 +1,14 @@
+.v-dropdown__menu {
+  padding: 4px 0;
+}
+
+.v-dropdown .v-dropdown__label {
+  &.v-dropdown__label-button,
+  &.v-dropdown__label-button-group {
+    border-radius: 4px;
+    line-height: 22px;
+    &:hover {
+      background-color: $main-active-color-hover;
+    }
+  }
+}

@@ -23,6 +23,7 @@
         :upload-type="uploadType"
         @clickFile="clickFile"
         :data-image="imageBase64"
+        :showAddText="showAddText"
       ></upload-image>
       <!-- 文件上传 -->
       <div class="v-upload__row" v-else-if="type == 'file'">
@@ -154,6 +155,10 @@ export default {
       default: function() {
         return true;
       }
+    },
+    showAddText: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

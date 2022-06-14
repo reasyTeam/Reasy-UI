@@ -1,0 +1,42 @@
+.v-popups--dark {
+  .v-popups__main {
+    background: #ffffff;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
+    color: #676775;
+    line-height: 16px;
+    text-align: left;
+    border-radius: 4px;
+    padding: 0;
+  }
+
+  .v-popups__arrow {
+    polygon {
+      fill: #fff;
+    }
+  }
+}
+
+.v-popconfirm__box {
+  padding: 20px 4px 10px;
+  min-width: 240px;
+}
+
+.v-popups__main {
+  background: #ffffff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
+  padding: 10px 12px;
+}
+.v-popover__title {
+  font-weight: 600;
+  font-size: 12px;
+  color: #4b4b5a;
+  line-height: 16px;
+  padding: 0 0 6px 0;
+}
+.v-popover__content {
+  padding: 8px 0 2px;
+  font-weight: 400;
+  font-size: 12px;
+  color: #4b4b5a;
+  line-height: 16px;
+}

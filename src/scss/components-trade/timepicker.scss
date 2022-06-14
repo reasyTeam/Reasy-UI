@@ -1,0 +1,32 @@
+.v-timepicker--medium .v-timepicker__li {
+  height: 28px;
+  line-height: 28px;
+}
+
+.v-timepicker__li--active,
+.v-timepicker__li:hover {
+  background-color: rgba($main-active-color, 0.05);
+}
+
+.v-timepicker__icon,
+.v-datepicker__icon {
+  color: #cbccd2;
+}
+
+.v-timepicker__footer,
+.v-datepicker--panel__footer {
+  padding: 10px 12px;
+}
+
+.v-timepicker__li {
+  line-height: 28px;
+  height: 28px;
+}
+.position-panel {
+  border-radius: 4px;
+}
+
+.v-datepicker--panel__header {
+  line-height: 40px;
+  height: 40px;
+}

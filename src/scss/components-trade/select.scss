@@ -1,0 +1,27 @@
+.v-select__icon:hover {
+  color: #8b8c99;
+}
+.v-select-options {
+  margin: 4px 0;
+}
+.v-select-options__item {
+  color: #676775;
+  line-height: 24px;
+  &:hover {
+    background-color: #f2f7ff;
+  }
+}
+.v-select--medium .v-select__label__item,
+.v-select--medium .v-select__icon--right {
+  line-height: 18px;
+}
+
+.v-select__label__item {
+  border-radius: 4px;
+}
+.v-select__icon--right {
+  color: #cbccd2;
+  &:hover {
+    color: #8b8c99;
+  }
+}

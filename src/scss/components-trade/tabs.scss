@@ -1,0 +1,38 @@
+.v-tabs {
+  .tab-nav--active {
+    font-weight: 400;
+  }
+
+  .tab-nav--tag {
+    border-bottom-color: #eeeff1;
+    .tab-nav-item.tab-nav--active {
+      border-color: #eeeff1;
+      border-bottom-color: transparent;
+    }
+  }
+
+  .tab-nav-item {
+    color: #8b8c99;
+    &.tab-nav-item--disabled {
+      color: #cbccd2;
+    }
+  }
+
+  .tab-nav--button,
+  .tab-nav--link,
+  .tab-nav--card,
+  .tab-nav--tag {
+    .tab-nav-item {
+      &.tab-nav--S,
+      &.tab-nav--M {
+        height: $form-line-height;
+        line-height: $form-line-height - 2px;
+        font-size: 12px;
+        min-width: 70px;
+        padding: 0 16px;
+        text-align: center;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

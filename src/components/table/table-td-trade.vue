@@ -5,6 +5,7 @@
       `is_${column.align}`
     ]"
     :key="index + 1"
+    :style="{ maxWidth: column.maxWidth }"
   >
     <template v-if="column.type === 'index'">
       {{ rowIndex + 1 }}
@@ -33,6 +34,7 @@
         fixed: !column.isNoFixed,
         'v-table__expand__wrapper': column.type === 'expand'
       }"
+      :style="{ width: column.innerWidth ? column.innerWidth : '' }"
     >
       <!-- 处理table-column中的default slot -->
       <v-td
@@ -40,6 +42,7 @@
         v-if="column.fn"
         :fn="column.fn"
         :index="rowIndex"
+        :className="'getWidth_' + column.prop"
       >
       </v-td>
       <!-- 换行 -->
@@ -47,15 +50,22 @@
         v-else-if="column.wordWrap"
         v-for="(col, index) in tdValue"
         :key="index + 1"
+        class="fixed"
+        v-tooltip="getTooltipOption(col)"
       >
         {{ col == "" ? emptyValue : col }}
       </div>
+      <!-- search值处理 -->
+      <div
+        v-else-if="column.isSearch"
+        class="fixed"
+        v-tooltip="getTooltipOption()"
+        v-html="filterSearch(tdValue)"
+      ></div>
       <!-- tooltip处理 -->
       <div v-else class="fixed" v-tooltip="getTooltipOption()">
         {{ tdValue }}
       </div>
-      <!-- search值处理 -->
-      <!-- <span v-else-if="column.isSearch" v-html="filterSearch(tdValue)"></span> -->
       <!-- 正常值处理 -->
       <!-- <span v-else>{{ tdValue }}</span> -->
     </div>
@@ -109,12 +119,12 @@ export default {
   },
   methods: {
     // 生成配置信息
-    getTooltipOption() {
+    getTooltipOption(col) {
       return Object.assign(
         {
           enterable: false,
           showOnlyEllipsis: true,
-          content: this.tdValue
+          content: col ? col : this.tdValue
         },
         this.column.tooltipOption
       );

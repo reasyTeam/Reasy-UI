@@ -3,6 +3,7 @@
     ref="table"
     class="table v-table__header"
     :class="{ 'v-table__border': border }"
+    v-if="isTable"
   >
     <v-header-operate
       v-model="checked"
@@ -10,14 +11,16 @@
       class="check-group"
       :options="options"
       :default-selected="defaultSelectValue"
+      @getCheckOperateData="getCheckOperateData"
     >
     </v-header-operate>
     <colgroup>
       <col
         v-for="(col, index) in columns"
-        :width="col.width"
+        :width="col.colWidth"
         :key="index + 1"
         :align="col.align"
+        :style="{ minWidth: col.colWidth + 'px' }"
       />
     </colgroup>
     <thead>
@@ -84,6 +87,79 @@
       </tr>
     </thead>
   </table>
+  <thead
+    ref="table"
+    class="table v-table__header"
+    :class="{ 'v-table__border': border }"
+    v-else
+  >
+    <tr>
+      <th
+        v-for="(col, index) in columns"
+        class="fixed"
+        :key="index + 1"
+        :class="[
+          { 'v-table__header--sort': col.isSort },
+          `is_${col.align}`,
+          `headerWidth_${col.prop}`
+        ]"
+        :data-help="col.help || col.prop"
+        @click="sortTable(col)"
+        @mouseenter="mouseenter(col)"
+        @mouseleave="mouseleave(col)"
+        :ref="[`headerWidth_${col.prop}`]"
+      >
+        <!-- 选择框 -->
+        <v-checkbox
+          no-id
+          v-if="col.type === 'selection'"
+          class="v-table__header__checkbox"
+          :before-change="beforeSelectAll"
+          v-model="isSelectedAll"
+          :hasValue="isSelected"
+          :disabled="isSelectAllDisabled"
+        ></v-checkbox>
+        <!-- 表头文字 -->
+        <!-- 支持显示html -->
+        <span
+          class="v-table__header__label"
+          :class="{
+            'text--active': sortProp === col.prop && col.isSort
+          }"
+          v-if="col.isHtmlHeader"
+          v-html="col.label"
+        ></span>
+        <!-- text格式显示 -->
+        <span
+          class="v-table__header__label"
+          v-else
+          :class="{
+            'text--active': sortProp === col.prop && col.isSort
+          }"
+          >{{ col.label }}</span
+        >
+        <!-- 排序 -->
+        <span v-if="col.isSort" class="v-table__sort">
+          <span
+            v-if="col.load && sortProp === col.prop"
+            class="v-table__icon v-icon-sort-load text--active"
+          ></span>
+          <span
+            v-else-if="col.hover && col.sortType == ''"
+            class="v-table__icon v-icon-sort-up"
+          ></span>
+          <span
+            v-else-if="col.sortType === 'asc' && sortProp === col.prop"
+            class="v-table__icon v-icon-sort-up text--active"
+          ></span>
+          <span
+            v-else-if="col.sortType === 'des' && sortProp === col.prop"
+            class="v-table__icon v-icon-sort-down text--active"
+          ></span>
+        </span>
+      </th>
+    </tr>
+  </thead>
 </template>
 <script>
 import NameMixin from "../name-mixins";
@@ -105,7 +181,12 @@ export default {
     beforeSelectAll: Function,
     isSelectAllDisabled: Boolean,
     disabled: Boolean,
-    headOperate: Boolean
+    headOperate: Boolean,
+    checkOperateData: Array,
+    isTable: {
+      type: Boolean,
+      default: true
+    }
   },
   components: {
     VHeaderOperate
@@ -131,9 +212,39 @@ export default {
       return this.disabled || this.$parent.disabled;
     }
   },
+  created() {
+    if (!this.isTable) {
+      this.$nextTick(() => {
+        this.columns.forEach((el, ind) => {
+          let eles = this.$refs[`headerWidth_${el.prop}`];
+          if (eles.length) {
+            el.colWidth = eles[0].offsetWidth;
+          }
+          if (el.type === "selection") {
+            el.colWidth = 48;
+          } else if (el.fixed) {
+            el.colWidth = 100;
+          }
+        });
+      });
+    }
+  },
+  updated() {
+    if (!this.isTable) {
+      this.$nextTick(() => {
+        this.columns.forEach((el, ind) => {
+          let eles = this.$refs[`headerWidth_${el.prop}`];
+          if (eles.length) {
+            el.colWidth = eles[0].offsetWidth;
+          }
+        });
+      });
+    }
+  },
   mounted() {
     this.$nextTick(function() {
       this.columnsCopy = copyDeepData(this.columns);
+      let checkedData = [];
       this.columns.forEach(element => {
         if (element.type == "selection") {
           return;
@@ -142,19 +253,23 @@ export default {
         this.options.push({
           label: element.label,
           value: element.prop,
-          disabled: !element.addOperate
+          disabled: !element.addOperate,
+          hideInOpreate: element.hideInOpreate
         });
         //默认状态值
         element.isDefaultValue && this.defaultSelectValue.push(element.prop);
         //默认状态
         (!element.addOperate || element.isDefaultValue) &&
-          this.checked.push(element.prop);
+          checkedData.push(element.prop);
       });
-      //更新表格
-      this.visibleChange(false);
+      this.checked =
+        this.checkOperateData.length > 0 ? this.checkOperateData : checkedData;
     });
   },
   methods: {
+    getCheckOperateData(data) {
+      this.$emit("getCheckOperateData", data);
+    },
     getHeight() {
       return parseInt(this.$refs.table.scrollHeight);
     },
@@ -187,16 +302,14 @@ export default {
       });
       this.$emit("sort", col.prop, col.sortType);
     },
-    visibleChange(isShow) {
-      if (!isShow) {
-        let arr = this.columnsCopy.filter(element => {
-          if (element.type == "selection") {
-            return true;
-          }
-          return this.checked.indexOf(element.prop) != -1;
-        });
-        this.$dispatch("v-table", "update.column", arr, true);
-      }
+    visibleChange() {
+      let arr = this.columnsCopy.filter(element => {
+        if (element.type == "selection") {
+          return true;
+        }
+        return this.checked.indexOf(element.prop) != -1;
+      });
+      this.$dispatch("v-table", "update.column", arr, true);
     }
   },
   watch: {

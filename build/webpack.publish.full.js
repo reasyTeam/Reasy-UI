@@ -9,7 +9,7 @@ module.exports = {
     vue: "vue"
   },
   entry: {
-    app: ["./src/components/indexFull.js"]
+    app: ["./src/components/index-full.js"]
   }, // 入口文件路径
   output: {
     chunkFilename: "[name].js?[chunkhash:5]",

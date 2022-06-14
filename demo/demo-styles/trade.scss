@@ -1,0 +1,32 @@
+.trade {
+  $color: #0058e4;
+  .side-nav .nav-item .nav-item a {
+    &.active {
+      color: $color;
+      background-color: #f2f7ff;
+    }
+    &:hover {
+      color: $color;
+    }
+  }
+
+  .side-link__bar__btn {
+    border-color: $color;
+  }
+
+  .side-link__list__item.active {
+    color: $color;
+  }
+
+  .demo-block .demo-block-control {
+    color: rgba($color, 0.3);
+
+    &:hover {
+      color: $color;
+    }
+  }
+  .reasy-doc.content blockquote {
+    border-left-color: $color;
+    background-color: rgba($color, 0.05);
+  }
+}

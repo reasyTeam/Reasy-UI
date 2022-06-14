@@ -2,15 +2,6 @@
   <div class="v-table v-table-trade" :class="[sizeCss, { disabled: disabled }]">
     <!-- 搜索 -->
     <div class="v-table__search">
-      <div v-if="isAdd" class="button" @click="btnClick('add')">
-        <v-button size="S">新增</v-button>
-      </div>
-      <div v-if="isEdit" class="button" @click="btnClick('edit')">
-        <v-button size="S">编辑</v-button>
-      </div>
-      <div v-if="isDelete" class="button" @click="btnClick('delete')">
-        <v-button size="S">删除</v-button>
-      </div>
       <!-- 表格上方左侧按钮 -->
       <div class="search-input"><slot name="btnLeft"></slot></div>
       <!-- 表格上方右侧按钮 -->
@@ -33,6 +24,9 @@
     <!-- 表头 -->
     <div class="v-table__header-wrap" ref="header">
       <table-header-trade
+        :name="name | id('ht')"
+        :checkOperateData="checkOperateData"
+        @getCheckOperateData="getCheckOperateData"
         :columns="columns"
         :border="border"
         :sortProp="sortProp"
@@ -50,7 +44,9 @@
         :style="{ width: `${leftFixedWidth}px` }"
       >
         <table-header-trade
-          :head-operate="headOperate"
+          :name="name | id('ht')"
+          :checkOperateData="checkOperateData"
+          @getCheckOperateData="getCheckOperateData"
           :columns="columns"
           :border="border"
           :sortProp="sortProp"
@@ -70,6 +66,9 @@
         :style="{ width: `${rightFixedWidth}px` }"
       >
         <table-header-trade
+          :name="name | id('ht')"
+          :checkOperateData="checkOperateData"
+          @getCheckOperateData="getCheckOperateData"
           :head-operate="headOperate"
           :columns="columns"
           :border="border"
@@ -84,6 +83,7 @@
         ></table-header-trade>
       </div>
     </div>
+
     <div class="v-table__content">
       <!-- 表格内容 -->
       <div
@@ -109,8 +109,25 @@
                 v-for="(col, index) in columns"
                 :width="col.width"
                 :key="index + 1"
+                v-bind:style="{ minWidth: col.width }"
               />
             </colgroup>
+            <table-header-trade
+              :name="name | id('tht')"
+              :columns="columns"
+              :checkOperateData="checkOperateData"
+              :border="border"
+              :sortProp="sortProp"
+              :value="checkboxAllVal"
+              :is-selected="hasCheckBoxSelect"
+              :before-select-all="beforeSelectAll"
+              :is-select-all-disabled="isSelectAllDisabled || data.length === 0"
+              @change="changeCheckboxAll"
+              @sort="sortTable"
+              :head-operate="headOperate"
+              style="visibility: collapse"
+              :isTable="false"
+            ></table-header-trade>
             <tbody>
               <slot name="header"></slot>
               <!-- 列表数据信息 -->
@@ -207,11 +224,12 @@
                     v-for="(col, index) in columns"
                     :width="col.width"
                     :key="index + 1"
+                    v-bind:style="{ maxWidth: col.minWidth }"
                   />
                 </colgroup>
+
                 <tbody>
                   <template v-for="(rowData, rowIndex) in data">
-                    <!-- 数据行信息 -->
                     <tr
                       ref="table-body-tr"
                       class="v-table__row"
@@ -263,11 +281,11 @@
                     v-for="(col, index) in columns"
                     :width="col.width"
                     :key="index + 1"
+                    v-bind:style="{ maxWidth: col.minWidth }"
                   />
                 </colgroup>
                 <tbody>
                   <template v-for="(rowData, rowIndex) in data">
-                    <!-- 数据行信息 -->
                     <tr
                       ref="table-body-tr"
                       class="v-table__row"
@@ -330,40 +348,10 @@
         {{ loadingText }}
       </v-loading>
     </div>
+
     <div v-if="$slots.loading" v-show="isLoading">
       <slot name="loading"></slot>
     </div>
-
-    <v-dialog
-      no-id
-      :name="name | id('add')"
-      v-model="addDialogShow"
-      :title="addConfig.title || '新增'"
-      :modal="true"
-      @confirm="confirm('add')"
-      @cancel="cancel('add')"
-      append-to-body
-    ></v-dialog>
-    <v-dialog
-      no-id
-      :name="name | id('edit')"
-      v-model="editDialogShow"
-      :title="editConfig.title || '编辑'"
-      :modal="true"
-      @confirm="confirm('edit')"
-      @cancel="cancel('edit')"
-      append-to-body
-    ></v-dialog>
-    <v-dialog
-      no-id
-      :name="name | id('del')"
-      v-model="deleteDialogShow"
-      :title="deleteConfig.title || '删除'"
-      :modal="true"
-      @confirm="confirm('delete')"
-      @cancel="cancel('delete')"
-      append-to-body
-    ></v-dialog>
   </div>
 </template>
 
@@ -374,7 +362,6 @@ import CollapseTransition from "../collapse/collapse-transition.js";
 import TableExpand from "./table-tb-fn.vue";
 import TableHeaderTrade from "./table-header-trade.vue";
 import TableFooter from "./table-footer.vue";
-import VDialog from "../dialog/v-dialog.vue";
 import NameMixin from "../name-mixins";
 import {
   copyDeepData,
@@ -398,8 +385,7 @@ export default {
     TableHeaderTrade,
     TableExpand,
     TableFooter,
-    CollapseTransition,
-    VDialog
+    CollapseTransition
   },
   props: {
     data: Array,
@@ -495,32 +481,10 @@ export default {
       type: Boolean,
       default: false
     },
-    //是否有新增按钮
-    isAdd: {
-      type: Boolean,
-      default: false
-    },
-    addConfig: {
-      type: Object,
+    checkOperateData: {
+      type: Array,
       default() {
-        return {};
-      }
-    },
-    beforeAddClick: {
-      type: Function,
-      default() {
-        return true;
-      }
-    },
-    //是否有编辑按钮
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    editConfig: {
-      type: Object,
-      default() {
-        return {};
+        return [];
       }
     },
     beforeEditClick: {
@@ -613,12 +577,23 @@ export default {
       // pageData: [], //当前页数据
       searchSupportArr: [], //支持search字段
       expandFunc: false, //展开事件
-      sortProp: "", //当前排序元素
-      addDialogShow: false, //是否显示新增弹窗
-      editDialogShow: false, //是否显示编辑弹窗
-      deleteDialogShow: false //是否显示删除弹窗
-      // pageSizeValue: 10 //每页条数
+      sortProp: "" //当前排序元素
+      // pageSizeValue: 10, //每页条数
+      // currentSelectData: [] //当前的选中项
     };
+  },
+  mounted() {
+    this.columns.forEach((el, ind) => {
+      //计算已经设定宽度的列宽，15px约为内边距的大小。
+      if (el.width != "") {
+        el.innerWidth = (el.width + "").split("px")[0] - 15 + "px";
+      }
+      //为自定义列添加默认的排序
+      if (el.defaultSortType == "asc" || el.defaultSortType == "des") {
+        el.sortType = el.defaultSortType;
+        this.sortTable(el.prop, el.sortType);
+      }
+    });
   },
   created() {
     this.columns = [];
@@ -632,7 +607,6 @@ export default {
       if (this.columns.some(colItem => item.prop == colItem.prop)) {
         return;
       }
-
       //支持展开
       if (item.type === "expand") {
         this.expandFunc = item.expandFn;
@@ -727,6 +701,16 @@ export default {
       this.$nextTick(() => {
         this.updateScrollHeight(isChanged);
         // this.$emit("after-update", this.pageData);
+        // 更新表头选中的值
+        // 是否有未选中的
+        const hasNoSelect = this.data.some(item => {
+          return item[this.checkboxField] !== CHECKBOX_CHECKED;
+        });
+        if (hasNoSelect || this.data.length == 0) {
+          this.checkboxAllVal = CHECKBOX_UNCHECKED;
+        } else {
+          this.checkboxAllVal = CHECKBOX_CHECKED;
+        }
       });
     },
     updateScrollHeight(isChanged) {
@@ -766,6 +750,10 @@ export default {
         this.goSearch();
       }
     },
+    //表头操作项
+    getCheckOperateData(data) {
+      this.$emit("getCheckOperateData", data);
+    },
     //搜索
     goSearch() {
       this.sortProp = "";
@@ -782,17 +770,20 @@ export default {
     filterSearch(data) {
       let text = data,
         searchText = this.searchValue;
-      if (searchText === "" || text.indexOf(searchText) === -1) {
+      let replaceStr = text ? text.match(new RegExp(searchText, "ig")) : null;
+      if (searchText === "" || replaceStr == null) {
         return escapeHTML(text);
       }
       text = escapeHTML(text);
       searchText = escapeHTML(searchText);
+
       text = text.replaceAll(
-        searchText,
-        "<span class='is-active'>" + searchText + "</span>"
+        replaceStr[0],
+        "<span style='color:red'>" + replaceStr[0] + "</span>"
       );
       return text;
     },
+
     //排序
     sortTable(prop, sortType) {
       this.sortProp = prop;
@@ -891,39 +882,6 @@ export default {
         this.$refs.tableRight &&
           (this.$refs.tableRight.style.top = `-${top}px`);
         this.lastScrollTop = top;
-      }
-    },
-    btnClick(type) {
-      if (type == "add") {
-        if (this.beforeAddClick) {
-          this.addDialogShow = true;
-        }
-      } else if (type == "edit") {
-        if (this.beforeEditClick) {
-          this.editDialogShow = true;
-        }
-      } else {
-        if (this.beforeDeleteClick) {
-          this.deleteDialogShow = true;
-        }
-      }
-    },
-    confirm(type) {
-      if (type == "add") {
-        this.addDialogShow = false;
-      } else if (type == "edit") {
-        this.editDialogShow = false;
-      } else {
-        this.deleteDialogShow = false;
-      }
-    },
-    cancel(type) {
-      if (type == "add") {
-        this.addDialogShow = false;
-      } else if (type == "edit") {
-        this.editDialogShow = false;
-      } else {
-        this.deleteDialogShow = false;
       }
     }
   },

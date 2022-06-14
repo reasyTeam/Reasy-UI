@@ -74,13 +74,20 @@ Vue.use(Base);
 
 ```html
 <v-upload
+  :showAddText="false"
   action="/cgi-bin/upload"
   ref="upload"
   name="upload-img"
   type="picture"
   :on-change="changeCallBack"
   ></v-upload>
-</div>
+<v-upload
+  action="/cgi-bin/upload"
+  ref="upload"
+  name="upload-img"
+  type="picture"
+  :on-change="changeCallBack"
+  ></v-upload>
 <script>
   export default {
     methods: {

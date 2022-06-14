@@ -1,0 +1,51 @@
+.v-input__icon {
+  color: #cbccd2;
+  font-size: 16px;
+  &:hover {
+    color: #8b8c99;
+  }
+  &.v-icon-close-plane {
+    color: $icon-color;
+    &:hover {
+      color: #cbccd2;
+    }
+  }
+  &.v-icon-search.active {
+    color: $main-active-color;
+  }
+}
+
+.input-text,
+.input-textarea {
+  border-radius: 4px;
+}
+.v-input-number__controls {
+  padding: 0;
+}
+.v-input-number--large {
+  .v-input-number__controls {
+    width: $form-line-height-l;
+  }
+}
+
+.v-input-number--medium {
+  .v-input-number__controls {
+    width: $form-line-height;
+  }
+}
+
+.v-input-number--small {
+  .v-input-number__controls {
+    width: $form-line-height-s;
+  }
+}
+
+.v-input-number__arrow {
+  color: #8b8c99;
+}
+.v-input-number--control {
+  width: 64px;
+  .input-text {
+    padding-right: 24px;
+  }
+}

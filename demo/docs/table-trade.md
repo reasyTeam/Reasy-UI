@@ -18,7 +18,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="baseTable">
   <v-table-col type="index" label="22222"> </v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -73,7 +73,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="data" @search="search">
+<v-table no-id :data="data" @search="search" name="buttonTable">
   <template #btnLeft>
     <v-button no-id size="S">左按钮</v-button>
   </template>
@@ -105,12 +105,13 @@ Vue.use(Base);
         data: [],
         table1: [
           {
-            ip: "192.168.0.100",
+            ip: "192.168.0.100skdbgfkdfbgkdfbgkdfbgkdfbgkdfbk",
             mac: "C8:3A:35:22:11:11",
             在线Time: "1000",
             hz: "2.4G",
             status: "升级中",
-            download: "12",
+            download:
+              "12kdgfshkgjdshkgjd",
             upLimit: "1000",
             downLimit: "25"
           },
@@ -163,6 +164,110 @@ Vue.use(Base);
 
 :::
 
+### 表格宽度、最大宽度
+
+表格列宽可通过`width`控制固定宽度，如果表格没有多余空白分配，可设置列的最大宽度`max-width`
+
+::: demo
+
+```html
+<v-table no-id :data="data" @search="search" name="maxTb">
+  <v-table-col prop="ip" label="IP地址" width="150px"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
+  <v-table-col prop="download" label="下载速率" max-width="120px"></v-table-col>
+  <v-table-col prop="upLimit" label="上传速率"></v-table-col>
+  <v-table-col prop="status" label="状态"></v-table-col>
+  <v-table-col prop="downLimit" label="下载限速" width="150px"></v-table-col>
+  <v-table-col prop="text" label="文本信息" width="180px"></v-table-col>
+  <v-table-col prop="hyText" label="超文本信息" width="200px"></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = this.table1;
+    },
+    methods: {
+      search(searchValue, searchField) {
+        console.log(
+          "搜索的值为：" + searchValue + "，搜索的字段为：" + searchField
+        );
+        //dosomething
+      }
+    },
+    data() {
+      return {
+        data: [],
+        table1: [
+          {
+            ip: "192.168.0.100skdbgfkdfbgkdfbgkdfbgkdfbgkdfbk",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download:
+              "12kdgfshkgjdshkgjdfskghdkfsjhgdkjfhgdkjfhgdkjfhgdkhgskhgkjdfhgksdhgkjdhfskjgdhfskghdfskg",
+            upLimit: "1000",
+            downLimit: "25",
+            text:'fkasjdhfkj',
+            hyText:'sgdhkdfhgkjfdshkghdfkjhkfdhgskdf'
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100",
+            text:'fkasjdhfkj',
+            hyText:'sgdhkdfhgkjfdshkghdfkjhkfdhgskdf'
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100",
+            text:'fkasjdhfkj',
+            hyText:'sgdhkdfhgkjfdshkghdfkjhkfdhgskdf'
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100",
+            text:'fkasjdhfkj',
+            hyText:'sgdhkdfhgkjfdshkghdfkjhkfdhgskdf'
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100",
+            text:'fkasjdhfkj',
+            hyText:'sgdhkdfhgkjfdshkghdfkjhkfdhgskdf'
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ### 表格搜索
 
 `is-search`表示此列数据支持搜索，`realtime-search`可以定义搜索为实时搜索和失焦搜索，默认为失焦搜索
@@ -170,7 +275,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="data" @search="search" realtime-search>
+<v-table no-id :data="data" @search="search" realtime-search name="searchTb">
   <v-table-col prop="ip" label="IP地址" width="150px"> </v-table-col>
   <v-table-col prop="mac" is-search label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="download" label="下载速率"></v-table-col>
@@ -256,18 +361,18 @@ Vue.use(Base);
 
 ### 表头操作列表项
 
-表头操作按钮可以设置显示的列表项，`head-operate`设置是否显示，默认不显示；`is-default-value`设置是否为默认显示列表项，默认显示；`add-operate`设置列表项是否可以操作，默认可以；注意：表头需要勾选默认一位；
+表头操作按钮可以设置显示的列表项，`head-operate`设置是否显示，默认不显示；`is-default-value`设置是否为默认显示列表项，默认显示；`add-operate`设置列表项是否可以操作，默认可以；注意：表头需要勾选默认一位；`hide-in-opreate`设置是否加入表格操作列表项内，默认值为false，注意：设置该配置项时不设置`is-default-value`
 
 ::: demo
 
 ```html
-<v-table no-id :data="data" head-operate>
+<v-table no-id :data="data" head-operate name="operateTb" 
+:checkOperateData="checkData" @getCheckOperateData="getCheckOperateData">
   <v-table-col type="selection"></v-table-col>
-  <v-table-col prop="ip" label="IP地址"> </v-table-col>
-  <v-table-col prop="mac" label="MAC地址"></v-table-col>
+  <v-table-col prop="ip" label="IP地址" :is-default-value="false"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" :add-operate="false"></v-table-col>
   <v-table-col
     prop="download"
-    :is-default-value="false"
     label="下载速率"
   ></v-table-col>
   <v-table-col
@@ -275,22 +380,22 @@ Vue.use(Base);
     :is-default-value="false"
     label="上传速率"
   ></v-table-col>
-  <v-table-col prop="status" label="状态" :add-operate="false"></v-table-col>
-  <v-table-col
-    prop="downLimit"
-    :is-default-value="false"
-    label="下载限速"
-  ></v-table-col>
+  <v-table-col prop="status" label="状态" hide-in-opreate></v-table-col>
 </v-table>
 <script>
   export default {
     mounted() {
       this.data = this.table1;
     },
-    methods: {},
+    methods: {
+      getCheckOperateData(data) {
+        console.log('勾选数据为', data);
+      }
+    },
     data() {
       return {
         data: [],
+        checkData: ['ip', 'mac', 'status'],
         table1: [
           {
             ip: "192.168.0.100",
@@ -370,6 +475,7 @@ Vue.use(Base);
   is-input-page
   :page-size="pageSize"
   :current-page="currentPage"
+  name="pageTable"
 >
   <v-table-col prop="ip" label="IP地址"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址"></v-table-col>
@@ -495,16 +601,21 @@ Vue.use(Base);
 
 ### 排序表格
 
-`is-sort`表示此列支持排序
+`is-sort`表示此列支持排序 ,`defaultSortType`表示默认排序:`asc`升序，`des`降序
 
 ::: demo
 
 ```html
-<v-table no-id :data="data" @sort="sortTable">
+<v-table no-id :data="data" @sort="sortTable" name="sortTable">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
-  <v-table-col is-sort prop="age" label="年龄"></v-table-col>
+  <v-table-col
+    is-sort
+    prop="age"
+    label="年龄"
+    defaultSortType="asc"
+  ></v-table-col>
 </v-table>
 <script>
   export default {
@@ -560,7 +671,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" emptyValue="-">
+<v-table no-id :data="table1" emptyValue="-" name="emptyTable">
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
@@ -611,10 +722,10 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="mulTable">
   <v-table-col prop="ssid" label="SSID" word-wrap> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
-  <v-table-col prop="name" label="名字" word-wrap></v-table-col>
+  <v-table-col prop="name" label="名字" width="150px" word-wrap></v-table-col>
   <v-table-col prop="age" label="年龄"></v-table-col>
 </v-table>
 <script>
@@ -643,7 +754,7 @@ Vue.use(Base);
           {
             ssid: ["ssid4"],
             password: "333333333333",
-            name: ["jack", "peter"],
+            name: ["jackssssssssssssssssssssssssssssssssssssssss", "peter"],
             age: "16"
           }
         ]
@@ -660,7 +771,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="tb123">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -956,7 +1067,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" stripe>
+<v-table no-id :data="table1" stripe name="table96">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -1007,7 +1118,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" border>
+<v-table no-id :data="table1" border name="bordTb">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -1058,7 +1169,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="tb65">
   <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ssid" label="SSID">
     <template v-slot="slotProps">
@@ -1124,7 +1235,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="fsdf">
   <v-table-col
     prop="ssid"
     label="SSID"
@@ -1278,7 +1389,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" is-loading>
+<v-table no-id :data="table1" is-loading name="tb548">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -1327,7 +1438,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" is-loading>
+<v-table no-id :data="table1" is-loading name="tb6215">
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col prop="name" label="名字"></v-table-col>
@@ -1367,6 +1478,7 @@ Vue.use(Base);
   :before-select-all="beforeSelectAll"
   :selectData="selectData"
   @selection-change="selectList"
+  name="tb921"
 >
   <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
@@ -1430,7 +1542,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" row-key="ssid" :select-data="[table1[2]]">
+<v-table no-id :data="table1" row-key="ssid" :select-data="[table1[2]]" name="tb554">
   <v-table-col type="selection"></v-table-col>
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
@@ -1482,7 +1594,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="tb156">
   <v-table-col type="index" label="序号"></v-table-col>
   <v-table-col prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
@@ -1534,7 +1646,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1">
+<v-table no-id :data="table1" name="tb9531">
   <v-table-col type="expand" prop="ssid" label="SSID">
     <template #expand="slotScope">
         <div>SSID: {{ slotScope.ssid }}</div>
@@ -1644,7 +1756,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" border disabled>
+<v-table no-id :data="table1" border disabled name="tb5fd">
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
@@ -1753,7 +1865,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table1" :max-row="5">
+<v-table no-id :data="table1" :max-row="5" name="sd56">
   <v-table-col type="index" label="序号"> </v-table-col>
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
@@ -2133,7 +2245,15 @@ Vue.use(Base);
 
 ```html
 <p>固定列宽</p>
-<v-table no-id :data="table1" is-pagination is-change-size is-input-page :max-row="5">
+<v-table
+  no-id
+  :data="table1"
+  is-pagination
+  is-change-size
+  is-input-page
+  :max-row="5"
+  name="tb54219"
+>
   <v-table-col is-search type="selection" fixed width="50"></v-table-col>
   <v-table-col type="index" label="序号" width="80" fixed="left" align="center">
   </v-table-col>
@@ -2152,7 +2272,15 @@ Vue.use(Base);
 </v-table>
 
 <p>不固定列宽</p>
-<v-table no-id :data="table1" is-pagination is-change-size is-input-page :max-row="5">
+<v-table
+  no-id
+  :data="table1"
+  is-pagination
+  is-change-size
+  is-input-page
+  :max-row="5"
+  name="tb95316"
+>
   <v-table-col type="selection" fixed="left"></v-table-col>
   <v-table-col type="index" label="序号" fixed> </v-table-col>
   <v-table-col prop="ip" label="IP地址"> </v-table-col>
@@ -2494,7 +2622,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="table" empty-text="暂无数据">
+<v-table no-id :data="table" empty-text="暂无数据" name="tb1567">
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="upload" label="上传速率"></v-table-col>
@@ -2502,7 +2630,7 @@ Vue.use(Base);
   <v-table-col prop="upLimit" label="上传限速"></v-table-col>
 </v-table>
 
-<v-table no-id :data="table" empty-text="暂无数据">
+<v-table no-id :data="table" empty-text="暂无数据" name="tb991616">
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
   <v-table-col prop="upload" label="上传速率"></v-table-col>

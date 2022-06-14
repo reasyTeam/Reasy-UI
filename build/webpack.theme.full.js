@@ -8,7 +8,7 @@ const { variables } = getConfig();
 module.exports = {
   entry: {
     style: "./src/scss/index.scss",
-    "style-full": "./src/scss/indexFull.scss"
+    "style-full": "./src/scss/index-full.scss"
   }, // 入口文件路径
   output: {
     path: path.join(root, "theme"), // 出口目录

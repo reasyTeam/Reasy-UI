@@ -1,0 +1,29 @@
+.v-dialog {
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  background-color: #fff;
+  .v-dialog__title {
+    font-size: 14px;
+    line-height: 20px;
+    background-color: #f9fafb;
+    border-radius: 4px;
+    box-shadow: none;
+  }
+  .v-dialog__title-inner {
+    color: #4b4b5a;
+  }
+  .v-dialog__main {
+    font-size: 12px;
+    padding: 24px 30px;
+    color: #4b4b5a;
+  }
+}
+.v-dialog__close {
+  font-size: 20px;
+}
+
+.v-dialog__footer {
+  padding: 12px 24px;
+  border-top: 1px solid #eeeff1;
+  border-bottom: 1px solid transparent;
+}

@@ -3,9 +3,10 @@
 $padding: 14px;
 // 主色
 $main-active-color: #0058e4;
+$main-active-color-hover: #f2f7ff;
 
 // S-M-L 三种size元素高度
-$form-line-height-s: 20px;
+$form-line-height-s: 24px;
 $form-line-height: 24px;
 $form-line-height-l: 32px;
 // 按钮尺寸
@@ -50,6 +51,7 @@ $disabled-border-color: #e8e9ec;
 $disabled-background-color: #f4f5f7;
 // placeholder颜色
 $placeholder-color: #ccc;
+$icon-color: #dddde2;
 
 // 表单元素宽度，例如：select、input等
 $elem-width: 208px;

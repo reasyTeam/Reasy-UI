@@ -39,7 +39,7 @@ Vue.use(Base);
     :title="dialogTitle"
     :close-on-click-modal="closeOnClickModal1"
     :modal="true"
-    :width="600"
+    :width="640"
     @confirm="handleConfirm"
     @open="handleOpen"
     @after-close="handleAfterClose"

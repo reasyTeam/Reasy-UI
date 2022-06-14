@@ -24,11 +24,11 @@ Vue.use(Base);
     <v-progress :height="40" :value=".5" type="line"></v-progress>
   </v-col>
   <v-col :span="24">
-    <v-progress :height="40" state="success" :value="1" type="line">
+    <v-progress :height="40" state="success" :iconSize="24" :value="1" type="line">
     </v-progress>
   </v-col>
   <v-col :span="24">
-    <v-progress :height="40" state="error" :value=".7" type="line">
+    <v-progress :height="40" state="error" :iconSize="24" :value=".7" type="line">
     </v-progress>
   </v-col>
 </v-row>
@@ -45,14 +45,14 @@ Vue.use(Base);
 ```html
 <v-row :gutter="24">
   <v-col :offset="9" :span="6">
-    <v-progress :height="30" :strokeWidth="6" :value=".5" type="line"></v-progress>
+    <v-progress :height="30" :strokeWidth="4" :value=".5" type="line"></v-progress>
   </v-col>
   <v-col :offset="9" :span="6">
-    <v-progress :height="30" :strokeWidth="6" state="success" :value="1" type="line">
+    <v-progress :height="30" :strokeWidth="4" state="success" :value="1" type="line">
     </v-progress>
   </v-col>
   <v-col :offset="9" :span="6">
-    <v-progress :height="30" :strokeWidth="6" state="error" :value=".7" type="line">
+    <v-progress :height="30" :strokeWidth="4" state="error" :value=".7" type="line">
     </v-progress>
   </v-col>
 </v-row>

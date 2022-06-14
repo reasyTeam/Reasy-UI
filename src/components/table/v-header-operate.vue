@@ -11,6 +11,7 @@
               no-id
               class="v-checkbox-group__item"
               v-model="isAllChecked"
+              :disabled="isAllDisabled"
             >
               全选
             </v-checkbox>
@@ -18,6 +19,7 @@
               no-id
               class="v-checkbox-group__item"
               v-model="isDefaultChecked"
+              :disabled="isDefaultDisabled"
             >
               默认状态
             </v-checkbox>
@@ -70,9 +72,12 @@ export default {
   data() {
     return {
       dropdownShow: false,
+      isDefaultDisabled: false,
+      isAllDisabled: false,
       style: {
         maxHeight: 0,
-        overflow: "auto"
+        overflow: "auto",
+        left: 0
       }
     };
   },
@@ -82,12 +87,15 @@ export default {
       let list = [];
       this.options.forEach(item => {
         if (typeof item === "object") {
-          list.push(item);
+          if (!item.hideInOpreate) {
+            list.push(item);
+          }
         } else {
           list.push({
             label: String(item),
             value: item,
-            disabled: false
+            disabled: false,
+            hideInOpreate: false
           });
         }
       });
@@ -95,7 +103,7 @@ export default {
     },
     // 全部选中
     allChecked() {
-      return this.optionList
+      return this.options
         .map(item => {
           if (item.disabled && !this.defaultSelected.includes(item.value)) {
             this.defaultSelected.push(item.value);
@@ -131,7 +139,14 @@ export default {
     },
     isDefaultChecked: {
       get() {
-        return equal(this.value, this.defaultChecked);
+        let defaultStatus = equal(this.value, this.defaultChecked);
+        if (this.allChecked.length == this.defaultChecked.length) {
+          this.isAllDisabled = defaultStatus;
+        } else {
+          this.isAllDisabled = false;
+        }
+        this.isDefaultDisabled = defaultStatus;
+        return defaultStatus;
       },
       set(value) {
         this.selectDefault(value);
@@ -162,8 +177,15 @@ export default {
       if (val) {
         let bodyHeight =
             document.documentElement.clientHeight || document.body.clientHeight,
+          scrollLeft =
+            (window.pageXOffset || document.documentElement.scrollLeft) +
+            document.body.scrollLeft,
           parentRect = this.$refs.operate.getBoundingClientRect();
         this.style.maxHeight = bodyHeight - parentRect.bottom + "px";
+        this.style.left =
+          scrollLeft + parentRect.left + parentRect.width - 180 + "px";
+      } else {
+        this.$emit("getCheckOperateData", this.value);
       }
     }
   }

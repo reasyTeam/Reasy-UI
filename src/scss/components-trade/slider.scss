@@ -1,0 +1,45 @@
+.v-slider-range {
+  color: #4b4b5a;
+}
+.v-slider__number {
+  width: 40px;
+}
+.v-slider__number--controls {
+  width: 84px;
+}
+.v-slider .input-text {
+  padding: 0;
+}
+.v-slider-line__bar {
+  border: 1px solid #dddde2;
+}
+.v-slider-line__bar--active,
+.v-slider-line__bar:hover {
+  transform: scale(1.42);
+  border: 2px solid #0058e4;
+}
+
+.v-slider--disabled {
+  .v-slider-line__inner {
+    background-color: #b2cfff;
+  }
+  .v-slider-line__bar {
+    border: 1px solid #dddde2;
+  }
+  .v-slider-line {
+    background-color: #f4f5f7;
+  }
+}
+.v-slider-line__popper {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+  .v-popups__main {
+    background: #ffffff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+    min-width: 40px;
+    color: #676775;
+    text-align: center;
+  }
+  .v-popups__arrow--top {
+    border-top-color: #fff;
+  }
+}

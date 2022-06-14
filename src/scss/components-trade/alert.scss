@@ -1,0 +1,42 @@
+.v-alert--success {
+  background: rgba(29, 184, 121, 0.1);
+  border: 1px solid #1db879;
+}
+
+.v-alert--warn {
+  background: rgba(245, 163, 0, 0.1);
+  border: 1px solid #f5a300;
+}
+
+.v-alert--error {
+  background: rgba(247, 66, 30, 0.1);
+  border: 1px solid #f7421e;
+}
+
+.v-alert--info {
+  background: rgba(0, 88, 228, 0.1);
+  border: 1px solid #0058e4;
+}
+
+.v-alert__main-inner .v-alert__title {
+  color: #4b4b5a;
+}
+
+.v-alert__button {
+  height: 16px;
+}
+
+.v-alert__icon-inner,
+.v-alert__button,
+.v-alert__title {
+  line-height: 16px;
+  vertical-align: top;
+}
+
+.v-alert__icon {
+  font-size: 16px;
+  line-height: 0;
+}
+.v-alert__button .v-alert__close {
+  color: #000;
+}

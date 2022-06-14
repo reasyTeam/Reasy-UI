@@ -9,7 +9,9 @@
       <!-- 未上传 -->
       <template v-if="uploadType === 0">
         <span class="v-upload__image__icon v-icon-add"></span>
-        <div class="v-upload__image__text">{{ _("Add") }}</div>
+        <div class="v-upload__image__text" v-if="showAddText">
+          {{ _("Add") }}
+        </div>
       </template>
       <!-- 上传中 -->
       <template v-if="uploadType === 1">
@@ -36,7 +38,11 @@ export default {
     //图片base64
     dataImage: String,
     //上传状态 0： 初始状态  1：上传中 2：上传成功
-    uploadType: Number
+    uploadType: Number,
+    showAddText: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {

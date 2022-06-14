@@ -23,6 +23,10 @@ export default {
       type: Boolean,
       default: true
     },
+    hideInOpreate: {
+      type: Boolean,
+      default: false
+    },
     //文字换行 数据为数组
     wordWrap: {
       type: Boolean,
@@ -54,6 +58,12 @@ export default {
       type: [String, Number],
       default: ""
     },
+    maxWidth: {
+      //宽度
+      type: [String, Number],
+      default: ""
+    },
+
     isHtmlHeader: {
       //是否支持html
       type: Boolean,
@@ -80,6 +90,10 @@ export default {
       //是否支持排序
       type: Boolean,
       default: false
+    },
+    defaultSortType: {
+      type: String,
+      default: ""
     },
     isSearch: {
       //是否支持搜索

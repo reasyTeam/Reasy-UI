@@ -1,0 +1,47 @@
+.v-upload__row__button {
+  height: 24px;
+  color: #676775;
+  border-color: #e8e9ec;
+  &.v-button--info .v-button__item {
+    line-height: 22px;
+  }
+}
+.v-upload__image__icon {
+  font-size: 20px;
+}
+
+.v-upload__image {
+  width: auto;
+  height: auto;
+  min-width: 40px;
+  min-height: 40px;
+  text-align: center;
+  padding: 9px;
+  border: 1px solid #e8e9ec;
+  border-radius: 4px;
+  &:not(.is-disabled):hover {
+    background: #f2f7ff;
+    border: 1px solid #b2cfff;
+  }
+  &:not(.is-disabled):active {
+    background: #f2f7ff;
+    border: 1px solid #0058e4;
+  }
+
+  &:not(.is-disabled):hover,
+  &:not(.is-disabled):active {
+    .v-upload__image__icon {
+      color: #0058e4;
+    }
+  }
+}
+
+.v-upload__image__middle {
+  margin-top: 0;
+  transform: none;
+  font-size: 0;
+}
+
+.v-upload__image__text {
+  font-size: 12px;
+}

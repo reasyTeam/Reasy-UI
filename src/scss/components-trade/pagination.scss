@@ -1,0 +1,60 @@
+.v-pagination--border {
+  .v-pagination__button--border {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    border: 0;
+    &.v-pagination__button--disabled {
+      background-color: transparent;
+      &.v-pagonation__icon {
+        background: $disabled-background-color;
+        color: $disabled-color;
+        width: 24px;
+        height: 24px;
+        line-height: 22px;
+        border: 1px solid $border-color;
+      }
+    }
+  }
+
+  .v-pagination__button:not(.v-pagination__button--disabled) {
+    &:hover {
+      font-weight: 600;
+    }
+    &.v-pagonation__icon {
+      border: 1px solid $border-color;
+      line-height: 22px;
+      border-radius: 4px;
+      height: 24px;
+      width: 24px;
+      &:hover {
+        color: $info-color;
+        font-weight: normal;
+        border-color: rgba($main-active-color, 0.3);
+        background-color: rgba($main-active-color, 0.05);
+      }
+      &:active {
+        color: $info-color;
+        font-weight: normal;
+        border-color: rgba($main-active-color, 0.9);
+        background-color: rgba($main-active-color, 0.05);
+      }
+    }
+  }
+  .v-pagination__button--active {
+    color: $main-active-color;
+    &.v-pagination__button--disabled {
+      color: $main-active-color;
+    }
+    font-weight: 600;
+    border: 0;
+    background: none;
+    &:hover {
+      color: $main-active-color;
+    }
+  }
+
+  .v-pagination__input .input-text {
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,44 @@
+.v-checkbox__icon--active {
+  border: 1px solid $main-active-color;
+  color: $main-active-color;
+  background-color: #fff;
+
+  &:before {
+    font-size: 18px;
+    position: relative;
+    top: -2px;
+    left: -2px;
+  }
+}
+.v-checkbox__item:hover {
+  .v-checkbox__icon--active:not(.v-checkbox__process) {
+    border-color: $main-active-color;
+  }
+}
+
+.v-checkbox__item--disabled {
+  .v-checkbox__icon.v-checkbox__icon--active {
+    border-color: rgba($main-active-color, 0.4);
+    background-color: #f2f7ff;
+    color: rgba($main-active-color, 0.4);
+  }
+  .v-checkbox__icon.v-checkbox__process {
+    border-color: $border-color;
+  }
+
+  &:hover {
+    .v-checkbox__icon.v-checkbox__icon--active {
+      border-color: rgba($main-active-color, 0.4);
+    }
+    .v-checkbox__icon.v-checkbox__process {
+      border-color: $border-color;
+    }
+  }
+}
+
+.v-checkbox__icon--active.v-checkbox__process:before {
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  bottom: auto;
+}

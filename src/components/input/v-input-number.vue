@@ -1,6 +1,10 @@
 <template>
   <div
-    :class="['v-input-number', `${sizeToCss(size, 'v-input-number--')}`]"
+    :class="[
+      'v-input-number',
+      `${sizeToCss(size, 'v-input-number--')}`,
+      { 'v-input-number--control': isControls && controlsPosition == 'right' }
+    ]"
     :style="{ width: inputWidth }"
   >
     <div

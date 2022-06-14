@@ -426,7 +426,7 @@ export default {
       this.checkValid(this.value);
     },
     delValue(item) {
-      if (this.isDisabled) {
+      if (this.isDisabled || item.disabled) {
         return;
       }
       this.multipleShowAll

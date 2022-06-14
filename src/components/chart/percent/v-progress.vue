@@ -27,6 +27,7 @@ const STATUS = {
   ERROR: "success",
   SUCCESS: "error"
 };
+const IS_TRADE = process.env.THEME === "trade";
 export default {
   name: "v-progress",
   props: {
@@ -56,22 +57,22 @@ export default {
     // 进行中颜色
     progressColor: {
       type: String,
-      default: "#ff801f"
+      default: IS_TRADE ? "#0058E4" : "#ff801f"
     },
     // 完成颜色
     successColor: {
       type: String,
-      default: "#17cc82"
+      default: IS_TRADE ? "#1DB879" : "#17cc82"
     },
     // 失败颜色
     errorColor: {
       type: String,
-      default: "#f7421e"
+      default: IS_TRADE ? "#F7421E" : "#f7421e"
     },
     // 背景色区间
     backColor: {
       type: String,
-      default: "#e9e9e9"
+      default: IS_TRADE ? "#E8E9EC" : "#e9e9e9"
     },
     // 百分比图线条宽
     strokeWidth: {
