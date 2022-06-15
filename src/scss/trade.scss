@@ -1,6 +1,9 @@
 /**
  * 商用主题风格
  */
+$icon-color: #dddde2;
+$main-active-color-hover: #f2f7ff;
+
 .trade {
   @import "./components-trade/alert.scss";
   @import "./components-trade/button.scss";
