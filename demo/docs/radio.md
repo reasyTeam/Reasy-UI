@@ -1,8 +1,8 @@
-## 单选框
+# 单选框
 
 用于一组可选项单项选择。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Radio } from "@reasy-team/reasy-ui";
@@ -11,12 +11,12 @@ Vue.use(Radio);
 Vue.use(Base);
 ```
 
-### 基础用法
+## 基础用法
 
 :::demo
 
 ```html
-<v-radio v-model="radio1" name="radio" :options="options"></v-radio>
+<v-radio v-model="radio1" name="radio" :options="options" @change="changeRadio"></v-radio>
 <script>
   export default {
     data() {
@@ -24,6 +24,11 @@ Vue.use(Base);
         radio1: 1,
         options: [1, 2, 3, 4]
       };
+    },
+    methods:{
+      changeRadio(val){
+        console.log('修改值了'+val)
+      }
     }
   };
 </script>
@@ -31,7 +36,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 :::demo
 
@@ -74,20 +79,20 @@ Vue.use(Base);
 
 :::
 
-### v-radio Attributes
+## Props
 
-| 参数          | 说明                                            | 类型               | 可选值 | 默认值                   |
-| ------------- | ----------------------------------------------- | ------------------ | ------ | ------------------------ |
-| v-model       | 绑定值                                          | string             | —      | —                        |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| options       | 下拉选项数组对象                                | Array              | —      | []                       |
-| disabled      | 是否禁用                                        | boolean            |        | false                    |
-| before-change | 切换选中前的钩子，返回 false 时，不会修改选中项 | function(value) {} | —      | function() {return true} |
+| 参数          | 说明                                                                    | 类型               | 可选值 | 默认值                   |
+| ------------- | ----------------------------------------------------------------------- | ------------------ | ------ | ------------------------ |
+| v-model       | 绑定值                                                                  | string             | —      | —                        |
+| no-id         | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id | boolean            | -      | false                    |
+| name          | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**              | string             | -      | -                        |
+| options       | 下拉选项数组对象                                                        | Array              | —      | []                       |
+| disabled      | 是否禁用                                                                | boolean            |        | false                    |
+| before-change | 切换选中前的钩子，返回 false 时，不会修改选中项                         | function(value) {} | —      | function() {return true} |
 
 **options 选项支持字符串、数字、boolean 或者对象，不为对象时显示的选项文字和值一致**
 
-#### options 属性
+## options
 
 | 参数     | 说明         | 类型                      | 可选值 | 默认值 |
 | -------- | ------------ | ------------------------- | ------ | ------ |
@@ -95,7 +100,7 @@ Vue.use(Base);
 | value    | 选项值       | string / boolean / number | —      | —      |
 | disabled | 选项是否禁用 | boolean                   | —      | false  |
 
-### v-radio Events
+## @Events
 
 | 事件名 | 说明           | 参数       |
 | ------ | -------------- | ---------- |

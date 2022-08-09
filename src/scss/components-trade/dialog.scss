@@ -4,7 +4,7 @@
   background-color: #fff;
   .v-dialog__title {
     font-size: 14px;
-    line-height: 20px;
+    line-height: 24px;
     background-color: #f9fafb;
     border-radius: 4px;
     box-shadow: none;
@@ -17,13 +17,21 @@
     padding: 24px 30px;
     color: #4b4b5a;
   }
+  .v-dialog__button-group {
+
+    .v-dialog__button-item + .v-dialog__button-item {
+      margin-left: 16px;
+    }
+  }
 }
 .v-dialog__close {
   font-size: 20px;
+  transform: translateY(-50%);
+  margin-top: 0;
 }
 
 .v-dialog__footer {
-  padding: 12px 24px;
+  padding: 11px 24px;
   border-top: 1px solid #eeeff1;
   border-bottom: 1px solid transparent;
 }

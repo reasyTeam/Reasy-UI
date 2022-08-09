@@ -93,7 +93,8 @@ export default {
 
       this.$emit("click", options.value);
       let result = this.beforeChange(options.value);
-      if (result !== false) {
+      //  不相等时触发change
+      if (result !== false && options.value !== this.value) {
         this.$emit("change", options.value);
         this.$dispatch("v-form", "form:change");
         this.checkValid(options.value);

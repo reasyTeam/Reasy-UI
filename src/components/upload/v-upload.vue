@@ -159,6 +159,11 @@ export default {
     showAddText: {
       type: Boolean,
       default: true
+    },
+    autoClear: {
+      //是否提交后自动清除文件
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -213,8 +218,13 @@ export default {
         const jsonStr = JSON.parse(response);
         this.uploadType = UPLOAD_TYPE.UPLOADED;
         this.onSuccess(jsonStr);
+        if (this.autoClear) {
+          this.clearFile();
+        }
       } catch (err) {
         console.log(err);
+        this.uploadType = UPLOAD_TYPE.UPLOADED;
+        this.onSuccess(response);
       }
     },
 
@@ -264,9 +274,10 @@ export default {
       this.$refs.iform.submit();
       this.uploadType = UPLOAD_TYPE.LOADING;
       //上传后清空文件
-      this.$refs.file.value = "";
+      //this.$refs.file.value = "";
     },
     clearFile() {
+      this.fileStr = "";
       this.$refs.file.value = "";
     }
   },

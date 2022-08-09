@@ -1,8 +1,8 @@
-## 二维码
+# 二维码
 
 可根据任意文本生成二维码
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Qrcode } from "@reasy-team/reasy-ui";
@@ -10,7 +10,7 @@ import { Qrcode } from "@reasy-team/reasy-ui";
 Vue.use(Qrcode);
 ```
 
-### 基本用法
+## 基本用法
 
 ::: demo
 
@@ -29,7 +29,7 @@ Vue.use(Qrcode);
 
 :::
 
-### 支持下载
+## 支持下载
 
 `is-download` 配置二维码图片可下载
 
@@ -50,7 +50,7 @@ Vue.use(Qrcode);
 
 :::
 
-### 支持背景图片
+## 支持背景图片
 
 `bg-src` 配置背景图片, `dot-scale` 配置像素点缩放大小（需缩小像素点才能清晰的显示背景图）
 
@@ -75,7 +75,7 @@ Vue.use(Qrcode);
 
 :::
 
-### 支持 logo 显示
+## 支持 logo 显示
 
 `logo-src` 配置 logo 图片，`logo-scale` 配置 logo 大小， logo 图片尽量使用正方形
 
@@ -100,7 +100,7 @@ Vue.use(Qrcode);
 
 :::
 
-### 自定义颜色
+## 自定义颜色
 
 `color-dark` 配置像素点颜色，`color-light` 配置空白处颜色
 ::: demo
@@ -126,7 +126,7 @@ Vue.use(Qrcode);
 
 :::
 
-### v-qrcode Attributes
+## Props
 
 | 参数              | 说明                                                     | 类型    | 可选值    | 默认值     |
 | ----------------- | -------------------------------------------------------- | ------- | --------- | ---------- |
@@ -152,7 +152,7 @@ Vue.use(Qrcode);
 | btn-text          | 下载按钮文字                                             | string  | —         | 下载二维码 |
 | file-name         | 下载的二维码文件名                                       | string  | —         | 二维码     |
 
-### v-input Slot
+## Slots
 
 | name   | 说明                           |
 | ------ | ------------------------------ |

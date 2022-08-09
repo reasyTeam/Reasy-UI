@@ -32,9 +32,9 @@ export default {
     style() {
       let translate = this.active * 24;
       return {
-        "-webkit-transform": `translate(-50%, ${translate}px)`,
-        "-ms-transform": `translate(-50%, ${translate}px)`,
-        transform: `translate(-50%, ${translate}px)`
+        "-webkit-transform": `translate(-100%, ${translate}px)`,
+        "-ms-transform": `translate(-100%, ${translate}px)`,
+        transform: `translate(-100%, ${translate}px)`
       };
     }
   },
@@ -43,7 +43,7 @@ export default {
       let wrapper = this.wrapper;
       if (wrapper) {
         let list = Array.from(wrapper.children).filter(
-          node => node.tagName === "H3"
+          node => node.tagName === "H2" || node.tagName === "H3"
         );
         let res = [];
         list.forEach(node => {
@@ -76,6 +76,14 @@ export default {
       }
 
       this.timer = setTimeout(() => {
+        if (
+          document.documentElement.scrollHeight - 50 <=
+          document.documentElement.scrollTop +
+            document.documentElement.offsetHeight
+        ) {
+          this.active = this.links.length - 1;
+          return;
+        }
         let top = document.documentElement.scrollTop;
         let i = 0;
         for (; i < this.links.length; i++) {
@@ -111,7 +119,7 @@ export default {
 .side-link {
   position: fixed;
   top: 120px;
-  right: 0;
+  right: 24px;
   padding-left: 24px;
   background-color: #fff;
 
@@ -128,19 +136,15 @@ export default {
       display: inline-block;
       height: 100%;
       width: 0;
-      border: 1px solid #eee;
-      border-radius: 1px;
+      border-left: 1px solid #ebebeb;
     }
 
     &__btn {
       position: absolute;
-      top: 8px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: 1px solid #ff801f;
-      background-color: #fff;
-      left: 50%;
+      top: 1px;
+      width: 0;
+      height: 24px;
+      border-left: 1px solid #ff801f;
       transition: transform 0.3s;
     }
   }

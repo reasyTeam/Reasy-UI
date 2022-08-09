@@ -118,7 +118,8 @@ $icon-color: #dddde2;
   // pagination start
   .v-pagination--border {
     .v-pagination__button--border {
-      width: $form-line-height;
+      min-width: $form-line-height;
+      width: auto;
       height: $form-line-height;
       line-height: $form-line-height;
       border: 0;

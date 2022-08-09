@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { on, off } from "../libs";
+import { on, off, throttle } from "../libs";
 import { renderTranslateStyle, PROPERTYS } from "./scroll-lib.js";
 
 // 滚动滑块的最小高度/宽度
@@ -43,6 +43,7 @@ export default {
     this.size = 0;
     // 滚动开始节点位置
     this.startPoint = 0;
+    this.throttleMove = throttle(this.mousemove, 1000 / 60, true);
     return {
       // 是否正在拖动滚动条
       isDragging: false,
@@ -125,9 +126,9 @@ export default {
       this.isDragging = true;
       this.oldOffset = this.scroll * this.maxTranslate;
       this.startPoint = e[this.propertys.client];
-      on(document, "mousemove", this.mousemove);
-      on(document, "mouseup", this.mouseup);
-      document.onselectstart = () => false;
+      on(window, "mousemove", this.throttleMove);
+      on(window, "mouseup", this.mouseup);
+      window.onselectstart = () => false;
     },
     mousemove(e) {
       e.preventDefault();
@@ -139,9 +140,9 @@ export default {
     },
     mouseup() {
       this.isDragging = false;
-      off(document, "mousemove", this.mousemove);
-      off(document, "mouseup", this.mouseup);
-      document.onselectstart = null;
+      off(window, "mousemove", this.throttleMove);
+      off(window, "mouseup", this.mouseup);
+      window.onselectstart = null;
     }
   },
   mounted() {

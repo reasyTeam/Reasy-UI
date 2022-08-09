@@ -70,8 +70,16 @@ $nav-width: 256px;
 .page-content {
   padding-top: 50px;
 }
-.page-content .content > h3 {
+.page-content .content > h1 {
+  margin: 20px 0 20px;
+  font-size: 26px;
+  color: #262626;
+}
+.page-content .content > h2 {
   margin: 55px 0 20px;
+}
+.page-content .content > h3 {
+  margin: 40px 0 20px;
 }
 .page-content .content > h4 {
   margin: 24px 0 14px;

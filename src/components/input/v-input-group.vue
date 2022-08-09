@@ -138,6 +138,7 @@ export default {
       this.$emit("input", inputValue);
     },
     handlerChange() {
+      this.isFocus = true;
       this.isChanged = true;
     },
     handlerKeydown(event) {

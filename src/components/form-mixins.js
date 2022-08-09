@@ -64,6 +64,19 @@ export default {
           [];
       }
       val = isUndefinedOrNull(val) ? this.value : val;
+
+      if (ignore || this.isDisabled) {
+        //忽略验证时
+        return false;
+      }
+
+      if (
+        (val === "" || (Array.isArray(val) && val.length == 0)) &&
+        !required
+      ) {
+        return false;
+      }
+
       result = this.beforeCheckError(val);
       //默认返回false 当返回true时 表示值正确，无需再进入下一步验证 返回string类型时 提示错误string
       if (result) {

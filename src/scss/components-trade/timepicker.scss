@@ -3,6 +3,11 @@
   line-height: 28px;
 }
 
+.v-timepicker--medium .v-timepicker__title {
+  height: 40px;
+  line-height: 40px;
+}
+
 .v-timepicker__li--active,
 .v-timepicker__li:hover {
   background-color: rgba($main-active-color, 0.05);

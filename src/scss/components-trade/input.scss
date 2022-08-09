@@ -16,10 +16,13 @@
 }
 
 .input-text,
-.input-textarea {
+.input-textarea,
+.input-number,
+.input-group--content {
   border-radius: 4px;
 }
-.v-input-number__controls {
+
+.v-input-number__controls.v-button {
   padding: 0;
 }
 .v-input-number--large {

@@ -67,6 +67,8 @@
 
   &__row {
     &__file {
+      overflow: hidden;
+      text-overflow: ellipsis;
       width: $elem-width;
       display: inline-block;
       border: 1px solid $border-color;

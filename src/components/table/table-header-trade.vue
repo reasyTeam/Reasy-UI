@@ -28,7 +28,11 @@
         <th
           v-for="(col, index) in columns"
           :key="index + 1"
-          :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
+          :class="[
+            { 'v-table__header--sort': col.isSort },
+            `is_${col.align}`,
+            'fixed'
+          ]"
           :data-help="col.help || col.prop"
           @click="sortTable(col)"
           :id="name | id(col.prop)"
@@ -93,6 +97,15 @@
     :class="{ 'v-table__border': border }"
     v-else
   >
+    <v-header-operate
+      v-model="checked"
+      v-if="headOperate"
+      class="check-group"
+      :options="options"
+      :default-selected="defaultSelectValue"
+      @getCheckOperateData="getCheckOperateData"
+    >
+    </v-header-operate>
     <tr>
       <th
         v-for="(col, index) in columns"
@@ -183,6 +196,7 @@ export default {
     disabled: Boolean,
     headOperate: Boolean,
     checkOperateData: Array,
+    data: Array,
     isTable: {
       type: Boolean,
       default: true
@@ -212,37 +226,10 @@ export default {
       return this.disabled || this.$parent.disabled;
     }
   },
-  created() {
-    if (!this.isTable) {
-      this.$nextTick(() => {
-        this.columns.forEach((el, ind) => {
-          let eles = this.$refs[`headerWidth_${el.prop}`];
-          if (eles.length) {
-            el.colWidth = eles[0].offsetWidth;
-          }
-          if (el.type === "selection") {
-            el.colWidth = 48;
-          } else if (el.fixed) {
-            el.colWidth = 100;
-          }
-        });
-      });
-    }
-  },
-  updated() {
-    if (!this.isTable) {
-      this.$nextTick(() => {
-        this.columns.forEach((el, ind) => {
-          let eles = this.$refs[`headerWidth_${el.prop}`];
-          if (eles.length) {
-            el.colWidth = eles[0].offsetWidth;
-          }
-        });
-      });
-    }
-  },
   mounted() {
     this.$nextTick(function() {
+      this.updateColumn();
+
       this.columnsCopy = copyDeepData(this.columns);
       let checkedData = [];
       this.columns.forEach(element => {
@@ -254,7 +241,7 @@ export default {
           label: element.label,
           value: element.prop,
           disabled: !element.addOperate,
-          hideInOpreate: element.hideInOpreate
+          hideInOperate: element.hideInOperate
         });
         //默认状态值
         element.isDefaultValue && this.defaultSelectValue.push(element.prop);
@@ -262,11 +249,34 @@ export default {
         (!element.addOperate || element.isDefaultValue) &&
           checkedData.push(element.prop);
       });
+
       this.checked =
         this.checkOperateData.length > 0 ? this.checkOperateData : checkedData;
     });
   },
   methods: {
+    updateColumn() {
+      if (!this.isTable) {
+        this.columns.forEach(el => {
+          el.colWidth = 0;
+        });
+        this.$nextTick(() => {
+          this.columns.forEach(el => {
+            let eles = this.$refs[`headerWidth_${el.prop}`];
+            if (eles.length) {
+              el.colWidth = eles[0].offsetWidth;
+            }
+            if (el.type === "selection") {
+              el.colWidth = 40;
+            } else if (el.type === "index") {
+              el.colWidth = 48;
+            } else if (el.fixed) {
+              el.colWidth = 100;
+            }
+          });
+        });
+      }
+    },
     getCheckOperateData(data) {
       this.$emit("getCheckOperateData", data);
     },
@@ -304,9 +314,10 @@ export default {
     },
     visibleChange() {
       let arr = this.columnsCopy.filter(element => {
-        if (element.type == "selection") {
+        if (element.type == "selection" || element.hideInOperate) {
           return true;
         }
+
         return this.checked.indexOf(element.prop) != -1;
       });
       this.$dispatch("v-table", "update.column", arr, true);
@@ -315,6 +326,25 @@ export default {
   watch: {
     checked() {
       this.visibleChange();
+    },
+    checkOperateData() {
+      this.checked =
+        this.checkOperateData.length > 0 ? this.checkOperateData : this.checked;
+    },
+    data: {
+      handler() {
+        this.updateColumn();
+      },
+      immediate: true
+    },
+    columns: {
+      handler() {
+        // 重新汇总columns数据
+        this.$nextTick(() => {
+          this.updateColumn();
+        });
+      },
+      immediate: true
     }
   }
 };

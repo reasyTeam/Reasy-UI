@@ -1,22 +1,22 @@
-## reasy-ui
+# reasy-ui
 
 Tenda 基于 Vue2.x 的 PC 组件库，[查看源码](https://github.com/reasyTeam/Reasy-UI)。
 
 同时支持风格定制，见[更改主题风格](#geng-gai-zhu-ti-feng-ge)。
 
-### 使用
+## 使用
 
 如有多语言环境，使用前请先引入`B28n.js`文件。
 
 > 组件中词条已提取到`lang.en.zh.json`文件，项目中请自行导入。
 
-### 安装
+## 安装
 
 ```
 npm i @reasy-team/reasy-ui -S
 ```
 
-#### 注意：
+### 注意：
 
 次版本号多为新增功能或对现有功能有一定的调整，所以在安装插件包的时候建议控制版本号修饰符为`~`，比如`~1.2.5`，代表版本范围`1.2.*`。
 
@@ -26,7 +26,7 @@ npm i @reasy-team/reasy-ui -S
 
 > 软件包通过版本控制，版本依次为【主版本号.次版本号.修补版本号】
 
-### 常用组件引用
+## 常用组件引用
 
 不包含折线图、饼图、柱图、和百分比
 
@@ -37,7 +37,7 @@ import "@reasy-team/reasy-ui/dist/style.css";
 Vue.use(ReasyUi);
 ```
 
-### 完全引用
+## 完全引用
 
 包含所有组件
 
@@ -48,7 +48,7 @@ import "@reasy-team/reasy-ui/dist/style-full.css";
 Vue.use(ReasyUi);
 ```
 
-### 按需引用
+## 按需引用
 
 **1. 安装 [babel-plugin-component](https://www.npmjs.com/package/babel-plugin-component) 插件**
 
@@ -77,7 +77,7 @@ Vue.use(Input);
 
 > 其中`Base`为组件基础支撑项，必须引入项，否则其它组件部分功能会不生效。
 
-### IPCOM 风格引用
+## IPCOM 风格引用
 
 ```
 import ReasyUi from "@reasy-team/reasy-ui/dist/ipcom/reasy-ui.js";
@@ -86,7 +86,7 @@ import "@reasy-team/reasy-ui/dist/ipcom/style.css";
 Vue.use(ReasyUi);
 ```
 
-### 商用风格引用
+## 商用风格引用
 
 ```
 import ReasyUi from "@reasy-team/reasy-ui/dist/trade/reasy-ui.js";
@@ -95,7 +95,7 @@ import "@reasy-team/reasy-ui/dist/trade/style.css";
 Vue.use(ReasyUi);
 ```
 
-### 更改主题风格
+## 更改主题风格
 
 支持自定义主题风格，只需要几个简单的步骤就可以完成风格切换。
 

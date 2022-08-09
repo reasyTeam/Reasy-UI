@@ -20,7 +20,19 @@
             :option="item"
           ></select-item>
           <template v-else>
-            {{ item.label }}
+            <v-tooltip
+              :max-width="200"
+              :enterable="false"
+              :between-space="0"
+              show-only-ellipsis
+              :content="item.label"
+              ><span
+                class="v-select-options__item__text"
+                :style="{ maxWidth: optionMaxWidth || 'auto' }"
+                :class="{ padding: isMultiple && getSelected(item, index) }"
+                >{{ item.label }}</span
+              ></v-tooltip
+            >
             <span
               v-if="isMultiple && getSelected(item, index)"
               class="v-select__icon--right--active v-icon-ok"
@@ -49,7 +61,7 @@ export default {
     //是否显示
     show: Boolean,
     //下拉框值
-    selectValue: [String, Number, Array, Boolean],
+    selectValue: [String, Number, Array, Boolean, Symbol],
     //多选长度限制
     multipleLimit: Number,
     //是否支持多选
@@ -57,7 +69,8 @@ export default {
     fn: Function,
     isExsit: Boolean,
     count: Number,
-    name: String
+    name: String,
+    optionMaxWidth: String
   },
   components: {
     SelectItem

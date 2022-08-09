@@ -2,8 +2,18 @@
   font-size: 12px;
   padding: 0 20px;
 }
+
+.v-button--medium {
+  padding: 0 24px;
+  &.v-button--info {
+    padding: 0 23px;
+  }
+}
+
 .v-button--info {
   border-color: $icon-color;
+  color: #676775;
+  padding: 0 19px;
   &:hover {
     color: $main-active-color;
     border-color: rgba($main-active-color, 0.3);
@@ -24,6 +34,9 @@
 .v-button--primary {
   &:focus {
     box-shadow: 0px 0px 4px 0px $main-active-color;
+  }
+  &:hover {
+    background-color: #0068ff;
   }
 }
 

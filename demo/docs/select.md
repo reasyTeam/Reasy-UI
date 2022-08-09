@@ -1,8 +1,8 @@
-## 选择器
+# 选择器
 
 当选项过多时，使用下拉菜单展示并选择。
 
-### 按需引用
+## 按需引用
 
 该组件依赖于`v-scroll`组件。
 
@@ -14,7 +14,7 @@ Vue.use(Select);
 Vue.use(Base);
 ```
 
-### 基本用法
+## 基本用法
 
 ::: demo
 
@@ -29,7 +29,7 @@ Vue.use(Base);
         selectOption: [
           {
             value: "1",
-            label: "选项一"
+            label: "选项一",
           },
           {
             value: "2",
@@ -52,7 +52,7 @@ Vue.use(Base);
 
 :::
 
-### 选项配置
+## 选项配置
 
 `options`支持数字
 
@@ -74,7 +74,7 @@ Vue.use(Base);
 
 :::
 
-### 自定义选项 HTML 结构
+## 自定义选项 HTML 结构
 
 通过设定默认的`slot`可以自定义显示的内容，`slotProps`包含`label`和`value`两个属性。
 
@@ -100,7 +100,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 选择器禁用
 
@@ -178,7 +178,7 @@ Vue.use(Base);
 
 :::
 
-### 支持输入
+## 支持输入
 
 `is-manual`支持手动配置，`manual-text`手动配置的文字
 
@@ -224,7 +224,62 @@ Vue.use(Base);
 
 :::
 
-### 支持清除
+## 支持为空时默认选择第一个
+`is-default-first`
+::: demo
+
+```html
+
+<v-select
+  v-model="select1"
+  name="select-manual"
+  is-default-first
+  :options="selectOption"
+></v-select>
+
+<div>支持清除时不生效</div>
+<v-select
+  v-model="select3"
+  name="select-manual"
+  is-default-first
+  is-clear
+  :options="selectOption"
+></v-select>
+
+<script>
+  export default {
+    data() {
+      return {
+        select1: "",
+        select2: "",
+          select3: "",
+        selectOption: [
+          {
+            value: "1",
+            label: "选项一"
+          },
+          {
+            value: "2",
+            label: "选项二"
+          },
+          {
+            value: "3",
+            label: "选项三"
+          },
+          {
+            value: "4",
+            label: "选项四"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+## 支持清除
 
 `is-clear`支持清除数据
 
@@ -264,7 +319,7 @@ Vue.use(Base);
 
 :::
 
-### 支持搜索
+## 支持搜索
 
 `is-search`支持搜索数据
 
@@ -304,7 +359,7 @@ Vue.use(Base);
 
 :::
 
-### 选项位置
+## 选项位置
 
 `position`支持配置选项的位置，`top`选项出现在上面，`bottom`选项出现在下面，`auto`选项根据下拉框位置自适应，默认值`auto`
 
@@ -365,7 +420,7 @@ Vue.use(Base);
 
 :::
 
-### 支持多选
+## 支持多选
 
 `is-multiple`支持多项选择，`multiple-limit`多选个数限制，`0`表示无限制， `multiple-show-all`显示所有已选项
 
@@ -392,6 +447,7 @@ Vue.use(Base);
       v-model="select2"
       is-multiple
       name="select-all"
+      is-default-first
       multiple-show-all
       :options="selectOption"
     ></v-select>
@@ -402,12 +458,13 @@ Vue.use(Base);
   export default {
     data() {
       return {
-        select1: ["1"],
-        select2: ["1"],
+        select1: ["2"],
+        select2: [],
         selectOption: [
           {
             value: "1",
-            label: "选项一"
+            label: "选项一",
+            disabled: true
           },
           {
             value: "2",
@@ -438,32 +495,33 @@ Vue.use(Base);
 
 :::
 
-### v-select Attributes
+## Props
 
-| 参数                   | 说明                                                           | 类型                              | 可选值              | 默认值 |
-| ---------------------- | -------------------------------------------------------------- | --------------------------------- | ------------------- | ------ |
-| v-model                | 绑定值，多选时值为数组，单选时为字符串                         | string / Array / Number / Boolean | —                   | —      |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name                   | 原生属性name，同时渲染为id属性，**必填**                                       | string                            | —                   | —      |
-| disabled               | 是否禁用                                                       | boolean                           | —                   | false  |
-| width                  | 选择器宽度                                                     | string / Number                   | —                   | —      |
-| is-clear               | 是否可以清空选项                                               | boolean                           | —                   | false  |
-| is-search              | 是否可以搜索                                                   | boolean                           | —                   | false  |
-| is-multiple            | 是否可以多选，支持多选时不能配置自定义                         | boolean                           | —                   | false  |
-| multiple-limit         | 多选时用户最多可以选择的个数，为 0 则不限制                    | number                            | —                   | 0      |
-| multiple-show-all      | 多选时是否展示所有的已选值                                     | boolean                           | —                   | false  |
-| placeholder            | 占位符                                                         | string                            | —                   | 请选择 |
-| size                   | 输入框尺寸                                                     | string                            | S / M / L           | M      |
-| options                | 下拉选项数组对象，支持数据选项为对象和字符串                   | Array                             | —                   | []     |
-| is-manual              | 是否支持手动输入                                               | boolean                           | —                   | false  |
-| manual-text            | 手动输入时选项的文字                                           | string                            | —                   | 自定义 |
-| position               | 选项框位置，对应上 、下、 自适应                               | string                            | top / bottom / auto | auto   |
-| display-options-number | 设置可显示选项的数量，如 options.length 大于该值，则显示滚动条 | number                            | -                   | 5      |
-| unit                   | 手动输入时，输入框支持的单位，同 v-input                       | string                            | -                   | -      |
+| 参数                   | 说明                                                                    | 类型                              | 可选值              | 默认值 |
+| ---------------------- | ----------------------------------------------------------------------- | --------------------------------- | ------------------- | ------ |
+| v-model                | 绑定值，多选时值为数组，单选时为字符串                                  | string / Array / Number / Boolean | —                   | —      |
+| no-id                  | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id | boolean                           | -                   | false  |
+| name                   | 原生属性name，同时渲染为id属性，**必填**                                | string                            | —                   | —      |
+| disabled               | 是否禁用                                                                | boolean                           | —                   | false  |
+| width                  | 选择器宽度                                                              | string / Number                   | —                   | —      |
+| is-clear               | 是否可以清空选项                                                        | boolean                           | —                   | false  |
+| is-search              | 是否可以搜索                                                            | boolean                           | —                   | false  |
+| is-default-first       | 是否为空时默认选择第一个，支持清空或多选时不支持此项                    | boolean                           | —                   | false  |
+| is-multiple            | 是否可以多选，支持多选时不能配置自定义                                  | boolean                           | —                   | false  |
+| multiple-limit         | 多选时用户最多可以选择的个数，为 0 则不限制                             | number                            | —                   | 0      |
+| multiple-show-all      | 多选时是否展示所有的已选值                                              | boolean                           | —                   | false  |
+| placeholder            | 占位符                                                                  | string                            | —                   | 请选择 |
+| size                   | 输入框尺寸                                                              | string                            | S / M / L           | M      |
+| options                | 下拉选项数组对象，支持数据选项为对象和字符串                            | Array                             | —                   | []     |
+| is-manual              | 是否支持手动输入                                                        | boolean                           | —                   | false  |
+| manual-text            | 手动输入时选项的文字                                                    | string                            | —                   | 自定义 |
+| position               | 选项框位置，对应上 、下、 自适应                                        | string                            | top / bottom / auto | auto   |
+| display-options-number | 设置可显示选项的数量，如 options.length 大于该值，则显示滚动条          | number                            | -                   | 5      |
+| unit                   | 手动输入时，输入框支持的单位，同 v-input                                | string                            | -                   | -      |
 
 **当支持手动输入时，支持输入框组件的属性**
 
-### options
+## options
 
 选择器选项配置，支持`Object`，`Boolean`，`Number`，`String`
 
@@ -475,7 +533,7 @@ Vue.use(Base);
 | value    | 选项的值     | string / number / boolean | —      | —      |
 | disabled | 是否禁用此项 | boolean                   | —      | false  |
 
-### 事件 Events
+## @Events
 
 | 事件名         | 说明                                     | 参数                          |
 | -------------- | ---------------------------------------- | ----------------------------- |

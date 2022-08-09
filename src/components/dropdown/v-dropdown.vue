@@ -79,7 +79,15 @@ export default {
     CreateToBody
   },
   mixins: [NameMixin],
+  model: {
+    prop: "value",
+    event: "change"
+  },
   props: {
+    value: {
+      type: Number,
+      default: 0
+    },
     type: {
       type: String,
       default: "link",
@@ -191,6 +199,7 @@ export default {
     },
     handleOptionClick(option, idx) {
       this.selectIndex = idx;
+      this.$emit("change", idx);
 
       this.$emit("click-item", option, idx);
 
@@ -233,6 +242,14 @@ export default {
     },
     setPosition() {
       this.$dispatch("create-to-body", "update:position");
+    }
+  },
+  created() {
+    this.selectIndex = this.value || 0;
+  },
+  watch: {
+    value(val) {
+      this.selectIndex = val;
     }
   }
 };

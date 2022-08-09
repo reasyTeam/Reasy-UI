@@ -10,13 +10,13 @@
     left: -2px;
   }
 }
-.v-checkbox__item:hover {
+.v-checkbox:hover {
   .v-checkbox__icon--active:not(.v-checkbox__process) {
     border-color: $main-active-color;
   }
 }
 
-.v-checkbox__item--disabled {
+.v-checkbox--disabled {
   .v-checkbox__icon.v-checkbox__icon--active {
     border-color: rgba($main-active-color, 0.4);
     background-color: #f2f7ff;

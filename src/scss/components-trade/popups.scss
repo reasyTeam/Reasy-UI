@@ -1,12 +1,7 @@
 .v-popups--dark {
   .v-popups__main {
     background: #ffffff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
     color: #676775;
-    line-height: 16px;
-    text-align: left;
-    border-radius: 4px;
-    padding: 0;
   }
 
   .v-popups__arrow {
@@ -23,8 +18,11 @@
 
 .v-popups__main {
   background: #ffffff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.12);
-  padding: 10px 12px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+  line-height: 16px;
+  text-align: left;
+  border-radius: 4px;
+  padding: 0;
 }
 .v-popover__title {
   font-weight: 600;

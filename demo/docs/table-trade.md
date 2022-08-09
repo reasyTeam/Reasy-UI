@@ -1,8 +1,8 @@
-## 表格
+# 表格
 
 用于展示多条结构类似的数据，可对数据进行排序、筛选、对比或其他自定义操作。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Table, Scroll, Loading } from "@reasy-team/reasy-ui";
@@ -13,7 +13,7 @@ Vue.use(Loading);
 Vue.use(Base);
 ```
 
-### 基本用法
+## 基本用法
 
 ::: demo
 
@@ -66,7 +66,7 @@ Vue.use(Base);
 
 :::
 
-### 表格上方按钮
+## 表格上方按钮
 
 表格上方自定义按钮或者文字，左右两边都存在插槽；如果存在搜索，那么搜索框是在最右边
 
@@ -164,7 +164,7 @@ Vue.use(Base);
 
 :::
 
-### 表格宽度、最大宽度
+## 表格宽度、最大宽度
 
 表格列宽可通过`width`控制固定宽度，如果表格没有多余空白分配，可设置列的最大宽度`max-width`
 
@@ -268,7 +268,7 @@ Vue.use(Base);
 
 :::
 
-### 表格搜索
+## 表格搜索
 
 `is-search`表示此列数据支持搜索，`realtime-search`可以定义搜索为实时搜索和失焦搜索，默认为失焦搜索
 
@@ -359,7 +359,7 @@ Vue.use(Base);
 
 :::
 
-### 表头操作列表项
+## 表头操作列表项
 
 表头操作按钮可以设置显示的列表项，`head-operate`设置是否显示，默认不显示；`is-default-value`设置是否为默认显示列表项，默认显示；`add-operate`设置列表项是否可以操作，默认可以；注意：表头需要勾选默认一位；`hide-in-opreate`设置是否加入表格操作列表项内，默认值为false，注意：设置该配置项时不设置`is-default-value`
 
@@ -456,7 +456,7 @@ Vue.use(Base);
 
 :::
 
-### 分页
+## 分页
 
 `is-pagination`配置表格分页，`page-size`配置每页多少条数据，`is-change-size`配置是否支持修改每页条数，`page-size-options`配置每页条数的选择，`is-input-page`配置是否支持手动输入页数跳转，`current-page`设置当前页数，`total-length`总共有多少条数据
 
@@ -599,7 +599,7 @@ Vue.use(Base);
 
 :::
 
-### 排序表格
+## 排序表格
 
 `is-sort`表示此列支持排序 ,`defaultSortType`表示默认排序:`asc`升序，`des`降序
 
@@ -664,7 +664,7 @@ Vue.use(Base);
 
 :::
 
-### 空数据
+## 空数据
 
 表格数据为空时，`emptyValue`可以自定义设置，默认填充 `-`
 
@@ -715,7 +715,7 @@ Vue.use(Base);
 
 :::
 
-### 多行数据
+## 多行数据
 
 `word-wrap`参数设置列数据可以显示多行数据，默认为不显示多行，注意：数据需要存储为数组形式；
 
@@ -766,7 +766,7 @@ Vue.use(Base);
 
 :::
 
-### 表格操作项
+## 表格操作项
 
 ::: demo
 
@@ -853,7 +853,7 @@ Vue.use(Base);
 
 :::
 
-<!-- ### 操作按钮
+<!-- ## 操作按钮
 
 新增 `is-add`设置是否显示新增按钮，`addConfig`设置新增弹窗内容
 编辑 `is-edit`设置是否显示编辑按钮，`editConfig`设置编辑弹窗内容
@@ -906,7 +906,7 @@ Vue.use(Base);
 
 :::
 
-### 表格大小
+## 表格大小
 
 `size`控制表格大小，行高，默认`L`
 
@@ -1060,7 +1060,7 @@ Vue.use(Base);
 
 ::: -->
 
-### 斑马条纹
+## 斑马条纹
 
 `stripe`配置表格斑马条纹
 
@@ -1111,7 +1111,7 @@ Vue.use(Base);
 
 :::
 
-### 边框
+## 边框
 
 `border`配置带边框表格
 
@@ -1162,7 +1162,7 @@ Vue.use(Base);
 
 :::
 
-### 自定义数据
+## 自定义数据
 
 `v-slot`配置当前列的自定义数据，必须与`template`搭配，`v-slot`的值为当前行的数据
 
@@ -1230,7 +1230,7 @@ Vue.use(Base);
 
 :::
 
-### 文字过长提示
+## 文字过长提示
 
 ::: demo
 
@@ -1323,7 +1323,7 @@ Vue.use(Base);
 
 :::
 
-<!-- ### 自定义表格点击事件
+<!-- ## 自定义表格点击事件
 
 ::: demo
 
@@ -1382,7 +1382,7 @@ Vue.use(Base);
 
 ::: -->
 
-### 加载中
+## 加载中
 
 `is-loading`表格是否在加载中
 
@@ -1460,7 +1460,7 @@ Vue.use(Base);
 
 :::
 
-### 列类型
+## 列类型
 
 `v-table-col`组件中的`type`配置表格当前列的类型，支持值`selection`选择，`index`索引，`expand`展开
 
@@ -1535,7 +1535,7 @@ Vue.use(Base);
 
 :::
 
-### 默认选中数据
+## 默认选中数据
 
 `select-data`为表格选中数据，类型为`Array`，必须配置`row-key`
 
@@ -1587,7 +1587,7 @@ Vue.use(Base);
 
 :::
 
-### 序号表格
+## 序号表格
 
 `type=index`表示序号，序号从 1 开始
 
@@ -1639,7 +1639,7 @@ Vue.use(Base);
 
 :::
 
-### 展开表格
+## 展开表格
 
 `type=expand`支持此列展开，插槽名称为`expand`，值为当前行的数据
 
@@ -1698,7 +1698,7 @@ Vue.use(Base);
 
 :::
 
-<!-- ### 排序表格
+<!-- ## 排序表格
 
 `is-sort`表示此列支持排序
 
@@ -1749,7 +1749,7 @@ Vue.use(Base);
 
 ::: -->
 
-### 禁用
+## 禁用
 
 `disabled`配置表格全部禁用
 
@@ -1805,7 +1805,7 @@ Vue.use(Base);
 
 :::
 
-<!-- ### 搜索表格
+<!-- ## 搜索表格
 
 `is-search`表示此列数据支持搜索，匹配的结果是当前列的值或者通过`format`转换后的数据，展开数据和自定义更改数据不在匹配范围内
 
@@ -1858,7 +1858,7 @@ Vue.use(Base);
 
 ::: -->
 
-### 表格高度
+## 表格高度
 
 `max-row`配置表格显示多少条数据，超过条数时，出现滚动条，默认为`0`不限制
 
@@ -2048,576 +2048,7 @@ Vue.use(Base);
 
 :::
 
-<!-- ### 分页
-
-`is-pagination`配置表格分页，`page-size`配置每页多少条数据，`is-change-size`配置是否支持修改每页条数，`page-size-options`配置每页条数的选择，`is-input-page`配置是否支持手动输入页数跳转
-
-::: demo
-
-```html
-<v-table no-id :data="table1" is-pagination is-change-size is-input-page :max-row="5">
-  <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
-  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
-  <v-table-col prop="upload" label="上传速率"></v-table-col>
-  <v-table-col prop="download" label="下载速率"></v-table-col>
-  <v-table-col prop="upLimit" label="上传限速"></v-table-col>
-  <v-table-col prop="downLimit" label="下载限速"></v-table-col>
-</v-table>
-<script>
-  export default {
-    data() {
-      return {
-        table1: [
-          {
-            ip: "192.168.0.100",
-            mac: "C8:3A:35:22:11:11",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.101",
-            mac: "C8:3A:35:22:11:12",
-            onlineTime: "100",
-            hz: "5G",
-            upload: "435",
-            download: "134",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.102",
-            mac: "C8:3A:35:22:11:13",
-            onlineTime: "67567",
-            hz: "2.4G",
-            upload: "678",
-            download: "34",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.103",
-            mac: "C8:3A:35:22:11:14",
-            onlineTime: "1000",
-            hz: "5G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.104",
-            mac: "C8:3A:35:22:11:15",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.105",
-            mac: "C8:3A:35:22:11:16",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.106",
-            mac: "C8:3A:35:22:11:17",
-            onlineTime: "67567",
-            hz: "2.4G",
-            upload: "678",
-            download: "34",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.107",
-            mac: "C8:3A:35:22:11:18",
-            onlineTime: "1000",
-            hz: "5G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.109",
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: '2"</span>',
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.128",
-            mac: "C8:3A:35:22:11:29",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.139",
-            mac: "C8:3A:35:22:11:32",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.148",
-            mac: "C8:3A:35:22:11:65",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.123",
-            mac: "C8:3A:35:22:11:87",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          }
-        ]
-      };
-    }
-  };
-</script>
-```
-
-::: -->
-
-### 固定列
-
-`fixed`用于配置固定列，默认为不固定，值类型为`String`和`Boolean`，取值范围`true、false、left、right`，为 true 为`左侧固定`，false 不固定。使用列固定时需要设置每列的宽度，不然不会出现滚动条。
-
-::: demo
-
-```html
-<p>固定列宽</p>
-<v-table
-  no-id
-  :data="table1"
-  is-pagination
-  is-change-size
-  is-input-page
-  :max-row="5"
-  name="tb54219"
->
-  <v-table-col is-search type="selection" fixed width="50"></v-table-col>
-  <v-table-col type="index" label="序号" width="80" fixed="left" align="center">
-  </v-table-col>
-  <v-table-col prop="ip" label="IP地址" width="180"> </v-table-col>
-  <v-table-col prop="mac" label="MAC地址" width="180"></v-table-col>
-  <v-table-col prop="upload" label="上传速率" width="120"></v-table-col>
-  <v-table-col prop="download" label="下载速率" width="120"></v-table-col>
-  <v-table-col prop="upLimit" label="上传限速" width="120"></v-table-col>
-  <v-table-col prop="downLimit" label="下载限速" width="120"></v-table-col>
-  <v-table-col label="操作" fixed="right" width="100">
-    <template v-slot="slotProps">
-      <v-button no-id type="text" icon="v-icon-edit"></v-button>
-      <v-button no-id type="text" icon="v-icon-delete"></v-button>
-    </template>
-  </v-table-col>
-</v-table>
-
-<p>不固定列宽</p>
-<v-table
-  no-id
-  :data="table1"
-  is-pagination
-  is-change-size
-  is-input-page
-  :max-row="5"
-  name="tb95316"
->
-  <v-table-col type="selection" fixed="left"></v-table-col>
-  <v-table-col type="index" label="序号" fixed> </v-table-col>
-  <v-table-col prop="ip" label="IP地址"> </v-table-col>
-  <v-table-col prop="mac" label="MAC地址"></v-table-col>
-  <v-table-col prop="upload" label="上传速率"></v-table-col>
-  <v-table-col prop="download" label="下载速率"></v-table-col>
-  <v-table-col prop="upLimit" label="上传限速"></v-table-col>
-  <v-table-col prop="downLimit" label="下载限速"></v-table-col>
-  <v-table-col label="操作" fixed="right">
-    <template>
-      <v-button no-id type="text" icon="v-icon-edit"></v-button>
-      <v-button no-id type="text" icon="v-icon-delete"></v-button>
-    </template>
-  </v-table-col>
-</v-table>
-<script>
-  export default {
-    data() {
-      return {
-        table1: [
-          {
-            ip: "192.168.0.100",
-            mac: "C8:3A:35:22:11:11",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.101",
-            mac: "C8:3A:35:22:11:12",
-            onlineTime: "100",
-            hz: "5G",
-            upload: "435",
-            download: "134",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.102",
-            mac: "C8:3A:35:22:11:13",
-            onlineTime: "67567",
-            hz: "2.4G",
-            upload: "678",
-            download: "34",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.103",
-            mac: "C8:3A:35:22:11:14",
-            onlineTime: "1000",
-            hz: "5G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.104",
-            mac: "C8:3A:35:22:11:15",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.105",
-            mac: "C8:3A:35:22:11:16",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.106",
-            mac: "C8:3A:35:22:11:17",
-            onlineTime: "67567",
-            hz: "2.4G",
-            upload: "678",
-            download: "34",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.107",
-            mac: "C8:3A:35:22:11:18",
-            onlineTime: "1000",
-            hz: "5G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.109",
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: '2"</span>',
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.128",
-            mac: "C8:3A:35:22:11:29",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.139",
-            mac: "C8:3A:35:22:11:32",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.148",
-            mac: "C8:3A:35:22:11:65",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.123",
-            mac: "C8:3A:35:22:11:87",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          }
-        ]
-      };
-    }
-  };
-</script>
-```
-
-:::
-
-<!-- ### 分页删除
-
-::: demo
-
-```html
-<v-table no-id :data="table" is-pagination is-change-size is-input-page :max-row="5">
-  <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
-  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
-  <v-table-col prop="upload" label="上传速率"></v-table-col>
-  <v-table-col prop="download" label="下载速率"></v-table-col>
-  <v-table-col prop="upLimit" label="上传限速"></v-table-col>
-  <v-table-col label="操作">
-    <template>
-      <span class="v-icon-delete"></span>
-      <span class="v-icon-edit"></span>
-    </template>
-  </v-table-col>
-</v-table>
-<script>
-  export default {
-    data() {
-      return {
-        table: [
-          {
-            ip: "192.168.0.105",
-            mac: "C8:3A:35:22:11:16",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.106",
-            mac: "C8:3A:35:22:11:17",
-            onlineTime: "67567",
-            hz: "2.4G",
-            upload: "678",
-            download: "34",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.107",
-            mac: "C8:3A:35:22:11:18",
-            onlineTime: "1000",
-            hz: "5G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.109",
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.108",
-            mac: "C8:3A:35:22:11:19",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: '2"</span>',
-            mac: "C8:3A:35:22:11:20",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.128",
-            mac: "C8:3A:35:22:11:29",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.139",
-            mac: "C8:3A:35:22:11:32",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.148",
-            mac: "C8:3A:35:22:11:65",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          },
-          {
-            ip: "192.168.0.123",
-            mac: "C8:3A:35:22:11:87",
-            onlineTime: "1000",
-            hz: "2.4G",
-            upload: "123",
-            download: "12",
-            upLimit: "1000",
-            downLimit: "100"
-          }
-        ]
-      };
-    },
-    methods: {
-      del() {
-        this.table.shift();
-      }
-    }
-  };
-</script>
-```
-
-::: -->
-
-### 数据为空
+## 数据为空
 
 ::: demo
 
@@ -2654,7 +2085,7 @@ Vue.use(Base);
 
 :::
 
-### v-table Attributes
+## Props
 
 | 参数                   | 说明                                                  | 类型     | 可选值 | 默认值                      |
 | ---------------------- | ----------------------------------------------------- | -------- | ------ | --------------------------- |
@@ -2683,7 +2114,7 @@ Vue.use(Base);
 | is-select-all-disabled | 全选按钮是否禁用                                      | boolean  |        | false                       |
 | disabled               | 表格是否禁用                                          | boolean  |        | false                       |
 
-### v-table Slot
+## v-table Slots
 
 | name    | 说明                                              |
 | ------- | ------------------------------------------------- |
@@ -2691,14 +2122,14 @@ Vue.use(Base);
 | loading | 自定义加载中，显示的前提是 is-loading 必须为 true |
 | empty   | 自定义数据列表为空显示                            |
 
-### v-table Methods
+## v-table Methods
 
 | 方法名             | 说明                           | 参数 |
 | ------------------ | ------------------------------ | ---- |
 | getSelected        | 获取选中的项，返回值为选中的项 | -    |
 | getCurrentPageData | 获取表格当前页的数据           |      |
 
-### v-table Events
+## v-table @Events
 
 | 事件名           | 说明                                                      | 参数                     |
 | ---------------- | --------------------------------------------------------- | ------------------------ |
@@ -2706,12 +2137,11 @@ Vue.use(Base);
 | click-row        | 当某一行被点击时会触发该事件                              | rowData, index           |
 | selection-change | 点击全选 或者单选时执行的事件，仅在 type=selection 时生效 | 当前的选中项             |
 
-### v-table-col Attributes
+## v-table-col Props
 
 | 参数             | 说明                                                                                                                   | 类型            | 可选值                     | 默认值 |
 | ---------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- | -------------------------- | ------ |
 | type             | 对应列的类型，selection 为支持多选择，index 为显示行索引，expand 为支持展开                                            | string          | selection / index / expand | —      |
-| fixed            | 列固定的位置，默认不固定                                                                                               | string          | left / right               | —      |
 | label            | 表头列文字                                                                                                             | string          | —                          | —      |
 | prop             | 表头列属性，定义 type 的三种类型时可不填，其他情况必填                                                                 | string          | —                          | —      |
 | width            | 列宽度，百分比或者 xxpx                                                                                                | string / number | —                          | —      |
@@ -2727,9 +2157,9 @@ Vue.use(Base);
 | before-selected  | 仅对**type=selection**有效，点击 checkbox 时，返回 false 表示不会被选中，其他都会选中。 <br />function(rowData, index) | Function        |                            |        |
 | is-html-header   | 标题是否是自定义 html                                                                                                  | boolean         | -                          | false  |
 
-> 注意：设置固定列后，必须同时设置`width`，否则可能出现意想不到的问题。同时 fixed 列不支持`expand`功能。
+> 注意：设置固定列后，必须同时设置`width`，否则可能出现意想不到的问题。
 
-### v-table-col slot
+## v-table-col Slots
 
 | name    | 说明                                                        |
 | ------- | ----------------------------------------------------------- |

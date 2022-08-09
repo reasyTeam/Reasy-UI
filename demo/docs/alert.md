@@ -1,8 +1,8 @@
-## 警告提示
+# 警告提示
 
 用于页面中展示重要的提示信息。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Alert } from "@reasy-team/reasy-ui";
@@ -11,7 +11,7 @@ Vue.use(Alert);
 Vue.use(Base);
 ```
 
-### 基础示例
+## 基础示例
 
 :::demo
 
@@ -47,7 +47,7 @@ Vue.use(Base);
 :::
 
 
-### 不带图标的提示
+## 不带图标的提示
 
 :::demo 通过设置`show-icon`来控制图标的显示，默认值为`true`。
 
@@ -65,7 +65,7 @@ Vue.use(Base);
 :::
 
 
-### 含查看链接的提示
+## 含查看链接的提示
 
 :::demo 通过设置`show-details-button`和`show-close`来仅显示`查看详情`按钮。
 
@@ -126,7 +126,7 @@ export default {
 
 :::
 
-### 带有辅助性文字介绍
+## 带有辅助性文字介绍
 
 :::demo 通过设置`title`和`descrition`来实现。
 
@@ -145,7 +145,7 @@ export default {
 
 :::
 
-### 自定义description内容
+## 自定义description内容
 
 :::demo 通过设置`default slot`来插入`description`内容。
 
@@ -166,7 +166,7 @@ export default {
 :::
 
 
-### Attributes
+## Props
 
 | 参数                | 说明                               | 类型    | 可选值                  | 默认值 |
 | ------------------- | ---------------------------------- | ------- | ----------------------- | ------ |
@@ -181,7 +181,7 @@ export default {
 | show-details-button | 是否显示查看详情按钮               | boolean | -                       | false  |
 
 
-### Events
+## @Events
 
 | 事件名称             | 说明               | 参数 |
 | -------------------- | ------------------ | ---- |
@@ -189,7 +189,7 @@ export default {
 | handle-details-click | 点击查看详情时触发 | -    |
 
 
-### Slot
+## Slots
 
 | name    | 说明                    |
 | ------- | ----------------------- |

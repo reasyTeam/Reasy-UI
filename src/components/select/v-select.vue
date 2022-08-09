@@ -54,6 +54,7 @@
       <!--多选-->
       <div
         v-else-if="multipleLabel.length > 0"
+        ref="multipleText"
         class="v-select__label--text v-select__label--position"
         :style="multipleShowAll && { whiteSpace: 'normal' }"
       >
@@ -62,9 +63,24 @@
           <span
             v-for="item in multipleLabel"
             :key="item.label"
-            class="v-select__label__item"
+            class="v-select__label__item multi__all"
+            :class="{ disabled: item.disabled }"
           >
-            <span class="v-select__label--text__item">{{ item.label }}</span>
+            <v-tooltip
+              :max-width="200"
+              :enterable="false"
+              :between-space="0"
+              show-only-ellipsis
+              :content="item.label"
+            >
+              <span
+                class="v-select__label--text__item ellipsis"
+                :style="{
+                  maxWidth: multiAllWidth
+                }"
+                >{{ item.label }}</span
+              >
+            </v-tooltip>
             <span
               class="v-select__icon--right v-icon-close"
               :id="name | id(`${item.label}-del`)"
@@ -73,18 +89,32 @@
           </span>
         </template>
         <template v-else>
-          <span class="v-select__label__item">
-            <span class="v-select__label--text__item">{{
-              multipleLabel[0].label
-            }}</span>
+          <span
+            class="v-select__label__item multi__all"
+            :class="{ disabled: multipleLabel[0].disabled }"
+          >
+            <v-tooltip
+              :max-width="200"
+              :enterable="false"
+              :between-space="0"
+              show-only-ellipsis
+              :content="multipleLabel[0].label"
+              ><span
+                class="v-select__label--text__item ellipsis"
+                :style="{
+                  maxWidth: multiNumWidth
+                }"
+                >{{ multipleLabel[0].label }}</span
+              ></v-tooltip
+            >
             <span
               class="v-select__icon--right v-icon-close"
               :id="name | id('del')"
-              @click.stop.prevent="delValue"
+              @click.stop.prevent="delValue(multipleLabel[0])"
             ></span>
           </span>
           <!-- 多选个数大于1时 其他项用数字表示 -->
-          <span v-if="multipleLabel.length > 1" class="v-select__label__item">
+          <span v-if="multipleLabel.length > 1" class="v-select__label__item ">
             <span class="v-select__label--text__item">
               +{{ multipleLabel.length - 1 }}
             </span>
@@ -123,6 +153,7 @@
         @input="val => (searchText = val)"
       />
       <dropdown-list
+        :option-max-width="optionMaxWidth"
         :class="sizeCss"
         :options="searchText ? searchList : optionList"
         :is-multiple="isMultiple"
@@ -147,6 +178,8 @@ import FormMixin from "../form-mixins";
 import NameMixin from "../name-mixins";
 import SearchInput from "../input/v-input.vue";
 
+const MULTIALLWIDTH = 45;
+const MULTINUMWIDTH = 35;
 export default {
   name: "v-select",
   mixins: [FormMixin, NameMixin],
@@ -161,7 +194,7 @@ export default {
   },
   props: {
     value: {
-      type: [String, Number, Array, Boolean],
+      type: [String, Number, Array, Boolean, Symbol],
       default: ""
     },
     disabled: {
@@ -183,6 +216,11 @@ export default {
       default: false
     },
     isSearch: {
+      type: Boolean,
+      default: false
+    },
+    // 是否为空时默认选择第一个
+    isDefaultFirst: {
       type: Boolean,
       default: false
     },
@@ -242,6 +280,10 @@ export default {
       default: 5
     },
     unit: {
+      type: String,
+      default: ""
+    },
+    optionMaxWidth: {
       type: String,
       default: ""
     }
@@ -324,6 +366,17 @@ export default {
     },
     isShowError() {
       return !this.isInput && !this.dropdownShow;
+    },
+    multiAllWidth() {
+      let width = this.multipleTextWidth - MULTIALLWIDTH;
+      return width > 0 ? width + "px" : 0;
+    },
+    multiNumWidth() {
+      let width = this.multipleTextWidth - MULTIALLWIDTH;
+      if (this.multipleLabel.length > 1) {
+        width = width - MULTINUMWIDTH;
+      }
+      return width > 0 ? width + "px" : 0;
     }
   },
   data() {
@@ -332,13 +385,22 @@ export default {
       isInput: false,
       inputValue: "",
       isMouseover: false,
-      searchText: ""
+      searchText: "",
+      multipleTextWidth: 0 //多选列表宽度
     };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      let $parent = this.$refs.multipleText;
+      if ($parent) {
+        this.multipleTextWidth = $parent.getBoundingClientRect().width;
+      }
+    });
   },
   methods: {
     showOptions(isArrow) {
       if (this.isDisabled) return;
-      if (isArrow) {
+      if (isArrow === true) {
         if (this.hasClear) {
           this.$emit("change", this.isMultiple ? [] : "");
           this.$dispatch("v-form", "form:change");
@@ -455,6 +517,20 @@ export default {
         this.$nextTick(() => {
           this.isMultiple && val.length > 1 && this.$refs.body.setPotion();
         });
+        // 默认选择第一个 不支持清空时生效
+        if (
+          (val === "" || (this.isMultiple && val.length === 0)) &&
+          this.isDefaultFirst &&
+          !this.isClear &&
+          this.optionList[0] &&
+          this.optionList[0].value
+        ) {
+          this.changeValue(
+            this.isMultiple
+              ? [this.optionList[0].value]
+              : this.optionList[0].value
+          );
+        }
       },
       immediate: true
     },

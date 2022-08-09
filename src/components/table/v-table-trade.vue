@@ -20,69 +20,7 @@
         ></v-input>
       </div>
     </div>
-
-    <!-- 表头 -->
-    <div class="v-table__header-wrap" ref="header">
-      <table-header-trade
-        :name="name | id('ht')"
-        :checkOperateData="checkOperateData"
-        @getCheckOperateData="getCheckOperateData"
-        :columns="columns"
-        :border="border"
-        :sortProp="sortProp"
-        :value="checkboxAllVal"
-        :is-selected="hasCheckBoxSelect"
-        :before-select-all="beforeSelectAll"
-        :is-select-all-disabled="isSelectAllDisabled || data.length === 0"
-        @change="changeCheckboxAll"
-        @sort="sortTable"
-        :head-operate="headOperate"
-      ></table-header-trade>
-      <div
-        v-if="leftFixedWidth > 0"
-        class="table--fixed table--left"
-        :style="{ width: `${leftFixedWidth}px` }"
-      >
-        <table-header-trade
-          :name="name | id('ht')"
-          :checkOperateData="checkOperateData"
-          @getCheckOperateData="getCheckOperateData"
-          :columns="columns"
-          :border="border"
-          :sortProp="sortProp"
-          :value="checkboxAllVal"
-          :is-selected="hasCheckBoxSelect"
-          :before-select-all="beforeSelectAll"
-          :is-select-all-disabled="isSelectAllDisabled || data.length === 0"
-          @change="changeCheckboxAll"
-          @sort="sortTable"
-          :style="{ width: `${tableWidth}px` }"
-        ></table-header-trade>
-      </div>
-
-      <div
-        v-if="rightFixedWidth > 0"
-        class="table--fixed table--right"
-        :style="{ width: `${rightFixedWidth}px` }"
-      >
-        <table-header-trade
-          :name="name | id('ht')"
-          :checkOperateData="checkOperateData"
-          @getCheckOperateData="getCheckOperateData"
-          :head-operate="headOperate"
-          :columns="columns"
-          :border="border"
-          :sortProp="sortProp"
-          :value="checkboxAllVal"
-          :is-selected="hasCheckBoxSelect"
-          :before-select-all="beforeSelectAll"
-          :is-select-all-disabled="isSelectAllDisabled || data.length === 0"
-          @change="changeCheckboxAll"
-          @sort="sortTable"
-          :style="{ width: `${tableWidth}px` }"
-        ></table-header-trade>
-      </div>
-    </div>
+    <div class="clearfix"></div>
 
     <div class="v-table__content">
       <!-- 表格内容 -->
@@ -91,240 +29,111 @@
         class="v-table__body"
         :class="{ 'v-table__border': border }"
       >
-        <v-scroll
-          ref="scroll"
-          @scroll="scroll"
-          overflow="auto"
-          class="v-table__scroll"
-          active
-          @mouseleave.native="hoverIndex = -1"
-        >
-          <table
-            ref="table"
-            class="table"
-            :class="{ 'v-table__stripe': stripe }"
-          >
-            <colgroup>
-              <col
-                v-for="(col, index) in columns"
-                :width="col.width"
-                :key="index + 1"
-                v-bind:style="{ minWidth: col.width }"
-              />
-            </colgroup>
-            <table-header-trade
-              :name="name | id('tht')"
-              :columns="columns"
-              :checkOperateData="checkOperateData"
-              :border="border"
-              :sortProp="sortProp"
-              :value="checkboxAllVal"
-              :is-selected="hasCheckBoxSelect"
-              :before-select-all="beforeSelectAll"
-              :is-select-all-disabled="isSelectAllDisabled || data.length === 0"
-              @change="changeCheckboxAll"
-              @sort="sortTable"
-              :head-operate="headOperate"
-              style="visibility: collapse"
-              :isTable="false"
-            ></table-header-trade>
-            <tbody>
-              <slot name="header"></slot>
-              <!-- 列表数据信息 -->
-              <template v-for="(rowData, rowIndex) in data">
-                <!-- 数据行信息 -->
-                <tr
-                  ref="table-body-tr"
-                  class="v-table__row"
-                  :class="{
-                    'v-table__row--active':
-                      getActive(rowData) || rowData[checkboxField],
-                    'v-table__row--hover': hoverIndex === rowIndex
-                  }"
-                  @click="clickRow(rowData)"
-                  @mouseenter="hoverIndex = rowIndex"
-                  :key="rowIndex + 1"
-                >
-                  <template v-for="(col, index) in columns">
-                    <v-td
-                      :emptyValue="emptyValue"
-                      :column="col"
-                      :key="index + 1"
-                      :index="index"
-                      :checkbox-field="checkboxField"
-                      :expand-field="expandField"
-                      :row-data="rowData"
-                      :row-index="rowIndex"
-                      :filter-search="filterSearch.bind(this)"
-                      :click-checkbox="clickCheckbox.bind(this)"
-                      :expand-table="expandTable.bind(this)"
-                      :before-change="col.beforeSelected.bind(this, rowData)"
-                      ref="checktd"
-                    ></v-td>
-                  </template>
-                </tr>
-                <!-- expand展开信息 -->
-                <tr
-                  class="v-table__row"
-                  :key="rowIndex + 1 + expandField"
-                  v-if="expandFunc && rowData[expandField]"
-                >
-                  <td :colspan="columns.length" class="v-table__expand--inner">
-                    <collapse-transition>
-                      <table-expand
-                        class="v-table__expand__wrapper"
-                        :rowData="rowData"
-                        :index="rowIndex"
-                        :fn="expandFunc"
-                      ></table-expand>
-                    </collapse-transition>
-                  </td>
-                </tr>
-              </template>
-              <!-- 列表为空信息 -->
-              <tr v-show="data.length === 0 && !isLoading">
-                <td :colspan="columns.length">
-                  <slot name="empty">
-                    <div class="v-table__empty-data">
-                      {{ emptyText }}
-                    </div>
-                  </slot>
-                </td>
-              </tr>
-              <!-- 默认表格loading要多加一空行 -->
-              <tr v-if="data.length === 0 && isLoading && !$slots.loading">
-                <td :colspan="columns.length">
-                  <div class="v-table__empty-data"></div>
-                </td>
-              </tr>
-              <tr v-if="customLastLine">
-                <td :colspan="columns.length" class="is_left">
-                  <slot name="lastTr"></slot>
-                </td>
-              </tr>
-            </tbody>
-            <!-- 默认slot -->
-            <slot></slot>
-          </table>
-
-          <template v-slot:content>
-            <div
-              v-if="leftFixedWidth > 0"
-              ref="tableLeft"
-              class="table--fixed table--left"
-              :style="{ width: `${leftFixedWidth}px` }"
-            >
-              <table
-                class="table"
-                :class="{ 'v-table__stripe': stripe }"
-                :style="{ width: `${tableWidth}px` }"
+        <table ref="table" class="table" :class="{ 'v-table__stripe': stripe }">
+          <colgroup>
+            <col
+              v-for="(col, index) in columns"
+              :width="col.width"
+              :key="index + 1"
+              v-bind:style="{ minWidth: col.width }"
+            />
+          </colgroup>
+          <table-header-trade
+            :name="name | id('tht')"
+            :isTable="false"
+            :data="tableData"
+            :style="{ visibility: maxRow > 0 ? 'collapse' : 'visible' }"
+            :checkOperateData="checkOperateData"
+            @getCheckOperateData="getCheckOperateData"
+            :columns="columns"
+            :border="border"
+            :sortProp="sortProp"
+            :value="checkboxAllVal"
+            :is-selected="hasCheckBoxSelect"
+            :before-select-all="beforeSelectAll"
+            :is-select-all-disabled="
+              isSelectAllDisabled || tableData.length === 0
+            "
+            @change="changeCheckboxAll"
+            @sort="sortTable"
+            :head-operate="headOperate"
+          ></table-header-trade>
+          <tbody>
+            <slot name="header"></slot>
+            <!-- 列表数据信息 -->
+            <template v-for="(rowData, rowIndex) in tableData">
+              <!-- 数据行信息 -->
+              <tr
+                ref="table-body-tr"
+                class="v-table__row"
+                :class="{
+                  'v-table__row--active': rowData[CHECKBOX_NAME]
+                }"
+                @click="clickRow(rowData)"
+                :key="rowData[rowKey] || rowIndex"
               >
-                <colgroup>
-                  <col
-                    v-for="(col, index) in columns"
-                    :width="col.width"
-                    :key="index + 1"
-                    v-bind:style="{ maxWidth: col.minWidth }"
-                  />
-                </colgroup>
-
-                <tbody>
-                  <template v-for="(rowData, rowIndex) in data">
-                    <tr
-                      ref="table-body-tr"
-                      class="v-table__row"
-                      :class="{
-                        'v-table__row--active':
-                          getActive(rowData) || rowData[checkboxField],
-                        'v-table__row--hover': hoverIndex === rowIndex
-                      }"
-                      @click="clickRow(rowData)"
-                      @mouseenter="hoverIndex = rowIndex"
-                      :key="rowIndex + 1"
-                    >
-                      <template v-for="(col, index) in columns">
-                        <v-td
-                          :column="col"
-                          :key="index + 1"
-                          :index="index"
-                          :checkbox-field="checkboxField"
-                          :expand-field="expandField"
-                          :row-data="rowData"
-                          :row-index="rowIndex"
-                          :filter-search="filterSearch.bind(this)"
-                          :click-checkbox="clickCheckbox.bind(this)"
-                          :expand-table="expandTable.bind(this)"
-                          :before-change="
-                            col.beforeSelected.bind(this, rowData)
-                          "
-                          ref="checktd"
-                        ></v-td>
-                      </template>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-            </div>
-            <div
-              v-if="rightFixedWidth > 0"
-              ref="tableRight"
-              class="table--fixed table--right"
-              :style="{ width: `${rightFixedWidth}px` }"
-            >
-              <table
-                class="table"
-                :class="{ 'v-table__stripe': stripe }"
-                :style="{ width: `${tableWidth}px` }"
+                <template v-for="(col, index) in columns">
+                  <v-td
+                    :emptyValue="emptyValue"
+                    :column="col"
+                    :key="index"
+                    :index="index"
+                    :checkbox-field="CHECKBOX_NAME"
+                    :expand-field="EXPAND_NAME"
+                    :row-data="rowData"
+                    :row-index="rowIndex"
+                    :filter-search="filterSearch.bind(this)"
+                    :click-checkbox="clickCheckbox.bind(this, rowData)"
+                    :expand-table="expandTable.bind(this)"
+                    :before-change="col.beforeSelected.bind(this, rowData)"
+                    ref="checktd"
+                  ></v-td>
+                </template>
+              </tr>
+              <!-- expand展开信息 -->
+              <tr
+                class="v-table__row"
+                :key="rowIndex + 1 + EXPAND_NAME"
+                v-if="expandFunc && rowData[EXPAND_NAME]"
               >
-                <colgroup>
-                  <col
-                    v-for="(col, index) in columns"
-                    :width="col.width"
-                    :key="index + 1"
-                    v-bind:style="{ maxWidth: col.minWidth }"
-                  />
-                </colgroup>
-                <tbody>
-                  <template v-for="(rowData, rowIndex) in data">
-                    <tr
-                      ref="table-body-tr"
-                      class="v-table__row"
-                      :class="{
-                        'v-table__row--active':
-                          getActive(rowData) || rowData[checkboxField],
-                        'v-table__row--hover': hoverIndex === rowIndex
-                      }"
-                      @click="clickRow(rowData)"
-                      @mouseenter="hoverIndex = rowIndex"
-                      :key="rowIndex + 1"
-                    >
-                      <template v-for="(col, index) in columns">
-                        <v-td
-                          :column="col"
-                          :key="index + 1"
-                          :index="index"
-                          :checkbox-field="checkboxField"
-                          :expand-field="expandField"
-                          :row-data="rowData"
-                          :row-index="rowIndex"
-                          :filter-search="filterSearch.bind(this)"
-                          :click-checkbox="clickCheckbox.bind(this)"
-                          :expand-table="expandTable.bind(this)"
-                          :before-change="
-                            col.beforeSelected.bind(this, rowData)
-                          "
-                          ref="checktd"
-                        ></v-td>
-                      </template>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-            </div>
-          </template>
-        </v-scroll>
+                <td :colspan="columns.length" class="v-table__expand--inner">
+                  <collapse-transition>
+                    <table-expand
+                      class="v-table__expand__wrapper"
+                      :rowData="rowData"
+                      :index="rowIndex"
+                      :fn="expandFunc"
+                    ></table-expand>
+                  </collapse-transition>
+                </td>
+              </tr>
+            </template>
+            <!-- 列表为空信息 -->
+            <tr v-show="tableData.length === 0 && !isLoading">
+              <td :colspan="columns.length">
+                <slot name="empty">
+                  <div class="v-table__empty-data">
+                    {{ emptyText }}
+                  </div>
+                </slot>
+              </td>
+            </tr>
+            <!-- 默认表格loading要多加一空行 -->
+            <tr v-if="tableData.length === 0 && isLoading && !$slots.loading">
+              <td :colspan="columns.length">
+                <div class="v-table__empty-data"></div>
+              </td>
+            </tr>
+            <tr v-if="customLastLine">
+              <td :colspan="columns.length" class="is_left">
+                <slot name="lastTr"></slot>
+              </td>
+            </tr>
+          </tbody>
+          <!-- 默认slot -->
+          <slot></slot>
+        </table>
       </div>
-      <!-- </v-scroll> -->
       <!-- 分页信息 -->
       <table-footer
         v-if="isPagination && totalLength > 0"
@@ -365,17 +174,17 @@ import TableFooter from "./table-footer.vue";
 import NameMixin from "../name-mixins";
 import {
   copyDeepData,
-  escapeHTML,
-  isUndefinedOrNull,
-  // throttle,
-  on,
-  off
+  escapeHTML
+  // isUndefinedOrNull,
 } from "../libs";
 import { size } from "../filters";
 const CHECKBOX_UNCHECKED = false; //选项未选中值
-const CHECKBOX_CHECKED = true; //选项选中值
+// const CHECKBOX_CHECKED = true; //选项选中值
 const CHECKBOX_NAME = "$checked"; //选择的属性
 const EXPAND_NAME = "$expand"; //展开属性
+const DISABLED_FIELD = "DISABLED";
+
+export { DISABLED_FIELD };
 
 export default {
   name: "v-table",
@@ -552,55 +361,39 @@ export default {
     },
     //非全选时是否有选中的项
     hasCheckBoxSelect() {
-      let isSelect = this.data.some(item => {
-        return item[this.checkboxField] === CHECKBOX_CHECKED;
-      });
-      return this.checkboxAllVal === CHECKBOX_UNCHECKED && isSelect;
+      return !this.checkboxAllVal && this.selectedCount > 0;
+    },
+    // selectData映射
+    selectedObject() {
+      return this.selectData.reduce((preValue, item) => {
+        preValue[item[this.rowKey]] = item;
+        return preValue;
+      }, {});
+    },
+    selectedCount() {
+      return this.runtimeSelected.length;
     }
   },
   data() {
-    this.lastScrollTop = 0;
-    this.lastScrollLeft = 0;
+    this.disabledCount = 0;
+    this.CHECKBOX_NAME = CHECKBOX_NAME;
+    this.EXPAND_NAME = EXPAND_NAME;
     return {
+      runtimeSelected: [],
       columns: [], //表头信息
-      leftFixedWidth: 0, // 固定在左侧列宽
-      rightFixedWidth: 0, // 固定在右侧列宽
-      hoverIndex: -1, // 鼠标悬浮的行索引
       tableWidth: 0, //表格宽度
-      checkboxField: CHECKBOX_NAME,
-      expandField: EXPAND_NAME,
-      // tableData: [], //表格数据
+      tableData: [], // 表格当前数据
       checkboxAllVal: CHECKBOX_UNCHECKED, //全选
       searchValue: "", //搜索框值
       searchText: "", //搜索时的文字
-      // page: 1, //当前页
-      // pageData: [], //当前页数据
       searchSupportArr: [], //支持search字段
       expandFunc: false, //展开事件
       sortProp: "" //当前排序元素
-      // pageSizeValue: 10, //每页条数
-      // currentSelectData: [] //当前的选中项
     };
-  },
-  mounted() {
-    this.columns.forEach((el, ind) => {
-      //计算已经设定宽度的列宽，15px约为内边距的大小。
-      if (el.width != "") {
-        el.innerWidth = (el.width + "").split("px")[0] - 15 + "px";
-      }
-      //为自定义列添加默认的排序
-      if (el.defaultSortType == "asc" || el.defaultSortType == "des") {
-        el.sortType = el.defaultSortType;
-        this.sortTable(el.prop, el.sortType);
-      }
-    });
   },
   created() {
     this.columns = [];
     this.searchSupportArr = [];
-    this.leftFixedWidth = 0;
-    this.leftFixedCount = 0;
-    this.rightFixedWidth = 0;
     // 列信息收集
     // 添加表格列信息
     this.$on("add.column", item => {
@@ -619,27 +412,16 @@ export default {
           prop: item.prop
         });
       }
-      if (item.fixed === true || item.fixed === "") {
-        item.fixed = "left";
-      }
 
       if (item.width) {
         item.width = size(item.width);
       } else if (item.type === "selection") {
+        item.width = 40;
+      } else if (item.type === "index") {
         item.width = 48;
-      } else if (item.fixed) {
-        item.width = 100;
       }
 
-      if (item.fixed === "left") {
-        this.columns.splice(this.leftFixedCount++, 0, item);
-        this.leftFixedWidth += parseInt(item.width);
-      } else if (item.fixed === "right") {
-        this.rightFixedWidth += parseInt(item.width);
-        this.columns.push(item);
-      } else {
-        this.columns.push(item);
-      }
+      this.columns.push(item);
     });
 
     function findColumn(columns, prop) {
@@ -674,71 +456,30 @@ export default {
       }
       this.columns.splice(exsitIndex, 1);
     });
-
-    on(window, "resize", this.updateBodyWidth);
   },
   methods: {
-    getActive(rowData) {
-      if (this.selectData.length < 1 || !this.rowKey) {
-        return false;
-      }
-      return this.selectData.some(item => {
-        if (item[this.rowKey] === rowData[this.rowKey]) {
-          if (isUndefinedOrNull(rowData[this.checkboxField])) {
-            this.$set(rowData, this.checkboxField, true);
-          } else {
-            return false;
-          }
-          return true;
-        }
-        return false;
-      });
-    },
-    updateTable(isChanged) {
-      // this.checkboxAllVal = CHECKBOX_UNCHECKED;
-      // this.pageData = this.getPageData();
-
+    updateTable() {
       this.$nextTick(() => {
-        this.updateScrollHeight(isChanged);
-        // this.$emit("after-update", this.pageData);
-        // 更新表头选中的值
-        // 是否有未选中的
-        const hasNoSelect = this.data.some(item => {
-          return item[this.checkboxField] !== CHECKBOX_CHECKED;
-        });
-        if (hasNoSelect || this.data.length == 0) {
-          this.checkboxAllVal = CHECKBOX_UNCHECKED;
-        } else {
-          this.checkboxAllVal = CHECKBOX_CHECKED;
+        // todo
+        const { rowKey, selectedObject, tableData } = this;
+        this.disabledCount = 0;
+        this.runtimeSelected = [];
+        if (rowKey) {
+          tableData.forEach(item => {
+            if (item[CHECKBOX_NAME] || selectedObject[item[rowKey]]) {
+              this.$set(item, CHECKBOX_NAME, true);
+              this.runtimeSelected.push(item);
+            } else {
+              this.$set(item, CHECKBOX_NAME, false);
+            }
+            item[DISABLED_FIELD] && this.disabledCount++;
+          });
         }
+        this.checkboxAllVal =
+          this.selectedCount + this.disabledCount >= tableData.length;
       });
     },
-    updateScrollHeight(isChanged) {
-      let maxRow = this.maxRow,
-        height = 0;
-      if (maxRow <= 0) {
-        maxRow = Number.MAX_SAFE_INTEGER;
-      }
 
-      if (maxRow < this.data.length) {
-        let trRefs = this.$refs["table-body-tr"],
-          trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
-
-        for (let i = 0; i < maxRow; i++) {
-          if (trArr[i]) {
-            height += trArr[i].offsetHeight;
-          }
-        }
-      } else {
-        height = "auto";
-      }
-
-      this.$refs.scroll.setSize(height, "", isChanged);
-    },
-    updateBodyWidth() {
-      this.tableWidth = parseInt(this.$refs.table.scrollWidth);
-      // this.$refs.scroll.update();
-    },
     inputSearch(val) {
       if (this.realtimeSearch) {
         this.searchValue = val;
@@ -764,11 +505,12 @@ export default {
       });
       this.$emit("search", this.searchValue, searchField);
       // }
-      this.checkboxAllVal = CHECKBOX_UNCHECKED;
-      this.updateTable(true);
+      // this.checkboxAllVal = CHECKBOX_UNCHECKED;
+      this.changeCheckboxAll(false);
+      // this.updateTable(true);
     },
     filterSearch(data) {
-      let text = data,
+      let text = "" + data,
         searchText = this.searchValue;
       let replaceStr = text ? text.match(new RegExp(searchText, "ig")) : null;
       if (searchText === "" || replaceStr == null) {
@@ -779,7 +521,7 @@ export default {
 
       text = text.replaceAll(
         replaceStr[0],
-        "<span style='color:red'>" + replaceStr[0] + "</span>"
+        "<span style='color:#0058e4'>" + replaceStr[0] + "</span>"
       );
       return text;
     },
@@ -787,56 +529,38 @@ export default {
     //排序
     sortTable(prop, sortType) {
       this.sortProp = prop;
-      // this.data.sort((a, b) => {
-      //   return sortByKey(a, b, prop, { [prop]: sortType });
-      // });
       this.$emit("sort", prop, sortType);
-      // this.updateTable(true);
     },
 
     //全选
     changeCheckboxAll(val) {
       this.checkboxAllVal = val;
-      this.data.forEach((item, index) => {
-        // if (!this.$refs.checktd[index].selection.disabled) {
-        //   this.$set(item, this.checkboxField, val);
-        // }
-        if (!this.$refs.checktd[index].disabled) {
-          this.$set(item, this.checkboxField, val);
+      this.runtimeSelected = [];
+      this.tableData.forEach(item => {
+        if (!item[DISABLED_FIELD]) {
+          item[CHECKBOX_NAME] = val;
+          val && this.runtimeSelected.push(item);
         }
       });
       this.$emit("selection-change", this.getSelected());
     },
     //单选
-    clickCheckbox() {
-      if (this.checkboxAllVal == CHECKBOX_UNCHECKED) {
-        //未选中时，如果全部都选中，则选中
-        let result = this.data.every(item => {
-          return item[this.checkboxField] == CHECKBOX_CHECKED;
-        });
-        if (result) {
-          this.checkboxAllVal = CHECKBOX_CHECKED;
+    clickCheckbox(rowData) {
+      this.$nextTick(() => {
+        if (rowData[CHECKBOX_NAME]) {
+          this.runtimeSelected.push(rowData);
+        } else {
+          let index = this.runtimeSelected.indexOf(rowData);
+          index > -1 && this.runtimeSelected.splice(index, 1);
         }
-      } else {
-        //选中时，如果存在未选中的，则取消选中
-        let result = this.data.some(item => {
-          return item[this.checkboxField] == CHECKBOX_UNCHECKED;
-        });
-        if (result) {
-          this.checkboxAllVal = CHECKBOX_UNCHECKED;
-        }
-      }
-      this.$emit("selection-change", this.getSelected());
+        this.checkboxAllVal =
+          this.selectedCount + this.disabledCount >= this.tableData.length;
+        this.$emit("selection-change", this.getSelected());
+      });
     },
     //展开
-    expandTable(rowData, index) {
-      this.$set(rowData, this.expandField, !rowData[this.expandField]);
-
-      //滚动条跳转到对应的行
-      this.$nextTick(() => {
-        this.$refs.scroll.update();
-        this.$refs.scroll.scrollToNode(this.$refs["table-body-tr"][index]);
-      });
+    expandTable(rowData) {
+      this.$set(rowData, EXPAND_NAME, !rowData[EXPAND_NAME]);
     },
 
     //点击列
@@ -845,68 +569,33 @@ export default {
     },
     //获取选中的数据
     getSelected() {
-      let result = this.data.filter(item => {
-        return item[this.checkboxField] == CHECKBOX_CHECKED;
-      });
-      let selectArr = copyDeepData(result);
-      selectArr.forEach(item => {
-        delete item[this.checkboxField];
-      });
-      return selectArr;
+      return copyDeepData(this.runtimeSelected);
     },
     //获取当前页的数据，给外部使用
     getCurrentPageData() {
-      return this.data;
+      return this.tableData;
     },
     //切换页
     changePage(page) {
-      // this.page = page;
+      this.$emit("selection-change", []);
       this.$emit("change-page", page);
-      // this.updateTable(true);
     },
     //切换每页数
     changeSize(pageSize) {
-      // this.pageSizeValue = pageSize;
       this.$emit("change-size", pageSize);
-      // this.updateTable(true);
-    },
-    scroll() {
-      let left = this.$refs.scroll.view.scrollLeft;
-      if (this.lastScrollLeft !== left) {
-        this.$refs.header.scrollLeft = left;
-        this.lastScrollLeft = left;
-      }
-      let top = this.$refs.scroll.view.scrollTop;
-      if (this.lastScrollTop !== top) {
-        this.$refs.tableLeft && (this.$refs.tableLeft.style.top = `-${top}px`);
-        this.$refs.tableRight &&
-          (this.$refs.tableRight.style.top = `-${top}px`);
-        this.lastScrollTop = top;
-      }
     }
-  },
-  destroyed() {
-    off(window, "resize", this.updateBodyWidth);
   },
 
   watch: {
     data: {
-      handler() {
+      handler(data) {
         this.sortProp &&
           this.columns.forEach(element => {
             let load = element.prop == this.sortProp ? false : true;
             this.$set(element, "load", load);
           });
+        this.tableData = copyDeepData(data);
         this.updateTable();
-      },
-      immediate: true
-    },
-    columns: {
-      handler() {
-        // 重新汇总columns数据
-        this.$nextTick(() => {
-          this.updateBodyWidth();
-        });
       },
       immediate: true
     }

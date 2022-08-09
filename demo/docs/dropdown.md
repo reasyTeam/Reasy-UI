@@ -1,8 +1,8 @@
-## 下拉菜单
+# 下拉菜单
 
 当页面操作命令过多时，用于收纳操作元素，将动作或菜单折叠到下拉菜单中。
 
-### 按需引用
+## 按需引用
 
 该组件依赖于`v-scroll`组件。
 
@@ -14,7 +14,7 @@ Vue.use(Dropdown);
 Vue.use(Base);
 ```
 
-### 基础示例
+## 基础示例
 
 点击下拉菜单按钮，展开更多操作。
 
@@ -25,6 +25,7 @@ Vue.use(Base);
   ref="dropdown"
   class="dropdown-item"
   label="普通样式"
+  v-model="value"
   name="drop-nromal"
   :options="options"
   @visible-change="visibleChange"
@@ -83,7 +84,8 @@ export default {
   data() {
     return {
       options: getOptions(7),
-      options1: getOptions(7)
+      options1: getOptions(7),
+      value:1,
     };
   },
   methods: {
@@ -107,7 +109,7 @@ export default {
 
 
 
-### 触发方式
+## 触发方式
 
 可以配置`click`激活或者`hover`激活。
 
@@ -184,7 +186,7 @@ export default {
 :::
 
 
-### 菜单隐藏方式
+## 菜单隐藏方式
 
 :::demo 通过`hide-after-selected`属性来配置，默认值为`true`。
 
@@ -260,7 +262,7 @@ export default {
 
 
 
-### 按钮禁用状态
+## 按钮禁用状态
 
 :::demo 通过`disabled`属性来配置，默认值为`false`。
 
@@ -337,7 +339,7 @@ export default {
 :::
 
 
-### 其他配置
+## 其他配置
 
 :::demo
 
@@ -411,7 +413,7 @@ export default {
 :::
 
 
-### 属性 Attributes
+## Props
 
 | 参数                   | 说明                                                                    | 类型           | 可选值      | 默认值   |
 | ---------------------- | ----------------------------------------------------------------------- | -------------- | ----------- | -------- |
@@ -427,7 +429,7 @@ export default {
 | panel-class            | 下拉菜单项容器的类名                                                    | String         | -           | -        | - |
 
 
-### Options Attributes
+## Options Attributes
 
 | 参数     | 说明                     | 类型                 | 可选值 | 默认值 |
 | -------- | ------------------------ | -------------------- | ------ | ------ |
@@ -438,7 +440,7 @@ export default {
 | icon     | 图标类名，不配置则不显示 | string               | -      | -      |
 
 
-### Events
+## @Events
 
 | 事件名称       | 说明                   | 参数                               |
 | -------------- | ---------------------- | ---------------------------------- |

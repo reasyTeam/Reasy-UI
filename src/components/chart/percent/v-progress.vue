@@ -24,8 +24,8 @@
 <script>
 const STATUS = {
   PROGRESS: "progress",
-  ERROR: "success",
-  SUCCESS: "error"
+  ERROR: "error",
+  SUCCESS: "success"
 };
 const IS_TRADE = process.env.THEME === "trade";
 export default {

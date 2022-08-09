@@ -629,6 +629,14 @@ export default {
       if (!this.showDatePanel || !this.isEndFocus) {
         year = this.originEndDate.year;
         month = this.originEndDate.month;
+
+        if (this.tmpDate.month === month) {
+          month = month + 1;
+          if (month > 11) {
+            month = 0;
+            year += 1;
+          }
+        }
       }
       this.isStartFocus = false;
       this.isEndFocus = true;
@@ -644,6 +652,7 @@ export default {
       //     year += 1;
       //   }
       // }
+
       this.updateTmpEndDate(year, month);
     },
 
@@ -813,7 +822,7 @@ export default {
           //等待聚焦事件更新表盘头部年月后再更新
           this.$nextTick(() => {
             //清空结束日期后，聚焦到结束表盘，结束表盘的头部年月设置为开始表盘的年月
-            this.updateTmpEndDate(this.originDate.year, this.originDate.month);
+            //this.updateTmpEndDate(this.originDate.year, this.originDate.month + 1);
           });
         } else if (
           (endDate == startDate && !isTimeCheckValid) ||

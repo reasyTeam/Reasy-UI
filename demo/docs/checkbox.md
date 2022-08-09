@@ -1,8 +1,8 @@
-## 复选框
+# 复选框
 
 一组备选项中进行多选
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Checkbox } from "@reasy-team/reasy-ui";
@@ -11,7 +11,7 @@ Vue.use(Checkbox);
 Vue.use(Base);
 ```
 
-### 基础用法
+## 基础用法
 
 单独使用可以切换两种状态
 
@@ -30,7 +30,11 @@ Vue.use(Base);
     <v-checkbox v-model="unchecked" disabled name="checkbox1">选项</v-checkbox>
   </v-form-item>
   <v-form-item label="选中禁用">
-    <v-checkbox v-model="checked" disabled name="checkbox2">选项</v-checkbox>
+    <v-checkbox v-model="checked" disabled name="checkbox2">选项 
+    <template #content>
+      content to to you
+    </template>
+    </v-checkbox>
   </v-form-item>
 </v-form>
 <script>
@@ -47,7 +51,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 ::: demo
 
@@ -66,7 +70,7 @@ Vue.use(Base);
 
 :::
 
-### 自定义选中值
+## 自定义选中值
 
 `on-value`为选中后的值 `off-value`为未选中时的值
 
@@ -89,20 +93,20 @@ Vue.use(Base);
 
 :::
 
-### v-checkbox Attributes
+## Props
 
-| 参数            | 说明                                                | 类型                      | 可选值 | 默认值                   |
-| --------------- | --------------------------------------------------- | ------------------------- | ------ | ------------------------ |
-| value / v-model | 绑定值                                              | string / number / boolean | —      | —                        |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| disabled        | 是否禁用                                            | boolean                   | —      | false                    |
-| on-value        | 选中时的值                                          | string / number / boolean | —      | true                     |
-| off-value       | 未选中时的值                                        | string / number / boolean | —      | false                    |
-| before-change   | 切换之前执行的函数，返回 false 时，不会执行数据更新 | function(value) {}        | —      | function() {return true} |
-| tooltip         | 文字提示，配置参考v-tooltip指令                     | object                    | —      | —                        |
+| 参数            | 说明                                                                         | 类型                      | 可选值 | 默认值                   |
+| --------------- | ---------------------------------------------------------------------------- | ------------------------- | ------ | ------------------------ |
+| value / v-model | 绑定值                                                                       | string / number / boolean | —      | —                        |
+| no-id           | 是否不需要 id，为 false 则以`name`作为 id，除特殊情况，表单中使用必须添加 id | boolean                   | -      | false                    |
+| name            | 原生属性 name，同时渲染为 id 属性，当`no-id`为 false 时**必填**              | string                    | -      | -                        |
+| disabled        | 是否禁用                                                                     | boolean                   | —      | false                    |
+| on-value        | 选中时的值                                                                   | string / number / boolean | —      | true                     |
+| off-value       | 未选中时的值                                                                 | string / number / boolean | —      | false                    |
+| before-change   | 切换之前执行的函数，返回 false 时，不会执行数据更新                          | function(value) {}        | —      | function() {return true} |
+| tooltip         | 文字提示，配置参考 v-tooltip 指令                                            | object                    | —      | —                        |
 
-### v-checkbox Events
+## @Events
 
 | 事件名 | 说明           | 参数       |
 | ------ | -------------- | ---------- |

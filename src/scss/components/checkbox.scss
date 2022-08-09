@@ -4,59 +4,72 @@
   line-height: $form-line-height;
   vertical-align: middle;
   @include clearfix;
+  cursor: pointer;
+  font-size: 0;
 
-  &__item {
-    cursor: pointer;
-    float: left;
-    font-size: 0;
+  // &__item {
+  //   cursor: pointer;
+  //   float: left;
+  //   font-size: 0;
 
-    &:hover {
-      .v-checkbox__icon,
-      .v-checkbox__process {
-        border-color: $border-hover-color;
-      }
+  &:hover {
+
+    .v-checkbox__icon,
+    .v-checkbox__process {
+      border-color: $border-hover-color;
     }
+  }
 
-    &--disabled {
-      cursor: not-allowed;
-      color: $disabled-color;
+  &__content {
+    font-size: 12px;
+    line-height: 16px;
+  }
 
-      .v-checkbox__icon {
+  &--disabled {
+    cursor: not-allowed;
+    color: $disabled-color;
+
+    .v-checkbox__icon {
+      border-color: $border-color;
+      background-color: $disabled-background-color;
+
+      &.v-checkbox__icon--active {
+        border-color: rgba($main-active-color, 0.4);
+        background-color: rgba($main-active-color, 0.4);
+        color: #fff;
+      }
+
+      &.v-checkbox__process {
         border-color: $border-color;
         background-color: $disabled-background-color;
 
-        &.v-checkbox__icon--active {
-          border-color: rgba($main-active-color, 0.4);
-          background-color: rgba($main-active-color, 0.4);
-          color: #fff;
+        &:before {
+          background-color: rgba($main-active-color, 0.5);
         }
 
-        &.v-checkbox__process {
-          border-color: $border-color;
-          background-color: $disabled-background-color;
-          &:before {
-            background-color: rgba($main-active-color, 0.5);
-          }
-          &:hover {
-            border-color: $main-active-color;
-          }
-        }
-      }
-      .v-checkbox__label {
-        color: $disabled-color;
-      }
-      &:hover {
-        .v-checkbox__icon,
-        .v-checkbox__process {
-          border-color: $border-color;
+        &:hover {
+          border-color: $main-active-color;
         }
       }
     }
 
-    & + & {
-      margin-left: 20px;
+    .v-checkbox__label {
+      color: $disabled-color;
+    }
+
+    &:hover {
+
+      .v-checkbox__icon,
+      .v-checkbox__process {
+        border-color: $border-color;
+      }
     }
   }
+
+  &+& {
+    margin-left: 20px;
+  }
+
 
   &__icon {
     font-size: 16px;
@@ -102,9 +115,11 @@
 .v-checkbox-group {
   display: inline-block;
   vertical-align: top;
+  margin-top: -4px;
 
-  .v-checkbox__item {
+  .v-checkbox {
     margin-right: 26px;
+    margin-top: 4px;
 
     // &:hover {
     //   .v-checkbox__icon,
@@ -114,12 +129,13 @@
     // }
   }
 
-  .v-checkbox__item--disabled {
+  .v-checkbox--disabled {
     .v-checkbox__process {
       border-color: rgba($main-active-color, 0.4);
     }
   }
-  .v-checkbox__item--disabled:hover {
+
+  .v-checkbox--disabled:hover {
     .v-checkbox__process {
       border-color: rgba($main-active-color, 0.4);
     }
@@ -129,19 +145,22 @@
     margin-right: 0;
   }
 }
+
 .v-checkbox-trade {
   &.v-checkbox-group {
     display: block;
   }
+
   .v-checkbox {
     display: initial;
-    &__item {
-      float: initial;
-      padding: 0 16px;
-    }
+    // &__item {
+    //   float: initial;
+    padding: 0 16px;
+    // }
   }
+
   .line {
-    border: 1px solid #EEEFF1;
-    margin: 8px 16px 3px
+    border-top: 1px solid #eeeff1;
+    margin: 8px 16px 3px;
   }
 }

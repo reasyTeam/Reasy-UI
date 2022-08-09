@@ -51,7 +51,7 @@
           </label>
         </slot>
       </label> -->
-      <label class="v-form-item__tip">
+      <label class="v-form-item__tip" v-if="showTip">
         <slot name="unit">
           <label class=" v-form-item__unit" v-if="unit">{{ unit }}</label>
         </slot>
@@ -63,9 +63,11 @@
         </slot>
       </label>
       <!-- 添加备注类提示 -->
-      <slot name="remark">
-        <div class="v-form-item__remark" v-if="remark">{{ remark }}</div>
-      </slot>
+      <div v-if="remark || $slots.remark" class="v-form-item__remark-wrap">
+        <slot name="remark">
+          <div class="v-form-item__remark" v-if="remark">{{ remark }}</div>
+        </slot>
+      </div>
       <div
         :style="{ height: showPopError ? '' : errHeight }"
         :class="{ 'v-form-item__content__error-pop': showPopError }"
@@ -93,6 +95,7 @@
 
 <script>
 import { sizeToCss } from "../filters";
+import { IGuid } from "../libs";
 export default {
   name: "v-form-item",
   inject: ["getValidateType", "getField", "elForm"],
@@ -155,6 +158,11 @@ export default {
     remark: {
       type: String,
       default: ""
+    },
+    // 是否显示tip位置 默认有 但是有时有影响时可以去除该元素
+    showTip: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
@@ -201,6 +209,12 @@ export default {
       showUnit: false,
       labelPosition: "left" //标题文字方向
     };
+  },
+
+  beforeCreate() {
+    if (this.$vnode.key === undefined) {
+      this.$vnode.key = IGuid();
+    }
   },
 
   created() {

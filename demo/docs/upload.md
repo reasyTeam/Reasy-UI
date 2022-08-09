@@ -1,7 +1,7 @@
-## 文件上传
+# 文件上传
 
 选择本地文件上传的组件。
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Upload, Button } from "@reasy-team/reasy-ui";
@@ -11,7 +11,7 @@ Vue.use(Button);
 Vue.use(Base);
 ```
 
-### 基本用法
+## 基本用法
 
 ::: demo
 
@@ -37,7 +37,7 @@ Vue.use(Base);
 
 :::
 
-### 文件上传
+## 文件上传
 
 `type` 配置上传的类型，支持`picture`、`file`和`text`，默认为`text`
 
@@ -66,7 +66,7 @@ Vue.use(Base);
 
 :::
 
-### 图片上传
+## 图片上传
 
 `type` 配置上传的类型，支持`picture`和`text`，默认为`text`
 
@@ -102,7 +102,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 ::: demo
 
@@ -129,7 +129,7 @@ Vue.use(Base);
 
 :::
 
-#### 文件禁用
+## 文件禁用
 
 ::: demo
 
@@ -157,7 +157,7 @@ Vue.use(Base);
 
 :::
 
-#### 图片禁用
+## 图片禁用
 
 ::: demo
 
@@ -185,7 +185,7 @@ Vue.use(Base);
 
 :::
 
-### v-upload Attributes
+## Props
 
 | 参数           | 说明                                                              | 类型               | 可选值       | 默认值 |
 | -------------- | ----------------------------------------------------------------- | ------------------ | ------------ | ------ |
@@ -201,7 +201,7 @@ Vue.use(Base);
 | on-change      | 文件改变时的钩子，添加文件或修改文件                              | function(file)     | —            | —      |
 | before-upload  | 上传文件之前的钩子，参数为上传的文件，<br />若返回 false 则不上传 | function(file)     | —            | —      |
 
-## v-upload Events
+## @Events
 
 | 事件名 | 说明             | 参数 |
 | ------ | ---------------- | ---- |

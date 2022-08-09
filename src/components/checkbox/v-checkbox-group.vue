@@ -181,7 +181,7 @@ export default {
         this.$emit("change", allValue);
         this.checkValid(allValue);
       } else {
-        this.$emit("change", this.unSelectedAllValue);
+        this.$emit("change", [...this.unSelectedAllValue]);
         this.checkValid(this.unSelectedAllValue);
       }
     },

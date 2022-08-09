@@ -1,32 +1,34 @@
 <template>
-  <div class="v-checkbox">
-    <label
-      class="v-checkbox__item"
-      :class="{ 'v-checkbox__item--disabled': isDisabled }"
-      @click="clickCheckbox"
-      :name="name"
-      :data-name="_name"
-      :id="name"
-    >
-      <span
-        class="v-checkbox__icon"
-        :class="
-          value === onValue
-            ? 'v-checkbox__icon--active v-icon-ok'
-            : hasValue
-            ? 'v-checkbox__icon--active v-checkbox__process'
-            : 'v-icon-check'
-        "
-      ></span>
-      <span v-if="tooltip" v-tooltip="tooltip" class="v-checkbox__label">
-        <slot></slot>
-      </span>
-      <span v-else class="v-checkbox__label">
-        <slot></slot>
-      </span>
-    </label>
-    <slot name="content"></slot>
+  <!-- <div class="v-checkbox"> -->
+  <div
+    class="v-checkbox"
+    :class="{ 'v-checkbox--disabled': isDisabled }"
+    @click="clickCheckbox"
+    :name="name"
+    :data-name="_name"
+    :id="name"
+  >
+    <span
+      class="v-checkbox__icon"
+      :class="
+        value === onValue
+          ? 'v-checkbox__icon--active v-icon-ok'
+          : hasValue
+          ? 'v-checkbox__icon--active v-checkbox__process'
+          : 'v-icon-check'
+      "
+    ></span>
+    <span v-if="tooltip" v-tooltip="tooltip" class="v-checkbox__label">
+      <slot></slot>
+    </span>
+    <span v-else-if="hasDefaultSlot" class="v-checkbox__label">
+      <slot></slot>
+    </span>
+    <div class="v-checkbox__content" v-if="hasContentSlot">
+      <slot name="content"></slot>
+    </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -68,6 +70,14 @@ export default {
       }
     },
     tooltip: Object // 与v-tooltip指令配置相同
+  },
+  computed: {
+    hasContentSlot() {
+      return !!this.$slots.content || !!this.$scopedSlots.content;
+    },
+    hasDefaultSlot() {
+      return !!this.$slots.default || !!this.$scopedSlots.default;
+    }
   },
   methods: {
     clickCheckbox() {

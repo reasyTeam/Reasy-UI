@@ -1,7 +1,7 @@
-## 表单
+# 表单
 
 表单包含复选框、单选框、输入框、下拉选择框等元素，用于收集数据、校验和提交数据。
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Form } from "@reasy-team/reasy-ui";
@@ -10,7 +10,7 @@ Vue.use(Form);
 Vue.use(Base);
 ```
 
-### 前提条件
+## 前提条件
 
 首先要在`Vue`的`prototype`上绑定`$valid`数据验证对象，对象形式时，执行`all`方法
 
@@ -49,8 +49,62 @@ Vue.use(Base);
   Vue.prototype.$valid = valid;
 ```
 
+::: demo
 
-### 基本用法
+```html
+<v-form ref="form" :model="formData" @submit="submit">
+  <v-form-item label="类型" prop="type">
+    <v-select name="type" v-model="formData.type" :options="options"></v-select>
+  </v-form-item>
+  <v-form-item label="值1" prop="data1" v-if="formData.type == 1">
+    <v-input name="data1" v-model="formData.data1"></v-input>
+  </v-form-item>
+  <v-form-item label="值2" prop="data2" v-else>
+    <v-input-group name="data2" type="ip" v-model="formData.data2"></v-input-group>
+  </v-form-item>
+  <v-form-item>
+    <v-button name="ok11" type="primary" @click="submitForm">保存</v-button>
+  </v-form-item>
+</v-form>
+
+<script>
+  export default {
+    data() {
+      return {
+        formData: {
+          type: 1,
+          data1: "1",
+          data2: "2"
+        },
+        options: [
+          {
+            label: "类型1",
+            value: 1
+          },
+          {
+            label: "类型2",
+            value: 2
+          }
+        ]
+      };
+    },
+    methods: {
+      submitForm() {
+        this.$refs.form.submitForm();
+      },
+      submit(data) {
+        this.$message.success("验证成功");
+        console.log("submit data", data);
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+
+## 基本用法
 
 表单元素组件为`v-form-item`，元素组件必须包含在`v-form-item`组件内才能生效。
 
@@ -60,10 +114,10 @@ Vue.use(Base);
 
 ```html
 <v-form ref="form" :rules="rules" @submit="submit">
-  <v-form-item label="数字" prop="ssid" unit="秒">
+  <v-form-item label="数字" prop="ssid" unit="秒" key="数字key">
     <v-input name="ssid" v-model="ruleForm.ssid"></v-input>
   </v-form-item>
-  <v-form-item label="密码" prop="pwd">
+  <v-form-item label="密码" prop="pwd" remark="这里显示remark信息。">
     <v-input name="pwd" v-model="ruleForm.pwd" show-password type="password"></v-input>
     <template v-slot:unit>
       <label class="v-form-item__unit">这里显示单位信息</label>
@@ -81,6 +135,9 @@ Vue.use(Base);
   </v-form-item>
   <v-form-item label="功率" prop="power">
     <v-slider name="power" :min="0" :max="100" v-model="ruleForm.power"></v-slider>
+    <template v-slot:description>
+      <label class="v-form-item__description">这里显示描述信息描述信息slot</label>
+    </template>
   </v-form-item>
   <v-form-item label="加密" prop="security">
     <v-radio name="security" v-model="ruleForm.security" :options="radioOptions"></v-radio>
@@ -95,7 +152,7 @@ Vue.use(Base);
       is-manual
     ></v-select>
   </v-form-item>
-  <v-form-item label="日期" prop="day">
+  <v-form-item label="日期" prop="day" :required="false">
     <v-checkbox-group
       is-select-all
       name="day"
@@ -105,13 +162,13 @@ Vue.use(Base);
       is-manual
     ></v-checkbox-group>
   </v-form-item>
-  <v-form-item label="时间" prop="time">
+  <v-form-item label="时间" prop="time" :required="false">
     <v-timepicker name="time" v-model="ruleForm.time"></v-timepicker>
-    <v-form-item prop="time" is-no-label is-inline>
+    <v-form-item prop="time" is-no-label is-inline  :required="false">
       <v-datepicker name="date" v-model="ruleForm.date" type="datetime"></v-datepicker>
     </v-form-item>
   </v-form-item>
-  <v-form-item label="日期时间" prop="date1">
+  <v-form-item label="日期时间" prop="date1" :required="false">
     <v-datepicker
       name="date1"
       v-model="ruleForm.date1"
@@ -236,7 +293,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 表单元素组件为`v-form-item`，元素组件必须包含在`v-form-item`组件内才能生效。
 
@@ -423,19 +480,19 @@ Vue.use(Base);
 :::
 
 
-### v-form Attributes
+## Props
 
 | 参数           | 说明                                                                    | 类型     | 可选值 | 默认值 |
 | -------------- | ----------------------------------------------------------------------- | -------- | ------ | ------ |
 | rules          | 数据验证规则                                                            | boolean  |        | {}     |
 | padding-width  | 表单选项文字与右边组件的距离                                            | number   |        | 24     |
 | is-label-right | 文字方向是否右对齐                                                      | boolean  |        | false  |
-| beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
 | disabled       | 表单是否禁用                                                            | boolean  |        | false  |
-| unit   |  表单显示的单位信息 | string | - |
-| description   |  表单显示的描述信息 | string | - |
+| unit           | 表单显示的单位信息                                                      | string   | -      |
+| description    | 表单显示的描述信息                                                      | string   | -      |
+| beforeSubmit   | 表单提交前数据验证，返回 false 时不会执行 submit<br />function(data) {} | function |        |        |
 
-### rules 验证规则
+## rules 验证规则
 
 key 为 表单选项的 prop，
 
@@ -449,47 +506,48 @@ key 为 表单选项的 prop，
 | args | 数据验证需要用到的值                               | Array  |        |        |
 | msg  | 错误提示信息，如果定义了，当验证错误时会提示此信息 | string |        |        |
 
-### v-form Methods
+## Methods
 
 | 方法名        | 说明             | 参数 |
 | ------------- | ---------------- | ---- |
 | submitForm    | 提交表单事件     | —    |
 | getSubmitData | 获取表单提交数据 | —    |
 
-### v-form Events
+## @Events
 
 | 事件名 | 说明                       | 参数           |
 | ------ | -------------------------- | -------------- |
 | submit | 表单验证完后的提交数据事件 | 提交的表单数据 |
 | cancel | 表单取消事件               | —              |
 
-### v-form-item Attributes
+## v-form-item
+## Props
 
-| 参数        | 说明                                                               | 类型           | 可选值 | 默认值 |
-| ----------- | ------------------------------------------------------------------ | -------------- | ------ | ------ |
-| label       | 选项文字                                                           | string         |        |        |
-| is-no-label | 不显示文字                                                         | boolean        |        | false  |
-| prop        | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string         |        |        |
-| required    | 是否必填                                                           | boolean        |        | true   |
-| ignore      | 是否忽略验证                                                       | boolean        |        | false  |
-| valid       | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |        |
-| disabled    | 选项是否禁用                                                       | boolean        |        | false  |
-| isInline    | 是否不换行显示，适用于紧接着前面的组件显示在一行                   | boolean        |        | false  |
-| show-pop-error    | 是否错误提示显示为提示小浮窗                   | boolean        |        | false  |
-| pop-error-position    | 错误提示小浮窗位置，参考[tooltip](./#/component/tooltip)组件                   | string        |        | right-center  |
+| 参数               | 说明                                                               | 类型           | 可选值 | 默认值       |
+| ------------------ | ------------------------------------------------------------------ | -------------- | ------ | ------------ |
+| label              | 选项文字                                                           | string         |        |              |
+| is-no-label        | 不显示文字                                                         | boolean        |        | false        |
+| prop               | 选项属性，用于数据验证规则和提交数据，不填不会对数据进行验证和提交 | string         |        |              |
+| required           | 是否必填                                                           | boolean        |        | true         |
+| ignore             | 是否忽略验证                                                       | boolean        |        | false        |
+| valid              | 数据验证规格，与 rules 配置一致，支持 type， args，msg 配置        | Array / Object |        |              |
+| disabled           | 选项是否禁用                                                       | boolean        |        | false        |
+| isInline           | 是否不换行显示，适用于紧接着前面的组件显示在一行                   | boolean        |        | false        |
+| show-pop-error     | 是否错误提示显示为提示小浮窗                                       | boolean        |        | false        |
+| pop-error-position | 错误提示小浮窗位置，参考[tooltip](./#/component/tooltip)组件       | string         |        | right-center |
 
-### v-form-item Methods
+## Methods
 
 | 方法名     | 说明                                           | 参数     |
 | ---------- | ---------------------------------------------- | -------- |
 | checkValid | 数据验证，返回是否验证成功<br />function(data) | 选项的值 |
 
-### v-form-item slot
+## Slots
 
-| name    | 说明                                                                |
-| ------- | ------------------------------------------------------------------- |
-| default | 表单元素右边显示内容                                                |
-| content | 右边多个数据验证时需要把第二个放入此插槽内，显示在 default 插槽后面 |
-| label   | 表单元素左边文字内容                                                |
-| unit | 单位信息，与`unit`属性作用相同，若同时配置`unit`属性，则只生效该slot |
+| name        | 说明                                                                            |
+| ----------- | ------------------------------------------------------------------------------- |
+| default     | 表单元素右边显示内容                                                            |
+| content     | 右边多个数据验证时需要把第二个放入此插槽内，显示在 default 插槽后面             |
+| label       | 表单元素左边文字内容                                                            |
+| unit        | 单位信息，与`unit`属性作用相同，若同时配置`unit`属性，则只生效该slot            |
 | description | 描述信息，可自定义特定样式描述信息，若同时配置`description`属性，则只生效该slot |

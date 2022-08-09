@@ -59,7 +59,12 @@
         :data-name="_name"
         ref="input"
         class="input-textarea"
-        :class="{ 'is-disabled': isDisabled !== false }"
+        :class="{
+          'is-disabled': isDisabled !== false,
+          'is-hover': isHover,
+          'is-focus': isFocus,
+          'is-input-error': isError
+        }"
         @focus="setFocus"
         :disabled="isDisabled !== false"
         :readonly="readonly"
@@ -210,6 +215,11 @@ export default {
     autoCorrection: {
       type: Array,
       default: () => []
+    },
+    // 为空时是否纠正为最小数字 根据autoCorrection 一起生效
+    notCorrectEmpty: {
+      type: Boolean,
+      default: false
     },
     size: {
       type: String,
@@ -446,13 +456,14 @@ export default {
       if (inputVal.match(/^0\d/g)) {
         newVal = parseInt(inputVal, 10);
       }
-      if (Number(newVal) > Number(maxValue)) {
+      if (newVal !== "" && Number(newVal) > Number(maxValue)) {
         newVal = maxValue;
       }
-      if (Number(newVal) < Number(minValue)) {
+      if (newVal !== "" && Number(newVal) < Number(minValue)) {
         newVal = minValue;
       }
-      if (newVal == "") {
+      // 为空时 可以不纠正
+      if (newVal == "" && !this.notCorrectEmpty) {
         newVal = minValue;
       }
       return newVal;

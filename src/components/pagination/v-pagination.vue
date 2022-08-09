@@ -23,14 +23,14 @@
             footerBtn.value !== 'prevBtn' &&
             footerBtn.value !== 'nextBtn',
           'v-pagination__button--disabled': disabled,
-          'v-icon-more': footerBtn.text === 'more'
+          'v-pagination__button--more': footerBtn.text === 'more'
         }"
         v-for="footerBtn in footer"
         :key="footerBtn.value"
         @click="gotoPage(footerBtn.value)"
       >
-        <template v-if="footerBtn.text !== 'more'">{{
-          footerBtn.text
+        <template>{{
+          footerBtn.text !== "more" ? footerBtn.text : "..."
         }}</template>
       </a>
       <a
@@ -48,7 +48,7 @@
       <!-- <span>{{ "第" + page + "/" + totalPage + "页" }}</span> -->
     </div>
     <div class="v-pagination__item" v-if="isChangeSize">
-      <span class="v-pagination__text">{{ _("P#erP#") }}</span>
+      <!-- <span class="v-pagination__text">{{ _("P#erP#") }}</span> -->
       <v-select
         v-model="pageSizeValue"
         :size="border ? 'M' : 'S'"
@@ -59,7 +59,7 @@
         no-id
         :name="name | id('size')"
       ></v-select>
-      <span class="v-pagination__text">{{ _("P#erP#") }}</span>
+      <!-- <span class="v-pagination__text">{{ _("P#erP#") }}</span> -->
     </div>
     <div class="v-pagination__item" v-if="isInputPage">
       <span class="v-pagination__text">{{ _("Go to") }}</span>

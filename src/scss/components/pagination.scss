@@ -98,6 +98,10 @@
       }
     }
 
+    &--more {
+      letter-spacing: 2px;
+    }
+
     & + .v-pagination__button {
       margin-left: 8px;
     }

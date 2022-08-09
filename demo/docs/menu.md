@@ -1,10 +1,10 @@
-## 菜单栏
+# 菜单栏
 
 通过给组件传路由对象数组生成菜单栏，分为普通模式和 vue-router 模式。<br>
 普通模式：只提供菜单样式效果和点击事件，不跳转页面<br>
 vue-router 模式：需安装 vue-router，结合`<router-view>`使用，配置同 vue-router 官方文档
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Menu } from "@reasy-team/reasy-ui";
@@ -13,7 +13,7 @@ Vue.use(Base);
 Vue.use(Menu);
 ```
 
-### 基础示例
+## 基础示例
 
 普通模式，通过 name 标识每个路由，默认选中第一个一级菜单的第一个子路由
 :::demo
@@ -182,7 +182,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 
 :::
 
-### 菜单图标
+## 菜单图标
 
 通过配置 routes 中 meta 对象的 icon 属性（只支持一级菜单）
 :::demo
@@ -257,7 +257,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 
 :::
 
-### 禁用
+## 禁用
 
 通过配置 routes 中 meta 对象的 disabled=true
 :::demo
@@ -333,7 +333,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 
 :::
 
-### IP-COM 风格
+## IP-COM 风格
 
 `is-ipcom`配置菜单是否 IPCOM 风格
 :::demo
@@ -409,9 +409,9 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 
 :::
 
-### 属性 Attributes
+## Props
 
-#### v-menu 属性
+### v-menu Props
 
 | 参数      | 说明                     | 类型    | 可选值 | 默认值 |
 | --------- | ------------------------ | ------- | ------ | ------ |
@@ -419,7 +419,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 | is-router | 是否采用 vue-router 模式 | boolean | -      | false  |
 | is-ipcom  | 是否采用 ip-com 风格     | boolean | -      | false  |
 
-#### routes 对象属性
+### routes Props
 
 | 参数     | 说明                                                                            | 类型   | 可选值 | 默认值 |
 | -------- | ------------------------------------------------------------------------------- | ------ | ------ | ------ |
@@ -428,7 +428,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 | meta     | 菜单自定义配置，默认支持 title（菜单标题），disabled（禁用），icon（菜单 logo） | object | -      | -      |
 | 其他     | vue-router 模式下的 routes 对象按 vue-router 官网配置                           |        |
 
-#### Events
+## @Events
 
 | 事件名称   | 说明               | 参数                |
 | ---------- | ------------------ | ------------------- |
@@ -437,7 +437,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 | open       | 一级菜单展开时触发 | 展开的一级菜单 name |
 | close      | 一级菜单关闭时触发 | 关闭的一级菜单 name |
 
-#### Slot
+## Slots
 
 | name       | 说明                     | 参数                       |
 | ---------- | ------------------------ | -------------------------- |

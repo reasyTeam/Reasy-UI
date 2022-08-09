@@ -23,7 +23,7 @@ export default {
       type: Boolean,
       default: true
     },
-    hideInOpreate: {
+    hideInOperate: {
       type: Boolean,
       default: false
     },
@@ -50,6 +50,11 @@ export default {
     },
     prop: {
       //表格字段
+      default: "",
+      type: String
+    },
+    help: {
+      //help字段
       default: "",
       type: String
     },

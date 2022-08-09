@@ -1,8 +1,8 @@
-## Pagination 分页
+# Pagination 分页
 
 有大量内容展现以及数据量过多时可使用分页加载处理来分解数据。采用分页的形式分隔长列表，切换页码浏览数据，每次只加载一个页面，节省加载时间。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Pagination } from "@reasy-team/reasy-ui";
@@ -11,19 +11,19 @@ Vue.use(Pagination);
 Vue.use(Base);
 ```
 
-### 基本样式
+## 基本样式
 
 标签页的常用样式。
 
 ::: demo
 
 ```html
-<v-pagination :total="100" name="page-base" :current-page="5"></v-pagination>
+<v-pagination :total="1000" name="page-base" :current-page="1"></v-pagination>
 ```
 
 :::
 
-### 简单样式
+## 简单样式
 
 简洁样式尺寸更小，样式更简洁
 
@@ -35,7 +35,7 @@ Vue.use(Base);
 
 :::
 
-### 更多分页
+## 更多分页
 
 在页数很多时使用。
 
@@ -57,7 +57,7 @@ Vue.use(Base);
 ```
 
 :::
-### 附加功能
+## 附加功能
 
 包括总数，跳转，改变三个附加功能，可根据需要自行选择所需功能。
 
@@ -80,7 +80,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 ::: demo
 
@@ -130,7 +130,7 @@ Vue.use(Base);
 
 :::
 
-### v-pagination Attributes
+## Props
 
 | 参数               | 说明                         | 类型     | 可选值                          | 默认值                    |
 | ------------------ | ---------------------------- | -------- | ------------------------------- | ------------------------- |
@@ -148,7 +148,7 @@ Vue.use(Base);
 | prev-text          | 替代图标显示的上一页文字     | string   | —                               | —                         |
 | next-text          | 替代图标显示的下一页文字     | string   | —                               | —                         |
 
-### v-pagination Events
+## @Events
 
 | 事件名      | 说明                               | 参数     |
 | ----------- | ---------------------------------- | -------- |

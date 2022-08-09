@@ -59,7 +59,7 @@
     display: block;
     margin: 0 auto;
     margin-top: 10px;
-    .input-text{
+    .input-text {
       border-radius: 4px;
     }
   }
@@ -216,6 +216,18 @@
       border-color: $main-active-color;
     }
   }
+  .multi__all {
+    .ellipsis {
+      display: inline-block;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .v-tooltip {
+      display: inline-block;
+    }
+  }
 }
 
 .v-select__input.is-focus {
@@ -252,5 +264,20 @@
 
   .v-select__icon--right {
     color: $disabled-color;
+  }
+}
+
+.v-select-options {
+  &__item {
+    &__text {
+      display: inline-block;
+      vertical-align: middle;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+  .v-tooltip {
+    display: inline-block;
   }
 }

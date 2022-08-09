@@ -1,8 +1,8 @@
-## 滑块
+# 滑块
 
 滑动型输入器，在范围内滑动选择数据。
 
-### 按需引用
+## 按需引用
 
 ```js
 // 当显示输入时需要同时引入Input和Button组件
@@ -14,7 +14,7 @@ Vue.use(Input);
 Vue.use(Base);
 ```
 
-### 基本用法
+## 基本用法
 
 ::: demo
 
@@ -33,7 +33,7 @@ Vue.use(Base);
 
 :::
 
-### 自定义范围
+## 自定义范围
 
 ::: demo
 
@@ -71,7 +71,7 @@ Vue.use(Base);
 
 :::
 
-### 显示输入框
+## 显示输入框
 
 ::: demo
 
@@ -116,7 +116,7 @@ Vue.use(Base);
 
 :::
 
-### 精度和步长
+## 精度和步长
 
 ::: demo
 
@@ -144,7 +144,7 @@ Vue.use(Base);
 
 :::
 
-### Tooltip
+## Tooltip
 
 ::: demo
 
@@ -187,7 +187,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 ::: demo
 
@@ -216,7 +216,7 @@ Vue.use(Base);
 
 :::
 
-### v-slider Attributes
+## Props
 
 | 参数                | 说明                                              | 类型     | 可选值    | 默认值 |
 | ------------------- | ------------------------------------------------- | -------- | --------- | ------ |
@@ -235,7 +235,7 @@ Vue.use(Base);
 | show-tooltip        | 是否显示 tooltip                                  | boolean  | —         | true   |
 | format              | tooltip 显示格式化, function(value){return value} | Function | —         | —      |
 
-### v-slider Events
+## @Events
 
 | 事件名 | 说明         | 参数       |
 | ------ | ------------ | ---------- |

@@ -1,8 +1,8 @@
-## 颜色选择器
+# 颜色选择器
 
 用于颜色选择，支持 RGB 、 HEX 或数组颜色格式，支持颜色预设。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Colorpicker, Input } from "@reasy-team/reasy-ui";
@@ -12,7 +12,7 @@ Vue.use(Input);
 Vue.use(Base);
 ```
 
-### 基础示例
+## 基础示例
 
 ::: demo
 
@@ -34,7 +34,7 @@ Vue.use(Base);
 
 :::
 
-### 颜色预设
+## 颜色预设
 
 `colors`配置颜色预设盘的可选颜色，支持 RGB 、 HEX 或数组颜色格式
 
@@ -59,7 +59,7 @@ Vue.use(Base);
 
 :::
 
-### 自定义返回
+## 自定义返回
 
 `format` 为自定义返回值，支持 RGB 、 HEX 或数组三种格式的返回，分别对应 format 值为`rgb`、`hex`、`array`，默认为`rgb`
 
@@ -83,7 +83,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用样式
+## 禁用样式
 
 `disabled` 配置颜色选择器是否禁用
 
@@ -107,7 +107,7 @@ Vue.use(Base);
 
 :::
 
-### v-colorpicker Attributes
+## Props
 
 | 参数       | 说明               | 类型    | 可选值                    | 默认值                                                                            |
 | ---------- | ------------------ | ------- | ------------------------- | --------------------------------------------------------------------------------- |
@@ -119,7 +119,7 @@ Vue.use(Base);
 | disabled   | 是否禁用           | boolean | —                         | false                                                                             |
 | show-panel | 是否显示颜色预设盘 | boolean | —                         | true                                                                              |
 
-### v-colorpicker Events
+## @Events
 
 | 事件名      | 说明                 | 参数           |
 | ----------- | -------------------- | -------------- |

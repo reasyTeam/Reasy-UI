@@ -1,8 +1,8 @@
-## 折叠面板
+# 折叠面板
 
 可以折叠/展开的内容区域。
 
-### 按需引用
+## 按需引用
 
 ```js
 import { Base, Collapse } from "@reasy-team/reasy-ui";
@@ -11,7 +11,7 @@ Vue.use(Collapse);
 Vue.use(Base);
 ```
 
-### 基础示例
+## 基础示例
 
 :::demo
 
@@ -23,7 +23,7 @@ Vue.use(Base);
 
 :::
 
-### 设置标题
+## 设置标题
 
 :::demo 通过`title`属性设置折叠面板的标题。
 
@@ -37,7 +37,7 @@ Vue.use(Base);
 
 :::
 
-### 设置内容
+## 设置内容
 
 :::demo 通过`text`属性对折叠面板的内容进行设置。
 
@@ -51,7 +51,7 @@ Vue.use(Base);
 
 :::
 
-### Slot
+## Slot
 
 :::demo 通过`default slot`对折叠面板的内容进行设置。
 
@@ -111,7 +111,7 @@ Vue.use(Base);
 
 :::
 
-### 折叠面板状态设置
+## 折叠面板状态设置
 
 :::demo 通过`actived`属性设置折叠面板的初始状态，同时也可以通过`v-model`指令对折叠面板的展开收起状态进行绑定。
 
@@ -123,7 +123,7 @@ Vue.use(Base);
 
 :::
 
-### 禁用
+## 禁用
 
 :::demo 通过`disabled`属性设置折叠面板的禁用状态。禁用后，面板的折叠状态不可修改。
 
@@ -135,7 +135,7 @@ Vue.use(Base);
 
 :::
 
-### Attributes
+## Props
 
 | 参数            | 说明     | 类型    | 可选值 | 默认值 |
 | --------------- | -------- | ------- | ------ | ------ |
@@ -144,7 +144,7 @@ Vue.use(Base);
 | actived/v-model | 展开状态 | boolean | -      | false  |
 | disabled        | 禁用     | boolean | -      | false  |
 
-## Slot
+## Slots
 
 | name    | 说明                    |
 | ------- | ----------------------- |

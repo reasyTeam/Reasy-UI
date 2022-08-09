@@ -4,7 +4,7 @@
       <div class="v-icon-more"></div>
     </div>
     <create-to-body width="180px" :show="dropdownShow" :style="style">
-      <div class="v-dropdown__menu">
+      <div class="v-dropdown__menu table-operate__menu">
         <v-scroll v-clickoutside="visibleChange">
           <div class="v-checkbox-trade v-checkbox-group">
             <v-checkbox
@@ -72,8 +72,6 @@ export default {
   data() {
     return {
       dropdownShow: false,
-      isDefaultDisabled: false,
-      isAllDisabled: false,
       style: {
         maxHeight: 0,
         overflow: "auto",
@@ -87,7 +85,7 @@ export default {
       let list = [];
       this.options.forEach(item => {
         if (typeof item === "object") {
-          if (!item.hideInOpreate) {
+          if (!item.hideInOperate) {
             list.push(item);
           }
         } else {
@@ -95,7 +93,7 @@ export default {
             label: String(item),
             value: item,
             disabled: false,
-            hideInOpreate: false
+            hideInOperate: false
           });
         }
       });
@@ -139,18 +137,21 @@ export default {
     },
     isDefaultChecked: {
       get() {
-        let defaultStatus = equal(this.value, this.defaultChecked);
-        if (this.allChecked.length == this.defaultChecked.length) {
-          this.isAllDisabled = defaultStatus;
-        } else {
-          this.isAllDisabled = false;
-        }
-        this.isDefaultDisabled = defaultStatus;
-        return defaultStatus;
+        return equal(this.value, this.defaultChecked);
       },
       set(value) {
         this.selectDefault(value);
       }
+    },
+    isAllDisabled() {
+      let defaultStatus = equal(this.value, this.defaultChecked);
+      if (this.allChecked.length == this.defaultChecked.length) {
+        return defaultStatus;
+      }
+      return false;
+    },
+    isDefaultDisabled() {
+      return equal(this.value, this.defaultChecked);
     }
   },
   methods: {

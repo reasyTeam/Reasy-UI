@@ -241,9 +241,9 @@ export default {
 :::
 
 
-### 属性 Attributes
+## Props
 
-#### steps属性
+### steps Props
 
 | 参数           | 说明                                         | 类型    | 可选值                             | 默认值  |
 | -------------- | -------------------------------------------- | ------- | ---------------------------------- | ------- |
@@ -253,7 +253,7 @@ export default {
 | finish-status  | 设置结束步骤的状态                           | string  | wait/process/finish/error/disabled | finish  |
 | align-center   | 文字进行居中对齐                             | boolean | -                                  | true    |
 
-#### step属性
+### step Props
 
 | 参数        | 说明                                          | 类型        | 可选值                             | 默认值 |
 | ----------- | --------------------------------------------- | ----------- | ---------------------------------- | ------ |
@@ -262,7 +262,7 @@ export default {
 | icon        | icon的class类名                               | string/slot | -                                  | -      |
 | status      | 设置当前步骤的状态，不设置则根据steps确定状态 | string      | wait/process/finish/error/disabled | -      |
 
-#### step Slot
+## step Slots
 
 | name        | 说明           |
 | ----------- | -------------- |
