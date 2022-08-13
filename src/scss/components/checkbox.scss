@@ -13,7 +13,6 @@
   //   font-size: 0;
 
   &:hover {
-
     .v-checkbox__icon,
     .v-checkbox__process {
       border-color: $border-hover-color;
@@ -58,7 +57,6 @@
     }
 
     &:hover {
-
       .v-checkbox__icon,
       .v-checkbox__process {
         border-color: $border-color;
@@ -66,10 +64,9 @@
     }
   }
 
-  &+& {
-    margin-left: 20px;
-  }
-
+  // & + & {
+  //   margin-left: 20px;
+  // }
 
   &__icon {
     font-size: 16px;

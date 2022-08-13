@@ -86,6 +86,7 @@ Vue.use(Base);
         <v-tooltip
           :max-width="210"
           :enterable="false"
+          trigger="click"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
           position="right-center"
         >

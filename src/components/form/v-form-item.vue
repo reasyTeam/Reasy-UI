@@ -211,12 +211,6 @@ export default {
     };
   },
 
-  beforeCreate() {
-    if (this.$vnode.key === undefined) {
-      this.$vnode.key = IGuid();
-    }
-  },
-
   created() {
     //失焦后数据验证
     this.$on("form:blur", val => {

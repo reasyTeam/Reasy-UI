@@ -67,6 +67,7 @@
 
   &__row {
     &__file {
+      white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       width: $elem-width;

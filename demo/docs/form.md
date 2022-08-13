@@ -53,7 +53,7 @@ Vue.use(Base);
 
 ```html
 <v-form ref="form" :model="formData" @submit="submit">
-  <v-form-item label="类型" prop="type">
+  <v-form-item label="类型" prop="type" key="key1">
     <v-select name="type" v-model="formData.type" :options="options"></v-select>
   </v-form-item>
   <v-form-item label="值1" prop="data1" v-if="formData.type == 1">
@@ -170,7 +170,7 @@ Vue.use(Base);
   </v-form-item>
   <v-form-item label="日期时间" prop="date1" :required="false">
     <v-datepicker
-      name="date1"
+      name="date2"
       v-model="ruleForm.date1"
       :width="400"
       is-range
@@ -292,6 +292,9 @@ Vue.use(Base);
 ```
 
 :::
+
+
+> 注意：如果涉及组件显示隐藏切换或者组件拿到的数据有问题时，请在`v-form-item`上绑定唯一的`key`。这是由于`Vue`对视图更新，进行`patch`操作时，对`DOM`进行复用引起的bug。
 
 ## 禁用
 
@@ -479,6 +482,7 @@ Vue.use(Base);
 
 :::
 
+> 注意：如果涉及组件显示隐藏切换或者组件拿到的数据有问题时，请在`v-form-item`上绑定唯一的`key`。这是由于`Vue`对视图更新，进行`patch`操作时，对`DOM`进行复用引起的bug。
 
 ## Props
 
@@ -521,6 +525,8 @@ key 为 表单选项的 prop，
 | cancel | 表单取消事件               | —              |
 
 ## v-form-item
+
+> 注意：如果涉及组件显示隐藏切换或者组件拿到的数据有问题时，请在`v-form-item`上绑定唯一的`key`。这是由于`Vue`对视图更新，进行`patch`操作时，对`DOM`进行复用引起的bug。
 ## Props
 
 | 参数               | 说明                                                               | 类型           | 可选值 | 默认值       |

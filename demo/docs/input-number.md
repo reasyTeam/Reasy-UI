@@ -41,7 +41,7 @@ Vue.use(Base);
   export default {
     data() {
       return {
-        num: 5
+        num: '5'
       };
     }
   };
