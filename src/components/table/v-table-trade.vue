@@ -13,7 +13,7 @@
           v-if="search"
           class="search-input"
           v-model="searchValue"
-          placeholder="搜索"
+          :placeholder="_('Search')"
           suffix-icon="v-icon-search"
           @input="inputSearch"
           @change="changeSearch"
@@ -52,7 +52,7 @@
             :is-selected="hasCheckBoxSelect"
             :before-select-all="beforeSelectAll"
             :is-select-all-disabled="
-              isSelectAllDisabled || tableData.length === 0
+              isSelectAllDisabled || tableData.length <= disabledCount
             "
             @change="changeCheckboxAll"
             @sort="sortTable"
@@ -78,6 +78,10 @@
                     :column="col"
                     :key="index"
                     :index="index"
+                    :id="name | id(rowIndex + 1 + '-' + (col.rawProp || index))"
+                    :name="
+                      name | id(rowIndex + 1 + '-' + (col.rawProp || index))
+                    "
                     :checkbox-field="CHECKBOX_NAME"
                     :expand-field="EXPAND_NAME"
                     :row-data="rowData"
@@ -152,6 +156,8 @@
         v-if="!$slots.loading"
         class="v-table__loading"
         :visible="isLoading"
+        :no-id="noId"
+        :name="name | id('loading')"
         background="#0058e4"
       >
         {{ loadingText }}
@@ -457,6 +463,17 @@ export default {
       this.columns.splice(exsitIndex, 1);
     });
   },
+  mounted() {
+    this.columns.forEach(el => {
+      //为自定义列添加默认的排序
+      if (el.defaultSortType == "asc" || el.defaultSortType == "des") {
+        el.sortType = el.defaultSortType;
+        this.sortProp = el.prop;
+        // 暂时不需要触发排序
+        // this.sortTable(el.prop, el.sortType);
+      }
+    });
+  },
   methods: {
     updateTable() {
       this.$nextTick(() => {
@@ -476,7 +493,12 @@ export default {
           });
         }
         this.checkboxAllVal =
-          this.selectedCount + this.disabledCount >= tableData.length;
+          this.selectedCount + this.disabledCount >= tableData.length &&
+          this.selectedCount > 0;
+        // 没有数据的时候0个
+        if (this.selectedCount + this.disabledCount == 0) {
+          this.checkboxAllVal = false;
+        }
       });
     },
 

@@ -17,7 +17,7 @@ Vue.use(Base);
 
 ```html
 <div class="loading-box">
-  <v-loading :visible="true"></v-loading>
+  <v-loading :visible="true" name="loading1"></v-loading>
 </div>
 
 <style>
@@ -39,11 +39,11 @@ Vue.use(Base);
 
 ```html
 <div class="loading-box loading-box__fill">
-  <v-loading :visible="show"></v-loading>
+  <v-loading :visible="show" name="loading2"></v-loading>
 </div>
 <div>
   <label>显示loading：</label>
-  <v-switch no-id v-model="show"></v-switch>
+  <v-switch no-id v-model="show" name="loading3"></v-switch>
 </div>
 
 <script>
@@ -80,7 +80,7 @@ Vue.use(Base);
 
 ```html
 <div class="loading-box">
-  <v-loading text="加载中" :visible="true"></v-loading>
+  <v-loading text="加载中" :visible="true" name="loading4"></v-loading>
 </div>
 
 <style>
@@ -105,13 +105,13 @@ Vue.use(Base);
   <v-col :span="12">
     <div class="loading-box loading-box__fill">
       has-mask="true"
-      <v-loading :visible="true"></v-loading>
+      <v-loading :visible="true" name="loading5"></v-loading>
     </div>
   </v-col>
   <v-col :span="12">
     <div class="loading-box loading-box__fill">
       has-mask="false"
-      <v-loading :has-mask="false" :visible="true"></v-loading>
+      <v-loading :has-mask="false" :visible="true" no-id></v-loading>
     </div>
   </v-col>
 </v-row>
@@ -141,17 +141,17 @@ Vue.use(Base);
 <v-row :gutter="12">
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading background="#1890ff" :visible="true"></v-loading>
+      <v-loading background="#1890ff" :visible="true" no-id></v-loading>
     </div>
   </v-col>
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading :visible="true"></v-loading>
+      <v-loading :visible="true" no-id></v-loading>
     </div>
   </v-col>
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading background="#d82228" :visible="true"></v-loading>
+      <v-loading background="#d82228" :visible="true" no-id></v-loading>
     </div>
   </v-col>
 </v-row>
@@ -179,17 +179,17 @@ Vue.use(Base);
 <v-row :gutter="12">
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading text="size: L" size="L" :visible="true"></v-loading>
+      <v-loading text="size: L" size="L" :visible="true" no-id></v-loading>
     </div>
   </v-col>
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading text="size: M" size="M" :visible="true"></v-loading>
+      <v-loading text="size: M" size="M" :visible="true" no-id></v-loading>
     </div>
   </v-col>
   <v-col :span="8">
     <div class="loading-box">
-      <v-loading text="size: S" size="S" :visible="true"></v-loading>
+      <v-loading text="size: S" size="S" :visible="true" no-id></v-loading>
     </div>
   </v-col>
 </v-row>
@@ -212,7 +212,7 @@ Vue.use(Base);
 
 ```html
 <div class="loading-box">
-  <v-loading :visible="true">
+  <v-loading :visible="true" no-id>
     <label style="color: #fff; background-color: rgb(255,0,0);">我</label>
     <label style="color: #fff; background-color: rgba(255,165,0);">是</label>
     <label style="color: #fff; background-color: rgba(255,255,0);">自</label>

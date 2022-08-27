@@ -12,7 +12,8 @@
       {{ rowIndex + 1 }}
     </template>
     <v-checkbox
-      no-id
+      :no-id="!name"
+      :name="name ? name + '-checkbox' : ''"
       v-else-if="column.type === 'selection'"
       class="v-table__header__checkbox"
       v-model="rowData[checkboxField]"
@@ -23,6 +24,7 @@
     <!-- expand处理 -->
     <span
       v-else-if="column.type === 'expand'"
+      :id="name ? name + '-expand' : ''"
       class="pointer v-table__expand__icon"
       :class="
         rowData[expandField] ? 'v-icon-minus-square' : 'v-icon-add-square'
@@ -105,14 +107,20 @@ export default {
     beforeChange: Function,
     filterSearch: Function,
     clickCheckbox: Function,
-    expandTable: Function
+    expandTable: Function,
+    name: String
   },
   components: {
     VTd
   },
   computed: {
     disabled() {
-      return this.column.getDisabled(this.rowData);
+      if (this.column.type === "selection") {
+        let val = this.column.getDisabled(this.rowData);
+        this.updateDisabled(val);
+        return val;
+      }
+      return false;
     },
     tdValue() {
       return this.column.format(this.column.prop, this.rowData) == ""
@@ -120,6 +128,7 @@ export default {
         : this.column.format(this.column.prop, this.rowData);
     }
   },
+
   methods: {
     // 生成配置信息
     getTooltipOption(col) {
@@ -131,14 +140,9 @@ export default {
         },
         this.column.tooltipOption
       );
-    }
-  },
-  watch: {
-    disabled: {
-      immediate: true,
-      handler(val) {
-        this.rowData[DISABLED_FIELD] = val;
-      }
+    },
+    updateDisabled(val) {
+      this.rowData[DISABLED_FIELD] = val;
     }
   }
 };

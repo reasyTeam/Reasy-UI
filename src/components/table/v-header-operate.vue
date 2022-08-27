@@ -13,7 +13,7 @@
               v-model="isAllChecked"
               :disabled="isAllDisabled"
             >
-              全选
+              {{ _("All") }}
             </v-checkbox>
             <v-checkbox
               no-id
@@ -21,7 +21,7 @@
               v-model="isDefaultChecked"
               :disabled="isDefaultDisabled"
             >
-              默认状态
+              {{ _("Default") }}
             </v-checkbox>
             <div class="line"></div>
             <!-- 选项 -->

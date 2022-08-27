@@ -72,6 +72,8 @@
       :class="{ 'v-table__border': border }"
     >
       <v-scroll
+        :no-id="noId"
+        :name="name | id('scroll')"
         ref="scroll"
         @scroll="scroll"
         overflow="auto"
@@ -110,6 +112,8 @@
                     :column="col"
                     :key="index + 1"
                     :index="index"
+                    :id="name | id(rowIndex + '-' + (col.rawProp || index))"
+                    :name="name | id(rowIndex + '-' + (col.rawProp || index))"
                     :checkbox-field="checkboxField"
                     :expand-field="expandField"
                     :row-data="rowData"
@@ -201,6 +205,14 @@
                         :column="col"
                         :key="index + 1"
                         :index="index"
+                        :id="
+                          name
+                            | id('l-' + rowIndex + '-' + (col.rawProp || index))
+                        "
+                        :name="
+                          name
+                            | id('l-' + rowIndex + '-' + (col.rawProp || index))
+                        "
                         :checkbox-field="checkboxField"
                         :expand-field="expandField"
                         :row-data="rowData"
@@ -256,6 +268,15 @@
                         :column="col"
                         :key="index + 1"
                         :index="index"
+                        :id="
+                          name
+                            | id('r-' + rowIndex + '-' + (col.rawProp || index))
+                        "
+                        :noId="!name"
+                        :name="
+                          name
+                            | id('r-' + rowIndex + '-' + (col.rawProp || index))
+                        "
                         :checkbox-field="checkboxField"
                         :expand-field="expandField"
                         :row-data="rowData"
@@ -295,7 +316,13 @@
     <div v-if="$slots.loading" v-show="isLoading">
       <slot name="loading"></slot>
     </div>
-    <v-loading class="v-table__loading" v-else :visible="isLoading">
+    <v-loading
+      class="v-table__loading"
+      v-else
+      :visible="isLoading"
+      :no-id="noId"
+      :name="name | id('loading')"
+    >
       {{ loadingText }}
     </v-loading>
   </div>

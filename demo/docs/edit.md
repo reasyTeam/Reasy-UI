@@ -206,7 +206,7 @@ Vue.use(Edit);
 ::: demo
 
 ```html
-<v-edit v-model="edit" name="edit-cor" :auto-correction="[1, 10]" :allow="/\d/g" />
+<v-edit v-model="edit" name="edit-cor" :auto-correction="[1, 10]" :allow="/\d/g" :not-correct-empty="false" />
 <script>
   export default {
     data() {
@@ -222,22 +222,22 @@ Vue.use(Edit);
 
 ## Props
 
-| 参数            | 说明                                               | 类型            | 可选值    | 默认值 |
-| --------------- | -------------------------------------------------- | --------------- | --------- | ------ |
-| v-model         | 绑定值                                             | string / number | —         | —      |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| maxlength       | 最大输入长度                                       | number          | —         | —      |
-| disabled        | 是否禁用                                           | boolean         | —         | false  |
-| width           | 输入框长度，支持数字和字符串，如 70 或 70px 或 70% | string / number | —         | —      |
-| placeholder     | 输入框占位文字                                     | string          | —         | —      |
-| is-clear        | 是否支持清空                                       | boolean         | —         | false  |
-| show-word-limit | 是否显示输入字数统计                               | boolean         | —         | false  |
-| autofocus       | 是否自动聚焦                                       | boolean         | —         | false  |
-| size            | 编辑框大小                                         | string          | S / M / L | M      |
-| allow           | 输入框允许输入字符的正则表达式                     | RegExp          | —         | —      |
-| unit            | 输入框单位                                         | String          | —         | —      |
-| auto-correction | 自动纠错，仅支持按范围进行数字纠错                 | Array           | —         | []     |
+| 参数            | 说明                                                                    | 类型            | 可选值    | 默认值 |
+| --------------- | ----------------------------------------------------------------------- | --------------- | --------- | ------ |
+| v-model         | 绑定值                                                                  | string / number | —         | —      |
+| no-id           | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id | boolean         | -         | false  |
+| name            | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**              | string          | -         | -      |
+| maxlength       | 最大输入长度                                                            | number          | —         | —      |
+| disabled        | 是否禁用                                                                | boolean         | —         | false  |
+| width           | 输入框长度，支持数字和字符串，如 70 或 70px 或 70%                      | string / number | —         | —      |
+| placeholder     | 输入框占位文字                                                          | string          | —         | —      |
+| is-clear        | 是否支持清空                                                            | boolean         | —         | false  |
+| show-word-limit | 是否显示输入字数统计                                                    | boolean         | —         | false  |
+| autofocus       | 是否自动聚焦                                                            | boolean         | —         | false  |
+| size            | 编辑框大小                                                              | string          | S / M / L | M      |
+| allow           | 输入框允许输入字符的正则表达式                                          | RegExp          | —         | —      |
+| unit            | 输入框单位                                                              | String          | —         | —      |
+| auto-correction | 自动纠错，仅支持按范围进行数字纠错                                      | Array           | —         | []     |
 
 ## @Events
 

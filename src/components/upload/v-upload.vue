@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import ajax from "./ajax";
 import UploadImage from "./upload-image.vue";
 import NameMixin from "../name-mixins";
 const UPLOAD_TYPE = {
@@ -98,6 +99,7 @@ const UPLOAD_TYPE = {
   LOADING: 1, //上传中
   UPLOADED: 2 //上传成功
 };
+let rawFile = null;
 export default {
   name: "v-upload",
   mixins: [NameMixin],
@@ -152,7 +154,7 @@ export default {
     //上传前处理事件，返回false不会上传文件
     beforeUpload: {
       type: Function,
-      default: function() {
+      default: function () {
         return true;
       }
     },
@@ -164,6 +166,26 @@ export default {
       //是否提交后自动清除文件
       type: Boolean,
       default: true
+    },
+    // isAjax
+    isAjax: {
+      type: Boolean,
+      default: false
+    },
+    // Ajax
+    onRemove: {
+      type: Function,
+      default: () => {}
+    },
+    // Ajax
+    onProgress: {
+      type: Function,
+      default: () => {}
+    },
+    // Ajax
+    onError: {
+      type: Function,
+      default: () => {}
     }
   },
   computed: {
@@ -262,27 +284,103 @@ export default {
       let elm = e.target;
       let fileArr = elm.value.split("\\");
       this.fileStr = fileArr.slice(-1)[0];
+      let files = elm.files;
+      if (!files) return;
+      // 获取原始文件
+      rawFile = Array.prototype.slice.call(elm.files)[0];
       if (this.type === "picture") {
         this.uploadType = UPLOAD_TYPE.INIT;
         this.getImageBase64(e);
       }
       this.onChange(this.fileStr);
     },
+    // ajax post
+    post(rawFile) {
+      const options = {
+        headers: this.headers,
+        withCredentials: this.withCredentials,
+        file: rawFile,
+        data: this.data,
+        filename: this.fileName,
+        action: this.action,
+        // onProgress 表示监听上传文件的进度事件
+        onProgress: e => {
+          this.onProgress(e, rawFile);
+        },
+        // onSuccess 表示监听上传文件的成功事件
+        onSuccess: res => {
+          this.onSuccess(res, rawFile);
+        },
+        // onSuccess 表示监听上传文件的失败事件
+        onError: err => {
+          console.error(err);
+          this.onError(err, rawFile);
+        }
+      };
+      const req = ajax(options);
+      if (req && req.then) {
+        req.then(options.onSuccess, options.onError);
+      }
+    },
+    upload(rawFile) {
+      this.$refs.file.value = null;
+      // beforeUpload 上传文件前的钩子函数
+      if (!this.beforeUpload) {
+        return this.post(rawFile);
+      }
+
+      const before = this.beforeUpload(rawFile);
+      if (before && before.then) {
+        before.then(
+          processedFile => {
+            const fileType = Object.prototype.toString.call(processedFile);
+
+            if (fileType === "[object File]" || fileType === "[object Blob]") {
+              if (fileType === "[object Blob]") {
+                processedFile = new File([processedFile], rawFile.name, {
+                  type: rawFile.type
+                });
+              }
+              for (const p in rawFile) {
+                if (rawFile.hasOwnProperty(p)) {
+                  processedFile[p] = rawFile[p];
+                }
+              }
+              this.post(processedFile);
+            } else {
+              this.post(rawFile);
+            }
+          },
+          () => {
+            this.onRemove(null, rawFile);
+          }
+        );
+      } else if (before !== false) {
+        this.post(rawFile);
+      } else {
+        // 移除文件
+        this.onRemove(null, rawFile);
+      }
+    },
     async submit() {
       let result = await this.beforeUpload(this.fileStr);
       if (!result) return;
-      this.$refs.iform.submit();
+      if (this.isAjax) {
+        this.upload(rawFile);
+      } else {
+        this.$refs.iform.submit();
+      }
       this.uploadType = UPLOAD_TYPE.LOADING;
       //上传后清空文件
-      //this.$refs.file.value = "";
+      this.$refs.file.value = "";
     },
     clearFile() {
-      this.fileStr = "";
       this.$refs.file.value = "";
     }
   },
   beforeDestroy() {
     window.removeEventListener("message", this.parseIframeCrossReponse, false);
+    rawFile = null;
   }
 };
 </script>

@@ -18,15 +18,24 @@
         </template>
         <template v-else>
           <div class="v-message__loading">
-            <v-loading size="S" :visible="true"></v-loading>
+            <v-loading size="S" :visible="true" no-id></v-loading>
           </div>
         </template>
       </template>
       <template v-if="!$slots.default">
-        <p v-if="!dangerouslyUseHTMLString" :class="contentClass">
+        <p
+          v-if="!dangerouslyUseHTMLString"
+          :class="contentClass"
+          :id="name | id('message-default')"
+        >
           {{ content }}
         </p>
-        <p v-else v-html="content" :class="contentClass"></p>
+        <p
+          v-else
+          v-html="content"
+          :class="contentClass"
+          :id="name | id('message-custom')"
+        ></p>
       </template>
       <template v-else>
         <slot></slot>
@@ -59,8 +68,17 @@ export default {
       timer: null,
       dangerouslyUseHTMLString: false,
       onClose: null,
+      name: "",
       closeCallback: () => {}
     };
+  },
+  filters: {
+    id(name, suffix) {
+      if (name === "") {
+        return "";
+      }
+      return `${name}-${suffix}`;
+    }
   },
   computed: {
     messageClass() {

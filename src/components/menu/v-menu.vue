@@ -9,6 +9,7 @@
     <router-link
       v-for="menuFirst in routes"
       :key="menuFirst.name"
+      :id="name | id(menuFirst.name)"
       :to="
         (isRouter && !menuFirst.meta.disabled && redirectPath(menuFirst)) || ''
       "
@@ -42,6 +43,7 @@
           <router-link
             v-for="menuSec in menuFirst.children"
             :key="menuSec.name"
+            :id="name | id(menuFirst.name + '-' + menuSec.name)"
             :to="(isRouter && !menuSec.meta.disabled && menuSec.path) || ''"
             :class="['v-menu-sec v-menu-el v-menu-text', menuSecCss(menuSec)]"
             @click.native="clickSec(menuSec)"

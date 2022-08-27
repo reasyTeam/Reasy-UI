@@ -22,6 +22,7 @@ Vue.use(Base);
     :bordered="true"
     :options="options1"
     @click="clickItem"
+    name="list1"
   >
   </v-list>
 </div>
@@ -32,6 +33,7 @@ Vue.use(Base);
     :bordered="true"
     :options="options2"
     @click="clickItem"
+    name="list2"
   >
   </v-list>
 </div>
@@ -82,6 +84,7 @@ export default {
   <v-list
     :bordered="true"
     @click="clickItem"
+    name="list3"
   >
   </v-list>
 </div>
@@ -92,6 +95,7 @@ export default {
     :bordered="true"
     empty-text="no data"
     @click="clickItem"
+    name="list4"
   >
   </v-list>
 </div>
@@ -101,6 +105,7 @@ export default {
   <v-list
     :bordered="true"
     @click="clickItem"
+    name="list5"
   >
     <template #empty-text>
       <div class="custom-empty-content">

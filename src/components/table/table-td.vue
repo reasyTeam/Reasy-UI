@@ -10,7 +10,8 @@
       {{ rowIndex + 1 }}
     </template>
     <v-checkbox
-      no-id
+      :no-id="!name"
+      :name="name ? name + '-checkbox' : ''"
       v-if="column.type === 'selection'"
       class="v-table__header__checkbox"
       v-model="rowData[checkboxField]"
@@ -22,6 +23,7 @@
     <span
       v-if="column.type === 'expand'"
       class="pointer v-table__expand__icon"
+      :id="name ? name + '-expand' : ''"
       :class="
         rowData[expandField] ? 'v-icon-minus-square' : 'v-icon-add-square'
       "
@@ -74,7 +76,8 @@ export default {
     beforeChange: Function,
     filterSearch: Function,
     clickCheckbox: Function,
-    expandTable: Function
+    expandTable: Function,
+    name: String
   },
   components: {
     VTd

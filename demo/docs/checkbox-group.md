@@ -16,7 +16,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-checkbox-group v-model="checked" name="check-group" :options="options"></v-checkbox-group>
+<v-checkbox-group v-model="checked" name="check-group" :options="options" width="300px"></v-checkbox-group>
 <script>
   export default {
     data() {
@@ -38,6 +38,34 @@ Vue.use(Base);
           {
             label: "选项四",
             value: 4
+          },
+          {
+            label: "选项四",
+            value: 5
+          },
+          {
+            label: "选项四",
+            value: 6
+          },
+          {
+            label: "选项四",
+            value: 7
+          },
+          {
+            label: "选项四",
+            value: 8
+          },
+          {
+            label: "选项四",
+            value: 9
+          },
+          {
+            label: "选项四",
+            value: 10
+          },
+          {
+            label: "选项四",
+            value: 11
           }
         ]
       };
@@ -304,18 +332,18 @@ Vue.use(Base);
 
 ## Props
 
-| 参数               | 说明                                                                                                                              | 类型    | 可选值 | 默认值 |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
-| value / v-model    | 绑定值                                                                                                                            | Arrray  | —      | []     |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| disabled           | 是否禁用全部复选框，包括全选复选框                                                                                                | boolean | —      | false  |
-| disabled-check-all | 是否仅禁用全选复选框。特殊情况下使用(一般配合options中的disabled，在多个checkbox组之间修改交互而使用)                             | boolean | —      | false  |
-| options            | 选项数组对象[{label: 显示文字，<br /> value：值，disabled: 是否禁用此项}]                                                         | Array   | —      | []     |
-| is-select-all      | 是否支持全选                                                                                                                      | boolean | —      | false  |
-| select-text        | 全部选中的文字描述                                                                                                                | string  | —      | 全选   |
-| min                | 最小支持选项                                                                                                                      | number  | —      | 0      |
-| max                | 最大支持选项，最大为选项的个数                                                                                                    | number  | —      | —      |
+| 参数               | 说明                                                                                                                            | 类型    | 可选值 | 默认值 |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------- | ------ | ------ |
+| value / v-model    | 绑定值                                                                                                                          | Arrray  | —      | []     |
+| no-id              | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id                                                         | boolean | -      | false  |
+| name               | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**                                                                      | string  | -      | -      |
+| disabled           | 是否禁用全部复选框，包括全选复选框                                                                                              | boolean | —      | false  |
+| disabled-check-all | 是否仅禁用全选复选框。特殊情况下使用(一般配合options中的disabled，在多个checkbox组之间修改交互而使用)                           | boolean | —      | false  |
+| options            | 选项数组对象[{label: 显示文字，<br /> value：值，disabled: 是否禁用此项}]                                                       | Array   | —      | []     |
+| is-select-all      | 是否支持全选                                                                                                                    | boolean | —      | false  |
+| select-text        | 全部选中的文字描述                                                                                                              | string  | —      | 全选   |
+| min                | 最小支持选项                                                                                                                    | number  | —      | 0      |
+| max                | 最大支持选项，最大为选项的个数                                                                                                  | number  | —      | —      |
 | tooltip            | 文字提示，配置参考v-tooltip指令。提示内容默认为options项中的label值。若配置了content值，那么所有的复选框的提示内容都为content值 | object  | —      | —      |
 
 ## options 选项

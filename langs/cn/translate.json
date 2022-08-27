@@ -44,5 +44,9 @@
   "Select File": "选择文件",
   "%s items in total": "共%s条",
   "Browse": "浏览",
-  "Click Browse to select a file": "点击浏览选择文件"
+  "Click Browse to select a file": "点击浏览选择文件",
+  "Download QR Code": "下载二维码",
+  "QR Code": "二维码",
+  "Search": "搜索",
+  "Default": "默认状态"
 }

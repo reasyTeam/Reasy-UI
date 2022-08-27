@@ -47,7 +47,7 @@ Vue.use(Base);
   ref="dropdown1"
   class="dropdown-item"
   label="可操作按钮组"
-  name="drop-btns"
+  name="drop-btns2"
   type="button-group"
   :options="options1"
   @content-click="contentClick"

@@ -251,6 +251,31 @@ export default {
         e.stopPropagation();
       }
     },
+    checkInputTime() {
+      let startTime = this.$refs.start.value;
+      let result = isValidTime(startTime, this.format, this.isAllDay);
+      if (!result) {
+        return false;
+      }
+
+      //支持范围
+      if (this.isRange) {
+        let endTime = this.$refs.end.value;
+        return isValidTime(endTime, this.format, this.isAllDay);
+      }
+      return true;
+    },
+    //返回输入框数据
+    getInputValue() {
+      let startTime = this.$refs.start.value;
+
+      //支持范围
+      if (this.isRange) {
+        let endTime = this.$refs.end.value;
+        return [startTime, endTime];
+      }
+      return startTime;
+    },
     //手动输入
     inputStartTime(val) {
       if (!isValidTime(val, this.format, this.isAllDay)) {
@@ -276,6 +301,9 @@ export default {
       this.startTime = val;
     },
     changeStartTime() {
+      if (!this.$refs.startPanel) {
+        return;
+      }
       let time = this.$refs.startPanel.getTime();
       this.startTime = time;
       this.$refs.start.setInputValue(time);

@@ -2,7 +2,7 @@
   <div class="v-loading" v-show="visible">
     <div class="v-loading__mask" v-if="hasMask"></div>
     <div class="v-loading__wrapper">
-      <div :class="['v-loading__dots', `v-loading__dots--${size}`]">
+      <div :class="['v-loading__dots', `v-loading__dots--${size}`]" :id="name">
         <div class="v-loading__dot__item" :style="dotStyle"></div>
         <div class="v-loading__dot__item" :style="dotStyle"></div>
         <div class="v-loading__dot__item" :style="dotStyle"></div>
@@ -16,8 +16,11 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
+
 export default {
   name: "v-loading",
+  mixins: [NameMixin],
   props: {
     target: {
       type: HTMLElement

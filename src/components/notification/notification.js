@@ -6,22 +6,22 @@ const NotifyConstructor = Vue.extend(Notification);
 const typeList = ["success", "error", "warning", "notice"];
 
 const betweenSpace = 16;
+const _globalOptions = {};
 
 let instance = {},
   zIndex = 1000,
   instances = {};
 
-const Notify2 = function(...args) {
+function handleInstance(resolve, ...args) {
   let options = {};
-
   if (args.length === 1) {
     args = args[0];
     if (isObject(args)) {
-      options = { ...args };
+      Object.assign(options, _globalOptions, { ...args });
     } else {
-      options = {
+      Object.assign(options, _globalOptions, {
         content: args
-      };
+      });
     }
 
     let positionType =
@@ -54,8 +54,17 @@ const Notify2 = function(...args) {
             betweenSpace}px`;
         }
       });
-      //resolve(currentInstance);
+
+      resolve && resolve(currentInstance);
     };
+    // 赋值name currentInstances 直接获取最后一个index 进行 +1
+    let len = currentInstances.length;
+    if (len > 0) {
+      options.name =
+        "notifi" + (~~currentInstances[len - 1].name.replace(/\D/g, "") + 1);
+    } else {
+      options.name = "notifi0";
+    }
 
     currentInstance = new NotifyConstructor({
       data: options
@@ -75,76 +84,22 @@ const Notify2 = function(...args) {
 
     return currentInstance;
   }
+}
+
+// 返回Notify 实例
+const NotifyInstace = function(...args) {
+  return handleInstance(undefined, ...args);
 };
 
-const Nofify = function(...args) {
+// 返回 promise 关闭触发成功回调
+const Notify = function(...args) {
   return new Promise(resolve => {
-    let options = {};
-
-    if (args.length === 1) {
-      args = args[0];
-      if (isObject(args)) {
-        options = { ...args };
-      } else {
-        options = {
-          content: args
-        };
-      }
-
-      let positionType =
-          options.position || NotifyConstructor.extendOptions.data().position,
-        currentInstance = {},
-        currentInstances = [];
-
-      if (!instance[positionType]) {
-        instance[positionType] = {};
-      }
-      if (!instances[positionType]) {
-        instances[positionType] = [];
-      }
-      currentInstance = instance[positionType];
-      currentInstances = instances[positionType];
-
-      options.onClose = function() {
-        const idx = currentInstances.findIndex(({ id }) => id === this.id),
-          removeOffsetHeight = currentInstances[idx]
-            ? currentInstances[idx].$el.offsetHeight
-            : 0;
-
-        currentInstances.splice(idx, 1);
-
-        currentInstances.forEach(({ id, $el }) => {
-          const [position] = this.positionArr;
-          if (id > this.id) {
-            $el.style[position] = `${parseInt($el.style[position]) -
-              removeOffsetHeight -
-              betweenSpace}px`;
-          }
-        });
-        resolve(currentInstance);
-      };
-
-      currentInstance = new NotifyConstructor({
-        data: options
-      });
-      currentInstance.$mount();
-      document.body.appendChild(currentInstance.$el);
-
-      let { verticalOffset } = currentInstance;
-      currentInstances.forEach(
-        item => (verticalOffset += item.$el.offsetHeight + betweenSpace)
-      );
-      currentInstance.verticalOffset = verticalOffset;
-      currentInstance.id = zIndex;
-      currentInstance.$el.style.zIndex = zIndex++;
-      currentInstance.show();
-      currentInstances.push(currentInstance);
-    }
+    handleInstance(resolve, ...args);
   });
 };
 
 typeList.forEach(msgType => {
-  Nofify[msgType] = function(content, duration) {
+  Notify[msgType] = function(content, duration) {
     const options = {
       status: msgType,
       content
@@ -154,9 +109,9 @@ typeList.forEach(msgType => {
       options.duration = duration;
     }
 
-    Nofify(options);
+    Notify(options);
   };
-  Notify2[msgType] = function(content, duration) {
+  NotifyInstace[msgType] = function(content, duration) {
     const options = {
       status: msgType,
       content
@@ -166,9 +121,16 @@ typeList.forEach(msgType => {
       options.duration = duration;
     }
 
-    return Notify2(options);
+    return NotifyInstace(options);
   };
 });
 
-export { Notify2 };
-export default Nofify;
+Notify.instance = NotifyInstace;
+Notify.setOptions = function(args) {
+  if (isObject(args)) {
+    Object.assign(_globalOptions, args);
+  }
+};
+
+export { NotifyInstace };
+export default Notify;

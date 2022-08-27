@@ -1,5 +1,5 @@
 <template>
-  <div class="v-collapse border-b" :class="{ disabled: isDisabled }">
+  <div class="v-collapse border-b" :class="{ disabled: isDisabled }" :id="name">
     <div
       class="v-collapse__header"
       :class="{ 'is-active': isActive }"
@@ -8,6 +8,7 @@
       <slot name="title">{{ title }}</slot>
       <i
         class="v-collapse__arrow v-icon-down"
+        :id="name | id('icon')"
         :class="{ 'is-active': isActive }"
       ></i>
     </div>
@@ -23,9 +24,11 @@
 
 <script>
 import CollapseTransition from "./collapse-transition";
+import NameMixin from "../name-mixins";
 
 export default {
   name: "v-collapse",
+  mixins: [NameMixin],
   props: {
     title: String,
     actived: {

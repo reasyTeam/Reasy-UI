@@ -35,7 +35,8 @@
         // [sizeCss]: sizeCss
       }"
       :style="{
-        'margin-left': !isNoLabel ? labelWidth + paddingWidth + 'px' : '0'
+        'margin-left': !isNoLabel ? labelWidth + paddingWidth + 'px' : '0',
+        'padding-right': paddingRight ? paddingRight + 'px' : ''
       }"
     >
       <slot></slot>
@@ -83,6 +84,7 @@
         </template>
         <div
           ref="error"
+          :id="prop | id('item-error')"
           class="v-form-item__content__msg is-error"
           v-else-if="showError"
         >
@@ -95,7 +97,8 @@
 
 <script>
 import { sizeToCss } from "../filters";
-import { IGuid } from "../libs";
+
+
 export default {
   name: "v-form-item",
   inject: ["getValidateType", "getField", "elForm"],
@@ -165,6 +168,14 @@ export default {
       default: true
     }
   },
+  filters: {
+    id(name, suffix) {
+      if (name === "") {
+        return "";
+      }
+      return `${name}-${suffix}`;
+    }
+  },
   computed: {
     //间距
     paddingWidth() {
@@ -172,6 +183,7 @@ export default {
     },
     //组件标题宽度
     labelWidth() {
+      this.isFirefox && this.updateTempWidth();
       return this.$getLabelWidth();
     },
     showError() {
@@ -196,7 +208,9 @@ export default {
     // }
   },
   data() {
+    this.isFirefox = navigator.userAgent.indexOf("Firefox") > 0;
     return {
+      paddingRight: 0, // 更新一个临时的padding  用于触发渲染 只有火狐时生效
       titleWidth: 0,
       errHeight: "", //错误文字高度
       value: "",
@@ -279,6 +293,13 @@ export default {
       //错误文字信息
       this.setError(result || "");
       return !result;
+    },
+    // 主要时解决form为inline-block 在火狐中会换行的问题
+    updateTempWidth() {
+      this.paddingRight = 1;
+      this.$nextTick(() => {
+        this.paddingRight = 0;
+      });
     },
     //子组件覆盖此函数
     checkData() {

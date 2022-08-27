@@ -70,12 +70,14 @@
           <span
             class="v-icon-up v-input-number__button up"
             :class="{ 'btn-disabled': addDisabled }"
+            :name="name | id('add')"
             @click="addNum"
           ></span>
           <!-- 下箭头 -->
           <span
             class="v-icon-down v-input-number__button down"
             :class="{ 'btn-disabled': subDisabled }"
+            :name="name | id('minus')"
             @click="subNum"
           ></span>
         </div>
@@ -123,6 +125,11 @@ export default {
     step: {
       type: Number,
       default: 1
+    },
+    // 必填时  不输入会自动校验值 // 否则 不处理
+    required: {
+      type: Boolean,
+      default: false
     },
     precision: Number
   },
@@ -197,10 +204,15 @@ export default {
     sizeToCss,
     // 输入框修改值
     handlerChange(value) {
-      if (!value) {
+      if (!value && !this.required) {
         this.$emit("change", value);
         return;
       }
+      //  为空时 默认为0  在根据最大值和最小值修改
+      if (value === "") {
+        value = 0;
+      }
+
       let val = parseFloat(value);
       if (this.hasPrecision) {
         val = +val.toFixed(this.precisionVal);

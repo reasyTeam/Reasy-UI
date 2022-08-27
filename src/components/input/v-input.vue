@@ -20,6 +20,7 @@
       v-if="preText"
       ref="preText"
       class="v-input__middle v-input__pre-text"
+      :id="name | id('pre-text')"
       :style="icon && { left: '32px', paddingLeft: 0 }"
       >{{ preText }}</span
     >

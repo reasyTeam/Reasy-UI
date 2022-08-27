@@ -65,11 +65,11 @@
             :key="item.label"
             class="v-select__label__item multi__all"
             :class="{ disabled: item.disabled }"
-          >
-            <v-tooltip
+            ><v-tooltip
               :max-width="200"
               :enterable="false"
               :between-space="0"
+              word-break="break-all"
               show-only-ellipsis
               :content="item.label"
             >
@@ -79,9 +79,8 @@
                   maxWidth: multiAllWidth
                 }"
                 >{{ item.label }}</span
-              >
-            </v-tooltip>
-            <span
+              > </v-tooltip
+            ><span
               class="v-select__icon--right v-icon-close"
               :id="name | id(`${item.label}-del`)"
               @click.stop.prevent="delValue(item)"
@@ -92,8 +91,7 @@
           <span
             class="v-select__label__item multi__all"
             :class="{ disabled: multipleLabel[0].disabled }"
-          >
-            <v-tooltip
+            ><v-tooltip
               :max-width="200"
               :enterable="false"
               :between-space="0"
@@ -106,8 +104,7 @@
                 }"
                 >{{ multipleLabel[0].label }}</span
               ></v-tooltip
-            >
-            <span
+            ><span
               class="v-select__icon--right v-icon-close"
               :id="name | id('del')"
               @click.stop.prevent="delValue(multipleLabel[0])"
@@ -121,7 +118,7 @@
           </span>
         </template>
       </div>
-      <div class="placeholder-text" v-if="isEmpty">
+      <div class="placeholder-text" v-if="isEmpty" ref="EmptyText">
         {{ placeholder }}
       </div>
     </div>
@@ -133,6 +130,7 @@
         'v-icon-down': !hasClear,
         'v-icon-close-plane': hasClear
       }"
+      :id="name | id('icon')"
       @click="showOptions(true)"
     ></span>
     <create-to-body
@@ -146,7 +144,7 @@
         v-if="isSearch"
         v-model="searchText"
         class="v-select__search"
-        :placeholder="_('搜索')"
+        :placeholder="_('Search')"
         is-search
         no-id
         :name="name | id('search')"
@@ -350,6 +348,13 @@ export default {
           });
         }
       });
+      // 有值时更新下最大宽度
+      if (list.length > 0 && !this.multipleTextWidth) {
+        this.$nextTick(() => {
+          this.updateWidth();
+        });
+      }
+
       return list;
     },
     selectLabel() {
@@ -369,14 +374,14 @@ export default {
     },
     multiAllWidth() {
       let width = this.multipleTextWidth - MULTIALLWIDTH;
-      return width > 0 ? width + "px" : 0;
+      return width > 0 ? width + "px" : "auto";
     },
     multiNumWidth() {
       let width = this.multipleTextWidth - MULTIALLWIDTH;
       if (this.multipleLabel.length > 1) {
         width = width - MULTINUMWIDTH;
       }
-      return width > 0 ? width + "px" : 0;
+      return width > 0 ? width + "px" : "auto";
     }
   },
   data() {
@@ -389,15 +394,13 @@ export default {
       multipleTextWidth: 0 //多选列表宽度
     };
   },
-  mounted() {
-    this.$nextTick(() => {
-      let $parent = this.$refs.multipleText;
-      if ($parent) {
-        this.multipleTextWidth = $parent.getBoundingClientRect().width;
-      }
-    });
-  },
   methods: {
+    updateWidth() {
+      let $el = this.$refs.multipleText;
+      if ($el) {
+        this.multipleTextWidth = $el.getBoundingClientRect().width;
+      }
+    },
     showOptions(isArrow) {
       if (this.isDisabled) return;
       if (isArrow === true) {
@@ -515,7 +518,7 @@ export default {
       handler(val) {
         this.inputValue = val;
         this.$nextTick(() => {
-          this.isMultiple && val.length > 1 && this.$refs.body.setPotion();
+          this.isMultiple && this.$refs.body.setPotion();
         });
         // 默认选择第一个 不支持清空时生效
         if (

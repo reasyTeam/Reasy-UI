@@ -24,6 +24,7 @@ Vue.use(Base);
         <v-tooltip
           :max-width="210"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
+          trigger="click"
           position="top-left"
         >
           <v-button name="button-tl" >上左</v-button>
@@ -33,6 +34,7 @@ Vue.use(Base);
         <v-tooltip
           :max-width="210"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
+          trigger="click"
           position="top-center"
         >
           <v-button name="button-tm" >上中</v-button>
@@ -78,6 +80,7 @@ Vue.use(Base);
           :enterable="false"
           content="骊山四顾，阿房一炬，当时奢侈今何处？只见草萧疏，水萦纡。至今遗恨迷烟树。"
           position="left-center"
+          trigger="click"
         >
           <v-button name="button-lm" >左中</v-button>
         </v-tooltip>

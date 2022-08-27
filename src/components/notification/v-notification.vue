@@ -34,6 +34,7 @@
       <div class="v-notification__main">
         <template v-if="!dangerouslyUseHTMLString">
           <p
+            :id="name | id('notifi-default')"
             :class="[
               `v-notification__main--default`,
               { 'v-notification__close-space': showClose && !title }
@@ -43,7 +44,7 @@
           </p>
         </template>
         <template v-else>
-          <div v-html="content"></div>
+          <div v-html="content" :id="name | id('notifi-custom')"></div>
         </template>
       </div>
       <div v-if="showConfirm" class="v-notification__button">
@@ -97,7 +98,8 @@ export default {
       confirmText: _("OK"),
       verticalOffset: 16,
       dangerouslyUseHTMLString: false,
-      status: STATUS.NONE
+      status: STATUS.NONE,
+      name: ""
     };
   },
   mounted() {
@@ -105,6 +107,14 @@ export default {
   },
   beforeDestroy() {
     this.clearTimer();
+  },
+  filters: {
+    id(name, suffix) {
+      if (name === "") {
+        return "";
+      }
+      return `${name}-${suffix}`;
+    }
   },
   computed: {
     showIcon() {

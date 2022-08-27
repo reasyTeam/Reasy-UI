@@ -10,6 +10,7 @@
     :isBlock="isBlock"
     :animate="animate"
     :active="true"
+    :name="name"
     @mounted="setPosition"
   >
     <slot></slot>
@@ -58,7 +59,8 @@ export default {
     animate: {
       type: Boolean,
       default: false
-    }
+    },
+    name: String
   },
   computed: {
     scroll() {

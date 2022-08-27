@@ -23,7 +23,7 @@ Vue.use(Base);
   <v-input-number size="L" name="input-num-l" v-model="num"></v-input-number>
 </div>
 <div class="input-group">
-  <v-input-number size="M" name="input-num-m" v-model="num"></v-input-number>
+  <v-input-number size="M" name="input-num-m" v-model="num" required></v-input-number>
 </div>
 <div class="input-group">
   <v-input-number size="S" name="input-num-s" v-model="num"></v-input-number>
@@ -88,7 +88,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-input-number v-model="num" name="input-range" :min="1" :max="10"></v-input-number>
+<v-input-number v-model="num" name="input-range" :min="1" :max="10" required></v-input-number>
 <script>
   export default {
     data() {
@@ -202,20 +202,21 @@ Vue.use(Base);
 
 ## Props
 
-| 参数              | 说明                                               | 类型            | 可选值     | 默认值    |
-| ----------------- | -------------------------------------------------- | --------------- | ---------- | --------- |
-| v-model           | 绑定值                                             | number          | —          | —         |
-| no-id       | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id         | boolean  | - | false|
-| name        | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**  | string  | - | -   |
-| disabled          | 是否禁用                                           | boolean         | —          | false     |
-| width             | 输入框长度，支持数字和字符串，如 70 或 70px 或 70% | string / number | —          | —         |
-| min               | 输入框最小值                                       | number          | —          | -Infinity |
-| max               | 输入框最大值                                       | number          | —          | Infinity  |
-| is-controls       | 输入框右侧是否有控制器                             | boolean         | —          | true      |
-| controls-position | 控制器按钮位置                                     | string          | right      | —         |
-| size              | 输入框尺寸                                         | string          | S / M / L  | M         |
-| step              | 步长                                               | number          | —          | 1         |
-| precision         | 数值精度，小于步长精度时计算会用步长的精度         | number          | 0 或正整数 | —         |
+| 参数              | 说明                                                                    | 类型            | 可选值     | 默认值    |
+| ----------------- | ----------------------------------------------------------------------- | --------------- | ---------- | --------- |
+| v-model           | 绑定值                                                                  | number          | —          | —         |
+| no-id             | 是否不需要id，为false则以`name`作为id，除特殊情况，表单中使用必须添加id | boolean         | -          | false     |
+| name              | 原生属性name，同时渲染为id属性，当`no-id`为false时**必填**              | string          | -          | -         |
+| disabled          | 是否禁用                                                                | boolean         | —          | false     |
+| width             | 输入框长度，支持数字和字符串，如 70 或 70px 或 70%                      | string / number | —          | —         |
+| min               | 输入框最小值                                                            | number          | —          | -Infinity |
+| max               | 输入框最大值                                                            | number          | —          | Infinity  |
+| is-controls       | 输入框右侧是否有控制器                                                  | boolean         | —          | true      |
+| controls-position | 控制器按钮位置                                                          | string          | right      | —         |
+| size              | 输入框尺寸                                                              | string          | S / M / L  | M         |
+| step              | 步长                                                                    | number          | —          | 1         |
+| precision         | 数值精度，小于步长精度时计算会用步长的精度                              | number          | 0 或正整数 | —         |
+| required          | 是否可以输入空 必填时会自动转换最大值最小值                             | boolean         | -          | false     |
 
 ## @Events
 

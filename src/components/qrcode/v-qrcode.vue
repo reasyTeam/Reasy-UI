@@ -73,11 +73,11 @@ export default {
     },
     btnText: {
       type: String,
-      default: _("下载二维码")
+      default: _("Download QR Code")
     },
     fileName: {
       type: String,
-      default: _("二维码")
+      default: _("QR Code")
     }
   },
   components: {

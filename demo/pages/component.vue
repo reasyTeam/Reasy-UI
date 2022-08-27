@@ -1,7 +1,7 @@
 <template>
   <div class="page page-container">
     <nav class="page-nav">
-      <v-scroll ref="scroll">
+      <v-scroll ref="scroll" no-id>
         <side-nav
           class="nav-scroll"
           :data="navsData"

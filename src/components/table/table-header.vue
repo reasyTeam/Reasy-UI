@@ -19,12 +19,13 @@
           :key="index + 1"
           :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
           @click="sortTable(col)"
-          :id="name | id(col.prop)"
+          :id="name | id(col.rawProp || index)"
           :data-name="col.prop"
         >
           <!-- 选择框 -->
           <v-checkbox
-            no-id
+            :no-id="!name"
+            :name="name | id((col.rawProp || index) + '-checbox')"
             v-if="col.type === 'selection'"
             class="v-table__header__checkbox"
             :before-change="beforeSelectAll"

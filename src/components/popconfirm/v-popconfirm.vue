@@ -16,7 +16,10 @@
     >
       <div class="v-popconfirm__box">
         <div class="v-popconfirm__main" v-if="!$slots.default">
-          <div :class="['v-popconfirm__title', { 'has-icon': icon }]">
+          <div
+            :class="['v-popconfirm__title', { 'has-icon': icon }]"
+            :name="name | id('title')"
+          >
             {{ title }}
           </div>
           <i :class="['v-popconfirm__icon', icon]"></i>

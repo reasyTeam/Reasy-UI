@@ -151,6 +151,7 @@ export default {
       }
       props.expandFn = this.$scopedSlots.expand || expandFn;
       // 表格字段
+      props.rawProp = props.prop;
       props.prop = this.tableProp;
       return props;
     }

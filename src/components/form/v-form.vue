@@ -3,12 +3,15 @@
     class="v-form"
     :class="{ 'v-dialog-form v-dialog-form__center': dialogCenter }"
   >
+    <v-input-hidden></v-input-hidden>
     <slot></slot>
   </section>
 </template>
 
 <script>
+import vInputHidden from "./v-input-hidden.vue";
 export default {
+  components: { vInputHidden },
   name: "v-form",
   provide() {
     return {

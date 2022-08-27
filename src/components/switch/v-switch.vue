@@ -7,6 +7,7 @@
       <!-- 开关按钮 -->
       <span
         :name="name"
+        :id="name | id('icon')"
         :data-name="_name"
         class="v-switch__icon"
         :class="{

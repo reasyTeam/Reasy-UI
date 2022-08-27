@@ -110,7 +110,7 @@ Vue.use(Base);
 <v-row :gutter="24">
   <v-col :span="8">
     overflow: x
-    <v-scroll class="scroll-demo" overflow="x" :height="200">
+    <v-scroll class="scroll-demo" overflow="x" :height="200" no-id>
       <ul style="width: 400px;">
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:x #{{ i }}
@@ -120,7 +120,7 @@ Vue.use(Base);
   </v-col>
   <v-col :span="8">
     overflow: y
-    <v-scroll class="scroll-demo" overflow="y" :height="200">
+    <v-scroll class="scroll-demo" overflow="y" :height="200" no-id>
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:y #{{ i }}
@@ -130,7 +130,7 @@ Vue.use(Base);
   </v-col>
   <v-col :span="8">
     overflow: hidden
-    <v-scroll class="scroll-demo" overflow="hidden" :height="200">
+    <v-scroll class="scroll-demo" overflow="hidden" :height="200"  no-id>
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:hidden #{{ i }}
@@ -161,7 +161,7 @@ Vue.use(Base);
 <v-row :gutter="24">
   <v-col :span="8">
     to-x: 100
-    <v-scroll class="scroll-demo" :toX="100" :height="200" active>
+    <v-scroll class="scroll-demo" :toX="100" :height="200" active name="scroll1">
       <ul style="width: 400px;">
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:x #{{ i }}
@@ -171,7 +171,7 @@ Vue.use(Base);
   </v-col>
   <v-col :span="8">
     to-y: 100
-    <v-scroll class="scroll-demo" :toY="100" :height="200">
+    <v-scroll class="scroll-demo" :toY="100" :height="200" name="scroll2">
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:y #{{ i }}
@@ -181,7 +181,7 @@ Vue.use(Base);
   </v-col>
   <v-col :span="8">
     to-index: 6
-    <v-scroll class="scroll-demo" :toIndex="6" :height="200">
+    <v-scroll class="scroll-demo" :toIndex="6" :height="200" name="scroll3">
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           overflow:hidden #{{ i }}
@@ -211,7 +211,7 @@ Vue.use(Base);
 ```html
 <v-row :gutter="24">
   <v-col :span="6">
-    <v-scroll class="scroll-demo" :height="200" ref="scroll1">
+    <v-scroll class="scroll-demo" :height="200" ref="scroll1" name="scroll4">
       <ul style="width: 400px;">
         <li v-for="i in 20" :id="'selector' + i" :key="i" class="scroll-item">
           #selector{{ i }}
@@ -225,7 +225,7 @@ Vue.use(Base);
     </div>
   </v-col>
   <v-col :span="6">
-    <v-scroll class="scroll-demo" :height="200" ref="scroll2">
+    <v-scroll class="scroll-demo" :height="200" ref="scroll2" name="scroll5">
       <ul style="width: 400px;">
         <li v-for="i in 20" :id="'selector' + i" :key="i" class="scroll-item">
           {{ i }}. 我慢慢地、慢慢地了解到，所谓父女母子一场
@@ -239,7 +239,7 @@ Vue.use(Base);
     </div>
   </v-col>
   <v-col :span="6">
-    <v-scroll class="scroll-demo" :height="200" ref="scroll3">
+    <v-scroll class="scroll-demo" :height="200" ref="scroll3" name="scroll6">
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           {{ i }}. scrollToY
@@ -253,7 +253,7 @@ Vue.use(Base);
     </div>
   </v-col>
   <v-col :span="6">
-    <v-scroll class="scroll-demo" :height="200" ref="scroll4">
+    <v-scroll class="scroll-demo" :height="200" ref="scroll4" name="scroll7">
       <ul>
         <li v-for="i in 20" :key="i" class="scroll-item">
           {{ i }}. scrollToIndex
@@ -283,19 +283,19 @@ Vue.use(Base);
 
 ## Props
 
-| 参数     | 说明                           | 类型           | 可选值              | 默认值       |
-| -------- | ------------------------------ | -------------- | ------------------- | ------------ |
-| height   | 最大高度，超出出现滚动条，必填 | number，string | 数值，inherit，auto | inherit      |
-| width    | 最大宽度，超出出现滚动条，必填 | number         | -                   | 外层容器宽度 |
-| overflow | 设置哪个方向出现滚动条         | string         | x，y, auto, hidden  | auto         |
-| is-block | 是否是块级元素，占满一行       | boolean        | -                   | true         |
-| to-x     | 滚动到 X 轴的具体位置，单位 px | number         | -                   | 0            |
-| to-y     | 滚动到 Y 轴的具体位置，单位 px | number         | -                   | 0            |
-| to-index | 滚动到第几个元素               | number         | -                   | -            |
-| to-index | 滚动到第几个元素               | number         | -                   | -            |
-| animate  | 是否添加滚动动画               | boolean         | -                   | false            |
-| active   | 是否一直显示滚动条               | boolean         | -                   | false            |
-| slider-width   | 滑动条宽度               | number         | -                   | 4            |
+| 参数         | 说明                           | 类型           | 可选值              | 默认值       |
+| ------------ | ------------------------------ | -------------- | ------------------- | ------------ |
+| height       | 最大高度，超出出现滚动条，必填 | number，string | 数值，inherit，auto | inherit      |
+| width        | 最大宽度，超出出现滚动条，必填 | number         | -                   | 外层容器宽度 |
+| overflow     | 设置哪个方向出现滚动条         | string         | x，y, auto, hidden  | auto         |
+| is-block     | 是否是块级元素，占满一行       | boolean        | -                   | true         |
+| to-x         | 滚动到 X 轴的具体位置，单位 px | number         | -                   | 0            |
+| to-y         | 滚动到 Y 轴的具体位置，单位 px | number         | -                   | 0            |
+| to-index     | 滚动到第几个元素               | number         | -                   | -            |
+| to-index     | 滚动到第几个元素               | number         | -                   | -            |
+| animate      | 是否添加滚动动画               | boolean        | -                   | false        |
+| active       | 是否一直显示滚动条             | boolean        | -                   | false        |
+| slider-width | 滑动条宽度                     | number         | -                   | 4            |
 
 - `height`为`inherit`时继承父级容器的高度，要保证外层容器可以取得高。为`auto`时表示不会出现垂直滚动条。
 - 不设置`width`时，要保证外层容器可以取得高或者宽
@@ -303,22 +303,22 @@ Vue.use(Base);
 - `animate`为`true`时，对应`scrollTo`、`scrollToX`、`scrollTo`、`scrollToY`、`scrollToIndex`方法使用时会产生`200ms`动画过渡滚动效果。
 ## @Events
 
-| 事件名 | 说明                                                 | 参数       |
-| ------ | ---------------------------------------------------- | ---------- |
-| scroll | 滚动事件，各类型的滚动过程都会执行该事件，**【注意必要时请添加节流或防抖】** | - |
-| mounted | 滚动条渲染完成活更新完成后回调 | - |
+| 事件名  | 说明                                                                         | 参数 |
+| ------- | ---------------------------------------------------------------------------- | ---- |
+| scroll  | 滚动事件，各类型的滚动过程都会执行该事件，**【注意必要时请添加节流或防抖】** | -    |
+| mounted | 滚动条渲染完成活更新完成后回调                                               | -    |
 ## Methods
 
-| 方法                 | 说明                                               | 参数                                    |
-| -------------------- | -------------------------------------------------- | --------------------------------------- |
-| scrollTo(selector)   | 滚动到某个`dom`元素                                | `dom`的唯一选择器，可以精确定位当前元素 |
-| update()             | 滚动条内部内容修改后，需要调用该方法自行更新滚动条 | -                                       |
-| scrollToX(to)        | 水平滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
-| scrollToY(to)        | 垂直滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
-| scrollToIndex(index) | 滚动到第几个元素                                   | 元素索引，从 1 开始                     |
-| setSize(height, width, isScrollToTop) | 修改容器的宽高           | 高，框，是否滚动到左上角                     |
-| setHeight(height, isScrollToTop) | 修改容器的高           | 高，框，是否滚动到最上面                     |
-| setWidth(width, isScrollToLeft) | 修改容器的宽           | 高，框，是否滚动到最左边                    |
+| 方法                                  | 说明                                               | 参数                                    |
+| ------------------------------------- | -------------------------------------------------- | --------------------------------------- |
+| scrollTo(selector)                    | 滚动到某个`dom`元素                                | `dom`的唯一选择器，可以精确定位当前元素 |
+| update()                              | 滚动条内部内容修改后，需要调用该方法自行更新滚动条 | -                                       |
+| scrollToX(to)                         | 水平滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
+| scrollToY(to)                         | 垂直滚动条滚动到 to 位置                           | 滚动到的位置，单位 px                   |
+| scrollToIndex(index)                  | 滚动到第几个元素                                   | 元素索引，从 1 开始                     |
+| setSize(height, width, isScrollToTop) | 修改容器的宽高                                     | 高，框，是否滚动到左上角                |
+| setHeight(height, isScrollToTop)      | 修改容器的高                                       | 高，框，是否滚动到最上面                |
+| setWidth(width, isScrollToLeft)       | 修改容器的宽                                       | 高，框，是否滚动到最左边                |
 
 ## Slots
 
@@ -337,7 +337,7 @@ Vue.use(Base);
 | to-y     | 滚动到 Y 轴的具体位置，单位 px | number  | -                  | 0            |
 | to-index | 滚动到第几个元素               | number  | -                  | -            |
 | count    | 最多显示行数                   | number  | -                  | 5            |
-| animate  | 是否添加滚动动画               | boolean         | -                   | false            |
+| animate  | 是否添加滚动动画               | boolean | -                  | false        |
 
 - 不设置`width`时，要保证外层容器可以取得高或者宽
 - `to-index`默认会选中当前 slot 的最外层元素的第`index`个子元素，优先级高于`scroll-to-y`

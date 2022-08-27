@@ -42,6 +42,7 @@
               :actived="true"
               :title="group.groupName"
               @change="$emit('change')"
+              no-id
             >
               <ul class="pure-menu-list">
                 <li

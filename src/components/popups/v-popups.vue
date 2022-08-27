@@ -372,26 +372,33 @@ export default {
 
       // 设置top-center => p1-p2
       if (p1 === "top" || p1 === "left") {
-        popupsStyleObj[p1] = `${referenceDomProps[p1] -
+        popupsStyleObj[p1] = `${~~(
+          referenceDomProps[p1] -
           popupsDomProps[positionSideNameMap[p1]] +
-          _betweenSpace}px`;
+          _betweenSpace
+        )}px`;
       } else {
-        popupsStyleObj[positionPropMap[p1]] = `${referenceDomProps[p1] +
-          _betweenSpace}px`;
+        popupsStyleObj[positionPropMap[p1]] = `${~~(
+          referenceDomProps[p1] + _betweenSpace
+        )}px`;
       }
 
       if (p2 === "top" || p2 === "left") {
-        popupsStyleObj[p2] = `${referenceDomProps[p2] + this.popupsOffset}px`;
+        popupsStyleObj[p2] = `${~~(
+          referenceDomProps[p2] + this.popupsOffset
+        )}px`;
       } else if (p2 === "center") {
-        popupsStyleObj[centerFixedMap[p1]] = `${referenceDomProps[
-          centerFixedMap[p1]
-        ] +
+        popupsStyleObj[centerFixedMap[p1]] = `${~~(
+          referenceDomProps[centerFixedMap[p1]] +
           referenceDomProps[positionSideNameMap[centerFixedMap[p1]]] / 2 -
-          popupsDomProps[positionSideNameMap[centerFixedMap[p1]]] / 2}px`;
+          popupsDomProps[positionSideNameMap[centerFixedMap[p1]]] / 2
+        )}px`;
       } else {
-        popupsStyleObj[positionPropMap[p2]] = `${referenceDomProps[p2] -
+        popupsStyleObj[positionPropMap[p2]] = `${~~(
+          referenceDomProps[p2] -
           popupsDomProps[positionSideNameMap[p2]] +
-          this.popupsOffset}px`;
+          this.popupsOffset
+        )}px`;
       }
 
       this.popupsStyle = Object.assign(this.popupsStyle, popupsStyleObj);

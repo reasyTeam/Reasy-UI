@@ -10,6 +10,7 @@
   >
     <span
       class="v-checkbox__icon"
+      :id="name | id('icon')"
       :class="
         value === onValue
           ? 'v-checkbox__icon--active v-icon-ok'

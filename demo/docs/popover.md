@@ -25,6 +25,7 @@ Vue.use(Base);
     :width="250"
     trigger="hover"
     position="top-left"
+    name="popover1"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button1" slot="reference">hover 触发</v-button>
@@ -35,6 +36,7 @@ Vue.use(Base);
     :width="250"
     trigger="click"
     position="top-center"
+    name="popover2"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button2" slot="reference">click 触发</v-button>
@@ -46,6 +48,7 @@ Vue.use(Base);
     :width="250"
     trigger="manual"
     position="bottom-center"
+    name="popover3"
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button3" slot="reference" @click="handleClick">手动触发</v-button>
@@ -85,6 +88,7 @@ export default {
     trigger="hover"
     :enterable="false"
     position="top-left"
+    no-id
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button4" slot="reference">不可移入弹出框</v-button>
@@ -96,6 +100,7 @@ export default {
     trigger="hover"
     position="bottom-center"
     transition="el-zoom-in-top"
+    no-id
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button5" slot="reference">触发动画</v-button>
@@ -106,6 +111,7 @@ export default {
     width="auto"
     trigger="hover"
     position="top-right"
+    no-id
   >
     这是一段内容,这是一段内容,这是一段内容,这是一段内容。
     <v-button name="button6" slot="reference">宽度自适应</v-button>

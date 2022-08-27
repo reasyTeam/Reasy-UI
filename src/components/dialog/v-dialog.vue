@@ -47,7 +47,7 @@
                 :id="name | id('close')"
               ></i>
             </div>
-            <div class="v-dialog__main" ref="main">
+            <div class="v-dialog__main" ref="main" :id="name | id('main')">
               <slot></slot>
             </div>
             <div ref="footer" :class="['v-dialog__footer', footerClass]">

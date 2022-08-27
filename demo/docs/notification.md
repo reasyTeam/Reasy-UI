@@ -20,10 +20,17 @@ Vue.use(Base);
   <v-button name="button1"  class="notify-btn" @click="handleAutoHideClick">自动关闭</v-button>
   <v-button name="button2"  class="notify-btn" type="primary" @click="handleKeepShowClick">一直显示</v-button>
   <v-button name="button3" class="notify-btn" @click="handleStatueShowClick">显示状态</v-button>
+  <v-button name="button4" class="notify-btn" @click="handleInstanceClick">{{!showInstance ? '返回通知实例' :'关闭该实例'}}</v-button>
 </template>
 
 <script>
 export default {
+  data(){
+    return {
+      showInstance:false,
+      instance:null
+    }
+  },
   methods: {
     handleAutoHideClick() {
       this.$notify({
@@ -48,6 +55,20 @@ export default {
         duration: 0,
         position: "top-right"
       });
+    },
+    handleInstanceClick(){
+      if(!this.showInstance){
+        this.showInstance = true;
+        this.instance = this.$notify.instance({
+          status: "success",
+          content: "返回实例，可以通过js控制关闭",
+          duration: 0,
+          position: "top-right"
+        })
+      }else{
+        this.showInstance = false;
+        this.instance.close();
+      }
     }
   }
 };
@@ -63,7 +84,7 @@ export default {
 
 ```html
 <template>
-  <v-button name="button4"  class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
+  <v-button name="button41"  class="notify-btn" type="primary" @click="handleSuccess">成功</v-button>
   <v-button name="button5"  class="notify-btn" type="danger" @click="handleError">失败</v-button>
   <v-button name="button6"  class="notify-btn" type="info" @click="handleWarning">警告</v-button>
   <v-button name="button7"  class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
@@ -78,7 +99,11 @@ export default {
       //   content: "这是一条成功信息！",
       //   position: "top-right"
       // });
-      this.$notify.success("这是一条成功信息！")
+      let notify = this.$notify.instance.success("这是一条成功信息！",0)
+
+      setTimeout(()=>{
+        notify.close();
+      },1000)
     },
     handleError() {
       // this.$notify({
@@ -86,7 +111,7 @@ export default {
       //   content: "这是一条错误信息！",
       //   position: "top-right"
       // });
-      this.$notify.error("这是一条成功信息！")
+      this.$notify.error("这是一条错误信息！")
 
     },
     handleWarning() {
@@ -95,7 +120,7 @@ export default {
       //   content: "这是一条警告！",
       //   position: "top-right"
       // });
-      this.$notify.warning("这是一条成功信息！")
+      this.$notify.warning("这是一条警告！")
 
     },
     handleNotice() {
@@ -104,7 +129,7 @@ export default {
       //   content: "这是一条普通的消息提醒",
       //   position: "top-right"
       // });
-      this.$notify.notice("这是一条成功信息！")
+      this.$notify.notice("这是一条普通的消息提醒")
 
     }
   }
@@ -301,6 +326,55 @@ export default {
         dangerouslyUseHTMLString: true,
         position: "top-right"
       });
+    }
+  }
+};
+</script>
+```
+
+:::
+
+
+## 返回通知实例，可以用于关闭
+
+:::demo 使用`this.$notify.instance` 可以返回通知实例进行处理，除了不会返回promise，用法和基本使用一致
+
+```html
+<template>
+  <v-button name="button52" class="notify-btn" @click="handleInstanceClick">{{!showInstance ? '返回通知实例' :'关闭该实例'}}</v-button>
+  <v-button name="button62"  class="notify-btn" type="info" @click="handleWarning">警告</v-button>
+  <v-button name="button72"  class="notify-btn" type="primary" @click="handleNotice">提醒</v-button>
+</template>
+
+<script>
+export default {
+  data(){
+    return {
+      showInstance:false,
+      instance:null
+    }
+  },
+  methods: {
+    handleInstanceClick(){
+      if(!this.showInstance){
+        this.showInstance = true;
+        this.instance = this.$notify.instance({
+          status: "success",
+          content: "返回实例，可以通过js控制关闭",
+          duration: 0,
+          position: "top-right"
+        })
+      }else{
+        this.showInstance = false;
+        this.instance.close();
+      }
+    },
+
+    handleWarning() {
+      this.$notify.instance.warning("这是一条警告！")
+    },
+    handleNotice() {
+      this.$notify.instance.notice("这是一条普通的消息提醒")
     }
   }
 };

@@ -91,6 +91,7 @@
       </tr>
     </thead>
   </table>
+
   <thead
     ref="table"
     class="table v-table__header"
@@ -121,10 +122,13 @@
         @mouseenter="mouseenter(col)"
         @mouseleave="mouseleave(col)"
         :ref="[`headerWidth_${col.prop}`]"
+        :style="{ 'min-width': col.width }"
+        :id="name | id(col.rawProp || index)"
       >
         <!-- 选择框 -->
         <v-checkbox
-          no-id
+          :no-id="!name"
+          :name="name | id((col.rawProp || index) + '-checbox')"
           v-if="col.type === 'selection'"
           class="v-table__header__checkbox"
           :before-change="beforeSelectAll"

@@ -366,7 +366,7 @@ Vue.use(Base);
 ::: demo
 
 ```html
-<v-table no-id :data="data" head-operate name="operateTb" 
+<v-table  :data="data" head-operate name="operateTb" 
 :checkOperateData="checkData" @getCheckOperateData="getCheckOperateData">
   <v-table-col type="selection"></v-table-col>
   <v-table-col prop="ip" label="IP地址" :is-default-value="false"> </v-table-col>
@@ -380,7 +380,8 @@ Vue.use(Base);
     :is-default-value="false"
     label="上传速率"
   ></v-table-col>
-  <v-table-col prop="status" label="状态" hide-in-opreate></v-table-col>
+
+  <v-table-col prop="statu" width="148px" label="状态" hide-in-opreate></v-table-col>
 </v-table>
 <script>
   export default {
@@ -1586,6 +1587,124 @@ Vue.use(Base);
 ```
 
 :::
+
+## 刷新保持之前选中的数据
+
+`select-data`为表格选中数据，在选中处理改变时，可以更新表格的选中数组，即可刷新时保留之前的数据
+
+表头操作按钮可以设置显示的列表项，`head-operate`设置是否显示，默认不显示；`is-default-value`设置是否为默认显示列表项，默认显示；`add-operate`设置列表项是否可以操作，默认可以；注意：表头需要勾选默认一位；`hide-in-opreate`设置是否加入表格操作列表项内，默认值为false，注意：设置该配置项时不设置`is-default-value`
+
+::: demo
+
+```html
+<v-button @click="refrensh">刷新</v-button>
+<v-table :data="data" 
+      head-operate 
+      name="operateTb2" 
+      :checkOperateData="checkData" 
+      @getCheckOperateData="getCheckOperateData" 
+      :select-data="selectedData"
+      row-key="ip"
+      @selection-change="selectionChange">
+  <v-table-col type="selection" :get-disabled="getDisabled"></v-table-col>
+  <v-table-col prop="ip" label="IP地址" :is-default-value="false"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" :add-operate="false"></v-table-col>
+  <v-table-col
+    prop="download"
+    label="下载速率"
+  ></v-table-col>
+  <v-table-col
+    prop="upLimit"
+    :is-default-value="false"
+    label="上传速率"
+  ></v-table-col>
+  <v-table-col prop="status" label="状态" hide-in-opreate></v-table-col>
+</v-table>
+<script>
+  export default {
+    mounted() {
+      this.data = JSON.parse(JSON.stringify(this.table1));
+    },
+    methods: {
+      getCheckOperateData(data) {
+        console.log('勾选数据为', data);
+      },
+      getDisabled(data) {
+      return data.ip > "192.168.0.103"
+      },
+      refrensh(){
+        this.data = JSON.parse(JSON.stringify(this.table1));
+      },
+      selectionChange(data){
+        this.selectedData = data;
+      }
+    },
+    data() {
+      return {
+        selectedData:[],
+        data: [],
+        checkData: ['ip', 'mac', 'status'],
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "25"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            在线Time: "100",
+            hz: "5G",
+            status: "升级中",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            在线Time: "67567",
+            hz: "2.4G",
+            status: "离线",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            在线Time: "1000",
+            hz: "5G",
+            status: "在线",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            在线Time: "1000",
+            hz: "2.4G",
+            status: "升级中",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+
 
 ## 序号表格
 

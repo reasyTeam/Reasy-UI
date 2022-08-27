@@ -57,6 +57,15 @@ const Msg = function(...args) {
       instance.$mount();
       document.body.appendChild(instance.$el);
 
+      // 赋值name 添加id
+      let len = instances.length;
+      if (len > 0) {
+        options.name =
+          "message" + (~~instances[len - 1].name.replace(/\D/g, "") + 1);
+      } else {
+        options.name = "message0";
+      }
+
       let { verticalOffset } = instance;
       instances.forEach(
         item => (verticalOffset += item.$el.offsetHeight + betweenSpace)

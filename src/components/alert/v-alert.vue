@@ -13,10 +13,15 @@
         ]"
       >
         <div class="v-alert__main-inner">
-          <div v-if="title" class="v-alert__title" :class="[isBoldTitle]">
+          <div
+            v-if="title"
+            class="v-alert__title"
+            :class="[isBoldTitle]"
+            :id="name | id('title')"
+          >
             {{ title }}
           </div>
-          <div class="v-alert__description">
+          <div class="v-alert__description" :id="name | id('description')">
             <slot>{{ description }}</slot>
           </div>
         </div>

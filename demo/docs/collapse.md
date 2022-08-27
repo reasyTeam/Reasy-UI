@@ -16,7 +16,7 @@ Vue.use(Base);
 :::demo
 
 ```html
-<v-collapse title="基础示例">
+<v-collapse title="基础示例" name="xxx">
   这里是展开后的内容这里是展开后的内容
 </v-collapse>
 ```
@@ -29,6 +29,7 @@ Vue.use(Base);
 
 ```html
 <v-collapse
+  name="name1"
   title="枫"
   text="乌云在我们心里搁下一块阴影，我聆听沉寂已久的心情，清晰透明，就像美丽的风景，总在回忆里才看得清，被伤透的心能不能够继续爱我，我用力牵起没温度的双手，过往温柔，已经被时间上锁，只剩挥散不去的难过，缓缓飘落的枫叶像思念，我点燃烛火温暖岁末的秋天，极光掠夺天边，北风掠过想你的容颜，我把爱烧成了落叶，却换不回熟悉的那张脸。"
 >
@@ -43,6 +44,7 @@ Vue.use(Base);
 
 ```html
 <v-collapse
+  name="name2"
   title="text设置内容"
   text="乌云在我们心里搁下一块阴影，我聆听沉寂已久的心情，清晰透明，就像美丽的风景，总在回忆里才看得清，被伤透的心能不能够继续爱我，我用力牵起没温度的双手，过往温柔，已经被时间上锁，只剩挥散不去的难过，缓缓飘落的枫叶像思念，我点燃烛火温暖岁末的秋天，极光掠夺天边，北风掠过想你的容颜，我把爱烧成了落叶，却换不回熟悉的那张脸。"
 >
@@ -56,7 +58,7 @@ Vue.use(Base);
 :::demo 通过`default slot`对折叠面板的内容进行设置。
 
 ```html
-<v-collapse>
+<v-collapse name="name3">
   <template v-slot:title>
     <i class="v-icon-ok-line"></i>
     <label>枫</label>
@@ -116,7 +118,7 @@ Vue.use(Base);
 :::demo 通过`actived`属性设置折叠面板的初始状态，同时也可以通过`v-model`指令对折叠面板的展开收起状态进行绑定。
 
 ```html
-<v-collapse title="默认打开折叠面板" :actived="true">
+<v-collapse title="默认打开折叠面板" :actived="true" no-id>
   默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。默认打开折叠面板。
 </v-collapse>
 ```
@@ -128,7 +130,7 @@ Vue.use(Base);
 :::demo 通过`disabled`属性设置折叠面板的禁用状态。禁用后，面板的折叠状态不可修改。
 
 ```html
-<v-collapse title="disabled" disabled>
+<v-collapse title="disabled" disabled no-id>
   disabled，无法切换展开和收缩状态。
 </v-collapse>
 ```

@@ -9,6 +9,7 @@
       @mouseleave="proxyDisabledHandler(disabled, handleLabelMouseleave)"
     >
       <span
+        :id="name | id('content')"
         class="v-dropdown__label__content"
         @click.stop="proxyDisabledHandler(disabled, handleLabelContentClick)"
         >{{ label }}</span
@@ -56,6 +57,7 @@
               "
             >
               <i
+                :id="name | id(idx + '-icon')"
                 v-if="item.icon"
                 class="v-dropdown__icon"
                 :class="item.icon"

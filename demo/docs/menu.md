@@ -190,7 +190,7 @@ vue-router 模式（由于此组件库中已存在 vue-router 路由，故此处
 ```html
 <template>
   <div class="page-demo">
-    <v-menu :routes="routes" no-id/></v-menu>
+    <v-menu :routes="routes" name="menu2"/></v-menu>
   </div>
 </template>
 

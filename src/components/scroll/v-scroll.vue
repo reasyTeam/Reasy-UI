@@ -9,6 +9,8 @@
     <bar
       ref="ybar"
       v-if="isVertical"
+      :name="name"
+      :id="name | id('is-vertical')"
       direct="y"
       :barsize="vbarHeight"
       v-model="scrollTop"
@@ -21,6 +23,8 @@
       ref="xbar"
       v-if="isHorizontal"
       direct="x"
+      :id="name | id('is-horizontal')"
+      :name="name"
       :barsize="hBarWidth"
       v-model="scrollLeft"
       :sliderWidth="sliderWidth"
@@ -36,8 +40,11 @@ import Bar from "./bar.vue";
 import { on, off } from "../libs.js";
 import tween from "../easing-function.js";
 
+import NameMixin from "../name-mixins";
+
 export default {
   name: "v-scroll",
+  mixins: [NameMixin],
   props: {
     // 内容区域高
     height: {

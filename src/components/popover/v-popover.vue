@@ -16,7 +16,7 @@
     >
       <div class="v-popover__main">
         <h5 class="v-popover__title">{{ title }}</h5>
-        <div class="v-popover__content">
+        <div class="v-popover__content" :id="name | id('content')">
           <slot></slot>
         </div>
       </div>
@@ -29,7 +29,10 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
+
 export default {
+  mixins: [NameMixin],
   name: "v-popover",
   props: {
     value: Boolean,

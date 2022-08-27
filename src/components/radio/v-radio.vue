@@ -14,6 +14,7 @@
         <!-- 单选图标 -->
         <span
           class="v-radio__icon"
+          :id="name | id(item.value + '-icon')"
           :value="item.value"
           :data-name="_name"
           :class="[

@@ -1,5 +1,5 @@
 <template>
-  <div class="v-list form-group" :class="computedListClass">
+  <div class="v-list form-group" :class="computedListClass" :id="name">
     <template v-if="options && options.length">
       <div
         class="v-list__meta"
@@ -17,7 +17,7 @@
             <img :src="item.avatar | getAvatarByField('src')" alt="avatar" />
           </div>
         </slot>
-        <div class="meta__content">
+        <div class="meta__content" :id="name | id(item[rowKey] || idx)">
           <slot name="title">
             <div class="meta__content-title">{{ item.title }}</div>
           </slot>
@@ -39,8 +39,11 @@
 </template>
 
 <script>
+import NameMixin from "../name-mixins";
+
 export default {
   name: "v-list",
+  mixins: [NameMixin],
   props: {
     bordered: {
       type: Boolean,

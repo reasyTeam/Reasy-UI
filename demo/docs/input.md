@@ -376,7 +376,7 @@ Vue.use(Base);
 <div>空时不纠正</div>
 <v-input type="text" name="input-co" v-model="input" :auto-correction="[1, 10]" :allow="/\d/g" not-correct-empty></v-input>
 <div>空时纠正为最小值</div>
-<v-input type="text" name="input-co" v-model="input1" :auto-correction="[1, 10]" :allow="/\d/g"></v-input>
+<v-input type="text" name="input-co2" v-model="input1" :auto-correction="[1, 10]" :allow="/\d/g"></v-input>
 
 <script>
   export default {
