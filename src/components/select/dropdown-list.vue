@@ -1,6 +1,12 @@
 <template>
   <div class="v-select-options" :id="name">
-    <v-x-scroll ref="scroll" @mounted="setPosition" :count="count">
+    <v-x-scroll
+      ref="scroll"
+      @mounted="setPosition"
+      :count="count"
+      :no-id="noId"
+      :name="name | id('scroll')"
+    >
       <!-- 下拉选项列表 -->
       <ul class="v-select-options__list">
         <li

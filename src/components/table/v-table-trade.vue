@@ -591,7 +591,12 @@ export default {
     },
     //获取选中的数据
     getSelected() {
-      return copyDeepData(this.runtimeSelected);
+      return copyDeepData(this.runtimeSelected).map(item => {
+        delete item[EXPAND_NAME];
+        delete item[CHECKBOX_NAME];
+        delete item[DISABLED_FIELD];
+        return item;
+      });
     },
     //获取当前页的数据，给外部使用
     getCurrentPageData() {

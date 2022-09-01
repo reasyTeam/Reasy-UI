@@ -247,7 +247,7 @@
   text-align: center;
   width: 100%;
   // max-width: 100%;
-  table-layout: auto;
+  table-layout: fixed;
   // background-color: #fff;
   .check-group {
     z-index: 99;
@@ -328,7 +328,7 @@
   color: #4b4b5a;
   th,
   td {
-    padding: 8px 10px;
+    padding: 9px 10px 8px;
   }
   th {
     font-weight: 600;
@@ -367,8 +367,8 @@
       position: absolute;
       top: 1px;
       right: 0;
-      width: 35px;
-      height: 35px;
+      width: 32px;
+      height: 32px;
       cursor: pointer;
       background: #f4f5f7;
       .operate-btn {
@@ -400,9 +400,20 @@
     margin-top: 8px;
     text-align: left;
   }
-  .v-table__icon {
-    top: 4px;
+
+  .v-table__header__label {
+    line-height: 16px;
   }
+
+  .v-table__icon {
+    top: 0px;
+    bottom: 0;
+    left: -2px;
+    height: 12px;
+    width: 12px;
+    margin: auto;
+  }
+
   .v-table__header__checkbox {
     line-height: 16px;
     .v-checkbox__icon {
@@ -437,19 +448,33 @@
   }
 
   .v-table__sort {
-    margin-left: 4px;
-    line-height: 18px;
+    margin-left: 6px;
+    line-height: 16px;
+  }
+
+  .table {
+    table-layout: auto;
   }
 }
 
 // 表格操作栏下拉框
 .trade .table-operate__menu {
-  padding: 6px 0 12px;
+  // padding: 6px 0 12px;
+  min-width: 180px;
+  padding: 0;
+
+  .line {
+    margin: 8px 16px 8px;
+  }
+
   .v-checkbox-group {
     font-size: inherit;
+    margin-top: 0px;
+
     .v-checkbox {
       display: block;
       margin: 4px 0;
+      white-space: nowrap;
       .v-checkbox__item {
         font-size: inherit;
       }
@@ -457,8 +482,13 @@
         line-height: 16px;
       }
     }
+
     .v-checkbox-group {
       display: block;
     }
+  }
+
+  .v-checkbox-trade.v-checkbox-group {
+    margin: 8px 0 16px;
   }
 }

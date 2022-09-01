@@ -28,7 +28,6 @@
       @focus="handlerFoucs"
       @change="changeValue"
       :unit="unit"
-      :placeholder="placeholder"
       :allow="allow"
       :size="size"
       :ignoreUpdateValue="true"

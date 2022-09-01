@@ -11,6 +11,7 @@
     :animate="animate"
     :active="true"
     :name="name"
+    :no-id="noId"
     @mounted="setPosition"
   >
     <slot></slot>
@@ -60,7 +61,8 @@ export default {
       type: Boolean,
       default: false
     },
-    name: String
+    name: String,
+    noId: Boolean
   },
   computed: {
     scroll() {

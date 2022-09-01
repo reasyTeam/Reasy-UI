@@ -47,7 +47,12 @@
                 :id="name | id('close')"
               ></i>
             </div>
-            <div class="v-dialog__main" ref="main" :id="name | id('main')">
+            <div
+              class="v-dialog__main"
+              :style="{ maxHeight: `${maxHeight}px` }"
+              ref="main"
+              :id="name | id('main')"
+            >
               <slot></slot>
             </div>
             <div ref="footer" :class="['v-dialog__footer', footerClass]">
@@ -91,6 +96,7 @@
 
 <script>
 import NameMixin from "../name-mixins";
+import { debounce } from "@/components/libs";
 export default {
   name: "v-dialog",
   mixins: [NameMixin],
@@ -164,7 +170,8 @@ export default {
   },
   data() {
     return {
-      dialogWrapperStyle: {}
+      dialogWrapperStyle: {},
+      maxHeight: this.getMaxHeight()
     };
   },
   mounted() {
@@ -175,6 +182,10 @@ export default {
     if (this.appendToId) {
       this.insertDialogToId();
     }
+    this.resizeFn = debounce(() => {
+      this.maxHeight = this.getMaxHeight();
+    }, 100);
+    window.addEventListener("resize", this.resizeFn);
   },
   computed: {
     visible() {
@@ -195,6 +206,16 @@ export default {
     }
   },
   methods: {
+    getMaxHeight() {
+      return (
+        parseInt(
+          (window.document.body.clientHeight ||
+            window.document.documentElement.clientHeight) * 0.8
+        ) -
+        56 -
+        (this.showTitle ? 48 : 0)
+      );
+    },
     show() {
       // this.visible = true;
       this.$emit("input", true);
@@ -262,6 +283,8 @@ export default {
       const dom = document.getElementById(this.appendToId);
       dom && dom.removeChild($dialogBox);
     }
+
+    window.removeEventListener("resize", this.resizeFn);
   }
 };
 </script>

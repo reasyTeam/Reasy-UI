@@ -9,6 +9,8 @@
           :to-index="hourIndex"
           @mounted="setPosition"
           :animate="true"
+          :no-id="noId"
+          :name="name | id('h')"
         >
           <ul class="v-timepicker__list">
             <li
@@ -39,6 +41,8 @@
           ref="minute"
           :to-index="minuteIndex"
           :animate="true"
+          :no-id="noId"
+          :name="name | id('m')"
         >
           <ul class="v-timepicker__list">
             <li
@@ -69,6 +73,8 @@
           ref="second"
           :to-index="secondIndex"
           :animate="true"
+          :no-id="noId"
+          :name="name | id('s')"
         >
           <ul class="v-timepicker__list">
             <li

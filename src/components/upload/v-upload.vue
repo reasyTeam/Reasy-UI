@@ -12,7 +12,7 @@
         type="hidden"
         v-for="(value, name) in data"
         :name="name"
-        :key="value"
+        :key="name"
         :value="value"
       />
       <!-- 图片上传 -->
@@ -154,7 +154,7 @@ export default {
     //上传前处理事件，返回false不会上传文件
     beforeUpload: {
       type: Function,
-      default: function () {
+      default: function() {
         return true;
       }
     },
@@ -372,9 +372,12 @@ export default {
       }
       this.uploadType = UPLOAD_TYPE.LOADING;
       //上传后清空文件
-      this.$refs.file.value = "";
+      if (this.autoClear) {
+        this.$refs.file.value = "";
+      }
     },
     clearFile() {
+      this.fileStr = "";
       this.$refs.file.value = "";
     }
   },

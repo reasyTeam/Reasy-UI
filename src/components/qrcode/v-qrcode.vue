@@ -36,7 +36,7 @@
   </div>
 </template>
 <script>
-import VueQr from "vue-qr";
+import VueQr from "./vue-qr.js";
 import NameMixin from "../name-mixins";
 
 export default {

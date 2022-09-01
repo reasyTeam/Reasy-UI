@@ -4,8 +4,17 @@
       <div class="v-icon-more"></div>
     </div>
     <create-to-body width="180px" :show="dropdownShow" :style="style">
-      <div class="v-dropdown__menu table-operate__menu">
-        <v-scroll v-clickoutside="visibleChange">
+      <div
+        ref="headDown"
+        class="v-dropdown__menu table-operate__menu"
+        :style="{ maxHeight: style.maxHeight }"
+      >
+        <v-scroll
+          ref="headScroll"
+          v-clickoutside="visibleChange"
+          no-id
+          overflow="y"
+        >
           <div class="v-checkbox-trade v-checkbox-group">
             <v-checkbox
               no-id
@@ -176,15 +185,30 @@ export default {
   watch: {
     dropdownShow(val) {
       if (val) {
+        //body的高度
         let bodyHeight =
             document.documentElement.clientHeight || document.body.clientHeight,
+          //横向滚动条宽度
           scrollLeft =
             (window.pageXOffset || document.documentElement.scrollLeft) +
             document.body.scrollLeft,
+          //表头父元素位置
           parentRect = this.$refs.operate.getBoundingClientRect();
+        //表头下拉框最大高度
         this.style.maxHeight = bodyHeight - parentRect.bottom + "px";
-        this.style.left =
-          scrollLeft + parentRect.left + parentRect.width - 180 + "px";
+        this.$nextTick(() => {
+          //表头下拉框位置
+          let headDown = this.$refs.headDown.getBoundingClientRect();
+          //表头下拉框左边距离
+          this.style.left =
+            scrollLeft +
+            parentRect.left +
+            parentRect.width -
+            headDown.width +
+            "px";
+          //更新y轴滚动条
+          this.$refs.headScroll.update();
+        });
       } else {
         this.$emit("getCheckOperateData", this.value);
       }
