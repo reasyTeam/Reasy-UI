@@ -47,19 +47,26 @@
       <!--多选-->
       <div v-else class="v-select__label--text v-select__label--position">
         <template v-if="multipleLabel.length > 0">
-          <span class="v-select__label__item">
+          <span
+            class="v-select__label__item"
+            v-for="i in showMutilCount"
+            :key="i"
+          >
             <span class="v-select__label--text__item">{{
-              multipleLabel[0].label
+              multipleLabel[i - 1].label
             }}</span>
             <span
               class="v-select__icon--right v-icon-close"
-              @click.stop.prevent="delValue"
+              @click.stop.prevent="delValue(i - 1)"
             ></span>
           </span>
           <!-- 多选个数大于1时 其他项用数字表示 -->
-          <span v-if="multipleLabel.length > 1" class="v-select__label__item">
+          <span
+            v-if="multipleLabel.length > showMutilCount"
+            class="v-select__label__item"
+          >
             <span class="v-select__label--text__item">
-              +{{ multipleLabel.length - 1 }}
+              +{{ multipleLabel.length - showMutilCount }}
             </span>
           </span>
         </template>
@@ -132,6 +139,10 @@ export default {
       type: Boolean,
       default: false
     },
+    showCount: {
+      type: Number,
+      default: 1
+    },
     //多选限制个数
     multipleLimit: {
       type: Number,
@@ -198,6 +209,12 @@ export default {
     }
   },
   computed: {
+    showMutilCount() {
+      return Math.min(
+        this.showCount,
+        this.multipleLabel ? this.multipleLabel.length : 0
+      );
+    },
     //大小
     sizeCss() {
       let cssObj = {
@@ -371,11 +388,12 @@ export default {
 
       this.checkValid(this.value);
     },
-    delValue() {
+    delValue(i) {
       if (this.isDisabled) {
         return;
       }
-      this.value.shift();
+      // this.value.shift();
+      this.value.splice(i, 1);
       this.checkValid(this.value);
     },
     hide() {

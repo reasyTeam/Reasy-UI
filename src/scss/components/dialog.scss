@@ -1,6 +1,7 @@
 .body--overflow-hidden {
   overflow: hidden;
 }
+
 .v-dialog-box {
   position: fixed;
   top: 0;
@@ -11,6 +12,7 @@
   overflow-x: auto;
   z-index: 1000;
 }
+
 .v-dialog-wrapper {
   position: relative;
   width: 100%;
@@ -22,9 +24,10 @@
   padding: 40px 0;
   transform: translate3d(0, -50%, 0px);
 }
+
 .v-dialog {
   $close-font-size: 16px;
-  $close-wrap-size: $close-font-size + 3px;
+  $close-wrap-size: $close-font-size +3px;
   $box-padding: 24px;
   $box-padding-top: 12px;
 
@@ -47,17 +50,20 @@
   &__header {
     position: relative;
   }
+
   &__title {
-    padding: $box-padding-top $box-padding;
+    padding: 16px $box-padding;
     font-size: $font-size-l;
     font-weight: 600;
     color: $title-color;
     line-height: 24px;
     box-shadow: 0px 1px 0px 0px #f5f5f5;
+
     &-inner {
       font-weight: 600;
     }
   }
+
   &__close {
     position: absolute;
     top: 50%;
@@ -75,11 +81,23 @@
     .v-form {
       margin: 0 56px;
     }
+
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: #b2b2b2;
+    }
   }
 
   &__footer {
     padding: 0 $box-padding $box-padding;
     margin-top: -4px;
+
     &--none {
       display: none;
     }
@@ -87,8 +105,9 @@
 
   &__button-group {
     text-align: right;
+
     .v-dialog__button-item {
-      & + .v-dialog__button-item {
+      &+.v-dialog__button-item {
         margin-left: 8px;
       }
     }
@@ -96,10 +115,12 @@
 
   &__close-space {
     padding-right: $box-padding * 2 + $close-wrap-size;
+
     .v-dialog__center {
       padding-left: $box-padding + $close-wrap-size;
     }
   }
+
   &__center {
     text-align: center;
     // &.v-dialog__title-inner {
@@ -128,6 +149,7 @@
   // animation: pop-fade-in 0.3s;
   transition: opacity 0.3s;
 }
+
 .v-dialog-fade-leave-active {
   // animation: pop-fade-out 0.3s;
   transition: opacity 0.3s;
@@ -160,9 +182,11 @@
 .v-dialog-inner-fade-enter-active {
   animation: dialog-inner-fade-in 0.3s;
 }
+
 .v-dialog-inner-fade-leave-active {
   animation: dialog-out-fade-out 0.3s;
 }
+
 @keyframes dialog-inner-fade-in {
   0% {
     transform: translate3d(0, -55%, 0);
@@ -172,6 +196,7 @@
     transform: translate3d(0, -50%, 0);
   }
 }
+
 @keyframes dialog-out-fade-out {
   0% {
     transform: translate3d(0, -50%, 0);
@@ -181,6 +206,7 @@
     transform: translate3d(0, -55%, 0);
   }
 }
+
 @keyframes dialog-fade-in {
   0% {
     transform: translate3d(-50%, -55%, 0);
@@ -190,6 +216,7 @@
     transform: translate3d(-50%, -50%, 0);
   }
 }
+
 @keyframes dialog-fade-out {
   0% {
     transform: translate3d(-50%, -50%, 0);

@@ -46,7 +46,7 @@
                 @click="close"
               ></i>
             </div>
-            <div class="v-dialog__main" ref="main">
+            <div class="v-dialog__main" ref="main"  :style="{ maxHeight: `${maxHeight}px` }">
               <slot></slot>
             </div>
             <div ref="footer" :class="['v-dialog__footer', footerClass]">
@@ -85,6 +85,8 @@
 </template>
 
 <script>
+
+import { debounce } from "@/components/libs";
 export default {
   name: "v-dialog",
   props: {
@@ -153,13 +155,18 @@ export default {
   },
   data() {
     return {
-      dialogWrapperStyle: {}
+      dialogWrapperStyle: {},
+      maxHeight: this.getMaxHeight()
     };
   },
   mounted() {
     if (this.appendToBody) {
       this.insertDialogToBody();
     }
+    this.resizeFn = debounce(() => {
+      this.maxHeight = this.getMaxHeight();
+    }, 100);
+    window.addEventListener("resize", this.resizeFn);
   },
   computed: {
     visible() {
@@ -180,6 +187,16 @@ export default {
     }
   },
   methods: {
+    getMaxHeight() {
+      return (
+        parseInt(
+          (window.document.body.clientHeight ||
+            window.document.documentElement.clientHeight) * 0.8
+        ) -
+        56 -
+        (this.showTitle ? 48 : 0)
+      );
+    },
     show() {
       // this.visible = true;
       this.$emit("input", true);
@@ -232,6 +249,10 @@ export default {
         this.$emit("open");
       }
     }
+  },
+  beforeDestroy() {
+
+    window.removeEventListener("resize", this.resizeFn);
   }
 };
 </script>

@@ -2,12 +2,13 @@
   <div class="v-dropdown">
     <!-- v-button 不满足使用 -->
     <div
-      :class="['v-dropdown__label', 'v-icon-down', dropdownLabelType]"
+      :class="['v-dropdown__label', dropdownLabelType]"
       @click="proxyDisabledHandler(disabled, handleLabelClick)"
       @mouseenter="proxyDisabledHandler(disabled, handleLabelMouseenter)"
       @mouseleave="proxyDisabledHandler(disabled, handleLabelMouseleave)"
     >
       {{ label }}
+      <i class="v-icon-down"></i>
     </div>
     <create-to-body
       :show="dropdownShow"

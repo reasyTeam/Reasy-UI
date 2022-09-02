@@ -33,6 +33,7 @@
   .v-input {
     width: 100%;
   }
+
   &__input {
     .input-text {
       padding-right: 2px !important;
@@ -41,6 +42,7 @@
     &--half.v-datepicker__input.v-input {
       width: calc(48% - 4px);
     }
+
     &--placeholder {
       .input-text {
         color: $placeholder-color;
@@ -56,6 +58,10 @@
     color: $light-color;
     font-size: 16px;
     cursor: pointer;
+
+    &.v-icon-close-plane {
+      color: $disabled-color;
+    }
 
     &--disabled {
       color: $disabled-color;
@@ -100,9 +106,11 @@
       font-size: 16px;
       line-height: inherit;
     }
+
     .v-icon-right {
       margin-right: 6px;
     }
+
     .v-icon-left {
       margin-left: 6px;
     }
@@ -135,6 +143,7 @@
       margin-bottom: 6px;
       padding: 10px;
       font-size: 14px;
+
       .v-datepicker--info {
         width: 46px;
       }
@@ -204,6 +213,7 @@
       color: $title-color;
     }
   }
+
   &--range {
     color: $title-color;
     background-color: rgba($main-active-color, 0.1);
@@ -229,6 +239,7 @@
   &__pre-month.pointer,
   &__next-month.pointer {
     color: $disabled-color;
+
     .v-datepicker--info:hover {
       color: $disabled-color;
       border-color: transparent;
@@ -240,7 +251,7 @@
 
     .v-datepicker--info {
       border-color: transparent;
-      color: $disabled-color !important;
+      color: $disabled-color  !important;
       background-color: $disabled-background-color;
     }
   }

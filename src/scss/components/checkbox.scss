@@ -11,6 +11,7 @@
     font-size: 0;
 
     &:hover {
+
       .v-checkbox__icon,
       .v-checkbox__process {
         border-color: $border-hover-color;
@@ -34,18 +35,23 @@
         &.v-checkbox__process {
           border-color: $border-color;
           background-color: $disabled-background-color;
+
           &:before {
             background-color: rgba($main-active-color, 0.5);
           }
+
           &:hover {
             border-color: $main-active-color;
           }
         }
       }
+
       .v-checkbox__label {
         color: $disabled-color;
       }
+
       &:hover {
+
         .v-checkbox__icon,
         .v-checkbox__process {
           border-color: $border-color;
@@ -53,7 +59,7 @@
       }
     }
 
-    & + & {
+    &+& {
       margin-left: 20px;
     }
   }
@@ -102,6 +108,7 @@
 .v-checkbox-group {
   display: inline-block;
   vertical-align: top;
+  font-size: 0;
 
   .v-checkbox__item {
     margin-right: 26px;
@@ -119,6 +126,7 @@
       border-color: rgba($main-active-color, 0.4);
     }
   }
+
   .v-checkbox__item--disabled:hover {
     .v-checkbox__process {
       border-color: rgba($main-active-color, 0.4);

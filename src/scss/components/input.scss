@@ -3,6 +3,7 @@ $main-active-light-color: rgba($main-active-color, 0.9);
 @mixin input-size($fontSize, $lineHeight) {
   font-size: $fontSize;
   vertical-align: top;
+
   .input-text,
   .v-input-group__splitter,
   .placeholder-text {
@@ -57,10 +58,6 @@ input[type="number"] {
       color: $disabled-color;
     }
 
-    &.input-gray:hover {
-      color: darken($border-color, 15%);
-    }
-
     &--prefix {
       position: absolute;
       height: 100%;
@@ -74,7 +71,7 @@ input[type="number"] {
       right: 0;
       top: 0;
 
-      .input-icon + .input-icon {
+      .input-icon+.input-icon {
         padding-left: 8px;
       }
     }
@@ -183,7 +180,7 @@ input[type="number"] {
   padding: 4px 8px;
 
   &.is-disabled {
-    border: 1px solid $disabled-border-color !important;
+    border: 1px solid $disabled-border-color  !important;
   }
 }
 
@@ -262,7 +259,7 @@ input[type="number"] {
     border-left: 1px solid $border-color;
     transition: height 0.1s linear;
 
-    & + .v-input-number__button {
+    &+.v-input-number__button {
       border-top: 1px solid $border-color;
     }
 
@@ -287,7 +284,7 @@ input[type="number"] {
     &.btn-disabled {
       cursor: not-allowed;
       background: $disabled-background-color;
-      color: $disabled-color !important;
+      color: $disabled-color  !important;
       border-color: #e9e9e9;
       transition: none;
 
@@ -362,12 +359,15 @@ input[type="number"] {
     &:hover {
       .v-input-number__button {
         height: 40%;
+
         &:hover {
           height: 60%;
         }
       }
+
       .btn-disabled {
         height: 50%;
+
         &:hover {
           height: 50%;
         }
@@ -383,15 +383,18 @@ input[type="number"] {
     .v-input-number__controls {
       width: 22px;
     }
+
     .v-input-number__position .input-text {
       padding-left: 30px;
       padding-right: 30px;
     }
   }
+
   &--large {
     .v-input-number__arrow {
       width: 24px;
     }
+
     .v-input-number__controls {
       width: 40px;
     }
