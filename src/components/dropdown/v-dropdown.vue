@@ -7,7 +7,7 @@
       @mouseenter="proxyDisabledHandler(disabled, handleLabelMouseenter)"
       @mouseleave="proxyDisabledHandler(disabled, handleLabelMouseleave)"
     >
-      {{ label }}
+      <label class="ver-align-middle">{{ label }}</label>
       <i class="v-icon-down"></i>
     </div>
     <create-to-body
