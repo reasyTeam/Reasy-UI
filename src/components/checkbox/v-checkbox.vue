@@ -70,6 +70,10 @@ export default {
         return true;
       }
     },
+    changeCheck: {
+      type: Boolean,
+      default: true
+    },
     tooltip: Object // 与v-tooltip指令配置相同
   },
   computed: {
@@ -90,7 +94,7 @@ export default {
           "change",
           this.value === this.onValue ? this.offValue : this.onValue
         );
-        this.checkValid(this.value);
+        this.changeCheck && this.checkValid(this.value);
       }
     }
   }

@@ -89,7 +89,7 @@ export default {
   },
   props: {
     value: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     type: {
@@ -203,7 +203,7 @@ export default {
     },
     handleOptionClick(option, idx) {
       this.selectIndex = idx;
-      this.$emit("change", idx);
+      this.$emit("change", option.value);
 
       this.$emit("click-item", option, idx);
 
@@ -248,12 +248,19 @@ export default {
       this.$dispatch("create-to-body", "update:position");
     }
   },
-  created() {
-    this.selectIndex = this.value || 0;
-  },
   watch: {
-    value(val) {
-      this.selectIndex = val;
+    value: {
+      handler(val) {
+        let index = 0;
+        for (let i = 0; i < this.options.length; i++) {
+          if (val === this.options[i].value) {
+            index = i;
+            break;
+          }
+        }
+        this.selectIndex = index;
+      },
+      immediate: true
     }
   }
 };

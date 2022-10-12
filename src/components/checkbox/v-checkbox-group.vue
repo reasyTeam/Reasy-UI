@@ -8,6 +8,7 @@
       v-model="isAllChecked"
       :disabled="disabledCheckAll || disabled"
       @click="handleAllClick"
+      :change-check="false"
       no-id
       :name="name | id('all')"
     >
@@ -24,6 +25,7 @@
       :off-value="offValue"
       :disabled="getDisabled(item, checkboxValueList[index])"
       :tooltip="tooltip | formatTooltip(item.label)"
+      :change-check="false"
       @change="changeValue(item)"
       @click="handlerClick(item)"
       :name="name | id(item.value)"

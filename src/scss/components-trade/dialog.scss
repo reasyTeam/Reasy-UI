@@ -18,7 +18,6 @@
     color: #4b4b5a;
   }
   .v-dialog__button-group {
-
     .v-dialog__button-item + .v-dialog__button-item {
       margin-left: 16px;
     }
@@ -34,4 +33,5 @@
   padding: 11px 24px;
   border-top: 1px solid #eeeff1;
   border-bottom: 1px solid transparent;
+  margin-top: 0px;
 }

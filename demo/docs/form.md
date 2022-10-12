@@ -136,7 +136,7 @@ Vue.use(Base);
   <v-form-item label="功率" prop="power">
     <v-slider name="power" :min="0" :max="100" v-model="ruleForm.power"></v-slider>
     <template v-slot:description>
-      <label class="v-form-item__description">这里显示描述信息描述信息slot</label>
+      <label class="v-form-item__description">这里显示描述信息描5555述信息slot</label>
     </template>
   </v-form-item>
   <v-form-item label="加密" prop="security">
@@ -152,7 +152,7 @@ Vue.use(Base);
       is-manual
     ></v-select>
   </v-form-item>
-  <v-form-item label="日期" prop="day" :required="false">
+  <v-form-item label="日期" prop="day">
     <v-checkbox-group
       is-select-all
       name="day"
@@ -266,7 +266,8 @@ Vue.use(Base);
           power: { type: "num", args: [1, 12] },
           ip: [{ type: "ip" }, this.checkIp],
           index: { type: "num", args: [1, 12] },
-          downLimit: { type: "num", args: [1, 12] }
+          downLimit: { type: "num", args: [1, 12] },
+          day:[this.checkDay]
         }
       };
     },
@@ -283,6 +284,9 @@ Vue.use(Base);
         if (+ipArr[0] <= 193) {
           return "自定义验证说明";
         }
+      },
+      checkDay(val){
+        return val.length < 3 ? "至少选择三天" :false
       },
       cancel() {}
     },

@@ -154,6 +154,7 @@
         :class="sizeCss"
         :options="searchText ? searchList : optionList"
         :is-multiple="isMultiple"
+        :high-light-text="searchText"
         :multiple-limit="multipleLimit"
         :select-value="value"
         :count="displayOptionsNumber"
@@ -161,6 +162,7 @@
         @click-options="clickOptions"
         @hide="hide"
         :is-exsit="!!isExsitOption"
+        :no-id="noId"
         :name="name | id('list')"
       ></dropdown-list>
     </create-to-body>

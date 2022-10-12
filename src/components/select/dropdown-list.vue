@@ -32,13 +32,23 @@
               :between-space="0"
               show-only-ellipsis
               :content="item.label"
-              ><span
+            >
+              <span
+                v-if="highLightText"
                 class="v-select-options__item__text"
                 :style="{ maxWidth: optionMaxWidth || 'auto' }"
                 :class="{ padding: isMultiple && getSelected(item, index) }"
-                >{{ item.label }}</span
-              ></v-tooltip
-            >
+                v-html="highLight(item.label)"
+              ></span>
+              <span
+                v-else
+                class="v-select-options__item__text"
+                :style="{ maxWidth: optionMaxWidth || 'auto' }"
+                :class="{ padding: isMultiple && getSelected(item, index) }"
+              >
+                {{ item.label }}</span
+              >
+            </v-tooltip>
             <span
               v-if="isMultiple && getSelected(item, index)"
               class="v-select__icon--right--active v-icon-ok"
@@ -68,6 +78,7 @@ export default {
     show: Boolean,
     //下拉框值
     selectValue: [String, Number, Array, Boolean, Symbol],
+    highLightText: String,
     //多选长度限制
     multipleLimit: Number,
     //是否支持多选
@@ -126,6 +137,16 @@ export default {
     },
     setPosition() {
       this.$dispatch("create-to-body", "update:position");
+    },
+    highLight(text) {
+      const { highLightText } = this;
+      if (highLightText) {
+        return text.replace(
+          highLightText,
+          `<i class="v-select-options__item__hl">${highLightText}</i>`
+        );
+      }
+      return text;
     }
   }
 };

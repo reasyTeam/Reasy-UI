@@ -11,6 +11,7 @@
       :id="name"
       @mouseover="isHover = true"
       @mouseout="isHover = false"
+      @paste="handlerPaste"
     >
       <span
         class="v-input-group__item"
@@ -244,6 +245,29 @@ export default {
     handlerBlur() {
       this.isFocus = false;
       this.$emit("blur");
+    },
+    handlerPaste(e) {
+      const clipdata = e.clipboardData || window.clipboardData;
+      if (!clipdata) {
+        return;
+      }
+      let value = clipdata.getData("text/plain");
+      let valArr = value.split(this.inputSplitter);
+      let isValid = valArr.every(item => {
+        //全是允许输入的值
+        return item == (item.match(this.inputAllow) || []).join("");
+      });
+      if (isValid && valArr.length === this.inputNumber) {
+        this.$emit("change", value);
+
+        //解决粘贴完数据后，再删除其中某个数据输入框数据未更新的问题
+        this.$refs.input.forEach((elem, index) => {
+          elem.setInputValue(valArr[index]);
+        });
+        //最后一个输入框聚焦
+        this.$refs.input[this.inputNumber - 1].focus();
+        e.preventDefault();
+      }
     }
   },
   watch: {

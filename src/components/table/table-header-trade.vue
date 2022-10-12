@@ -121,7 +121,7 @@
         @click="sortTable(col)"
         @mouseenter="mouseenter(col)"
         @mouseleave="mouseleave(col)"
-        :ref="[`headerWidth_${col.prop}`]"
+        :ref="`headerWidth_${col.prop}`"
         :style="{ 'min-width': col.width }"
         :id="name | id(col.rawProp || index)"
       >

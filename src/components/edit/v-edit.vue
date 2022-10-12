@@ -4,16 +4,14 @@
     :class="[sizeCss, { 'v-edit--disabled': isDisabled }]"
     :style="{ width: inputWidth }"
   >
-    <div v-show="!isEditing">
-      <input
-        readonly
+    <div v-show="!isEditing" class="edit-show">
+      <label
         :title="labelVal"
-        :value="labelVal"
         :id="name | id('disabled')"
         :name="name"
         class="edit-plane edit__lable"
-        disabled
-      />
+        >{{ labelVal }}</label
+      >
       <span
         class="v-icon-edit v-edit__icon pointer edit-gray"
         :id="name | id('edit')"
