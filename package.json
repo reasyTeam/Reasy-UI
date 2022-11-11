@@ -55,7 +55,7 @@
     "prettier": "^1.19.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "sass": "^1.52.1",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^13.2.0",
     "sass-resources-loader": "^2.0.3",
     "style-loader": "^2.0.0",
     "transliteration": "^2.2.0",
