@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+   <div></div>
 </template>
 
 <script>
@@ -126,6 +126,13 @@ export default {
       default() {
         return false;
       }
+    },
+    borderSide: {
+      type: Boolean,
+      default: false
+    },
+    sortFormat: {
+      type: Function
     }
   },
   computed: {

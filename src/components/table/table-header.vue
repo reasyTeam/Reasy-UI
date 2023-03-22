@@ -10,12 +10,14 @@
         :width="col.width"
         :key="index + 1"
         :align="col.align"
+        :style="{ minWidth: col.width + 'px' }"
       />
     </colgroup>
     <thead>
       <tr>
         <th
           v-for="(col, index) in columns"
+          :style="{ maxWidth: col.maxWidth }"
           :key="index + 1"
           :class="[{ 'v-table__header--sort': col.isSort }, `is_${col.align}`]"
           @click="sortTable(col)"

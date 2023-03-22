@@ -493,7 +493,10 @@ export default {
 
         inputVal = (inputVal.match(this.allow) || []).join("");
         //setTimeout(() => {
-        event.target.value = inputVal;
+        if (inputVal !== event.target.value) {
+          event.target.value = inputVal;
+        }
+
         //将光标设置到原位，原位置是输入后光标在数据长度的倒数第几个位置
         //解决刚刚输入的数据被过滤后光标位置不正确
         setCursorPos(event.target, inputVal.length - endNum);

@@ -53,6 +53,7 @@
               ref="main"
               :id="name | id('main')"
             >
+              <span v-if="content">{{ content }}</span>
               <slot></slot>
             </div>
             <div ref="footer" :class="['v-dialog__footer', footerClass]">
@@ -164,6 +165,10 @@ export default {
       default: false
     },
     appendToId: {
+      type: String,
+      default: ""
+    },
+    content: {
       type: String,
       default: ""
     }

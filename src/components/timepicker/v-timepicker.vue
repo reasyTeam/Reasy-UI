@@ -86,7 +86,7 @@
             :min="min"
             :max="max"
             @change="changeStartTime"
-            :name="name | id('start')"
+            :name="name | id('panel-start')"
           ></time-panel>
         </v-col>
         <!-- 结束时间 -->
@@ -101,7 +101,7 @@
             :min="min"
             :max="max"
             @change="changeEndTime"
-            :name="name | id('end')"
+            :name="name | id('panel-end')"
           ></time-panel>
         </v-col>
       </v-row>

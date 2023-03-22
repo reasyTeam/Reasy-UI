@@ -31,10 +31,13 @@
           class="v-upload__row__file"
           @click="clickFile"
           :id="name | id('file')"
-          :class="{
-            'has-file': fileName,
-            'v-upload__row__file-disabled': disabled
-          }"
+          :class="[
+            {
+              'has-file': fileName,
+              'v-upload__row__file-disabled': disabled
+            },
+            sizeCss
+          ]"
           >{{ fileName || _("Click Browse to select a file") }}</label
         >
         <v-button
@@ -43,22 +46,30 @@
           @click="clickFile"
           no-id
           :name="name | id('upload')"
+          :size="size"
+          :type="btnType"
         >
-          <span>{{ _("Browse") }}</span>
+          <slot>
+            <span>{{ _("Browse") }}</span>
+          </slot>
         </v-button>
       </div>
 
       <!-- 其它上传类型 -->
       <div v-else>
         <v-button
-          icon="v-icon-upload"
+          :icon="icon"
           :disabled="disabled"
           class="v-upload__button"
           no-id
           @click="clickFile"
           :name="name | id('upload')"
+          :size="size"
+          :type="btnType"
         >
-          <span>{{ _("Select File") }}</span>
+          <slot>
+            <span>{{ _("Select File") }}</span>
+          </slot>
         </v-button>
       </div>
       <!-- 上传文件列表 -->
@@ -186,6 +197,23 @@ export default {
     onError: {
       type: Function,
       default: () => {}
+    },
+    icon: {
+      type: String,
+      default: "v-icon-upload"
+    },
+    //文件大小限制
+    limitSize: {
+      type: Number,
+      default: 0
+    },
+    size: {
+      type: String,
+      default: "M"
+    },
+    btnType: {
+      type: String,
+      default: "info"
     }
   },
   computed: {
@@ -199,6 +227,14 @@ export default {
     },
     fileName() {
       return this.fileStr || this.noFileText;
+    },
+    sizeCss() {
+      let cssObj = {
+        M: "v-upload__row__file--medium",
+        S: "v-upload__row__file--small",
+        L: "v-upload__row__file--large"
+      };
+      return cssObj[this.size];
     }
   },
   data() {
@@ -363,6 +399,12 @@ export default {
       }
     },
     async submit() {
+      if (this.limitSize && rawFile.size > this.limitSize * 1024 * 1024) {
+        this.$message.error(_("文件大小不能超过%sMB", [this.limitSize]));
+        this.$refs.file.value = "";
+        return;
+      }
+
       let result = await this.beforeUpload(this.fileStr);
       if (!result) return;
       if (this.isAjax) {

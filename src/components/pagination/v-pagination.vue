@@ -258,6 +258,7 @@ export default {
     currentPage: {
       handler(val) {
         this.page = val;
+        this.pageValue = String(val);
       },
       immediate: true
     },

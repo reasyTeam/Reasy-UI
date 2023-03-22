@@ -110,6 +110,7 @@ const install = function(Vue) {
   Vue.use(Base);
   Vue.use(Message);
   Vue.use(Notification);
+  Vue.use(Dialog);
   Vue.use(Tooltip);
   components.forEach(component => {
     Vue.component(component.name, component);

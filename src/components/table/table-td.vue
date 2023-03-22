@@ -1,10 +1,17 @@
 <template>
   <td
+    v-if="show"
     :class="[
-      { 'v-table__expand': column.type === 'expand' },
+      {
+        'v-table__expand': column.type === 'expand',
+        'border-side': column.borderSide
+      },
       `is_${column.align}`
     ]"
     :key="index + 1"
+    :style="{ maxWidth: column.maxWidth }"
+    :rowspan="getSpan[0]"
+    :colspan="getSpan[1]"
   >
     <template v-if="column.type === 'index'">
       {{ rowIndex + 1 }}
@@ -77,7 +84,8 @@ export default {
     filterSearch: Function,
     clickCheckbox: Function,
     expandTable: Function,
-    name: String
+    name: String,
+    spanMethod: Function
   },
   components: {
     VTd
@@ -85,6 +93,12 @@ export default {
   computed: {
     disabled() {
       return this.column.getDisabled(this.rowData);
+    },
+    getSpan() {
+      return this.handleSpanMethod();
+    },
+    show() {
+      return this.getSpan[0] * this.getSpan[1] > 0;
     }
   },
   methods: {
@@ -98,6 +112,16 @@ export default {
         },
         column.tooltipOption
       );
+    },
+    //更新行、列合并
+    handleSpanMethod() {
+      let result = this.spanMethod(
+        this.rowIndex,
+        this.index,
+        this.rowData,
+        this.column
+      );
+      return result || [1, 1];
     }
   }
 };

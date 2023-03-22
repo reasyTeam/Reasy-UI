@@ -1,10 +1,26 @@
 .v-upload__row__button {
-  height: 24px;
   color: #676775;
   border-color: #e8e9ec;
-  &.v-button--info .v-button__item {
-    line-height: 22px;
-  }
+  border-radius: 0 4px 4px 0;
+  vertical-align: middle;
+}
+.v-upload__row__file--small {
+  width: $elem-width;
+  height: $form-button-height-s;
+  font-size: $font-size-s;
+  line-height: calc(#{$form-button-height-s} - 2px) 
+}
+.v-upload__row__file--medium {
+  width: $elem-width;
+  height: $form-button-height;
+  font-size: $font-size-m;
+  line-height: calc(#{$form-button-height} - 2px) 
+}
+.v-upload__row__file--large {
+  width: $elem-width;
+  height: $form-button-height-l;
+  font-size: $font-size-l;
+  line-height: calc(#{$form-button-height-l} - 2px) 
 }
 .v-upload__image__icon {
   font-size: 20px;

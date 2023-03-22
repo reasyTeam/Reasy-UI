@@ -38,5 +38,5 @@ module.exports = {
   colorpicker: "./src/scss/components/colorpicker.scss",
   edit: "./src/scss/components/edit.scss",
   qrcode: "./src/scss/components/qrcode.scss",
-  menu: "./components/menu.scss"
+  menu: "./src/scss/components/menu.scss"
 };

@@ -1,5 +1,9 @@
 <template>
-  <div class="v-table" :id="name" :class="[sizeCss, { disabled: disabled }]">
+  <div
+    class="v-table"
+    :id="name"
+    :class="[sizeCss, { disabled: disabled, 'no-wrap': isAuto }]"
+  >
     <!-- 搜索 -->
     <div class="v-table__search" v-if="search">
       <v-input
@@ -81,7 +85,11 @@
         active
         @mouseleave.native="hoverIndex = -1"
       >
-        <table ref="table" class="table" :class="{ 'v-table__stripe': stripe }">
+        <table
+          ref="table"
+          class="table"
+          :class="{ 'v-table__stripe': stripe, 'hide-head': isAuto }"
+        >
           <colgroup>
             <col
               v-for="(col, index) in columns"
@@ -89,6 +97,55 @@
               :key="index + 1"
             />
           </colgroup>
+          <thead v-if="isAuto">
+            <tr>
+              <th
+                v-for="(col, index) in columns"
+                :key="index + 1"
+                :class="[
+                  { 'v-table__header--sort': col.isSort },
+                  `is_${col.align}`
+                ]"
+                :id="name | id(col.rawProp || index)"
+                :data-name="col.prop"
+              >
+                <!-- 选择框 -->
+                <v-checkbox
+                  :no-id="!name"
+                  :name="name | id((col.rawProp || index) + '-checbox')"
+                  v-if="col.type === 'selection'"
+                  class="v-table__header__checkbox"
+                  v-model="checkboxAllVal"
+                ></v-checkbox>
+                <!-- 表头文字 -->
+                <!-- 支持显示html -->
+                <span
+                  class="v-table__header__label"
+                  v-if="col.isHtmlHeader"
+                  v-html="col.label"
+                ></span>
+                <!-- text格式显示 -->
+                <span class="v-table__header__label" v-else>{{
+                  col.label
+                }}</span>
+                <!-- 排序 -->
+                <span v-if="col.isSort" class="v-table__sort">
+                  <span
+                    class="v-table__icon v-table__icon--up"
+                    :class="{
+                      active: col.sortType === 'asc' && sortProp === col.prop
+                    }"
+                  ></span>
+                  <span
+                    class="v-table__icon v-table__icon--down"
+                    :class="{
+                      active: col.sortType === 'desc' && sortProp === col.prop
+                    }"
+                  ></span>
+                </span>
+              </th>
+            </tr>
+          </thead>
           <tbody>
             <slot name="header"></slot>
             <!-- 列表数据信息 -->
@@ -111,6 +168,7 @@
                   <v-td
                     :column="col"
                     :key="index + 1"
+                    :spanMethod="spanMethod"
                     :index="index"
                     :id="name | id(rowIndex + '-' + (col.rawProp || index))"
                     :name="name | id(rowIndex + '-' + (col.rawProp || index))"
@@ -122,7 +180,11 @@
                     :click-checkbox="clickCheckbox.bind(this)"
                     :expand-table="expandTable.bind(this)"
                     :before-change="col.beforeSelected.bind(this, rowData)"
-                    ref="checktd"
+                    :ref="
+                      col.type == 'selection'
+                        ? 'checktd'
+                        : `td_${col.prop}${name}`
+                    "
                   ></v-td>
                 </template>
               </tr>
@@ -188,7 +250,6 @@
                 <template v-for="(rowData, rowIndex) in pageData">
                   <!-- 数据行信息 -->
                   <tr
-                    ref="table-body-tr"
                     class="v-table__row"
                     :class="{
                       'v-table__row--active':
@@ -204,6 +265,7 @@
                       <v-td
                         :column="col"
                         :key="index + 1"
+                        :spanMethod="spanMethod"
                         :index="index"
                         :id="
                           name
@@ -221,7 +283,7 @@
                         :click-checkbox="clickCheckbox.bind(this)"
                         :expand-table="expandTable.bind(this)"
                         :before-change="col.beforeSelected.bind(this, rowData)"
-                        ref="checktd"
+                        :ref="col.type == 'selection' ? 'checktd' : ''"
                       ></v-td>
                     </template>
                   </tr>
@@ -251,7 +313,6 @@
                 <template v-for="(rowData, rowIndex) in pageData">
                   <!-- 数据行信息 -->
                   <tr
-                    ref="table-body-tr"
                     class="v-table__row"
                     :class="{
                       'v-table__row--active':
@@ -267,6 +328,7 @@
                       <v-td
                         :column="col"
                         :key="index + 1"
+                        :spanMethod="spanMethod"
                         :index="index"
                         :id="
                           name
@@ -285,7 +347,7 @@
                         :click-checkbox="clickCheckbox.bind(this)"
                         :expand-table="expandTable.bind(this)"
                         :before-change="col.beforeSelected.bind(this, rowData)"
-                        ref="checktd"
+                        :ref="col.type == 'selection' ? 'checktd' : ''"
                       ></v-td>
                     </template>
                   </tr>
@@ -494,6 +556,31 @@ export default {
     disabled: {
       type: Boolean,
       default: false
+    },
+    //自定义滚动高度
+    customHeight: {
+      type: [Number, String],
+      default: 0
+    },
+    //自定义排序
+    customSort: {
+      type: Boolean,
+      default: false
+    },
+    //自定义搜索
+    customSearch: {
+      type: Boolean,
+      default: false
+    },
+    tableLayout: {
+      type: String,
+      default: "fixed"
+    },
+    spanMethod: {
+      type: Function,
+      default() {
+        return [1, 1];
+      }
     }
   },
   computed: {
@@ -527,6 +614,10 @@ export default {
         return item[this.checkboxField] === CHECKBOX_CHECKED;
       });
       return this.checkboxAllVal === CHECKBOX_UNCHECKED && isSelect;
+    },
+    //是否自适应布局
+    isAuto() {
+      return this.tableLayout === "auto";
     }
   },
   data() {
@@ -549,8 +640,11 @@ export default {
       searchSupportArr: [], //支持search字段
       expandFunc: false, //展开事件
       sortProp: "", //当前排序元素
+      sortType: "", //当前排序顺序
       pageSizeValue: 10, //每页条数
-      currentSelectData: [] //当前的选中项
+      currentSelectData: [], //当前的选中项
+      timer: null,
+      sortFormatObj: {} //排序函数对象
     };
   },
   created() {
@@ -600,6 +694,8 @@ export default {
       } else {
         this.columns.push(item);
       }
+
+      this.sortFormatObj[item.prop] = item.sortFormat;
     });
 
     function findColumn(columns, prop) {
@@ -631,9 +727,48 @@ export default {
       this.columns.splice(exsitIndex, 1);
     });
 
-    on(window, "resize", this.updateBodyWidth);
+    on(window, "resize", () => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.updateBodyWidth();
+        this.updataColumn();
+      }, 100);
+    });
   },
   methods: {
+    //根据表体宽度更新表头宽度
+    updataColumn() {
+      if (this.isAuto) {
+        this.leftFixedWidth = 0;
+        this.rightFixedWidth = 0;
+
+        this.columns.forEach(el => {
+          let eles = this.$refs[`td_${el.prop}${this.name}`],
+            checktd = this.$refs.checktd;
+
+          if (eles && eles.length) {
+            el.width = eles[0].$el.offsetWidth || 0;
+          }
+          if (el.type === "selection") {
+            el.width = 40;
+            if (checktd && checktd.length) {
+              el.width = Math.max(40, checktd[0].$el.offsetWidth);
+            }
+          } else if (el.type === "index") {
+            el.width = Math.max(48, el.width);
+          }
+
+          //固定列
+          if (el.fixed === "left") {
+            this.leftFixedWidth += el.width;
+          }
+          if (el.fixed === "right") {
+            this.rightFixedWidth += el.width;
+          }
+        });
+        this.columns.splice(0, 0);
+      }
+    },
     getActive(rowData) {
       if (this.currentSelectData.length < 1 || !this.rowKey) {
         return false;
@@ -651,9 +786,15 @@ export default {
       });
     },
     updateTable(isChanged) {
+      if (this.isAuto) {
+        this.columns.forEach(el => {
+          el.width = 0;
+        });
+      }
       this.pageData = this.getPageData();
 
       this.$nextTick(() => {
+        this.updataColumn();
         this.updateScrollHeight(isChanged);
         this.$emit("after-update", this.pageData);
         // 更新表头选中的值
@@ -669,6 +810,14 @@ export default {
       });
     },
     updateScrollHeight(isChanged) {
+      if (this.customHeight) {
+        let maxHeight =
+          this.getTbodyHeight() > this.customHeight
+            ? this.customHeight
+            : "auto";
+        this.$refs.scroll.setSize(maxHeight, "", isChanged);
+        return;
+      }
       let maxRow = this.maxRow,
         height = 0;
       if (maxRow <= 0) {
@@ -676,22 +825,29 @@ export default {
       }
 
       if (maxRow < (this.pageData || []).length) {
-        let trRefs = this.$refs["table-body-tr"],
-          trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
-
-        for (let i = 0; i < maxRow; i++) {
-          if (trArr[i]) {
-            height += trArr[i].offsetHeight;
-          }
-        }
+        height = this.getTbodyHeight(maxRow);
       } else {
         height = "auto";
       }
 
       this.$refs.scroll.setSize(height, "", isChanged);
     },
+    getTbodyHeight(len) {
+      let height = 0;
+      let trRefs = this.$refs["table-body-tr"],
+        trArr = Array.isArray(trRefs) ? trRefs : [trRefs];
+      len = len || trArr.length;
+      for (let i = 0; i < len; i++) {
+        if (trArr[i]) {
+          height += trArr[i].offsetHeight;
+        }
+      }
+      return height;
+    },
     updateBodyWidth() {
-      this.tableWidth = parseInt(this.$refs.table.scrollWidth);
+      this.tableWidth = parseInt(
+        this.$refs.table && this.$refs.table.scrollWidth
+      );
       // this.$refs.scroll.update();
     },
 
@@ -699,6 +855,11 @@ export default {
     goSearch() {
       this.sortProp = "";
       this.searchText = this.searchValue;
+      //自定义搜索
+      if (this.customSearch) {
+        this.$emit("custom-search", this.searchValue);
+        return;
+      }
       if (this.searchValue == "") {
         this.tableData = copyDeepData(this.data);
       } else {
@@ -733,9 +894,18 @@ export default {
     },
     //排序
     sortTable(prop, sortType) {
+      let sortFormat = this.sortFormatObj[prop];
       this.sortProp = prop;
+      this.sortType = sortType;
+      //自定义排序
+      if (this.customSort) {
+        this.$emit("custom-sort", prop, sortType);
+        return;
+      }
       this.tableData.sort((a, b) => {
-        return sortByKey(a, b, prop, { [prop]: sortType });
+        return sortFormat
+          ? sortFormat(a, b, this.sortProp, this.sortType)
+          : sortByKey(a, b, prop, { [prop]: sortType });
       });
       this.updateTable(true);
     },
@@ -874,6 +1044,17 @@ export default {
             this.page = Math.ceil(this.tableData.length / this.pageSizeValue);
           }
         }
+        //自定义排序
+        if (!this.customSort && this.sortProp) {
+          let sortFormat = this.sortFormatObj[this.sortProp];
+          this.tableData.sort((a, b) => {
+            return sortFormat
+              ? sortFormat(a, b, this.sortProp, this.sortType)
+              : sortByKey(a, b, this.sortProp, {
+                  [this.sortProp]: this.sortType
+                });
+          });
+        }
         this.updateTable();
         this.$nextTick(() => {
           this.updateCurrentSelectData();
@@ -895,6 +1076,11 @@ export default {
         this.currentSelectData = copyDeepData(val || []);
       },
       immediate: true
+    },
+    customHeight: {
+      handler() {
+        this.updateScrollHeight();
+      }
     }
   }
 };

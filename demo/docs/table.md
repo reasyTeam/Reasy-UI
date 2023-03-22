@@ -322,6 +322,55 @@ Vue.use(Base);
 
 :::
 
+`border-side` 可以单独设置某一列的边框
+
+::: demo
+
+```html
+<v-table name="tbale30" :data="table1">
+  <v-table-col prop="ssid" label="SSID" border-side> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
 ## 自定义数据
 
 `v-slot`配置当前列的自定义数据，必须与`template`搭配，`v-slot`的值为当前行的数据
@@ -858,12 +907,76 @@ Vue.use(Base);
 
 ## 排序表格
 
-`is-sort`表示此列支持排序
+`is-sort`表示此列支持排序，默认使用 ASCII 进行排序；如有需要其他格式的排序方式，可以使用 `sortFormat` 函数处理；
 
 ::: demo
 
 ```html
 <v-table name="tbale14" :data="table1">
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col is-sort prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col
+    is-sort
+    prop="age"
+    label="年龄"
+    :sortFormat="sortFormat"
+  ></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "jack",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhon",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jack",
+            age: "16"
+          }
+        ]
+      };
+    },
+    methods: {
+      sortFormat(a, b, prop, sortType) {
+        return sortType == "asc" ? a[prop] - b[prop] : b[prop] - a[prop];
+      }
+    }
+  };
+</script>
+```
+
+:::
+
+如果排序不使用组件默认的排序，可以设置 `customSort` 为 true 自定义处理排序数据
+
+::: demo
+
+```html
+<v-table
+  name="tbale31"
+  :data="table1"
+  :custom-sort="true"
+  @custom-sort="customSort"
+>
   <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
   <v-table-col is-sort prop="password" label="密码"></v-table-col>
   <v-table-col is-sort prop="name" label="名字"></v-table-col>
@@ -900,6 +1013,11 @@ Vue.use(Base);
           }
         ]
       };
+    },
+    methods: {
+      customSort(prop, type) {
+        console.log(prop, type);
+      }
     }
   };
 </script>
@@ -1024,6 +1142,194 @@ Vue.use(Base);
 
 ```html
 <v-table name="tbale17" :data="table1" :max-row="5">
+  <v-table-col type="index" label="序号"> </v-table-col>
+  <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
+  <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
+  <v-table-col prop="upload" label="上传速率"></v-table-col>
+  <v-table-col prop="download" label="下载速率"></v-table-col>
+  <v-table-col prop="upLimit" label="上传限速"></v-table-col>
+  <v-table-col prop="downLimit" label="下载限速"></v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ip: "192.168.0.100",
+            mac: "C8:3A:35:22:11:11",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.101",
+            mac: "C8:3A:35:22:11:12",
+            onlineTime: "100",
+            hz: "5G",
+            upload: "435",
+            download: "134",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.102",
+            mac: "C8:3A:35:22:11:13",
+            onlineTime: "67567",
+            hz: "2.4G",
+            upload: "678",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.103",
+            mac: "C8:3A:35:22:11:14",
+            onlineTime: "1000",
+            hz: "5G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.104",
+            mac: "C8:3A:35:22:11:15",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.105",
+            mac: "C8:3A:35:22:11:16",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.106",
+            mac: "C8:3A:35:22:11:17",
+            onlineTime: "67567",
+            hz: "2.4G",
+            upload: "678",
+            download: "34",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.107",
+            mac: "C8:3A:35:22:11:18",
+            onlineTime: "1000",
+            hz: "5G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.108",
+            mac: "C8:3A:35:22:11:19",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.109",
+            mac: "C8:3A:35:22:11:20",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.108",
+            mac: "C8:3A:35:22:11:19",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: '2"</span>',
+            mac: "C8:3A:35:22:11:20",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.128",
+            mac: "C8:3A:35:22:11:29",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.139",
+            mac: "C8:3A:35:22:11:32",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.148",
+            mac: "C8:3A:35:22:11:65",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          },
+          {
+            ip: "192.168.0.123",
+            mac: "C8:3A:35:22:11:87",
+            onlineTime: "1000",
+            hz: "2.4G",
+            upload: "123",
+            download: "12",
+            upLimit: "1000",
+            downLimit: "100"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+`custom-height`配置表格最多显示的高度，超过高度时，出现滚动条，默认为`0`不限制
+
+::: demo
+
+```html
+<v-table name="tbale26" :data="table1" :custom-height="300">
   <v-table-col type="index" label="序号"> </v-table-col>
   <v-table-col prop="ip" label="IP地址" width="180px"> </v-table-col>
   <v-table-col prop="mac" label="MAC地址" width="180px"></v-table-col>
@@ -1821,6 +2127,133 @@ Vue.use(Base);
 
 :::
 
+## 表格显示格式
+
+`tableLayout`为 auto 设置表格宽度由内容撑开，超出则显示滚动条，默认为 fixed 固定宽度；
+
+当表格设置为 auto 时，`maxWidth` 可以设置内容的最大宽度，注意：只在表格出现横向滚动的时候才生效，否则还是按照内容分配宽度。
+
+::: demo
+
+```html
+<v-table name="tbale28" :data="table1" tableLayout="auto">
+  <v-table-col is-sort prop="ssid" label="SSID"> </v-table-col>
+  <v-table-col prop="password" label="密码" maxWidth="100px"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit"></span>
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1dwdwfgdgsgdgfdgfdgfdg",
+            password: '2"</span>dsfwefwefwefwefewdwdwefwefwef',
+            name: "jackfewfwegdfgdfgfdgfd",
+            age: "12fewfwegfgfdgdgfgdf"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111ewqw",
+            name: "jhonfwefwefvfwefwdfewdwefsdfwe",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jackfewfwevfwegwrfwefwefwewefe",
+            age: "16"
+          }
+        ]
+      };
+    }
+  };
+</script>
+```
+
+:::
+
+## 表格合并
+
+`spanMethod`函数可以实现合并行或列，方法的参数包含了当前行号、当前列号、当前行数据、当前列对象；
+
+该函数需要返回一个包含两个元素的数组，数组的第一个元素为合并的行数，第二个元素为合并的列数；如果返回 [0, 0] 则隐藏当前表格
+
+::: demo
+
+```html
+<v-table name="tbale29" :data="table1" :spanMethod="spanMethod">
+  <v-table-col is-sort prop="ssid" label="SSID" border-side> </v-table-col>
+  <v-table-col prop="password" label="密码"></v-table-col>
+  <v-table-col is-sort prop="name" label="名字"></v-table-col>
+  <v-table-col prop="age" label="年龄"></v-table-col>
+  <v-table-col label="操作">
+    <template v-slot="slotProps">
+      <span class="v-icon-edit"></span>
+    </template>
+  </v-table-col>
+</v-table>
+<script>
+  export default {
+    data() {
+      return {
+        table1: [
+          {
+            ssid: "ssid1",
+            password: '2"</span>',
+            name: "cynthia",
+            age: "12"
+          },
+          {
+            ssid: "ssid2",
+            password: "111111111",
+            name: "jhonfwefwefvfwef",
+            age: "13"
+          },
+          {
+            ssid: "ssid3",
+            password: "2222222222",
+            name: "jack",
+            age: "15"
+          },
+          {
+            ssid: "ssid4",
+            password: "333333333333",
+            name: "jackfew",
+            age: "16"
+          }
+        ]
+      };
+    },
+    methods: {
+      spanMethod(rowIndex, columnIndex, rowData, column) {
+        if (columnIndex === 0) {
+          if (rowIndex % 2 === 0) {
+            return [2, 1];
+          } else {
+            return [0, 0];
+          }
+        }
+      }
+    }
+  };
+</script>
+```
+
+::: 
+
 ## Props
 
 | 参数                   | 说明                                                  | 类型     | 可选值    | 默认值                      |
@@ -1845,7 +2278,11 @@ Vue.use(Base);
 | select-data            | 选中的行数据                                          | Array    |           | []                          |
 | before-select-all      | 全选时切换前执行的事件，返回 false 时不会执行全选事件 | function |           | function(val) {return true} |
 | is-select-all-disabled | 全选按钮是否禁用                                      | boolean  |           | false                       |
-| disabled               | 表格是否禁用                                          | boolean  |           | false                       |
+| disabled               | 表格是否禁用                                          | boolean  |           | false     
+| custom-sort               | 表格是否使用自定义处理排序                                 | boolean  |           |false                    |
+| custom-height               | 表格设置自定义高度                                | string  |           |0                    |
+| table-layout               | 表格设置数据显示格式                             | string  |     fixed / auto      |fixed                    |
+| span-method               | 表格设置数据合并函数                             | function  |           |      function(rowIndex, columnIndex, rowData, column) {return [1, 1]}             |
 
 ## @Events
 
@@ -1854,6 +2291,7 @@ Vue.use(Base);
 | after-update     | 更新后的表格数据                                          | 表格数据（转化后的数据） |
 | click-row        | 当某一行被点击时会触发该事件                              | rowData, index           |
 | selection-change | 点击全选 或者单选时执行的事件，仅在 type=selection 时生效 | 当前的选中项             |
+| custom-sort      | 表格设置自定义处理排序时，点击排序触发的函数              | prop, sortType             |
 
 ## Methods
 
@@ -1885,10 +2323,12 @@ Vue.use(Base);
 | tooltip-option  | tooltip的配置项参考`v-tooltip`                                                                                         | boolean         | —                          | false  |
 | is-search       | 是否支持搜索                                                                                                           | boolean         | —                          | false  |
 | is-sort         | 是否支持排序                                                                                                           | boolean         | —                          | false  |
+| border-side         | 是否支持边框                                                                                                           | boolean         | —                          | false  |
 | align           | 对齐方式                                                                                                               | string          | left / center / right      | left   |
 | format          | 对此列数据自定义格式化，返回值为该列显示的数据，<br />返回数据可用于搜索<br />function(prop, rowData, index)           | Function        | —                          | —      |
 | get-disabled    | 仅对**type=selection**有效，返回复选框是否禁用<br />function(rowData)                                                  | Function        |                            |        |
 | before-selected | 仅对**type=selection**有效，点击 checkbox 时，返回 false 表示不会被选中，其他都会选中。 <br />function(rowData, index) | Function        |                            |        |
+| sort-format | 自定义排序的格式 <br />function(rowData1, rowData2, sortProp, sortType) | Function        |                            |        |
 | is-html-header  | 标题是否是自定义 html                                                                                                  | boolean         | -                          | false  |
 
 > 注意：设置固定列后，必须同时设置`width`，否则可能出现意想不到的问题。同时 fixed 列不支持`expand`功能。

@@ -131,7 +131,11 @@ export default {
       type: Boolean,
       default: false
     },
-    precision: Number
+    precision: Number,
+    allow: {
+      type: RegExp,
+      default: () => /[0-9-.]/gi
+    }
   },
   computed: {
     inputValue: {
@@ -195,7 +199,6 @@ export default {
   },
   data() {
     return {
-      allow: /[0-9-.]/gi,
       isHover: false,
       isFocus: false
     };

@@ -90,7 +90,7 @@ export default {
     },
     sliderWidth: {
       type: Number,
-      default: 4
+      default: 12
     },
     animate: {
       type: Boolean,
@@ -392,9 +392,10 @@ export default {
         let height = this.view.scrollHeight;
 
         this.isVertical = this.overflow === "auto" || this.overflow === "y";
-        this.isVertical = this.isVertical && this.wrapHeight < height;
+        // IE处理小数时出现滚动条
+        this.isVertical = this.isVertical && this.wrapHeight + 1 < height;
         this.isHorizontal = this.overflow === "auto" || this.overflow === "x";
-        this.isHorizontal = this.isHorizontal && this.wrapWidth < width;
+        this.isHorizontal = this.isHorizontal && this.wrapWidth + 1 < width;
 
         if (this.isHorizontal) {
           this.hBarWidth = parseInt((this.wrapWidth / width) * this.wrapWidth);

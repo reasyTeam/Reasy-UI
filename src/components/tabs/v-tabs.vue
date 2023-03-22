@@ -201,6 +201,11 @@ export default {
     }
   },
   watch: {
+    value: {
+      handler(val) {
+        this.currentValue = val;
+      }
+    },
     currentValue() {
       this.setTabActiveBorder();
     },

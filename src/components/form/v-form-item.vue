@@ -98,10 +98,13 @@
 <script>
 import { sizeToCss } from "../filters";
 
-
 export default {
   name: "v-form-item",
-  inject: ["getValidateType", "getField", "elForm"],
+  inject: {
+    getValidateType: { default: null },
+    getField: { default: null },
+    elForm: { default: null }
+  },
   provide() {
     return {
       elFormItem: this
@@ -166,6 +169,16 @@ export default {
     showTip: {
       type: Boolean,
       default: true
+    },
+    padding: {
+      type: Number,
+      default: 24
+    },
+    beforeSubmit: {
+      type: Function,
+      default(data) {
+        return data;
+      }
     }
   },
   filters: {
@@ -179,10 +192,13 @@ export default {
   computed: {
     //间距
     paddingWidth() {
-      return this.elForm.paddingWidth;
+      return this.elForm ? this.elForm.paddingWidth : this.padding;
     },
     //组件标题宽度
     labelWidth() {
+      if (!this.elForm) {
+        return this.titleWidth;
+      }
       this.isFirefox && this.updateTempWidth();
       return this.$getLabelWidth();
     },
@@ -230,6 +246,8 @@ export default {
     this.$on("form:blur", val => {
       this.checkValid(val);
 
+      //单独的form-item不校验
+      if (!this.getField) return;
       //获取关联验证组件
       if (!this.relativeProp) return;
 
@@ -324,12 +342,37 @@ export default {
     //子元素值
     getValue() {
       return this.value;
+    },
+    //表单提交时执行
+    submit() {
+      if (this.disabled) return;
+      //有错
+      if (!this.checkValid()) {
+        this.$message.error(_("Please check the error message"));
+        return false;
+      }
+      //表单自定义事件
+      let subData = { [this.prop]: this.getValue() };
+      let result = this.beforeSubmit(subData);
+      if (typeof result === "string") {
+        this.$message.error(result);
+        return false;
+      } else if (result === false) {
+        return false;
+      } else {
+        result = result || subData;
+      }
+
+      //数据验证通过
+      this.$emit("submit", result);
     }
   },
   watch: {
-    title: {
+    label: {
       handler() {
-        this.changeTitle();
+        this.$nextTick(() => {
+          this.changeTitle();
+        });
       }
       //immediate: true
     },

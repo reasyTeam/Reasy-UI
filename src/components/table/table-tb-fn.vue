@@ -10,7 +10,9 @@ export default {
     return createElement(
       "div",
       { class: this.className },
-      typeof this.fn === "function" ? this.fn(this.rowData) : this.fn
+      typeof this.fn === "function"
+        ? this.fn(this.rowData, this.index)
+        : this.fn
     );
   }
 };
