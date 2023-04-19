@@ -385,6 +385,12 @@ export default {
       return width > 0 ? width + "px" : "auto";
     }
   },
+  mounted() {
+    document.querySelector(".v-dialog__main") &&
+      document
+        .querySelector(".v-dialog__main")
+        .addEventListener("scroll", this.hide);
+  },
   data() {
     return {
       dropdownShow: false,
@@ -548,6 +554,12 @@ export default {
         this.$dispatch("v-form-item", "form:error", val);
       }
     }
+  },
+  beforeDestroy() {
+    document.querySelector(".v-dialog__main") &&
+      document
+        .querySelector(".v-dialog__main")
+        .removeEventListener("scroll", this.hide);
   }
 };
 </script>
