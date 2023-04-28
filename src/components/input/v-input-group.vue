@@ -24,6 +24,7 @@
           v-model="item.value"
           :maxlength="inputMaxLen"
           :data-index="item.index"
+          :autocomplete="autoComplete"
           :allow="inputAllow"
           :disabled="isDisabled"
           is-child
@@ -90,6 +91,10 @@ export default {
     autoCorrection: {
       type: Array,
       default: () => []
+    },
+    autoComplete: {
+      type: String,
+      default: "off"
     }
   },
   computed: {

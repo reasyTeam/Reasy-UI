@@ -36,6 +36,7 @@
         no-id
         :name="name"
         :data-name="_name"
+        :autocomplete="autoComplete"
         is-child
         :width="width"
         :disabled="isDisabled"
@@ -135,6 +136,10 @@ export default {
     allow: {
       type: RegExp,
       default: () => /[0-9-.]/gi
+    },
+    autoComplete: {
+      type: String,
+      default: "off"
     }
   },
   computed: {

@@ -29,6 +29,7 @@
         :type="showPassword ? (passwordVisible ? 'text' : 'password') : type"
         :name="name"
         :id="name"
+        :autocomplete="autoComplete"
         :data-name="_name"
         ref="input"
         class="input-text"
@@ -252,7 +253,11 @@ export default {
       default: true
     },
     strength: String,
-    preText: String
+    preText: String,
+    autoComplete: {
+      type: String,
+      default: "off"
+    }
   },
   computed: {
     //尺寸大小样式
