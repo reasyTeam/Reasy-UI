@@ -405,7 +405,7 @@ export function sortByKey(item1, item2, fields, sortTypeObj) {
     for (i = 0; i < fields.length; i++) {
       asc = sortTypeObj[fields[i]] == "asc"; //升序
       prop = fields[i];
-      if (typeof item1[prop] == "number" || typeof item2[prop] == "number") {
+      if (typeof item1[prop] == "number" && typeof item2[prop] == "number") {
         value1 = item1[prop];
         value2 = item2[prop];
       } else {
